@@ -14,7 +14,3 @@ fontsize: 12pt
 subparagraph: yes
 link-citations: yes
 ---
-
-# CHAPTER ONE: INTRODUCTION
-
-Here is the introduction to my thesis.
