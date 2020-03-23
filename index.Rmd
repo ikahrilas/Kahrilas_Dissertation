@@ -13,7 +13,6 @@ classoption: oneside
 fontsize: 12pt
 subparagraph: yes
 link-citations: yes
-biblio-style: apalike
 ---
 
 # CHAPTER ONE: INTRODUCTION
