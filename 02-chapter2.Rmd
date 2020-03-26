@@ -32,6 +32,9 @@ _Worry._ The 16-item Penn State Worry Questionnaire [@meyerDevelopmentValidation
 ## Results
 ### Depression Severity
 To provide clinically relevant descriptive information regarding depression severity in the sample, participants were categorized into five depression severity groups based on established PHQ-9 cutoff scores: minimal (1-4), mild (5-9), moderate (10-14), moderately severe (15-19), and severe [20-27; @kroenkePHQ9ValidityBrief2001]. Group means, standard deviations, and reliability coefficients of primary variables of interest (PA, NA, and savoring the moment) were calculated for each of the depression severity groups (see Table 1). Pairwise t-test comparisons with Holm correction were conducted to assess mean differences between each depression group for PA, NA, and savoring the moment. Analyses indicated significant differences between all groups for all variables except for the difference in mean PA between moderately severe and severe depression groups.
+```{r descriptive stats, fig.cap = "poo"}
+knitr::include_graphics("images/paper_1/descriptive_stats.png")
+```
 
 ### Correlations Among Study Variables
 Pearson correlations were computed among the primary study variables (see Table 2). As expected, PA was positively associated with all temporal domains of savoring. NA, depression, and anxious arousal were negatively associated with all temporal savoring domains. All correlations were statistically significant.
