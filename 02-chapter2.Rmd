@@ -32,9 +32,179 @@ _Worry._ The 16-item Penn State Worry Questionnaire [@meyerDevelopmentValidation
 ## Results
 ### Depression Severity
 To provide clinically relevant descriptive information regarding depression severity in the sample, participants were categorized into five depression severity groups based on established PHQ-9 cutoff scores: minimal (1-4), mild (5-9), moderate (10-14), moderately severe (15-19), and severe [20-27; @kroenkePHQ9ValidityBrief2001]. Group means, standard deviations, and reliability coefficients of primary variables of interest (PA, NA, and savoring the moment) were calculated for each of the depression severity groups (see Table 1). Pairwise t-test comparisons with Holm correction were conducted to assess mean differences between each depression group for PA, NA, and savoring the moment. Analyses indicated significant differences between all groups for all variables except for the difference in mean PA between moderately severe and severe depression groups.
-```{r descriptive stats, fig.cap = "poo"}
-knitr::include_graphics("images/paper_1/descriptive_stats.png")
+
+```{r code to create tibble for descriptive stats, include = FALSE}
+# load packages
+library(tidyverse)
+library(Hmisc) # install.packages("Hmisc")
+library(MBESS)
+library(magick) # install.packages("magick")
+library(webshot) # install.packages("webshot")
+webshot::install_phantomjs()
+# load data
+sad_data <- read_csv(here::here("data", "paper_one", "total_data.csv"))
+# create severity designation
+sad_data_severity <- sad_data %>%
+  mutate(phq_total = phq_total - 9) %>% 
+  mutate("severity" = if_else(phq_total > 20, "Severe", 
+                              if_else(phq_total > 15, "Moderately Severe",
+                                      if_else(phq_total > 10, "Moderate",
+                                              if_else(between(phq_total, 5, 9), "Mild", "a_Minimal")
+                                             )
+                                      )
+                              )
+         )
+# create data frame for n, percent, mean, and sd for each variable
+no <- sad_data_severity %>%
+  split(.$severity) %>% 
+  map_df(~ {
+    nrow(.x)
+    }) %>% 
+  mutate(header = "n") %>% 
+  select(header, everything())
+
+percent <- sad_data_severity %>%
+  split(.$severity) %>% 
+  map_df(~ {
+    "n" = round(nrow(.x) / nrow(sad_data_severity) * 100, digits = 1)
+    }) %>% 
+  mutate(header = "\\\\%") %>% 
+  select(header, everything())
+
+mean_pa <- sad_data_severity %>% 
+  split(.$severity) %>% 
+  map_df(~ {
+    sprintf("%.1f", round(mean(.x$masq_pa), digits = 2))
+  }) %>% 
+  mutate(header = "PA Mean") %>% 
+  select(header, everything())
+
+sd_pa <- sad_data_severity %>% 
+  split(.$severity) %>% 
+  map_df(~ { 
+    sprintf("%.1f", round(sd(.x$masq_pa), digits = 2))
+    }) %>% 
+  mutate(header = "PA SD") %>% 
+  select(header, everything())
+
+mean_na <- sad_data_severity %>% 
+  split(.$severity) %>% 
+  map_df(~ {
+    sprintf("%.1f", round(mean(.x$masq_na), digits = 2))
+  }) %>% 
+  mutate(header = "NA Mean") %>% 
+  select(header, everything())
+
+sd_na <- sad_data_severity %>% 
+  split(.$severity) %>% 
+  map_df(~ { 
+    sprintf("%.1f", round(sd(.x$masq_na), digits = 2))
+    }) %>% 
+  mutate(header = "NA SD") %>% 
+  select(header, everything())
+
+mean_stm <- sad_data_severity %>% 
+  split(.$severity) %>% 
+  map_df(~ {
+    sprintf("%.1f", round(mean(.x$savoring_moment), digits = 2))
+  }) %>% 
+  mutate(header = "StM Mean") %>% 
+  select(header, everything())
+
+sd_stm <- sad_data_severity %>% 
+  split(.$severity) %>% 
+  map_df(~ { 
+    sprintf("%.1f", round(sd(.x$savoring_moment), digits = 2))
+    }) %>% 
+  mutate(header = "StM SD") %>% 
+  select(header, everything())
+# derive mcdonald's omega for each group
+## designate items for each variable
+pa_items <- c("masq_2", "masq_4", "masq_5", "masq_7", "masq_11", "masq_14", "masq_19", "masq_23", "masq_26", "masq_28", "masq_32", "masq_34", "masq_36", "masq_37")
+na_items <- c("masq_9", "masq_13", "masq_17", "masq_21", "masq_29", "masq_30", "masq_35", "masq_38")
+moment_items <- c("sbi_5", "sbi_11", "sbi_17", "sbi_23", "sbi_2_r", "sbi_8_r", "sbi_14_r", "sbi_20_r")
+## list of depression groups to be used with map functions
+dep_groups <- list(a_Minimal = "a_Minimal",
+                   Mild = "Mild",
+                   Moderate = "Moderate",
+                   `Moderately Severe` = "Moderately Severe",
+                   Severe = "Severe")
+
+## define function that calculates omega with severity group and items as arguments
+omega <- function(sev, items) {
+  sad_data_severity %>%
+  filter(severity == sev) %>%
+  select(items) %>% 
+  ci.reliability(., type = "omega")
+}
+
+## make a list of all the groups of items that have to be used to calculate omega
+all_items <- list(pa = pa_items,
+                  na = na_items,
+                  stm = moment_items)
+
+## define another very cool function function that will iterate over the list of items and output a data frame containing macdonald's 
+## omega for each variable partitioned by severity group.
+cool <- function(items) {
+map(dep_groups, ~ gsub(".*\\.",".", sprintf("%.2f", round(omega(.x, items)$est, digits = 2)
+                                           )
+                      )
+   )
+}
+
+## run the function
+dep_group_omega <- map_df(all_items, ~ cool(.x))
+
+dep_group_omega <- dep_group_omega %>% 
+  mutate(header = c("PA $\\\\omega$",
+                 "NA $\\\\omega$",
+                 "StM $\\\\omega$")
+  ) %>% 
+  select(header, everything())
+# merge all dataframes together
+no <- map_df(no, ~ as.character(.x))
+percent <- map_df(percent, ~ as.character(.x))
+final_df <- bind_rows(no, percent, mean_pa, sd_pa, mean_na, sd_na, mean_stm, sd_stm, dep_group_omega)
+names(final_df)[2] <- "Minimal"
+library(data.table) # install.packages("data.table")
+df_transpose <- transpose(final_df)
+df_transpose <- df_transpose %>% 
+  mutate("Depression Group" = names(final_df)) %>% 
+  select("Depression Group", everything())
+names(df_transpose) <- c("Depression Group", final_df$header)
+df_table <- df_transpose[-1,]
+rownames(df_table) <- NULL
+## define the column names in one spot
+names(df_table) <- c("Depression Group",
+                     "n",
+                     "\\%",
+                     "PA Mean",
+                     "PA $SD$",
+                     "NA Mean",
+                     "NA $SD$",
+                     "StM Mean",
+                     "StM $SD$",
+                     "PA $\\omega$",
+                     "NA $\\omega$",
+                     "StM $\\omega$")
+df_table <- df_table %>% 
+  select(`Depression Group`, n, "\\%", "PA Mean", "PA $SD$", "PA $\\omega$", "NA Mean", "NA $SD$", "NA $\\omega$", "StM Mean", "StM $SD$", "StM $\\omega$")
+names(df_table) <- c("Depression Group",
+                     "n",
+                     "\\%",
+                     rep(c("Mean", "$SD$", "$\\omega$"), times = 3))
 ```
+
+```{r descriptive stats table, echo = FALSE, out.width = 3}
+library(kableExtra)
+kable(df_table, "latex", booktabs = TRUE, escape = FALSE, align = "r") %>% 
+  add_header_above(c(" " = 3, "Positive Affectivity" = 3, "Negative Affectivity" = 3, "Savoring the Moment" = 3)) %>%
+  row_spec(0, align = "c") %>% 
+  column_spec(9, width = "0.6cm") %>%
+  column_spec(12, width = "0.7cm") %>% 
+  kable_styling(latex_options = "scale_down")
+```
+
 
 ### Correlations Among Study Variables
 Pearson correlations were computed among the primary study variables (see Table 2). As expected, PA was positively associated with all temporal domains of savoring. NA, depression, and anxious arousal were negatively associated with all temporal savoring domains. All correlations were statistically significant.
