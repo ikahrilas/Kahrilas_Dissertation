@@ -11,6 +11,10 @@ output:
 documentclass: book
 classoption: oneside
 fontsize: 12pt
+header-includes:
+  - \usepackage{caption}
+  - \captionsetup[table]{textfont={it}, labelfont={bf}, singlelinecheck=false, labelsep=newline}
+  - \captionsetup[figure]{textfont={it}, labelfont={bf}, singlelinecheck=false, labelsep=newline}
 subparagraph: yes
 link-citations: yes
 ---
