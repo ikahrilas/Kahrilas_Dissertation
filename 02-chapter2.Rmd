@@ -199,13 +199,13 @@ names(df_table) <- c("Depression Group",
 library(kableExtra)
 kable(df_table, "latex", booktabs = TRUE, escape = FALSE, align = "r", caption = "Descriptive Statistics Among Positive and Negative Affectivity and Savoring the Moment for each Depression Severity Group") %>% 
   add_header_above(c(" " = 3, "Positive Affectivity" = 3, "Negative Affectivity" = 3, "Savoring the Moment" = 3)) %>% 
+  column_spec(4:12, width = ".3in") %>% 
   kable_styling(latex_options = "scale_down") %>%
   footnote(general_title = "Note.",
            escape = FALSE,
            general = "Holm corrected pairwise t-tests indicated significant differences between each  depression group for all variables except between moderately severe and severe groups for PA. SD = standard deviation, $\\\\omega$ = McDonald’s Omega.",
            threeparttable = TRUE,
-           footnote_as_chunk = TRUE,
-           fixed_small_size = TRUE)
+           footnote_as_chunk = TRUE)
 ```
 
 ### Correlations Among Study Variables
