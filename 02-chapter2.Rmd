@@ -31,7 +31,7 @@ _Worry._ The 16-item Penn State Worry Questionnaire [@meyerDevelopmentValidation
 
 ## Results
 ### Depression Severity
-To provide clinically relevant descriptive information regarding depression severity in the sample, participants were categorized into five depression severity groups based on established PHQ-9 cutoff scores: minimal (1-4), mild (5-9), moderate (10-14), moderately severe (15-19), and severe [20-27; @kroenkePHQ9ValidityBrief2001]. Group means, standard deviations, and reliability coefficients of primary variables of interest (PA, NA, and savoring the moment) were calculated for each of the depression severity groups (see Table 1). Pairwise t-test comparisons with Holm correction were conducted to assess mean differences between each depression group for PA, NA, and savoring the moment. Analyses indicated significant differences between all groups for all variables except for the difference in mean PA between moderately severe and severe depression groups.
+To provide clinically relevant descriptive information regarding depression severity in the sample, participants were categorized into five depression severity groups based on established PHQ-9 cutoff scores: minimal (1-4), mild (5-9), moderate (10-14), moderately severe (15-19), and severe [20-27; @kroenkePHQ9ValidityBrief2001]. Group means, standard deviations, and reliability coefficients of primary variables of interest (PA, NA, and savoring the moment) were calculated for each of the depression severity groups (see \@ref(descriptive-stats-dep)). Pairwise t-test comparisons with Holm correction were conducted to assess mean differences between each depression group for PA, NA, and savoring the moment. Analyses indicated significant differences between all groups for all variables except for the difference in mean PA between moderately severe and severe depression groups.
 
 ```{r code to create tibble for descriptive stats, include = FALSE}
 # load packages
@@ -210,6 +210,53 @@ kable(df_table, "latex", booktabs = TRUE, escape = FALSE, align = "r", caption =
 
 ### Correlations Among Study Variables
 Pearson correlations were computed among the primary study variables (see Table 2). As expected, PA was positively associated with all temporal domains of savoring. NA, depression, and anxious arousal were negatively associated with all temporal savoring domains. All correlations were statistically significant.
+
+```{r correlation-matrix, fig.cap = "(ref:corr-matrix)", message = FALSE, warning = FALSE, echo = FALSE}
+# load packages
+library(tidyverse)
+library(xtable)
+
+# load data
+sad_data <- read_csv(here::here("data", "paper_one", "total_data.csv"))
+
+# create correlation matrix
+tab <- sad_data %>% 
+  select(anticipating,
+         savoring_moment,
+         reminiscing,
+         masq_pa,
+         masq_na,
+         masq_aa,
+         phq_total,
+         pswq_total) %>%
+  rename("1. Anticipating" = anticipating,
+         "2. Savoring the Moment" = savoring_moment,
+         "3. Reminiscing" = reminiscing,
+         "4. Positive Affectivity" = masq_pa,
+         "5. Negative Affectivity" = masq_na,
+         "6. Anxious Arousal" = masq_aa,
+         "7. Depression" = phq_total,
+         "8. Worry" = pswq_total) %>% 
+  cor(use = "complete.obs") %>% 
+  as.data.frame() %>% 
+  map_df(., ~ {
+    sprintf("%.2f", .x) %>% 
+    str_remove(., "^0+")
+    }) %>% 
+  map_df(., ~ {
+  if_else(str_detect(.x, "-"), paste0("-", str_remove(.x, "-0")), .x)
+    }) %>% 
+  mutate(" " = colnames(.)) %>% 
+  select(` `, everything()) %>% 
+  rstatix::replace_upper_triangle(., by=  "", diagonal = FALSE)
+colnames(tab) <- c(" ", paste0(c(1:8), "."))
+
+# create table
+kable(tab, format = "latex",  linesep = "", digits = 2, escape = FALSE, booktabs = TRUE, align = c("l", rep("r", 8)), caption = "Correlations among affectivity, temporal domains of savoring, depression severity, and anxious arousal measures ($N$ = 1,618)") %>% 
+  column_spec(2:9, width = "2em") %>% 
+  kable_styling(latex_options = "scale_down", font_size = 10)
+```
+
 
 ### Positive Affectivity, Negative Affectivity, and Anxious Arousal as Predictors of Depression
 The tripartite model posits that depression and anxiety have specific relations with three affective dimensions: PA, NA, and anxious arousal [@clarkDiagnosisClassificationPsychopathology1995; @watsonTestingTripartiteModel1995a]. Given the present study’s focus on PA and depression, we wanted to confirm the unique relation between each of these dimensions and depression symptoms in the present sample. Per the tripartite model, we anticipated that low levels of PA and high levels of NA would be positively associated with depression symptoms, and that anxious arousal would be unrelated to depression symptoms. Multiple regression analyses were conducted with PA, NA, and anxious arousal as predictors and depressions with no covariates. Diverging from the specific association between PA and depression proposed by Clark and Watson (1991, 1995a, 1995b), results from the test sample indicated that each of the predictors were uniquely associated with depression. NA [$b = .52,\ \beta = .55,\ t(1614) = 25.47,\ p < .001$] was the strongest predictor of depression, followed by anxious arousal [$b = .11,\ \beta = .21,\ t(1614) = 10.38,\ p < .001$], and lastly PA [$b = -.09,\ \beta = -.19,\ t(1614) = -10.55,\ p < .001$].
