@@ -1,7 +1,7 @@
 # CHAPTER ONE: INTRODUCTION
 
 ```{r, echo = FALSE, message = FALSE, warning = FALSE}
-knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, fig.width = 6)
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 ```
 
 ## Positive emotion dysregulation in depressive disorders

@@ -14,7 +14,7 @@ fontsize: 12pt
 header-includes:
   - \usepackage{caption}
   - \captionsetup[table]{textfont={it}, labelfont={bf}, singlelinecheck=false, labelsep=newline}
-  - \captionsetup[figure]{textfont={it}, labelfont={bf}, singlelinecheck=false, labelsep=newline}
+  - \captionsetup[figure]{textfont={it}, singlelinecheck=false, labelsep=period}
 subparagraph: yes
 link-citations: yes
 ---

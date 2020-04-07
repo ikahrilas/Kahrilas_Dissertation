@@ -264,6 +264,769 @@ The tripartite model posits that depression and anxiety have specific relations 
 ### Mediation Analyses
 Path analyses were run in R [@rcoreteamLanguageEnvironmentStatistical2018] using the lavaan package [@rosseelLavaanPackageStructural2011] to assess the indirect effects of PA and NA on depression via three temporal domains of savoring capacity while accounting for the variance associated with gender, worry, and anxious arousal (see Figure 1). Exogenous variables (PA and NA) were allowed to correlate with one another, as were the residual variances of each of the temporal domains of savoring. Maximum likelihood estimation was used to estimate path coefficients, and bias-corrected bootstrap confidence intervals based on 10,000 bootstrap samples were used to estimate indirect effects of temporal domains of savoring between affectivity and depression. The fully saturated model contained 45 free parameters with zero degrees of freedom, resulting in perfect goodness of fit indices. Results (see Figure 1 and Table 3) showed that PA was associated with anticipating (standardized: $a_1 = .41$, unstandardized: $a_1 = .30$, $p < .001$), savoring the moment (standardized: $a_2 = .46$, unstandardized: $a_2 = .36$, $p < .001$), and reminiscing (standardized: $a_3 = .39$, unstandardized: $a_3 = .28$, $p < .001$). There were significant associations between NA and anticipating (standardized: $a_i = -.11$, unstandardized: $a_i = -.16$, $p < .001$), savoring the moment (standardized: $a_{ii} = -.29$, unstandardized: $a_{ii} = -.44$, $p < .001$), and reminiscing (standardized: $a_{iii} = -.16$, unstandardized: $a_{iii} = -.23$,  $p < .001$). Further, savoring the moment was related to lower depression severity (standardized: $b_2 = -.07$, unstandardized: $b_2 = -.04$, $p = .024$), while anticipating and reminiscing were not. Bias-corrected bootstrap confidence intervals (based on 10,000 bootstrap samples; see Table 3) for the indirect effects of temporal domains of savoring between PA and depression did not include zero for savoring the moment (95% CI [-.028, -.002], $a_2b_2 = -.01$) but did include zero for anticipating (95% CI [-.009, .012], $a_1b_1 = .00$) and reminiscing (95% CI [-.009, .013], $a_3b_3 = .00$). Similarly, bias-corrected bootstrap confidence intervals for the indirect effects of temporal domains of savoring between NA and depression did not include zero for savoring the moment (95% CI [.003, .035], $a_{ii}b_2 = .02$) but did include zero for anticipating (95% CI [-.007, .005], $a_ib_1 = .00$) and reminiscing (95% CI [-.011, .007], $a_{iii}b_3 = .00$). Notably, there is a negative indirect effect between PA and depression via savoring the moment with a positive relationship between PA and savoring the moment. This signifies that the positive association between PA and momentary savoring results in reduced depression scores that accounts for a portion of the significant negative relationship between PA and depression (standardized: $c’_{PA} = -.16$, unstandardized: $c’_{PA} = -.08$, $p < .001$). The direct effect of NA on depression was also significant (standardized: $c’_{NA} = .49$, unstandardized: $c’_{NA} = .02$, $p < .001$).
 
+(ref:path-diagram) Standardized structural diagram of path model with three mediators: anticipating, savoring the moment, and reminiscing (N = 1,618). The diagram shows A) the effect of positive and negative affectivity on depression severity and B) the direct and indirect pathways associating affectivity with temporal domains of savoring and depression. Sex, worry, and anxious arousal were included as covariates in the model, but were omitted from the figure to streamline presentation. Positive and negative affectivity were allowed to correlate with each other and with the three covariates, which were also allowed to intercorrelate. These intercorrelations were omitted from the path diagram to streamline presentation. The residual variances in the mediators and in depression were also estimated parameters in the structural model. These residual variances were also omitted from the path diagram to streamline presentation.
+
+```{r path-diagram, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:path-diagram)", out.height="36%", out.width="100%"}
+knitr::include_graphics("images/paper_1/path_model.png", auto_pdf = TRUE)
+```
+
+(ref:path-analysis-table) Unstandardized path coefficients from the structural equation model using positive and negative affectivity to predict depression with savoring subscales as mediators (N = 1,618). The structural model included three covariates (sex, worry, and anxious arousal) as exogenous independent variables, each of which had direct effects on the three mediators and depression.
+
+```{r construct table, include = FALSE}
+# load packages
+library(tidyverse)
+library(kableExtra)
+
+# load in data
+parms <- readr::read_csv("data/paper_one/parms.csv")
+sad_data <- readr::read_csv("data/paper_one/total_data.csv")
+
+# fit linear models
+ant_model <- lm(anticipating ~ masq_pa + masq_na + sex + pswq_total + masq_aa, data = sad_data)
+
+mom_model <- lm(savoring_moment ~ masq_pa + masq_na + sex + pswq_total + masq_aa, data = sad_data)
+
+rem_model <- lm(reminiscing ~ masq_pa + masq_na + sex + pswq_total + masq_aa, data = sad_data)
+
+dep_model <- lm(phq_total ~ masq_pa + masq_na + sex + pswq_total + masq_aa + anticipating  + savoring_moment + reminiscing, data = sad_data)
+
+# extract degrees of freedom
+df_ant <- paste0("$F$(",summary(ant_model)$fstatistic[[2]], ",", " ", summary(ant_model)$fstatistic[[3]], ")")
+df_mom <- paste0("$F$(",summary(mom_model)$fstatistic[[2]], ",", " ", summary(mom_model)$fstatistic[[3]], ")")
+df_rem <- paste0("$F$(",summary(rem_model)$fstatistic[[2]], ",", " ", summary(rem_model)$fstatistic[[3]], ")")
+df_dep <- paste0("$F$(",summary(dep_model)$fstatistic[[2]], ",", " ", summary(dep_model)$fstatistic[[3]], ")")
+
+# F statistic value
+f_ant <- sprintf("%.2f", summary(ant_model)$fstatistic[[1]])
+f_mom <- sprintf("%.2f", summary(mom_model)$fstatistic[[1]])
+f_rem <- sprintf("%.2f", summary(rem_model)$fstatistic[[1]])
+f_dep <- sprintf("%.2f", summary(dep_model)$fstatistic[[1]])
+
+# R-squared value
+rsquare_ant <- sprintf("%.2f", summary(ant_model)$r.squared)
+rsquare_mom <- sprintf("%.2f", summary(mom_model)$r.squared)
+rsquare_rem <- sprintf("%.2f", summary(rem_model)$r.squared)
+rsquare_dep <- sprintf("%.2f", summary(dep_model)$r.squared)
+
+# name of antecedents
+ant <- tibble(ant = c("PA", "$M_{1}$(ANT)", "$M_{2}$(MOM)", "$M_{3}$(REM)", "NA", "$M_{1}$(ANT)", "$M_{2}$(MOM)", "$M_{3}$(REM)",             "SEX", "WOR", "ANX", "$R^2$", "$F$", "$p$"))
+
+# path coefficients 
+m1_coef <- c(
+  sprintf("%.2f",parms %>%
+    filter(lhs == "anticipating", rhs == "masq_pa") %>%
+    select(est) %>%
+    pull()),
+  "--------",
+  "--------",
+  "--------",
+  parms %>%
+     filter(lhs == "anticipating", rhs == "masq_na") %>%
+     select(est) %>%
+     pull() %>%
+    round(digits = 2),
+  "--------",
+  "--------",
+  "--------",
+  parms %>%
+    filter(lhs == "anticipating", rhs == "sex") %>%
+    select(est) %>%
+    pull() %>%
+    round(digits = 2),
+  parms %>%
+     filter(lhs == "anticipating", rhs == "pswq_total") %>%
+     select(est) %>%
+     pull() %>%
+    round(digits = 2),
+  parms %>%
+     filter(lhs == "anticipating", rhs == "masq_aa") %>%
+     select(est) %>%
+     pull() %>%
+    round(digits = 2),
+  " ",
+  " ",
+  " "
+)
+# standard errors
+m1_se <- c(
+  parms %>%
+    filter(lhs == "anticipating", rhs == "masq_pa") %>%
+    select(se) %>%
+    pull() %>%
+    round(digits = 2),
+  "--------",
+  "--------",
+  "--------",
+  parms %>%
+     filter(lhs == "anticipating", rhs == "masq_na") %>%
+     select(se) %>%
+     pull() %>%
+    round(digits = 2),
+  "--------",
+  "--------",
+  "--------",
+  parms %>%
+    filter(lhs == "anticipating", rhs == "sex") %>%
+    select(se) %>%
+    pull() %>%
+    round(digits = 2),
+  parms %>%
+     filter(lhs == "anticipating", rhs == "pswq_total") %>%
+     select(se) %>%
+     pull() %>%
+    round(digits = 2),
+  parms %>%
+     filter(lhs == "anticipating", rhs == "masq_aa") %>%
+     select(se) %>%
+     pull() %>%
+    round(digits = 2),
+  rsquare_ant,
+  f_ant,
+  "<.001"
+)
+# p values
+m1_p <- c(
+  parms %>%
+    filter(lhs == "anticipating", rhs == "masq_pa") %>%
+    select(pvalue) %>%
+    pull() %>%
+    round(digits = 3),
+  NA,
+  NA,
+  NA,
+  parms %>%
+     filter(lhs == "anticipating", rhs == "masq_na") %>%
+     select(pvalue) %>%
+     pull() %>%
+    round(digits = 3),
+  NA,
+  NA,
+  NA,
+  parms %>%
+    filter(lhs == "anticipating", rhs == "sex") %>%
+    select(pvalue) %>%
+    pull() %>%
+    round(digits = 3),
+  parms %>%
+     filter(lhs == "anticipating", rhs == "pswq_total") %>%
+     select(pvalue) %>%
+     pull() %>%
+    round(digits = 3),
+  parms %>%
+     filter(lhs == "anticipating", rhs == "masq_aa") %>%
+     select(pvalue) %>%
+     pull() %>%
+    round(digits = 3),
+  999,
+  999,
+  999
+)
+
+m1_p[!is.na(m1_p) & m1_p < .001] <- "<.001"
+m1_p[is.na(m1_p)] <- "--------"
+m1_p[m1_p == 999] <- " "
+
+# results for anticipating
+results_m1 <- tibble(
+       Coef. = m1_coef,
+       SE = m1_se,
+       p = m1_p
+       )
+# savoring the moment results
+# coefficients
+m2_coef <- c(
+  parms %>%
+    filter(lhs == "savoring_moment", rhs == "masq_pa") %>%
+    select(est) %>%
+    pull() %>%
+    round(digits = 2),
+  "--------",
+  "--------",
+  "--------",
+  parms %>%
+     filter(lhs == "savoring_moment", rhs == "masq_na") %>%
+     select(est) %>%
+     pull() %>%
+    round(digits = 2),
+  "--------",
+  "--------",
+  "--------",
+  parms %>%
+    filter(lhs == "savoring_moment", rhs == "sex") %>%
+    select(est) %>%
+    pull() %>%
+    round(digits = 2),
+  parms %>%
+     filter(lhs == "savoring_moment", rhs == "pswq_total") %>%
+     select(est) %>%
+     pull() %>%
+    round(digits = 2),
+  parms %>%
+     filter(lhs == "savoring_moment", rhs == "masq_aa") %>%
+     select(est) %>%
+     pull() %>%
+    round(digits = 2),
+  " ",
+  " ",
+  " "
+)
+# standard errors
+m2_se <- c(
+  parms %>%
+    filter(lhs == "savoring_moment", rhs == "masq_pa") %>%
+    select(se) %>%
+    pull() %>%
+    round(digits = 2),
+  "--------",
+  "--------",
+  "--------",
+  parms %>%
+     filter(lhs == "savoring_moment", rhs == "masq_na") %>%
+     select(se) %>%
+     pull() %>%
+    round(digits = 2),
+  "--------",
+  "--------",
+  "--------",
+  parms %>%
+    filter(lhs == "savoring_moment", rhs == "sex") %>%
+    select(se) %>%
+    pull() %>%
+    round(digits = 2),
+  sprintf("%.2f",parms %>%
+     filter(lhs == "savoring_moment", rhs == "pswq_total") %>%
+     select(se) %>%
+     pull()),
+  parms %>%
+     filter(lhs == "savoring_moment", rhs == "masq_aa") %>%
+     select(se) %>%
+     pull() %>%
+    round(digits = 2),
+  rsquare_mom,
+  f_mom, 
+  "<.001"
+)
+# p values
+m2_p <- c(
+  parms %>%
+    filter(lhs == "savoring_moment", rhs == "masq_pa") %>%
+    select(pvalue) %>%
+    pull() %>%
+    round(digits = 3),
+  NA,
+  NA,
+  NA,
+  parms %>%
+     filter(lhs == "savoring_moment", rhs == "masq_na") %>%
+     select(pvalue) %>%
+     pull() %>%
+    round(digits = 3),
+  NA,
+  NA,
+  NA,
+  parms %>%
+    filter(lhs == "savoring_moment", rhs == "sex") %>%
+    select(pvalue) %>%
+    pull() %>%
+    round(digits = 3),
+  parms %>%
+     filter(lhs == "savoring_moment", rhs == "pswq_total") %>%
+     select(pvalue) %>%
+     pull() %>%
+    round(digits = 3),
+  parms %>%
+     filter(lhs == "savoring_moment", rhs == "masq_aa") %>%
+     select(pvalue) %>%
+     pull() %>%
+    round(digits = 3),
+  999,
+  999,
+  999
+)
+m2_p[!is.na(m2_p) & m2_p < .001] <- "<.001"
+m2_p[is.na(m2_p)] <- "--------"
+m2_p[m2_p == 999] <- " "
+# results table
+results_m2 <- tibble(
+       Coef. = m2_coef,
+       SE = m2_se,
+       p = m2_p
+       )
+
+# coefficients
+m3_coef <- c(
+  parms %>%
+    filter(lhs == "reminiscing", rhs == "masq_pa") %>%
+    select(est) %>%
+    pull() %>%
+    round(digits = 2),
+  "--------",
+  "--------",
+  "--------",
+  sprintf("%.2f", parms %>%
+     filter(lhs == "reminiscing", rhs == "masq_na") %>%
+     select(est) %>%
+     pull()),
+  "--------",
+  "--------",
+  "--------",
+  parms %>%
+    filter(lhs == "reminiscing", rhs == "sex") %>%
+    select(est) %>%
+    pull() %>%
+    round(digits = 2),
+  parms %>%
+     filter(lhs == "reminiscing", rhs == "pswq_total") %>%
+     select(est) %>%
+     pull() %>%
+    round(digits = 2),
+  parms %>%
+     filter(lhs == "reminiscing", rhs == "masq_aa") %>%
+     select(est) %>%
+     pull() %>%
+    round(digits = 2),
+  " ",
+  " ",
+  " "
+)
+# standard errors
+m3_se <- c(
+  parms %>%
+    filter(lhs == "reminiscing", rhs == "masq_pa") %>%
+    select(se) %>%
+    pull() %>%
+    round(digits = 2),
+  "--------",
+  "--------",
+  "--------",
+  sprintf("%.2f", parms %>%
+     filter(lhs == "reminiscing", rhs == "masq_na") %>%
+     select(se) %>%
+     pull()),
+  "--------",
+  "--------",
+  "--------",
+  sprintf("%.2f", parms %>%
+     filter(lhs == "reminiscing", rhs == "sex") %>%
+     select(se) %>%
+     pull()),
+  parms %>%
+     filter(lhs == "reminiscing", rhs == "pswq_total") %>%
+     select(se) %>%
+     pull() %>%
+    round(digits = 2),
+  parms %>%
+     filter(lhs == "reminiscing", rhs == "masq_aa") %>%
+     select(se) %>%
+     pull() %>%
+    round(digits = 2),
+  rsquare_rem,
+  f_rem,
+  "<.001"
+)
+# p values
+m3_p <- c(
+  parms %>%
+    filter(lhs == "reminiscing", rhs == "masq_pa") %>%
+    select(pvalue) %>%
+    pull() %>%
+    round(digits = 3),
+  NA,
+  NA,
+  NA,
+  parms %>%
+     filter(lhs == "reminiscing", rhs == "masq_na") %>%
+     select(pvalue) %>%
+     pull() %>%
+    round(digits = 3),
+  NA,
+  NA,
+  NA,
+  parms %>%
+    filter(lhs == "reminiscing", rhs == "sex") %>%
+    select(pvalue) %>%
+    pull() %>%
+    round(digits = 3),
+  parms %>%
+     filter(lhs == "reminiscing", rhs == "pswq_total") %>%
+     select(pvalue) %>%
+     pull() %>%
+    round(digits = 3),
+  parms %>%
+     filter(lhs == "reminiscing", rhs == "masq_aa") %>%
+     select(pvalue) %>%
+     pull() %>%
+    round(digits = 3),
+  999,
+  999,
+  999
+)
+m3_p[!is.na(m3_p) & m3_p < .001] <- "<.001"
+m3_p[is.na(m3_p)] <- "--------"
+m3_p[m3_p == 999] <- " "
+# results
+results_m3 <- tibble(
+       Coef. = m3_coef,
+       SE = m3_se,
+       p = m3_p
+       )
+# direct depression results
+# coefficients
+dep_coef <- c(
+  parms %>%
+    filter(lhs == "phq_total", rhs == "masq_pa") %>%
+    select(est) %>%
+    pull() %>%
+    round(digits = 2),
+  sprintf("%.2f", parms %>%
+     filter(lhs == "phq_total", rhs == "anticipating") %>%
+     select(est) %>%
+     pull()),
+  parms %>% 
+    filter(lhs == "phq_total", rhs == "savoring_moment") %>% 
+    select(est) %>% 
+    pull() %>% 
+    round(digits = 2),
+  parms %>% 
+    filter(lhs == "phq_total", rhs == "reminiscing") %>% 
+    select(est) %>% 
+    pull() %>% 
+    round(digits = 2),
+  parms %>%
+     filter(lhs == "phq_total", rhs == "masq_na") %>%
+     select(est) %>%
+     pull() %>%
+    round(digits = 2),
+  sprintf("%.2f", parms %>%
+     filter(lhs == "phq_total", rhs == "anticipating") %>%
+     select(est) %>%
+     pull()),
+  parms %>% 
+    filter(lhs == "phq_total", rhs == "savoring_moment") %>% 
+    select(est) %>% 
+    pull() %>% 
+    round(digits = 2),
+  parms %>% 
+    filter(lhs == "phq_total", rhs == "reminiscing") %>% 
+    select(est) %>% 
+    pull() %>% 
+    round(digits = 2),
+  parms %>%
+    filter(lhs == "phq_total", rhs == "sex") %>%
+    select(est) %>%
+    pull() %>%
+    round(digits = 2),
+  parms %>%
+     filter(lhs == "phq_total", rhs == "pswq_total") %>%
+     select(est) %>%
+     pull() %>%
+     round(digits = 2),
+  sprintf("%.2f", parms %>%
+     filter(lhs == "phq_total", rhs == "masq_aa") %>%
+     select(est) %>%
+     pull()),
+  " ",
+  " ",
+  " "
+)
+# standard errors
+dep_se <- c(
+  sprintf("%.2f", parms %>%
+    filter(lhs == "phq_total", rhs == "masq_pa") %>%
+    select(se) %>%
+    pull()),
+  parms %>% 
+    filter(lhs == "phq_total", rhs == "anticipating") %>% 
+    select(se) %>% 
+    pull() %>% 
+    round(digits = 2),
+  parms %>% 
+    filter(lhs == "phq_total", rhs == "savoring_moment") %>% 
+    select(se) %>% 
+    pull() %>% 
+    round(digits = 2),
+  parms %>% 
+    filter(lhs == "phq_total", rhs == "reminiscing") %>% 
+    select(se) %>% 
+    pull() %>% 
+    round(digits = 2),
+  parms %>%
+     filter(lhs == "phq_total", rhs == "masq_na") %>%
+     select(se) %>%
+     pull() %>%
+    round(digits = 2),
+  parms %>% 
+    filter(lhs == "phq_total", rhs == "anticipating") %>% 
+    select(se) %>% 
+    pull() %>% 
+    round(digits = 2),
+  parms %>% 
+    filter(lhs == "phq_total", rhs == "savoring_moment") %>% 
+    select(se) %>% 
+    pull() %>% 
+    round(digits = 2),
+  parms %>% 
+    filter(lhs == "phq_total", rhs == "reminiscing") %>% 
+    select(se) %>% 
+    pull() %>% 
+    round(digits = 2),
+  parms %>%
+    filter(lhs == "phq_total", rhs == "sex") %>%
+    select(se) %>%
+    pull() %>%
+    round(digits = 2),
+  parms %>%
+     filter(lhs == "phq_total", rhs == "pswq_total") %>%
+     select(se) %>%
+     pull() %>%
+    round(digits = 2),
+  parms %>%
+     filter(lhs == "phq_total", rhs == "masq_aa") %>%
+     select(se) %>%
+     pull() %>%
+    round(digits = 2),
+  rsquare_dep,
+  f_dep,
+  "<.001"
+)
+# p values
+dep_p <- c(
+  parms %>%
+    filter(lhs == "phq_total", rhs == "masq_pa") %>%
+    select(pvalue) %>%
+    pull() %>%
+    round(digits = 3),
+  parms %>% 
+    filter(lhs == "phq_total", rhs == "anticipating") %>% 
+    select(pvalue) %>% 
+    pull() %>% 
+    round(digits = 3),
+  parms %>% 
+    filter(lhs == "phq_total", rhs == "savoring_moment") %>% 
+    select(pvalue) %>% 
+    pull() %>% 
+    round(digits = 3),
+  parms %>% 
+    filter(lhs == "phq_total", rhs == "reminiscing") %>% 
+    select(pvalue) %>% 
+    pull() %>% 
+    round(digits = 3),
+  parms %>%
+     filter(lhs == "phq_total", rhs == "masq_na") %>%
+     select(pvalue) %>%
+     pull() %>%
+    round(digits = 3),
+  parms %>% 
+    filter(lhs == "phq_total", rhs == "anticipating") %>% 
+    select(pvalue) %>% 
+    pull() %>% 
+    round(digits = 3),
+  parms %>% 
+    filter(lhs == "phq_total", rhs == "savoring_moment") %>% 
+    select(pvalue) %>% 
+    pull() %>% 
+    round(digits = 3),
+  parms %>% 
+    filter(lhs == "phq_total", rhs == "reminiscing") %>% 
+    select(pvalue) %>% 
+    pull() %>% 
+    round(digits = 3),
+  parms %>%
+    filter(lhs == "phq_total", rhs == "sex") %>%
+    select(pvalue) %>%
+    pull() %>%
+    round(digits = 3),
+  parms %>%
+     filter(lhs == "phq_total", rhs == "pswq_total") %>%
+     select(pvalue) %>%
+     pull() %>%
+    round(digits = 3),
+  parms %>%
+     filter(lhs == "phq_total", rhs == "masq_aa") %>%
+     select(pvalue) %>%
+     pull() %>%
+    round(digits = 3),
+  999,
+  999,
+  999
+)
+dep_p[!is.na(dep_p) & dep_p < .001] <- "<.001"
+dep_p[is.na(dep_p)] <- "--------"
+dep_p[dep_p == 999] <- " "
+# results
+results_dep <- tibble(Coef. = dep_coef,
+       SE = dep_se,
+       p = dep_p)
+
+# indirect effect coefficients
+ind_coef <- c(
+  "--------",
+  sprintf("%.2f", parms %>%
+     filter(rhs == "a3*b3") %>%
+     select(est) %>%
+     pull()),
+  parms %>%
+    filter(rhs == "a2*b2") %>% 
+    select(est) %>% 
+    pull() %>% 
+    round(digits = 2),
+  sprintf("%.2f", parms %>%
+     filter(rhs == "a1*b1") %>%
+     select(est) %>%
+     pull()),
+  "--------",
+  sprintf("%.2f", parms %>%
+     filter(rhs == "aiii*b3") %>%
+     select(est) %>%
+     abs() %>% 
+     pull()),
+  parms %>% 
+    filter(rhs == "aii*b2") %>% 
+    select(est) %>% 
+    pull() %>% 
+    round(digits = 2), 
+  sprintf("%.2f", parms %>%
+     filter(rhs == "ai*b1") %>%
+     select(est) %>%
+     abs() %>% 
+     pull()),
+  rep("--------", times = 3),
+  " ",
+  " ",
+  " "
+)
+# indirect confidence intervals
+ind_ci_lower <- c("--------",
+                   parms %>%
+                    filter(rhs == "a3*b3") %>% 
+                    select(ci.lower) %>% 
+                    pull() %>% 
+                    round(digits = 3),
+                  parms %>%
+                    filter(rhs == "a2*b2") %>% 
+                    select(ci.lower) %>% 
+                    pull() %>% 
+                    round(digits = 3),
+                  parms %>%
+                    filter(rhs == "a1*b1") %>% 
+                    select(ci.lower) %>% 
+                    pull() %>% 
+                    round(digits = 3),
+            "--------",
+                  parms %>%
+                    filter(rhs == "aiii*b3") %>% 
+                    select(ci.lower) %>% 
+                    pull() %>% 
+                    round(digits = 3),
+                  sprintf("%.3f", parms %>%
+                    filter(rhs == "aii*b2") %>%
+                    select(ci.lower) %>%
+                    pull()),
+                  parms %>%
+                    filter(rhs == "ai*b1") %>% 
+                    select(ci.lower) %>% 
+                    pull() %>% 
+                    round(digits = 3),
+            rep("--------", times = 3),
+            " ",
+            " ",
+            " "
+          )
+
+ind_ci_upper <- c("--------",
+                  parms %>%
+                    filter(rhs == "a3*b3") %>% 
+                    select(ci.upper) %>% 
+                    pull() %>%
+                    round(digits = 3),
+                  sprintf("%.3f", parms %>%
+                    filter(rhs == "a2*b2") %>%
+                    select(ci.upper) %>%
+                    pull()),
+                  parms %>%
+                    filter(rhs == "a1*b1") %>% 
+                    select(ci.upper) %>% 
+                    pull() %>%
+                    round(digits = 3),
+                  "--------",
+                  parms %>% 
+                    filter(rhs == "aiii*b3") %>% 
+                    select(ci.upper) %>% 
+                    pull() %>% 
+                    round(digits = 3),
+                  parms %>% 
+                    filter(rhs == "aii*b2") %>% 
+                    select(ci.upper) %>% 
+                    pull() %>% 
+                    round(digits = 3),
+                  sprintf("%.3f", parms %>%
+                    filter(rhs == "ai*b1") %>%
+                    select(ci.upper) %>%
+                    pull()),
+                  rep("--------", times = 3),
+                  " ",
+                  " ",
+                  " "
+          )
+
+results_ind <- tibble(
+  Coef. = ind_coef,
+  Lower = ind_ci_lower,
+  Upper = ind_ci_upper)
+
+# replace p values
+results_m1[10, 3] <- "<.006"
+results_m3[10, 3] <- "<.088"
+
+# merge into single table
+paths_1 <- tibble(" " = c("$a_1$", rep(" ", 3), "$a_i$", rep(" ", 6), rep(" ", 3)))
+paths_2 <- tibble(" " = c("$a_2$", rep(" ", 3), "$a_{ii}$", rep(" ", 6), rep(" ", 3)))
+paths_3 <- tibble(" " = c("$a_3$", rep(" ", 3), "$a_{iii}$", rep(" ", 6), rep(" ", 3)))
+paths_dep <- tibble(" " = c("$c'_{PA}$", "$b_{1}$", "$b_{2}$", "$b_{3}$", "$c'_{NA}$", "$b_{1}$", "$b_{2}$", "$b_{3}$", rep(" ", 3), rep(" ", 3)))
+paths_ind <- tibble(" " = c(" ", "$a_{1}b_{1}$", "$a_{2}b_{2}$", "$a_{3}b_{3}$", " ", "$a_{i}b_{1}$", "$a_{ii}b_{2}$", "$a_{iii}b_{3}$", rep(" ", 6)))
+
+results_total <- bind_cols(ant, paths_1, results_m1, paths_2, results_m2, paths_3, results_m3, paths_dep, results_dep, paths_ind, results_ind)
+names(results_total) <- c("Antecedent",
+                          " ",
+                          "Coef.",
+                          "$SE$",
+                          "$p$",
+                          " ",
+                          "Coef.",
+                          "$SE$",
+                          "$p$",
+                          " ",
+                          "Coef.",
+                          "$SE$",
+                          "$p$",
+                          " ",
+                          "Coef.",
+                          "$SE$",
+                          "$p$",
+                          " ",
+                          "Coef.",
+                          "Lower",
+                          "Upper"
+                          )
+```
+
+```{r path-analysis-table, echo = FALSE, fig.cap="(ref:path-analysis-table)", fig.pos="H", out.extra=""}
+kable(results_total, "latex", escape = FALSE, booktabs = TRUE, align = c("l", rep(c("c", "r", "c", "r"), 4), "c", "r", "r", "r"), linesep = "", caption = "(ref:path-analysis-table)") %>%
+  kable_styling(font_size = 24, latex_options = c("scale_down")) %>% 
+  add_header_above(c(" ", "$M_1$(ANT)" = 4, "$M_2$(MOM)" = 4, "$M_3$(REM)" = 4, "$Y$(DEP)" = 4, " ", " ", "95\\\\% bcCI" = 2), escape = FALSE) %>% 
+  add_header_above(c(rep(" ", 17), "Indirect Effects" = 4), bold = TRUE, italic = TRUE) %>% 
+  add_indent(c(2:4, 6:8)) %>% 
+  pack_rows("Covariates:", 9, 11) %>% 
+  row_spec(0, align = "c") %>% 
+  row_spec(11, hline_after = TRUE) %>% 
+  footnote(general_title = "Note.",
+           escape = FALSE,
+           general = "$SE$ = Standard Error, PA = Positive Affectivity, NA = Negative Affectivity, ANT = Anticipating, MOM = Savoring the Moment, REM = Reminiscing, DEP = Depression, WOR = Worry, ANX = Anxious Arousal. The symbols appearing to the left of the direct effects (e.g., $a_1$) refer to the labeled paths in Figure 2. The symbols to the left of each indirect effect coefficient represent the products of each of the constituent direct effects that compose each indirect effect. For example, symbol $a_1b_1$ represents the product of the direct effect of PA on ANT (i.e., $a_1$) and the direct effect of ANT on DEP (i.e., $b_1$), or $(a_1)(b_1)$.",
+           threeparttable = TRUE,
+           footnote_as_chunk = TRUE)
+```
+
+
 ## Discussion
 The present study examined the relationship between affectivity (PA and NA) and depression symptoms via the future-, present-, and past-focused temporal domains of savoring beliefs (i.e., self-reported capacity to savor by anticipating, savor the moment, and savor by reminiscing, respectively). As predicted, results showed that PA and NA were associated with all three temporal domains of savoring. Savoring the moment distinctly mediated the relationship between affectivity and depression; whereas, the other temporal domains did not mediate this relationship. Replicating past research, we also found a relationship between affectivity and depression symptoms [@chorpitaTripartiteModelDimensions2002; @clarkTripartiteModelAnxiety1991; @dunnChangesPositiveNegative2019; @khazanovPositiveEmotionalitySpecific2016; @watsonTestingTripartiteModel1995; @watsonTestingTripartiteModel1995a]. Of note, we found that the effect size for the bivariate relationship between NA and depression (i.e., 55% shared variance) was roughly three times larger than the effect size for the relationship between PA and depression (i.e., 18% shared variance); but given that NA is theorized to be a common factor shared among depression and anxiety [@watsonTestingTripartiteModel1995; @watsonTestingTripartiteModel1995a], higher NA may also be increased due to co-occurring anxiety symptoms. These findings are similar to results from a meta-analysis suggesting that low positive emotionality creates an inherent vulnerability to depression, but perhaps to a lesser degree than previously surmised [@khazanovPositiveEmotionalitySpecific2016].
 While findings from the present study imply that structured interventions aimed at enhancing any of the three temporal domains of savoring may serve to attenuate levels of NA and bolster levels of PA and well-being, only savoring the moment is likely to reduce depression symptoms. This latter finding is consistent with previous research showing that momentary savoring capacity has a stronger negative association with depressive symptoms than do reminiscing and anticipating [@bryantSavoringBeliefsInventory2003a; @carverTendenciesManiaTendencies2009]. Together, these findings indicate that developing interventions to promote savoring the moment may be effective in reducing depression. 
