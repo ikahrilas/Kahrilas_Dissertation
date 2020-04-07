@@ -1,0 +1,97 @@
+---
+title: "More cleaning, missing values, and subscale scores"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+sad_data <- read_csv("total_data.csv")
+```
+## More cleaning
+For our analyses, we actually won't need the BRIEF or PANAS questionnaires, so we can omit them.
+```{r omit brief}
+sad_data <- sad_data %>% 
+  select(-starts_with("BRIEF")) %>%
+  select(-contains("PANAS"))
+names(sad_data)
+```
+
+### Demographic variables
+
+Cleaning up demographic variables
+
+```{r clean up demographic variables}
+# Let's inspect the age variable for suspect entries
+sad_data %>% 
+  distinct(age) %>%
+  pull(.)
+```
+
+Looks like we have some missing values, some who erroneously input their ID numbers as their age, a 15 year old, and someone who entered zero. We'll omit the person who reported their age as 15 and fill the rest of entries with NAs
+
+```{r clean age variable}
+# omit 15 year old
+sad_data <- sad_data %>% filter(!age == 15)
+
+# there are 110 cases with questionable age variables, let's omit them. 
+sad_data <- sad_data %>% mutate(age = na_if(age, 7087106163),
+                    age = na_if(age, 6306244561),
+                    age = na_if(age, 0))
+  
+# all the remaining age entries look good
+sad_data %>% distinct(age)
+```
+
+Now, let's inspect the ethnicity variable
+
+```{r ethnicity variable}
+sad_data %>%
+  distinct(ethnicity)
+```
+
+Appears to be in order, we have the two possible responses and some missing values.
+
+```{r race}
+sad_data %>%
+  distinct(race)
+```
+
+Race looks fine too, just some missing values.
+
+## Other missing values
+
+Let's determine the percentage of each variable that is missing
+
+```{r percentage of missing responses for each variable}
+map_dbl(sad_data, ~ {
+  (sum(is.na(.x))/sum(!is.na(.x))) * 100
+  })
+```
+This is good news - it appears that no more than %5.70 of any variable is missing, so we had a pretty good response rate. Since we have such a large N, we can just omit all cases that have missing values.
+
+```{r omit all cases with missing values}
+sad_data <- na.omit(sad_data)
+```
+As you can see, the above function now indicates that 0% of all variables are missing
+```{r test that there is no missing data}
+map_dbl(sad_data, ~ {
+  (sum(is.na(.x))/sum(!is.na(.x))) * 100
+  })
+```
+
+```{r load data in workspace, include = FALSE}
+write_csv(sad_data, "total_data.csv")
+```
+
+```{r code for finding percentage that each race and ethnicity comprises of the final sample}
+# race
+map_dbl(table(sad_data$race), ~{
+  .x / nrow(sad_data) * 100
+})
+# ethnicity
+map_dbl(table(sad_data$ethnicity), ~ {
+  .x / nrow(sad_data) * 100
+})
+```
+

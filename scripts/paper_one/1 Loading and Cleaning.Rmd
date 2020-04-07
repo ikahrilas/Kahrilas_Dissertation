@@ -1,0 +1,340 @@
+---
+title: "Loading and Cleaning Participant Data (Fall 2014 - Spring 2019)"
+author: "Ian Kahrilas"
+date: "8/23/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Loading in and cleaning new data
+
+Data collection from Loyola's participant pool is ongoing. When the SaD manuscript was first drafted, we had 1014 participants that we collected from Fall 2014 - Fall 2017. Writing manuscripts takes a long time, and we've since collected several more semesters' worth of data. To increase our power, we will now add our new data.
+
+We'll be using packages from the _tidyverse_ to accomplish this.
+
+```{r load tidyverse, message=FALSE}
+library(tidyverse)
+library(readr)
+```
+
+### Fall 2014 and Spring 2015
+
+Let's load in and clean up the Fall 2014 and Spring 2015 data
+```{r load fall 2014 and spring 2015 dataset, message = FALSE, warning = FALSE}
+# earlier datasets do not follow the same naming conventions as older datasets. They
+# will require a bit more work
+fall_2014 <- c(list.files(pattern = "Individual Differences"), 
+               list.files(pattern = "FINAL SPRING 2015"))
+fall_2014 <- map_df(fall_2014, read_csv)
+```
+
+As you can see, this dataset is a total mess. Let's get rid of some columns, as they are not needed.
+
+```{r delete rows}
+fall_2014 <- fall_2014[-(1:13)]
+fall_2014 <- fall_2014[-c(3, 4, 11:15)]
+```
+
+Now, we can clean up a few more things
+
+```{r rename demographic info}
+# make new names for demographic information
+fall_2014 <- fall_2014 %>% rename("age" = names(fall_2014[1]),
+                     "sex" = names(fall_2014[2]),
+                     "ethnicity" = names(fall_2014[3]),
+                     )
+```
+
+Columns 9 to 30 pertain to the BRIEF questionnaire, so we can label them as such
+
+```{r BRIEF}
+names(fall_2014)[9:30] <- paste("BRIEF", 1:22, sep = "_")
+```
+
+We don't need the sleep, davies, or ps questions, so we can omit them
+
+```{r delete variables}
+fall_2014 <- fall_2014 %>% 
+  select(-c(names(fall_2014)[31:102]))
+```
+
+Columns 31-46 pertain to the 16 PSWQ items, so we'll name them appropriately.
+
+```{r PSWQ}
+names(fall_2014)[31:46] <- paste("PSWQ", 1:16, sep = "_")
+```
+
+Now, the MASQ
+
+```{r MASQ}
+names(fall_2014)[47:85] <- paste("MASQ", 1:39, sep = "_")
+```
+
+Next comes the PHQ
+
+```{r PHQ}
+names(fall_2014)[86:97] <- paste("PHQ", 1:12, sep = "_")
+```
+
+Get rid of the pain measures
+
+```{r eliminate pain measures}
+fall_2014 <- fall_2014 %>%
+  select(-c(98:117))
+```
+
+Now, name the SBI items
+
+```{r SBI}
+names(fall_2014)[98:121] <- paste("SBI", 1:24, sep = "_")
+```
+
+Ditch the last item
+
+```{r eliminate the last item}
+fall_2014 <- fall_2014 %>%
+  select(-122)
+```
+
+The last glaring issue here is the first row of data, which does not contain actual data values. It can be eliminated with the follow command:
+
+```{r first row}
+fall_2014 <- fall_2014[-1,]
+```
+
+Even though the data looks good, there's a problem: all of the data are of the character class. This can be remedied by using the `map_dbl` and `as.numeric` functions. This combination of functions iterates over each column of a data frame and turns them into numeric class data
+
+```{r turn columns into nuermic data, warning = FALSE}
+# this code illustrates the problem at hand, that all variables are of character class
+map_chr(fall_2014, class)
+# this changes all the variables to nuermical class
+fall_2014 <- map_df(fall_2014, as.numeric)
+# now, as you can see, all variables are of the nuemrical class
+glimpse(fall_2014)
+map_chr(fall_2014, class)
+```
+
+Now we can fix the race variable, which is spread out over 5 different columns. This code will derive a single categorical variable and delete the extraneous columns.
+
+```{r race variable}
+names(fall_2014)[4] <- "X19" # to reduce verbose code, rename the variable
+fall_2014 <- fall_2014 %>%
+  select(X19:X23) %>% # limit scope of operations
+  rowwise() %>% # perform vector-wise operations on rows rather than columns
+  mutate(race = if_else(sum(X19, X20, X21, X22, X23, na.rm = TRUE) >= 6, "biracial", # if the sum of all the race variables is 6 or greater, participant is biracial
+                        if_else(!is.na(X19), "american indian", 
+                                if_else(!is.na(X20), "asian",
+                                        if_else(!is.na(X21), "pacific islander",
+                                                if_else(!is.na(X22), "african american",
+                                                        if_else(!is.na(X23), "caucasian", NA_character_)
+                                                        )
+                                                )
+                                        )
+                                )
+                        )
+         ) %>%
+  select(race) %>% # only select the newly created race variable
+  bind_cols(., fall_2014) %>% # bind everything back to the original dataset
+  select(-c(paste0("X", 19:23))) # get rid of the old race variables
+# here it is now
+select(fall_2014, race)
+```
+
+This will be useful for the other datasets, so let's turn this code into a function.
+
+```{r tidy_race function}
+tidy_race <- function(df) {
+  names(df)[4] <- "X19"
+  df <- df %>%
+  select(X19:X23) %>%
+  rowwise() %>% #
+  mutate(race = if_else(sum(X19, X20, X21, X22, X23, na.rm = TRUE) >= 6, "biracial",
+                        if_else(!is.na(X19), "american indian", 
+                                if_else(!is.na(X20), "asian",
+                                        if_else(!is.na(X21), "pacific islander",
+                                                if_else(!is.na(X22), "african american",
+                                                        if_else(!is.na(X23), "caucasian", NA_character_)
+                                                        )
+                                                )
+                                        )
+                                )
+                        )
+         ) %>%
+  select(race) %>%
+  bind_cols(., df) %>%
+  select(-c(paste0("X", 19:23)))
+}
+```
+
+The data from Fall 2014 and Spring 2015 are now in good shape. Let's move on to the other data. 
+
+### Fall 2015
+
+```{r Fall 2015 Data, message = FALSE, warning = FALSE}
+# Load it in
+fall_2015 <- read_csv(list.files(pattern = "FINAL FALL 2015"))
+# Omit unnecessary variables
+fall_2015 <- fall_2015[-c(1:13, 16, 17, 24:28, 51:117, 185:204, 229:237)]
+```
+
+Now, we can appropriately name our variables
+
+```{r Fall 2015 Variable Names}
+names(fall_2015)[c(1, 2, 3)] <- c("age", "sex", "ethnicity")
+names(fall_2015)[9:30] <- paste("BRIEF", 1:22, sep = "_")
+names(fall_2015)[31:46] <- paste("PSWQ", 1:16, sep = "_")
+names(fall_2015)[47:85] <- paste("MASQ", 1:39, sep = "_")
+names(fall_2015)[86:97] <- paste("PHQ", 1:12, sep = "_")
+names(fall_2015)[98:121] <- paste("SBI", 1:24, sep = "_")
+```
+
+Now clean it up.
+
+```{r Fall 2015 cleaning, warning = FALSE}
+fall_2015 <- fall_2015[-1,]
+fall_2015 <- map_df(fall_2015, as.numeric)
+fall_2015 <- tidy_race(fall_2015)
+```
+
+Turn it into a function, boi. We'll also add the tidy_race function here as well.
+
+```{r sad_rename_clean function}
+sad_rename_clean <- function(df) {
+names(df)[c(1, 2, 3)] <- c("age", "sex", "ethnicity")
+names(df)[31:46] <- paste("PSWQ", 1:16, sep = "_")
+names(df)[47:85] <- paste("MASQ", 1:39, sep = "_")
+names(df)[9:30] <- paste("BRIEF", 1:22, sep = "_")
+names(df)[86:97] <- paste("PHQ", 1:12, sep = "_")
+names(df)[98:121] <- paste("SBI", 1:24, sep = "_")
+df <- df[-1,]
+df <- map_df(df, as.numeric)
+df <- tidy_race(df)
+}
+```
+
+### Spring 2016
+
+Onto Spring 2016. The Spring 2016 data set is a bit different because of the addition of the EPS at the end of the survey, hence why the deleted indices are a bit different from the other datasets.
+
+```{r spring 2016, message = FALSE, warning = FALSE}
+spring_2016 <- read_csv(list.files(pattern = "FINAL SPRING 2016"))
+spring_2016 <- spring_2016[-c(1:13, 16, 17, 24:28, 51:117, 185:204, 229:247)]
+```
+
+Now we can use the sad_rename_clean function to name the columns and clean it up a bit
+
+```{r spring 2016 renaming, message = FALSE, warning = FALSE}
+spring_2016 <- sad_rename_clean(spring_2016)
+glimpse(spring_2016)
+```
+
+Everything looks good. Now onto Fall 2016
+
+### Fall 2016
+
+```{r Fall 2016, message = FALSE, warning = FALSE}
+fall_2016 <- read_csv(list.files(pattern = "FINAL FALL 2016"))
+```
+
+Starting in Fall 2016, we added the state and trait PANAS at the end of the survey. This is of some interest to us, so we won't delete these.
+
+```{r delete indices for Fall 2016}
+fall_2016 <- fall_2016[-c(1:13, 16, 17, 24:28, 51:117, 185:204, 229:246, 301)]
+```
+
+Let's use our function to clean it up
+
+```{r clean fall 2016, warning = FALSE, message = FALSE}
+fall_2016 <- sad_rename_clean(fall_2016)
+```
+
+Everything here is good except for the last items, which is the PANAS. Let's name those with this next code snippet.
+
+```{r PANAS naming}
+# "S_" is for the state PANAS
+names(fall_2016)[118:144] <- paste("S_PANAS", 1:27, sep = "_")
+# "T_" is for the trait PANAS
+names(fall_2016)[145:171] <- paste("T_PANAS", 1:27, sep = "_")
+```
+
+### Spring 2017 to Spring 2019
+
+Spring 2017 to Spring 2019 have all been renamed and cleaned previously, so there's less to be done here. Since all these data have the same variable names, let's load them into a single dataframe.
+
+```{r load in Spring 2017 - Spring 2019, message = FALSE}
+spring_2017_spring_2019 <- map_df(list.files(pattern = "sad_"), read_csv)
+```
+
+There's a couple variables that we don't need from these new data. Let's get rid of them with the following code snippet:
+
+```{r get rid of extra variables in new data}
+spring_2017_spring_2019 <- spring_2017_spring_2019 %>% 
+  select(-c(color_blind, handedness, native_english:household_member))
+```
+
+The race variables here need to be updated, but since the indices are different, we cannot use our `tidy_race` function. So, we'll deal with it using some modified code:
+
+```{r fix race variable in new data}
+spring_2017_spring_2019 <- spring_2017_spring_2019 %>% 
+  select(`American Indian or Alaskan Native`:`White / Caucasian`) %>% 
+  rowwise() %>% 
+  mutate(race = if_else(sum(`American Indian or Alaskan Native`, 
+                            Asian,
+                            `Native Hawaiian or Other Pacific Islander`,
+                            `Black or African American`,
+                            `White / Caucasian`, 
+                            na.rm = TRUE) >= 6, "biracial",
+                        if_else(!is.na(`American Indian or Alaskan Native`), "american indian",
+                                if_else(!is.na(Asian), "asian",
+                                        if_else(!is.na(`Native Hawaiian or Other Pacific Islander`), "pacific islander",
+                                                if_else(!is.na(`Black or African American`), "african american",
+                                                               if_else(!is.na(`White / Caucasian`), "caucasian", NA_character_)
+                                                )
+                                        )
+                                )
+                        )
+  )
+         ) %>% 
+  select(race) %>%
+  bind_cols(., spring_2017_spring_2019) %>% 
+  select(-c(`American Indian or Alaskan Native`:`White / Caucasian`))
+```
+
+The age variable in the latest data is still of a character class, so let's change that to numerical data.
+
+```{r change age to numerical class, warning = FALSE, message = FALSE}
+spring_2017_spring_2019$age <- as.numeric(spring_2017_spring_2019$age)
+```
+
+### Merge all of the data together
+
+All the individual datasets can now be merged with the following function.
+
+```{r merge all data}
+# this compiles all of the data into a list
+data_list <- list(fall_2014,
+                  fall_2015,
+                  fall_2016,
+                  spring_2016,
+                  spring_2017_spring_2019)
+# this command takes the list and binds it all together
+sad_data <- map_df(data_list, bind_rows)
+```
+
+Let's take a look at it
+
+```{r check out the data}
+glimpse(sad_data)
+dim(sad_data)
+```
+
+Great! We're ready to move on. Before doing so, let's clean up our workspace a bit though:
+
+```{r clean workspace}
+rm(fall_2014, fall_2015, fall_2016, data_list, spring_2016, spring_2017_spring_2019)
+write_csv(sad_data, "total_data.csv")
+```
+
