@@ -257,7 +257,6 @@ kable(tab, format = "latex",  linesep = "", digits = 2, escape = FALSE, booktabs
   kable_styling(latex_options = "scale_down", font_size = 10)
 ```
 
-
 ### Positive Affectivity, Negative Affectivity, and Anxious Arousal as Predictors of Depression
 The tripartite model posits that depression and anxiety have specific relations with three affective dimensions: PA, NA, and anxious arousal [@clarkDiagnosisClassificationPsychopathology1995; @watsonTestingTripartiteModel1995a]. Given the present study’s focus on PA and depression, we wanted to confirm the unique relation between each of these dimensions and depression symptoms in the present sample. Per the tripartite model, we anticipated that low levels of PA and high levels of NA would be positively associated with depression symptoms, and that anxious arousal would be unrelated to depression symptoms. Multiple regression analyses were conducted with PA, NA, and anxious arousal as predictors and depressions with no covariates. Diverging from the specific association between PA and depression proposed by Clark and Watson (1991, 1995a, 1995b), results from the test sample indicated that each of the predictors were uniquely associated with depression. NA [$b = .52,\ \beta = .55,\ t(1614) = 25.47,\ p < .001$] was the strongest predictor of depression, followed by anxious arousal [$b = .11,\ \beta = .21,\ t(1614) = 10.38,\ p < .001$], and lastly PA [$b = -.09,\ \beta = -.19,\ t(1614) = -10.55,\ p < .001$].
 
