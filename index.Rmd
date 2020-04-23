@@ -1,5 +1,5 @@
 --- 
-bibliography: citations.bib
+bibliography: [citations.bib, references.bib]
 csl: apa7.csl
 output:
   bookdown::pdf_book:
