@@ -268,7 +268,59 @@ n170_watch_tab <- n170_watch_tab %>%
   mutate(comp = "N170") %>% 
   select(comp, everything())
 
-watch_tab <- bind_rows(lpp_watch_tab, epn_watch_tab, n170_watch_tab) %>% 
+# Arousal comparisons
+reg_mod_ar <- lmer(arousal ~ valence_condition * regulation_condition + (1|pid), data = per_dat_cond)
+ar_watch <- emmeans(reg_mod_ar, pairwise ~ valence_condition | regulation_condition)
+ar_watch_tab <- data.frame(ar_watch$contrasts) %>% 
+  filter(regulation_condition == "Watch")
+# derive standardized beta for effect size
+dat$block <- relevel(factor(dat$block), ref = "Neu_Watch")
+ar_std_beta <- standardize_parameters(lmer(arousal ~ block + (1|pid), data = dat))
+ar_std_beta <- ar_std_beta %>% 
+  filter(Parameter %in% c("blockNeg_Watch", "blockPos_Watch")) %>% 
+  mutate(Parameter = c("Neutral - Positive", "Negative - Neutral"))
+dat$block <- relevel(factor(dat$block), ref = "Pos_Watch")
+tmp <- standardize_parameters(lmer(arousal ~ block + (1|pid), data = dat))
+tmp <- tmp %>% 
+  filter(Parameter == "blockNeg_Watch") %>% 
+  mutate(Parameter = "Negative - Positive")
+ar_std_beta <- bind_rows(ar_std_beta, tmp)
+ar_watch_tab <- full_join(ar_watch_tab, ar_std_beta, by = c("contrast" = "Parameter")) %>% 
+  select(contrast, estimate, Std_Coefficient, everything())
+ar_watch_tab$contrast[3] <- "Positive - Neutral"
+ar_watch_tab$estimate[3] <- abs(ar_watch_tab$estimate[3])
+ar_watch_tab$t.ratio[3] <- abs(ar_watch_tab$t.ratio[3])
+ar_watch_tab <- ar_watch_tab %>% 
+  mutate(comp = "arousal_rating") %>% 
+  select(comp, everything())
+
+# Valence comparisons
+reg_mod_val <- lmer(valence ~ valence_condition * regulation_condition + (1|pid), data = per_dat_cond)
+val_watch <- emmeans(reg_mod_val, pairwise ~ valence_condition | regulation_condition)
+val_watch_tab <- data.frame(val_watch$contrasts) %>% 
+  filter(regulation_condition == "Watch")
+# derive standardized beta for effect size
+dat$block <- relevel(factor(dat$block), ref = "Neu_Watch")
+val_std_beta <- standardize_parameters(lmer(valence ~ block + (1|pid), data = dat))
+val_std_beta <- val_std_beta %>% 
+  filter(Parameter %in% c("blockNeg_Watch", "blockPos_Watch")) %>% 
+  mutate(Parameter = c("Neutral - Positive", "Negative - Neutral"))
+dat$block <- relevel(factor(dat$block), ref = "Pos_Watch")
+tmp <- standardize_parameters(lmer(valence ~ block + (1|pid), data = dat))
+tmp <- tmp %>% 
+  filter(Parameter == "blockNeg_Watch") %>% 
+  mutate(Parameter = "Negative - Positive")
+val_std_beta <- bind_rows(val_std_beta, tmp)
+val_watch_tab <- full_join(val_watch_tab, val_std_beta, by = c("contrast" = "Parameter")) %>% 
+  select(contrast, estimate, Std_Coefficient, everything())
+val_watch_tab$contrast[3] <- "Positive - Neutral"
+val_watch_tab$estimate[3] <- abs(val_watch_tab$estimate[3])
+val_watch_tab$t.ratio[3] <- abs(val_watch_tab$t.ratio[3])
+val_watch_tab <- val_watch_tab %>% 
+  mutate(comp = "arousal_rating") %>% 
+  select(comp, everything())
+
+watch_tab <- bind_rows(lpp_watch_tab, epn_watch_tab, n170_watch_tab, ar_watch_tab, val_watch_tab) %>% 
   select(comp:Std_Coefficient, SE, p.value)
 names(watch_tab) <- c("comp", "Contrast", "Estimate", "Std. Beta", "$SE$", "Sig.")
 watch_tab <- watch_tab %>%
@@ -291,9 +343,11 @@ kable(., "latex", escape = FALSE, booktabs = TRUE, align = c("l", rep("c", times
   pack_rows("LPP", 1, 3) %>% 
   pack_rows("EPN", 4, 6) %>% 
   pack_rows("N170", 7, 9) %>% 
+  pack_rows("Arousal Ratings", 10, 12) %>% 
+  pack_rows("Valence Ratings", 13, 15) %>% 
   footnote(escape = FALSE,
            general_title = "Note.",
-           general = "$SE$ = Standard Error, Std. Beta = Standardized Beta coefficient as measure of effect size derived by fitting multilevel model to standardized dataset, Sig. = $p$ value",
+           general = "$SE$ = Standard Error, Std. Beta = Standardized Beta coefficient as measure of effect size derived by fitting multilevel model to standardized dataset, Sig. = $p$ value. $P$ values adjusted using the Tukey method for comparing a family of three estimates.",
            threeparttable = TRUE)
 ```
 
