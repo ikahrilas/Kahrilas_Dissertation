@@ -79,8 +79,8 @@ First, participants completed three practice trials that consisted of 10 not use
 
 (ref:paradigm) Experimental paradigm utilized in the present study. 
 
-```{r paradigm, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:paradigm)", out.height="36%", out.width="100%"}
-knitr::include_graphics("images/paper_2/PER Paradigm.png", auto_pdf = TRUE)
+```{r paradigm, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:paradigm)", out.height= "50%", out.width="100%"}
+knitr::include_graphics("images/paper_2/PER_paradigm.png", auto_pdf = TRUE)
 ```
 
 #### Apparatus and Physiological Recording
@@ -89,10 +89,49 @@ Scalp EEG was measured while participants completed an emotion regulation task. 
 The following EEG data processing steps were implemented in Brain Electrical Source Analysis software [BESA; @schergBESABrainElectric1990]. EEG data were re-referenced to the average activity of the mastoid electrodes for LPP analyses [@hajcakAttendingAffectAppraisal2006; @hajcakReappraisalModulatesElectrocortical2006] and average reference of all electrodes for EPN and N170 analyses [@stockdaleInfluenceStimulusValence2020; @yoonEnhancedEarlyPosterior2016] and digitally filtered with a 0.01 Hz high-pass filter. All filters had a cutoff attenuation of 12 dB/octave. Muscle (e.g., eye blink, eye movement) and other artifacts were removed and/or corrected via implementing automatic algorithms in BESA. Stimulus-locked averages were calculated to ascertain LPP, EPN, and N170. The data were baseline-adjusted by subtracting the average activity for 200 milliseconds (Hajcak et al., 2006) before stimulus onset. LPP activity was calculated as the average activity in the 450 – 800 ms window at Pz, P1, and P2 electrode sites. EPN and N170 activity was calculated as the average activity in the 225 - 375 ms and 150 - 190 ms windows, respecitvely, at PO7 and PO8 electrode sites. The scoring window and sites were selected based upon existing literature as well as visual inspection of the data to determine where respective EEG components were observed to be maximal in the present sample. The selected scoring window and electrode sites were similar to other studies investigating LPP, EPN, and N170 in similar contexts [e.g., @frankHemodynamicElectrocorticalReactivity2019; @hajcakReappraisalModulatesElectrocortical2006; @thomEmotionalScenesElicit2014]. The experiment was computer-administered, using E-Prime 2.0 software [@schneiderEPrimeUserGuide2002] in order to manipulate the timing and presentation of stimuli. All stimuli were presented in color and occupied the entirety of the 21-inch monitor. The viewing distance was approximately 24 in. and occupied 25°of the vertical visual angle and 30° horizontally (Cuthbert et al., 2000; Hajcak & Nieuwenhuis, 2006).
 
 ### Results
-The first objective of the proposed study was to investigate the relationship between highly arousing affective vs. neutral stimuli from the OASIS and parietal cortical activity (LPP). Data below a skewness statistic of 1.0 were considered normally distributed. No variables of interest violated this threshold. Participants without valid EEG data were excluded from the following analyses (*n* = 6). No other data were missing from variables of interest.
-All analyses were run in R version 3.5.0 (R Core Team, 2018). Multilevel modeling (MLM) analyses were conducted using the lme4 package [@batesFittingLinearMixedeffects2015]. Means and standard deviations of LPP activity and participant ratings (arousal, valence, and difficulty) were calculated for each of the experimental blocks (see Table 1). In order to evaluate whether the experimental blocks varied on arousal and valence, a repeated measures analysis of variance yielded significant variation among image blocks for arousal ($F(6, 270) = 25.02$, $p < .001$) and valence ($F(6, 270) = 80.43$, $p < .001$) ratings. Tukey’s HSD test was used to calculate comparisons across all blocks for arousal (see Table 2) and valence (see Table 3) ratings using the psycho package [@makowskiPsychoPackageEfficient2018]. Pearson correlations were run among psychological and physiological variables across the sample. Significant correlations were found between several variables (see Table 4). Means and standard deviations of between-subjects variables (savoring the moment, trait positive affect, and state positive affect) were also derived (see Table 4).
+Trials without valid EEG data were excluded from the following analyses (*n* = 2). Analyses were run in R version 3.6.2 [@rcoreteamLanguageEnvironmentStatistical2018]. Multilevel modeling (MLM) analyses were conducted using the lme4 package [@batesFittingLinearMixedeffects2015]. Model assumptions were checked via visual inspection of diagnostic plots (i.e., residual, QQ, scale-location, and residuals vs. leverage) generated with the performance package [@ludeckePerformanceAssessmentRegression2019]. Descriptive statistics for LPP, EPN, N170 and participant ratings (arousal, valence, and difficulty) were calculated for each of the experimental blocks (see XXXX). In order to evaluate whether the experimental blocks varied on arousal and valence, a repeated measures analysis of variance yielded significant variation among image blocks for arousal ($F(6, 270) = 25.02,\ p < .001$) and valence ($F(6, 270) = 80.43,\ p < .001$) ratings. Tukey’s HSD test was used to calculate comparisons across all blocks for arousal (see Table 2) and valence (see Table 3) ratings using the psycho package [@makowskiPsychoPackageEfficient2018]. Pearson correlations were run among psychological and physiological variables across the sample. Significant correlations were found between several variables (see Table 4). Means and standard deviations of between-subjects variables (savoring the moment, trait positive affect, and state positive affect) were also derived (see Table 4).
 
-Before testing primary hypotheses, a null model was run to assess whether the grouping variable (participant) differed on the outcome variable (parietal cortical activity) and to estimate the degree of nonindependence in the sample. An intraclass-correlation indicated that that 56% of the total variance in LPP activity is accounted for by differences between participants’ average LPP activity. This necessitates an analytical technique, such as MLM, that accounts for non-independence. Semi-partial R^2 was calculated for model parameters to estimate relative variance explained by each predictor [@edwardsR2StatisticFixed2008; @trittIdeologicalReactivityPolitical2016].
+(ref:descriptives-by-block) Means and standard deviations for LPP, EPN, and N170 EEG components, as well as arousal, valence, and difficulty ratings.
+
+```{r descriptives-by-block, echo = FALSE, message = FALSE, fig.cap = "(ref:descriptives-by-block)"}
+library(tidyverse)
+library(kableExtra)
+dat <- read_csv("data/paper_two/created_data/per_data_analyses_2020_5_19.csv") %>% 
+  mutate(N170 = (N170_left + N170_right) / 2,
+         EPN = (EPN_left + EPN_right) / 2) %>% 
+  select(pid:LPP, N170, EPN, everything())
+
+desc_stats <- dat %>% 
+  group_by(block) %>% 
+  summarize("Mean LPP (SD)" = 
+              paste0(sprintf("%.1f", mean(LPP, na.rm = TRUE)), " ", "(", sprintf("%.1f", sd(LPP, na.rm = TRUE)), ")"),
+            "Mean EPN (SD)" = 
+              paste0(sprintf("%.1f", mean(EPN)), " ", "(", sprintf("%.1f", sd(EPN)), ")"),
+            "Mean N170 (SD)" = 
+              paste0(sprintf("%.1f", mean(N170)), " ", "(", sprintf("%.1f", sd(N170)), ")"),
+            "Mean Arousal (SD)" = 
+              paste0(sprintf("%.1f", mean(arousal)), " ", "(", sprintf("%.1f", sd(arousal)), ")"),
+            "Mean Valence (SD)" = 
+              paste0(sprintf("%.1f", mean(valence)), " ", "(", sprintf("%.1f", sd(valence)), ")"),
+            "Mean Difficulty (SD)" = 
+              paste0(sprintf("%.1f", mean(difficulty)), " ", "(", sprintf("%.1f", sd(difficulty)), ")")) %>% 
+  rename("Block" = "block") %>% 
+  mutate(Block = c("Negative Decrease", 
+                   "Negative Increase",
+                   "Negative Watch",
+                   "Neutral Watch",
+                   "Positive Decrease",
+                   "Positive Increase",
+                   "Positive Watch"))
+
+kable(desc_stats, "latex", escape = FALSE, booktabs = TRUE, align = "c", linesep = "", caption = "(ref:descriptives-by-block)") %>% 
+  kable_styling(font_size = 24, latex_options = c("scale_down")) %>% 
+  footnote(general_title = "Note.",
+           general = "SD = Standard Error.")
+```
+
+
+Before testing primary hypotheses, a null model was run to assess whether the grouping variable (participant) differed on the outcome variable (parietal cortical activity) and to estimate the degree of nonindependence in the sample. An intraclass-correlation indicated that that 56% of the total variance in LPP activity is accounted for by differences between participants’ average LPP activity. This necessitates an analytical technique, such as MLM, that accounts for non-independence. Semi-partial R-squared was calculated for model parameters to estimate relative variance explained by each predictor [@edwardsR2StatisticFixed2008; @trittIdeologicalReactivityPolitical2016].
 #### Hypotheses 1a & 1b. 
 MLM with variance components covariance matrices to estimate random intercepts and slopes for each participant was used to test whether increased LPP activity is associated with passively viewing highly arousing affective compared to neutral OASIS stimuli. Dummy-coded block (within subjects: neutral watch block as reference level) and mean- centered valence (within subjects) variables were included in the omnibus model to predict LPP activity while accounting for the variance attributed to the how positive or negative participants rated each block. A main effect of block type upon LPP activity was found (positive watch; $b = 1.38$, $SE = .39$, $t(244.96) = 3.52$, $p < .001$, $R^2 = .03$; negative watch; $b = 2.12$, $SE = .42$, $t(249.05) = 5.10$, $p < .001$, $R^2 = .06$). These findings indicate that passively viewing affective (positive and negative) compared to neutral OASIS images is associated with enhanced LPP activity (see Figure 4).
 #### Hypothesis 2a 
