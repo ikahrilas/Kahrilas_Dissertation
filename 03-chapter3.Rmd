@@ -352,7 +352,7 @@ watch_tab <- watch_tab %>%
 
 watch_tab %>% 
   select(-comp) %>% 
-kable(., "latex", escape = FALSE, booktabs = TRUE, align = c("l", "c", "r", "c", "r", "r"), linesep = "", caption = "(ref:pairwise-watch-comparison-table)") %>% 
+kable(., "latex", escape = FALSE, booktabs = TRUE, align = c("l", "c", "c", "c", "c", "c"), linesep = "", caption = "(ref:pairwise-watch-comparison-table)") %>% 
   row_spec(0, align = "c") %>% 
   pack_rows("LPP", 1, 3) %>% 
   pack_rows("EPN", 4, 6) %>% 
