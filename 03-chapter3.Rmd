@@ -79,7 +79,7 @@ First, participants completed three practice trials that consisted of 10 not use
 
 (ref:paradigm) Experimental paradigm utilized in the present study. 
 
-```{r paradigm, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:paradigm)", out.height= "50%", out.width="100%"}
+```{r paradigm, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:paradigm)", out.height= "45%", out.width="100%"}
 knitr::include_graphics("images/paper_2/PER_paradigm.png", auto_pdf = TRUE)
 ```
 
@@ -97,15 +97,6 @@ dat <- read_csv("data/paper_two/created_data/per_data_analyses_2020_5_19.csv") %
   mutate(N170 = (N170_left + N170_right) / 2,
          EPN = (EPN_left + EPN_right) / 2) %>% 
   select(pid:LPP, N170, EPN, everything())
-dat_cond <- read_csv("data/paper_two/created_data/per_data_analyses_2020_5_19.csv") %>% 
-  mutate(N170 = (N170_left + N170_right) / 2,
-         EPN = (EPN_left + EPN_right) / 2) %>% 
-  select(pid:LPP, N170, EPN, everything()) %>% 
-  separate(block, c("valence_cond", "regulation_cond"), "_") %>% 
-  mutate(valence_condition = if_else(valence_cond == "Neg", "Negative",
-                           if_else(valence_cond == "Pos", "Positive", "Neutral")),
-         regulation_condition = if_else(regulation_cond == "Dec", "Decrease",
-                              if_else(regulation_cond == "Inc", "Increase", "Watch")))
 
 mod_lpp <- lmer(LPP ~ block + (1|pid), data = dat)
 av_lpp <- anova(mod_lpp)
@@ -124,9 +115,22 @@ av_n170 <- anova(mod_n170)
 df_num_n170 <- av_n170$NumDF
 df_den_n170 <- av_n170$DenDF
 f_n170 <- sprintf("%.2f", av_n170[["F value"]])
+
+mod_ar <- lmer(arousal ~ block + (1|pid), data = dat)
+av_ar <- anova(mod_ar)
+df_num_ar <- av_ar$NumDF
+df_den_ar <- av_ar$DenDF
+f_ar <- sprintf("%.2f", av_ar[["F value"]])
+
+mod_val <- lmer(valence ~ block + (1|pid), data = dat)
+av_val <- anova(mod_val)
+df_num_val <- av_val$NumDF
+df_den_val <- av_val$DenDF
+f_val <- sprintf("%.2f", av_val[["F value"]])
 ```
-Trials without valid EEG data were excluded from the following analyses (*n* = 2). Analyses were run in R version 3.6.2 [@rcoreteamLanguageEnvironmentStatistical2018]. Multilevel modeling (MLM) analyses were conducted using the lme4 package [@batesFittingLinearMixedeffects2015]. Model assumptions were checked via visual inspection of diagnostic plots (i.e., residual, QQ, scale-location, and residuals vs. leverage) generated with the performance package [@ludeckePerformanceAssessmentRegression2019]. Descriptive statistics for LPP, EPN, N170 and participant ratings (arousal, valence, and difficulty) were calculated for each of the experimental blocks (see Table XXXX). A repeated measures analysis of variance yielded significant variation among experimental image blocks for LPP ($F$(`r df_num_lpp`, `r df_den_lpp` = `r f_lpp`, $p < .001$), EPN ($F$(`r df_num_epn`, `r df_den_epn`) = `r f_epn`, $p < .001$), and N170 ($F$(`r df_num_n170`, `r df_den_n170`) = `r f_n170`, $p < .001$). Repeated measures analysis of variance similiarly indicated differences among blocks for arousal ratings , valence ratings, and difficulty ratings.
-Tukey’s HSD test was used to calculate comparisons across all blocks for arousal (see Table 2) and valence (see Table 3) ratings using the psycho package [@makowskiPsychoPackageEfficient2018]. Pearson correlations were run among psychological and physiological variables across the sample. Significant correlations were found between several variables (see Table 4). Means and standard deviations of between-subjects variables (savoring the moment, trait positive affect, and state positive affect) were also derived (see Table 4). `r av$NumDF`
+Trials without valid EEG data were excluded from the following analyses (*n* = 2). Analyses were run in R version 3.6.2 [@rcoreteamLanguageEnvironmentStatistical2018]. Multilevel modeling (MLM) analyses were conducted using the lme4 package [@batesFittingLinearMixedeffects2015]. Model assumptions were checked via visual inspection of diagnostic plots (i.e., residual, QQ, scale-location, and residuals vs. leverage) generated with the performance package [@ludeckePerformanceAssessmentRegression2019]. Descriptive statistics for LPP, EPN, N170 and participant ratings (arousal, valence, and difficulty) were calculated for each of the experimental blocks (see Table XXXX). A repeated measures analysis of variance yielded significant variation among experimental image blocks for LPP ($F$(`r df_num_lpp`, `r df_den_lpp` = `r f_lpp`, $p < .001$), EPN ($F$(`r df_num_epn`, `r df_den_epn`) = `r f_epn`, $p < .001$), and N170 ($F$(`r df_num_n170`, `r df_den_n170`) = `r f_n170`, $p < .001$). Repeated measures analysis of variance similiarly indicated differences among blocks for arousal ratings ($F$(`r df_num_ar`, `r df_den_ar` = `r f_ar`, $p < .001$) and valence ratings ($F$(`r df_num_val`, `r df_den_val` = `r f_val`, $p < .001$). Pairwise comparisons were calculated using the emmeans package [@lenthEmmeansEstimatedMarginal2020]. 
+
+Tukey’s HSD test was used to calculate comparisons across all blocks for arousal (see Table 2) and valence (see Table 3) ratings using the psycho package [@makowskiPsychoPackageEfficient2018]. Pearson correlations were run among psychological and physiological variables across the sample. Significant correlations were found between several variables (see Table 4). Means and standard deviations of between-subjects variables (savoring the moment, trait positive affect, and state positive affect) were also derived (see Table 4).
 
 (ref:descriptives-by-block) Means and standard deviations for LPP, EPN, and N170 EEG components, as well as arousal, valence, and difficulty ratings.
 
@@ -167,6 +171,131 @@ kable(desc_stats, "latex", escape = FALSE, booktabs = TRUE, align = "c", linesep
            general = "SD = Standard Error.")
 ```
 
+(ref:pairwise-watch-comparison-table) Contrasts between passive watch conditions for LPP, EPN, and N170 EEG components.
+
+```{r pairwise-watch-comparison-table, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "ref:pairwise-watch-comparison-table)"}
+library(tidyverse)
+library(emmeans)
+library(lmerTest)
+library(r2glmm)
+library(effectsize)
+# read in data and make variables for valence and regulation conditions
+per_dat_cond <- read_csv("data/paper_two/created_data/per_data_analyses_2020_5_19.csv") %>% 
+  mutate(N170 = (N170_left + N170_right) / 2,
+         EPN = (EPN_left + EPN_right) / 2) %>% 
+  select(pid:LPP, N170, EPN, everything()) %>% 
+  separate(block, c("valence_cond", "regulation_cond"), "_") %>% 
+  mutate(valence_condition = if_else(valence_cond == "Neg", "Negative",
+                           if_else(valence_cond == "Pos", "Positive", "Neutral")),
+         regulation_condition = if_else(regulation_cond == "Dec", "Decrease",
+                              if_else(regulation_cond == "Inc", "Increase", "Watch")))
+
+# LPP watch comparisons
+reg_mod_lpp <- lmer(LPP ~ valence_condition * regulation_condition + (1|pid), data = per_dat_cond)
+lpp_watch <- emmeans(reg_mod_lpp, pairwise ~ valence_condition | regulation_condition)
+lpp_watch_tab <- data.frame(lpp_watch$contrasts) %>% 
+  filter(regulation_condition == "Watch")
+# derive standardized beta for effect size
+dat$block <- relevel(factor(dat$block), ref = "Neu_Watch")
+lpp_std_beta <- standardize_parameters(lmer(LPP ~ block + (1|pid), data = dat))
+lpp_std_beta <- lpp_std_beta %>% 
+  filter(Parameter %in% c("blockNeg_Watch", "blockPos_Watch")) %>% 
+  mutate(Parameter = c("Neutral - Positive", "Negative - Neutral"))
+dat$block <- relevel(factor(dat$block), ref = "Pos_Watch")
+tmp <- standardize_parameters(lmer(LPP ~ block + (1|pid), data = dat))
+tmp <- tmp %>% 
+  filter(Parameter == "blockNeg_Watch") %>% 
+  mutate(Parameter = "Negative - Positive")
+lpp_std_beta <- bind_rows(lpp_std_beta, tmp)
+lpp_watch_tab <- full_join(lpp_watch_tab, lpp_std_beta, by = c("contrast" = "Parameter")) %>% 
+  select(contrast, estimate, Std_Coefficient, everything())
+lpp_watch_tab$contrast[3] <- "Positive - Neutral"
+lpp_watch_tab$estimate[3] <- abs(lpp_watch_tab$estimate[3])
+lpp_watch_tab$t.ratio[3] <- abs(lpp_watch_tab$t.ratio[3])
+lpp_watch_tab <- lpp_watch_tab %>% 
+  mutate(comp = "LPP") %>% 
+  select(comp, everything())
+
+# EPN comparisons
+reg_mod_epn <- lmer(EPN ~ valence_condition * regulation_condition + (1|pid), data = per_dat_cond)
+epn_watch <- emmeans(reg_mod_epn, pairwise ~ valence_condition | regulation_condition)
+epn_watch_tab <- data.frame(epn_watch$contrasts) %>% 
+  filter(regulation_condition == "Watch")
+# derive standardized beta for effect size
+dat$block <- relevel(factor(dat$block), ref = "Neu_Watch")
+epn_std_beta <- standardize_parameters(lmer(EPN ~ block + (1|pid), data = dat))
+epn_std_beta <- epn_std_beta %>% 
+  filter(Parameter %in% c("blockNeg_Watch", "blockPos_Watch")) %>% 
+  mutate(Parameter = c("Neutral - Positive", "Negative - Neutral"))
+dat$block <- relevel(factor(dat$block), ref = "Pos_Watch")
+tmp <- standardize_parameters(lmer(EPN ~ block + (1|pid), data = dat))
+tmp <- tmp %>% 
+  filter(Parameter == "blockNeg_Watch") %>% 
+  mutate(Parameter = "Negative - Positive")
+epn_std_beta <- bind_rows(epn_std_beta, tmp)
+epn_watch_tab <- full_join(epn_watch_tab, epn_std_beta, by = c("contrast" = "Parameter")) %>% 
+  select(contrast, estimate, Std_Coefficient, everything())
+epn_watch_tab$contrast[3] <- "Positive - Neutral"
+epn_watch_tab$estimate[3] <- abs(epn_watch_tab$estimate[3])
+epn_watch_tab$t.ratio[3] <- abs(epn_watch_tab$t.ratio[3])
+epn_watch_tab <- epn_watch_tab %>% 
+  mutate(comp = "EPN") %>% 
+  select(comp, everything())
+
+# N170 comparisons
+reg_mod_n170 <- lmer(N170 ~ valence_condition * regulation_condition + (1|pid), data = per_dat_cond)
+n170_watch <- emmeans(reg_mod_n170, pairwise ~ valence_condition | regulation_condition)
+n170_watch_tab <- data.frame(n170_watch$contrasts) %>% 
+  filter(regulation_condition == "Watch")
+# derive standardized beta for effect size
+dat$block <- relevel(factor(dat$block), ref = "Neu_Watch")
+n170_std_beta <- standardize_parameters(lmer(N170 ~ block + (1|pid), data = dat))
+n170_std_beta <- n170_std_beta %>% 
+  filter(Parameter %in% c("blockNeg_Watch", "blockPos_Watch")) %>% 
+  mutate(Parameter = c("Neutral - Positive", "Negative - Neutral"))
+dat$block <- relevel(factor(dat$block), ref = "Pos_Watch")
+tmp <- standardize_parameters(lmer(N170 ~ block + (1|pid), data = dat))
+tmp <- tmp %>% 
+  filter(Parameter == "blockNeg_Watch") %>% 
+  mutate(Parameter = "Negative - Positive")
+n170_std_beta <- bind_rows(n170_std_beta, tmp)
+n170_watch_tab <- full_join(n170_watch_tab, n170_std_beta, by = c("contrast" = "Parameter")) %>% 
+  select(contrast, estimate, Std_Coefficient, everything())
+n170_watch_tab$contrast[3] <- "Positive - Neutral"
+n170_watch_tab$estimate[3] <- abs(n170_watch_tab$estimate[3])
+n170_watch_tab$t.ratio[3] <- abs(n170_watch_tab$t.ratio[3])
+n170_watch_tab <- n170_watch_tab %>% 
+  mutate(comp = "N170") %>% 
+  select(comp, everything())
+
+watch_tab <- bind_rows(lpp_watch_tab, epn_watch_tab, n170_watch_tab) %>% 
+  select(comp:Std_Coefficient, SE, p.value)
+names(watch_tab) <- c("comp", "Contrast", "Estimate", "Std. Beta", "$SE$", "Sig.")
+watch_tab <- watch_tab %>%
+  mutate(Sig. = sprintf("%.3f", watch_tab$Sig.),
+         Sig. = str_remove(Sig., "^0+"),
+         Sig. = if_else(Sig. == ".000", "<.001", Sig.))
+
+watch_tab <- map_df(watch_tab, ~ {
+  if(class(.x) == "numeric") {
+    sprintf("%.2f", .x)
+  } else {
+    .x
+  }
+})
+
+watch_tab %>% 
+  select(-comp) %>% 
+kable(., "latex", escape = FALSE, booktabs = TRUE, align = c("l", rep("c", times = 3), "r"), linesep = "", caption = "(ref:pairwise-watch-comparison-table)") %>% 
+  row_spec(0, align = "c") %>% 
+  pack_rows("LPP", 1, 3) %>% 
+  pack_rows("EPN", 4, 6) %>% 
+  pack_rows("N170", 7, 9) %>% 
+  footnote(escape = FALSE,
+           general_title = "Note.",
+           general = "$SE$ = Standard Error, Std. Beta = Standardized Beta coefficient as measure of effect size derived by fitting multilevel model to standardized dataset, Sig. = $p$ value",
+           threeparttable = TRUE)
+```
 
 
 Before testing primary hypotheses, a null model was run to assess whether the grouping variable (participant) differed on the outcome variable (parietal cortical activity) and to estimate the degree of nonindependence in the sample. An intraclass-correlation indicated that that 56% of the total variance in LPP activity is accounted for by differences between participants’ average LPP activity. This necessitates an analytical technique, such as MLM, that accounts for non-independence. Semi-partial R-squared was calculated for model parameters to estimate relative variance explained by each predictor [@edwardsR2StatisticFixed2008; @trittIdeologicalReactivityPolitical2016].
