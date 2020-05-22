@@ -89,7 +89,44 @@ Scalp EEG was measured while participants completed an emotion regulation task. 
 The following EEG data processing steps were implemented in Brain Electrical Source Analysis software [BESA; @schergBESABrainElectric1990]. EEG data were re-referenced to the average activity of the mastoid electrodes for LPP analyses [@hajcakAttendingAffectAppraisal2006; @hajcakReappraisalModulatesElectrocortical2006] and average reference of all electrodes for EPN and N170 analyses [@stockdaleInfluenceStimulusValence2020; @yoonEnhancedEarlyPosterior2016] and digitally filtered with a 0.01 Hz high-pass filter. All filters had a cutoff attenuation of 12 dB/octave. Muscle (e.g., eye blink, eye movement) and other artifacts were removed and/or corrected via implementing automatic algorithms in BESA. Stimulus-locked averages were calculated to ascertain LPP, EPN, and N170. The data were baseline-adjusted by subtracting the average activity for 200 milliseconds (Hajcak et al., 2006) before stimulus onset. LPP activity was calculated as the average activity in the 450 – 800 ms window at Pz, P1, and P2 electrode sites. EPN and N170 activity was calculated as the average activity in the 225 - 375 ms and 150 - 190 ms windows, respecitvely, at PO7 and PO8 electrode sites. The scoring window and sites were selected based upon existing literature as well as visual inspection of the data to determine where respective EEG components were observed to be maximal in the present sample. The selected scoring window and electrode sites were similar to other studies investigating LPP, EPN, and N170 in similar contexts [e.g., @frankHemodynamicElectrocorticalReactivity2019; @hajcakReappraisalModulatesElectrocortical2006; @thomEmotionalScenesElicit2014]. The experiment was computer-administered, using E-Prime 2.0 software [@schneiderEPrimeUserGuide2002] in order to manipulate the timing and presentation of stimuli. All stimuli were presented in color and occupied the entirety of the 21-inch monitor. The viewing distance was approximately 24 in. and occupied 25°of the vertical visual angle and 30° horizontally (Cuthbert et al., 2000; Hajcak & Nieuwenhuis, 2006).
 
 ### Results
-Trials without valid EEG data were excluded from the following analyses (*n* = 2). Analyses were run in R version 3.6.2 [@rcoreteamLanguageEnvironmentStatistical2018]. Multilevel modeling (MLM) analyses were conducted using the lme4 package [@batesFittingLinearMixedeffects2015]. Model assumptions were checked via visual inspection of diagnostic plots (i.e., residual, QQ, scale-location, and residuals vs. leverage) generated with the performance package [@ludeckePerformanceAssessmentRegression2019]. Descriptive statistics for LPP, EPN, N170 and participant ratings (arousal, valence, and difficulty) were calculated for each of the experimental blocks (see XXXX). In order to evaluate whether the experimental blocks varied on arousal and valence, a repeated measures analysis of variance yielded significant variation among image blocks for arousal ($F(6, 270) = 25.02,\ p < .001$) and valence ($F(6, 270) = 80.43,\ p < .001$) ratings. Tukey’s HSD test was used to calculate comparisons across all blocks for arousal (see Table 2) and valence (see Table 3) ratings using the psycho package [@makowskiPsychoPackageEfficient2018]. Pearson correlations were run among psychological and physiological variables across the sample. Significant correlations were found between several variables (see Table 4). Means and standard deviations of between-subjects variables (savoring the moment, trait positive affect, and state positive affect) were also derived (see Table 4).
+```{r repeated-measures-ANOVA, message = FALSE, include = FALSE}
+library(tidyverse)
+library(lmerTest)
+
+dat <- read_csv("data/paper_two/created_data/per_data_analyses_2020_5_19.csv") %>% 
+  mutate(N170 = (N170_left + N170_right) / 2,
+         EPN = (EPN_left + EPN_right) / 2) %>% 
+  select(pid:LPP, N170, EPN, everything())
+dat_cond <- read_csv("data/paper_two/created_data/per_data_analyses_2020_5_19.csv") %>% 
+  mutate(N170 = (N170_left + N170_right) / 2,
+         EPN = (EPN_left + EPN_right) / 2) %>% 
+  select(pid:LPP, N170, EPN, everything()) %>% 
+  separate(block, c("valence_cond", "regulation_cond"), "_") %>% 
+  mutate(valence_condition = if_else(valence_cond == "Neg", "Negative",
+                           if_else(valence_cond == "Pos", "Positive", "Neutral")),
+         regulation_condition = if_else(regulation_cond == "Dec", "Decrease",
+                              if_else(regulation_cond == "Inc", "Increase", "Watch")))
+
+mod_lpp <- lmer(LPP ~ block + (1|pid), data = dat)
+av_lpp <- anova(mod_lpp)
+df_num_lpp <- av_lpp$NumDF
+df_den_lpp <- sprintf("%.2f", av_lpp$DenDF)
+f_lpp <- sprintf("%.2f", av_lpp[["F value"]])
+
+mod_epn <- lmer(EPN ~ block + (1|pid), data = dat)
+av_epn <- anova(mod_epn)
+df_num_epn <- av_epn$NumDF
+df_den_epn <- av_epn$DenDF
+f_epn <- sprintf("%.2f", av_epn[["F value"]])
+
+mod_n170 <- lmer(N170 ~ block + (1|pid), data = dat)
+av_n170 <- anova(mod_n170)
+df_num_n170 <- av_n170$NumDF
+df_den_n170 <- av_n170$DenDF
+f_n170 <- sprintf("%.2f", av_n170[["F value"]])
+```
+Trials without valid EEG data were excluded from the following analyses (*n* = 2). Analyses were run in R version 3.6.2 [@rcoreteamLanguageEnvironmentStatistical2018]. Multilevel modeling (MLM) analyses were conducted using the lme4 package [@batesFittingLinearMixedeffects2015]. Model assumptions were checked via visual inspection of diagnostic plots (i.e., residual, QQ, scale-location, and residuals vs. leverage) generated with the performance package [@ludeckePerformanceAssessmentRegression2019]. Descriptive statistics for LPP, EPN, N170 and participant ratings (arousal, valence, and difficulty) were calculated for each of the experimental blocks (see Table XXXX). A repeated measures analysis of variance yielded significant variation among experimental image blocks for LPP ($F$(`r df_num_lpp`, `r df_den_lpp` = `r f_lpp`, $p < .001$), EPN ($F$(`r df_num_epn`, `r df_den_epn`) = `r f_epn`, $p < .001$), and N170 ($F$(`r df_num_n170`, `r df_den_n170`) = `r f_n170`, $p < .001$). Repeated measures analysis of variance similiarly indicated differences among blocks for arousal ratings , valence ratings, and difficulty ratings.
+Tukey’s HSD test was used to calculate comparisons across all blocks for arousal (see Table 2) and valence (see Table 3) ratings using the psycho package [@makowskiPsychoPackageEfficient2018]. Pearson correlations were run among psychological and physiological variables across the sample. Significant correlations were found between several variables (see Table 4). Means and standard deviations of between-subjects variables (savoring the moment, trait positive affect, and state positive affect) were also derived (see Table 4). `r av$NumDF`
 
 (ref:descriptives-by-block) Means and standard deviations for LPP, EPN, and N170 EEG components, as well as arousal, valence, and difficulty ratings.
 
@@ -129,6 +166,7 @@ kable(desc_stats, "latex", escape = FALSE, booktabs = TRUE, align = "c", linesep
   footnote(general_title = "Note.",
            general = "SD = Standard Error.")
 ```
+
 
 
 Before testing primary hypotheses, a null model was run to assess whether the grouping variable (participant) differed on the outcome variable (parietal cortical activity) and to estimate the degree of nonindependence in the sample. An intraclass-correlation indicated that that 56% of the total variance in LPP activity is accounted for by differences between participants’ average LPP activity. This necessitates an analytical technique, such as MLM, that accounts for non-independence. Semi-partial R-squared was calculated for model parameters to estimate relative variance explained by each predictor [@edwardsR2StatisticFixed2008; @trittIdeologicalReactivityPolitical2016].
