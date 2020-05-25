@@ -652,7 +652,7 @@ library(tidyverse)
 library(here)
 
 # load electrode layout
-elec_loc <- read_csv(here("data", "Equidistant Layout.csv"))
+elec_loc <- read_csv(here("data", "paper_two", "Equidistant Layout.csv"))
 elec_loc <- elec_loc %>%
   rename("channel" = `channel name`) %>%
   filter(channel != "CMS", channel != "DRL")
@@ -663,10 +663,29 @@ elec_loc <- elec_loc %>%
   mutate(x = theta * cos(radian_phi),
          y = theta * sin(radian_phi))
 
+Pz_elec <- c("A25", "B28", "B22")
+
 # merge coordinates with ERP data
-eeg_dat <- read_csv(here("data", "created_data", "erp_mast_no_lp.csv"))
+eeg_dat <- read_csv(here("data", "paper_two", "created_data",  "erp_mast_no_lp.csv"))
 eeg_dat_long <- pivot_longer(eeg_dat, cols = A1:EXG2, names_to = "electrode", values_to = "amplitude")
 eeg_dat_loc <- left_join(eeg_dat_long, elec_loc, by = c("electrode" = "channel"))
+
+topo_elec <- c(paste0("A", 1:32), paste0("B", 1:32))
+
+erp_topo <- eeg_dat_loc %>%
+  filter(!is.na(amplitude), block == "Pos_Inc", electrode %in% topo_elec, between(ms, 450, 800)) %>%
+  group_by(electrode, x, y) %>%
+  summarize(amplitude = mean(amplitude, na.rm = TRUE))
+
+topoplot(data = erp_topo, limits = c(-5, 5), palette = "viridis", highlights = c("A25", "B28", "B22")) +
+  ggtitle("Positive Increase") +
+  theme(plot.title = element_text(hjust = 0.5, size = 22))
+
+
+# testing for contrast amplitudes
+eeg_dat_loc %>% 
+  filter(block %in% c("Pos_Inc", "Pos_Watch"), electrode %in% topo_elec, between(ms, 450, 800)) %>% 
+  pivot_wider(names_from = "block", values_from = "amplitude")
 ```
 
 
