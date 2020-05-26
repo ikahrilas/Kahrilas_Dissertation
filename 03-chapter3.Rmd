@@ -681,11 +681,28 @@ topoplot(data = erp_topo, limits = c(-5, 5), palette = "viridis", highlights = c
   ggtitle("Positive Increase") +
   theme(plot.title = element_text(hjust = 0.5, size = 22))
 
-
 # testing for contrast amplitudes
-eeg_dat_loc %>% 
-  filter(block %in% c("Pos_Inc", "Pos_Watch"), electrode %in% topo_elec, between(ms, 450, 800)) %>% 
-  pivot_wider(names_from = "block", values_from = "amplitude")
+lpp_topo_plot <- function(block_1, block_2, title) {
+tmp <- eeg_dat_loc %>% 
+  filter(block == block_1,
+         between(ms, 450, 800),
+         electrode %in% topo_elec) %>% 
+  rename("amp_1" = "amplitude") %>% 
+  select(pid, ms, electrode, amp_1, x, y)
+tmp_2 <- eeg_dat_loc %>% 
+  filter(block == block_2,
+         between(ms, 450, 800),
+         electrode %in% topo_elec) %>% 
+  rename("amp_2" = "amplitude") %>% 
+  select(pid, ms, electrode, amp_2)
+dat <- left_join(tmp, tmp_2, by = c("pid", "electrode", "ms")) %>% 
+  mutate(amplitude = amp_1 - amp_2) %>% 
+  group_by(electrode, x, y) %>%
+  summarize(amplitude = mean(amplitude, na.rm = TRUE))
+topoplot(dat, palette = "viridis", highlights = c("A25", "B28", "B22")) +
+  ggtitle(title) +
+  theme(plot.title = element_text(hjust = 0.5, size = 22))
+}
 ```
 
 
