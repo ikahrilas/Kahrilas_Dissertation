@@ -645,7 +645,7 @@ kable(., "latex", escape = FALSE, booktabs = TRUE, align = c("l", rep("c", times
            footnote_as_chunk = TRUE)
 ```
 
-(ref:LPP-watch-topos) Topographical plots and average waveforms for LPP during passive watch conditions.
+(ref:LPP-watch-topos) Topographical plots and average waveforms for LPP during passive watch conditions. Highlighted sensors indicate Pz sites used to measure LPP for waveform plot and analyses.
 
 ```{r LPP-watch-topos, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:LPP-watch-topos)"}
 library(devtools)
