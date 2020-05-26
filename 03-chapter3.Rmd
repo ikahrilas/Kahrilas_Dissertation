@@ -684,7 +684,7 @@ erp_topo <- eeg_dat_loc %>%
   summarize(amplitude = mean(amplitude, na.rm = TRUE))
 topoplot(data = erp_topo, limits = c(-5, 5), palette = "viridis", highlights = Pz_elec) +
   ggtitle(title) +
-  theme(plot.title = element_text(hjust = 0.5, size = 16))
+  theme(plot.title = element_text(hjust = 0.5, size = 12))
 }
 
 watch_topos <- map2(c("Neu_Watch", "Pos_Watch", "Neg_Watch"), 
@@ -707,13 +707,13 @@ watch_lpp <- eeg_dat %>%
          y = expression(paste("Amplitude ( ",mu,"V)"))) +
    #      title = paste("Average LPP Waveforms")) +
     theme_classic() +
-    theme(axis.title = element_text(size = 16),
+    theme(axis.title = element_text(size = 12),
           axis.text = element_text(size = 12),
-          legend.title = element_text(size = 16),
+          legend.title = element_text(size = 12),
           legend.text = element_text(size = 12),
           legend.key.size = unit(2, "line"),
           plot.title = element_text(hjust = 0.5),
-          title = element_text(size = 16)) +
+          title = element_text(size = 12)) +
     # scale_color_manual(name = "Group", values = c("green", "blue", "red"))
     scale_color_viridis_d(name = "Block",
                           breaks = c("Neg_Watch", "Pos_Watch", "Neu_Watch"),
