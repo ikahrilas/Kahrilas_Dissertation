@@ -645,7 +645,7 @@ kable(., "latex", escape = FALSE, booktabs = TRUE, align = c("l", rep("c", times
            footnote_as_chunk = TRUE)
 ```
 
-(ref:LPP-watch-topos) Topographical plots and average waveforms for LPP during passive watch conditions. Highlighted sensors indicate Pz sites used to measure LPP for waveform plot and analyses.
+(ref:LPP-watch-topos) Topographical plots and average waveforms for LPP during passive watch conditions. Sensors highlighted in white were used to measure LPP for waveform plots and analyses.
 
 ```{r LPP-watch-topos, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:LPP-watch-topos)"}
 library(devtools)
@@ -771,7 +771,7 @@ topo_patch / watch_lpp
 # watch_topos
 ```
 
-(ref:LPP-pos-topos) Topographical plots and average waveforms for LPP during regulation conditions in response to positive images. Highlighted sensors indicate Pz sites used to measure LPP for waveform plots and analyses.
+(ref:LPP-pos-topos) Topographical plots and average waveforms for LPP during regulation conditions in response to positive images. Sensors highlighted in white were used to measure LPP for waveform plots and analyses.
 
 ```{r LPP-pos-topos, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:LPP-pos-topos)"}
 library(devtools)
@@ -862,7 +862,7 @@ topo_patch <- (watch_topos[[1]] | watch_topos[[2]] | watch_topos[[3]]) + plot_la
 topo_patch / watch_lpp
 ```
 
-(ref:LPP-neg-topos) Topographical plots and average waveforms for LPP during regulation conditions in response to negative images. Highlighted sensors indicate Pz sites used to measure LPP for waveform plots and analyses.
+(ref:LPP-neg-topos) Topographical plots and average waveforms for LPP during regulation conditions in response to negative images. Sensors highlighted in white were used to measure LPP for waveform plots and analyses.
 
 ```{r LPP-neg-topos, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:LPP-neg-topos)"}
 library(devtools)
@@ -953,7 +953,7 @@ topo_patch <- (watch_topos[[1]] | watch_topos[[2]] | watch_topos[[3]]) + plot_la
 topo_patch / watch_lpp
 ```
 
-(ref:EPN-N170-watch-topos) Topographical plots and average waveforms for LPP during regulation conditions in response to negative images. Highlighted sensors indicate Pz sites used to measure LPP for waveform plots and analyses.
+(ref:EPN-N170-watch-topos) Topographical plots and average waveforms for N170 (top row) and EPN (bottom row) components during passive watch conditions. Sensors highlighted in white were used to measure N170 and EPN for waveform plots and analyses.
 
 ```{r EPN-N170-watch-topos, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:EPN-N170-watch-topos)"}
 library(devtools)
@@ -1029,11 +1029,9 @@ ggplot(erp_topo, aes(x = x, y = y, fill = amplitude)) +
 n170_watch_topos <- map2(c("Neu_Watch", "Pos_Watch", "Neg_Watch"), 
                     c("Neutral", "Positive", "Negative"),
                     ~ n170_topo_fun(.x, .y))
-n170_watch_topos
 epn_watch_topos <- map2(c("Neu_Watch", "Pos_Watch", "Neg_Watch"), 
                     c("Neutral", "Positive", "Negative"),
                     ~ epn_topo_fun(.x, .y))
-epn_watch_topos
 
 watch_n170_epn <- eeg_dat %>%
     filter(block %in% c("Neu_Watch", "Pos_Watch", "Neg_Watch")) %>% 
@@ -1065,9 +1063,11 @@ watch_n170_epn <- eeg_dat %>%
     scale_color_viridis_d(name = "Block",
                           breaks = c("Neg_Watch", "Neu_Watch", "Pos_Watch"),
                           labels = c("Negative Watch", "Positive Watch", "Neutral Watch"))
-watch_n170_epn
-topo_patch <- (watch_topos[[1]] | watch_topos[[2]] | watch_topos[[3]]) + plot_layout(guides = 'collect')
-topo_patch / watch_lpp
+
+topo_n170_patch <- (n170_watch_topos[[1]] | n170_watch_topos[[2]] | n170_watch_topos[[3]])
+topo_epn_patch <- (epn_watch_topos[[1]] | epn_watch_topos[[2]] | epn_watch_topos[[3]])
+topos_patch <- topo_n170_patch / topo_epn_patch + plot_layout(guides = 'collect')
+topos_patch / watch_n170_epn_width + plot_layout(heights = c(1, 1, 1.5))
 ```
 
 Before testing primary hypotheses, a null model was run to assess whether the grouping variable (participant) differed on the outcome variable (parietal cortical activity) and to estimate the degree of nonindependence in the sample. An intraclass-correlation indicated that that 56% of the total variance in LPP activity is accounted for by differences between participants’ average LPP activity. This necessitates an analytical technique, such as MLM, that accounts for non-independence. Semi-partial R-squared was calculated for model parameters to estimate relative variance explained by each predictor [@edwardsR2StatisticFixed2008; @trittIdeologicalReactivityPolitical2016].
