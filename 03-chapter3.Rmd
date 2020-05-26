@@ -715,6 +715,7 @@ watch_lpp <- eeg_dat %>%
     geom_vline(xintercept = 0, linetype = "dashed") +
     geom_vline(xintercept = c(450, 800), linetype = "solid", size = 1.05) +
     geom_hline(yintercept = 0, linetype = "dashed") +
+    annotate("rect", xmin = 450, xmax = 800, ymin = -Inf, ymax = Inf, alpha = .2) +
     labs(x = "Time (ms)",
          y = expression(paste("Amplitude ( ",mu,"V)"))) +
    #      title = paste("Average LPP Waveforms")) +
@@ -840,6 +841,7 @@ watch_lpp <- eeg_dat %>%
     geom_vline(xintercept = 0, linetype = "dashed") +
     geom_vline(xintercept = c(450, 800), linetype = "solid", size = 1.05) +
     geom_hline(yintercept = 0, linetype = "dashed") +
+    annotate("rect", xmin = 450, xmax = 800, ymin = -Inf, ymax = Inf, alpha = .2) +
     labs(x = "Time (ms)",
          y = expression(paste("Amplitude ( ",mu,"V)"))) +
    #      title = paste("Average LPP Waveforms")) +
@@ -930,6 +932,7 @@ watch_lpp <- eeg_dat %>%
     geom_vline(xintercept = 0, linetype = "dashed") +
     geom_vline(xintercept = c(450, 800), linetype = "solid", size = 1.05) +
     geom_hline(yintercept = 0, linetype = "dashed") +
+    annotate("rect", xmin = 450, xmax = 800, ymin = -Inf, ymax = Inf, alpha = .2) +
     labs(x = "Time (ms)",
          y = expression(paste("Amplitude ( ",mu,"V)"))) +
    #      title = paste("Average LPP Waveforms")) +
@@ -1032,8 +1035,8 @@ epn_watch_topos <- map2(c("Neu_Watch", "Pos_Watch", "Neg_Watch"),
                     ~ epn_topo_fun(.x, .y))
 epn_watch_topos
 
-watch_lpp <- eeg_dat %>%
-    filter(block %in% c("Neg_Dec", "Neg_Watch", "Neg_Inc")) %>% 
+watch_n170_epn <- eeg_dat %>%
+    filter(block %in% c("Neu_Watch", "Pos_Watch", "Neg_Watch")) %>% 
     select(all_of(epn_n170_elec),  block:prop_trials) %>%
     filter(ms < 750) %>% 
     pivot_longer(., cols = epn_n170_elec, names_to = "electrode", values_to = "mv") %>%
@@ -1042,7 +1045,10 @@ watch_lpp <- eeg_dat %>%
     ggplot(., aes(ms, mv, color = block)) +
     geom_line(size = 1.1) +
     geom_vline(xintercept = 0, linetype = "dashed") +
-    geom_vline(xintercept = c(450, 800), linetype = "solid", size = 1.05) +
+    geom_vline(xintercept = c(160, 200), linetype = "solid", size = 1.05) +
+    geom_vline(xintercept = c(250, 375), linetype = "solid", size = 1.05) +
+    annotate("rect", xmin = 160, xmax = 200, ymin = -Inf, ymax = Inf, alpha = .2) +
+    annotate("rect", xmin = 250, xmax = 375, ymin = -Inf, ymax = Inf, alpha = .2) +
     geom_hline(yintercept = 0, linetype = "dashed") +
     labs(x = "Time (ms)",
          y = expression(paste("Amplitude ( ",mu,"V)"))) +
@@ -1057,9 +1063,9 @@ watch_lpp <- eeg_dat %>%
           title = element_text(size = 12)) +
     # scale_color_manual(name = "Group", values = c("green", "blue", "red"))
     scale_color_viridis_d(name = "Block",
-                          breaks = c("Neg_Dec", "Neg_Watch", "Neg_Inc"),
-                          labels = c("Negative Increase", "Negative Watch", "Negative Decrease"))
-
+                          breaks = c("Neg_Watch", "Neu_Watch", "Pos_Watch"),
+                          labels = c("Negative Watch", "Positive Watch", "Neutral Watch"))
+watch_n170_epn
 topo_patch <- (watch_topos[[1]] | watch_topos[[2]] | watch_topos[[3]]) + plot_layout(guides = 'collect')
 topo_patch / watch_lpp
 ```
