@@ -681,11 +681,33 @@ lpp_topo_fun <- function(block_type, title) {
 erp_topo <- eeg_dat_loc %>%
   filter(!is.na(amplitude), block == block_type, electrode %in% topo_elec, between(ms, 450, 800)) %>%
   group_by(electrode, x, y) %>%
-  summarize(amplitude = mean(amplitude, na.rm = TRUE))
-topoplot(data = erp_topo, limits = c(-5, 5), palette = "viridis", highlights = Pz_elec) +
+  summarize(amplitude = mean(amplitude, na.rm = TRUE)) %>% 
+  mutate(highlight = if_else(electrode %in% Pz_elec, "white", "black"))
+ggplot(erp_topo, aes(x = x, y = y, fill = amplitude)) +
+  stat_scalpmap() +  
+  geom_mask(scale_fac = 1.4) +
+  geom_head() +               
+  geom_channels(aes(color = highlight), size = 0.5) +             
+  scale_fill_viridis_c(limits = c(-5, 5), oob = scales::squish) +
+  scale_color_manual(breaks = c("black", "white"),
+                     values = c("black", "white"),
+                     guide = FALSE) +
+  labs(fill = expression(paste("Amplitude (", mu,"V)"))) +
+  coord_equal() +
+  theme_void() +
   ggtitle(title) +
   theme(plot.title = element_text(hjust = 0.5, size = 12))
+  # geom_topo(chan_size = 0.1,
+  #           interp_limit = "skirt", ) + 
+  # theme_void() +
+  # coord_equal() +
+  # scale_fill_viridis_c(limits = c(-5, 5), oob = scales::squish)
+# topoplot(data = erp_topo, limits = c(-5, 5), palette = "viridis", highlights = Pz_elec) +
+#   ggtitle(title) +
+#   theme(plot.title = element_text(hjust = 0.5, size = 12))
 }
+
+lpp_topo_fun("Pos_Inc", "Positive Increase")
 
 watch_topos <- map2(c("Neu_Watch", "Pos_Watch", "Neg_Watch"), 
                     c("Neutral", "Positive", "Negative"),
