@@ -697,14 +697,6 @@ ggplot(erp_topo, aes(x = x, y = y, fill = amplitude)) +
   theme_void() +
   ggtitle(title) +
   theme(plot.title = element_text(hjust = 0.5, size = 12))
-  # geom_topo(chan_size = 0.1,
-  #           interp_limit = "skirt", ) + 
-  # theme_void() +
-  # coord_equal() +
-  # scale_fill_viridis_c(limits = c(-5, 5), oob = scales::squish)
-# topoplot(data = erp_topo, limits = c(-5, 5), palette = "viridis", highlights = Pz_elec) +
-#   ggtitle(title) +
-#   theme(plot.title = element_text(hjust = 0.5, size = 12))
 }
 
 watch_topos <- map2(c("Neu_Watch", "Pos_Watch", "Neg_Watch"), 
@@ -778,6 +770,185 @@ topo_patch / watch_lpp
 # watch_topos
 ```
 
+(ref:LPP-pos-topos) Topographical plots and average waveforms for LPP during regulation conditions in response to positive images. Highlighted sensors indicate Pz sites used to measure LPP for waveform plots and analyses.
+
+```{r LPP-pos-topos, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:LPP-pos-topos)"}
+library(devtools)
+library(eegUtils) # remotes::install_github("craddm/eegUtils")
+library(tidyverse)
+library(here)
+library(patchwork)
+
+# load electrode layout
+elec_loc <- read_csv(here("data", "paper_two", "Equidistant Layout.csv"))
+elec_loc <- elec_loc %>%
+  rename("channel" = `channel name`) %>%
+  filter(channel != "CMS", channel != "DRL")
+
+elec_loc$radian_phi <- pi/180 * elec_loc$phi
+
+elec_loc <- elec_loc %>%
+  mutate(x = theta * cos(radian_phi),
+         y = theta * sin(radian_phi))
+
+Pz_elec <- c("A25", "B28", "B22")
+
+# merge coordinates with ERP data
+eeg_dat <- read_csv(here("data", "paper_two", "created_data",  "erp_mast_no_lp.csv"))
+eeg_dat$A25[eeg_dat$pid %in% c(206201843, 206201831) & eeg_dat$block %in% c("Neg_Watch", "Pos_Watch") & between(eeg_dat$ms, 450, 800)] <- NA
+eeg_dat$B28[eeg_dat$pid %in% c(206201843, 206201831) & eeg_dat$block %in% c("Neg_Watch", "Pos_Watch") & between(eeg_dat$ms, 450, 800)] <- NA
+eeg_dat$B22[eeg_dat$pid %in% c(206201843, 206201831) & eeg_dat$block %in% c("Neg_Watch", "Pos_Watch") & between(eeg_dat$ms, 450, 800)] <- NA
+eeg_dat_long <- pivot_longer(eeg_dat, cols = A1:EXG2, names_to = "electrode", values_to = "amplitude")
+eeg_dat_loc <- left_join(eeg_dat_long, elec_loc, by = c("electrode" = "channel"))
+topo_elec <- c(paste0("A", 1:32), paste0("B", 1:32))
+
+lpp_topo_fun <- function(block_type, title) {
+erp_topo <- eeg_dat_loc %>%
+  filter(!is.na(amplitude), block == block_type, electrode %in% topo_elec, between(ms, 450, 800)) %>%
+  group_by(electrode, x, y) %>%
+  summarize(amplitude = mean(amplitude, na.rm = TRUE)) %>% 
+  mutate(highlight = if_else(electrode %in% Pz_elec, "white", "black"))
+ggplot(erp_topo, aes(x = x, y = y, fill = amplitude)) +
+  stat_scalpmap() +  
+  geom_mask(scale_fac = 1.4) +
+  geom_head() +               
+  geom_channels(aes(color = highlight), size = 0.5) +             
+  scale_fill_viridis_c(limits = c(-5, 5), oob = scales::squish) +
+  scale_color_manual(breaks = c("black", "white"),
+                     values = c("black", "white"),
+                     guide = FALSE) +
+  labs(fill = expression(paste("Amplitude (", mu,"V)"))) +
+  coord_equal() +
+  theme_void() +
+  ggtitle(title) +
+  theme(plot.title = element_text(hjust = 0.5, size = 12))
+}
+
+watch_topos <- map2(c("Pos_Dec", "Pos_Watch", "Pos_Inc"), 
+                    c("Decrease", "Watch", "Increase"),
+                    ~ lpp_topo_fun(.x, .y))
+
+watch_lpp <- eeg_dat %>%
+    filter(block %in% c("Pos_Dec", "Pos_Watch", "Pos_Inc")) %>% 
+    select(all_of(Pz_elec),  block:prop_trials) %>%
+    filter(ms < 1750) %>% 
+    pivot_longer(., cols = Pz_elec, names_to = "electrode", values_to = "mv") %>%
+    group_by(block, ms) %>%
+    summarize(mv = mean(mv, na.rm = TRUE)) %>%
+    ggplot(., aes(ms, mv, color = block)) +
+    geom_line(size = 1.1) +
+    geom_vline(xintercept = 0, linetype = "dashed") +
+    geom_vline(xintercept = c(450, 800), linetype = "solid", size = 1.05) +
+    geom_hline(yintercept = 0, linetype = "dashed") +
+    labs(x = "Time (ms)",
+         y = expression(paste("Amplitude ( ",mu,"V)"))) +
+   #      title = paste("Average LPP Waveforms")) +
+    theme_classic() +
+    theme(axis.title = element_text(size = 12),
+          axis.text = element_text(size = 12),
+          legend.title = element_text(size = 12),
+          legend.text = element_text(size = 12),
+          legend.key.size = unit(2, "line"),
+          plot.title = element_text(hjust = 0.5),
+          title = element_text(size = 12)) +
+    # scale_color_manual(name = "Group", values = c("green", "blue", "red"))
+    scale_color_viridis_d(name = "Block",
+                          breaks = c("Pos_Dec", "Pos_Watch", "Pos_Inc"),
+                          labels = c("Positive Increase", "Positive Watch", "Positive Decrease"))
+
+topo_patch <- (watch_topos[[1]] | watch_topos[[2]] | watch_topos[[3]]) + plot_layout(guides = 'collect')
+topo_patch / watch_lpp
+```
+
+(ref:LPP-neg-topos) Topographical plots and average waveforms for LPP during regulation conditions in response to negative images. Highlighted sensors indicate Pz sites used to measure LPP for waveform plots and analyses.
+
+```{r LPP-neg-topos, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:LPP-neg-topos)"}
+library(devtools)
+library(eegUtils) # remotes::install_github("craddm/eegUtils")
+library(tidyverse)
+library(here)
+library(patchwork)
+
+# load electrode layout
+elec_loc <- read_csv(here("data", "paper_two", "Equidistant Layout.csv"))
+elec_loc <- elec_loc %>%
+  rename("channel" = `channel name`) %>%
+  filter(channel != "CMS", channel != "DRL")
+
+elec_loc$radian_phi <- pi/180 * elec_loc$phi
+
+elec_loc <- elec_loc %>%
+  mutate(x = theta * cos(radian_phi),
+         y = theta * sin(radian_phi))
+
+Pz_elec <- c("A25", "B28", "B22")
+
+# merge coordinates with ERP data
+eeg_dat <- read_csv(here("data", "paper_two", "created_data",  "erp_mast_no_lp.csv"))
+eeg_dat$A25[eeg_dat$pid %in% c(206201843, 206201831) & eeg_dat$block %in% c("Neg_Watch", "Pos_Watch") & between(eeg_dat$ms, 450, 800)] <- NA
+eeg_dat$B28[eeg_dat$pid %in% c(206201843, 206201831) & eeg_dat$block %in% c("Neg_Watch", "Pos_Watch") & between(eeg_dat$ms, 450, 800)] <- NA
+eeg_dat$B22[eeg_dat$pid %in% c(206201843, 206201831) & eeg_dat$block %in% c("Neg_Watch", "Pos_Watch") & between(eeg_dat$ms, 450, 800)] <- NA
+eeg_dat_long <- pivot_longer(eeg_dat, cols = A1:EXG2, names_to = "electrode", values_to = "amplitude")
+eeg_dat_loc <- left_join(eeg_dat_long, elec_loc, by = c("electrode" = "channel"))
+topo_elec <- c(paste0("A", 1:32), paste0("B", 1:32))
+
+lpp_topo_fun <- function(block_type, title) {
+erp_topo <- eeg_dat_loc %>%
+  filter(!is.na(amplitude), block == block_type, electrode %in% topo_elec, between(ms, 450, 800)) %>%
+  group_by(electrode, x, y) %>%
+  summarize(amplitude = mean(amplitude, na.rm = TRUE)) %>% 
+  mutate(highlight = if_else(electrode %in% Pz_elec, "white", "black"))
+ggplot(erp_topo, aes(x = x, y = y, fill = amplitude)) +
+  stat_scalpmap() +  
+  geom_mask(scale_fac = 1.4) +
+  geom_head() +               
+  geom_channels(aes(color = highlight), size = 0.5) +             
+  scale_fill_viridis_c(limits = c(-7, 7), oob = scales::squish) +
+  scale_color_manual(breaks = c("black", "white"),
+                     values = c("black", "white"),
+                     guide = FALSE) +
+  labs(fill = expression(paste("Amplitude (", mu,"V)"))) +
+  coord_equal() +
+  theme_void() +
+  ggtitle(title) +
+  theme(plot.title = element_text(hjust = 0.5, size = 12))
+}
+
+watch_topos <- map2(c("Neg_Dec", "Neg_Watch", "Neg_Inc"), 
+                    c("Decrease", "Watch", "Increase"),
+                    ~ lpp_topo_fun(.x, .y))
+
+watch_lpp <- eeg_dat %>%
+    filter(block %in% c("Neg_Dec", "Neg_Watch", "Neg_Inc")) %>% 
+    select(all_of(Pz_elec),  block:prop_trials) %>%
+    filter(ms < 1750) %>% 
+    pivot_longer(., cols = Pz_elec, names_to = "electrode", values_to = "mv") %>%
+    group_by(block, ms) %>%
+    summarize(mv = mean(mv, na.rm = TRUE)) %>%
+    ggplot(., aes(ms, mv, color = block)) +
+    geom_line(size = 1.1) +
+    geom_vline(xintercept = 0, linetype = "dashed") +
+    geom_vline(xintercept = c(450, 800), linetype = "solid", size = 1.05) +
+    geom_hline(yintercept = 0, linetype = "dashed") +
+    labs(x = "Time (ms)",
+         y = expression(paste("Amplitude ( ",mu,"V)"))) +
+   #      title = paste("Average LPP Waveforms")) +
+    theme_classic() +
+    theme(axis.title = element_text(size = 12),
+          axis.text = element_text(size = 12),
+          legend.title = element_text(size = 12),
+          legend.text = element_text(size = 12),
+          legend.key.size = unit(2, "line"),
+          plot.title = element_text(hjust = 0.5),
+          title = element_text(size = 12)) +
+    # scale_color_manual(name = "Group", values = c("green", "blue", "red"))
+    scale_color_viridis_d(name = "Block",
+                          breaks = c("Neg_Dec", "Neg_Watch", "Neg_Inc"),
+                          labels = c("Negative Increase", "Negative Watch", "Negative Decrease"))
+
+topo_patch <- (watch_topos[[1]] | watch_topos[[2]] | watch_topos[[3]]) + plot_layout(guides = 'collect')
+topo_patch / watch_lpp
+```
 
 Before testing primary hypotheses, a null model was run to assess whether the grouping variable (participant) differed on the outcome variable (parietal cortical activity) and to estimate the degree of nonindependence in the sample. An intraclass-correlation indicated that that 56% of the total variance in LPP activity is accounted for by differences between participants’ average LPP activity. This necessitates an analytical technique, such as MLM, that accounts for non-independence. Semi-partial R-squared was calculated for model parameters to estimate relative variance explained by each predictor [@edwardsR2StatisticFixed2008; @trittIdeologicalReactivityPolitical2016].
 #### Hypotheses 1a & 1b. 
