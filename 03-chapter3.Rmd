@@ -707,8 +707,6 @@ ggplot(erp_topo, aes(x = x, y = y, fill = amplitude)) +
 #   theme(plot.title = element_text(hjust = 0.5, size = 12))
 }
 
-lpp_topo_fun("Pos_Inc", "Positive Increase")
-
 watch_topos <- map2(c("Neu_Watch", "Pos_Watch", "Neg_Watch"), 
                     c("Neutral", "Positive", "Negative"),
                     ~ lpp_topo_fun(.x, .y))
@@ -716,7 +714,7 @@ watch_topos <- map2(c("Neu_Watch", "Pos_Watch", "Neg_Watch"),
 watch_lpp <- eeg_dat %>%
     filter(block %in% c("Neu_Watch", "Pos_Watch", "Neg_Watch")) %>% 
     select(all_of(Pz_elec),  block:prop_trials) %>%
-    filter(ms < 2000) %>% 
+    filter(ms < 1750) %>% 
     pivot_longer(., cols = Pz_elec, names_to = "electrode", values_to = "mv") %>%
     group_by(block, ms) %>%
     summarize(mv = mean(mv, na.rm = TRUE)) %>%
