@@ -181,7 +181,7 @@ library(kableExtra)
 library(Hmisc)
 
 # load data
-dat <- read_csv("data/paper_two/created_data/per_data_analyses_2020_5_19.csv") %>% 
+cor_dat <- read_csv("data/paper_two/created_data/per_data_analyses_2020_5_19.csv") %>% 
   mutate(N170 = (N170_left + N170_right) / 2,
          EPN = (EPN_left + EPN_right) / 2) %>% 
   select(pid:LPP, N170, EPN, everything())
@@ -232,7 +232,7 @@ corstars <-function(x, method=c("pearson", "spearman"), removeTriangle=c("upper"
 } 
 
 # create correlation matrix
-tab <- dat %>% 
+tab <- cor_dat %>% 
   select(LPP,
          EPN,
          N170,
