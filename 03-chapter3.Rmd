@@ -953,7 +953,7 @@ topo_patch <- (watch_topos[[1]] | watch_topos[[2]] | watch_topos[[3]]) + plot_la
 topo_patch / watch_lpp
 ```
 
-(ref:EPN-N170-watch-topos) Topographical plots and average waveforms for N170 (top row) and EPN (bottom row) components during passive watch conditions. Sensors highlighted in white were used to measure N170 and EPN for waveform plots and analyses.
+(ref:EPN-N170-watch-topos) Topographical plots and average waveforms for N170 (160 - 200 ms; top row) and EPN (225 - 375 ms; bottom row) components during passive watch conditions. Sensors highlighted in white were used to measure N170 and EPN for waveform plots and analyses.
 
 ```{r EPN-N170-watch-topos, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:EPN-N170-watch-topos)"}
 library(devtools)
@@ -1070,7 +1070,7 @@ topos_patch <- topo_n170_patch / topo_epn_patch + plot_layout(guides = 'collect'
 topos_patch / watch_n170_epn + plot_layout(heights = c(1, 1, 1.5))
 ```
 
-(ref:EPN-N170-pos-topos) Topographical plots and average waveforms for N170 (top row) and EPN (bottom row) during regulation conditions in response to positive images. Sensors highlighted in white were used to measure N170 and EPN for waveform plots and analyses.
+(ref:EPN-N170-pos-topos) Topographical plots and average waveforms for N170 (160 - 200 ms; top row) and EPN (225 - 375 ms; bottom row) during regulation conditions in response to positive images. Sensors highlighted in white were used to measure N170 and EPN for waveform plots and analyses.
 
 ```{r EPN-N170-pos-topos, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:EPN-N170-pos-topos)"}
 library(devtools)
@@ -1185,7 +1185,7 @@ topos_patch <- topo_n170_patch / topo_epn_patch + plot_layout(guides = 'collect'
 topos_patch / watch_n170_epn + plot_layout(heights = c(1, 1, 1.5))
 ```
 
-(ref:EPN-N170-neg-topos) Topographical plots and average waveforms for N170 (top row) and EPN (bottom row) during regulation conditions in response to negative images. Sensors highlighted in white were used to measure N170 and EPN for waveform plots and analyses.
+(ref:EPN-N170-neg-topos) Topographical plots and average waveforms for N170 (160 - 200 ms; top row) and EPN (225 - 375 ms; bottom row) during regulation conditions in response to negative images. Sensors highlighted in white were used to measure N170 and EPN for waveform plots and analyses.
 
 ```{r EPN-N170-neg-topos, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:EPN-N170-neg-topos)"}
 library(devtools)
