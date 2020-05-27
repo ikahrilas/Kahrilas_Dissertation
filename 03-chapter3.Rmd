@@ -171,6 +171,102 @@ kable(desc_stats, "latex", escape = FALSE, booktabs = TRUE, align = "c", linesep
            general = "SD = Standard Error.")
 ```
 
+```{r corr-table, echo = FALSE, message = FALSE, fig.cap = "(ref:corr-table)"}
+# load packages
+library(tidyverse)
+library(xtable)
+library(kableExtra)
+library(Hmisc)
+
+# load data
+dat <- read_csv("data/paper_two/created_data/per_data_analyses_2020_5_19.csv") %>% 
+  mutate(N170 = (N170_left + N170_right) / 2,
+         EPN = (EPN_left + EPN_right) / 2) %>% 
+  select(pid:LPP, N170, EPN, everything())
+
+# define corstars function
+corstars <-function(x, method=c("pearson", "spearman"), removeTriangle=c("upper", "lower"),
+                     result=c("none", "html", "latex")){
+    #Compute correlation matrix
+    require(Hmisc)
+    x <- as.matrix(x)
+    correlation_matrix<-rcorr(x, type=method[1])
+    R <- correlation_matrix$r # Matrix of correlation coeficients
+    p <- correlation_matrix$P # Matrix of p-value 
+    
+    ## Define notions for significance levels; spacing is important.
+    mystars <- ifelse(p < .05, "*", " ")
+    
+    ## trunctuate the correlation matrix to two decimal
+    R <- format(round(cbind(rep(-1.11, ncol(x)), R), 2))[,-1]
+    
+    ## build a new matrix that includes the correlations with their apropriate stars
+    Rnew <- matrix(paste(R, mystars, sep=""), ncol=ncol(x))
+    diag(Rnew) <- paste(diag(R), " ", sep="")
+    rownames(Rnew) <- colnames(x)
+    colnames(Rnew) <- paste(colnames(x), "", sep="")
+    
+    ## remove upper triangle of correlation matrix
+    if(removeTriangle[1]=="upper"){
+      Rnew <- as.matrix(Rnew)
+      Rnew[upper.tri(Rnew, diag = TRUE)] <- ""
+      Rnew <- as.data.frame(Rnew)
+    }
+    
+    ## remove lower triangle of correlation matrix
+    else if(removeTriangle[1]=="lower"){
+      Rnew <- as.matrix(Rnew)
+      Rnew[lower.tri(Rnew, diag = TRUE)] <- ""
+      Rnew <- as.data.frame(Rnew)
+    }
+    
+    ## remove last column and return the correlation matrix
+    Rnew <- cbind(Rnew[1:length(Rnew)-1])
+    if (result[1]=="none") return(Rnew)
+    else{
+      if(result[1]=="html") print(xtable(Rnew), type="html")
+      else print(xtable(Rnew), type="latex") 
+    }
+} 
+
+# create correlation matrix
+tab <- dat %>% 
+  select(LPP,
+         EPN,
+         N170,
+         arousal,
+         valence,
+         difficulty,
+         pos_affectivity,
+         savoring_moment) %>%
+  rename("1. LPP" = LPP,
+         "2. EPN" = EPN,
+         "3. N170" = N170,
+         "4. Arousal Ratings" = arousal,
+         "5. Valence Ratings" = valence,
+         "6. Difficulty Ratings" = difficulty,
+         "7. PA" = pos_affectivity,
+         "8. StM" = savoring_moment) %>% 
+  corstars(., "pearson", "upper", "none") %>% 
+  as.data.frame() %>% 
+  map_df(., ~ {
+    sprintf("%.2f", .x) %>% 
+    str_remove(., "^0+")
+    }) %>% 
+  map_df(., ~ {
+  if_else(str_detect(.x, "-"), paste0("-", str_remove(.x, "-0")), .x)
+    }) %>% 
+  mutate(" " = colnames(.)) %>% 
+  select(` `, everything()) %>% 
+  rstatix::replace_upper_triangle(., by=  "", diagonal = FALSE)
+colnames(tab) <- c(" ", paste0(c(1:8), "."))
+
+# create table
+kable(tab, format = "latex",  linesep = "", digits = 2, escape = FALSE, booktabs = TRUE, align = c("l", rep("r", 8)), caption = "Correlations among affectivity, temporal domains of savoring, depression severity, and anxious arousal measures ($N$ = 1,618)") %>% 
+  column_spec(2:9, width = "2em") %>% 
+  kable_styling(latex_options = "scale_down", font_size = 10)
+```
+
 (ref:pairwise-watch-comparison-table) Contrasts between passive watch conditions for LPP, EPN, and N170 EEG components.
 
 ```{r pairwise-watch-comparison-table, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:pairwise-watch-comparison-table)"}
