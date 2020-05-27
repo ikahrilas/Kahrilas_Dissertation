@@ -171,7 +171,9 @@ kable(desc_stats, "latex", escape = FALSE, booktabs = TRUE, align = "c", linesep
            general = "SD = Standard Error.")
 ```
 
-```{r corr-table, echo = FALSE, message = FALSE, fig.cap = "(ref:corr-table)"}
+(ref:corr-table) Correlations among EEG components, behavioral ratings, positive affectivity, and savoring the moment ($N$ = 52)
+
+```{r corr-table, echo=FALSE, fig.cap=, message=FALSE}
 # load packages
 library(tidyverse)
 library(xtable)
@@ -238,7 +240,9 @@ tab <- dat %>%
          valence,
          difficulty,
          pos_affectivity,
-         savoring_moment) %>%
+         savoring_moment,
+         depression,
+         sex) %>%
   rename("1. LPP" = LPP,
          "2. EPN" = EPN,
          "3. N170" = N170,
@@ -246,25 +250,41 @@ tab <- dat %>%
          "5. Valence Ratings" = valence,
          "6. Difficulty Ratings" = difficulty,
          "7. PA" = pos_affectivity,
-         "8. StM" = savoring_moment) %>% 
+         "8. StM" = savoring_moment,
+         "9. Depression" = depression,
+         "10. Sex" = sex) %>% 
   corstars(., "pearson", "upper", "none") %>% 
   as.data.frame() %>% 
   map_df(., ~ {
-    sprintf("%.2f", .x) %>% 
-    str_remove(., "^0+")
+  as.character(.x) %>% 
+  str_trim() %>% 
+  str_remove("^0+")
     }) %>% 
   map_df(., ~ {
   if_else(str_detect(.x, "-"), paste0("-", str_remove(.x, "-0")), .x)
-    }) %>% 
-  mutate(" " = colnames(.)) %>% 
-  select(` `, everything()) %>% 
-  rstatix::replace_upper_triangle(., by=  "", diagonal = FALSE)
-colnames(tab) <- c(" ", paste0(c(1:8), "."))
-
+    })
+colnames(tab) <- paste0(c(1:9), ".")
+tab %>% 
+  mutate(" " = c("1. LPP",
+                 "2. EPN",
+                 "3. N170",
+                 "4. Arousal\\nRatings",
+                 "5. Valence\\nRatings",
+                 "6. Difficulty\\nRatings",
+                 "7. PA",
+                 "8. StM",
+                 "9. Depression",
+                 "10. Sex")) %>% 
+  select(" ", everything()) %>% 
 # create table
-kable(tab, format = "latex",  linesep = "", digits = 2, escape = FALSE, booktabs = TRUE, align = c("l", rep("r", 8)), caption = "Correlations among affectivity, temporal domains of savoring, depression severity, and anxious arousal measures ($N$ = 1,618)") %>% 
-  column_spec(2:9, width = "2em") %>% 
-  kable_styling(latex_options = "scale_down", font_size = 10)
+kable(., format = "latex",  linesep = "", escape = FALSE, booktabs = TRUE, align = c("l", rep("r", 9)), caption = "(ref:corr-table)") %>% 
+  kable_styling(latex_options = "scale_down", font_size = 12) %>% 
+  column_spec(2:10, width = "3em") %>% 
+  footnote(general_title = "Note.",
+           escape = FALSE,
+           general = "*$p < .05$. PA = positive affectivity, StM = savoring the moment. EEG components averaged across all regulation blocks.",
+           threeparttable = TRUE,
+           footnote_as_chunk = TRUE)
 ```
 
 (ref:pairwise-watch-comparison-table) Contrasts between passive watch conditions for LPP, EPN, and N170 EEG components.
