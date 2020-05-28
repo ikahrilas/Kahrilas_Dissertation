@@ -782,9 +782,9 @@ erp_topo <- eeg_dat_loc %>%
   mutate(highlight = if_else(electrode %in% Pz_elec, "white", "black"))
 ggplot(erp_topo, aes(x = x, y = y, fill = amplitude)) +
   stat_scalpmap() +  
-  geom_mask(scale_fac = 1.4) +
+  geom_mask(scale_fac = 1.5) +
   geom_head() +               
-  geom_channels(aes(color = highlight), size = 0.5) +             
+  geom_channels(aes(color = highlight), size = 0.125) +             
   scale_fill_viridis_c(limits = c(-5, 5), oob = scales::squish) +
   scale_color_manual(breaks = c("black", "white"),
                      values = c("black", "white"),
@@ -799,7 +799,7 @@ ggplot(erp_topo, aes(x = x, y = y, fill = amplitude)) +
 watch_topos <- map2(c("Neu_Watch", "Pos_Watch", "Neg_Watch"), 
                     c("Neutral", "Positive", "Negative"),
                     ~ lpp_topo_fun(.x, .y))
-
+watch_topos[[2]]
 watch_lpp <- eeg_dat %>%
     filter(block %in% c("Neu_Watch", "Pos_Watch", "Neg_Watch")) %>% 
     select(all_of(Pz_elec),  block:prop_trials) %>%
