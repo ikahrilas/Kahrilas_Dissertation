@@ -782,7 +782,7 @@ erp_topo <- eeg_dat_loc %>%
   mutate(highlight = if_else(electrode %in% Pz_elec, "white", "black"))
 ggplot(erp_topo, aes(x = x, y = y, fill = amplitude)) +
   stat_scalpmap() +  
-  geom_mask(scale_fac = 1.5) +
+  geom_mask(scale_fac = 1.6) +
   geom_head() +               
   geom_channels(aes(color = highlight), size = 0.125) +             
   scale_fill_viridis_c(limits = c(-5, 5), oob = scales::squish) +
@@ -799,7 +799,7 @@ ggplot(erp_topo, aes(x = x, y = y, fill = amplitude)) +
 watch_topos <- map2(c("Neu_Watch", "Pos_Watch", "Neg_Watch"), 
                     c("Neutral", "Positive", "Negative"),
                     ~ lpp_topo_fun(.x, .y))
-watch_topos[[2]]
+
 watch_lpp <- eeg_dat %>%
     filter(block %in% c("Neu_Watch", "Pos_Watch", "Neg_Watch")) %>% 
     select(all_of(Pz_elec),  block:prop_trials) %>%
@@ -825,9 +825,10 @@ watch_lpp <- eeg_dat %>%
           plot.title = element_text(hjust = 0.5),
           title = element_text(size = 12)) +
     # scale_color_manual(name = "Group", values = c("green", "blue", "red"))
-    scale_color_viridis_d(name = "Block",
-                          breaks = c("Neg_Watch", "Pos_Watch", "Neu_Watch"),
-                          labels = c("Negative Watch", "Positive Watch", "Neutral Watch"))
+    scale_color_manual(values = c("red", "blue", "green"),
+                       name = "Block",
+                       breaks = c("Neg_Watch", "Pos_Watch", "Neu_Watch"),
+                       labels = c("Negative Watch", "Positive Watch", "Neutral Watch"))
 
 topo_patch <- (watch_topos[[1]] | watch_topos[[2]] | watch_topos[[3]]) + plot_layout(guides = 'collect')
 topo_patch / watch_lpp
