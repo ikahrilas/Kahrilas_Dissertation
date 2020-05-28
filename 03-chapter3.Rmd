@@ -173,12 +173,10 @@ kable(desc_stats, "latex", escape = FALSE, booktabs = TRUE, align = "c", linesep
 
 (ref:corr-table) Correlations among EEG components, behavioral ratings, positive affectivity, and savoring the moment ($N$ = 52)
 
-```{r corr-table, echo=FALSE, fig.cap=, message=FALSE}
+```{r corr-table, echo=FALSE, fig.cap = "(ref:corr-table)", message=FALSE}
 # load packages
 library(tidyverse)
-library(xtable)
 library(kableExtra)
-library(Hmisc)
 
 # load data
 cor_dat <- read_csv("data/paper_two/created_data/per_data_analyses_2020_5_19.csv") %>% 
@@ -211,7 +209,7 @@ tab <- cor_dat %>%
 
 #Compute correlation matrix
 x <- as.matrix(tab)
-correlation_matrix<-rcorr(x)
+correlation_matrix<-Hmisc::rcorr(x)
 R <- correlation_matrix$r # Matrix of correlation coeficients
 p <- correlation_matrix$P # Matrix of p-value 
     
@@ -236,7 +234,7 @@ Rnew <- as.data.frame(Rnew)
 tab <- cbind(Rnew[1:length(Rnew)-1])
 
 ## clean it up and prepare for latex rendering
-tab %>% 
+tab <- tab %>% 
   as.data.frame() %>% 
   map_df(., ~ {
   as.character(.x) %>% 
