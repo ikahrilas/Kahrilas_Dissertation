@@ -134,9 +134,7 @@ df_num_diff <- av_diff$NumDF
 df_den_diff <- round(av_diff$DenDF, digits = 0)
 f_diff <- sprintf("%.2f", av_diff[["F value"]])
 ```
-Trials without valid EEG data were excluded from the following analyses (*n* = 2). Analyses were run in R version 3.6.2 [@rcoreteamLanguageEnvironmentStatistical2018]. Multilevel modeling (MLM) analyses were conducted using the lme4 package [@batesFittingLinearMixedeffects2015]. Model assumptions were checked via visual inspection of diagnostic plots (i.e., residual, QQ, scale-location, and residuals vs. leverage) generated with the performance package [@ludeckePerformanceAssessmentRegression2019]. Correlations among key study and relevant demographic variables (see Table 2\ref(tab:corr-table)) indicated significant associations ranging from small to large in effect size. Descriptive statistics for LPP, EPN, N170 and participant ratings (arousal, valence, and difficulty) were calculated for each of the experimental blocks (see Table \@ref(tab:descriptives-by-block)). A repeated measures analysis of variance yielded significant variation among experimental image blocks for LPP ($F$(`r df_num_lpp`, `r df_den_lpp` = `r f_lpp`, $p < .001$), EPN ($F$(`r df_num_epn`, `r df_den_epn`) = `r f_epn`, $p < .001$), and N170 ($F$(`r df_num_n170`, `r df_den_n170`) = `r f_n170`, $p < .001$). Repeated measures analysis of variance similiarly indicated differences among blocks for arousal ($F$(`r df_num_ar`, `r df_den_ar` = `r f_ar`, $p < .001$), valence ($F$(`r df_num_val`, `r df_den_val` = `r f_val`, $p < .001$), and difficulty ($F$(`r df_num_diff`, `r df_den_diff`) = `r f_diff`, $p < .001$) ratings. Pairwise comparisons were calculated using the emmeans package [@lenthEmmeansEstimatedMarginal2020]. 
-
-Pairwise comparisons were conducted between passive watch conditions for EEG components and behavioral ratings (see \@ref(tab:pairwise-watch-comparison-table) as well as regulation conditions see (Table 3) ratings using the psycho package [@makowskiPsychoPackageEfficient2018]. Pearson correlations were run among psychological and physiological variables across the sample. Significant correlations were found between several variables (see Table 4). Means and standard deviations of between-subjects variables (savoring the moment, trait positive affect, and state positive affect) were also derived (see Table 4).
+Trials without valid EEG data were excluded from the following analyses (*n* = 2). Analyses were run in R version 3.6.2 [@rcoreteamLanguageEnvironmentStatistical2018]. Multilevel modeling (MLM) analyses were conducted using the lme4 package [@batesFittingLinearMixedeffects2015]. Model assumptions were checked via visual inspection of diagnostic plots (i.e., residual, QQ, scale-location, and residuals vs. leverage) generated with the performance package [@ludeckePerformanceAssessmentRegression2019]. Correlations among key psychological and demographic variables (see Table 2\ref(tab:corr-table)) indicated significant associations ranging from small to large in effect size. Descriptive statistics for LPP, EPN, N170 and participant ratings (arousal, valence, and difficulty) were calculated for each of the experimental blocks (see Table \@ref(tab:descriptives-by-block)). A repeated measures analysis of variance yielded significant variation among experimental image blocks for LPP ($F$(`r df_num_lpp`, `r df_den_lpp` = `r f_lpp`, $p < .001$), EPN ($F$(`r df_num_epn`, `r df_den_epn`) = `r f_epn`, $p < .001$), and N170 ($F$(`r df_num_n170`, `r df_den_n170`) = `r f_n170`, $p < .001$). Repeated measures analysis of variance similiarly indicated differences among blocks for arousal ($F$(`r df_num_ar`, `r df_den_ar` = `r f_ar`, $p < .001$), valence ($F$(`r df_num_val`, `r df_den_val` = `r f_val`, $p < .001$), and difficulty ($F$(`r df_num_diff`, `r df_den_diff`) = `r f_diff`, $p < .001$) ratings. Pairwise comparisons were conducted between passive watch conditions for EEG components and behavioral ratings (Table \@ref(tab:pairwise-watch-comparison-table) as well as regulation conditions (Table \@ref(tab:pairwise-reg-comparison-table) using the emmeans package [@lenthEmmeansEstimatedMarginal2020]. Effect sizes were interpreted using Funder's 
 
 (ref:descriptives-by-block) Means and standard deviations for LPP, EPN, and N170 EEG components, as well as arousal, valence, and difficulty ratings.
 
@@ -255,9 +253,9 @@ tab %>%
   mutate(" " = c("1. LPP",
                  "2. EPN",
                  "3. N170",
-                 "4. Arousal\\nRatings",
-                 "5. Valence\\nRatings",
-                 "6. Difficulty\\nRatings",
+                 "4. Arousal Ratings",
+                 "5. Valence Ratings",
+                 "6. Difficulty Ratings",
                  "7. PA",
                  "8. StM",
                  "9. Depression",
@@ -1096,9 +1094,9 @@ erp_topo <- eeg_dat_loc %>%
   mutate(highlight = if_else(electrode %in% epn_n170_elec, "white", "black"))
 ggplot(erp_topo, aes(x = x, y = y, fill = amplitude)) +
   stat_scalpmap() +  
-  geom_mask(scale_fac = 1.6) +
+  geom_mask(scale_fac = 1.7) +
   geom_head() +               
-  geom_channels(aes(color = highlight), size = 0.125) +             
+  geom_channels(aes(color = highlight), size = 0.1) +             
   scale_fill_viridis_c(limits = c(-10, 10), oob = scales::squish) +
   scale_color_manual(breaks = c("black", "white"),
                      values = c("black", "white"),
@@ -1118,9 +1116,9 @@ erp_topo <- eeg_dat_loc %>%
   mutate(highlight = if_else(electrode %in% epn_n170_elec, "white", "black"))
 ggplot(erp_topo, aes(x = x, y = y, fill = amplitude)) +
   stat_scalpmap() +  
-  geom_mask(scale_fac = 1.4) +
+  geom_mask(scale_fac = 1.7) +
   geom_head() +               
-  geom_channels(aes(color = highlight), size = 0.5) +             
+  geom_channels(aes(color = highlight), size = 0.1) +             
   scale_fill_viridis_c(limits = c(-10, 10), oob = scales::squish) +
   scale_color_manual(breaks = c("black", "white"),
                      values = c("black", "white"),
@@ -1214,9 +1212,9 @@ erp_topo <- eeg_dat_loc %>%
   mutate(highlight = if_else(electrode %in% epn_n170_elec, "white", "black"))
 ggplot(erp_topo, aes(x = x, y = y, fill = amplitude)) +
   stat_scalpmap() +  
-  geom_mask(scale_fac = 1.6) +
+  geom_mask(scale_fac = 1.7) +
   geom_head() +               
-  geom_channels(aes(color = highlight), size = 0.125) +             
+  geom_channels(aes(color = highlight), size = 0.1) +             
   scale_fill_viridis_c(limits = c(-10, 10), oob = scales::squish) +
   scale_color_manual(breaks = c("black", "white"),
                      values = c("black", "white"),
@@ -1236,9 +1234,9 @@ erp_topo <- eeg_dat_loc %>%
   mutate(highlight = if_else(electrode %in% epn_n170_elec, "white", "black"))
 ggplot(erp_topo, aes(x = x, y = y, fill = amplitude)) +
   stat_scalpmap() +  
-  geom_mask(scale_fac = 1.4) +
+  geom_mask(scale_fac = 1.7) +
   geom_head() +               
-  geom_channels(aes(color = highlight), size = 0.5) +             
+  geom_channels(aes(color = highlight), size = 0.1) +             
   scale_fill_viridis_c(limits = c(-10, 10), oob = scales::squish) +
   scale_color_manual(breaks = c("black", "white"),
                      values = c("black", "white"),
@@ -1330,9 +1328,9 @@ erp_topo <- eeg_dat_loc %>%
   mutate(highlight = if_else(electrode %in% epn_n170_elec, "white", "black"))
 ggplot(erp_topo, aes(x = x, y = y, fill = amplitude)) +
   stat_scalpmap() +  
-  geom_mask(scale_fac = 1.6) +
+  geom_mask(scale_fac = 1.7) +
   geom_head() +               
-  geom_channels(aes(color = highlight), size = 0.125) +             
+  geom_channels(aes(color = highlight), size = 0.1) +             
   scale_fill_viridis_c(limits = c(-10, 10), oob = scales::squish) +
   scale_color_manual(breaks = c("black", "white"),
                      values = c("black", "white"),
@@ -1352,9 +1350,9 @@ erp_topo <- eeg_dat_loc %>%
   mutate(highlight = if_else(electrode %in% epn_n170_elec, "white", "black"))
 ggplot(erp_topo, aes(x = x, y = y, fill = amplitude)) +
   stat_scalpmap() +  
-  geom_mask(scale_fac = 1.4) +
+  geom_mask(scale_fac = 1.7) +
   geom_head() +               
-  geom_channels(aes(color = highlight), size = 0.5) +             
+  geom_channels(aes(color = highlight), size = 0.1) +             
   scale_fill_viridis_c(limits = c(-10, 10), oob = scales::squish) +
   scale_color_manual(breaks = c("black", "white"),
                      values = c("black", "white"),
