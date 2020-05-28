@@ -909,9 +909,9 @@ erp_topo <- eeg_dat_loc %>%
   mutate(highlight = if_else(electrode %in% Pz_elec, "white", "black"))
 ggplot(erp_topo, aes(x = x, y = y, fill = amplitude)) +
   stat_scalpmap() +  
-  geom_mask(scale_fac = 1.4) +
+  geom_mask(scale_fac = 1.6) +
   geom_head() +               
-  geom_channels(aes(color = highlight), size = 0.5) +             
+  geom_channels(aes(color = highlight), size = 0.125) +             
   scale_fill_viridis_c(limits = c(-5, 5), oob = scales::squish) +
   scale_color_manual(breaks = c("black", "white"),
                      values = c("black", "white"),
@@ -952,7 +952,8 @@ watch_lpp <- eeg_dat %>%
           plot.title = element_text(hjust = 0.5),
           title = element_text(size = 12)) +
     # scale_color_manual(name = "Group", values = c("green", "blue", "red"))
-    scale_color_viridis_d(name = "Block",
+    scale_color_manual(values = c("blue", "green", "red"),
+                          name = "Block",
                           breaks = c("Pos_Dec", "Pos_Watch", "Pos_Inc"),
                           labels = c("Positive Increase", "Positive Watch", "Positive Decrease"))
 
@@ -1000,9 +1001,9 @@ erp_topo <- eeg_dat_loc %>%
   mutate(highlight = if_else(electrode %in% Pz_elec, "white", "black"))
 ggplot(erp_topo, aes(x = x, y = y, fill = amplitude)) +
   stat_scalpmap() +  
-  geom_mask(scale_fac = 1.4) +
+  geom_mask(scale_fac = 1.6) +
   geom_head() +               
-  geom_channels(aes(color = highlight), size = 0.5) +             
+  geom_channels(aes(color = highlight), size = 0.125) +             
   scale_fill_viridis_c(limits = c(-7, 7), oob = scales::squish) +
   scale_color_manual(breaks = c("black", "white"),
                      values = c("black", "white"),
@@ -1043,7 +1044,8 @@ watch_lpp <- eeg_dat %>%
           plot.title = element_text(hjust = 0.5),
           title = element_text(size = 12)) +
     # scale_color_manual(name = "Group", values = c("green", "blue", "red"))
-    scale_color_viridis_d(name = "Block",
+    scale_color_manual(values = c("blue", "green", "red"),
+                          name = "Block",
                           breaks = c("Neg_Dec", "Neg_Watch", "Neg_Inc"),
                           labels = c("Negative Increase", "Negative Watch", "Negative Decrease"))
 
@@ -1088,9 +1090,9 @@ erp_topo <- eeg_dat_loc %>%
   mutate(highlight = if_else(electrode %in% epn_n170_elec, "white", "black"))
 ggplot(erp_topo, aes(x = x, y = y, fill = amplitude)) +
   stat_scalpmap() +  
-  geom_mask(scale_fac = 1.4) +
+  geom_mask(scale_fac = 1.6) +
   geom_head() +               
-  geom_channels(aes(color = highlight), size = 0.5) +             
+  geom_channels(aes(color = highlight), size = 0.125) +             
   scale_fill_viridis_c(limits = c(-10, 10), oob = scales::squish) +
   scale_color_manual(breaks = c("black", "white"),
                      values = c("black", "white"),
@@ -1158,7 +1160,8 @@ watch_n170_epn <- eeg_dat %>%
           plot.title = element_text(hjust = 0.5),
           title = element_text(size = 12)) +
     # scale_color_manual(name = "Group", values = c("green", "blue", "red"))
-    scale_color_viridis_d(name = "Block",
+    scale_color_manual(values = c("green", "blue", "red"),
+                          name = "Block",
                           breaks = c("Neu_Watch", "Pos_Watch", "Neg_Watch"),
                           labels = c("Negative Watch", "Positive Watch", "Neutral Watch"))
 
@@ -1205,9 +1208,9 @@ erp_topo <- eeg_dat_loc %>%
   mutate(highlight = if_else(electrode %in% epn_n170_elec, "white", "black"))
 ggplot(erp_topo, aes(x = x, y = y, fill = amplitude)) +
   stat_scalpmap() +  
-  geom_mask(scale_fac = 1.4) +
+  geom_mask(scale_fac = 1.6) +
   geom_head() +               
-  geom_channels(aes(color = highlight), size = 0.5) +             
+  geom_channels(aes(color = highlight), size = 0.125) +             
   scale_fill_viridis_c(limits = c(-10, 10), oob = scales::squish) +
   scale_color_manual(breaks = c("black", "white"),
                      values = c("black", "white"),
@@ -1273,7 +1276,8 @@ watch_n170_epn <- eeg_dat %>%
           plot.title = element_text(hjust = 0.5),
           title = element_text(size = 12)) +
     # scale_color_manual(name = "Group", values = c("green", "blue", "red"))
-    scale_color_viridis_d(name = "Block",
+    scale_color_manual(values = c("red", "blue", "green"),
+                          name = "Block",
                           breaks = c("Pos_Inc", "Pos_Dec", "Pos_Watch"),
                           labels = c("Positive Increase", "Positive Decrease", "Positive Watch"))
 
@@ -1320,9 +1324,9 @@ erp_topo <- eeg_dat_loc %>%
   mutate(highlight = if_else(electrode %in% epn_n170_elec, "white", "black"))
 ggplot(erp_topo, aes(x = x, y = y, fill = amplitude)) +
   stat_scalpmap() +  
-  geom_mask(scale_fac = 1.4) +
+  geom_mask(scale_fac = 1.6) +
   geom_head() +               
-  geom_channels(aes(color = highlight), size = 0.5) +             
+  geom_channels(aes(color = highlight), size = 0.125) +             
   scale_fill_viridis_c(limits = c(-10, 10), oob = scales::squish) +
   scale_color_manual(breaks = c("black", "white"),
                      values = c("black", "white"),
@@ -1388,7 +1392,8 @@ watch_n170_epn <- eeg_dat %>%
           plot.title = element_text(hjust = 0.5),
           title = element_text(size = 12)) +
     # scale_color_manual(name = "Group", values = c("green", "blue", "red"))
-    scale_color_viridis_d(name = "Block",
+    scale_color_manual(values = c("blue", "green", "red"),
+                          name = "Block",
                           breaks = c("Neg_Dec", "Neg_Watch", "Neg_Inc"),
                           labels = c("Negative Decrease", "Negative Watch", "Negative Increase"))
 
