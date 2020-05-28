@@ -318,9 +318,10 @@ tmp <- standardize_parameters(lmer(LPP ~ block + (1|pid), data = dat))
 tmp <- tmp %>% 
   filter(Parameter == "blockNeg_Watch") %>% 
   mutate(Parameter = "Negative - Positive")
-lpp_std_beta <- bind_rows(lpp_std_beta, tmp)
+lpp_std_beta <- bind_rows(lpp_std_beta, tmp) %>% 
+  mutate(interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "funder2019")))
 lpp_watch_tab <- full_join(lpp_watch_tab, lpp_std_beta, by = c("contrast" = "Parameter")) %>% 
-  select(contrast, estimate, lower.CL, upper.CL, Std_Coefficient, t.ratio, p.value)
+  select(contrast, estimate, lower.CL, upper.CL, Std_Coefficient, interpretation, t.ratio, p.value)
 lpp_watch_tab <- lpp_watch_tab %>% 
   mutate(comp = "LPP") %>% 
   select(comp, everything())
@@ -345,9 +346,10 @@ tmp <- standardize_parameters(lmer(EPN ~ block + (1|pid), data = dat))
 tmp <- tmp %>% 
   filter(Parameter == "blockNeg_Watch") %>% 
   mutate(Parameter = "Negative - Positive")
-epn_std_beta <- bind_rows(epn_std_beta, tmp)
+epn_std_beta <- bind_rows(epn_std_beta, tmp) %>% 
+  mutate(interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "funder2019")))
 epn_watch_tab <- full_join(epn_watch_tab, epn_std_beta, by = c("contrast" = "Parameter")) %>% 
-  select(contrast, estimate, lower.CL, upper.CL, Std_Coefficient, t.ratio, p.value)
+  select(contrast, estimate, lower.CL, upper.CL, Std_Coefficient, interpretation, t.ratio, p.value)
 epn_watch_tab <- epn_watch_tab %>% 
   mutate(comp = "EPN") %>% 
   select(comp, everything())
@@ -372,9 +374,10 @@ tmp <- standardize_parameters(lmer(N170 ~ block + (1|pid), data = dat))
 tmp <- tmp %>% 
   filter(Parameter == "blockNeg_Watch") %>% 
   mutate(Parameter = "Negative - Positive")
-n170_std_beta <- bind_rows(n170_std_beta, tmp)
+n170_std_beta <- bind_rows(n170_std_beta, tmp) %>% 
+  mutate(interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "funder2019")))
 n170_watch_tab <- full_join(n170_watch_tab, n170_std_beta, by = c("contrast" = "Parameter")) %>% 
-  select(contrast, estimate, lower.CL, upper.CL, Std_Coefficient, t.ratio, p.value)
+  select(contrast, estimate, lower.CL, upper.CL, Std_Coefficient, interpretation, t.ratio, p.value)
 n170_watch_tab <- n170_watch_tab %>% 
   mutate(comp = "N170") %>% 
   select(comp, everything())
@@ -399,9 +402,10 @@ tmp <- standardize_parameters(lmer(arousal ~ block + (1|pid), data = dat))
 tmp <- tmp %>% 
   filter(Parameter == "blockNeg_Watch") %>% 
   mutate(Parameter = "Negative - Positive")
-ar_std_beta <- bind_rows(ar_std_beta, tmp)
+ar_std_beta <- bind_rows(ar_std_beta, tmp) %>% 
+  mutate(interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "funder2019")))
 ar_watch_tab <- full_join(ar_watch_tab, ar_std_beta, by = c("contrast" = "Parameter")) %>% 
-  select(contrast, estimate, lower.CL, upper.CL, Std_Coefficient, t.ratio, p.value)
+  select(contrast, estimate, lower.CL, upper.CL, Std_Coefficient, interpretation, t.ratio, p.value)
 ar_watch_tab <- ar_watch_tab %>% 
   mutate(comp = "arousal_rating") %>% 
   select(comp, everything())
@@ -426,15 +430,16 @@ tmp <- standardize_parameters(lmer(valence ~ block + (1|pid), data = dat))
 tmp <- tmp %>% 
   filter(Parameter == "blockNeg_Watch") %>% 
   mutate(Parameter = "Negative - Positive")
-val_std_beta <- bind_rows(val_std_beta, tmp)
+val_std_beta <- bind_rows(val_std_beta, tmp) %>% 
+  mutate(interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "funder2019")))
 val_watch_tab <- full_join(val_watch_tab, val_std_beta, by = c("contrast" = "Parameter")) %>% 
-  select(contrast, estimate, lower.CL, upper.CL, Std_Coefficient, t.ratio, p.value)
+  select(contrast, estimate, lower.CL, upper.CL, Std_Coefficient, interpretation, t.ratio, p.value)
 val_watch_tab <- val_watch_tab %>% 
   mutate(comp = "valence_rating") %>% 
   select(comp, everything())
 
 watch_tab <- bind_rows(lpp_watch_tab, epn_watch_tab, n170_watch_tab, ar_watch_tab, val_watch_tab)
-names(watch_tab) <- c("comp", "Contrast", "Estimate", "lower.CL", "upper.CL", "Std. Beta", "$t$ ratio", "Sig.")
+names(watch_tab) <- c("comp", "Contrast", "Estimate", "lower.CL", "upper.CL", "Std. Beta", "interpretation", "$t$ ratio", "Sig.")
 watch_tab <- watch_tab %>%
   mutate(Sig. = sprintf("%.3f", watch_tab$Sig.),
          Sig. = str_remove(Sig., "^0+"),
@@ -450,8 +455,9 @@ watch_tab <- watch_tab %>%
   mutate(CI = paste0(lower.CL, ", ", upper.CL)) %>% 
   select(comp:Estimate, "CI", everything()) %>% 
   select(-lower.CL, -upper.CL, -`$t$ ratio`) %>% 
-  mutate("Estimate (95\\% CI)" = paste0(watch_tab$Estimate, " (", CI, ")")) %>% 
-  select(comp, Contrast, "Estimate (95\\% CI)", "Std. Beta", Sig.)
+  mutate("Estimate (95\\% CI)" = paste0(watch_tab$Estimate, " (", CI, ")"),
+         "Std. Beta (Label)" = paste0(watch_tab$`Std. Beta`, " (", interpretation, ")")) %>% 
+  select(comp, Contrast, "Estimate (95\\% CI)", "Std. Beta (Label)", Sig.)
 
 watch_tab %>% 
   select(-comp) %>% 
@@ -463,10 +469,11 @@ kable(., "latex", escape = FALSE, booktabs = TRUE, align = c("l", "c", "c", "c")
   pack_rows("Arousal Ratings", 10, 12) %>% 
   pack_rows("Valence Ratings", 13, 15) %>% 
   footnote(escape = FALSE,
+           footnote_as_chunk = TRUE,
            general_title = "Note.",
-           general = "Std. Beta = Standardized Beta coefficient as measure of effect size derived by fitting multilevel model to standardized dataset, Sig. = $p$ value. $P$ values and confidence intervals adjusted using the Tukey method for comparing a family of three estimates.",
-           threeparttable = TRUE,
-           footnote_as_chunk = TRUE)
+           general = "Std. Beta (Label) = Standardized Beta coefficient as measure of effect size derived by fitting multilevel model to standardized dataset with effect size label as per Funder's (2019) recommendations, Sig. = $p$ value. $P$ values and confidence intervals adjusted using the Tukey method for comparing a family of three estimates.",
+           threeparttable = TRUE) %>% 
+  save_kable("poop.png")
 ```
 
 (ref:pairwise-reg-comparison-table) Contrasts between regulation conditions for positive and negative OASIS images for LPP, EPN, and N170 EEG components.
