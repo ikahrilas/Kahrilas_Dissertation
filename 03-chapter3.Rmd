@@ -134,7 +134,7 @@ df_num_diff <- av_diff$NumDF
 df_den_diff <- round(av_diff$DenDF, digits = 0)
 f_diff <- sprintf("%.2f", av_diff[["F value"]])
 ```
-Trials without valid EEG data were excluded from the following analyses (*n* = 2). Analyses were run in R version 3.6.2 [@rcoreteamLanguageEnvironmentStatistical2018]. Multilevel modeling (MLM) analyses were conducted using the lme4 package [@batesFittingLinearMixedeffects2015]. Model assumptions were checked via visual inspection of diagnostic plots (i.e., residual, QQ, scale-location, and residuals vs. leverage) generated with the performance package [@ludeckePerformanceAssessmentRegression2019]. Correlations among key psychological and demographic variables (see Table 2\ref(tab:corr-table)) indicated significant associations ranging from small to large in effect size. Descriptive statistics for LPP, EPN, N170 and participant ratings (arousal, valence, and difficulty) were calculated for each of the experimental blocks (see Table \@ref(tab:descriptives-by-block)). A repeated measures analysis of variance yielded significant variation among experimental image blocks for LPP ($F$(`r df_num_lpp`, `r df_den_lpp` = `r f_lpp`, $p < .001$), EPN ($F$(`r df_num_epn`, `r df_den_epn`) = `r f_epn`, $p < .001$), and N170 ($F$(`r df_num_n170`, `r df_den_n170`) = `r f_n170`, $p < .001$). Repeated measures analysis of variance similiarly indicated differences among blocks for arousal ($F$(`r df_num_ar`, `r df_den_ar` = `r f_ar`, $p < .001$), valence ($F$(`r df_num_val`, `r df_den_val` = `r f_val`, $p < .001$), and difficulty ($F$(`r df_num_diff`, `r df_den_diff`) = `r f_diff`, $p < .001$) ratings. Pairwise comparisons were conducted between passive watch conditions for EEG components and behavioral ratings (Table \@ref(tab:pairwise-watch-comparison-table) as well as regulation conditions (Table \@ref(tab:pairwise-reg-comparison-table) using the emmeans package [@lenthEmmeansEstimatedMarginal2020]. Effect sizes were interpreted using Funder's 
+Trials without valid EEG data were excluded from the following analyses (*n* = 2). Analyses were run in R version 3.6.2 [@rcoreteamLanguageEnvironmentStatistical2018]. Multilevel modeling (MLM) analyses were conducted using the lme4 package [@batesFittingLinearMixedeffects2015]. All linear mixed models were estimated using REML with particpants included as random intercepts. Model assumptions were checked via visual inspection of diagnostic plots (i.e., residual, QQ, scale-location, and residuals vs. leverage) generated with the performance package [@ludeckePerformanceAssessmentRegression2019]. Correlations among key psychological and demographic variables (see Table 2\ref(tab:corr-table)) indicated significant associations ranging from small to large in effect size. Descriptive statistics for LPP, EPN, N170 and participant ratings (arousal, valence, and difficulty) were calculated for each of the experimental blocks (see Table \@ref(tab:descriptives-by-block)). A repeated measures analysis of variance yielded significant variation among experimental image blocks for LPP ($F$(`r df_num_lpp`, `r df_den_lpp` = `r f_lpp`, $p < .001$), EPN ($F$(`r df_num_epn`, `r df_den_epn`) = `r f_epn`, $p < .001$), and N170 ($F$(`r df_num_n170`, `r df_den_n170`) = `r f_n170`, $p < .001$). Repeated measures analysis of variance similiarly indicated differences among blocks for arousal ($F$(`r df_num_ar`, `r df_den_ar` = `r f_ar`, $p < .001$), valence ($F$(`r df_num_val`, `r df_den_val` = `r f_val`, $p < .001$), and difficulty ($F$(`r df_num_diff`, `r df_den_diff`) = `r f_diff`, $p < .001$) ratings. Pairwise comparisons were conducted between passive watch conditions for EEG components and behavioral ratings (Table \@ref(tab:pairwise-watch-comparison-table) as well as regulation conditions (Table \@ref(tab:pairwise-reg-comparison-table) using the emmeans package [@lenthEmmeansEstimatedMarginal2020]. Effect sizes were interpreted using Funder's [-@funderEvaluatingEffectSize2019] recommendations. For passive watch conditions with LPP as the dependent variable, very large and large differences were found for negative vs. neutral and positive vs. netural blocks, respectively. Contrasts of passive watch blocks with EPN as the outcome yielded medium and small differences for negative vs. neutral blocks and positive vs. neutral blocks, respectively. For N170, large and small differences were found for negative vs. neutral and positive vs. neutral blocks, respectively. 
 
 (ref:descriptives-by-block) Means and standard deviations for LPP, EPN, and N170 EEG components, as well as arousal, valence, and difficulty ratings.
 
@@ -312,7 +312,7 @@ dat$block <- relevel(factor(dat$block), ref = "Neu_Watch")
 lpp_std_beta <- standardize_parameters(lmer(LPP ~ block + (1|pid), data = dat))
 lpp_std_beta <- lpp_std_beta %>% 
   filter(Parameter %in% c("blockNeg_Watch", "blockPos_Watch")) %>% 
-  mutate(Parameter = c("Neutral - Positive", "Negative - Neutral"))
+  mutate(Parameter = c("Negative - Neutral", "Neutral - Positive"))
 dat$block <- relevel(factor(dat$block), ref = "Pos_Watch")
 tmp <- standardize_parameters(lmer(LPP ~ block + (1|pid), data = dat))
 tmp <- tmp %>% 
@@ -959,7 +959,7 @@ watch_lpp <- eeg_dat %>%
     scale_color_manual(values = c("blue", "green", "red"),
                           name = "Block",
                           breaks = c("Pos_Dec", "Pos_Watch", "Pos_Inc"),
-                          labels = c("Positive Increase", "Positive Watch", "Positive Decrease"))
+                          labels = c("Positive Decrease", "Positive Watch", "Positive Increase"))
 
 topo_patch <- (watch_topos[[1]] | watch_topos[[2]] | watch_topos[[3]]) + plot_layout(guides = 'collect')
 topo_patch / watch_lpp
@@ -1051,7 +1051,7 @@ watch_lpp <- eeg_dat %>%
     scale_color_manual(values = c("blue", "green", "red"),
                           name = "Block",
                           breaks = c("Neg_Dec", "Neg_Watch", "Neg_Inc"),
-                          labels = c("Negative Increase", "Negative Watch", "Negative Decrease"))
+                          labels = c("Negative Decrease", "Negative Watch", "Negative Increase"))
 
 topo_patch <- (watch_topos[[1]] | watch_topos[[2]] | watch_topos[[3]]) + plot_layout(guides = 'collect')
 topo_patch / watch_lpp
@@ -1167,7 +1167,7 @@ watch_n170_epn <- eeg_dat %>%
     scale_color_manual(values = c("green", "blue", "red"),
                           name = "Block",
                           breaks = c("Neu_Watch", "Pos_Watch", "Neg_Watch"),
-                          labels = c("Negative Watch", "Positive Watch", "Neutral Watch"))
+                          labels = c("Neutral Watch", "Positive Watch", "Negative Watch"))
 
 topo_n170_patch <- (n170_watch_topos[[1]] | n170_watch_topos[[2]] | n170_watch_topos[[3]])
 topo_epn_patch <- (epn_watch_topos[[1]] | epn_watch_topos[[2]] | epn_watch_topos[[3]])
