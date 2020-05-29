@@ -482,7 +482,7 @@ kable(., "latex", escape = FALSE, booktabs = TRUE, align = c("l", "c", "c", "c")
 
 (ref:pairwise-reg-comparison-table) Contrasts between regulation conditions for positive and negative OASIS images for LPP, EPN, and N170 EEG components.
 
-```{r pairwise-regulation-comparison-table, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:pairwise-reg-comparison-table)"}
+```{r pairwise-reg-comparison-table, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:pairwise-reg-comparison-table)"}
 library(tidyverse)
 library(emmeans)
 library(lmerTest)
@@ -1442,7 +1442,8 @@ library(effectsize)
 
 dat <- read_csv("data/paper_two/created_data/per_data_analyses_2020_5_19.csv") %>% 
   mutate(N170 = (N170_left + N170_right) / 2,
-         EPN = (EPN_left + EPN_right) / 2) %>% 
+         EPN = (EPN_left + EPN_right) / 2,
+         pos_affectivity = scale(pos_affectivity, scale = FALSE, center = TRUE)) %>% 
   select(pid:LPP, N170, EPN, everything())
 
 # LPP as outcome
@@ -1532,7 +1533,7 @@ epn_pa_p <- epn_pa_dat %>%
   select(Pr...t..) %>% 
   pull()
 
-# N170 as outcome
+# n170 as outcome
 n170_pa <- lmer(N170 ~ block*pos_affectivity + (1|pid), data = dat)
 summary(n170_pa)
 n170_pa_dat <- data.frame(coef(summary(n170_pa)))
@@ -1574,9 +1575,95 @@ n170_pa_p <- n170_pa_dat %>%
   filter(var == "blockPos_Watch:pos_affectivity") %>% 
   select(Pr...t..) %>% 
   pull()
+
+# arousal as outcome
+ar_pa <- lmer(arousal ~ block*pos_affectivity + (1|pid), data = dat)
+summary(ar_pa)
+ar_pa_dat <- data.frame(coef(summary(ar_pa)))
+ar_pa_beta <- ar_pa_dat %>% 
+  mutate(var = row.names(.)) %>% 
+  mutate(Estimate = sprintf("%.2f", Estimate)) %>% 
+  filter(var == "blockPos_Watch:pos_affectivity") %>% 
+  select(Estimate) %>% 
+  pull()
+ar_pa_std_beta <- standardize_parameters(ar_pa) %>% 
+  filter(Parameter == "blockPos_Watch:pos_affectivity") %>% 
+  mutate(Std_Coefficient = sprintf("%.2f", Std_Coefficient)) %>% 
+  select(`Std_Coefficient`) %>% 
+  pull()
+ar_pa_se <- ar_pa_dat %>% 
+  mutate(var = row.names(.)) %>% 
+  mutate(Std..Error = sprintf("%.2f", Std..Error)) %>% 
+  filter(var == "blockPos_Watch:pos_affectivity") %>% 
+  select(Std..Error) %>% 
+  pull()
+ar_pa_df <- ar_pa_dat %>% 
+  mutate(var = row.names(.)) %>% 
+  mutate(df = sprintf("%.2f", df)) %>% 
+  filter(var == "blockPos_Watch:pos_affectivity") %>% 
+  select(df) %>% 
+  pull()
+ar_pa_t <- ar_pa_dat %>% 
+  mutate(var = row.names(.)) %>% 
+  mutate(t.value = sprintf("%.2f", t.value)) %>% 
+  filter(var == "blockPos_Watch:pos_affectivity") %>% 
+  select(t.value) %>% 
+  pull()
+ar_pa_p <- ar_pa_dat %>% 
+  mutate(var = row.names(.),
+         Pr...t.. = sprintf("%.3f", Pr...t..),
+         Pr...t.. = str_remove(Pr...t.., "^0+"),
+         Pr...t.. = paste("=", Pr...t..),
+         Pr...t.. = if_else(Pr...t.. == "= .000", "< .001", Pr...t..)) %>% 
+  filter(var == "blockPos_Watch:pos_affectivity") %>% 
+  select(Pr...t..) %>% 
+  pull()
+
+# valence as outcome
+val_pa <- lmer(valence ~ block*pos_affectivity + (1|pid), data = dat)
+summary(val_pa)
+val_pa_dat <- data.frame(coef(summary(val_pa)))
+val_pa_beta <- val_pa_dat %>% 
+  mutate(var = row.names(.)) %>% 
+  mutate(Estimate = sprintf("%.2f", Estimate)) %>% 
+  filter(var == "blockPos_Watch:pos_affectivity") %>% 
+  select(Estimate) %>% 
+  pull()
+val_pa_std_beta <- standardize_parameters(val_pa) %>% 
+  filter(Parameter == "blockPos_Watch:pos_affectivity") %>% 
+  mutate(Std_Coefficient = sprintf("%.2f", Std_Coefficient)) %>% 
+  select(`Std_Coefficient`) %>% 
+  pull()
+val_pa_se <- val_pa_dat %>% 
+  mutate(var = row.names(.)) %>% 
+  mutate(Std..Error = sprintf("%.2f", Std..Error)) %>% 
+  filter(var == "blockPos_Watch:pos_affectivity") %>% 
+  select(Std..Error) %>% 
+  pull()
+val_pa_df <- val_pa_dat %>% 
+  mutate(var = row.names(.)) %>% 
+  mutate(df = sprintf("%.2f", df)) %>% 
+  filter(var == "blockPos_Watch:pos_affectivity") %>% 
+  select(df) %>% 
+  pull()
+val_pa_t <- val_pa_dat %>% 
+  mutate(var = row.names(.)) %>% 
+  mutate(t.value = sprintf("%.2f", t.value)) %>% 
+  filter(var == "blockPos_Watch:pos_affectivity") %>% 
+  select(t.value) %>% 
+  pull()
+val_pa_p <- val_pa_dat %>% 
+  mutate(var = row.names(.),
+         Pr...t.. = sprintf("%.3f", Pr...t..),
+         Pr...t.. = str_remove(Pr...t.., "^0+"),
+         Pr...t.. = paste("=", Pr...t..),
+         Pr...t.. = if_else(Pr...t.. == "= .000", "< .001", Pr...t..)) %>% 
+  filter(var == "blockPos_Watch:pos_affectivity") %>% 
+  select(Pr...t..) %>% 
+  pull()
 ```
 
-The second objective was to examine the relationship between personality traits pertaining to positive emotion (i.e., PA and momentary savoring capacity) and EEG components of interest. MLM with variance components covariance matrices to estimate random intercepts for each participant was used to test if the relationship between EEG components and passively viewing positive images versus neutral images varied as a function of trait positive affect. Dummy-coded block (within subjects: neutral watch block as reference level) and mean-centered trait positive affect (between subjects) variables were included in the omnibus model. An interaction term between block and trait positive affect variables was added to probe for a conditional relationship between block and EEG component as a function of trait positive affect. Results did not indicate a significant interaction between viewing condition and PA in predicting LPP ($b$ = `r lpp_pa_beta`, $\beta$ = `r lpp_pa_std_beta`, $SE$ = `r lpp_pa_se`, $t$(`r lpp_pa_df`) = `r lpp_pa_t`, $p$ `r lpp_pa_p`), EPN ($b$ = `r epn_pa_beta`, $\beta$ = `r epn_pa_std_beta`, $SE$ = `r epn_pa_se`, $t$(`r epn_pa_df`) = `r epn_pa_t`, $p$ `r epn_pa_p`), nor N170 ($b$ = `r n170_pa_beta`, $\beta$ = `r n170_pa_std_beta`, $SE$ = `r n170_pa_se`, $t$(`r n170_pa_df`) = `r n170_pa_t`, $p$ `r n170_pa_p`).
+The second objective was to examine the relationship between personality traits pertaining to positive emotion (i.e., PA and momentary savoring capacity) and EEG components of interest. MLM with variance components covariance matrices to estimate random intercepts for each participant was used to test if the relationship between EEG components and passively viewing positive images versus neutral images varied as a function of trait positive affect. Dummy-coded block (within subjects: neutral watch block as reference level) and mean-centered trait positive affect (between subjects) variables were included in the omnibus model. An interaction term between block and trait positive affect variables was added to probe for a conditional relationship between block and EEG component as a function of trait positive affect. Results did not indicate a significant interaction between viewing condition and PA in predicting LPP ($b$ = `r lpp_pa_beta`, $\beta$ = `r lpp_pa_std_beta`, $SE$ = `r lpp_pa_se`, $t$(`r lpp_pa_df`) = `r lpp_pa_t`, $p$ `r lpp_pa_p`), EPN ($b$ = `r epn_pa_beta`, $\beta$ = `r epn_pa_std_beta`, $SE$ = `r epn_pa_se`, $t$(`r epn_pa_df`) = `r epn_pa_t`, $p$ `r epn_pa_p`), nor N170 ($b$ = `r n170_pa_beta`, $\beta$ = `r n170_pa_std_beta`, $SE$ = `r n170_pa_se`, $t$(`r n170_pa_df`) = `r n170_pa_t`, $p$ `r n170_pa_p`). Exploratory moderation analyses were also run with arousal and valence ratings as the dependent variable. Results did not indicate a significant interaction between viewing condition and PA in predicting arousal ratings ($b$ = `r ar_pa_beta`, $\beta$ = `r ar_pa_std_beta`, $SE$ = `r ar_pa_se`, $t$(`r ar_pa_df`) = `r ar_pa_t`, $p$ `r ar_pa_p`) and predicted a small interaction effect in predicting valence ratings ($b$ = `r val_pa_beta`, $\beta$ = `r val_pa_std_beta`, $SE$ = `r val_pa_se`, $t$(`r val_pa_df`) = `r val_pa_t`, $p$ `r val_pa_p`), such that greater levels of positive affecitivty were associated with more positive valence ratings after passively viewing positive images compared to neutral images. 
 
 #### Hypothesis 2b
 MLM with variance components covariance matrices to estimate random intercepts and slopes for each participant was used to test if the relationship between parietal cortical activity and increasing emotional intensity in response to positive images versus passively watching positive images (see Figure 5) varied as a function of momentary savoring capacity. Dummy-coded block (within subjects: positive watch block as reference level), mean- centered difficulty rating (within subjects), mean-centered savoring capacity (between subjects), and mean-centered trait positive affect (between subjects) variables were included in the omnibus model. An interaction term between the block and savoring capacity variables was added to probe for a conditional relationship between block and LPP activity as a function of momentary savoring capacity while accounting for the variance attributed to the how difficult participants rated each block and their trait positive affect. Results did not indicate a significant interaction between viewing condition and savoring capacity in predicting LPP activity ($b = 0.30$, $SE = .39$, $t(262.79) = 0.76$, $p = .445$, $R^2 < .01$).
