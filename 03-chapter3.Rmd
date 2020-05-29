@@ -452,7 +452,11 @@ watch_tab <- map_df(watch_tab, ~ {
   }
 })
 watch_tab <- watch_tab %>% 
-  mutate(CI = paste0(lower.CL, ", ", upper.CL)) %>% 
+  mutate(Estimate = if_else(Estimate == "-0.00", "0.00", Estimate),
+         lower.CL = if_else(lower.CL == "-0.00", "0.00", lower.CL),
+         upper.CL = if_else(upper.CL == "-0.00", "0.00", upper.CL),
+         `Std. Beta` = if_else(`Std. Beta` == "-0.00", "0.00", `Std. Beta`),
+         CI = paste0(lower.CL, ", ", upper.CL)) %>% 
   select(comp:Estimate, "CI", everything()) %>% 
   select(-lower.CL, -upper.CL, -`$t$ ratio`) %>% 
   mutate("Estimate (95\\% CI)" = paste0(watch_tab$Estimate, " (", CI, ")"),
@@ -728,7 +732,11 @@ reg_tab <- map_df(reg_tab, ~ {
 })
 
 reg_tab <- reg_tab %>% 
-  mutate(CI = paste0(lower.CL, ", ", upper.CL)) %>% 
+  mutate(Estimate = if_else(Estimate == "-0.00", "0.00", Estimate),
+         lower.CL = if_else(lower.CL == "-0.00", "0.00", lower.CL),
+         upper.CL = if_else(upper.CL == "-0.00", "0.00", upper.CL),
+         `Std. Beta` = if_else(`Std. Beta` == "-0.00", "0.00", `Std. Beta`),
+         CI = paste0(lower.CL, ", ", upper.CL)) %>% 
   select(comp:Estimate, "CI", everything()) %>% 
   select(-lower.CL, -upper.CL) %>% 
   mutate("Estimate (95\\% CI)" = paste0(Estimate, " (", CI, ")"),
