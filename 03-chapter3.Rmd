@@ -136,7 +136,6 @@ f_diff <- sprintf("%.2f", av_diff[["F value"]])
 ```
 Trials without valid EEG data were excluded from the following analyses (*n* = 2). Analyses were run in R version 3.6.2 [@rcoreteamLanguageEnvironmentStatistical2018]. Multilevel modeling (MLM) analyses were conducted using the lme4 package [@batesFittingLinearMixedeffects2015]. All linear mixed models were estimated using REML with particpants included as random intercepts. Model assumptions were checked via visual inspection of diagnostic plots (i.e., residual, QQ, scale-location, and residuals vs. leverage) generated with the performance package [@ludeckePerformanceAssessmentRegression2019]. Correlations among key psychological and demographic variables (see Table 2\ref(tab:corr-table)) indicated significant associations ranging from small to large in effect size. Descriptive statistics for LPP, EPN, N170 and participant ratings (arousal, valence, and difficulty) were calculated for each of the experimental blocks (see Table \@ref(tab:descriptives-by-block)). A repeated measures analysis of variance yielded significant variation among experimental image blocks for LPP ($F$(`r df_num_lpp`, `r df_den_lpp` = `r f_lpp`, $p < .001$), EPN ($F$(`r df_num_epn`, `r df_den_epn`) = `r f_epn`, $p < .001$), and N170 ($F$(`r df_num_n170`, `r df_den_n170`) = `r f_n170`, $p < .001$). Repeated measures analysis of variance similiarly indicated differences among blocks for arousal ($F$(`r df_num_ar`, `r df_den_ar` = `r f_ar`, $p < .001$), valence ($F$(`r df_num_val`, `r df_den_val` = `r f_val`, $p < .001$), and difficulty ($F$(`r df_num_diff`, `r df_den_diff`) = `r f_diff`, $p < .001$) ratings. Pairwise comparisons were conducted between passive watch conditions for EEG components and behavioral ratings (Table \@ref(tab:pairwise-watch-comparison-table)) as well as regulation conditions (Table \@ref(tab:pairwise-reg-comparison-table)) using the emmeans package [@lenthEmmeansEstimatedMarginal2020]. Effect sizes were interpreted using Funder's [-@funderEvaluatingEffectSize2019] recommendations. Between watch conditions, results indicated large to very large differences for LPP (see Table \@ref(tab:pairwise-watch-comparison-table) & Figure \@ref(fig:LPP-watch-topos)), small to medium differences for EPN, and small to large differences for N170 (see Table \@ref(tab:pairwise-reg-comparison-table) & Figure \@ref(fig:EPN-N170-watch-topos)). Behavioral ratings were in the expected directions, with both positive and negative images resulting in higher arousal ratings compared to neutral images. Further, negative and positive image blocks resulted in lower (i.e., more negative) and higher (i.e., more positive) valence ratings, respectively. Notably, the differences in behavioral ratings associated with negative vs. neutral image blocks were larger than they were for positive vs. neutral image blocks. Between positive regulation conditions, results indicated no significant effects for LPP (see Table \@ref(tab:pairwise-reg-comparison-table)) and Figure \@ref(fig:LPP-pos-topos)), a very small difference between increase and watch conditions for EPN (see Table \@ref(tab:pairwise-reg-comparison-table) & Figure \@ref(fig:EPN-N170-pos-topos)), and no significant differences for N170. Increase conditions resulted in very small and medium increases in arousal and valence ratings, respectively, compared to passive watch conditions. Decrease conditions led to decreases in arousal and valence ratings (Table \@ref(tab:pairwise-reg-comparison-table)). Between negative regulation conditions, results indicated a small difference between increase and watch conditions for LPP (see Table \@ref(tab:pairwise-reg-comparison-table) & Figure \@ref(fig:LPP-neg-topos)) and no significant differences for EPN and N170 (see Table \@ref(tab:pairwise-reg-comparison-table) & Figure \@ref(fig:EPN-N170-neg-topos)). Increase conditions resulted in tiny and large increases for arousal and valence ratings in increase vs. watch and decrease vs. watch conditions, respectively (Table \@ref(tab:pairwise-reg-comparison-table)).
 
-
 (ref:descriptives-by-block) Means and standard deviations for LPP, EPN, and N170 EEG components, as well as arousal, valence, and difficulty ratings.
 
 ```{r descriptives-by-block, echo = FALSE, message = FALSE, fig.cap = "(ref:descriptives-by-block)"}
@@ -1435,11 +1434,74 @@ topos_patch <- topo_n170_patch / topo_epn_patch + plot_layout(guides = 'collect'
 topos_patch / watch_n170_epn + plot_layout(heights = c(1, 1, 1.5))
 ```
 
-Before testing primary hypotheses, a null model was run to assess whether the grouping variable (participant) differed on the outcome variable (parietal cortical activity) and to estimate the degree of nonindependence in the sample. An intraclass-correlation indicated that that 56% of the total variance in LPP activity is accounted for by differences between participants’ average LPP activity. This necessitates an analytical technique, such as MLM, that accounts for non-independence. Semi-partial R-squared was calculated for model parameters to estimate relative variance explained by each predictor [@edwardsR2StatisticFixed2008; @trittIdeologicalReactivityPolitical2016].
-#### Hypotheses 1a & 1b. 
-MLM with variance components covariance matrices to estimate random intercepts and slopes for each participant was used to test whether increased LPP activity is associated with passively viewing highly arousing affective compared to neutral OASIS stimuli. Dummy-coded block (within subjects: neutral watch block as reference level) and mean- centered valence (within subjects) variables were included in the omnibus model to predict LPP activity while accounting for the variance attributed to the how positive or negative participants rated each block. A main effect of block type upon LPP activity was found (positive watch; $b = 1.38$, $SE = .39$, $t(244.96) = 3.52$, $p < .001$, $R^2 = .03$; negative watch; $b = 2.12$, $SE = .42$, $t(249.05) = 5.10$, $p < .001$, $R^2 = .06$). These findings indicate that passively viewing affective (positive and negative) compared to neutral OASIS images is associated with enhanced LPP activity (see Figure 4).
-#### Hypothesis 2a 
-The second objective was to examine the relationship between personality traits pertaining to positive emotion (i.e., PA and savoring capacity) and parietal cortical activity. MLM with variance components covariance matrices to estimate random intercepts and slopes for each participant was used to test if the relationship between LPP activity and passively viewing positive images versus neutral images varied as a function of trait positive affect. Dummy-coded block (within subjects: neutral watch block as reference level), mean-centered difficulty rating (within subjects), mean-centered trait positive affect (between subjects), and mean-centered state positive affect (between subjects) variables were included in the omnibus model. An interaction term between block and trait positive affect variables was also added to probe for a conditional relationship between block and LPP activity as a function of trait positive affect while accounting for the variance attributed to the how difficult participants rated each block and their state positive affect. Results did not indicate a significant interaction between viewing condition and PA in predicting LPP activity ($b = 0.03$, $SE = .06$, $t(262.81) = 0.50$, $p = .620$, $R^2 < .01$).
+The second objective was to examine the relationship between personality traits pertaining to positive emotion (i.e., PA and momentary savoring capacity) and EEG components of interest. MLM with variance components covariance matrices to estimate random intercepts for each participant was used to test if the relationship between EEG components and passively viewing positive images versus neutral images varied as a function of trait positive affect. Dummy-coded block (within subjects: neutral watch block as reference level) and mean-centered trait positive affect (between subjects) variables were included in the omnibus model. An interaction term between block and trait positive affect variables was added to probe for a conditional relationship between block and EEG component as a function of trait positive affect. Results did not indicate a significant interaction between viewing condition and PA in predicting LPP ($b$ = `r lpp_pa_beta`, $\beta$ = `r lpp_pa_std_beta`, $SE$ = `r lpp_pa_se`, $t$(`r lpp_pa_df`) = `r lpp_pa_t`, $p$ = `r lpp_pa_p`).
+
+($F$(`r df_num_n170`, `r df_den_n170`) = `r f_n170`, $p < .001$)
+
+```{r positive-affectivity-mlm-analyses, include = FALSE, message = FALSE}
+library(tidyverse)
+library(lmerTest)
+library(effectsize)
+
+dat <- read_csv("data/paper_two/created_data/per_data_analyses_2020_5_19.csv") %>% 
+  mutate(N170 = (N170_left + N170_right) / 2,
+         EPN = (EPN_left + EPN_right) / 2) %>% 
+  select(pid:LPP, N170, EPN, everything())
+
+# LPP as outcome
+dat$block <- relevel(factor(dat$block), ref = "Neu_Watch")
+lpp_pa <- lmer(LPP ~ block*pos_affectivity + (1|pid), data = dat)
+summary(lpp_pa)
+lpp_pa_dat <- data.frame(coef(summary(lpp_pa)))
+lpp_pa_beta <- lpp_pa_dat %>% 
+  mutate(var = row.names(.)) %>% 
+  mutate(Estimate = sprintf("%.2f", Estimate)) %>% 
+  filter(var == "blockPos_Watch:pos_affectivity") %>% 
+  select(Estimate) %>% 
+  pull()
+lpp_pa_std_beta <- standardize_parameters(lpp_pa) %>% 
+  filter(Parameter == "blockPos_Watch:pos_affectivity") %>% 
+  mutate(Std_Coefficient = sprintf("%.2f", Std_Coefficient)) %>% 
+  select(`Std_Coefficient`) %>% 
+  pull()
+lpp_pa_se <- lpp_pa_dat %>% 
+  mutate(var = row.names(.)) %>% 
+  mutate(Std..Error = sprintf("%.2f", Std..Error)) %>% 
+  filter(var == "blockPos_Watch:pos_affectivity") %>% 
+  select(Std..Error) %>% 
+  pull()
+lpp_pa_df <- lpp_pa_dat %>% 
+  mutate(var = row.names(.)) %>% 
+  mutate(df = sprintf("%.2f", df)) %>% 
+  filter(var == "blockPos_Watch:pos_affectivity") %>% 
+  select(df) %>% 
+  pull()
+lpp_pa_t <- lpp_pa_dat %>% 
+  mutate(var = row.names(.)) %>% 
+  mutate(t.value = sprintf("%.2f", t.value)) %>% 
+  filter(var == "blockPos_Watch:pos_affectivity") %>% 
+  select(t.value) %>% 
+  pull()
+lpp_pa_p <- lpp_pa_dat %>% 
+  mutate(var = row.names(.),
+         Pr...t.. = sprintf("%.3f", Pr...t..),
+         Pr...t.. = str_remove(Pr...t.., "^0+"),
+         Pr...t.. = paste("=", Pr...t..),
+         Pr...t.. = if_else(Pr...t.. == "= .000", "< .001", Pr...t..)) %>% 
+  filter(var == "blockPos_Watch:pos_affectivity") %>% 
+  select(Pr...t..) %>% 
+  pull()
+
+
+confint(lpp_pa)
+lpp_pa_dat
+mod_lpp <- lmer(LPP ~ block + (1|pid), data = dat)
+av_lpp <- anova(mod_lpp)
+df_num_lpp <- av_lpp$NumDF
+df_den_lpp <- sprintf("%.2f", av_lpp$DenDF)
+f_lpp <- sprintf("%.2f", av_lpp[["F value"]])
+```
+
 #### Hypothesis 2b
 MLM with variance components covariance matrices to estimate random intercepts and slopes for each participant was used to test if the relationship between parietal cortical activity and increasing emotional intensity in response to positive images versus passively watching positive images (see Figure 5) varied as a function of momentary savoring capacity. Dummy-coded block (within subjects: positive watch block as reference level), mean- centered difficulty rating (within subjects), mean-centered savoring capacity (between subjects), and mean-centered trait positive affect (between subjects) variables were included in the omnibus model. An interaction term between the block and savoring capacity variables was added to probe for a conditional relationship between block and LPP activity as a function of momentary savoring capacity while accounting for the variance attributed to the how difficult participants rated each block and their trait positive affect. Results did not indicate a significant interaction between viewing condition and savoring capacity in predicting LPP activity ($b = 0.30$, $SE = .39$, $t(262.79) = 0.76$, $p = .445$, $R^2 < .01$).
 
