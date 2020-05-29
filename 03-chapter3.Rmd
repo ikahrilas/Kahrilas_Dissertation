@@ -471,7 +471,7 @@ kable(., "latex", escape = FALSE, booktabs = TRUE, align = c("l", "c", "c", "c")
   footnote(escape = FALSE,
            footnote_as_chunk = TRUE,
            general_title = "Note.",
-           general = "Std. Beta (Label) = Standardized Beta coefficient as measure of effect size derived by fitting multilevel model to standardized dataset with effect size label as per Funder's (2019) recommendations, Sig. = $p$ value. $P$ values and confidence intervals adjusted using the Tukey method for comparing a family of three estimates.",
+           general = "Std. Beta (Label) = Standardized Beta coefficient as measure of effect size derived by fitting model to standardized dataset with effect size label as per Funder's (2019) recommendations, Sig. = $p$ value. $P$ values and confidence intervals adjusted using the Tukey method for comparing a family of three estimates.",
            threeparttable = TRUE) %>% 
   save_kable("poop.png")
 ```
@@ -528,19 +528,21 @@ lpp_std_beta_pos <- lpp_std_beta_pos %>%
   filter(Parameter %in% c("blockPos_Dec", "blockPos_Inc")) %>% 
   bind_rows(., filter(tmp_pos, Parameter == "blockPos_Dec")) %>% 
   mutate(Parameter = c("Decrease - Watch", "Increase - Watch", "Decrease - Increase"),
+         interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "funder2019")),
          valence_condition = "Positive")
 
 lpp_std_beta_neg <- lpp_std_beta_neg %>% 
   filter(Parameter %in% c("blockNeg_Dec", "blockNeg_Inc")) %>% 
   bind_rows(., filter(tmp_neg, Parameter == "blockNeg_Dec")) %>% 
   mutate(Parameter = c("Decrease - Watch", "Increase - Watch", "Decrease - Increase"),
+         interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "funder2019")),
          valence_condition = "Negative")
 
 lpp_std_beta <- bind_rows(lpp_std_beta_pos, lpp_std_beta_neg)
 
 lpp_reg_tab <- full_join(lpp_reg_tab, lpp_std_beta, by = c("contrast" = "Parameter", "valence_condition")) %>% 
   mutate(comp = "LPP") %>% 
-  select(comp, valence_condition, contrast, estimate, lower.CL, upper.CL, Std_Coefficient, p.value)
+  select(comp, valence_condition, contrast, estimate, lower.CL, upper.CL, Std_Coefficient, interpretation, p.value)
 
 # EPN regulation comparisons
 reg_mod_epn <- lmer(EPN ~ valence_condition * regulation_condition + (1|pid), data = per_dat_cond)
@@ -568,19 +570,21 @@ epn_std_beta_pos <- epn_std_beta_pos %>%
   filter(Parameter %in% c("blockPos_Dec", "blockPos_Inc")) %>% 
   bind_rows(., filter(tmp_pos, Parameter == "blockPos_Dec")) %>% 
   mutate(Parameter = c("Decrease - Watch", "Increase - Watch", "Decrease - Increase"),
+         interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "funder2019")),
          valence_condition = "Positive")
 
 epn_std_beta_neg <- epn_std_beta_neg %>% 
   filter(Parameter %in% c("blockNeg_Dec", "blockNeg_Inc")) %>% 
   bind_rows(., filter(tmp_neg, Parameter == "blockNeg_Dec")) %>% 
   mutate(Parameter = c("Decrease - Watch", "Increase - Watch", "Decrease - Increase"),
+         interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "funder2019")),
          valence_condition = "Negative")
 
 epn_std_beta <- bind_rows(epn_std_beta_pos, epn_std_beta_neg)
 
 epn_reg_tab <- full_join(epn_reg_tab, epn_std_beta, by = c("contrast" = "Parameter", "valence_condition")) %>% 
   mutate(comp = "EPN") %>% 
-  select(comp, valence_condition, contrast, estimate, lower.CL, upper.CL, Std_Coefficient, p.value)
+  select(comp, valence_condition, contrast, estimate, lower.CL, upper.CL, Std_Coefficient, interpretation, p.value)
 
 # N170 regulation comparisons
 reg_mod_n170 <- lmer(N170 ~ valence_condition * regulation_condition + (1|pid), data = per_dat_cond)
@@ -608,19 +612,21 @@ n170_std_beta_pos <- n170_std_beta_pos %>%
   filter(Parameter %in% c("blockPos_Dec", "blockPos_Inc")) %>% 
   bind_rows(., filter(tmp_pos, Parameter == "blockPos_Dec")) %>% 
   mutate(Parameter = c("Decrease - Watch", "Increase - Watch", "Decrease - Increase"),
+         interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "funder2019")),
          valence_condition = "Positive")
 
 n170_std_beta_neg <- n170_std_beta_neg %>% 
   filter(Parameter %in% c("blockNeg_Dec", "blockNeg_Inc")) %>% 
   bind_rows(., filter(tmp_neg, Parameter == "blockNeg_Dec")) %>% 
   mutate(Parameter = c("Decrease - Watch", "Increase - Watch", "Decrease - Increase"),
+         interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "funder2019")),
          valence_condition = "Negative")
 
 n170_std_beta <- bind_rows(n170_std_beta_pos, n170_std_beta_neg)
 
 n170_reg_tab <- full_join(n170_reg_tab, n170_std_beta, by = c("contrast" = "Parameter", "valence_condition")) %>% 
   mutate(comp = "N170") %>% 
-  select(comp, valence_condition, contrast, estimate, lower.CL, upper.CL, Std_Coefficient, p.value)
+  select(comp, valence_condition, contrast, estimate, lower.CL, upper.CL, Std_Coefficient, interpretation, p.value)
 
 # Arousal regulation comparisons
 reg_mod_ar <- lmer(arousal ~ valence_condition * regulation_condition + (1|pid), data = per_dat_cond)
@@ -648,19 +654,21 @@ ar_std_beta_pos <- ar_std_beta_pos %>%
   filter(Parameter %in% c("blockPos_Dec", "blockPos_Inc")) %>% 
   bind_rows(., filter(tmp_pos, Parameter == "blockPos_Dec")) %>% 
   mutate(Parameter = c("Decrease - Watch", "Increase - Watch", "Decrease - Increase"),
+         interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "funder2019")),
          valence_condition = "Positive")
 
 ar_std_beta_neg <- ar_std_beta_neg %>% 
   filter(Parameter %in% c("blockNeg_Dec", "blockNeg_Inc")) %>% 
   bind_rows(., filter(tmp_neg, Parameter == "blockNeg_Dec")) %>% 
   mutate(Parameter = c("Decrease - Watch", "Increase - Watch", "Decrease - Increase"),
+         interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "funder2019")),
          valence_condition = "Negative")
 
 ar_std_beta <- bind_rows(ar_std_beta_pos, ar_std_beta_neg)
 
 ar_reg_tab <- full_join(ar_reg_tab, ar_std_beta, by = c("contrast" = "Parameter", "valence_condition")) %>% 
   mutate(comp = "arousal") %>% 
-  select(comp, valence_condition, contrast, estimate, lower.CL, upper.CL, Std_Coefficient, p.value)
+  select(comp, valence_condition, contrast, estimate, lower.CL, upper.CL, Std_Coefficient, interpretation, p.value)
 
 # Valence comparisons
 reg_mod_val <- lmer(valence ~ valence_condition * regulation_condition + (1|pid), data = per_dat_cond)
@@ -688,23 +696,25 @@ val_std_beta_pos <- val_std_beta_pos %>%
   filter(Parameter %in% c("blockPos_Dec", "blockPos_Inc")) %>% 
   bind_rows(., filter(tmp_pos, Parameter == "blockPos_Dec")) %>% 
   mutate(Parameter = c("Decrease - Watch", "Increase - Watch", "Decrease - Increase"),
+         interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "funder2019")),
          valence_condition = "Positive")
 
 val_std_beta_neg <- val_std_beta_neg %>% 
   filter(Parameter %in% c("blockNeg_Dec", "blockNeg_Inc")) %>% 
   bind_rows(., filter(tmp_neg, Parameter == "blockNeg_Dec")) %>% 
   mutate(Parameter = c("Decrease - Watch", "Increase - Watch", "Decrease - Increase"),
+         interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "funder2019")),
          valence_condition = "Negative")
 
 val_std_beta <- bind_rows(val_std_beta_pos, ar_std_beta_neg)
 
 val_reg_tab <- full_join(val_reg_tab, val_std_beta, by = c("contrast" = "Parameter", "valence_condition")) %>% 
   mutate(comp = "valence") %>% 
-  select(comp, valence_condition, contrast, estimate, lower.CL, upper.CL, Std_Coefficient, p.value)
+  select(comp, valence_condition, contrast, estimate, lower.CL, upper.CL, Std_Coefficient, interpretation, p.value)
 
 # collate components and behavioral ratings
 reg_tab <- bind_rows(lpp_reg_tab, epn_reg_tab, n170_reg_tab, ar_reg_tab, val_reg_tab)
-names(reg_tab) <- c("comp", "valence_condition", "Contrast", "Estimate", "lower.CL", "upper.CL", "Std. Beta", "Sig.")
+names(reg_tab) <- c("comp", "valence_condition", "Contrast", "Estimate", "lower.CL", "upper.CL", "Std. Beta", "interpretation", "Sig.")
 reg_tab <- reg_tab %>%
   mutate(Sig. = sprintf("%.3f", reg_tab$Sig.),
          Sig. = str_remove(Sig., "^0+"),
@@ -721,8 +731,9 @@ reg_tab <- reg_tab %>%
   mutate(CI = paste0(lower.CL, ", ", upper.CL)) %>% 
   select(comp:Estimate, "CI", everything()) %>% 
   select(-lower.CL, -upper.CL) %>% 
-  mutate("Estimate (95\\% CI)" = paste0(Estimate, " (", CI, ")")) %>% 
-  select(comp, valence_condition, Contrast, "Estimate (95\\% CI)", "Std. Beta", Sig.)
+  mutate("Estimate (95\\% CI)" = paste0(Estimate, " (", CI, ")"),
+         "Std. Beta (Label)" = paste0(reg_tab$`Std. Beta`, " (", interpretation, ")")) %>% 
+  select(comp, valence_condition, Contrast, "Estimate (95\\% CI)", "Std. Beta (Label)", Sig.)
 
 reg_tab_pos <- reg_tab %>% 
   filter(valence_condition == "Positive") %>% 
@@ -748,9 +759,10 @@ kable(., "latex", escape = FALSE, booktabs = TRUE, align = c("l", rep("c", times
   pack_rows("Valence Ratings", 13, 15) %>% 
   footnote(escape = FALSE,
            general_title = "Note.",
-           general = "Std. Beta = Standardized Beta coefficient as measure of effect size derived by fitting multilevel model to standardized dataset, Sig. = $p$ value. $P$ values and confidence intervals adjusted using the Tukey method for comparing a family of three estimates.",
+           general = "Std. Beta = Standardized Beta coefficient as measure of effect size derived by fitting model to standardized dataset with effect size label as per Funder's (2019) recommendations, Sig. = $p$ value. $P$ values and confidence intervals adjusted using the Tukey method for comparing a family of three estimates.",
            threeparttable = TRUE,
-           footnote_as_chunk = TRUE)
+           footnote_as_chunk = TRUE) %>% 
+  save_kable("poop.jpg")
 ```
 
 (ref:LPP-watch-topos) Topographical plots and average waveforms for LPP during passive watch conditions. Sensors highlighted in white were used to measure LPP for waveform plots and analyses.
