@@ -134,7 +134,8 @@ df_num_diff <- av_diff$NumDF
 df_den_diff <- round(av_diff$DenDF, digits = 0)
 f_diff <- sprintf("%.2f", av_diff[["F value"]])
 ```
-Trials without valid EEG data were excluded from the following analyses (*n* = 2). Analyses were run in R version 3.6.2 [@rcoreteamLanguageEnvironmentStatistical2018]. Multilevel modeling (MLM) analyses were conducted using the lme4 package [@batesFittingLinearMixedeffects2015]. All linear mixed models were estimated using REML with particpants included as random intercepts. Model assumptions were checked via visual inspection of diagnostic plots (i.e., residual, QQ, scale-location, and residuals vs. leverage) generated with the performance package [@ludeckePerformanceAssessmentRegression2019]. Correlations among key psychological and demographic variables (see Table 2\ref(tab:corr-table)) indicated significant associations ranging from small to large in effect size. Descriptive statistics for LPP, EPN, N170 and participant ratings (arousal, valence, and difficulty) were calculated for each of the experimental blocks (see Table \@ref(tab:descriptives-by-block)). A repeated measures analysis of variance yielded significant variation among experimental image blocks for LPP ($F$(`r df_num_lpp`, `r df_den_lpp` = `r f_lpp`, $p < .001$), EPN ($F$(`r df_num_epn`, `r df_den_epn`) = `r f_epn`, $p < .001$), and N170 ($F$(`r df_num_n170`, `r df_den_n170`) = `r f_n170`, $p < .001$). Repeated measures analysis of variance similiarly indicated differences among blocks for arousal ($F$(`r df_num_ar`, `r df_den_ar` = `r f_ar`, $p < .001$), valence ($F$(`r df_num_val`, `r df_den_val` = `r f_val`, $p < .001$), and difficulty ($F$(`r df_num_diff`, `r df_den_diff`) = `r f_diff`, $p < .001$) ratings. Pairwise comparisons were conducted between passive watch conditions for EEG components and behavioral ratings (Table \@ref(tab:pairwise-watch-comparison-table) as well as regulation conditions (Table \@ref(tab:pairwise-reg-comparison-table) using the emmeans package [@lenthEmmeansEstimatedMarginal2020]. Effect sizes were interpreted using Funder's [-@funderEvaluatingEffectSize2019] recommendations. For passive watch conditions with LPP as the dependent variable, very large and large differences were found for negative vs. neutral and positive vs. netural blocks, respectively. Contrasts of passive watch blocks with EPN as the outcome yielded medium and small differences for negative vs. neutral blocks and positive vs. neutral blocks, respectively. For N170, large and small differences were found for negative vs. neutral and positive vs. neutral blocks, respectively. 
+Trials without valid EEG data were excluded from the following analyses (*n* = 2). Analyses were run in R version 3.6.2 [@rcoreteamLanguageEnvironmentStatistical2018]. Multilevel modeling (MLM) analyses were conducted using the lme4 package [@batesFittingLinearMixedeffects2015]. All linear mixed models were estimated using REML with particpants included as random intercepts. Model assumptions were checked via visual inspection of diagnostic plots (i.e., residual, QQ, scale-location, and residuals vs. leverage) generated with the performance package [@ludeckePerformanceAssessmentRegression2019]. Correlations among key psychological and demographic variables (see Table 2\ref(tab:corr-table)) indicated significant associations ranging from small to large in effect size. Descriptive statistics for LPP, EPN, N170 and participant ratings (arousal, valence, and difficulty) were calculated for each of the experimental blocks (see Table \@ref(tab:descriptives-by-block)). A repeated measures analysis of variance yielded significant variation among experimental image blocks for LPP ($F$(`r df_num_lpp`, `r df_den_lpp` = `r f_lpp`, $p < .001$), EPN ($F$(`r df_num_epn`, `r df_den_epn`) = `r f_epn`, $p < .001$), and N170 ($F$(`r df_num_n170`, `r df_den_n170`) = `r f_n170`, $p < .001$). Repeated measures analysis of variance similiarly indicated differences among blocks for arousal ($F$(`r df_num_ar`, `r df_den_ar` = `r f_ar`, $p < .001$), valence ($F$(`r df_num_val`, `r df_den_val` = `r f_val`, $p < .001$), and difficulty ($F$(`r df_num_diff`, `r df_den_diff`) = `r f_diff`, $p < .001$) ratings. Pairwise comparisons were conducted between passive watch conditions for EEG components and behavioral ratings (Table \@ref(tab:pairwise-watch-comparison-table) as well as regulation conditions (Table \@ref(tab:pairwise-reg-comparison-table) using the emmeans package [@lenthEmmeansEstimatedMarginal2020]. Effect sizes were interpreted using Funder's [-@funderEvaluatingEffectSize2019] recommendations. Between watch conditions, results indicated large to very large differences for LPP (Figure \@ref(fig:LPP-watch-topos)), small to medium differences for EPN, and small to large differences for N170 (Figure \@ref(fig:EPN-N170-watch-topos)).
+
 
 (ref:descriptives-by-block) Means and standard deviations for LPP, EPN, and N170 EEG components, as well as arousal, valence, and difficulty ratings.
 
@@ -267,7 +268,7 @@ kable(., format = "latex",  linesep = "", escape = FALSE, booktabs = TRUE, align
   column_spec(2:10, width = "3em") %>% 
   footnote(general_title = "Note.",
            escape = FALSE,
-           general = "*$p < .05$. PA = positive affectivity, StM = savoring the moment. EEG components averaged across all regulation blocks.",
+           general = "*$p < .05$. PA = positive affectivity, StM = savoring the moment. EEG components and behavioral ratings (i.e., arousal, valence, and difficulty) averaged across all regulation blocks.",
            threeparttable = TRUE,
            footnote_as_chunk = TRUE)
 ```
@@ -476,8 +477,7 @@ kable(., "latex", escape = FALSE, booktabs = TRUE, align = c("l", "c", "c", "c")
            footnote_as_chunk = TRUE,
            general_title = "Note.",
            general = "Std. Beta (Label) = Standardized Beta coefficient as measure of effect size derived by fitting model to standardized dataset with effect size label as per Funder's (2019) recommendations, Sig. = $p$ value. $P$ values and confidence intervals adjusted using the Tukey method for comparing a family of three estimates.",
-           threeparttable = TRUE) %>% 
-  save_kable("poop.png")
+           threeparttable = TRUE)
 ```
 
 (ref:pairwise-reg-comparison-table) Contrasts between regulation conditions for positive and negative OASIS images for LPP, EPN, and N170 EEG components.
@@ -740,7 +740,7 @@ reg_tab <- reg_tab %>%
   select(comp:Estimate, "CI", everything()) %>% 
   select(-lower.CL, -upper.CL) %>% 
   mutate("Estimate (95\\% CI)" = paste0(Estimate, " (", CI, ")"),
-         "Std. Beta (Label)" = paste0(reg_tab$`Std. Beta`, " (", interpretation, ")")) %>% 
+         "Std. Beta (Label)" = paste0(`Std. Beta`, " (", interpretation, ")")) %>% 
   select(comp, valence_condition, Contrast, "Estimate (95\\% CI)", "Std. Beta (Label)", Sig.)
 
 reg_tab_pos <- reg_tab %>% 
@@ -769,8 +769,7 @@ kable(., "latex", escape = FALSE, booktabs = TRUE, align = c("l", rep("c", times
            general_title = "Note.",
            general = "Std. Beta = Standardized Beta coefficient as measure of effect size derived by fitting model to standardized dataset with effect size label as per Funder's (2019) recommendations, Sig. = $p$ value. $P$ values and confidence intervals adjusted using the Tukey method for comparing a family of three estimates.",
            threeparttable = TRUE,
-           footnote_as_chunk = TRUE) %>% 
-  save_kable("poop.jpg")
+           footnote_as_chunk = TRUE)
 ```
 
 (ref:LPP-watch-topos) Topographical plots and average waveforms for LPP during passive watch conditions. Sensors highlighted in white were used to measure LPP for waveform plots and analyses.
