@@ -148,18 +148,12 @@ dat <- read_csv("data/paper_two/created_data/per_data_analyses_2020_5_19.csv") %
 
 desc_stats <- dat %>% 
   group_by(block) %>% 
-  summarize("Mean LPP (SD)" = 
-              paste0(sprintf("%.1f", mean(LPP, na.rm = TRUE)), " ", "(", sprintf("%.1f", sd(LPP, na.rm = TRUE)), ")"),
-            "Mean EPN (SD)" = 
-              paste0(sprintf("%.1f", mean(EPN)), " ", "(", sprintf("%.1f", sd(EPN)), ")"),
-            "Mean N170 (SD)" = 
-              paste0(sprintf("%.1f", mean(N170)), " ", "(", sprintf("%.1f", sd(N170)), ")"),
-            "Mean Arousal (SD)" = 
-              paste0(sprintf("%.1f", mean(arousal)), " ", "(", sprintf("%.1f", sd(arousal)), ")"),
-            "Mean Valence (SD)" = 
-              paste0(sprintf("%.1f", mean(valence)), " ", "(", sprintf("%.1f", sd(valence)), ")"),
-            "Mean Difficulty (SD)" = 
-              paste0(sprintf("%.1f", mean(difficulty)), " ", "(", sprintf("%.1f", sd(difficulty)), ")")) %>% 
+  dplyr::summarize("Mean LPP (SD)" = paste0(sprintf("%.1f", mean(LPP, na.rm = TRUE)), " ", "(", sprintf("%.1f", sd(LPP, na.rm = TRUE)), ")"),
+            "Mean EPN (SD)" = paste0(sprintf("%.1f", mean(EPN)), " ", "(", sprintf("%.1f", sd(EPN)), ")"),
+            "Mean N170 (SD)" = paste0(sprintf("%.1f", mean(N170)), " ", "(", sprintf("%.1f", sd(N170)), ")"),
+            "Mean Arousal (SD)" = paste0(sprintf("%.1f", mean(arousal)), " ", "(", sprintf("%.1f", sd(arousal)), ")"),
+            "Mean Valence (SD)" = paste0(sprintf("%.1f", mean(valence)), " ", "(", sprintf("%.1f", sd(valence)), ")"),
+            "Mean Difficulty (SD)" = paste0(sprintf("%.1f", mean(difficulty)), " ", "(", sprintf("%.1f", sd(difficulty)), ")")) %>% 
   rename("Block" = "block") %>% 
   mutate(Block = c("Negative Decrease", 
                    "Negative Increase",
@@ -274,7 +268,7 @@ kable(., format = "latex",  linesep = "", escape = FALSE, booktabs = TRUE, align
 
 (ref:pairwise-watch-comparison-table) Contrasts between passive watch conditions for LPP, EPN, and N170 EEG components.
 
-```{r pairwise-watch-comparison-table, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:pairwise-watch-comparison-table)"}
+```{r pairwise-watch-comparison-table, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:pairwise-watch-comparison-table)", cache = TRUE}
 library(tidyverse)
 library(emmeans)
 library(lmerTest)
@@ -482,7 +476,7 @@ kable(., "latex", escape = FALSE, booktabs = TRUE, align = c("l", "c", "c", "c")
 
 (ref:pairwise-reg-comparison-table) Contrasts between regulation conditions for positive and negative OASIS images for LPP, EPN, and N170 EEG components.
 
-```{r pairwise-reg-comparison-table, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:pairwise-reg-comparison-table)"}
+```{r pairwise-reg-comparison-table, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:pairwise-reg-comparison-table)", cache = TRUE}
 library(tidyverse)
 library(emmeans)
 library(lmerTest)
@@ -775,7 +769,7 @@ kable(., "latex", escape = FALSE, booktabs = TRUE, align = c("l", rep("c", times
 
 (ref:LPP-watch-topos) Topographical plots and average waveforms for LPP during passive watch conditions. Sensors highlighted in white were used to measure LPP for waveform plots and analyses.
 
-```{r LPP-watch-topos, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:LPP-watch-topos)"}
+```{r LPP-watch-topos, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:LPP-watch-topos)", cahce = TRUE}
 library(devtools)
 library(eegUtils) # remotes::install_github("craddm/eegUtils")
 library(tidyverse)
@@ -809,10 +803,10 @@ lpp_topo_fun <- function(block_type, title) {
 erp_topo <- eeg_dat_loc %>%
   filter(!is.na(amplitude), block == block_type, electrode %in% topo_elec, between(ms, 450, 800)) %>%
   group_by(electrode, x, y) %>%
-  summarize(amplitude = mean(amplitude, na.rm = TRUE)) %>% 
+  dplyr::summarize(amplitude = mean(amplitude, na.rm = TRUE)) %>% 
   mutate(highlight = if_else(electrode %in% Pz_elec, "white", "black"))
 ggplot(erp_topo, aes(x = x, y = y, fill = amplitude)) +
-  stat_scalpmap() +  
+  stat_scalpmap() +
   geom_mask(scale_fac = 1.6) +
   geom_head() +               
   geom_channels(aes(color = highlight), size = 0.125) +             
@@ -837,7 +831,7 @@ watch_lpp <- eeg_dat %>%
     filter(ms < 1750) %>% 
     pivot_longer(., cols = Pz_elec, names_to = "electrode", values_to = "mv") %>%
     group_by(block, ms) %>%
-    summarize(mv = mean(mv, na.rm = TRUE)) %>%
+    dplyr::summarize(mv = mean(mv, na.rm = TRUE)) %>%
     ggplot(., aes(ms, mv, color = block)) +
     geom_line(size = 1.1) +
     geom_vline(xintercept = 0, linetype = "dashed") +
@@ -881,7 +875,7 @@ topo_patch / watch_lpp
 # dat <- left_join(tmp, tmp_2, by = c("pid", "electrode", "ms")) %>% 
 #   mutate(amplitude = amp_1 - amp_2) %>% 
 #   group_by(electrode, x, y) %>%
-#   summarize(amplitude = mean(amplitude, na.rm = TRUE))
+#   dplyr::summarize(amplitude = mean(amplitude, na.rm = TRUE))
 # topoplot(dat, limits = c(-5, 5), palette = "viridis", highlights = Pz_elec) +
 #   ggtitle(title) +
 #   theme(plot.title = element_text(hjust = 0.5, size = 22))
@@ -902,7 +896,8 @@ topo_patch / watch_lpp
 
 (ref:LPP-pos-topos) Topographical plots and average waveforms for LPP during regulation conditions in response to positive images. Sensors highlighted in white were used to measure LPP for waveform plots and analyses.
 
-```{r LPP-pos-topos, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:LPP-pos-topos)"}
+```{r LPP-pos-topos, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:LPP-pos-topos)", cache = TRUE}
+rm(list=ls())
 library(devtools)
 library(eegUtils) # remotes::install_github("craddm/eegUtils")
 library(tidyverse)
@@ -936,7 +931,7 @@ lpp_topo_fun <- function(block_type, title) {
 erp_topo <- eeg_dat_loc %>%
   filter(!is.na(amplitude), block == block_type, electrode %in% topo_elec, between(ms, 450, 800)) %>%
   group_by(electrode, x, y) %>%
-  summarize(amplitude = mean(amplitude, na.rm = TRUE)) %>% 
+  dplyr::summarize(amplitude = mean(amplitude, na.rm = TRUE)) %>% 
   mutate(highlight = if_else(electrode %in% Pz_elec, "white", "black"))
 ggplot(erp_topo, aes(x = x, y = y, fill = amplitude)) +
   stat_scalpmap() +  
@@ -964,7 +959,7 @@ watch_lpp <- eeg_dat %>%
     filter(ms < 1750) %>% 
     pivot_longer(., cols = Pz_elec, names_to = "electrode", values_to = "mv") %>%
     group_by(block, ms) %>%
-    summarize(mv = mean(mv, na.rm = TRUE)) %>%
+    dplyr::summarize(mv = mean(mv, na.rm = TRUE)) %>%
     ggplot(., aes(ms, mv, color = block)) +
     geom_line(size = 1.1) +
     geom_vline(xintercept = 0, linetype = "dashed") +
@@ -994,7 +989,8 @@ topo_patch / watch_lpp
 
 (ref:LPP-neg-topos) Topographical plots and average waveforms for LPP during regulation conditions in response to negative images. Sensors highlighted in white were used to measure LPP for waveform plots and analyses.
 
-```{r LPP-neg-topos, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:LPP-neg-topos)"}
+```{r LPP-neg-topos, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:LPP-neg-topos)", cache = TRUE}
+rm(list=ls())
 library(devtools)
 library(eegUtils) # remotes::install_github("craddm/eegUtils")
 library(tidyverse)
@@ -1028,7 +1024,7 @@ lpp_topo_fun <- function(block_type, title) {
 erp_topo <- eeg_dat_loc %>%
   filter(!is.na(amplitude), block == block_type, electrode %in% topo_elec, between(ms, 450, 800)) %>%
   group_by(electrode, x, y) %>%
-  summarize(amplitude = mean(amplitude, na.rm = TRUE)) %>% 
+  dplyr::summarize(amplitude = mean(amplitude, na.rm = TRUE)) %>% 
   mutate(highlight = if_else(electrode %in% Pz_elec, "white", "black"))
 ggplot(erp_topo, aes(x = x, y = y, fill = amplitude)) +
   stat_scalpmap() +  
@@ -1056,7 +1052,7 @@ watch_lpp <- eeg_dat %>%
     filter(ms < 1750) %>% 
     pivot_longer(., cols = Pz_elec, names_to = "electrode", values_to = "mv") %>%
     group_by(block, ms) %>%
-    summarize(mv = mean(mv, na.rm = TRUE)) %>%
+    dplyr::summarize(mv = mean(mv, na.rm = TRUE)) %>%
     ggplot(., aes(ms, mv, color = block)) +
     geom_line(size = 1.1) +
     geom_vline(xintercept = 0, linetype = "dashed") +
@@ -1086,7 +1082,8 @@ topo_patch / watch_lpp
 
 (ref:EPN-N170-watch-topos) Topographical plots and average waveforms for N170 (160 - 200 ms; top row) and EPN (250 - 375 ms; bottom row) components during passive watch conditions. Sensors highlighted in white were used to measure N170 and EPN for waveform plots and analyses.
 
-```{r EPN-N170-watch-topos, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:EPN-N170-watch-topos)"}
+```{r EPN-N170-watch-topos, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:EPN-N170-watch-topos)", cache = TRUE}
+rm(list=ls())
 library(devtools)
 library(eegUtils) # remotes::install_github("craddm/eegUtils")
 library(tidyverse)
@@ -1117,7 +1114,7 @@ n170_topo_fun <- function(block_type, title) {
 erp_topo <- eeg_dat_loc %>%
   filter(!is.na(amplitude), block == block_type, electrode %in% topo_elec, between(ms, 160, 200)) %>%
   group_by(electrode, x, y) %>%
-  summarize(amplitude = mean(amplitude, na.rm = TRUE)) %>% 
+  dplyr::summarize(amplitude = mean(amplitude, na.rm = TRUE)) %>% 
   mutate(highlight = if_else(electrode %in% epn_n170_elec, "white", "black"))
 ggplot(erp_topo, aes(x = x, y = y, fill = amplitude)) +
   stat_scalpmap() +  
@@ -1139,7 +1136,7 @@ epn_topo_fun <- function(block_type, title) {
 erp_topo <- eeg_dat_loc %>%
   filter(!is.na(amplitude), block == block_type, electrode %in% topo_elec, between(ms, 250, 375)) %>%
   group_by(electrode, x, y) %>%
-  summarize(amplitude = mean(amplitude, na.rm = TRUE)) %>% 
+  dplyr::summarize(amplitude = mean(amplitude, na.rm = TRUE)) %>% 
   mutate(highlight = if_else(electrode %in% epn_n170_elec, "white", "black"))
 ggplot(erp_topo, aes(x = x, y = y, fill = amplitude)) +
   stat_scalpmap() +  
@@ -1170,7 +1167,7 @@ watch_n170_epn <- eeg_dat %>%
     filter(ms < 750) %>% 
     pivot_longer(., cols = epn_n170_elec, names_to = "electrode", values_to = "mv") %>%
     group_by(block, ms) %>%
-    summarize(mv = mean(mv, na.rm = TRUE)) %>%
+    dplyr::summarize(mv = mean(mv, na.rm = TRUE)) %>%
     ggplot(., aes(ms, mv, color = block)) +
     geom_line(size = 1.1) +
     geom_vline(xintercept = 0, linetype = "dashed") +
@@ -1204,7 +1201,8 @@ topos_patch / watch_n170_epn + plot_layout(heights = c(1, 1, 1.5))
 
 (ref:EPN-N170-pos-topos) Topographical plots and average waveforms for N170 (160 - 200 ms; top row) and EPN (250 - 375 ms; bottom row) during regulation conditions in response to positive images. Sensors highlighted in white were used to measure N170 and EPN for waveform plots and analyses.
 
-```{r EPN-N170-pos-topos, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:EPN-N170-pos-topos)"}
+```{r EPN-N170-pos-topos, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:EPN-N170-pos-topos)", cache = TRUE}
+rm(list=ls())
 library(devtools)
 library(eegUtils) # remotes::install_github("craddm/eegUtils")
 library(tidyverse)
@@ -1235,7 +1233,7 @@ n170_topo_fun <- function(block_type, title) {
 erp_topo <- eeg_dat_loc %>%
   filter(!is.na(amplitude), block == block_type, electrode %in% topo_elec, between(ms, 160, 200)) %>%
   group_by(electrode, x, y) %>%
-  summarize(amplitude = mean(amplitude, na.rm = TRUE)) %>% 
+  dplyr::summarize(amplitude = mean(amplitude, na.rm = TRUE)) %>% 
   mutate(highlight = if_else(electrode %in% epn_n170_elec, "white", "black"))
 ggplot(erp_topo, aes(x = x, y = y, fill = amplitude)) +
   stat_scalpmap() +  
@@ -1257,7 +1255,7 @@ epn_topo_fun <- function(block_type) {
 erp_topo <- eeg_dat_loc %>%
   filter(!is.na(amplitude), block == block_type, electrode %in% topo_elec, between(ms, 250, 375)) %>%
   group_by(electrode, x, y) %>%
-  summarize(amplitude = mean(amplitude, na.rm = TRUE)) %>% 
+  dplyr::summarize(amplitude = mean(amplitude, na.rm = TRUE)) %>% 
   mutate(highlight = if_else(electrode %in% epn_n170_elec, "white", "black"))
 ggplot(erp_topo, aes(x = x, y = y, fill = amplitude)) +
   stat_scalpmap() +  
@@ -1286,7 +1284,7 @@ watch_n170_epn <- eeg_dat %>%
     filter(ms < 750) %>% 
     pivot_longer(., cols = epn_n170_elec, names_to = "electrode", values_to = "mv") %>%
     group_by(block, ms) %>%
-    summarize(mv = mean(mv, na.rm = TRUE)) %>%
+    dplyr::summarize(mv = mean(mv, na.rm = TRUE)) %>%
     ggplot(., aes(ms, mv, color = block)) +
     geom_line(size = 1.1) +
     geom_vline(xintercept = 0, linetype = "dashed") +
@@ -1320,7 +1318,8 @@ topos_patch / watch_n170_epn + plot_layout(heights = c(1, 1, 1.5))
 
 (ref:EPN-N170-neg-topos) Topographical plots and average waveforms for N170 (160 - 200 ms; top row) and EPN (250 - 375 ms; bottom row) during regulation conditions in response to negative images. Sensors highlighted in white were used to measure N170 and EPN for waveform plots and analyses.
 
-```{r EPN-N170-neg-topos, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:EPN-N170-neg-topos)"}
+```{r EPN-N170-neg-topos, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:EPN-N170-neg-topos)", cache = TRUE}
+rm(list=ls())
 library(devtools)
 library(eegUtils) # remotes::install_github("craddm/eegUtils")
 library(tidyverse)
@@ -1351,7 +1350,7 @@ n170_topo_fun <- function(block_type, title) {
 erp_topo <- eeg_dat_loc %>%
   filter(!is.na(amplitude), block == block_type, electrode %in% topo_elec, between(ms, 160, 200)) %>%
   group_by(electrode, x, y) %>%
-  summarize(amplitude = mean(amplitude, na.rm = TRUE)) %>% 
+  dplyr::summarize(amplitude = mean(amplitude, na.rm = TRUE)) %>% 
   mutate(highlight = if_else(electrode %in% epn_n170_elec, "white", "black"))
 ggplot(erp_topo, aes(x = x, y = y, fill = amplitude)) +
   stat_scalpmap() +  
@@ -1373,7 +1372,7 @@ epn_topo_fun <- function(block_type) {
 erp_topo <- eeg_dat_loc %>%
   filter(!is.na(amplitude), block == block_type, electrode %in% topo_elec, between(ms, 250, 375)) %>%
   group_by(electrode, x, y) %>%
-  summarize(amplitude = mean(amplitude, na.rm = TRUE)) %>% 
+  dplyr::summarize(amplitude = mean(amplitude, na.rm = TRUE)) %>% 
   mutate(highlight = if_else(electrode %in% epn_n170_elec, "white", "black"))
 ggplot(erp_topo, aes(x = x, y = y, fill = amplitude)) +
   stat_scalpmap() +  
@@ -1402,7 +1401,7 @@ watch_n170_epn <- eeg_dat %>%
     filter(ms < 750) %>% 
     pivot_longer(., cols = epn_n170_elec, names_to = "electrode", values_to = "mv") %>%
     group_by(block, ms) %>%
-    summarize(mv = mean(mv, na.rm = TRUE)) %>%
+    dplyr::summarize(mv = mean(mv, na.rm = TRUE)) %>%
     ggplot(., aes(ms, mv, color = block)) +
     geom_line(size = 1.1) +
     geom_vline(xintercept = 0, linetype = "dashed") +
@@ -1436,6 +1435,7 @@ topos_patch / watch_n170_epn + plot_layout(heights = c(1, 1, 1.5))
 
 
 ```{r positive-affectivity-mlm-analyses, include = FALSE}
+rm(list=ls())
 library(tidyverse)
 library(lmerTest)
 library(effectsize)
@@ -1666,6 +1666,7 @@ val_pa_p <- val_pa_dat %>%
 The second objective was to examine the relationship between personality traits pertaining to positive emotion (i.e., PA and momentary savoring capacity) and EEG components of interest. MLM with variance components covariance matrices to estimate random intercepts for each participant was used to test if the relationship between EEG components and passively viewing positive images versus neutral images varied as a function of trait positive affect. Dummy-coded block (within subjects: neutral watch block as reference level) and mean-centered trait positive affect (between subjects) variables were included in the omnibus model. An interaction term between block and trait positive affect variables was added to probe for a conditional relationship between block and EEG component as a function of trait positive affect. Results did not indicate a significant interaction between viewing condition and PA in predicting LPP ($b$ = `r lpp_pa_beta`, $\beta$ = `r lpp_pa_std_beta`, $SE$ = `r lpp_pa_se`, $t$(`r lpp_pa_df`) = `r lpp_pa_t`, $p$ `r lpp_pa_p`), EPN ($b$ = `r epn_pa_beta`, $\beta$ = `r epn_pa_std_beta`, $SE$ = `r epn_pa_se`, $t$(`r epn_pa_df`) = `r epn_pa_t`, $p$ `r epn_pa_p`), nor N170 ($b$ = `r n170_pa_beta`, $\beta$ = `r n170_pa_std_beta`, $SE$ = `r n170_pa_se`, $t$(`r n170_pa_df`) = `r n170_pa_t`, $p$ `r n170_pa_p`). Exploratory moderation analyses were also run with arousal and valence ratings as the dependent variable. Results did not indicate a significant interaction between viewing condition and PA in predicting arousal ratings ($b$ = `r ar_pa_beta`, $\beta$ = `r ar_pa_std_beta`, $SE$ = `r ar_pa_se`, $t$(`r ar_pa_df`) = `r ar_pa_t`, $p$ `r ar_pa_p`) and predicted a small interaction effect in predicting valence ratings ($b$ = `r val_pa_beta`, $\beta$ = `r val_pa_std_beta`, $SE$ = `r val_pa_se`, $t$(`r val_pa_df`) = `r val_pa_t`, $p$ `r val_pa_p`), such that greater levels of positive affecitivty were associated with more positive valence ratings after passively viewing positive images compared to neutral images. 
 
 ```{r stm-mlm-analyses, include = FALSE}
+rm(list=ls())
 library(tidyverse)
 library(lmerTest)
 library(effectsize)
