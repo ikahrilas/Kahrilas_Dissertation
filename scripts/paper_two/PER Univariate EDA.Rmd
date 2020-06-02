@@ -26,7 +26,7 @@ per_questionnaires <- read_csv(here("data", "paper_two", "data_from_PER_R_projec
 ```
 
 ```{r averaging and questionnaire variable selection, include = FALSE}
-lpp_elec <- "B28" # look at 450 - 800 ms windows
+lpp_elec <- c("B28") # look at 450 - 800 ms windows
 epn_elec_right <- "B26" # 250 - 375 ms
 epn_elec_left <- "A29" # 250 - 375 ms
 epn_elec_avg <- c("A29", "B27")
@@ -35,7 +35,7 @@ N170_left <- "A29" # 160 - 200 ms
 N170_avg <- c("A29", "B27")
 # front_left <- c("EXG2", "A3", "A9", "A10") # 1000 - 2000 ms
 # front_right <- c("EXG1", "B2", "B7", "B8")
-# select variabes from questionnaire data set for analyses
+# select variables from questionnaire data set for analyses
 measures_int <- per_questionnaires %>% 
   select(pid:valence, age, sex, handedness, ethnicity, Race, political_orientation, coffee_typical_day:typical_sleep_hours,
          anticipating:masq_aa, tmms_repair:depression)
