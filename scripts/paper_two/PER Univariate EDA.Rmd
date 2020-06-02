@@ -1,0 +1,246 @@
+---
+title: "Univariate EDA for PER Project"
+author: "Ian Kahrilas"
+date: "2/10/2020"
+output:
+  pdf_document: default
+  html_document: default
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+library(here)
+library(pander)
+library(ggpubr)
+library(car)
+library(emmeans)
+library(welchADF)
+library(moments)
+library(modelbased)
+library(patchwork)
+library(r2glmm)
+# load in data
+erp_mast_wide <- read_csv(here("data", "paper_two", "data_from_PER_R_project", "created_data", "erp_mast_no_lp.csv"))
+erp_avr_wide <- read_csv(here("data", "paper_two", "data_from_PER_R_project", "created_data", "erp_avr_no_lp.csv"))
+per_questionnaires <- read_csv(here("data", "paper_two", "data_from_PER_R_project", "created_data", "per_measures.csv"))
+```
+
+```{r averaging and questionnaire variable selection, include = FALSE}
+lpp_elec <- "B28" # look at 450 - 800 ms windows
+epn_elec_right <- "B26" # 250 - 375 ms
+epn_elec_left <- "A29" # 250 - 375 ms
+epn_elec_avg <- c("A29", "B27")
+N170_right <- "B26" # 160 - 200 ms
+N170_left <- "A29" # 160 - 200 ms
+N170_avg <- c("A29", "B27")
+# front_left <- c("EXG2", "A3", "A9", "A10") # 1000 - 2000 ms
+# front_right <- c("EXG1", "B2", "B7", "B8")
+# select variabes from questionnaire data set for analyses
+measures_int <- per_questionnaires %>% 
+  select(pid:valence, age, sex, handedness, ethnicity, Race, political_orientation, coffee_typical_day:typical_sleep_hours,
+         anticipating:masq_aa, tmms_repair:depression)
+
+LPP <- erp_mast_wide %>%
+  select(all_of(lpp_elec), pid:prop_trials) %>% 
+  filter(between(ms, 450, 800)) %>%
+  pivot_longer(., cols = all_of(lpp_elec), names_to = "electrode", values_to = "mv") %>% 
+  group_by(pid, block) %>% 
+  summarize(LPP = mean(mv, na.rm = TRUE),
+            prop_trials = mean(prop_trials, na.rm = TRUE))
+
+EPN_right <- erp_avr_wide %>%
+  select(all_of(epn_elec_right), pid:prop_trials) %>% 
+  filter(between(ms, 250, 375)) %>%
+  pivot_longer(., cols = all_of(epn_elec_right), names_to = "electrode", values_to = "mv") %>% 
+  group_by(pid, block) %>% 
+  summarize(EPN_right = mean(mv, na.rm = TRUE))
+
+EPN_left <- erp_avr_wide %>%
+  select(all_of(epn_elec_left), pid:prop_trials) %>% 
+  filter(between(ms, 250, 375)) %>%
+  pivot_longer(., cols = all_of(epn_elec_left), names_to = "electrode", values_to = "mv") %>% 
+  group_by(pid, block) %>% 
+  summarize(EPN_left = mean(mv, na.rm = TRUE))
+
+N170_right <- erp_avr_wide %>% 
+  select(all_of(N170_right), pid:prop_trials) %>% 
+  filter(between(ms, 160, 200)) %>% 
+  pivot_longer(., cols = all_of(N170_right), names_to = "electrode", values_to = "mv") %>% 
+  group_by(pid, block) %>% 
+  summarize(N170_right = mean(mv, na.rm = TRUE))
+
+N170_left <- erp_avr_wide %>% 
+  select(all_of(N170_left), pid:prop_trials) %>% 
+  filter(between(ms, 160, 200)) %>% 
+  pivot_longer(., cols = all_of(N170_left), names_to = "electrode", values_to = "mv") %>% 
+  group_by(pid, block) %>% 
+  summarize(N170_left = mean(mv, na.rm = TRUE))
+
+# front_right <- erp_mast_wide %>% 
+#   select(all_of(front_right), pid:prop_trials) %>% 
+#   filter(between(ms, 1000, 2000)) %>% 
+#   pivot_longer(., cols = all_of(front_right), names_to = "electrode", values_to = "mv") %>% 
+#   group_by(pid, block) %>% 
+#   summarize(front_right = mean(mv, na.rm = TRUE))
+  
+# front_left <- erp_mast_wide %>% 
+#   select(all_of(front_left), pid:prop_trials) %>% 
+#   filter(between(ms, 1000, 2000)) %>% 
+#   pivot_longer(., cols = all_of(front_left), names_to = "electrode", values_to = "mv") %>% 
+#   group_by(pid, block) %>% 
+#   summarize(front_left = mean(mv, na.rm = TRUE))
+```
+
+Join all the tibbles together
+```{r join all tibbles together, include=FALSE}
+#join all LPP tibbles plus right frontal
+per_erp <- left_join(LPP, EPN_right, by = c("pid", "block")) %>%
+  left_join(EPN_left, by = c("pid", "block")) %>%
+  left_join(N170_right, by = c("pid", "block")) %>%
+  left_join(N170_left, by = c("pid", "block")) %>% 
+  # left_join(front_right, by = c("pid", "block")) %>% 
+  # left_join(front_left, by = c("pid", "block")) %>% 
+  left_join(measures_int, by = c("pid", "block"))
+# change variable classes for parsimonious exploriation and analysis
+## pid as character type
+per_erp$pid <- as.character(per_erp$pid)
+## block as factor
+per_erp$block <- as.factor(per_erp$block)
+per_erp <- per_erp %>% 
+  select(pid, block, prop_trials, everything())
+```
+
+## Questionnaire Descriptive Statisitcs
+
+```{r descriptive stats on variables of interest}
+per_erp %>% 
+  ungroup() %>% 
+  summarize("PA Mean" = mean(pos_affectivity, na.rm = TRUE),
+            "PA SD" = sd(pos_affectivity, na.rm = TRUE),
+            "NA Mean" = mean(neg_affectivity, na.rm = TRUE),
+            "NA SD" = sd(neg_affectivity, na.rm = TRUE),
+            "StM Mean" = mean(savoring_moment, na.rm = TRUE),
+            "StM SD" = sd(savoring_moment, na.rm = TRUE)) %>% 
+  pander(split.tables = 200, caption = "PA = Positive Affectivity, NA = Negative Affectivity, StM = Savoring the Moment")
+```
+
+## EEG Descriptive Statistics by Block
+
+```{r descriptive statistics for ERP components}
+per_erp %>% 
+  group_by(block) %>% 
+  summarize(LPP_mean = mean(LPP, na.rm = TRUE),
+            LPP_sd = sd(LPP, na.rm = TRUE),
+            EPN_left_mean = mean(EPN_left, na.rm = TRUE),
+            EPN_left_sd = sd(EPN_left, na.rm = TRUE),
+            EPN_right_mean = mean(EPN_right, na.rm = TRUE),
+            EPN_right_sd = sd(EPN_right, na.rm = TRUE),
+            N170_right_mean = mean(N170_right, na.rm = TRUE),
+            N170_right_sd = sd(N170_right, na.rm = TRUE),
+            N170_left_mean = mean(N170_left, na.rm = TRUE),
+            N170_left_sd = sd(N170_left, na.rm = TRUE))
+```
+
+## Behavioral Rating Descriptive Statistics by Block
+
+```{r descriptive statistics for behavioral ratings}
+per_erp %>% 
+  group_by(block) %>% 
+  summarize(arousal_mean = mean(arousal, na.rm = TRUE),
+            arousal_sd = sd(arousal, na.rm = TRUE),
+            valence_mean = mean(valence, na.rm = TRUE),
+            valence_sd = sd(valence, na.rm = TRUE),
+            difficulty_mean = mean(difficulty, na.rm = TRUE),
+            difficulty_sd = sd(difficulty, na.rm = TRUE))
+```
+
+## Exploration of Questionnaire Data
+
+```{r histograms and qqplots, message = FALSE, warning = FALSE}
+meas_by_pid <- per_erp %>% 
+  group_by(pid) %>% 
+  summarize(anticipating = mean(anticipating, na.rm = TRUE),
+            savoring_moment = mean(savoring_moment, na.rm = TRUE),
+            reminiscing = mean(reminiscing, na.rm = TRUE),
+            sbi_tot = mean(sbi_tot, na.rm = TRUE),
+            pos_affectivity = mean(pos_affectivity, na.rm = TRUE),
+            neg_affectivity = mean(neg_affectivity, na.rm = TRUE),
+            pos_affect = mean(pos_affect, na.rm = TRUE),
+            neg_affect = mean(neg_affect, na.rm = TRUE),
+            masq_pa = mean(masq_pa, na.rm = TRUE),
+            masq_na = mean(masq_na, na.rm = TRUE),
+            masq_aa = mean(masq_aa, na.rm = TRUE),
+            tmms_repair = mean(tmms_repair, na.rm = TRUE),
+            tmms_attention = mean(tmms_attention, na.rm = TRUE),
+            tmms_clarity = mean(tmms_clarity, na.rm = TRUE),
+            erq_reappraisal = mean(erq_reappraisal, na.rm = TRUE),
+            erq_suppression = mean(erq_suppression, na.rm = TRUE),
+            depression = mean(depression, na.rm = TRUE))
+
+measure_hist_qq_fun <- function(var, name) {
+hist <- meas_by_pid %>% 
+  gghistogram(., var)
+qq <- meas_by_pid %>% 
+  ggqqplot(., var)
+hist|qq + plot_annotation(title = name)
+}
+
+name <- c("Anticipating", "Savoring the Moment", "Reminiscing", "SBI Total", "Positive Affectivity",
+           "Negative Affectivity", "Positive Affect", "Negative Affect", "MASQ PA", "MASQ NA",
+           "MASQ AA", "TMMS Repair", "TMMS Attention", "TMMS Clarity", "ERQ Reappraisal",
+           "ERQ Suppression", "Depression")
+
+map2(names(meas_by_pid)[-1], name, ~ measure_hist_qq_fun(.x, .y))
+```
+
+## Histograms and QQplots for each block with EEG Components
+
+```{r histograms and qqplots for LPP, EPN, and N170 for each block, warning = FALSE, message = FALSE}
+hist_qq_fun <- function(trial, component) {
+(per_erp %>% 
+  filter(block == trial) %>% 
+  select(component) %>% 
+  gghistogram(., x = component) |
+per_erp %>% 
+  filter(block == trial) %>% 
+  select(component) %>% 
+  ggqqplot(., component)) +
+  plot_annotation(title = paste(trial, component))
+}
+
+blocks <- unique(as.character(per_erp$block))
+components <- names(per_erp)[4:8]
+map(components, ~map(blocks, ~hist_qq_fun(trial = .x, component = .y), .y = .x))
+```
+ 
+Omit extreme cases indicated in the histograms and QQ plots, and regenerate histograms and QQ plots.
+
+```{r examine extreme cases, warning=FALSE,message=FALSE}
+per_erp$LPP[per_erp$block == "Neg_Watch" & per_erp$LPP > 20] <- NA
+per_erp$LPP[per_erp$block == "Pos_Watch" & per_erp$LPP < -5] <- NA
+
+map(components, ~map(blocks, ~hist_qq_fun(trial = .x, component = .y), .y = .x))
+
+# write new file to workspace
+write_csv(per_erp, here("data", "paper_two", "created_data", "per_data_analyses_2020_5_19.csv"))
+```
+
+## Histograms and QQplots for each block with behavioral ratings
+
+```{r hist and qq with behavioral ratings, echo = FALSE, message = FALSE, warning = FALSE}
+hist_qq_fun <- function(trial, rating) {
+(per_erp %>% 
+  filter(block == trial) %>% 
+  select(rating) %>% 
+  gghistogram(., x = rating, bins = 8) |
+per_erp %>% 
+  filter(block == trial) %>% 
+  select(rating) %>% 
+  ggqqplot(., rating)) +
+  plot_annotation(title = paste(c(trial, rating)))
+}
+blocks <- unique(as.character(per_erp$block))
+ratings <- names(per_erp)[9:11]
+
+map(ratings, ~map(blocks, ~hist_qq_fun(trial = .x, rating = .y), .y = .x))
+```
