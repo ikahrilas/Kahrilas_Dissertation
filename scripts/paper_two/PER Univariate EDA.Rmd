@@ -48,6 +48,13 @@ LPP <- erp_mast_wide %>%
   summarize(LPP = mean(mv, na.rm = TRUE),
             prop_trials = mean(prop_trials, na.rm = TRUE))
 
+LPP_late <- erp_mast_wide %>%
+  select(all_of(lpp_elec), pid:prop_trials) %>% 
+  filter(between(ms, 800, 2000)) %>%
+  pivot_longer(., cols = all_of(lpp_elec), names_to = "electrode", values_to = "mv") %>% 
+  group_by(pid, block) %>% 
+  summarize(LPP_late = mean(mv, na.rm = TRUE))
+
 EPN_right <- erp_avr_wide %>%
   select(all_of(epn_elec_right), pid:prop_trials) %>% 
   filter(between(ms, 250, 375)) %>%
@@ -95,6 +102,7 @@ Join all the tibbles together
 ```{r join all tibbles together, include=FALSE}
 #join all LPP tibbles plus right frontal
 per_erp <- left_join(LPP, EPN_right, by = c("pid", "block")) %>%
+  left_join(LPP_late, by = c("pid", "block")) %>% 
   left_join(EPN_left, by = c("pid", "block")) %>%
   left_join(N170_right, by = c("pid", "block")) %>%
   left_join(N170_left, by = c("pid", "block")) %>% 
@@ -131,6 +139,8 @@ per_erp %>%
   group_by(block) %>% 
   summarize(LPP_mean = mean(LPP, na.rm = TRUE),
             LPP_sd = sd(LPP, na.rm = TRUE),
+            LPP_late_mean = mean(LPP_late, na.rm = TRUE),
+            LPP_late_sd = sd(LPP_late, na.rm = TRUE),
             EPN_left_mean = mean(EPN_left, na.rm = TRUE),
             EPN_left_sd = sd(EPN_left, na.rm = TRUE),
             EPN_right_mean = mean(EPN_right, na.rm = TRUE),
@@ -195,7 +205,7 @@ map2(names(meas_by_pid)[-1], name, ~ measure_hist_qq_fun(.x, .y))
 
 ## Histograms and QQplots for each block with EEG Components
 
-```{r histograms and qqplots for LPP, EPN, and N170 for each block, warning = FALSE, message = FALSE}
+```{r histograms and qqplots for LPP, LPP_late, EPN, and N170 for each block, warning = FALSE, message = FALSE}
 hist_qq_fun <- function(trial, component) {
 (per_erp %>% 
   filter(block == trial) %>% 
@@ -207,9 +217,9 @@ per_erp %>%
   ggqqplot(., component)) +
   plot_annotation(title = paste(trial, component))
 }
-
+names(per_erp)
 blocks <- unique(as.character(per_erp$block))
-components <- names(per_erp)[4:8]
+components <- names(per_erp)[4:9]
 map(components, ~map(blocks, ~hist_qq_fun(trial = .x, component = .y), .y = .x))
 ```
  
@@ -218,6 +228,7 @@ Omit extreme cases indicated in the histograms and QQ plots, and regenerate hist
 ```{r examine extreme cases, warning=FALSE,message=FALSE}
 per_erp$LPP[per_erp$block == "Neg_Watch" & per_erp$LPP > 20] <- NA
 per_erp$LPP[per_erp$block == "Pos_Watch" & per_erp$LPP < -5] <- NA
+per_erp$LPP_late[per_erp$block == "Neg_Watch" & per_erp$LPP_late > 30] <- NA
 
 map(components, ~map(blocks, ~hist_qq_fun(trial = .x, component = .y), .y = .x))
 
