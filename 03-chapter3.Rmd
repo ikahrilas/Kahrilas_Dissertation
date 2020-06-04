@@ -764,7 +764,8 @@ kable(., "latex", escape = FALSE, booktabs = TRUE, align = c("l", rep("c", times
            general_title = "Note.",
            general = "Std. Beta = Absolute value of standardized beta coefficient as measure of effect size derived by fitting model to standardized dataset with effect size label as per Funder's (2019) recommendations, Sig. = $p$ value. $P$ values and confidence intervals adjusted using the Tukey method for comparing a family of three estimates.",
            threeparttable = TRUE,
-           footnote_as_chunk = TRUE)
+           footnote_as_chunk = TRUE) %>% 
+  save_kable("poop.png")
 ```
 
 (ref:LPP-watch-topos) Topographical plots and average waveforms for LPP during passive watch conditions. Sensors highlighted in white were used to measure LPP for waveform plots and analyses.
@@ -916,7 +917,7 @@ elec_loc <- elec_loc %>%
   mutate(x = theta * cos(radian_phi),
          y = theta * sin(radian_phi))
 
-Pz_elec <- c("A25", "B28", "B22")
+Pz_elec <- c("B28")
 
 # merge coordinates with ERP data
 eeg_dat <- read_csv(here("data", "paper_two", "created_data",  "erp_mast_no_lp.csv"))
