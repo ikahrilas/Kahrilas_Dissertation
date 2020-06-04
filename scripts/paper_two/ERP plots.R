@@ -42,7 +42,7 @@ eeg_df_mast$B22[eeg_df_mast$pid %in% c(206201843, 206201831) & eeg_df_mast$block
 erp_plot_fun <- function(dat, cluster, comp_name, time_window_low, time_window_high) {
   dat %>%
     select(all_of(cluster),  block:prop_trials) %>%
-    filter(ms < 1000) %>%
+    filter(ms < 1500) %>%
     pivot_longer(., cols = cluster, names_to = "electrode", values_to = "mv") %>%
     group_by(block, ms) %>%
     summarize(mv = mean(mv, na.rm = TRUE)) %>%
@@ -77,7 +77,7 @@ erp_plot_fun_passive <- function(dat, cluster, comp_name, time_window_low, time_
   dat %>%
     filter(block %in% c("Neg_Watch", "Neu_Watch", "Pos_Watch")) %>%
     select(all_of(cluster),  block:prop_trials) %>%
-    filter(ms < 1000) %>%
+    filter(ms < 1500) %>%
     pivot_longer(., cols = cluster, names_to = "electrode", values_to = "mv") %>%
     group_by(block, ms) %>%
     summarize(mv = mean(mv, na.rm = TRUE)) %>%
@@ -108,7 +108,7 @@ erp_plot_fun_positive <- function(dat, cluster, comp_name, time_window_low, time
   dat %>%
     filter(block %in% c("Pos_Dec", "Pos_Watch", "Pos_Inc")) %>%
     select(all_of(cluster),  block:prop_trials) %>%
-    filter(ms < 1000) %>%
+    filter(ms < 1500) %>%
     pivot_longer(., cols = cluster, names_to = "electrode", values_to = "mv") %>%
     group_by(block, ms) %>%
     summarize(mv = mean(mv, na.rm = TRUE)) %>%
@@ -139,7 +139,7 @@ erp_plot_fun_negative <- function(dat, cluster, comp_name, time_window_low, time
   dat %>%
     filter(block %in% c("Neg_Dec", "Neg_Watch", "Neg_Inc")) %>%
     select(all_of(cluster),  block:prop_trials) %>%
-    filter(ms < 1000) %>%
+    filter(ms < 1500) %>%
     pivot_longer(., cols = cluster, names_to = "electrode", values_to = "mv") %>%
     group_by(block, ms) %>%
     summarize(mv = mean(mv, na.rm = TRUE)) %>%
