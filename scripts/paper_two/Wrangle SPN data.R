@@ -49,10 +49,18 @@ spn_evt <- files_evt %>%
              prop_trials = n_trials / 40)
   })
 
-# # handle split file - 206201831
-# read_table2("data/paper_two/SPN_mul/206201831_av-export.mul", skip = 1) %>% nrow()
-# read_table2("data/paper_two/SPN_mul/206201831b_av-export.mul", skip = 1) %>% nrow()
-
+# handle split file - 206201831
+tmp <- bind_rows(read_table2("data/paper_two/SPN_mul/206201831_av-export.mul", skip = 1),
+          read_table2("data/paper_two/SPN_mul/206201831b_av-export.mul", skip = 1)) %>%
+  mutate(pid = 206201831,
+         block = rep(block_names, each = nrow(.) / 7),
+         ms = rep(seq(from = -200, to = 2000,
+                      by = ((2200 + (2200 / (nrow(.)/7))) / (nrow(.)/7))),
+                  times = 7)
+  ) %>%
+  select(-X74)
+# merge split file with rest of spn data
+spn_dat <- bind_rows(spn_dat, tmp)
 # clean up names
 names(spn_dat) <- gsub("_.*", "", names(spn_dat))
 
