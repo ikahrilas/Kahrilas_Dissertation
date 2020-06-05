@@ -12,8 +12,52 @@ library(glue)
 # file names
 files <- str_subset(list.files(path = "data/paper_two/SPN_mul"), "206201831", negate = TRUE)
 files <- glue("data/paper_two/SPN_mul/{files}")
+# evt file names
+files_evt <- str_subset(list.files(path = "data/paper_two/SPN_evt"), "206201831", negate = TRUE)
+files_evt <- glue("data/paper_two/SPN_evt/{files}")
 
-dat <- files %>%
-  map_dfr(~ {
+# block names
+block_names <- c("Pre_Pos_Inc",
+                 "Pre_Pos_Dec",
+                 "Pre_Pos_Watch",
+                 "Pre_Neu_Watch",
+                 "Pre_Neg_Inc",
+                 "Pre_Neg_Dec",
+                 "Pre_Neg_Watch")
 
+# read in data
+spn_dat <- files %>%
+  map_dfr(~{
+    read_table2(.x, skip = 1) %>%
+      mutate(pid = as.numeric(str_extract(.x, "[0-9]{7,}")),
+             block = rep(block_names, each = nrow(.) / 7),
+             ms = rep(seq(from = -200, to = 2000,
+                          by = ((2200 + (2200 / (nrow(.)/7))) / (nrow(.)/7))),
+                      times = 7)
+             )
+  }) %>%
+  select(-X71, -X72, -X73, -X74)
+
+# read in evt files
+spn_evt <- files_evt %>%
+  map_dfr(~{
+    read_table(.x) %>%
+      separate(`Code	TriNo	Comnt`, into = c("block", "n_trials"), sep = " ") %>%
+      mutate(block = str_extract(block, block_names),
+             n_trials = as.numeric(str_extract(n_trials, "[0-9]{2}")),
+             pid = as.numeric(str_extract(.x, "[0-9]+")),
+             prop_trials = n_trials / 40)
   })
+
+# # handle split file - 206201831
+# read_table2("data/paper_two/SPN_mul/206201831_av-export.mul", skip = 1) %>% nrow()
+# read_table2("data/paper_two/SPN_mul/206201831b_av-export.mul", skip = 1) %>% nrow()
+
+# clean up names
+names(spn_dat) <- gsub("_.*", "", names(spn_dat))
+
+# merge mul and evt files
+spn <- full_join(spn_dat, spn_evt, by = c("pid", "block"))
+
+# write file
+write_csv(spn_dat, here("data", "paper_two", "created_data", "spn.csv"))
