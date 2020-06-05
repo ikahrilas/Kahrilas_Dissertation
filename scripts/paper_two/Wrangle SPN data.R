@@ -14,7 +14,7 @@ files <- str_subset(list.files(path = "data/paper_two/SPN_mul"), "206201831", ne
 files <- glue("data/paper_two/SPN_mul/{files}")
 # evt file names
 files_evt <- str_subset(list.files(path = "data/paper_two/SPN_evt"), "206201831", negate = TRUE)
-files_evt <- glue("data/paper_two/SPN_evt/{files}")
+files_evt <- glue("data/paper_two/SPN_evt/{files_evt}")
 
 # block names
 block_names <- c("Pre_Pos_Inc",
@@ -60,4 +60,4 @@ names(spn_dat) <- gsub("_.*", "", names(spn_dat))
 spn <- full_join(spn_dat, spn_evt, by = c("pid", "block"))
 
 # write file
-write_csv(spn_dat, here("data", "paper_two", "created_data", "spn.csv"))
+write_csv(spn, here("data", "paper_two", "created_data", "spn.csv"))
