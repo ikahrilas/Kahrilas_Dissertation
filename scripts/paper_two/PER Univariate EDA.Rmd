@@ -67,9 +67,9 @@ N170 <- erp_avr_wide %>%
   summarize(N170 = mean(mv, na.rm = TRUE))
 
 SPN <- spn_wide %>% 
-  select(all_of(spn), pid:prop_trials) %>% 
+  select(all_of(spn_elec), pid:prop_trials) %>% 
   filter(between(ms, 315, 1250)) %>% 
-  pivot_longer(., cols = all_of(spn), names_to = "electrode", values_to = "mv") %>% 
+  pivot_longer(., cols = all_of(spn_elec), names_to = "electrode", values_to = "mv") %>% 
   group_by(pid, block) %>% 
   mutate(block = str_remove(block, "Pre_")) %>% 
   summarize(SPN = mean(mv, na.rm = TRUE))
