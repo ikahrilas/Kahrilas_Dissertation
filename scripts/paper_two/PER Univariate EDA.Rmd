@@ -20,8 +20,9 @@ library(modelbased)
 library(patchwork)
 library(r2glmm)
 # load in data
-erp_mast_wide <- read_csv(here("data", "paper_two", "data_from_PER_R_project", "created_data", "erp_mast_no_lp.csv"))
-erp_avr_wide <- read_csv(here("data", "paper_two", "data_from_PER_R_project", "created_data", "erp_avr_no_lp.csv"))
+erp_mast_wide <- read_csv(here("data", "paper_two", "created_data", "erp_mast.csv"))
+erp_avr_wide <- read_csv(here("data", "paper_two", "created_data", "erp_avr.csv"))
+spn_wide <- read_csv(here("data", "paper_two", "created_data", "spn.csv"))
 per_questionnaires <- read_csv(here("data", "paper_two", "data_from_PER_R_project", "created_data", "per_measures.csv"))
 ```
 
@@ -33,8 +34,8 @@ epn_elec_avg <- c("A29", "B27")
 N170_right <- "B26" # 160 - 200 ms
 N170_left <- "A29" # 160 - 200 ms
 N170_avg <- c("A29", "B27")
-# front_left <- c("EXG2", "A3", "A9", "A10") # 1000 - 2000 ms
-# front_right <- c("EXG1", "B2", "B7", "B8")
+spn <- "A5"
+
 # select variables from questionnaire data set for analyses
 measures_int <- per_questionnaires %>% 
   select(pid:valence, age, sex, handedness, ethnicity, Race, political_orientation, coffee_typical_day:typical_sleep_hours,
