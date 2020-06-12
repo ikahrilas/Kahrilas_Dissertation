@@ -64,17 +64,7 @@ mastoid <- map_dfr(LPP_files, ~ {
 mastoid <- mastoid %>% select(-c(E67:X74, X71:X72))
 
 # this reads all average-referenced files into a list and generates, pid, block, and ms variables
-avg_lp <- map_df(here("data", "paper_two", "data_from_PER_R_project",  "avr_lp", files_avg_lp), ~ {
-  read_table2(.x, skip = 1) %>%
-    mutate(
-      pid = as.numeric(str_extract(.x, "[0-9]{7,}")),
-      block = rep(block_names, each = nrow(.) / 7),
-      ms = rep(seq(from = -200, to = 3000,
-                   by = ((3200 + (3200 / (nrow(.)/7))) / (nrow(.)/7))),
-               times = 7))
-}
-)
-avg_no_lp <- map_df(here("data", "paper_two", "data_from_PER_R_project", "avr_no_lp", files_avg_no_lp), ~ {
+avr <- map_df(n170_epn_files, ~ {
   read_table2(.x, skip = 1) %>%
     mutate(
       pid = as.numeric(str_extract(.x, "[0-9]{7,}")),
