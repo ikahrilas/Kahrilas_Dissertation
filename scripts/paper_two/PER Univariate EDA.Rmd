@@ -202,8 +202,6 @@ Omit extreme cases indicated in the histograms and QQ plots, and regenerate hist
 per_erp$LPP[per_erp$block == "Neg_Watch" & per_erp$LPP > 40] <- NA
 per_erp$LPP_late[per_erp$block == "Neg_Watch" & per_erp$LPP_late > 50] <- NA
 per_erp$LPP_late[per_erp$block == "Neg_Dec" & per_erp$LPP_late < -40] <- NA
-per_erp$LPP[per_erp$block == "Pos_Watch" & per_erp$LPP < -5] <- NA
-per_erp$LPP_late[per_erp$block == "Neg_Watch" & per_erp$LPP_late > 30] <- NA
 per_erp$SPN[per_erp$block == "Neu_Watch" & per_erp$SPN < -20] <- NA
 per_erp$SPN[per_erp$block == "Pos_Dec" & per_erp$SPN < -20] <- NA
 
