@@ -39,7 +39,7 @@ measures_int <- per_questionnaires %>%
 
 LPP <- erp_mast_wide %>%
   select(all_of(lpp_elec), pid:prop_trials) %>% 
-  filter(between(ms, 450, 800)) %>%
+  filter(between(ms, 300, 800)) %>%
   pivot_longer(., cols = all_of(lpp_elec), names_to = "electrode", values_to = "mv") %>% 
   group_by(pid, block) %>% 
   summarize(LPP = mean(mv, na.rm = TRUE),
