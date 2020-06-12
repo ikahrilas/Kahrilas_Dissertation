@@ -48,7 +48,7 @@ evt <- map_dfr(evt_files, ~{
 })
 
 # this reads all mastoid-referenced files into a list and generates pid, block, and ms variables
-mastoid_lp <- map_df(here("data", "paper_two", "data_from_PER_R_project", "mast_lp", files_mast_lp), ~ {
+mastoid <- map_dfr(LPP_files, ~ {
   read_table2(.x, skip = 1) %>%
     mutate(
       pid = as.numeric(str_extract(.x, "[0-9]{7,}")),
@@ -61,7 +61,7 @@ mastoid_lp <- map_df(here("data", "paper_two", "data_from_PER_R_project", "mast_
 )
 
 # drop extraneous columns
-mastoid_lp <- mastoid_lp %>% select(-c(E67:X74, X71:X72))
+mastoid <- mastoid %>% select(-c(E67:X74, X71:X72))
 
 # this reads all average-referenced files into a list and generates, pid, block, and ms variables
 avg_lp <- map_df(here("data", "paper_two", "data_from_PER_R_project",  "avr_lp", files_avg_lp), ~ {
