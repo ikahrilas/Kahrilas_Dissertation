@@ -57,14 +57,14 @@ EPN <- erp_avr_wide %>%
   filter(between(ms, 250, 375)) %>%
   pivot_longer(., cols = all_of(epn_elec), names_to = "electrode", values_to = "mv") %>% 
   group_by(pid, block) %>% 
-  summarize(EPN_right = mean(mv, na.rm = TRUE))
+  summarize(EPN = mean(mv, na.rm = TRUE))
 
 N170 <- erp_avr_wide %>% 
   select(all_of(N170_elec), pid:prop_trials) %>% 
   filter(between(ms, 160, 200)) %>% 
   pivot_longer(., cols = all_of(N170_elec), names_to = "electrode", values_to = "mv") %>% 
   group_by(pid, block) %>% 
-  summarize(N170_right = mean(mv, na.rm = TRUE))
+  summarize(N170 = mean(mv, na.rm = TRUE))
 
 SPN <- spn_wide %>% 
   select(all_of(spn), pid:prop_trials) %>% 
@@ -78,14 +78,10 @@ SPN <- spn_wide %>%
 Join all the tibbles together
 ```{r join all tibbles together, include=FALSE}
 #join all LPP tibbles plus right frontal
-per_erp <- left_join(LPP, EPN_right, by = c("pid", "block")) %>%
-  left_join(LPP_late, by = c("pid", "block")) %>% 
-  left_join(EPN_left, by = c("pid", "block")) %>%
-  left_join(N170_right, by = c("pid", "block")) %>%
-  left_join(N170_left, by = c("pid", "block")) %>% 
+per_erp <- left_join(LPP, LPP_late, by = c("pid", "block")) %>%
+  left_join(EPN, by = c("pid", "block")) %>%
+  left_join(N170, by = c("pid", "block")) %>%
   left_join(SPN, by = c("pid", "block")) %>% 
-  # left_join(front_right, by = c("pid", "block")) %>% 
-  # left_join(front_left, by = c("pid", "block")) %>% 
   left_join(measures_int, by = c("pid", "block"))
 # change variable classes for parsimonious exploration and analysis
 ## pid as character type
