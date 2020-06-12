@@ -115,14 +115,10 @@ per_erp %>%
             LPP_sd = sd(LPP, na.rm = TRUE),
             LPP_late_mean = mean(LPP_late, na.rm = TRUE),
             LPP_late_sd = sd(LPP_late, na.rm = TRUE),
-            EPN_left_mean = mean(EPN_left, na.rm = TRUE),
-            EPN_left_sd = sd(EPN_left, na.rm = TRUE),
-            EPN_right_mean = mean(EPN_right, na.rm = TRUE),
-            EPN_right_sd = sd(EPN_right, na.rm = TRUE),
-            N170_right_mean = mean(N170_right, na.rm = TRUE),
-            N170_right_sd = sd(N170_right, na.rm = TRUE),
-            N170_left_mean = mean(N170_left, na.rm = TRUE),
-            N170_left_sd = sd(N170_left, na.rm = TRUE),
+            EPN_mean = mean(EPN, na.rm = TRUE),
+            EPN_sd = sd(EPN, na.rm = TRUE),
+            N170_mean = mean(N170, na.rm = TRUE),
+            N170_sd = sd(N170, na.rm = TRUE),
             SPN_mean = mean(SPN, na.rm = TRUE),
             SPN_sd = sd(SPN, na.rm = TRUE))
 ```
@@ -195,18 +191,24 @@ per_erp %>%
 }
 
 blocks <- unique(as.character(per_erp$block))
-components <- names(per_erp)[4:10]
-map(components, ~map(blocks, ~hist_qq_fun(trial = .x, component = .y), .y = .x))
+components <- names(per_erp)[4:8]
+map(components, ~map(blocks, ~hist_qq_fun(trial = .x, component = .y), .y = .x)) %>% 
+  walk(print)
 ```
  
 Omit extreme cases indicated in the histograms and QQ plots, and regenerate histograms and QQ plots.
 
 ```{r examine extreme cases, warning=FALSE,message=FALSE}
 per_erp$LPP[per_erp$block == "Neg_Watch" & per_erp$LPP > 40] <- NA
+per_erp$LPP_late[per_erp$block == "Neg_Watch" & per_erp$LPP_late > 50] <- NA
+per_erp$LPP_late[per_erp$block == "Neg_Dec" & per_erp$LPP_late < -40] <- NA
 per_erp$LPP[per_erp$block == "Pos_Watch" & per_erp$LPP < -5] <- NA
 per_erp$LPP_late[per_erp$block == "Neg_Watch" & per_erp$LPP_late > 30] <- NA
+per_erp$SPN[per_erp$block == "Neu_Watch" & per_erp$SPN < -20] <- NA
+per_erp$SPN[per_erp$block == "Pos_Dec" & per_erp$SPN < -20] <- NA
 
-map(components, ~map(blocks, ~hist_qq_fun(trial = .x, component = .y), .y = .x))
+map(components, ~map(blocks, ~hist_qq_fun(trial = .x, component = .y), .y = .x)) %>% 
+  walk(print)
 
 # write new file to workspace
 write_csv(per_erp, here("data", "paper_two", "created_data", "per_data_analyses_2020_5_19.csv"))
