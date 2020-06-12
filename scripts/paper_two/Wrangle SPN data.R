@@ -10,11 +10,11 @@ library(here)
 library(glue)
 
 # file names
-files <- str_subset(list.files(path = "data/paper_two/SPN_mul"), "206201831", negate = TRUE)
-files <- glue("data/paper_two/SPN_mul/{files}")
+files <- str_subset(list.files(path = "data/paper_two/SPN mul"), "206201831", negate = TRUE)
+files <- glue("data/paper_two/SPN mul/{files}")
 # evt file names
-files_evt <- str_subset(list.files(path = "data/paper_two/SPN_evt"), "206201831", negate = TRUE)
-files_evt <- glue("data/paper_two/SPN_evt/{files_evt}")
+files_evt <- str_subset(list.files(path = "data/paper_two/SPN evt"), "206201831", negate = TRUE)
+files_evt <- glue("data/paper_two/SPN evt/{files_evt}")
 
 # block names
 block_names <- c("Pre_Pos_Inc",
@@ -50,8 +50,8 @@ spn_evt <- files_evt %>%
   })
 
 # handle split file - 206201831
-tmp <- bind_rows(read_table2("data/paper_two/SPN_mul/206201831_av-export.mul", skip = 1),
-          read_table2("data/paper_two/SPN_mul/206201831b_av-export.mul", skip = 1)) %>%
+tmp <- bind_rows(read_table2("data/paper_two/SPN mul/206201831_av-export.mul", skip = 1),
+          read_table2("data/paper_two/SPN mul/206201831b_av-export.mul", skip = 1)) %>%
   mutate(pid = 206201831,
          block = rep(block_names, each = nrow(.) / 7),
          ms = rep(seq(from = -200, to = 2000,
@@ -59,6 +59,7 @@ tmp <- bind_rows(read_table2("data/paper_two/SPN_mul/206201831_av-export.mul", s
                   times = 7)
   ) %>%
   select(-X74)
+
 # merge split file with rest of spn data
 spn_dat <- bind_rows(spn_dat, tmp)
 # clean up names
