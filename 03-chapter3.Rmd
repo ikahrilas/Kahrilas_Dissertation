@@ -88,8 +88,6 @@ library(tidyverse)
 library(lmerTest)
 
 dat <- read_csv("data/paper_two/created_data/per_data_analyses_2020_5_19.csv") %>% 
-  mutate(N170 = (N170_left + N170_right) / 2,
-         EPN = (EPN_left + EPN_right) / 2) %>% 
   select(pid:LPP, N170, EPN, everything())
 
 mod_lpp <- lmer(LPP ~ block + (1|pid), data = dat)
