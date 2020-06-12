@@ -13,36 +13,30 @@ library(patchwork)
 #'
 #' read in data
 #+ read in eeg data, incude = FALSE
-eeg_df_mast <- read_csv(here("data", "paper_two", "data_from_PER_R_project", "created_data", "erp_mast_no_lp.csv"))
-eeg_df_avr <- read_csv(here("data", "paper_two", "data_from_PER_R_project", "created_data", "erp_avr_no_lp.csv"))
-spn_df <- read_csv(here("data", "paper_two", "created_data", "spn.csv"))
-#eeg_df_mast <- eeg_df_mast %>% filter(prop_trials > .50)
-#eeg_df_avr <- eeg_df_avr %>% filter(prop_trials > .50)
+eeg_df_mast <- read_csv(here("data", "paper_two", "created_data", "erp_mast.csv"))
+eeg_df_avr <- read_csv(here("data", "paper_two", "created_data", "erp_avr.csv"))
+spn_df <- read_csv(here("data", "paper_two", "created_data", "spn.csv")) %>%
+  mutate(block = str_remove(block, "Pre_"))
 #'
 #' define clusters of electrodes and time windows for each component
 #+ electrode clusters and time windows
 # clusters
-lpp_elec <- "B28" # look at 450 - 800 ms windows
-epn_elec_right <- "B26" # 250 - 375 ms
-epn_elec_left <- "A29" # 250 - 375 ms
-epn_elec_avg <- c("A29", "B27")
-N170_right <- "B26" # 160 - 200 ms
-N170_left <- "A29" # 160 - 200 ms
-N170_avg <- c("A29", "B27")
-spn_elec <- "A5"
+lpp_elec <- "B28" # look at 450 - 800 ms and 800 - 2000 ms windows
+epn_elec <- c("A29", "B26") # 250 - 375 ms
+N170_elec <- c("A29", "B26") # 160 - 200 ms
+spn_elec <- "A5" # 315 - 1250 ms
 #'
 #' Omit extreme cases as indicated by histograms and QQ plots in Univarite Exploration script
 #+ Omit exteme cases
-eeg_df_mast$A25[eeg_df_mast$pid %in% c(206201843, 206201831) & eeg_df_mast$block %in% c("Neg_Watch", "Pos_Watch") & between(eeg_df_mast$ms, 450, 800)] <- NA
-eeg_df_mast$B28[eeg_df_mast$pid %in% c(206201843, 206201831) & eeg_df_mast$block %in% c("Neg_Watch", "Pos_Watch") & between(eeg_df_mast$ms, 450, 800)] <- NA
-eeg_df_mast$B22[eeg_df_mast$pid %in% c(206201843, 206201831) & eeg_df_mast$block %in% c("Neg_Watch", "Pos_Watch") & between(eeg_df_mast$ms, 450, 800)] <- NA
+eeg_df_mast$B28[eeg_df_mast$pid == 206201854 & eeg_df_mast$block %in% c("Neg_Watch", "Neg_Dec") & between(eeg_df_mast$ms, 450, 2000)] <- NA
+spn_df$A5[spn_df$pid == 206201817 & spn_df$block %in% c("Neu_Watch", "Pos_Dec") & between(spn_df$ms, 315, 1215)] <- NA
 
 #' Create plots for each component with all conditions
 #+ plot creation
 erp_plot_fun <- function(dat, cluster, comp_name, time_window_low, time_window_high) {
   dat %>%
     select(all_of(cluster),  block:prop_trials) %>%
-    filter(ms < 1500) %>%
+    filter(ms < 2000) %>%
     pivot_longer(., cols = cluster, names_to = "electrode", values_to = "mv") %>%
     group_by(block, ms) %>%
     summarize(mv = mean(mv, na.rm = TRUE)) %>%
@@ -61,23 +55,24 @@ erp_plot_fun <- function(dat, cluster, comp_name, time_window_low, time_window_h
           legend.text = element_text(size = 12),
           legend.key.size = unit(2, "line"),
           plot.title = element_text(hjust = 0.5),
-          title = element_text(size = 16)) +
-    # scale_color_manual(name = "Group", values = c("green", "blue", "red"))
-    scale_color_viridis_d(name = "Group",
-                          breaks = c("Neg_Dec", "Neg_Watch", "Neg_Inc",
-                                     "Neu_Watch",
-                                     "Pos_Dec", "Pos_Watch", "Pos_Inc"),
-                          labels = c("Negative Decrease", "Negative Watch", "Negative Increase",
-                                     "Neutral Watch",
-                                     "Positive Decrease", "Positive Watch", "Positive Increase"))
+          title = element_text(size = 16))
 }
+    # scale_color_manual(name = "Group", values = c("green", "blue", "red"))
+    # scale_color_viridis_d(name = "Group",
+    #                       breaks = c("Neg_Dec", "Neg_Watch", "Neg_Inc",
+    #                                  "Neu_Watch",
+    #                                  "Pos_Dec", "Pos_Watch", "Pos_Inc"),
+    #                       labels = c("Negative Decrease", "Negative Watch", "Negative Increase",
+    #                                  "Neutral Watch",
+    #                                  "Positive Decrease", "Positive Watch", "Positive Increase"))
+
 #' plots for just passive conditions
 #+ passive plot function
 erp_plot_fun_passive <- function(dat, cluster, comp_name, time_window_low, time_window_high) {
   dat %>%
     filter(block %in% c("Neg_Watch", "Neu_Watch", "Pos_Watch")) %>%
     select(all_of(cluster),  block:prop_trials) %>%
-    filter(ms < 1500) %>%
+    filter(ms < 2000) %>%
     pivot_longer(., cols = cluster, names_to = "electrode", values_to = "mv") %>%
     group_by(block, ms) %>%
     summarize(mv = mean(mv, na.rm = TRUE)) %>%
@@ -96,19 +91,20 @@ erp_plot_fun_passive <- function(dat, cluster, comp_name, time_window_low, time_
           legend.text = element_text(size = 12),
           legend.key.size = unit(2, "line"),
           plot.title = element_text(hjust = 0.5),
-          title = element_text(size = 16)) +
-    # scale_color_manual(name = "Group", values = c("green", "blue", "red"))
-    scale_color_viridis_d(name = "Group",
-                          breaks = c("Neg_Watch", "Neu_Watch", "Pos_Watch"),
-                          labels = c("Negative Watch", "Neutral Watch", "Positive Watch"))
+          title = element_text(size = 16))
 }
+    # # scale_color_manual(name = "Group", values = c("green", "blue", "red"))
+    # scale_color_viridis_d(name = "Group",
+    #                       breaks = c("Neg_Watch", "Neu_Watch", "Pos_Watch"),
+    #                       labels = c("Negative Watch", "Neutral Watch", "Positive Watch"))
+
 #' plots for positive conditions
 #+ positive plot function
 erp_plot_fun_positive <- function(dat, cluster, comp_name, time_window_low, time_window_high) {
   dat %>%
     filter(block %in% c("Pos_Dec", "Pos_Watch", "Pos_Inc")) %>%
     select(all_of(cluster),  block:prop_trials) %>%
-    filter(ms < 1500) %>%
+    filter(ms < 2000) %>%
     pivot_longer(., cols = cluster, names_to = "electrode", values_to = "mv") %>%
     group_by(block, ms) %>%
     summarize(mv = mean(mv, na.rm = TRUE)) %>%
@@ -127,19 +123,20 @@ erp_plot_fun_positive <- function(dat, cluster, comp_name, time_window_low, time
           legend.text = element_text(size = 12),
           legend.key.size = unit(2, "line"),
           plot.title = element_text(hjust = 0.5),
-          title = element_text(size = 16)) +
-    # scale_color_manual(name = "Group", values = c("green", "blue", "red"))
-    scale_color_viridis_d(name = "Group",
-                          breaks = c("Pos_Dec", "Pos_Watch", "Pos_Inc"),
-                          labels = c("Positive Decrease", "Positive Watch", "Positive Increase"))
+          title = element_text(size = 16))
 }
+    # scale_color_manual(name = "Group", values = c("green", "blue", "red"))
+    # scale_color_viridis_d(name = "Group",
+    #                       breaks = c("Pos_Dec", "Pos_Watch", "Pos_Inc"),
+    #                       labels = c("Positive Decrease", "Positive Watch", "Positive Increase"))
+
 #' plot function for negative condition
 #+ negative plot function
 erp_plot_fun_negative <- function(dat, cluster, comp_name, time_window_low, time_window_high) {
   dat %>%
     filter(block %in% c("Neg_Dec", "Neg_Watch", "Neg_Inc")) %>%
     select(all_of(cluster),  block:prop_trials) %>%
-    filter(ms < 1500) %>%
+    filter(ms < 2000) %>%
     pivot_longer(., cols = cluster, names_to = "electrode", values_to = "mv") %>%
     group_by(block, ms) %>%
     summarize(mv = mean(mv, na.rm = TRUE)) %>%
@@ -158,162 +155,124 @@ erp_plot_fun_negative <- function(dat, cluster, comp_name, time_window_low, time
           legend.text = element_text(size = 12),
           legend.key.size = unit(2, "line"),
           plot.title = element_text(hjust = 0.5),
-          title = element_text(size = 16)) +
-    # scale_color_manual(name = "Group", values = c("green", "blue", "red"))
-    scale_color_viridis_d(name = "Group",
-                          breaks = c("Neg_Dec", "Neg_Watch", "Neg_Inc"),
-                          labels = c("Negative Decrease", "Negative Watch", "Negative Increase"))
+          title = element_text(size = 16))
 }
+    # scale_color_manual(name = "Group", values = c("green", "blue", "red"))
+    # scale_color_viridis_d(name = "Group",
+    #                       breaks = c("Neg_Dec", "Neg_Watch", "Neg_Inc"),
+    #                       labels = c("Negative Decrease", "Negative Watch", "Negative Increase"))
+
 #'
 #' Use pmap to iterate plotting function over list of parameters.
 #+ iterate and plot
 # all
 plots_all <- pmap(list(dat = list(eeg_df_mast,
-                              eeg_df_avr,
-                              eeg_df_avr,
-                              eeg_df_avr,
-                              eeg_df_avr,
-                              eeg_df_avr,
-                              eeg_df_avr),
+                                  eeg_df_mast,
+                                  eeg_df_avr,
+                                  eeg_df_avr,
+                                  spn_df),
                    cluster = list(lpp_elec,
-                               epn_elec_right,
-                               epn_elec_left,
-                               epn_elec_avg,
-                               N170_left,
-                               N170_right,
-                               N170_avg),
+                                  lpp_elec,
+                                  epn_elec,
+                                  N170_elec,
+                                  spn_elec),
                    comp_name = c("LPP",
-                                 "Right EPN",
-                                 "Left EPN",
-                                 "Bilateral EPN",
-                                 "Left N170",
-                                 "Right N170",
-                                 "Bilateral N170"),
+                                 "Late LPP",
+                                 "EPN",
+                                 "N170",
+                                 "SPN"),
                    time_window_low = c(450,
+                                       800,
                                        225,
-                                       225,
-                                       225,
-                                       150,
-                                       150,
-                                       150),
+                                       160,
+                                       315),
                    time_window_high = c(800,
+                                        2000,
                                         375,
-                                        375,
-                                        375,
-                                        190,
-                                        190,
-                                        190)),
+                                        200,
+                                        1250)),
                    .f = erp_plot_fun)
+
 # passive blocks
 plots_passive <- pmap(list(dat = list(eeg_df_mast,
+                                      eeg_df_mast,
                                       eeg_df_avr,
                                       eeg_df_avr,
-                                      eeg_df_avr,
-                                      eeg_df_avr,
-                                      eeg_df_avr,
-                                      eeg_df_avr),
+                                      spn_df),
                            cluster = list(lpp_elec,
-                                          epn_elec_right,
-                                          epn_elec_left,
-                                          epn_elec_avg,
-                                          N170_left,
-                                          N170_right,
-                                          N170_avg),
+                                          lpp_elec,
+                                          epn_elec,
+                                          N170_elec,
+                                          spn_elec),
                            comp_name = c("LPP",
-                                         "Right EPN",
-                                         "Left EPN",
-                                         "Bilateral EPN",
-                                         "Left N170",
-                                         "Right N170",
-                                         "Bilateral N170"),
+                                         "Late LPP",
+                                         "EPN",
+                                         "N170",
+                                         "SPN"),
                            time_window_low = c(450,
+                                               800,
                                                225,
-                                               225,
-                                               225,
-                                               150,
-                                               150,
-                                               150),
+                                               160,
+                                               315),
                            time_window_high = c(800,
+                                                2000,
                                                 375,
-                                                375,
-                                                375,
-                                                190,
-                                                190,
-                                                190)),
+                                                200,
+                                                1250)),
                       .f = erp_plot_fun_passive)
 # positive blocks
 plots_positive <- pmap(list(dat = list(eeg_df_mast,
+                                       eeg_df_mast,
                                        eeg_df_avr,
                                        eeg_df_avr,
-                                       eeg_df_avr,
-                                       eeg_df_avr,
-                                       eeg_df_avr,
-                                       eeg_df_avr),
+                                       spn_df),
                             cluster = list(lpp_elec,
-                                           epn_elec_right,
-                                           epn_elec_left,
-                                           epn_elec_avg,
-                                           N170_left,
-                                           N170_right,
-                                           N170_avg),
+                                           lpp_elec,
+                                           epn_elec,
+                                           N170_elec,
+                                           spn_elec),
                             comp_name = c("LPP",
-                                          "Right EPN",
-                                          "Left EPN",
-                                          "Bilateral EPN",
-                                          "Left N170",
-                                          "Right N170",
-                                          "Bilateral N170"),
+                                          "Late LPP",
+                                          "EPN",
+                                          "N170",
+                                          "SPN"),
                             time_window_low = c(450,
+                                                800,
                                                 225,
-                                                225,
-                                                225,
-                                                150,
-                                                150,
-                                                150),
+                                                160,
+                                                315),
                             time_window_high = c(800,
+                                                 2000,
                                                  375,
-                                                 375,
-                                                 375,
-                                                 190,
-                                                 190,
-                                                 190)),
+                                                 200,
+                                                 1250)),
                        .f = erp_plot_fun_positive)
 # negative blocks
 plots_negative <- pmap(list(dat = list(eeg_df_mast,
+                                       eeg_df_mast,
                                        eeg_df_avr,
                                        eeg_df_avr,
-                                       eeg_df_avr,
-                                       eeg_df_avr,
-                                       eeg_df_avr,
-                                       eeg_df_avr),
+                                       spn_df),
                             cluster = list(lpp_elec,
-                                           epn_elec_right,
-                                           epn_elec_left,
-                                           epn_elec_avg,
-                                           N170_left,
-                                           N170_right,
-                                           N170_avg),
+                                           lpp_elec,
+                                           epn_elec,
+                                           N170_elec,
+                                           spn_elec),
                             comp_name = c("LPP",
-                                          "Right EPN",
-                                          "Left EPN",
-                                          "Bilateral EPN",
-                                          "Left N170",
-                                          "Right N170",
-                                          "Bilateral N170"),
-                            time_window_low = c(450,
+                                          "Late LPP",
+                                          "EPN",
+                                          "N170",
+                                          "SPN"),
+                            time_window_low = c(300,
+                                                800,
                                                 225,
-                                                225,
-                                                225,
-                                                150,
-                                                150,
-                                                150),
+                                                160,
+                                                315),
                             time_window_high = c(800,
+                                                 2000,
                                                  375,
-                                                 375,
-                                                 375,
-                                                 190,
-                                                 190,
-                                                 190)),
+                                                 200,
+                                                 1250)),
                        .f = erp_plot_fun_negative)
 #'
 #' save images to workspace
@@ -334,3 +293,13 @@ map2(plots_positive, c("LPP", "EPN_right", "EPN_left", "EPN_bilateral", "N170_le
 map2(plots_negative, c("LPP", "EPN_right", "EPN_left", "EPN_bilateral", "N170_left", "N170_right", "N170_bilateral"), ~{
   ggsave(plot = .x, filename = here("Images", "average_waveforms", "negative_blocks", paste0(.y, "_negative.png")), device = "png", width = 8, height = 5, scale = 1.5)
 })
+
+eeg_df_mast %>%
+  select(B28,  block:prop_trials) %>%
+  filter(ms < 2000,
+         block %in% c("Neg_Dec", "Neg_Inc", "Neg_Watch")) %>%
+  pivot_longer(., cols = B28, names_to = "electrode", values_to = "mv") %>%
+  group_by(block, ms) %>%
+  summarize(mv = mean(mv, na.rm = TRUE)) %>%
+  ggplot(., aes(ms, mv, color = block)) +
+  geom_line(size = 1.1)
