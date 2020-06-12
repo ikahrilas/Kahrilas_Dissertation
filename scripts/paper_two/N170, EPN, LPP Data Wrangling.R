@@ -131,13 +131,13 @@ erp_mast <- inner_join(mastoid, evt, by = c("pid", "block"))
 erp_avr <- inner_join(avr, evt, by = c("pid", "block"))
 
 # fix incorrect pid
-mastoid$pid[mastoid$pid == 201206832] <- 206201832
-avr$pid[avr$pid == 201206832] <- 206201832
+erp_mast$pid[erp_mast$pid == 201206832] <- 206201832
+erp_avr$pid[erp_avr$pid == 201206832] <- 206201832
 
 # set pid as character class
-mastoid$pid <- as.character(mastoid$pid)
-avr$pid <- as.character(avr$pid)
+erp_mast$pid <- as.character(erp_mast$pid)
+erp_avr$pid <- as.character(erp_avr$pid)
 
 # write files
-write_csv(mastoid, here("data", "paper_two", "created_data", "erp_mast.csv"))
-write_csv(avr, here("data", "paper_two", "created_data", "erp_avr.csv"))
+write_csv(erp_mast, here("data", "paper_two", "created_data", "erp_mast.csv"))
+write_csv(erp_avr, here("data", "paper_two", "created_data", "erp_avr.csv"))
