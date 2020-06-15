@@ -42,7 +42,7 @@ evt <- map_dfr(evt_files, ~{
   read_table(.x) %>%
     separate(`Code	TriNo	Comnt`, into = c("block", "n_trials"), sep = " ") %>%
     mutate(block = str_extract(block, block_names),
-           n_trials = as.numeric(str_extract(n_trials, "[0-9]{2}")),
+           n_trials = as.numeric(n_trials),
            pid = as.numeric(str_extract(.x, "[0-9]+")),
            prop_trials = n_trials / 40)
 })
