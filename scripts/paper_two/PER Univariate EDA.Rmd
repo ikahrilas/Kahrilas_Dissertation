@@ -68,7 +68,7 @@ N170 <- erp_avr_wide %>%
 
 SPN <- spn_wide %>% 
   select(all_of(spn_elec), pid:prop_trials) %>% 
-  filter(between(ms, 315, 1250)) %>% 
+  filter(between(ms, 450, 1250)) %>% 
   pivot_longer(., cols = all_of(spn_elec), names_to = "electrode", values_to = "mv") %>% 
   group_by(pid, block) %>% 
   mutate(block = str_remove(block, "Pre_")) %>% 
