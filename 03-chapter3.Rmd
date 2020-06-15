@@ -137,15 +137,14 @@ df_num_diff <- av_diff$NumDF
 df_den_diff <- round(av_diff$DenDF, digits = 0)
 f_diff <- sprintf("%.2f", av_diff[["F value"]])
 ```
-Trials without valid EEG data were excluded from the following analyses (*n* = 2). Analyses were run in R version 3.6.2 [@rcoreteamLanguageEnvironmentStatistical2018]. Multilevel modeling (MLM) analyses were conducted using the lme4 package [@batesFittingLinearMixedeffects2015]. All linear mixed models were estimated using REML with particpants included as random intercepts. Model assumptions were checked via visual inspection of diagnostic plots (i.e., residual, QQ, scale-location, and residuals vs. leverage) generated with the performance package [@ludeckePerformanceAssessmentRegression2019]. Correlations among key psychological and demographic variables (see Table 2\ref(tab:corr-table)) indicated significant associations ranging from small to large in effect size. Descriptive statistics for LPP, EPN, N170 and participant ratings (arousal, valence, and difficulty) were calculated for each of the experimental blocks (see Table \@ref(tab:descriptives-by-block)). A repeated measures analysis of variance yielded significant variation among experimental image blocks for LPP ($F$(`r df_num_lpp`, `r df_den_lpp` = `r f_lpp`, $p < .001$), EPN ($F$(`r df_num_epn`, `r df_den_epn`) = `r f_epn`, $p < .001$), and N170 ($F$(`r df_num_n170`, `r df_den_n170`) = `r f_n170`, $p < .001$). Repeated measures analysis of variance similiarly indicated differences among blocks for arousal ($F$(`r df_num_ar`, `r df_den_ar` = `r f_ar`, $p < .001$), valence ($F$(`r df_num_val`, `r df_den_val` = `r f_val`, $p < .001$), and difficulty ($F$(`r df_num_diff`, `r df_den_diff`) = `r f_diff`, $p < .001$) ratings. Pairwise comparisons were conducted between passive watch conditions for EEG components and behavioral ratings (Table \@ref(tab:pairwise-watch-comparison-table)) as well as regulation conditions (Table \@ref(tab:pairwise-reg-comparison-table)) using the emmeans package [@lenthEmmeansEstimatedMarginal2020]. Effect sizes were interpreted using Funder's [-@funderEvaluatingEffectSize2019] recommendations. Between watch conditions, results indicated large to very large differences for LPP (see Table \@ref(tab:pairwise-watch-comparison-table) & Figure \@ref(fig:LPP-watch-topos)), small to medium differences for EPN, and small to large differences for N170 (see Table \@ref(tab:pairwise-reg-comparison-table) & Figure \@ref(fig:EPN-N170-watch-topos)). Behavioral ratings were in the expected directions, with both positive and negative images resulting in higher arousal ratings compared to neutral images. Further, negative and positive image blocks resulted in lower (i.e., more negative) and higher (i.e., more positive) valence ratings, respectively. Notably, the differences in behavioral ratings associated with negative vs. neutral image blocks were larger than they were for positive vs. neutral image blocks. Between positive regulation conditions, results indicated no significant effects for LPP (see Table \@ref(tab:pairwise-reg-comparison-table)) and Figure \@ref(fig:LPP-pos-topos)), a very small difference between increase and watch conditions for EPN (see Table \@ref(tab:pairwise-reg-comparison-table) & Figure \@ref(fig:EPN-N170-pos-topos)), and no significant differences for N170. Increase conditions resulted in very small and medium increases in arousal and valence ratings, respectively, compared to passive watch conditions. Decrease conditions led to decreases in arousal and valence ratings (Table \@ref(tab:pairwise-reg-comparison-table)). Between negative regulation conditions, results indicated a small difference between increase and watch conditions for LPP (see Table \@ref(tab:pairwise-reg-comparison-table) & Figure \@ref(fig:LPP-neg-topos)) and no significant differences for EPN and N170 (see Table \@ref(tab:pairwise-reg-comparison-table) & Figure \@ref(fig:EPN-N170-neg-topos)). Increase conditions resulted in tiny and large increases for arousal and valence ratings in increase vs. watch and decrease vs. watch conditions, respectively (Table \@ref(tab:pairwise-reg-comparison-table)).
+Trials without valid EEG data were excluded from analyses (*n* = 2 for N170/EPN/LPP anlayses and *n* = 5 for SPN). Analyses were run in R version 4.0.0 [@rcoreteamLanguageEnvironmentStatistical2018]. Multilevel modeling (MLM) analyses were conducted using the lme4 package [@batesFittingLinearMixedeffects2015]. All linear mixed models were estimated using REML with particpants included as random intercepts. Model assumptions were checked via visual inspection of diagnostic plots (i.e., residual, QQ, scale-location, and residuals vs. leverage) generated with the performance package [@ludeckePerformanceAssessmentRegression2019]. Correlations among key psychological and demographic variables (see Table 2\ref(tab:corr-table)) indicated significant associations ranging from small to large in effect size. Descriptive statistics for LPP, EPN, N170 and participant ratings (arousal, valence, and difficulty) were calculated for each of the experimental blocks (see Table \@ref(tab:descriptives-by-block)). A repeated measures analysis of variance yielded significant variation among experimental image blocks for LPP ($F$(`r df_num_lpp`, `r df_den_lpp` = `r f_lpp`, $p < .001$), EPN ($F$(`r df_num_epn`, `r df_den_epn`) = `r f_epn`, $p < .001$), and N170 ($F$(`r df_num_n170`, `r df_den_n170`) = `r f_n170`, $p < .001$). Repeated measures analysis of variance similarly indicated differences among blocks for arousal ($F$(`r df_num_ar`, `r df_den_ar` = `r f_ar`, $p < .001$), valence ($F$(`r df_num_val`, `r df_den_val` = `r f_val`, $p < .001$), and difficulty ($F$(`r df_num_diff`, `r df_den_diff`) = `r f_diff`, $p < .001$) ratings. A significant effect of block was not found for SPN and late LPP. Pairwise comparisons were conducted between passive watch conditions for EEG components and behavioral ratings (Table \@ref(tab:pairwise-watch-comparison-table)) as well as regulation conditions (Table \@ref(tab:pairwise-reg-comparison-table)) using the emmeans package [@lenthEmmeansEstimatedMarginal2020]. Effect sizes were interpreted using Funder's [-@funderEvaluatingEffectSize2019] recommendations. Between watch conditions, results indicated large to very large differences for LPP (see Table \@ref(tab:pairwise-watch-comparison-table) & Figure \@ref(fig:LPP-watch-topos)), small to medium differences for EPN, and small to large differences for N170 (see Table \@ref(tab:pairwise-reg-comparison-table) & Figure \@ref(fig:EPN-N170-watch-topos)). Behavioral ratings were in the expected directions, with both positive and negative images resulting in higher arousal ratings compared to neutral images. Further, negative and positive image blocks resulted in lower (i.e., more negative) and higher (i.e., more positive) valence ratings, respectively. Notably, the differences in behavioral ratings associated with negative vs. neutral image blocks were larger than they were for positive vs. neutral image blocks. Between positive regulation conditions, results indicated no significant effects for LPP (see Table \@ref(tab:pairwise-reg-comparison-table)) and Figure \@ref(fig:LPP-pos-topos)), a very small difference between increase and watch conditions for EPN (see Table \@ref(tab:pairwise-reg-comparison-table) & Figure \@ref(fig:EPN-N170-pos-topos)), and no significant differences for N170. Increase conditions resulted in very small and medium increases in arousal and valence ratings, respectively, compared to passive watch conditions. Decrease conditions led to decreases in arousal and valence ratings (Table \@ref(tab:pairwise-reg-comparison-table)). Between negative regulation conditions, results indicated a small difference between increase and watch conditions for LPP (see Table \@ref(tab:pairwise-reg-comparison-table) & Figure \@ref(fig:LPP-neg-topos)) and no significant differences for EPN and N170 (see Table \@ref(tab:pairwise-reg-comparison-table) & Figure \@ref(fig:EPN-N170-neg-topos)). Increase conditions resulted in tiny and large increases for arousal and valence ratings in increase vs. watch and decrease vs. watch conditions, respectively (Table \@ref(tab:pairwise-reg-comparison-table)).
 
 (ref:descriptives-by-block) Means and standard deviations for LPP, EPN, and N170 EEG components, as well as arousal, valence, and difficulty ratings.
 
 ```{r descriptives-by-block, echo = FALSE, message = FALSE, fig.cap = "(ref:descriptives-by-block)"}
 library(tidyverse)
 library(kableExtra)
-dat <- read_csv("data/paper_two/created_data/per_data_analyses_2020_5_19.csv") %>% 
-  select(pid:LPP, N170, EPN, everything())
+dat <- read_csv("data/paper_two/created_data/per_data_analyses_2020_5_19.csv")
 
 desc_stats <- dat %>% 
   group_by(block) %>% 
@@ -170,7 +169,7 @@ kable(desc_stats, "latex", escape = FALSE, booktabs = TRUE, align = "lcccccccc",
   kable_styling(font_size = 24, latex_options = c("scale_down")) %>% 
   row_spec(0, align = "c") %>% 
   footnote(general_title = "Note.",
-           general = "SD = Standard Error.",
+           general = "SD = Standard Deviation.",
            footnote_as_chunk = TRUE) %>% 
   save_kable("poop.png")
 ```
@@ -183,16 +182,15 @@ library(tidyverse)
 library(kableExtra)
 
 # load data
-cor_dat <- read_csv("data/paper_two/created_data/per_data_analyses_2020_5_19.csv") %>% 
-  mutate(N170 = (N170_left + N170_right) / 2,
-         EPN = (EPN_left + EPN_right) / 2) %>% 
-  select(pid:LPP, N170, EPN, everything())
+cor_dat <- read_csv("data/paper_two/created_data/per_data_analyses_2020_5_19.csv")
 
 # create correlation matrix
 tab <- cor_dat %>% 
-  select(LPP,
-         EPN,
+  select(SPN,
          N170,
+         EPN,
+         LPP,
+         LPP_late,
          arousal,
          valence,
          difficulty,
@@ -200,16 +198,18 @@ tab <- cor_dat %>%
          savoring_moment,
          depression,
          sex) %>%
-  rename("1. LPP" = LPP,
-         "2. EPN" = EPN,
-         "3. N170" = N170,
-         "4. Arousal Ratings" = arousal,
-         "5. Valence Ratings" = valence,
-         "6. Difficulty Ratings" = difficulty,
-         "7. PA" = pos_affectivity,
-         "8. StM" = savoring_moment,
-         "9. Depression" = depression,
-         "10. Sex" = sex) 
+  rename("1. SPN" = SPN,
+         "2. N170" = N170,
+         "3. EPN" = EPN,
+         "4. LPP" = LPP,
+         "5. Late LPP" = LPP_late,
+         "6. Arousal Ratings" = arousal,
+         "7. Valence Ratings" = valence,
+         "8. Difficulty Ratings" = difficulty,
+         "9. PA" = pos_affectivity,
+         "10. StM" = savoring_moment,
+         "11. Depression" = depression,
+         "12. Sex" = sex) 
 
 #Compute correlation matrix
 x <- as.matrix(tab)
@@ -223,7 +223,7 @@ mystars <- ifelse(p < .05, "*", " ")
 ## trunctuate the correlation matrix to two decimal
 R <- format(round(cbind(rep(-1.11, ncol(x)), R), 2))[,-1]
     
-## build a new matrix that includes the correlations with their apropriate stars
+## build a new matrix that includes the correlations with their appropriate stars
 Rnew <- matrix(paste(R, mystars, sep=""), ncol=ncol(x))
 diag(Rnew) <- paste(diag(R), " ", sep="")
 rownames(Rnew) <- colnames(x)
@@ -248,28 +248,31 @@ tab <- tab %>%
   map_df(., ~ {
   if_else(str_detect(.x, "-"), paste0("-", str_remove(.x, "-0")), .x)
     })
-colnames(tab) <- paste0(c(1:9), ".")
+colnames(tab) <- paste0(c(1:11), ".")
 tab %>% 
-  mutate(" " = c("1. LPP",
-                 "2. EPN",
-                 "3. N170",
-                 "4. Arousal Ratings",
-                 "5. Valence Ratings",
-                 "6. Difficulty Ratings",
-                 "7. PA",
-                 "8. StM",
-                 "9. Depression",
-                 "10. Sex")) %>% 
+  mutate(" " = c("1. SPN",
+                 "2. N170",
+                 "3. EPN",
+                 "4. LPP",
+                 "5. Late LPP",
+                 "6. Arousal Ratings",
+                 "7. Valence Ratings",
+                 "8. Difficulty Ratings",
+                 "9. PA",
+                 "10. StM",
+                 "11. Depression",
+                 "12. Sex")) %>% 
   select(" ", everything()) %>% 
 ## create table
-kable(., format = "latex",  linesep = "", escape = FALSE, booktabs = TRUE, align = c("l", rep("r", 9)), caption = "(ref:corr-table)") %>% 
+kable(., format = "latex",  linesep = "", escape = FALSE, booktabs = TRUE, align = c("l", rep("r", 11)), caption = "(ref:corr-table)") %>% 
   kable_styling(latex_options = "scale_down", font_size = 12) %>% 
-  column_spec(2:10, width = "3em") %>% 
+  column_spec(2:11, width = "3em") %>% 
   footnote(general_title = "Note.",
            escape = FALSE,
            general = "*$p < .05$. PA = positive affectivity, StM = savoring the moment. EEG components and behavioral ratings (i.e., arousal, valence, and difficulty) averaged across all regulation blocks.",
            threeparttable = TRUE,
-           footnote_as_chunk = TRUE)
+           footnote_as_chunk = TRUE) %>% 
+  save_kable("poop.png")
 ```
 
 (ref:pairwise-watch-comparison-table) Contrasts between passive watch conditions for LPP, EPN, and N170 EEG components.
