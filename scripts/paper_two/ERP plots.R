@@ -278,28 +278,42 @@ plots_negative <- pmap(list(dat = list(eeg_df_mast,
 #' save images to workspace
 #+ save the images
 # all
-map2(plots_all, c("LPP", "EPN_right", "EPN_left", "EPN_bilateral", "N170_left", "N170_right", "N170_bilateral"), ~{
-  ggsave(plot = .x, filename = here("Images", "average_waveforms", "all_blocks", paste0(.y, "_all.png")), device = "png", width = 8, height = 5, scale = 1.5)
+map2(plots_all, c("LPP", "Late_LPP", "EPN", "N170", "SPN"), ~{
+  ggsave(plot = .x, filename = here("images", "paper_2", "average_waveforms", "all_blocks", paste0(.y, "_all.png")), device = "png", width = 8, height = 5, scale = 1.5)
 })
 # passive blocks
-map2(plots_passive, c("LPP", "EPN_right", "EPN_left", "EPN_bilateral", "N170_left", "N170_right", "N170_bilateral"), ~{
-  ggsave(plot = .x, filename = here("Images", "average_waveforms", "passive_blocks", paste0(.y, "_passive.png")), device = "png", width = 8, height = 5, scale = 1.5)
+map2(plots_passive, c("LPP", "Late_LPP", "EPN", "N170", "SPN"), ~{
+  ggsave(plot = .x, filename = here("images", "paper_2", "average_waveforms", "passive_blocks", paste0(.y, "_passive.png")), device = "png", width = 8, height = 5, scale = 1.5)
 })
 # positive blocks
-map2(plots_positive, c("LPP", "EPN_right", "EPN_left", "EPN_bilateral", "N170_left", "N170_right", "N170_bilateral"), ~{
-  ggsave(plot = .x, filename = here("Images", "average_waveforms", "positive_blocks", paste0(.y, "_positive.png")), device = "png", width = 8, height = 5, scale = 1.5)
+map2(plots_positive, c("LPP", "Late_LPP", "EPN", "N170", "SPN"), ~{
+  ggsave(plot = .x, filename = here("images", "paper_2", "average_waveforms", "positive_blocks", paste0(.y, "_positive.png")), device = "png", width = 8, height = 5, scale = 1.5)
 })
 # negative blocks
-map2(plots_negative, c("LPP", "EPN_right", "EPN_left", "EPN_bilateral", "N170_left", "N170_right", "N170_bilateral"), ~{
-  ggsave(plot = .x, filename = here("Images", "average_waveforms", "negative_blocks", paste0(.y, "_negative.png")), device = "png", width = 8, height = 5, scale = 1.5)
+map2(plots_negative, c("LPP", "Late_LPP", "EPN", "N170", "SPN"), ~{
+  ggsave(plot = .x, filename = here("images", "paper_2", "average_waveforms", "negative_blocks", paste0(.y, "_negative.png")), device = "png", width = 8, height = 5, scale = 1.5)
 })
 
 eeg_df_mast %>%
-  select(B28,  block:prop_trials) %>%
+  select(all_of(lpp_elec),  block:prop_trials) %>%
   filter(ms < 2000,
-         block %in% c("Neg_Dec", "Neg_Inc", "Neg_Watch")) %>%
-  pivot_longer(., cols = B28, names_to = "electrode", values_to = "mv") %>%
+         block %in% c("Neg_Dec", "Neg_Watch", "Neg_Inc")) %>%
+  pivot_longer(., cols = lpp_elec, names_to = "electrode", values_to = "mv") %>%
   group_by(block, ms) %>%
   summarize(mv = mean(mv, na.rm = TRUE)) %>%
   ggplot(., aes(ms, mv, color = block)) +
-  geom_line(size = 1.1)
+  geom_line(size = 1.1) +
+  geom_vline(xintercept = 0, linetype = "dashed") +
+  geom_vline(xintercept = c(300, 800), linetype = "solid", size = 1.05) +
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  labs(x = "Time (ms)",
+       y = expression(paste("Amplitude ( ",mu,"V)")),
+       title = paste("Average", "LPP", "Waveforms")) +
+  theme_classic() +
+  theme(axis.title = element_text(size = 16),
+        axis.text = element_text(size = 12),
+        legend.title = element_text(size = 16),
+        legend.text = element_text(size = 12),
+        legend.key.size = unit(2, "line"),
+        plot.title = element_text(hjust = 0.5),
+        title = element_text(size = 16))
