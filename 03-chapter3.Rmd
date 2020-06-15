@@ -87,14 +87,25 @@ The following EEG data processing steps were implemented in Brain Electrical Sou
 library(tidyverse)
 library(lmerTest)
 
-dat <- read_csv("data/paper_two/created_data/per_data_analyses_2020_5_19.csv") %>% 
-  select(pid:LPP, N170, EPN, everything())
+dat <- read_csv("data/paper_two/created_data/per_data_analyses_2020_5_19.csv")
+
+mod_spn <- lmer(SPN ~ block + (1|pid), data = dat)
+av_spn <- anova(mod_spn)
+df_num_spn <- av_spn$NumDF
+df_den_spn <- sprintf("%.2f", av_spn$DenDF)
+f_spn <- sprintf("%.2f", av_spn[["F value"]])
 
 mod_lpp <- lmer(LPP ~ block + (1|pid), data = dat)
 av_lpp <- anova(mod_lpp)
 df_num_lpp <- av_lpp$NumDF
 df_den_lpp <- sprintf("%.2f", av_lpp$DenDF)
 f_lpp <- sprintf("%.2f", av_lpp[["F value"]])
+
+mod_lpp_late <- lmer(LPP_late ~ block + (1|pid), data = dat)
+av_lpp_late <- anova(mod_lpp_late)
+df_num_lpp_late <- av_lpp_late$NumDF
+df_den_lpp_late <- sprintf("%.2f", av_lpp_late$DenDF)
+f_lpp_late <- sprintf("%.2f", av_lpp_late[["F value"]])
 
 mod_epn <- lmer(EPN ~ block + (1|pid), data = dat)
 av_epn <- anova(mod_epn)
@@ -134,18 +145,18 @@ Trials without valid EEG data were excluded from the following analyses (*n* = 2
 library(tidyverse)
 library(kableExtra)
 dat <- read_csv("data/paper_two/created_data/per_data_analyses_2020_5_19.csv") %>% 
-  mutate(N170 = (N170_left + N170_right) / 2,
-         EPN = (EPN_left + EPN_right) / 2) %>% 
   select(pid:LPP, N170, EPN, everything())
 
 desc_stats <- dat %>% 
   group_by(block) %>% 
   dplyr::summarize("Mean LPP (SD)" = paste0(sprintf("%.1f", mean(LPP, na.rm = TRUE)), " ", "(", sprintf("%.1f", sd(LPP, na.rm = TRUE)), ")"),
-            "Mean EPN (SD)" = paste0(sprintf("%.1f", mean(EPN)), " ", "(", sprintf("%.1f", sd(EPN)), ")"),
-            "Mean N170 (SD)" = paste0(sprintf("%.1f", mean(N170)), " ", "(", sprintf("%.1f", sd(N170)), ")"),
-            "Mean Arousal (SD)" = paste0(sprintf("%.1f", mean(arousal)), " ", "(", sprintf("%.1f", sd(arousal)), ")"),
-            "Mean Valence (SD)" = paste0(sprintf("%.1f", mean(valence)), " ", "(", sprintf("%.1f", sd(valence)), ")"),
-            "Mean Difficulty (SD)" = paste0(sprintf("%.1f", mean(difficulty)), " ", "(", sprintf("%.1f", sd(difficulty)), ")")) %>% 
+                   "Mean Late LPP (SD)" = paste0(sprintf("%.1f", mean(LPP_late, na.rm = TRUE)), " ", "(", sprintf("%.1f", sd(LPP_late, na.rm = TRUE)), ")"),
+                   "Mean EPN (SD)" = paste0(sprintf("%.1f", mean(EPN)), " ", "(", sprintf("%.1f", sd(EPN)), ")"),
+                   "Mean N170 (SD)" = paste0(sprintf("%.1f", mean(N170)), " ", "(", sprintf("%.1f", sd(N170)), ")"),
+                   "Mean SPN (SD)" = paste0(sprintf("%.1f", mean(SPN, na.rm = TRUE)), " ", "(", sprintf("%.1f", sd(SPN, na.rm = TRUE)), ")"),
+                   "Mean Arousal (SD)" = paste0(sprintf("%.1f", mean(arousal)), " ", "(", sprintf("%.1f", sd(arousal)), ")"),
+                   "Mean Valence (SD)" = paste0(sprintf("%.1f", mean(valence)), " ", "(", sprintf("%.1f", sd(valence)), ")"),
+                   "Mean Difficulty (SD)" = paste0(sprintf("%.1f", mean(difficulty)), " ", "(", sprintf("%.1f", sd(difficulty)), ")")) %>% 
   rename("Block" = "block") %>% 
   mutate(Block = c("Negative Decrease", 
                    "Negative Increase",
@@ -155,10 +166,13 @@ desc_stats <- dat %>%
                    "Positive Increase",
                    "Positive Watch"))
 
-kable(desc_stats, "latex", escape = FALSE, booktabs = TRUE, align = "c", linesep = "", caption = "(ref:descriptives-by-block)") %>% 
+kable(desc_stats, "latex", escape = FALSE, booktabs = TRUE, align = "lcccccccc", linesep = "", caption = "(ref:descriptives-by-block)") %>% 
   kable_styling(font_size = 24, latex_options = c("scale_down")) %>% 
+  row_spec(0, align = "c") %>% 
   footnote(general_title = "Note.",
-           general = "SD = Standard Error.")
+           general = "SD = Standard Error.",
+           footnote_as_chunk = TRUE) %>% 
+  save_kable("poop.png")
 ```
 
 (ref:corr-table) Correlations among EEG components, behavioral ratings, positive affectivity, and savoring the moment ($N$ = 52)
