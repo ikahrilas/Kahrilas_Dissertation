@@ -294,21 +294,20 @@ map2(plots_negative, c("LPP", "Late_LPP", "EPN", "N170", "SPN"), ~{
   ggsave(plot = .x, filename = here("images", "paper_2", "average_waveforms", "negative_blocks", paste0(.y, "_negative.png")), device = "png", width = 8, height = 5, scale = 1.5)
 })
 
-eeg_df_mast %>%
-  select(all_of(lpp_elec),  block:prop_trials) %>%
-  filter(ms < 2000,
-         block %in% c("Neg_Dec", "Neg_Watch", "Neg_Inc")) %>%
-  pivot_longer(., cols = lpp_elec, names_to = "electrode", values_to = "mv") %>%
+spn_df %>%
+  select(all_of(spn_elec),  block:prop_trials) %>%
+  filter(ms < 2000) %>%
+  pivot_longer(., cols = spn_elec, names_to = "electrode", values_to = "mv") %>%
   group_by(block, ms) %>%
   summarize(mv = mean(mv, na.rm = TRUE)) %>%
   ggplot(., aes(ms, mv, color = block)) +
   geom_line(size = 1.1) +
   geom_vline(xintercept = 0, linetype = "dashed") +
-  geom_vline(xintercept = c(300, 800), linetype = "solid", size = 1.05) +
+  geom_vline(xintercept = c(450, 1250), linetype = "solid", size = 1.05) +
   geom_hline(yintercept = 0, linetype = "dashed") +
   labs(x = "Time (ms)",
        y = expression(paste("Amplitude ( ",mu,"V)")),
-       title = paste("Average", "LPP", "Waveforms")) +
+       title = paste("Average", "SPN", "Waveforms")) +
   theme_classic() +
   theme(axis.title = element_text(size = 16),
         axis.text = element_text(size = 12),
