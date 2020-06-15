@@ -266,13 +266,12 @@ tab %>%
 ## create table
 kable(., format = "latex",  linesep = "", escape = FALSE, booktabs = TRUE, align = c("l", rep("r", 11)), caption = "(ref:corr-table)") %>% 
   kable_styling(latex_options = "scale_down", font_size = 12) %>% 
-  column_spec(2:11, width = "3em") %>% 
+  column_spec(2:12, width = "3em") %>% 
   footnote(general_title = "Note.",
            escape = FALSE,
            general = "*$p < .05$. PA = positive affectivity, StM = savoring the moment. EEG components and behavioral ratings (i.e., arousal, valence, and difficulty) averaged across all regulation blocks.",
            threeparttable = TRUE,
-           footnote_as_chunk = TRUE) %>% 
-  save_kable("poop.png")
+           footnote_as_chunk = TRUE)
 ```
 
 (ref:pairwise-watch-comparison-table) Contrasts between passive watch conditions for LPP, EPN, and N170 EEG components.
@@ -286,20 +285,43 @@ library(effectsize)
 library(kableExtra)
 
 # read in data and make variables for valence and regulation conditions
-dat <- read_csv("data/paper_two/created_data/per_data_analyses_2020_5_19.csv") %>% 
-  mutate(N170 = (N170_left + N170_right) / 2,
-         EPN = (EPN_left + EPN_right) / 2) %>% 
-  select(pid:LPP, N170, EPN, everything())
+dat <- read_csv("data/paper_two/created_data/per_data_analyses_2020_5_19.csv")
 
 per_dat_cond <- read_csv("data/paper_two/created_data/per_data_analyses_2020_5_19.csv") %>% 
-  mutate(N170 = (N170_left + N170_right) / 2,
-         EPN = (EPN_left + EPN_right) / 2) %>% 
   select(pid:LPP, N170, EPN, everything()) %>% 
   separate(block, c("valence_cond", "regulation_cond"), "_") %>% 
   mutate(valence_condition = if_else(valence_cond == "Neg", "Negative",
                            if_else(valence_cond == "Pos", "Positive", "Neutral")),
          regulation_condition = if_else(regulation_cond == "Dec", "Decrease",
                               if_else(regulation_cond == "Inc", "Increase", "Watch")))
+
+# SPN watch comparisons
+reg_mod_spn <- lmer(SPN ~ valence_condition * regulation_condition + (1|pid), data = per_dat_cond)
+spn_watch <- emmeans(reg_mod_spn, pairwise ~ valence_condition | regulation_condition)
+spn_watch_confint <- data.frame(confint(spn_watch)$contrasts) %>% 
+  filter(regulation_condition == "Watch") %>% 
+  select(contrast, lower.CL, upper.CL)
+spn_watch_tab <- data.frame(spn_watch$contrasts) %>% 
+  filter(regulation_condition == "Watch") %>% 
+  left_join(., spn_watch_confint, by = "contrast")
+# derive standardized beta for effect size
+dat$block <- relevel(factor(dat$block), ref = "Neu_Watch")
+spn_std_beta <- standardize_parameters(lmer(SPN ~ block + (1|pid), data = dat))
+spn_std_beta <- spn_std_beta %>% 
+  filter(Parameter %in% c("blockNeg_Watch", "blockPos_Watch")) %>% 
+  mutate(Parameter = if_else(Parameter == "blockNeg_Watch", "Negative - Neutral", "Neutral - Positive"))
+dat$block <- relevel(factor(dat$block), ref = "Pos_Watch")
+tmp <- standardize_parameters(lmer(SPN ~ block + (1|pid), data = dat))
+tmp <- tmp %>% 
+  filter(Parameter == "blockNeg_Watch") %>% 
+  mutate(Parameter = "Negative - Positive")
+spn_std_beta <- bind_rows(spn_std_beta, tmp) %>% 
+  mutate(interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "funder2019")))
+spn_watch_tab <- full_join(spn_watch_tab, spn_std_beta, by = c("contrast" = "Parameter")) %>% 
+  select(contrast, estimate, lower.CL, upper.CL, Std_Coefficient, interpretation, t.ratio, p.value)
+spn_watch_tab <- spn_watch_tab %>% 
+  mutate(comp = "SPN") %>% 
+  select(comp, everything())
 
 # LPP watch comparisons
 reg_mod_lpp <- lmer(LPP ~ valence_condition * regulation_condition + (1|pid), data = per_dat_cond)
@@ -315,7 +337,7 @@ dat$block <- relevel(factor(dat$block), ref = "Neu_Watch")
 lpp_std_beta <- standardize_parameters(lmer(LPP ~ block + (1|pid), data = dat))
 lpp_std_beta <- lpp_std_beta %>% 
   filter(Parameter %in% c("blockNeg_Watch", "blockPos_Watch")) %>% 
-  mutate(Parameter = c("Negative - Neutral", "Neutral - Positive"))
+  mutate(Parameter = if_else(Parameter == "blockNeg_Watch", "Negative - Neutral", "Neutral - Positive"))
 dat$block <- relevel(factor(dat$block), ref = "Pos_Watch")
 tmp <- standardize_parameters(lmer(LPP ~ block + (1|pid), data = dat))
 tmp <- tmp %>% 
@@ -327,6 +349,34 @@ lpp_watch_tab <- full_join(lpp_watch_tab, lpp_std_beta, by = c("contrast" = "Par
   select(contrast, estimate, lower.CL, upper.CL, Std_Coefficient, interpretation, t.ratio, p.value)
 lpp_watch_tab <- lpp_watch_tab %>% 
   mutate(comp = "LPP") %>% 
+  select(comp, everything())
+
+# Late LPP watch comparisons
+reg_mod_lpp_late <- lmer(LPP_late ~ valence_condition * regulation_condition + (1|pid), data = per_dat_cond)
+lpp_late_watch <- emmeans(reg_mod_lpp_late, pairwise ~ valence_condition | regulation_condition)
+lpp_late_watch_confint <- data.frame(confint(lpp_late_watch)$contrasts) %>% 
+  filter(regulation_condition == "Watch") %>% 
+  select(contrast, lower.CL, upper.CL)
+lpp_late_watch_tab <- data.frame(lpp_late_watch$contrasts) %>% 
+  filter(regulation_condition == "Watch") %>% 
+  left_join(., lpp_late_watch_confint, by = "contrast")
+# derive standardized beta for effect size
+dat$block <- relevel(factor(dat$block), ref = "Neu_Watch")
+lpp_late_std_beta <- standardize_parameters(lmer(LPP_late ~ block + (1|pid), data = dat))
+lpp_late_std_beta <- lpp_late_std_beta %>% 
+  filter(Parameter %in% c("blockNeg_Watch", "blockPos_Watch")) %>% 
+  mutate(Parameter = if_else(Parameter == "blockNeg_Watch", "Negative - Neutral", "Neutral - Positive"))
+dat$block <- relevel(factor(dat$block), ref = "Pos_Watch")
+tmp <- standardize_parameters(lmer(LPP_late ~ block + (1|pid), data = dat))
+tmp <- tmp %>% 
+  filter(Parameter == "blockNeg_Watch") %>% 
+  mutate(Parameter = "Negative - Positive")
+lpp_late_std_beta <- bind_rows(lpp_late_std_beta, tmp) %>% 
+  mutate(interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "funder2019")))
+lpp_late_watch_tab <- full_join(lpp_late_watch_tab, lpp_late_std_beta, by = c("contrast" = "Parameter")) %>% 
+  select(contrast, estimate, lower.CL, upper.CL, Std_Coefficient, interpretation, t.ratio, p.value)
+lpp_late_watch_tab <- lpp_late_watch_tab %>% 
+  mutate(comp = "Late LPP") %>% 
   select(comp, everything())
 
 # EPN comparisons
@@ -343,7 +393,7 @@ dat$block <- relevel(factor(dat$block), ref = "Neu_Watch")
 epn_std_beta <- standardize_parameters(lmer(EPN ~ block + (1|pid), data = dat))
 epn_std_beta <- epn_std_beta %>% 
   filter(Parameter %in% c("blockNeg_Watch", "blockPos_Watch")) %>% 
-  mutate(Parameter = c("Neutral - Positive", "Negative - Neutral"))
+  mutate(Parameter = if_else(Parameter == "blockNeg_Watch", "Negative - Neutral", "Neutral - Positive"))
 dat$block <- relevel(factor(dat$block), ref = "Pos_Watch")
 tmp <- standardize_parameters(lmer(EPN ~ block + (1|pid), data = dat))
 tmp <- tmp %>% 
@@ -371,7 +421,7 @@ dat$block <- relevel(factor(dat$block), ref = "Neu_Watch")
 n170_std_beta <- standardize_parameters(lmer(N170 ~ block + (1|pid), data = dat))
 n170_std_beta <- n170_std_beta %>% 
   filter(Parameter %in% c("blockNeg_Watch", "blockPos_Watch")) %>% 
-  mutate(Parameter = c("Neutral - Positive", "Negative - Neutral"))
+  mutate(Parameter = if_else(Parameter == "blockNeg_Watch", "Negative - Neutral", "Neutral - Positive"))
 dat$block <- relevel(factor(dat$block), ref = "Pos_Watch")
 tmp <- standardize_parameters(lmer(N170 ~ block + (1|pid), data = dat))
 tmp <- tmp %>% 
@@ -399,7 +449,7 @@ dat$block <- relevel(factor(dat$block), ref = "Neu_Watch")
 ar_std_beta <- standardize_parameters(lmer(arousal ~ block + (1|pid), data = dat))
 ar_std_beta <- ar_std_beta %>% 
   filter(Parameter %in% c("blockNeg_Watch", "blockPos_Watch")) %>% 
-  mutate(Parameter = c("Neutral - Positive", "Negative - Neutral"))
+  mutate(Parameter = if_else(Parameter == "blockNeg_Watch", "Negative - Neutral", "Neutral - Positive"))
 dat$block <- relevel(factor(dat$block), ref = "Pos_Watch")
 tmp <- standardize_parameters(lmer(arousal ~ block + (1|pid), data = dat))
 tmp <- tmp %>% 
@@ -427,7 +477,7 @@ dat$block <- relevel(factor(dat$block), ref = "Neu_Watch")
 val_std_beta <- standardize_parameters(lmer(valence ~ block + (1|pid), data = dat))
 val_std_beta <- val_std_beta %>% 
   filter(Parameter %in% c("blockNeg_Watch", "blockPos_Watch")) %>% 
-  mutate(Parameter = c("Neutral - Positive", "Negative - Neutral"))
+  mutate(Parameter = if_else(Parameter == "blockNeg_Watch", "Negative - Neutral", "Neutral - Positive"))
 dat$block <- relevel(factor(dat$block), ref = "Pos_Watch")
 tmp <- standardize_parameters(lmer(valence ~ block + (1|pid), data = dat))
 tmp <- tmp %>% 
@@ -441,7 +491,7 @@ val_watch_tab <- val_watch_tab %>%
   mutate(comp = "valence_rating") %>% 
   select(comp, everything())
 
-watch_tab <- bind_rows(lpp_watch_tab, epn_watch_tab, n170_watch_tab, ar_watch_tab, val_watch_tab) %>% 
+watch_tab <- bind_rows(spn_watch_tab, n170_watch_tab, epn_watch_tab, lpp_watch_tab, lpp_late_watch_tab, ar_watch_tab, val_watch_tab) %>% 
   mutate(Std_Coefficient = abs(Std_Coefficient))
 names(watch_tab) <- c("comp", "Contrast", "Estimate", "lower.CL", "upper.CL", "Std. Beta", "interpretation", "$t$ ratio", "Sig.")
 watch_tab <- watch_tab %>%
@@ -471,11 +521,13 @@ watch_tab %>%
   select(-comp) %>% 
 kable(., "latex", escape = FALSE, booktabs = TRUE, align = c("l", "c", "c", "c"), linesep = "", caption = "(ref:pairwise-watch-comparison-table)") %>% 
   row_spec(0, align = "c") %>% 
-  pack_rows("LPP", 1, 3) %>% 
-  pack_rows("EPN", 4, 6) %>% 
-  pack_rows("N170", 7, 9) %>% 
-  pack_rows("Arousal Ratings", 10, 12) %>% 
-  pack_rows("Valence Ratings", 13, 15) %>% 
+  pack_rows("SPN", 1, 3) %>% 
+  pack_rows("N170", 4, 6) %>% 
+  pack_rows("EPN", 7, 9) %>% 
+  pack_rows("LPP", 10, 12) %>% 
+  pack_rows("Late LPP", 13, 15) %>% 
+  pack_rows("Arousal Ratings", 16, 18) %>% 
+  pack_rows("Valence Ratings", 19, 21) %>% 
   footnote(escape = FALSE,
            footnote_as_chunk = TRUE,
            general_title = "Note.",
@@ -483,7 +535,7 @@ kable(., "latex", escape = FALSE, booktabs = TRUE, align = c("l", "c", "c", "c")
            threeparttable = TRUE)
 ```
 
-(ref:pairwise-reg-comparison-table) Contrasts between regulation conditions for positive and negative OASIS images for LPP, EPN, and N170 EEG components.
+sav(ref:pairwise-reg-comparison-table) Contrasts between regulation conditions for positive and negative OASIS images for LPP, EPN, and N170 EEG components.
 
 ```{r pairwise-reg-comparison-table, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:pairwise-reg-comparison-table)", cache = TRUE, cache.lazy = FALSE}
 library(tidyverse)
