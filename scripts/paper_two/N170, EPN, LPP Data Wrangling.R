@@ -39,8 +39,8 @@ block_names <- c("Pos_Inc",
 
 # read in .evt files, make columns for block, number of trials, and pid. This cleans names up, too.
 evt <- map_dfr(evt_files, ~{
-  read_table(.x) %>%
-    separate(`Code	TriNo	Comnt`, into = c("block", "n_trials"), sep = " ") %>%
+  read_delim(.x, "\t", escape_double = FALSE, trim_ws = TRUE) %>%
+    separate(Comnt, into = c("block", "n_trials"), sep = " ") %>%
     mutate(block = str_extract(block, block_names),
            n_trials = as.numeric(n_trials),
            pid = as.numeric(str_extract(.x, "[0-9]+")),
@@ -81,7 +81,8 @@ split_case_avr <- paste0("/Users/ian/tmp/Kahrilas_Dissertation/data/paper_two/N_
 split_case_mr <- bind_rows(read_table2(split_case_mr[1], skip = 1), read_table2(split_case_mr[2], skip = 1)) %>%
   mutate(
     pid = as.numeric(str_extract(split_case_mr[1], "[0-9]{7,}")),
-    block = rep(block_names, each = nrow(.) / 7),
+    block = rep(c("Pos_Dec", "Neg_Inc", "Neu_Watch",
+                  "Pos_Inc", "Pos_Watch", "Neg_Dec", "Neg_Watch"), each = nrow(.) / 7),
     ms = rep(seq(from = -200, to = 3000,
                  by = ((3200 + (3200 / (nrow(.)/7))) / (nrow(.)/7))),
              times = 7)) %>%
@@ -93,7 +94,8 @@ mastoid <- bind_rows(mastoid, split_case_mr)
 split_case_avr <- bind_rows(read_table2(split_case_avr[1], skip = 1), read_table2(split_case_avr[2], skip = 1)) %>%
   mutate(
     pid = as.numeric(str_extract(split_case_avr[1], "[0-9]{7,}")),
-    block = rep(block_names, each = nrow(.) / 7),
+    block = rep(c("Pos_Dec", "Neg_Inc", "Neu_Watch",
+                  "Pos_Inc", "Pos_Watch", "Neg_Dec", "Neg_Watch"), each = nrow(.) / 7),
     ms = rep(seq(from = -200, to = 3000,
                  by = ((3200 + (3200 / (nrow(.)/7))) / (nrow(.)/7))),
              times = 7))
@@ -103,9 +105,9 @@ avr <- bind_rows(avr, split_case_avr)
 # evt data
 split_case_evt <- paste0("/Users/ian/tmp/Kahrilas_Dissertation/data/paper_two/N_EPN_LPP evt/", str_subset(list.files("/Users/ian/tmp/Kahrilas_Dissertation/data/paper_two/N_EPN_LPP evt/"), "206201831"))
 
-split_case_evt <- bind_rows(read_table(split_case_evt[1]),
-                            read_table(split_case_evt[2])) %>%
-  separate(`Code	TriNo	Comnt`, into = c("block", "n_trials"), sep = " ") %>%
+split_case_evt <- bind_rows(read_delim(split_case_evt[1], "\t", escape_double = FALSE, trim_ws = TRUE),
+                            read_delim(split_case_evt[2], "\t", escape_double = FALSE, trim_ws = TRUE)) %>%
+  separate(Comnt, into = c("block", "n_trials"), sep = " ") %>%
   mutate(block = c("Pos_Dec",
                    "Neg_Inc",
                    "Neu_Watch",
@@ -113,8 +115,8 @@ split_case_evt <- bind_rows(read_table(split_case_evt[1]),
                    "Pos_Watch",
                    "Neg_Dec",
                    "Neg_Watch"),
-         n_trials = as.numeric(n_trials),
          pid = as.numeric(str_extract(split_case_evt[1], "[0-9]+")),
+         n_trials = as.numeric(n_trials),
          prop_trials = n_trials / 40)
 
 evt <- bind_rows(evt, split_case_evt)
@@ -141,3 +143,4 @@ erp_avr$pid <- as.character(erp_avr$pid)
 # write files
 write_csv(erp_mast, here("data", "paper_two", "created_data", "erp_mast.csv"))
 write_csv(erp_avr, here("data", "paper_two", "created_data", "erp_avr.csv"))
+
