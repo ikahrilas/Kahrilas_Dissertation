@@ -72,6 +72,7 @@ avr <- map_df(n170_epn_files, ~ {
                times = 7))
 }
 )
+
 #'
 #' Merge split case (206201821b) with rest of the data
 #+ merging split case
@@ -129,8 +130,10 @@ names(mastoid) <- gsub("_.*", "", names(mastoid))
 #'
 #' merge all data together and write to work space
 #+ merge .mul and .evt data frames
-erp_mast <- inner_join(mastoid, evt, by = c("pid", "block"))
-erp_avr <- inner_join(avr, evt, by = c("pid", "block"))
+erp_mast <- inner_join(mastoid, evt, by = c("pid", "block")) %>%
+  select(-Tmu, -Code, -TriNo)
+erp_avr <- inner_join(avr, evt, by = c("pid", "block")) %>%
+  select(-Tmu, -Code, -TriNo)
 
 # fix incorrect pid
 erp_mast$pid[erp_mast$pid == 201206832] <- 206201832
@@ -143,4 +146,3 @@ erp_avr$pid <- as.character(erp_avr$pid)
 # write files
 write_csv(erp_mast, here("data", "paper_two", "created_data", "erp_mast.csv"))
 write_csv(erp_avr, here("data", "paper_two", "created_data", "erp_avr.csv"))
-
