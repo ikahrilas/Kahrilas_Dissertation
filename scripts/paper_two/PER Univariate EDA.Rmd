@@ -27,10 +27,10 @@ per_questionnaires <- read_csv(here("data", "paper_two", "archive", "data_from_P
 ```
 
 ```{r averaging and questionnaire variable selection, include = FALSE}
-lpp_elec <- c("B28") # look at 450 - 800 ms and 800 - 2000 ms windows
+lpp_elec <- c("B28") # look at 400 - 800 ms and 800 - 2000 ms windows
 epn_elec <- c("A29", "B26") # 250 - 375 ms
 N170_elec <- c("A29", "B26") # 160 - 200 ms
-spn_elec <- "A5" # 315 - 1250 ms
+spn_elec <- "A5" # 450 - 1250 ms
 
 # select variables from questionnaire data set for analyses
 measures_int <- per_questionnaires %>% 
@@ -39,7 +39,7 @@ measures_int <- per_questionnaires %>%
 
 LPP <- erp_mast_wide %>%
   select(all_of(lpp_elec), pid:prop_trials) %>% 
-  filter(between(ms, 300, 800)) %>%
+  filter(between(ms, 400, 800)) %>%
   pivot_longer(., cols = all_of(lpp_elec), names_to = "electrode", values_to = "mv") %>% 
   group_by(pid, block) %>% 
   summarize(LPP = mean(mv, na.rm = TRUE),
