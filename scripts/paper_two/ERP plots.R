@@ -29,8 +29,8 @@ spn_elec <- "A5" # 450 - 1250 ms
 #'
 #' Omit extreme cases as indicated by histograms and QQ plots in Univarite Exploration script
 #+ Omit extreme cases
-# eeg_df_mast$B28[eeg_df_mast$pid == 206201854 & eeg_df_mast$block %in% c("Neg_Watch", "Neg_Dec") & between(eeg_df_mast$ms, 450, 2000)] <- NA
-# spn_df$A5[spn_df$pid == 206201817 & spn_df$block %in% c("Neu_Watch", "Pos_Dec") & between(spn_df$ms, 315, 1215)] <- NA
+ eeg_df_mast$B28[eeg_df_mast$pid == 206201854 & eeg_df_mast$block %in% c("Neg_Watch", "Neg_Dec") & between(eeg_df_mast$ms, 450, 2000)] <- NA
+ spn_df$A5[spn_df$pid == 206201817 & spn_df$block %in% c("Neu_Watch", "Pos_Dec") & between(spn_df$ms, 315, 1215)] <- NA
 
 #' Create plots for each component with all conditions
 #+ plot creation
