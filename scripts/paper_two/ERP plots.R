@@ -17,19 +17,20 @@ eeg_df_mast <- read_csv(here("data", "paper_two", "created_data", "erp_mast.csv"
 eeg_df_avr <- read_csv(here("data", "paper_two", "created_data", "erp_avr.csv"))
 spn_df <- read_csv(here("data", "paper_two", "created_data", "spn.csv")) %>%
   mutate(block = str_remove(block, "Pre_"))
+
 #'
 #' define clusters of electrodes and time windows for each component
 #+ electrode clusters and time windows
 # clusters
-lpp_elec <- "B28" # look at 450 - 800 ms and 800 - 2000 ms windows
+lpp_elec <- "B28" # look at 400 - 800 ms and 800 - 2000 ms windows
 epn_elec <- c("A29", "B26") # 250 - 375 ms
 N170_elec <- c("A29", "B26") # 160 - 200 ms
-spn_elec <- "A5" # 315 - 1250 ms
+spn_elec <- "A5" # 450 - 1250 ms
 #'
 #' Omit extreme cases as indicated by histograms and QQ plots in Univarite Exploration script
-#+ Omit exteme cases
-eeg_df_mast$B28[eeg_df_mast$pid == 206201854 & eeg_df_mast$block %in% c("Neg_Watch", "Neg_Dec") & between(eeg_df_mast$ms, 450, 2000)] <- NA
-spn_df$A5[spn_df$pid == 206201817 & spn_df$block %in% c("Neu_Watch", "Pos_Dec") & between(spn_df$ms, 315, 1215)] <- NA
+#+ Omit extreme cases
+# eeg_df_mast$B28[eeg_df_mast$pid == 206201854 & eeg_df_mast$block %in% c("Neg_Watch", "Neg_Dec") & between(eeg_df_mast$ms, 450, 2000)] <- NA
+# spn_df$A5[spn_df$pid == 206201817 & spn_df$block %in% c("Neu_Watch", "Pos_Dec") & between(spn_df$ms, 315, 1215)] <- NA
 
 #' Create plots for each component with all conditions
 #+ plot creation
@@ -181,7 +182,7 @@ plots_all <- pmap(list(dat = list(eeg_df_mast,
                                  "EPN",
                                  "N170",
                                  "SPN"),
-                   time_window_low = c(450,
+                   time_window_low = c(400,
                                        800,
                                        225,
                                        160,
@@ -213,7 +214,7 @@ plots_passive <- pmap(list(dat = list(eeg_df_mast,
                                                800,
                                                225,
                                                160,
-                                               315),
+                                               450),
                            time_window_high = c(800,
                                                 2000,
                                                 375,
@@ -236,11 +237,11 @@ plots_positive <- pmap(list(dat = list(eeg_df_mast,
                                           "EPN",
                                           "N170",
                                           "SPN"),
-                            time_window_low = c(450,
+                            time_window_low = c(400,
                                                 800,
                                                 225,
                                                 160,
-                                                315),
+                                                450),
                             time_window_high = c(800,
                                                  2000,
                                                  375,
@@ -263,11 +264,11 @@ plots_negative <- pmap(list(dat = list(eeg_df_mast,
                                           "EPN",
                                           "N170",
                                           "SPN"),
-                            time_window_low = c(300,
+                            time_window_low = c(400,
                                                 800,
                                                 225,
                                                 160,
-                                                315),
+                                                450),
                             time_window_high = c(800,
                                                  2000,
                                                  375,
@@ -293,26 +294,3 @@ map2(plots_positive, c("LPP", "Late_LPP", "EPN", "N170", "SPN"), ~{
 map2(plots_negative, c("LPP", "Late_LPP", "EPN", "N170", "SPN"), ~{
   ggsave(plot = .x, filename = here("images", "paper_2", "average_waveforms", "negative_blocks", paste0(.y, "_negative.png")), device = "png", width = 8, height = 5, scale = 1.5)
 })
-
-spn_df %>%
-  select(all_of(spn_elec),  block:prop_trials) %>%
-  filter(ms < 2000) %>%
-  pivot_longer(., cols = spn_elec, names_to = "electrode", values_to = "mv") %>%
-  group_by(block, ms) %>%
-  summarize(mv = mean(mv, na.rm = TRUE)) %>%
-  ggplot(., aes(ms, mv, color = block)) +
-  geom_line(size = 1.1) +
-  geom_vline(xintercept = 0, linetype = "dashed") +
-  geom_vline(xintercept = c(450, 1250), linetype = "solid", size = 1.05) +
-  geom_hline(yintercept = 0, linetype = "dashed") +
-  labs(x = "Time (ms)",
-       y = expression(paste("Amplitude ( ",mu,"V)")),
-       title = paste("Average", "SPN", "Waveforms")) +
-  theme_classic() +
-  theme(axis.title = element_text(size = 16),
-        axis.text = element_text(size = 12),
-        legend.title = element_text(size = 16),
-        legend.text = element_text(size = 12),
-        legend.key.size = unit(2, "line"),
-        plot.title = element_text(hjust = 0.5),
-        title = element_text(size = 16))
