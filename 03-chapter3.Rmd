@@ -924,9 +924,9 @@ kable(., "latex", escape = FALSE, booktabs = TRUE, align = c("l", rep("c", times
            footnote_as_chunk = TRUE)
 ```
 
-(ref:LPP-watch-topos) Topographical plots and average waveforms for LPP during passive watch conditions. Sensors highlighted in white were used to measure LPP for waveform plots and analyses.
+(ref:LPP-watch-topos) Topographical plots and average waveforms for LPP during passive watch conditions. Sensor highlighted in white was used to measure LPP for waveform plots and analyses.
 
-```{r LPP-watch-topos, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:LPP-watch-topos)", cahce = TRUE, cache.lazy = FALSE}
+```{r LPP-watch-topos, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:LPP-watch-topos)", cahce = TRUE, cache.lazy = FALSE, out.width="150%"}
 library(devtools)
 library(eegUtils) # remotes::install_github("craddm/eegUtils")
 library(tidyverse)
@@ -945,56 +945,67 @@ elec_loc <- elec_loc %>%
   mutate(x = theta * cos(radian_phi),
          y = theta * sin(radian_phi))
 
-Pz_elec <- c("A25", "B28", "B22")
+Pz_elec <- c("B28")
 
 # merge coordinates with ERP data
-eeg_dat <- read_csv(here("data", "paper_two", "created_data",  "erp_mast_no_lp.csv"))
-eeg_dat$A25[eeg_dat$pid %in% c(206201843, 206201831) & eeg_dat$block %in% c("Neg_Watch", "Pos_Watch") & between(eeg_dat$ms, 450, 800)] <- NA
-eeg_dat$B28[eeg_dat$pid %in% c(206201843, 206201831) & eeg_dat$block %in% c("Neg_Watch", "Pos_Watch") & between(eeg_dat$ms, 450, 800)] <- NA
-eeg_dat$B22[eeg_dat$pid %in% c(206201843, 206201831) & eeg_dat$block %in% c("Neg_Watch", "Pos_Watch") & between(eeg_dat$ms, 450, 800)] <- NA
+eeg_dat <- read_csv(here("data", "paper_two", "created_data", "erp_mast.csv"))
+eeg_dat$B28[eeg_dat$pid == 206201854 & eeg_dat$block %in% c("Neg_Watch", "Neg_Dec") & between(eeg_dat$ms, 400, 2000)] <- NA
 eeg_dat_long <- pivot_longer(eeg_dat, cols = A1:EXG2, names_to = "electrode", values_to = "amplitude")
 eeg_dat_loc <- left_join(eeg_dat_long, elec_loc, by = c("electrode" = "channel"))
 topo_elec <- c(paste0("A", 1:32), paste0("B", 1:32))
 
-lpp_topo_fun <- function(block_type, title) {
-erp_topo <- eeg_dat_loc %>%
-  filter(!is.na(amplitude), block == block_type, electrode %in% topo_elec, between(ms, 450, 800)) %>%
-  group_by(electrode, x, y) %>%
+late_tmp <- eeg_dat_loc %>% 
+  filter(!is.na(amplitude), block %in% c("Neu_Watch", "Pos_Watch", "Neg_Watch"), 
+          electrode %in% topo_elec, between(ms, 800, 2000)) %>%
+  group_by(block, electrode, x, y) %>%
   dplyr::summarize(amplitude = mean(amplitude, na.rm = TRUE)) %>% 
-  mutate(highlight = if_else(electrode %in% Pz_elec, "white", "black"))
-ggplot(erp_topo, aes(x = x, y = y, fill = amplitude)) +
+  mutate(highlight = if_else(electrode %in% Pz_elec, "white", "black"),
+         block = if_else(block == "Neu_Watch", "Neutral", 
+                         if_else(block == "Pos_Watch", "Positive", "Negative")),
+         block = factor(block, levels = c("Neutral", "Positive", "Negative")),
+         comp = "Late")
+
+watch_topos <- eeg_dat_loc %>%
+  filter(!is.na(amplitude), block %in% c("Neu_Watch", "Pos_Watch", "Neg_Watch"), 
+          electrode %in% topo_elec, between(ms, 400, 800)) %>%
+  group_by(block, electrode, x, y) %>%
+  dplyr::summarize(amplitude = mean(amplitude, na.rm = TRUE)) %>% 
+  mutate(highlight = if_else(electrode %in% Pz_elec, "white", "black"),
+         block = if_else(block == "Neu_Watch", "Neutral", 
+                         if_else(block == "Pos_Watch", "Positive", "Negative")),
+         block = factor(block, levels = c("Neutral", "Positive", "Negative")),
+         comp = "Early") %>% 
+    bind_rows(., late_tmp) %>%
+    mutate(., comp = factor(comp)) %>% 
+ggplot(., aes(x = x, y = y, fill = amplitude)) +
   stat_scalpmap() +
-  geom_mask(scale_fac = 1.6) +
+  geom_mask(scale_fac = 1.6, size = .01) +
   geom_head() +               
   geom_channels(aes(color = highlight), size = 0.125) +             
-  scale_fill_viridis_c(limits = c(-5, 5), oob = scales::squish) +
+  scale_fill_viridis_c(limits = c(-6, 6), oob = scales::squish) +
   scale_color_manual(breaks = c("black", "white"),
                      values = c("black", "white"),
                      guide = FALSE) +
   labs(fill = expression(paste("Amplitude (", mu,"V)"))) +
   coord_equal() +
   theme_void() +
-  ggtitle(title) +
-  theme(plot.title = element_text(hjust = 0.5, size = 12))
-}
-
-watch_topos <- map2(c("Neu_Watch", "Pos_Watch", "Neg_Watch"), 
-                    c("Neutral", "Positive", "Negative"),
-                    ~ lpp_topo_fun(.x, .y))
+  facet_grid(vars(comp), vars(block), switch = "y") +
+  theme(strip.text.x = element_text(size = 12, vjust = 1),
+        strip.text.y = element_text(size = 12, angle = 90))
 
 watch_lpp <- eeg_dat %>%
     filter(block %in% c("Neu_Watch", "Pos_Watch", "Neg_Watch")) %>% 
     select(all_of(Pz_elec),  block:prop_trials) %>%
-    filter(ms < 1750) %>% 
+    filter(ms <= 2000) %>% 
     pivot_longer(., cols = Pz_elec, names_to = "electrode", values_to = "mv") %>%
     group_by(block, ms) %>%
     dplyr::summarize(mv = mean(mv, na.rm = TRUE)) %>%
     ggplot(., aes(ms, mv, color = block)) +
     geom_line(size = 1.1) +
     geom_vline(xintercept = 0, linetype = "dashed") +
-    geom_vline(xintercept = c(450, 800), linetype = "solid", size = 1.05) +
+    geom_vline(xintercept = c(400, 800, 2000), linetype = "solid", size = 1.05) +
     geom_hline(yintercept = 0, linetype = "dashed") +
-    annotate("rect", xmin = 450, xmax = 800, ymin = -Inf, ymax = Inf, alpha = .2) +
+    annotate("rect", xmin = 400, xmax = 2000, ymin = -Inf, ymax = Inf, alpha = .2) +
     labs(x = "Time (ms)",
          y = expression(paste("Amplitude ( ",mu,"V)"))) +
    #      title = paste("Average LPP Waveforms")) +
@@ -1012,8 +1023,7 @@ watch_lpp <- eeg_dat %>%
                        breaks = c("Neg_Watch", "Pos_Watch", "Neu_Watch"),
                        labels = c("Negative Watch", "Positive Watch", "Neutral Watch"))
 
-topo_patch <- (watch_topos[[1]] | watch_topos[[2]] | watch_topos[[3]]) + plot_layout(guides = 'collect')
-topo_patch / watch_lpp
+watch_topos / watch_lpp + plot_layout(widths = 2)
 
 # --- contrast topos - comment out for now
 # lpp_topo_plot_contrast <- function(block_1, block_2, title) {
@@ -1051,7 +1061,7 @@ topo_patch / watch_lpp
 # watch_topos
 ```
 
-(ref:LPP-pos-topos) Topographical plots and average waveforms for LPP during regulation conditions in response to positive images. Sensors highlighted in white were used to measure LPP for waveform plots and analyses.
+(ref:LPP-pos-topos) Topographical plots and average waveforms for LPP during regulation conditions in response to positive images. Sensor highlighted in white was used to measure LPP for waveform plots and analyses.
 
 ```{r LPP-pos-topos, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:LPP-pos-topos)", cache = TRUE, cache.lazy = FALSE}
 rm(list=ls())
@@ -1076,75 +1086,85 @@ elec_loc <- elec_loc %>%
 Pz_elec <- c("B28")
 
 # merge coordinates with ERP data
-eeg_dat <- read_csv(here("data", "paper_two", "created_data",  "erp_mast_no_lp.csv"))
-eeg_dat$A25[eeg_dat$pid %in% c(206201843, 206201831) & eeg_dat$block %in% c("Neg_Watch", "Pos_Watch") & between(eeg_dat$ms, 450, 800)] <- NA
-eeg_dat$B28[eeg_dat$pid %in% c(206201843, 206201831) & eeg_dat$block %in% c("Neg_Watch", "Pos_Watch") & between(eeg_dat$ms, 450, 800)] <- NA
-eeg_dat$B22[eeg_dat$pid %in% c(206201843, 206201831) & eeg_dat$block %in% c("Neg_Watch", "Pos_Watch") & between(eeg_dat$ms, 450, 800)] <- NA
+eeg_dat <- read_csv(here("data", "paper_two", "created_data", "erp_mast.csv"))
+eeg_dat$B28[eeg_dat$pid == 206201854 & eeg_dat$block %in% c("Neg_Watch", "Neg_Dec") & between(eeg_dat$ms, 400, 2000)] <- NA
 eeg_dat_long <- pivot_longer(eeg_dat, cols = A1:EXG2, names_to = "electrode", values_to = "amplitude")
 eeg_dat_loc <- left_join(eeg_dat_long, elec_loc, by = c("electrode" = "channel"))
 topo_elec <- c(paste0("A", 1:32), paste0("B", 1:32))
 
-lpp_topo_fun <- function(block_type, title) {
-erp_topo <- eeg_dat_loc %>%
-  filter(!is.na(amplitude), block == block_type, electrode %in% topo_elec, between(ms, 450, 800)) %>%
-  group_by(electrode, x, y) %>%
+late_tmp <- eeg_dat_loc %>% 
+  filter(!is.na(amplitude), block %in% c("Pos_Dec", "Pos_Watch", "Pos_Inc"), 
+          electrode %in% topo_elec, between(ms, 800, 2000)) %>%
+  group_by(block, electrode, x, y) %>%
   dplyr::summarize(amplitude = mean(amplitude, na.rm = TRUE)) %>% 
-  mutate(highlight = if_else(electrode %in% Pz_elec, "white", "black"))
-ggplot(erp_topo, aes(x = x, y = y, fill = amplitude)) +
-  stat_scalpmap() +  
-  geom_mask(scale_fac = 1.6) +
+  mutate(highlight = if_else(electrode %in% Pz_elec, "white", "black"),
+         block = if_else(block == "Pos_Dec", "Decrease", 
+                         if_else(block == "Pos_Watch", "Watch", "Increase")),
+         block = factor(block, levels = c("Decrease", "Watch", "Increase")),
+         comp = "Late")
+
+pos_topos <- eeg_dat_loc %>%
+  filter(!is.na(amplitude), block %in% c("Pos_Dec", "Pos_Watch", "Pos_Inc"), 
+          electrode %in% topo_elec, between(ms, 400, 800)) %>%
+  group_by(block, electrode, x, y) %>%
+  dplyr::summarize(amplitude = mean(amplitude, na.rm = TRUE)) %>% 
+  mutate(highlight = if_else(electrode %in% Pz_elec, "white", "black"),
+         block = if_else(block == "Pos_Dec", "Decrease", 
+                         if_else(block == "Pos_Watch", "Watch", "Increase")),
+         block = factor(block, levels = c("Decrease", "Watch", "Increase")),
+         comp = "Early") %>% 
+    bind_rows(., late_tmp) %>%
+    mutate(., comp = factor(comp)) %>% 
+ggplot(., aes(x = x, y = y, fill = amplitude)) +
+  stat_scalpmap() +
+  geom_mask(scale_fac = 1.6, size = .01) +
   geom_head() +               
   geom_channels(aes(color = highlight), size = 0.125) +             
-  scale_fill_viridis_c(limits = c(-5, 5), oob = scales::squish) +
+  scale_fill_viridis_c(limits = c(-8, 8), oob = scales::squish) +
   scale_color_manual(breaks = c("black", "white"),
                      values = c("black", "white"),
                      guide = FALSE) +
   labs(fill = expression(paste("Amplitude (", mu,"V)"))) +
   coord_equal() +
   theme_void() +
-  ggtitle(title) +
-  theme(plot.title = element_text(hjust = 0.5, size = 12))
-}
-
-watch_topos <- map2(c("Pos_Dec", "Pos_Watch", "Pos_Inc"), 
-                    c("Decrease", "Watch", "Increase"),
-                    ~ lpp_topo_fun(.x, .y))
+  facet_grid(vars(comp), vars(block), switch = "y") +
+  theme(strip.text.x = element_text(size = 10, vjust = 1),
+        strip.text.y = element_text(size = 10, angle = 90))
 
 watch_lpp <- eeg_dat %>%
     filter(block %in% c("Pos_Dec", "Pos_Watch", "Pos_Inc")) %>% 
     select(all_of(Pz_elec),  block:prop_trials) %>%
-    filter(ms < 1750) %>% 
+    filter(ms <= 2000) %>% 
     pivot_longer(., cols = Pz_elec, names_to = "electrode", values_to = "mv") %>%
     group_by(block, ms) %>%
     dplyr::summarize(mv = mean(mv, na.rm = TRUE)) %>%
     ggplot(., aes(ms, mv, color = block)) +
     geom_line(size = 1.1) +
     geom_vline(xintercept = 0, linetype = "dashed") +
-    geom_vline(xintercept = c(450, 800), linetype = "solid", size = 1.05) +
+    geom_vline(xintercept = c(450, 800, 2000), linetype = "solid", size = 1.05) +
     geom_hline(yintercept = 0, linetype = "dashed") +
-    annotate("rect", xmin = 450, xmax = 800, ymin = -Inf, ymax = Inf, alpha = .2) +
+    annotate("rect", xmin = 450, xmax = 2000, ymin = -Inf, ymax = Inf, alpha = .2) +
     labs(x = "Time (ms)",
          y = expression(paste("Amplitude ( ",mu,"V)"))) +
    #      title = paste("Average LPP Waveforms")) +
     theme_classic() +
-    theme(axis.title = element_text(size = 12),
-          axis.text = element_text(size = 12),
-          legend.title = element_text(size = 12),
-          legend.text = element_text(size = 12),
+    theme(axis.title = element_text(size = 10),
+          axis.text = element_text(size = 10),
+          legend.title = element_text(size = 10),
+          legend.text = element_text(size = 10),
           legend.key.size = unit(2, "line"),
           plot.title = element_text(hjust = 0.5),
-          title = element_text(size = 12)) +
+          title = element_text(size = 10)) +
     # scale_color_manual(name = "Group", values = c("green", "blue", "red"))
     scale_color_manual(values = c("blue", "green", "red"),
                           name = "Block",
                           breaks = c("Pos_Dec", "Pos_Watch", "Pos_Inc"),
                           labels = c("Positive Decrease", "Positive Watch", "Positive Increase"))
 
-topo_patch <- (watch_topos[[1]] | watch_topos[[2]] | watch_topos[[3]]) + plot_layout(guides = 'collect')
-topo_patch / watch_lpp
+pos_topos / watch_lpp + plot_layout(widths = c(2))
 ```
 
-(ref:LPP-neg-topos) Topographical plots and average waveforms for LPP during regulation conditions in response to negative images. Sensors highlighted in white were used to measure LPP for waveform plots and analyses.
+(ref:LPP-neg-topos) Topographical plots and average waveforms for early (400 - 800 ms) and late (800 - 2000 ms) LPP during regulation conditions in response to negative images. Sensor highlighted in white was used to measure LPP for waveform plots and analyses.
 
 ```{r LPP-neg-topos, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:LPP-neg-topos)", cache = TRUE, cache.lazy = FALSE}
 rm(list=ls())
@@ -1166,78 +1186,88 @@ elec_loc <- elec_loc %>%
   mutate(x = theta * cos(radian_phi),
          y = theta * sin(radian_phi))
 
-Pz_elec <- c("A25", "B28", "B22")
+Pz_elec <- c("B28")
 
 # merge coordinates with ERP data
-eeg_dat <- read_csv(here("data", "paper_two", "created_data",  "erp_mast_no_lp.csv"))
-eeg_dat$A25[eeg_dat$pid %in% c(206201843, 206201831) & eeg_dat$block %in% c("Neg_Watch", "Pos_Watch") & between(eeg_dat$ms, 450, 800)] <- NA
-eeg_dat$B28[eeg_dat$pid %in% c(206201843, 206201831) & eeg_dat$block %in% c("Neg_Watch", "Pos_Watch") & between(eeg_dat$ms, 450, 800)] <- NA
-eeg_dat$B22[eeg_dat$pid %in% c(206201843, 206201831) & eeg_dat$block %in% c("Neg_Watch", "Pos_Watch") & between(eeg_dat$ms, 450, 800)] <- NA
+eeg_dat <- read_csv(here("data", "paper_two", "created_data", "erp_mast.csv"))
+eeg_dat$B28[eeg_dat$pid == 206201854 & eeg_dat$block %in% c("Neg_Watch", "Neg_Dec") & between(eeg_dat$ms, 400, 2000)] <- NA
 eeg_dat_long <- pivot_longer(eeg_dat, cols = A1:EXG2, names_to = "electrode", values_to = "amplitude")
 eeg_dat_loc <- left_join(eeg_dat_long, elec_loc, by = c("electrode" = "channel"))
 topo_elec <- c(paste0("A", 1:32), paste0("B", 1:32))
 
-lpp_topo_fun <- function(block_type, title) {
-erp_topo <- eeg_dat_loc %>%
-  filter(!is.na(amplitude), block == block_type, electrode %in% topo_elec, between(ms, 450, 800)) %>%
-  group_by(electrode, x, y) %>%
+late_tmp <- eeg_dat_loc %>% 
+  filter(!is.na(amplitude), block %in% c("Neg_Dec", "Neg_Watch", "Neg_Inc"), 
+          electrode %in% topo_elec, between(ms, 800, 2000)) %>%
+  group_by(block, electrode, x, y) %>%
   dplyr::summarize(amplitude = mean(amplitude, na.rm = TRUE)) %>% 
-  mutate(highlight = if_else(electrode %in% Pz_elec, "white", "black"))
-ggplot(erp_topo, aes(x = x, y = y, fill = amplitude)) +
-  stat_scalpmap() +  
-  geom_mask(scale_fac = 1.6) +
+  mutate(highlight = if_else(electrode %in% Pz_elec, "white", "black"),
+         block = if_else(block == "Neg_Dec", "Decrease", 
+                         if_else(block == "Neg_Watch", "Watch", "Increase")),
+         block = factor(block, levels = c("Decrease", "Watch", "Increase")),
+         comp = "Late")
+
+neg_topos <- eeg_dat_loc %>%
+  filter(!is.na(amplitude), block %in% c("Neg_Dec", "Neg_Watch", "Neg_Inc"), 
+          electrode %in% topo_elec, between(ms, 400, 800)) %>%
+  group_by(block, electrode, x, y) %>%
+  dplyr::summarize(amplitude = mean(amplitude, na.rm = TRUE)) %>% 
+  mutate(highlight = if_else(electrode %in% Pz_elec, "white", "black"),
+         block = if_else(block == "Neg_Dec", "Decrease", 
+                         if_else(block == "Neg_Watch", "Watch", "Increase")),
+         block = factor(block, levels = c("Decrease", "Watch", "Increase")),
+         comp = "Early") %>% 
+    bind_rows(., late_tmp) %>%
+    mutate(., comp = factor(comp)) %>% 
+ggplot(., aes(x = x, y = y, fill = amplitude)) +
+  stat_scalpmap() +
+  geom_mask(scale_fac = 1.6, size = .01) +
   geom_head() +               
   geom_channels(aes(color = highlight), size = 0.125) +             
-  scale_fill_viridis_c(limits = c(-7, 7), oob = scales::squish) +
+  scale_fill_viridis_c(limits = c(-8, 8), oob = scales::squish) +
   scale_color_manual(breaks = c("black", "white"),
                      values = c("black", "white"),
                      guide = FALSE) +
   labs(fill = expression(paste("Amplitude (", mu,"V)"))) +
   coord_equal() +
   theme_void() +
-  ggtitle(title) +
-  theme(plot.title = element_text(hjust = 0.5, size = 12))
-}
-
-watch_topos <- map2(c("Neg_Dec", "Neg_Watch", "Neg_Inc"), 
-                    c("Decrease", "Watch", "Increase"),
-                    ~ lpp_topo_fun(.x, .y))
+  facet_grid(vars(comp), vars(block), switch = "y") +
+  theme(strip.text.x = element_text(size = 10, vjust = 1),
+        strip.text.y = element_text(size = 10, angle = 90))
 
 watch_lpp <- eeg_dat %>%
     filter(block %in% c("Neg_Dec", "Neg_Watch", "Neg_Inc")) %>% 
     select(all_of(Pz_elec),  block:prop_trials) %>%
-    filter(ms < 1750) %>% 
+    filter(ms <= 2000) %>% 
     pivot_longer(., cols = Pz_elec, names_to = "electrode", values_to = "mv") %>%
     group_by(block, ms) %>%
     dplyr::summarize(mv = mean(mv, na.rm = TRUE)) %>%
     ggplot(., aes(ms, mv, color = block)) +
     geom_line(size = 1.1) +
     geom_vline(xintercept = 0, linetype = "dashed") +
-    geom_vline(xintercept = c(450, 800), linetype = "solid", size = 1.05) +
+    geom_vline(xintercept = c(450, 800, 2000), linetype = "solid", size = 1.05) +
     geom_hline(yintercept = 0, linetype = "dashed") +
-    annotate("rect", xmin = 450, xmax = 800, ymin = -Inf, ymax = Inf, alpha = .2) +
+    annotate("rect", xmin = 450, xmax = 2000, ymin = -Inf, ymax = Inf, alpha = .2) +
     labs(x = "Time (ms)",
          y = expression(paste("Amplitude ( ",mu,"V)"))) +
    #      title = paste("Average LPP Waveforms")) +
     theme_classic() +
-    theme(axis.title = element_text(size = 12),
-          axis.text = element_text(size = 12),
-          legend.title = element_text(size = 12),
-          legend.text = element_text(size = 12),
+    theme(axis.title = element_text(size = 10),
+          axis.text = element_text(size = 10),
+          legend.title = element_text(size = 10),
+          legend.text = element_text(size = 10),
           legend.key.size = unit(2, "line"),
           plot.title = element_text(hjust = 0.5),
-          title = element_text(size = 12)) +
+          title = element_text(size = 10)) +
     # scale_color_manual(name = "Group", values = c("green", "blue", "red"))
     scale_color_manual(values = c("blue", "green", "red"),
                           name = "Block",
                           breaks = c("Neg_Dec", "Neg_Watch", "Neg_Inc"),
                           labels = c("Negative Decrease", "Negative Watch", "Negative Increase"))
 
-topo_patch <- (watch_topos[[1]] | watch_topos[[2]] | watch_topos[[3]]) + plot_layout(guides = 'collect')
-topo_patch / watch_lpp
+neg_topos / watch_lpp + plot_layout(widths = 2)
 ```
 
-(ref:EPN-N170-watch-topos) Topographical plots and average waveforms for N170 (160 - 200 ms; top row) and EPN (250 - 375 ms; bottom row) components during passive watch conditions. Sensors highlighted in white were used to measure N170 and EPN for waveform plots and analyses.
+(ref:EPN-N170-watch-topos) Topographical plots and average waveforms for N170 (160 - 200 ms; top row) and EPN (250 - 375 ms; bottom row) during passive watch conditions. Sensor highlighted in white were used to measure N170 and EPN for waveform plots and analyses.
 
 ```{r EPN-N170-watch-topos, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:EPN-N170-watch-topos)", cache = TRUE, cache.lazy = FALSE}
 rm(list=ls())
@@ -1259,25 +1289,42 @@ elec_loc <- elec_loc %>%
   mutate(x = theta * cos(radian_phi),
          y = theta * sin(radian_phi))
 
-epn_n170_elec <- c("A29", "B26")
+n170_epn_elec <- c("A29", "B26")
 
 # merge coordinates with ERP data
-eeg_dat <- read_csv(here("data", "paper_two", "created_data",  "erp_avr_no_lp.csv"))
+eeg_dat <- read_csv(here("data", "paper_two", "created_data", "erp_avr.csv"))
 eeg_dat_long <- pivot_longer(eeg_dat, cols = A1:EXG2, names_to = "electrode", values_to = "amplitude")
 eeg_dat_loc <- left_join(eeg_dat_long, elec_loc, by = c("electrode" = "channel"))
 topo_elec <- c(paste0("A", 1:32), paste0("B", 1:32))
 
-n170_topo_fun <- function(block_type, title) {
-erp_topo <- eeg_dat_loc %>%
-  filter(!is.na(amplitude), block == block_type, electrode %in% topo_elec, between(ms, 160, 200)) %>%
-  group_by(electrode, x, y) %>%
+epn <- eeg_dat_loc %>% 
+  filter(!is.na(amplitude), block %in% c("Neu_Watch", "Pos_Watch", "Neg_Watch"), 
+          electrode %in% topo_elec, between(ms, 250, 375)) %>%
+  group_by(block, electrode, x, y) %>%
   dplyr::summarize(amplitude = mean(amplitude, na.rm = TRUE)) %>% 
-  mutate(highlight = if_else(electrode %in% epn_n170_elec, "white", "black"))
-ggplot(erp_topo, aes(x = x, y = y, fill = amplitude)) +
-  stat_scalpmap() +  
-  geom_mask(scale_fac = 1.7) +
+  mutate(highlight = if_else(electrode %in% n170_epn_elec, "white", "black"),
+         block = if_else(block == "Neu_Watch", "Neutral", 
+                         if_else(block == "Neg_Watch", "Negative", "Positive")),
+         block = factor(block, levels = c("Neutral", "Positive", "Negative")),
+         comp = "EPN")
+
+n170_epn_topos <- eeg_dat_loc %>%
+  filter(!is.na(amplitude), block %in% c("Neu_Watch", "Pos_Watch", "Neg_Watch"), 
+          electrode %in% topo_elec, between(ms, 160, 200)) %>%
+  group_by(block, electrode, x, y) %>%
+  dplyr::summarize(amplitude = mean(amplitude, na.rm = TRUE)) %>% 
+  mutate(highlight = if_else(electrode %in% n170_epn_elec, "white", "black"),
+         block = if_else(block == "Neu_Watch", "Neutral", 
+                         if_else(block == "Neg_Watch", "Negative", "Positive")),
+         block = factor(block, levels = c("Neutral", "Positive", "Negative")),
+         comp = "N170") %>% 
+    bind_rows(., epn) %>%
+    mutate(., comp = factor(comp)) %>% 
+ggplot(., aes(x = x, y = y, fill = amplitude)) +
+  stat_scalpmap() +
+  geom_mask(scale_fac = 1.6, size = .01) +
   geom_head() +               
-  geom_channels(aes(color = highlight), size = 0.1) +             
+  geom_channels(aes(color = highlight), size = 0.125) +             
   scale_fill_viridis_c(limits = c(-10, 10), oob = scales::squish) +
   scale_color_manual(breaks = c("black", "white"),
                      values = c("black", "white"),
@@ -1285,44 +1332,15 @@ ggplot(erp_topo, aes(x = x, y = y, fill = amplitude)) +
   labs(fill = expression(paste("Amplitude (", mu,"V)"))) +
   coord_equal() +
   theme_void() +
-  ggtitle(title) +
-  theme(plot.title = element_text(hjust = 0.5, size = 12))
-}
-
-epn_topo_fun <- function(block_type, title) {
-erp_topo <- eeg_dat_loc %>%
-  filter(!is.na(amplitude), block == block_type, electrode %in% topo_elec, between(ms, 250, 375)) %>%
-  group_by(electrode, x, y) %>%
-  dplyr::summarize(amplitude = mean(amplitude, na.rm = TRUE)) %>% 
-  mutate(highlight = if_else(electrode %in% epn_n170_elec, "white", "black"))
-ggplot(erp_topo, aes(x = x, y = y, fill = amplitude)) +
-  stat_scalpmap() +  
-  geom_mask(scale_fac = 1.7) +
-  geom_head() +               
-  geom_channels(aes(color = highlight), size = 0.1) +             
-  scale_fill_viridis_c(limits = c(-10, 10), oob = scales::squish) +
-  scale_color_manual(breaks = c("black", "white"),
-                     values = c("black", "white"),
-                     guide = FALSE) +
-  labs(fill = expression(paste("Amplitude (", mu,"V)"))) +
-  coord_equal() +
-  theme_void() +
-  ggtitle(title) +
-  theme(plot.title = element_text(hjust = 0.5, size = 12))
-}
-
-n170_watch_topos <- map2(c("Neu_Watch", "Pos_Watch", "Neg_Watch"), 
-                    c("Neutral", "Positive", "Negative"),
-                    ~ n170_topo_fun(.x, .y))
-epn_watch_topos <- map2(c("Neu_Watch", "Pos_Watch", "Neg_Watch"), 
-                    c("", "", ""),
-                    ~ epn_topo_fun(.x, .y))
+  facet_grid(vars(comp), vars(block), switch = "y") +
+  theme(strip.text.x = element_text(size = 10, vjust = 1),
+        strip.text.y = element_text(size = 10, angle = 90))
 
 watch_n170_epn <- eeg_dat %>%
-    filter(block %in% c("Neu_Watch", "Pos_Watch", "Neg_Watch")) %>% 
-    select(all_of(epn_n170_elec),  block:prop_trials) %>%
-    filter(ms < 750) %>% 
-    pivot_longer(., cols = epn_n170_elec, names_to = "electrode", values_to = "mv") %>%
+    filter(block %in% c("Neg_Watch", "Neu_Watch", "Pos_Watch")) %>% 
+    select(all_of(n170_epn_elec),  block:prop_trials) %>%
+    filter(ms <= 1000) %>% 
+    pivot_longer(., cols = n170_epn_elec, names_to = "electrode", values_to = "mv") %>%
     group_by(block, ms) %>%
     dplyr::summarize(mv = mean(mv, na.rm = TRUE)) %>%
     ggplot(., aes(ms, mv, color = block)) +
@@ -1330,30 +1348,27 @@ watch_n170_epn <- eeg_dat %>%
     geom_vline(xintercept = 0, linetype = "dashed") +
     geom_vline(xintercept = c(160, 200), linetype = "solid", size = 1.05) +
     geom_vline(xintercept = c(250, 375), linetype = "solid", size = 1.05) +
+    geom_hline(yintercept = 0, linetype = "dashed") +
     annotate("rect", xmin = 160, xmax = 200, ymin = -Inf, ymax = Inf, alpha = .2) +
     annotate("rect", xmin = 250, xmax = 375, ymin = -Inf, ymax = Inf, alpha = .2) +
-    geom_hline(yintercept = 0, linetype = "dashed") +
     labs(x = "Time (ms)",
          y = expression(paste("Amplitude ( ",mu,"V)"))) +
    #      title = paste("Average LPP Waveforms")) +
     theme_classic() +
-    theme(axis.title = element_text(size = 12),
-          axis.text = element_text(size = 12),
-          legend.title = element_text(size = 12),
-          legend.text = element_text(size = 12),
+    theme(axis.title = element_text(size = 10),
+          axis.text = element_text(size = 10),
+          legend.title = element_text(size = 10),
+          legend.text = element_text(size = 10),
           legend.key.size = unit(2, "line"),
           plot.title = element_text(hjust = 0.5),
-          title = element_text(size = 12)) +
+          title = element_text(size = 10)) +
     # scale_color_manual(name = "Group", values = c("green", "blue", "red"))
-    scale_color_manual(values = c("green", "blue", "red"),
+    scale_color_manual(values = c("blue", "green", "red"),
                           name = "Block",
                           breaks = c("Neu_Watch", "Pos_Watch", "Neg_Watch"),
                           labels = c("Neutral Watch", "Positive Watch", "Negative Watch"))
 
-topo_n170_patch <- (n170_watch_topos[[1]] | n170_watch_topos[[2]] | n170_watch_topos[[3]])
-topo_epn_patch <- (epn_watch_topos[[1]] | epn_watch_topos[[2]] | epn_watch_topos[[3]])
-topos_patch <- topo_n170_patch / topo_epn_patch + plot_layout(guides = 'collect')
-topos_patch / watch_n170_epn + plot_layout(heights = c(1, 1, 1.5))
+n170_epn_topos / watch_n170_epn + plot_layout(widths = 2)
 ```
 
 (ref:EPN-N170-pos-topos) Topographical plots and average waveforms for N170 (160 - 200 ms; top row) and EPN (250 - 375 ms; bottom row) during regulation conditions in response to positive images. Sensors highlighted in white were used to measure N170 and EPN for waveform plots and analyses.
@@ -1378,68 +1393,58 @@ elec_loc <- elec_loc %>%
   mutate(x = theta * cos(radian_phi),
          y = theta * sin(radian_phi))
 
-epn_n170_elec <- c("A29", "B26")
+n170_epn_elec <- c("A29", "B26")
 
 # merge coordinates with ERP data
-eeg_dat <- read_csv(here("data", "paper_two", "created_data",  "erp_avr_no_lp.csv"))
+eeg_dat <- read_csv(here("data", "paper_two", "created_data", "erp_avr.csv"))
 eeg_dat_long <- pivot_longer(eeg_dat, cols = A1:EXG2, names_to = "electrode", values_to = "amplitude")
 eeg_dat_loc <- left_join(eeg_dat_long, elec_loc, by = c("electrode" = "channel"))
 topo_elec <- c(paste0("A", 1:32), paste0("B", 1:32))
 
-n170_topo_fun <- function(block_type, title) {
-erp_topo <- eeg_dat_loc %>%
-  filter(!is.na(amplitude), block == block_type, electrode %in% topo_elec, between(ms, 160, 200)) %>%
-  group_by(electrode, x, y) %>%
+epn <- eeg_dat_loc %>% 
+  filter(!is.na(amplitude), block %in% c("Pos_Dec", "Pos_Watch", "Pos_Inc"), 
+          electrode %in% topo_elec, between(ms, 250, 375)) %>%
+  group_by(block, electrode, x, y) %>%
   dplyr::summarize(amplitude = mean(amplitude, na.rm = TRUE)) %>% 
-  mutate(highlight = if_else(electrode %in% epn_n170_elec, "white", "black"))
-ggplot(erp_topo, aes(x = x, y = y, fill = amplitude)) +
-  stat_scalpmap() +  
-  geom_mask(scale_fac = 1.7) +
+  mutate(highlight = if_else(electrode %in% n170_epn_elec, "white", "black"),
+         block = if_else(block == "Pos_Dec", "Decrease", 
+                         if_else(block == "Pos_Watch", "Watch", "Increase")),
+         block = factor(block, levels = c("Decrease", "Watch", "Increase")),
+         comp = "EPN")
+
+n170_epn_topos <- eeg_dat_loc %>%
+  filter(!is.na(amplitude), block %in% c("Pos_Dec", "Pos_Watch", "Pos_Inc"), 
+          electrode %in% topo_elec, between(ms, 160, 200)) %>%
+  group_by(block, electrode, x, y) %>%
+  dplyr::summarize(amplitude = mean(amplitude, na.rm = TRUE)) %>% 
+  mutate(highlight = if_else(electrode %in% n170_epn_elec, "white", "black"),
+         block = if_else(block == "Pos_Dec", "Decrease", 
+                         if_else(block == "Pos_Watch", "Watch", "Increase")),
+         block = factor(block, levels = c("Decrease", "Watch", "Increase")),
+         comp = "N170") %>% 
+    bind_rows(., epn) %>%
+    mutate(., comp = factor(comp)) %>% 
+ggplot(., aes(x = x, y = y, fill = amplitude)) +
+  stat_scalpmap() +
+  geom_mask(scale_fac = 1.6, size = .01) +
   geom_head() +               
-  geom_channels(aes(color = highlight), size = 0.1) +             
-  scale_fill_viridis_c(limits = c(-10, 10), oob = scales::squish) +
+  geom_channels(aes(color = highlight), size = 0.125) +             
+  scale_fill_viridis_c(limits = c(-12, 12), oob = scales::squish) +
   scale_color_manual(breaks = c("black", "white"),
                      values = c("black", "white"),
                      guide = FALSE) +
   labs(fill = expression(paste("Amplitude (", mu,"V)"))) +
   coord_equal() +
   theme_void() +
-  ggtitle(title) +
-  theme(plot.title = element_text(hjust = 0.5, size = 12))
-}
+  facet_grid(vars(comp), vars(block), switch = "y") +
+  theme(strip.text.x = element_text(size = 10, vjust = 1),
+        strip.text.y = element_text(size = 10, angle = 90))
 
-epn_topo_fun <- function(block_type) {
-erp_topo <- eeg_dat_loc %>%
-  filter(!is.na(amplitude), block == block_type, electrode %in% topo_elec, between(ms, 250, 375)) %>%
-  group_by(electrode, x, y) %>%
-  dplyr::summarize(amplitude = mean(amplitude, na.rm = TRUE)) %>% 
-  mutate(highlight = if_else(electrode %in% epn_n170_elec, "white", "black"))
-ggplot(erp_topo, aes(x = x, y = y, fill = amplitude)) +
-  stat_scalpmap() +  
-  geom_mask(scale_fac = 1.7) +
-  geom_head() +               
-  geom_channels(aes(color = highlight), size = 0.1) +             
-  scale_fill_viridis_c(limits = c(-10, 10), oob = scales::squish) +
-  scale_color_manual(breaks = c("black", "white"),
-                     values = c("black", "white"),
-                     guide = FALSE) +
-  labs(fill = expression(paste("Amplitude (", mu,"V)"))) +
-  coord_equal() +
-  theme_void() +
-  theme(plot.title = element_text(hjust = 0.5, size = 12))
-}
-
-n170_watch_topos <- map2(c("Pos_Dec", "Pos_Watch", "Pos_Inc"), 
-                    c("Decrease", "Watch", "Increase"),
-                    ~ n170_topo_fun(.x, .y))
-epn_watch_topos <- map(c("Pos_Dec", "Pos_Watch", "Pos_Inc"), 
-                    ~ epn_topo_fun(.x))
-
-watch_n170_epn <- eeg_dat %>%
+pos_n170_epn <- eeg_dat %>%
     filter(block %in% c("Pos_Dec", "Pos_Watch", "Pos_Inc")) %>% 
-    select(all_of(epn_n170_elec),  block:prop_trials) %>%
-    filter(ms < 750) %>% 
-    pivot_longer(., cols = epn_n170_elec, names_to = "electrode", values_to = "mv") %>%
+    select(all_of(n170_epn_elec),  block:prop_trials) %>%
+    filter(ms <= 1000) %>% 
+    pivot_longer(., cols = n170_epn_elec, names_to = "electrode", values_to = "mv") %>%
     group_by(block, ms) %>%
     dplyr::summarize(mv = mean(mv, na.rm = TRUE)) %>%
     ggplot(., aes(ms, mv, color = block)) +
@@ -1447,30 +1452,27 @@ watch_n170_epn <- eeg_dat %>%
     geom_vline(xintercept = 0, linetype = "dashed") +
     geom_vline(xintercept = c(160, 200), linetype = "solid", size = 1.05) +
     geom_vline(xintercept = c(250, 375), linetype = "solid", size = 1.05) +
+    geom_hline(yintercept = 0, linetype = "dashed") +
     annotate("rect", xmin = 160, xmax = 200, ymin = -Inf, ymax = Inf, alpha = .2) +
     annotate("rect", xmin = 250, xmax = 375, ymin = -Inf, ymax = Inf, alpha = .2) +
-    geom_hline(yintercept = 0, linetype = "dashed") +
     labs(x = "Time (ms)",
          y = expression(paste("Amplitude ( ",mu,"V)"))) +
    #      title = paste("Average LPP Waveforms")) +
     theme_classic() +
-    theme(axis.title = element_text(size = 12),
-          axis.text = element_text(size = 12),
-          legend.title = element_text(size = 12),
-          legend.text = element_text(size = 12),
+    theme(axis.title = element_text(size = 10),
+          axis.text = element_text(size = 10),
+          legend.title = element_text(size = 10),
+          legend.text = element_text(size = 10),
           legend.key.size = unit(2, "line"),
           plot.title = element_text(hjust = 0.5),
-          title = element_text(size = 12)) +
+          title = element_text(size = 10)) +
     # scale_color_manual(name = "Group", values = c("green", "blue", "red"))
-    scale_color_manual(values = c("red", "blue", "green"),
+    scale_color_manual(values = c("blue", "green", "red"),
                           name = "Block",
-                          breaks = c("Pos_Inc", "Pos_Dec", "Pos_Watch"),
-                          labels = c("Positive Increase", "Positive Decrease", "Positive Watch"))
+                          breaks = c("Pos_Dec", "Pos_Watch", "Pos_Inc"),
+                          labels = c("Positive Decrease", "Positive Watch", "Positive Increase"))
 
-topo_n170_patch <- (n170_watch_topos[[1]] | n170_watch_topos[[2]] | n170_watch_topos[[3]])
-topo_epn_patch <- (epn_watch_topos[[1]] | epn_watch_topos[[2]] | epn_watch_topos[[3]])
-topos_patch <- topo_n170_patch / topo_epn_patch + plot_layout(guides = 'collect')
-topos_patch / watch_n170_epn + plot_layout(heights = c(1, 1, 1.5))
+n170_epn_topos / pos_n170_epn + plot_layout(widths = 2)
 ```
 
 (ref:EPN-N170-neg-topos) Topographical plots and average waveforms for N170 (160 - 200 ms; top row) and EPN (250 - 375 ms; bottom row) during regulation conditions in response to negative images. Sensors highlighted in white were used to measure N170 and EPN for waveform plots and analyses.
@@ -1495,68 +1497,58 @@ elec_loc <- elec_loc %>%
   mutate(x = theta * cos(radian_phi),
          y = theta * sin(radian_phi))
 
-epn_n170_elec <- c("A29", "B26")
+n170_epn_elec <- c("A29", "B26")
 
 # merge coordinates with ERP data
-eeg_dat <- read_csv(here("data", "paper_two", "created_data",  "erp_avr_no_lp.csv"))
+eeg_dat <- read_csv(here("data", "paper_two", "created_data", "erp_avr.csv"))
 eeg_dat_long <- pivot_longer(eeg_dat, cols = A1:EXG2, names_to = "electrode", values_to = "amplitude")
 eeg_dat_loc <- left_join(eeg_dat_long, elec_loc, by = c("electrode" = "channel"))
 topo_elec <- c(paste0("A", 1:32), paste0("B", 1:32))
 
-n170_topo_fun <- function(block_type, title) {
-erp_topo <- eeg_dat_loc %>%
-  filter(!is.na(amplitude), block == block_type, electrode %in% topo_elec, between(ms, 160, 200)) %>%
-  group_by(electrode, x, y) %>%
+epn <- eeg_dat_loc %>% 
+  filter(!is.na(amplitude), block %in% c("Neg_Dec", "Neg_Watch", "Neg_Inc"), 
+          electrode %in% topo_elec, between(ms, 250, 375)) %>%
+  group_by(block, electrode, x, y) %>%
   dplyr::summarize(amplitude = mean(amplitude, na.rm = TRUE)) %>% 
-  mutate(highlight = if_else(electrode %in% epn_n170_elec, "white", "black"))
-ggplot(erp_topo, aes(x = x, y = y, fill = amplitude)) +
-  stat_scalpmap() +  
-  geom_mask(scale_fac = 1.7) +
+  mutate(highlight = if_else(electrode %in% n170_epn_elec, "white", "black"),
+         block = if_else(block == "Neg_Dec", "Decrease", 
+                         if_else(block == "Neg_Watch", "Watch", "Increase")),
+         block = factor(block, levels = c("Decrease", "Watch", "Increase")),
+         comp = "EPN")
+
+n170_epn_topos <- eeg_dat_loc %>%
+  filter(!is.na(amplitude), block %in% c("Neg_Dec", "Neg_Watch", "Neg_Inc"), 
+          electrode %in% topo_elec, between(ms, 160, 200)) %>%
+  group_by(block, electrode, x, y) %>%
+  dplyr::summarize(amplitude = mean(amplitude, na.rm = TRUE)) %>% 
+  mutate(highlight = if_else(electrode %in% n170_epn_elec, "white", "black"),
+         block = if_else(block == "Neg_Dec", "Decrease", 
+                         if_else(block == "Neg_Watch", "Watch", "Increase")),
+         block = factor(block, levels = c("Decrease", "Watch", "Increase")),
+         comp = "N170") %>% 
+    bind_rows(., epn) %>%
+    mutate(., comp = factor(comp)) %>% 
+ggplot(., aes(x = x, y = y, fill = amplitude)) +
+  stat_scalpmap() +
+  geom_mask(scale_fac = 1.6, size = .01) +
   geom_head() +               
-  geom_channels(aes(color = highlight), size = 0.1) +             
-  scale_fill_viridis_c(limits = c(-10, 10), oob = scales::squish) +
+  geom_channels(aes(color = highlight), size = 0.125) +             
+  scale_fill_viridis_c(limits = c(-12, 12), oob = scales::squish) +
   scale_color_manual(breaks = c("black", "white"),
                      values = c("black", "white"),
                      guide = FALSE) +
   labs(fill = expression(paste("Amplitude (", mu,"V)"))) +
   coord_equal() +
   theme_void() +
-  ggtitle(title) +
-  theme(plot.title = element_text(hjust = 0.5, size = 12))
-}
+  facet_grid(vars(comp), vars(block), switch = "y") +
+  theme(strip.text.x = element_text(size = 10, vjust = 1),
+        strip.text.y = element_text(size = 10, angle = 90))
 
-epn_topo_fun <- function(block_type) {
-erp_topo <- eeg_dat_loc %>%
-  filter(!is.na(amplitude), block == block_type, electrode %in% topo_elec, between(ms, 250, 375)) %>%
-  group_by(electrode, x, y) %>%
-  dplyr::summarize(amplitude = mean(amplitude, na.rm = TRUE)) %>% 
-  mutate(highlight = if_else(electrode %in% epn_n170_elec, "white", "black"))
-ggplot(erp_topo, aes(x = x, y = y, fill = amplitude)) +
-  stat_scalpmap() +  
-  geom_mask(scale_fac = 1.7) +
-  geom_head() +               
-  geom_channels(aes(color = highlight), size = 0.1) +             
-  scale_fill_viridis_c(limits = c(-10, 10), oob = scales::squish) +
-  scale_color_manual(breaks = c("black", "white"),
-                     values = c("black", "white"),
-                     guide = FALSE) +
-  labs(fill = expression(paste("Amplitude (", mu,"V)"))) +
-  coord_equal() +
-  theme_void() +
-  theme(plot.title = element_text(hjust = 0.5, size = 12))
-}
-
-n170_watch_topos <- map2(c("Neg_Dec", "Neg_Watch", "Neg_Inc"), 
-                    c("Decrease", "Watch", "Increase"),
-                    ~ n170_topo_fun(.x, .y))
-epn_watch_topos <- map(c("Neg_Dec", "Neg_Watch", "Neg_Inc"), 
-                    ~ epn_topo_fun(.x))
-
-watch_n170_epn <- eeg_dat %>%
+neg_n170_epn <- eeg_dat %>%
     filter(block %in% c("Neg_Dec", "Neg_Watch", "Neg_Inc")) %>% 
-    select(all_of(epn_n170_elec),  block:prop_trials) %>%
-    filter(ms < 750) %>% 
-    pivot_longer(., cols = epn_n170_elec, names_to = "electrode", values_to = "mv") %>%
+    select(all_of(n170_epn_elec),  block:prop_trials) %>%
+    filter(ms <= 1000) %>% 
+    pivot_longer(., cols = n170_epn_elec, names_to = "electrode", values_to = "mv") %>%
     group_by(block, ms) %>%
     dplyr::summarize(mv = mean(mv, na.rm = TRUE)) %>%
     ggplot(., aes(ms, mv, color = block)) +
@@ -1564,9 +1556,96 @@ watch_n170_epn <- eeg_dat %>%
     geom_vline(xintercept = 0, linetype = "dashed") +
     geom_vline(xintercept = c(160, 200), linetype = "solid", size = 1.05) +
     geom_vline(xintercept = c(250, 375), linetype = "solid", size = 1.05) +
+    geom_hline(yintercept = 0, linetype = "dashed") +
     annotate("rect", xmin = 160, xmax = 200, ymin = -Inf, ymax = Inf, alpha = .2) +
     annotate("rect", xmin = 250, xmax = 375, ymin = -Inf, ymax = Inf, alpha = .2) +
+    labs(x = "Time (ms)",
+         y = expression(paste("Amplitude ( ",mu,"V)"))) +
+   #      title = paste("Average LPP Waveforms")) +
+    theme_classic() +
+    theme(axis.title = element_text(size = 10),
+          axis.text = element_text(size = 10),
+          legend.title = element_text(size = 10),
+          legend.text = element_text(size = 10),
+          legend.key.size = unit(2, "line"),
+          plot.title = element_text(hjust = 0.5),
+          title = element_text(size = 10)) +
+    # scale_color_manual(name = "Group", values = c("green", "blue", "red"))
+    scale_color_manual(values = c("blue", "green", "red"),
+                          name = "Block",
+                          breaks = c("Neg_Dec", "Neg_Watch", "Neg_Inc"),
+                          labels = c("Negative Decrease", "Negative Watch", "Negative Increase"))
+
+n170_epn_topos / neg_n170_epn + plot_layout(widths = 2)
+```
+
+(ref:SPN-watch-topos) Topographical plots and average waveforms for SPN during passive watch conditions. Sensor highlighted in white was used to measure SPN for waveform plots and analyses.
+
+```{r SPN-watch-topos, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:SPN-watch-topos)", cache = TRUE, cache.lazy = FALSE}
+library(devtools)
+library(eegUtils) # remotes::install_github("craddm/eegUtils")
+library(tidyverse)
+library(here)
+library(patchwork)
+
+# load electrode layout
+elec_loc <- read_csv(here("data", "paper_two", "Equidistant Layout.csv"))
+elec_loc <- elec_loc %>%
+  rename("channel" = `channel name`) %>%
+  filter(channel != "CMS", channel != "DRL")
+
+elec_loc$radian_phi <- pi/180 * elec_loc$phi
+
+elec_loc <- elec_loc %>%
+  mutate(x = theta * cos(radian_phi),
+         y = theta * sin(radian_phi))
+
+spn_elec <- c("A5")
+
+# merge coordinates with ERP data
+eeg_dat <- read_csv(here("data", "paper_two", "created_data", "erp_mast.csv"))
+eeg_dat$A5[eeg_dat$pid == 206201817 & eeg_dat$block %in% c("Neu_Watch", "Pos_Dec") & between(eeg_dat$ms, 450, 1215)] <- NA
+eeg_dat_long <- pivot_longer(eeg_dat, cols = A1:EXG2, names_to = "electrode", values_to = "amplitude")
+eeg_dat_loc <- left_join(eeg_dat_long, elec_loc, by = c("electrode" = "channel"))
+topo_elec <- c(paste0("A", 1:32), paste0("B", 1:32))
+
+watch_topos <- eeg_dat_loc %>%
+  filter(!is.na(amplitude), block %in% c("Neu_Watch", "Pos_Watch", "Neg_Watch"), 
+          electrode %in% topo_elec, between(ms, 450, 1250)) %>%
+  group_by(block, electrode, x, y) %>%
+  dplyr::summarize(amplitude = mean(amplitude, na.rm = TRUE)) %>% 
+  mutate(highlight = if_else(electrode %in% spn_elec, "white", "black"),
+         block = if_else(block == "Neu_Watch", "Neutral", 
+                         if_else(block == "Pos_Watch", "Positive", "Negative")),
+         block = factor(block, levels = c("Neutral", "Positive", "Negative"))) %>% 
+ggplot(., aes(x = x, y = y, fill = amplitude)) +
+  stat_scalpmap() +
+  geom_mask(scale_fac = 1.6, size = .01) +
+  geom_head() +               
+  geom_channels(aes(color = highlight), size = 0.125) +             
+  scale_fill_viridis_c(limits = c(-5, 6), oob = scales::squish) +
+  scale_color_manual(breaks = c("black", "white"),
+                     values = c("black", "white"),
+                     guide = FALSE) +
+  labs(fill = expression(paste("Amplitude (", mu,"V)"))) +
+  coord_equal() +
+  theme_void() +
+  facet_wrap(~ block) +
+  theme(strip.text.x = element_text(size = 12, vjust = 1))
+
+watch_spn <- eeg_dat %>%
+    filter(block %in% c("Neu_Watch", "Pos_Watch", "Neg_Watch")) %>% 
+    select(all_of(spn_elec),  block:prop_trials) %>%
+    filter(ms <= 1500) %>% 
+    pivot_longer(., cols = spn_elec, names_to = "electrode", values_to = "mv") %>%
+    group_by(block, ms) %>%
+    dplyr::summarize(mv = mean(mv, na.rm = TRUE)) %>%
+    ggplot(., aes(ms, mv, color = block)) +
+    geom_line(size = 1.1) +
+    geom_vline(xintercept = 0, linetype = "dashed") +
+    geom_vline(xintercept = c(450, 1250), linetype = "solid", size = 1.05) +
     geom_hline(yintercept = 0, linetype = "dashed") +
+    annotate("rect", xmin = 450, xmax = 1250, ymin = -Inf, ymax = Inf, alpha = .2) +
     labs(x = "Time (ms)",
          y = expression(paste("Amplitude ( ",mu,"V)"))) +
    #      title = paste("Average LPP Waveforms")) +
@@ -1579,17 +1658,187 @@ watch_n170_epn <- eeg_dat %>%
           plot.title = element_text(hjust = 0.5),
           title = element_text(size = 12)) +
     # scale_color_manual(name = "Group", values = c("green", "blue", "red"))
-    scale_color_manual(values = c("blue", "green", "red"),
-                          name = "Block",
-                          breaks = c("Neg_Dec", "Neg_Watch", "Neg_Inc"),
-                          labels = c("Negative Decrease", "Negative Watch", "Negative Increase"))
+    scale_color_manual(values = c("red", "blue", "green"),
+                       name = "Block",
+                       breaks = c("Neg_Watch", "Pos_Watch", "Neu_Watch"),
+                       labels = c("Negative Watch", "Positive Watch", "Neutral Watch"))
 
-topo_n170_patch <- (n170_watch_topos[[1]] | n170_watch_topos[[2]] | n170_watch_topos[[3]])
-topo_epn_patch <- (epn_watch_topos[[1]] | epn_watch_topos[[2]] | epn_watch_topos[[3]])
-topos_patch <- topo_n170_patch / topo_epn_patch + plot_layout(guides = 'collect')
-topos_patch / watch_n170_epn + plot_layout(heights = c(1, 1, 1.5))
+watch_topos / watch_spn + plot_layout(widths = 2)
 ```
 
+(ref:SPN-pos-topos) Topographical plots and average waveforms for SPN during positive regulation conditions. Sensor highlighted in white was used to measure SPN for waveform plots and analyses.
+
+```{r SPN-pos-topos, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:SPN-reg_tpops)", cache = TRUE, cache.lazy = FALSE}
+library(devtools)
+library(eegUtils) # remotes::install_github("craddm/eegUtils")
+library(tidyverse)
+library(here)
+library(patchwork)
+
+# load electrode layout
+elec_loc <- read_csv(here("data", "paper_two", "Equidistant Layout.csv"))
+elec_loc <- elec_loc %>%
+  rename("channel" = `channel name`) %>%
+  filter(channel != "CMS", channel != "DRL")
+
+elec_loc$radian_phi <- pi/180 * elec_loc$phi
+
+elec_loc <- elec_loc %>%
+  mutate(x = theta * cos(radian_phi),
+         y = theta * sin(radian_phi))
+
+spn_elec <- c("A5")
+
+# merge coordinates with ERP data
+eeg_dat <- read_csv(here("data", "paper_two", "created_data", "erp_mast.csv"))
+eeg_dat$A5[eeg_dat$pid == 206201817 & eeg_dat$block %in% c("Neu_Watch", "Pos_Dec") & between(eeg_dat$ms, 450, 1215)] <- NA
+eeg_dat_long <- pivot_longer(eeg_dat, cols = A1:EXG2, names_to = "electrode", values_to = "amplitude")
+eeg_dat_loc <- left_join(eeg_dat_long, elec_loc, by = c("electrode" = "channel"))
+topo_elec <- c(paste0("A", 1:32), paste0("B", 1:32))
+
+watch_topos <- eeg_dat_loc %>%
+  filter(!is.na(amplitude), block %in% c("Pos_Dec", "Pos_Watch", "Pos_Inc"), 
+          electrode %in% topo_elec, between(ms, 450, 1250)) %>%
+  group_by(block, electrode, x, y) %>%
+  dplyr::summarize(amplitude = mean(amplitude, na.rm = TRUE)) %>% 
+  mutate(highlight = if_else(electrode %in% spn_elec, "white", "black"),
+         block = if_else(block == "Pos_Dec", "Decrease", 
+                         if_else(block == "Pos_Watch", "Watch", "Increase")),
+         block = factor(block, levels = c("Decrease", "Watch", "Increase"))) %>% 
+ggplot(., aes(x = x, y = y, fill = amplitude)) +
+  stat_scalpmap() +
+  geom_mask(scale_fac = 1.6, size = .01) +
+  geom_head() +               
+  geom_channels(aes(color = highlight), size = 0.125) +             
+  scale_fill_viridis_c(limits = c(-5, 6), oob = scales::squish) +
+  scale_color_manual(breaks = c("black", "white"),
+                     values = c("black", "white"),
+                     guide = FALSE) +
+  labs(fill = expression(paste("Amplitude (", mu,"V)"))) +
+  coord_equal() +
+  theme_void() +
+  facet_wrap(~ block) +
+  theme(strip.text.x = element_text(size = 12, vjust = 1))
+
+watch_spn <- eeg_dat %>%
+    filter(block %in% c("Pos_Dec", "Pos_Watch", "Pos_Inc")) %>% 
+    select(all_of(spn_elec),  block:prop_trials) %>%
+    filter(ms <= 1500) %>% 
+    pivot_longer(., cols = spn_elec, names_to = "electrode", values_to = "mv") %>%
+    group_by(block, ms) %>%
+    dplyr::summarize(mv = mean(mv, na.rm = TRUE)) %>%
+    ggplot(., aes(ms, mv, color = block)) +
+    geom_line(size = 1.1) +
+    geom_vline(xintercept = 0, linetype = "dashed") +
+    geom_vline(xintercept = c(450, 1250), linetype = "solid", size = 1.05) +
+    geom_hline(yintercept = 0, linetype = "dashed") +
+    annotate("rect", xmin = 450, xmax = 1250, ymin = -Inf, ymax = Inf, alpha = .2) +
+    labs(x = "Time (ms)",
+         y = expression(paste("Amplitude ( ",mu,"V)"))) +
+   #      title = paste("Average LPP Waveforms")) +
+    theme_classic() +
+    theme(axis.title = element_text(size = 12),
+          axis.text = element_text(size = 12),
+          legend.title = element_text(size = 12),
+          legend.text = element_text(size = 12),
+          legend.key.size = unit(2, "line"),
+          plot.title = element_text(hjust = 0.5),
+          title = element_text(size = 12)) +
+    # scale_color_manual(name = "Group", values = c("green", "blue", "red"))
+    scale_color_manual(values = c("red", "blue", "green"),
+                       name = "Block",
+                       breaks = c("Pos_Dec", "Pos_Watch", "Pos_Inc"),
+                       labels = c("Positive Decrease", "Positive Watch", "Positive Increase"))
+
+watch_topos / watch_spn + plot_layout(widths = 2)
+```
+
+(ref:SPN-neg-topos) Topographical plots and average waveforms for SPN during negative regulation conditions. Sensor highlighted in white was used to measure SPN for waveform plots and analyses.
+
+```{r SPN-neg-topos, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:SPN-reg_tpops)", cache = TRUE, cache.lazy = FALSE}
+library(devtools)
+library(eegUtils) # remotes::install_github("craddm/eegUtils")
+library(tidyverse)
+library(here)
+library(patchwork)
+
+# load electrode layout
+elec_loc <- read_csv(here("data", "paper_two", "Equidistant Layout.csv"))
+elec_loc <- elec_loc %>%
+  rename("channel" = `channel name`) %>%
+  filter(channel != "CMS", channel != "DRL")
+
+elec_loc$radian_phi <- pi/180 * elec_loc$phi
+
+elec_loc <- elec_loc %>%
+  mutate(x = theta * cos(radian_phi),
+         y = theta * sin(radian_phi))
+
+spn_elec <- c("A5")
+
+# merge coordinates with ERP data
+eeg_dat <- read_csv(here("data", "paper_two", "created_data", "erp_mast.csv"))
+eeg_dat$A5[eeg_dat$pid == 206201817 & eeg_dat$block %in% c("Neu_Watch", "Pos_Dec") & between(eeg_dat$ms, 450, 1215)] <- NA
+eeg_dat_long <- pivot_longer(eeg_dat, cols = A1:EXG2, names_to = "electrode", values_to = "amplitude")
+eeg_dat_loc <- left_join(eeg_dat_long, elec_loc, by = c("electrode" = "channel"))
+topo_elec <- c(paste0("A", 1:32), paste0("B", 1:32))
+
+watch_topos <- eeg_dat_loc %>%
+  filter(!is.na(amplitude), block %in% c("Neg_Dec", "Neg_Watch", "Neg_Inc"), 
+          electrode %in% topo_elec, between(ms, 450, 1250)) %>%
+  group_by(block, electrode, x, y) %>%
+  dplyr::summarize(amplitude = mean(amplitude, na.rm = TRUE)) %>% 
+  mutate(highlight = if_else(electrode %in% spn_elec, "white", "black"),
+         block = if_else(block == "Neg_Dec", "Decrease", 
+                         if_else(block == "Neg_Watch", "Watch", "Increase")),
+         block = factor(block, levels = c("Decrease", "Watch", "Increase"))) %>% 
+ggplot(., aes(x = x, y = y, fill = amplitude)) +
+  stat_scalpmap() +
+  geom_mask(scale_fac = 1.6, size = .01) +
+  geom_head() +               
+  geom_channels(aes(color = highlight), size = 0.125) +             
+  scale_fill_viridis_c(limits = c(-5, 6), oob = scales::squish) +
+  scale_color_manual(breaks = c("black", "white"),
+                     values = c("black", "white"),
+                     guide = FALSE) +
+  labs(fill = expression(paste("Amplitude (", mu,"V)"))) +
+  coord_equal() +
+  theme_void() +
+  facet_wrap(~ block) +
+  theme(strip.text.x = element_text(size = 12, vjust = 1))
+
+watch_spn <- eeg_dat %>%
+    filter(block %in% c("Neg_Dec", "Neg_Watch", "Neg_Inc")) %>% 
+    select(all_of(spn_elec),  block:prop_trials) %>%
+    filter(ms <= 1500) %>% 
+    pivot_longer(., cols = spn_elec, names_to = "electrode", values_to = "mv") %>%
+    group_by(block, ms) %>%
+    dplyr::summarize(mv = mean(mv, na.rm = TRUE)) %>%
+    ggplot(., aes(ms, mv, color = block)) +
+    geom_line(size = 1.1) +
+    geom_vline(xintercept = 0, linetype = "dashed") +
+    geom_vline(xintercept = c(450, 1250), linetype = "solid", size = 1.05) +
+    geom_hline(yintercept = 0, linetype = "dashed") +
+    annotate("rect", xmin = 450, xmax = 1250, ymin = -Inf, ymax = Inf, alpha = .2) +
+    labs(x = "Time (ms)",
+         y = expression(paste("Amplitude ( ",mu,"V)"))) +
+   #      title = paste("Average LPP Waveforms")) +
+    theme_classic() +
+    theme(axis.title = element_text(size = 12),
+          axis.text = element_text(size = 12),
+          legend.title = element_text(size = 12),
+          legend.text = element_text(size = 12),
+          legend.key.size = unit(2, "line"),
+          plot.title = element_text(hjust = 0.5),
+          title = element_text(size = 12)) +
+    # scale_color_manual(name = "Group", values = c("green", "blue", "red"))
+    scale_color_manual(values = c("red", "blue", "green"),
+                       name = "Block",
+                       breaks = c("Neg_Dec", "Neg_Watch", "Neg_Inc"),
+                       labels = c("Negative Decrease", "Negative Watch", "Negative Increase"))
+
+watch_topos / watch_spn + plot_layout(widths = 2)
+```
 
 ```{r positive-affectivity-mlm-analyses, include = FALSE}
 rm(list=ls())
