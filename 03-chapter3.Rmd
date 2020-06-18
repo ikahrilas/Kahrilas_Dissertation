@@ -83,7 +83,7 @@ Scalp EEG was measured while participants completed an emotion regulation task. 
 The following EEG data processing steps were implemented in Brain Electrical Source Analysis software [BESA; @schergBESABrainElectric1990]. EEG data were re-referenced to the average activity of the mastoid electrodes for LPP analyses [@hajcakAttendingAffectAppraisal2006; @hajcakReappraisalModulatesElectrocortical2006] and average reference of all electrodes for EPN and N170 analyses [@stockdaleInfluenceStimulusValence2020; @yoonEnhancedEarlyPosterior2016] and digitally filtered with a 0.01 Hz high-pass filter with a cutoff attenuation of 12 dB/octave. Muscle (e.g., eye blink, eye movement) and other artifacts were removed and/or corrected via implementing automatic algorithms in BESA. Stimulus-locked averages were calculated to ascertain LPP, EPN, and N170. Data were baseline-adjusted by subtracting the average activity for 200 milliseconds [@moserIntentionalModulationEmotional2006] before stimulus onset. LPP activity was calculated as the average activity in the 450 – 800 ms window at Pz, P1, and P2 electrode sites. N170 and EPN activity was calculated as the average activity in the 160 - 200 ms and 250 - 375 ms windows, respecitvely, at PO7 and PO8 electrode sites. Scoring windows and sites were selected based upon existing literature and visual inspection of the data to determine maximal presence of respective EEG components. The selected scoring window and electrode sites were similar to other studies investigating LPP, EPN, and N170 [e.g., @frankHemodynamicElectrocorticalReactivity2019; @hajcakReappraisalModulatesElectrocortical2006; @thomEmotionalScenesElicit2014]. The experiment was computer-administered, using E-Prime 2.0 software [@schneiderEPrimeUserGuide2002] in order to manipulate the timing and presentation of stimuli. All stimuli were presented in color and occupied the entirety of the 21-inch monitor. The viewing distance was approximately 24 in. and occupied 25° of the vertical visual angle and 30° horizontally (Cuthbert et al., 2000; Hajcak & Nieuwenhuis, 2006).
 
 ### Results
-```{r repeated-measures-ANOVA, message = FALSE, include = FALSE}
+```{r repeated-measures-ANOVA, message = FALSE, include = FALSE, echo = FALSE}
 library(tidyverse)
 library(lmerTest)
 
@@ -143,6 +143,7 @@ Trials without valid EEG data were excluded from analyses (*n* = 2 for N170/EPN/
 
 ```{r descriptives-by-block, echo = FALSE, message = FALSE, fig.cap = "(ref:descriptives-by-block)"}
 library(tidyverse)
+options(kableExtra.latex.load_packages = FALSE)
 library(kableExtra)
 dat <- read_csv("data/paper_two/created_data/per_data_analyses_2020_5_19.csv")
 
@@ -178,7 +179,6 @@ kable(desc_stats, "latex", escape = FALSE, booktabs = TRUE, align = "lcccccccc",
 ```{r corr-table, echo=FALSE, fig.cap = "(ref:corr-table)", message=FALSE}
 # load packages
 library(tidyverse)
-library(kableExtra)
 
 # load data
 cor_dat <- read_csv("data/paper_two/created_data/per_data_analyses_2020_5_19.csv")
@@ -287,7 +287,6 @@ library(emmeans)
 library(lmerTest)
 library(r2glmm)
 library(effectsize)
-library(kableExtra)
 
 # read in data and make variables for valence and regulation conditions
 dat <- read_csv("data/paper_two/created_data/per_data_analyses_2020_5_19.csv")
@@ -548,7 +547,6 @@ library(emmeans)
 library(lmerTest)
 library(r2glmm)
 library(effectsize)
-library(kableExtra)
 
 # read in data and make variables for valence and regulation conditions
 dat <- read_csv("data/paper_two/created_data/per_data_analyses_2020_5_19.csv") %>% 
@@ -1480,7 +1478,7 @@ n170_epn_topos / pos_n170_epn + plot_layout(widths = 2)
 
 (ref:EPN-N170-neg-topos) Topographical plots and average waveforms for N170 (160 - 200 ms; top row) and EPN (250 - 375 ms; bottom row) during regulation conditions in response to negative images. Sensors highlighted in white were used to measure N170 and EPN for waveform plots and analyses.
 
-```{r EPN-N170-neg-topos, echo=FALSE, fig.cap="(ref:EPN-N170-neg-topos)", message=FALSE, warning=FALSE, cache=TRUE, cache.lazy=}
+```{r EPN-N170-neg-topos, echo=FALSE, fig.cap="(ref:EPN-N170-neg-topos)", message=FALSE, warning=FALSE, cache=TRUE, cache.lazy = FALSE}
 rm(list=ls())
 library(devtools)
 library(eegUtils) # remotes::install_github("craddm/eegUtils")
@@ -1844,7 +1842,7 @@ watch_spn <- eeg_dat %>%
 watch_topos / watch_spn + plot_layout(widths = 2)
 ```
 
-```{r positive-affectivity-mlm-analyses, include = FALSE}
+```{r positive-affectivity-mlm-analyses, echo = FALSE, include = FALSE}
 rm(list=ls())
 library(tidyverse)
 library(lmerTest)
@@ -1865,7 +1863,7 @@ spn_pa_beta <- spn_pa_dat %>%
   filter(var == "blockPos_Watch:pos_affectivity") %>% 
   select(Estimate) %>% 
   pull()
-spn_pa_beta <- standardize_parameters(spn_pa) %>% 
+spn_pa_std_beta <- standardize_parameters(spn_pa) %>% 
   filter(Parameter == "blockPos_Watch:pos_affectivity") %>% 
   mutate(Std_Coefficient = sprintf("%.2f", Std_Coefficient)) %>% 
   select(`Std_Coefficient`) %>% 
@@ -2204,7 +2202,7 @@ diff_pa_p <- diff_pa_dat %>%
 
 The second objective was to examine the relationship between personality traits pertaining to positive emotion (i.e., PA and momentary savoring capacity) and EEG components of interest. MLM with variance components covariance matrices to estimate random intercepts for each participant was used to test if the relationship between EEG components and passively viewing positive images versus neutral images varied as a function of trait positive affect. Dummy-coded block (within subjects: neutral watch block as reference level) and mean-centered trait positive affect (between subjects) variables were included in the omnibus model. An interaction term between block and trait positive affect variables was added to probe for a conditional relationship between block and EEG component as a function of trait positive affect. Results did not indicate a significant interaction between viewing condition and PA in predicting SPN ($b$ = `r spn_pa_beta`, $\beta$ = `r spn_pa_std_beta`, $SE$ = `r spn_pa_se`, $t$(`r spn_pa_df`) = `r spn_pa_t`, $p$ `r spn_pa_p`), EPN ($b$ = `r epn_pa_beta`, $\beta$ = `r epn_pa_std_beta`, $SE$ = `r epn_pa_se`, $t$(`r epn_pa_df`) = `r epn_pa_t`, $p$ `r epn_pa_p`), N170 ($b$ = `r n170_pa_beta`, $\beta$ = `r n170_pa_std_beta`, $SE$ = `r n170_pa_se`, $t$(`r n170_pa_df`) = `r n170_pa_t`, $p$ `r n170_pa_p`), LPP ($b$ = `r lpp_pa_beta`, $\beta$ = `r lpp_pa_std_beta`, $SE$ = `r lpp_pa_se`, $t$(`r lpp_pa_df`) = `r lpp_pa_t`, $p$ `r lpp_pa_p`), nor late LPP ($b$ = `r late_lpp_pa_beta`, $\beta$ = `r late_lpp_pa_std_beta`, $SE$ = `r late_lpp_pa_se`, $t$(`r late_lpp_pa_df`) = `r late_lpp_pa_t`, $p$ `r late_lpp_pa_p`) . Exploratory moderation analyses were also run with arousal and valence ratings as the dependent variable. Results did not indicate a significant interaction between viewing condition and PA in predicting arousal ratings ($b$ = `r ar_pa_beta`, $\beta$ = `r ar_pa_std_beta`, $SE$ = `r ar_pa_se`, $t$(`r ar_pa_df`) = `r ar_pa_t`, $p$ `r ar_pa_p`) and predicted a small interaction effect in predicting valence ratings ($b$ = `r val_pa_beta`, $\beta$ = `r val_pa_std_beta`, $SE$ = `r val_pa_se`, $t$(`r val_pa_df`) = `r val_pa_t`, $p$ `r val_pa_p`), such that greater levels of positive affectivity were associated with more positive valence ratings after passively viewing positive images compared to neutral images. 
 
-```{r stm-mlm-analyses, include = FALSE}
+```{r stm-mlm-analyses, echo = FALSE, include = FALSE}
 rm(list=ls())
 library(tidyverse)
 library(lmerTest)
@@ -2567,6 +2565,7 @@ To test if the relationship between EEG components/behavioral ratings and increa
 
 ### DISCUSSION
 The present study sought to explore the OASIS as an alternative to the IAPS in psychophysiological research as well the role of personality traits in neural affective processing. This research will help introduce more up-to-date and open access materials in affective neuroscience research and devise neuroscience-informed clinical interventions to enhance positive emotion. We found that, similar to the IAPS, highly arousing positive and negative OASIS stimuli elicited augmented LPP activity. Furthermore, PA and capacity to savor the moment did not influence the relationship between passively viewing and increasing emotional intensity in response to positive images, respectively.
+
 Results suggest that highly arousing positive and negative images are correlated with enhanced parietal cortical activity. This is a common finding in research investigating the neural time course of affective processing with the IAPS [@cuthbertBrainPotentialsAffective2000; @hajcakMotivatedControlledAttention2009; @hajcakNeuralResponseEmotional2007; @krompingerModulationsElectrophysiologicalResponse2008; @moserIntentionalModulationEmotional2006; @schuppAffectivePictureProcessing2000; @trittIdeologicalReactivityPolitical2016]. Participant rating scales in the present study indicated that passively viewing positive and negative image blocks were associated with more arousal when compared to neutral images. Passively watching negative images was associated with higher arousal ratings when compared to positive images. Passively viewing negative images was associated with valence scores that were significantly lower than neutral images, yet the difference between positive and neutral images was not significant. This suggests that negatively-valenced stimuli may have more profound effects on state manipulations of emotion than positively-valenced stimuli. Notably, these behavioral ratings did not correlate with LPP activity. This may be attributed to the fact that participant ratings likely reflect state manipulations at the end of each block while LPP may reflect arousal and/or valence in response to each image. Overall, these findings lend support to the OASIS image set being used in subsequent psychophysiological studies investigating the neural time course of affective processing. The OASIS also has several advantages over the IAPS. More specifically, it is up-to-date, spans a number of semantic categories, and is open access [@kurdiIntroducingOpenAffective2017].
 
 Evidence of conditional relationships between regulating one’s emotion in response to affective images and LPP activity as a function of personality traits pertaining to positive emotion was not found. This is a departure from earlier fMRI research investigating correlations between neural activation in response to pleasant stimuli/happy faces and the personality trait of extraversion [@canliAmygdalaResponseHappy2002; @canliFMRIStudyPersonality2001]. This discrepancy could be due to different methods. Canli et al. (2001, 2002) utilized fMRI and presented five blocks of four pictures that were presented for 7.5 seconds each while the present study used EEG and utilized seven blocks of 40 image blocks that were presented for two seconds each. fMRI does not have the temporal resolution necessary to analyze timing in the 0 – 3000 ms time window as the present study did. Thus, it is possible that different components were being analyzed in Canli et al. (2001, 2002) and the present study. Furthermore, Canli et al. (2001) limited their sample to only women on the grounds that, “...they are more likely to report intense emotional experiences (Shields, 1991) and because they show more physiological reactivity in concordance with valence judgments than men (Lang, Greenwald, Bradley, & Hamm, 1993).” In contrast, the present study recruited participants regardless of gender in order produce more generalizable findings. Additionally, different statistical analyses were utilized in the present study compared to those reported in Canli et al. (2002, 2003). Though the language used in Canli et al. (2003) suggests a moderation analysis: “...given that amygdala activation to positive emotional scenes varies as a function of this trait...” (p. 1), closer inspection indicates that correlations between z scores for voxels in fMRI slices and personality traits were reported. This technique necessitates multiple statistical tests, inflating type-I error, and is unable to account for variance attributed to other variables. True moderation analyses, as performed in the present study, are tested in a single regression model that allows one to statistically control for effects of other variables.
