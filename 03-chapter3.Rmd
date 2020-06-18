@@ -137,7 +137,7 @@ df_num_diff <- av_diff$NumDF
 df_den_diff <- round(av_diff$DenDF, digits = 0)
 f_diff <- sprintf("%.2f", av_diff[["F value"]])
 ```
-Trials without valid EEG data were excluded from analyses (*n* = 2 for N170/EPN/LPP anlayses and *n* = 5 for SPN). Analyses were run in R version 4.0.0 [@rcoreteamLanguageEnvironmentStatistical2018]. Multilevel modeling (MLM) analyses were conducted using the lme4 package [@batesFittingLinearMixedeffects2015]. All linear mixed models were estimated using REML with particpants included as random intercepts. Model assumptions were checked via visual inspection of diagnostic plots (i.e., residual, QQ, scale-location, and residuals vs. leverage) generated with the performance package [@ludeckePerformanceAssessmentRegression2019]. Correlations among key psychological and demographic variables (see Table 2\ref(tab:corr-table)) indicated significant associations ranging from small to large in effect size. Descriptive statistics for LPP, EPN, N170 and participant ratings (arousal, valence, and difficulty) were calculated for each of the experimental blocks (see Table \@ref(tab:descriptives-by-block)). A repeated measures analysis of variance yielded significant variation among experimental image blocks for LPP ($F$(`r df_num_lpp`, `r df_den_lpp` = `r f_lpp`, $p < .001$), EPN ($F$(`r df_num_epn`, `r df_den_epn`) = `r f_epn`, $p < .001$), and N170 ($F$(`r df_num_n170`, `r df_den_n170`) = `r f_n170`, $p < .001$). Repeated measures analysis of variance similarly indicated differences among blocks for arousal ($F$(`r df_num_ar`, `r df_den_ar` = `r f_ar`, $p < .001$), valence ($F$(`r df_num_val`, `r df_den_val` = `r f_val`, $p < .001$), and difficulty ($F$(`r df_num_diff`, `r df_den_diff`) = `r f_diff`, $p < .001$) ratings. A significant effect of block was not found for SPN and late LPP. Pairwise comparisons were conducted using the emmeans package [@lenthEmmeansEstimatedMarginal2020] among passive watch and regulation conditions for EEG components and behavioral ratings, which are summarized in Table \@ref(tab:pairwise-watch-comparison-table and Table \@ref(tab:pairwise-reg-comparison-table, respectively. Effect sizes were interpreted using Funder's [-@funderEvaluatingEffectSize2019] recommendations. 
+Trials without valid EEG data were excluded from analyses (*n* = 2 for N170/EPN/LPP anlayses and *n* = 5 for SPN). Analyses were run in R version 4.0.0 [@rcoreteamLanguageEnvironmentStatistical2018]. Multilevel modeling (MLM) analyses were conducted using the lme4 package [@batesFittingLinearMixedeffects2015]. All linear mixed models were estimated using REML with particpants included as random intercepts. Model assumptions were checked via visual inspection of diagnostic plots (i.e., residual, QQ, scale-location, and residuals vs. leverage) generated with the performance package [@ludeckePerformanceAssessmentRegression2019]. Correlations among key psychological and demographic variables (see Table 2\ref(tab:corr-table)) indicated significant associations ranging from small to large in effect size. Descriptive statistics for LPP, EPN, N170 and participant ratings (arousal, valence, and difficulty) were calculated for each of the experimental blocks (see Table \@ref(tab:descriptives-by-block)). A repeated measures analysis of variance yielded significant variation among experimental image blocks for LPP ($F$(`r df_num_lpp`, `r df_den_lpp` = `r f_lpp`, $p < .001$), EPN ($F$(`r df_num_epn`, `r df_den_epn`) = `r f_epn`, $p < .001$), and N170 ($F$(`r df_num_n170`, `r df_den_n170`) = `r f_n170`, $p < .001$). Repeated measures analysis of variance similarly indicated differences among blocks for arousal ($F$(`r df_num_ar`, `r df_den_ar` = `r f_ar`, $p < .001$), valence ($F$(`r df_num_val`, `r df_den_val` = `r f_val`, $p < .001$), and difficulty ($F$(`r df_num_diff`, `r df_den_diff`) = `r f_diff`, $p < .001$) ratings. A significant effect of block was not found for SPN and late LPP. Pairwise comparisons were conducted using the emmeans package [@lenthEmmeansEstimatedMarginal2020] among passive watch and regulation conditions for EEG components and behavioral ratings, which are summarized in Table \@ref(tab:pairwise-watch-comparison-table and Table \@ref(tab:pairwise-reg-comparison-table, respectively. Effect sizes were interpreted using Funder's [-@funderEvaluatingEffectSize2019] recommendations. Topographical plots and average ERP waveforms for 
 
 (ref:descriptives-by-block) Means and standard deviations for LPP, EPN, and N170 EEG components, as well as arousal, valence, and difficulty ratings.
 
@@ -170,8 +170,7 @@ kable(desc_stats, "latex", escape = FALSE, booktabs = TRUE, align = "lcccccccc",
   row_spec(0, align = "c") %>% 
   footnote(general_title = "Note.",
            general = "SD = Standard Deviation.",
-           footnote_as_chunk = TRUE) %>% 
-  save_kable("poop.png")
+           footnote_as_chunk = TRUE)
 ```
 
 (ref:corr-table) Correlations among EEG components, behavioral ratings, positive affectivity, and savoring the moment ($N$ = 52)
@@ -195,7 +194,9 @@ tab <- cor_dat %>%
          valence,
          difficulty,
          pos_affectivity,
+         anticipating,
          savoring_moment,
+         reminiscing,
          depression,
          sex) %>%
   rename("1. SPN" = SPN,
@@ -207,9 +208,11 @@ tab <- cor_dat %>%
          "7. Valence Ratings" = valence,
          "8. Difficulty Ratings" = difficulty,
          "9. PA" = pos_affectivity,
-         "10. StM" = savoring_moment,
-         "11. Depression" = depression,
-         "12. Sex" = sex) 
+         "10. Anticipating" = anticipating,
+         "11. StM" = savoring_moment,
+         "12. Reminiscing" = reminiscing,
+         "13. Depression" = depression,
+         "14. Sex" = sex) 
 
 #Compute correlation matrix
 x <- as.matrix(tab)
@@ -248,7 +251,7 @@ tab <- tab %>%
   map_df(., ~ {
   if_else(str_detect(.x, "-"), paste0("-", str_remove(.x, "-0")), .x)
     })
-colnames(tab) <- paste0(c(1:11), ".")
+colnames(tab) <- paste0(c(1:13), ".")
 tab %>% 
   mutate(" " = c("1. SPN",
                  "2. N170",
@@ -259,14 +262,16 @@ tab %>%
                  "7. Valence Ratings",
                  "8. Difficulty Ratings",
                  "9. PA",
-                 "10. StM",
-                 "11. Depression",
-                 "12. Sex")) %>% 
+                 "10. Anticipating",
+                 "11. StM",
+                 "12. Reminiscing",
+                 "13. Depression",
+                 "14. Sex")) %>% 
   select(" ", everything()) %>% 
 ## create table
-kable(., format = "latex",  linesep = "", escape = FALSE, booktabs = TRUE, align = c("l", rep("r", 11)), caption = "(ref:corr-table)") %>% 
+kable(., format = "latex",  linesep = "", escape = FALSE, booktabs = TRUE, align = c("l", rep("r", 13)), caption = "(ref:corr-table)") %>% 
   kable_styling(latex_options = "scale_down", font_size = 12) %>% 
-  column_spec(2:12, width = "3em") %>% 
+  column_spec(2:14, width = "3em") %>% 
   footnote(general_title = "Note.",
            escape = FALSE,
            general = "*$p < .05$. PA = positive affectivity, StM = savoring the moment. EEG components and behavioral ratings (i.e., arousal, valence, and difficulty) averaged across all regulation blocks.",
@@ -949,7 +954,6 @@ Pz_elec <- c("B28")
 
 # merge coordinates with ERP data
 eeg_dat <- read_csv(here("data", "paper_two", "created_data", "erp_mast.csv"))
-eeg_dat$B28[eeg_dat$pid == 206201854 & eeg_dat$block %in% c("Neg_Watch", "Neg_Dec") & between(eeg_dat$ms, 400, 2000)] <- NA
 eeg_dat_long <- pivot_longer(eeg_dat, cols = A1:EXG2, names_to = "electrode", values_to = "amplitude")
 eeg_dat_loc <- left_join(eeg_dat_long, elec_loc, by = c("electrode" = "channel"))
 topo_elec <- c(paste0("A", 1:32), paste0("B", 1:32))
@@ -1087,7 +1091,7 @@ Pz_elec <- c("B28")
 
 # merge coordinates with ERP data
 eeg_dat <- read_csv(here("data", "paper_two", "created_data", "erp_mast.csv"))
-eeg_dat$B28[eeg_dat$pid == 206201854 & eeg_dat$block %in% c("Neg_Watch", "Neg_Dec") & between(eeg_dat$ms, 400, 2000)] <- NA
+eeg_dat$B28[eeg_dat$pid == 206201823 & eeg_dat$block == "Pos_Inc" & between(eeg_dat$ms, 400, 800)] <- NA
 eeg_dat_long <- pivot_longer(eeg_dat, cols = A1:EXG2, names_to = "electrode", values_to = "amplitude")
 eeg_dat_loc <- left_join(eeg_dat_long, elec_loc, by = c("electrode" = "channel"))
 topo_elec <- c(paste0("A", 1:32), paste0("B", 1:32))
@@ -1190,7 +1194,6 @@ Pz_elec <- c("B28")
 
 # merge coordinates with ERP data
 eeg_dat <- read_csv(here("data", "paper_two", "created_data", "erp_mast.csv"))
-eeg_dat$B28[eeg_dat$pid == 206201854 & eeg_dat$block %in% c("Neg_Watch", "Neg_Dec") & between(eeg_dat$ms, 400, 2000)] <- NA
 eeg_dat_long <- pivot_longer(eeg_dat, cols = A1:EXG2, names_to = "electrode", values_to = "amplitude")
 eeg_dat_loc <- left_join(eeg_dat_long, elec_loc, by = c("electrode" = "channel"))
 topo_elec <- c(paste0("A", 1:32), paste0("B", 1:32))
@@ -1477,7 +1480,7 @@ n170_epn_topos / pos_n170_epn + plot_layout(widths = 2)
 
 (ref:EPN-N170-neg-topos) Topographical plots and average waveforms for N170 (160 - 200 ms; top row) and EPN (250 - 375 ms; bottom row) during regulation conditions in response to negative images. Sensors highlighted in white were used to measure N170 and EPN for waveform plots and analyses.
 
-```{r EPN-N170-neg-topos, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:EPN-N170-neg-topos)", cache = TRUE, cache.lazy = FALSE}
+```{r EPN-N170-neg-topos, echo=FALSE, fig.cap="(ref:EPN-N170-neg-topos)", message=FALSE, warning=FALSE, cache=TRUE, cache.lazy=}
 rm(list=ls())
 library(devtools)
 library(eegUtils) # remotes::install_github("craddm/eegUtils")
@@ -1600,16 +1603,17 @@ elec_loc <- elec_loc %>%
   mutate(x = theta * cos(radian_phi),
          y = theta * sin(radian_phi))
 
-spn_elec <- c("A5")
+spn_elec <- "A5"
 
 # merge coordinates with ERP data
-eeg_dat <- read_csv(here("data", "paper_two", "created_data", "erp_mast.csv"))
-eeg_dat$A5[eeg_dat$pid == 206201817 & eeg_dat$block %in% c("Neu_Watch", "Pos_Dec") & between(eeg_dat$ms, 450, 1215)] <- NA
+eeg_dat <- read_csv(here("data", "paper_two", "created_data", "spn.csv")) %>% 
+  mutate(block = str_remove(block, "Pre_"))
+eeg_dat$A5[eeg_dat$pid %in% c(206201817, 206201827) & eeg_dat$block %in% c("Neu_Watch") & between(eeg_dat$ms, -200, 2000)] <- NA
 eeg_dat_long <- pivot_longer(eeg_dat, cols = A1:EXG2, names_to = "electrode", values_to = "amplitude")
 eeg_dat_loc <- left_join(eeg_dat_long, elec_loc, by = c("electrode" = "channel"))
 topo_elec <- c(paste0("A", 1:32), paste0("B", 1:32))
 
-watch_topos <- eeg_dat_loc %>%
+spn_watch_topos <- eeg_dat_loc %>%
   filter(!is.na(amplitude), block %in% c("Neu_Watch", "Pos_Watch", "Neg_Watch"), 
           electrode %in% topo_elec, between(ms, 450, 1250)) %>%
   group_by(block, electrode, x, y) %>%
@@ -1623,7 +1627,7 @@ ggplot(., aes(x = x, y = y, fill = amplitude)) +
   geom_mask(scale_fac = 1.6, size = .01) +
   geom_head() +               
   geom_channels(aes(color = highlight), size = 0.125) +             
-  scale_fill_viridis_c(limits = c(-5, 6), oob = scales::squish) +
+  scale_fill_viridis_c(limits = c(-4, 5), oob = scales::squish) +
   scale_color_manual(breaks = c("black", "white"),
                      values = c("black", "white"),
                      guide = FALSE) +
@@ -1635,9 +1639,9 @@ ggplot(., aes(x = x, y = y, fill = amplitude)) +
 
 watch_spn <- eeg_dat %>%
     filter(block %in% c("Neu_Watch", "Pos_Watch", "Neg_Watch")) %>% 
-    select(all_of(spn_elec),  block:prop_trials) %>%
-    filter(ms <= 1500) %>% 
-    pivot_longer(., cols = spn_elec, names_to = "electrode", values_to = "mv") %>%
+    select(A5,  block:prop_trials) %>%
+    filter(ms < 1500) %>% 
+    pivot_longer(., cols = A5, names_to = "electrode", values_to = "mv") %>%
     group_by(block, ms) %>%
     dplyr::summarize(mv = mean(mv, na.rm = TRUE)) %>%
     ggplot(., aes(ms, mv, color = block)) +
@@ -1663,12 +1667,12 @@ watch_spn <- eeg_dat %>%
                        breaks = c("Neg_Watch", "Pos_Watch", "Neu_Watch"),
                        labels = c("Negative Watch", "Positive Watch", "Neutral Watch"))
 
-watch_topos / watch_spn + plot_layout(widths = 2)
+spn_watch_topos / watch_spn + plot_layout(widths = 2)
 ```
 
 (ref:SPN-pos-topos) Topographical plots and average waveforms for SPN during positive regulation conditions. Sensor highlighted in white was used to measure SPN for waveform plots and analyses.
 
-```{r SPN-pos-topos, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:SPN-reg_tpops)", cache = TRUE, cache.lazy = FALSE}
+```{r SPN-pos-topos, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:SPN-reg_tops)", cache = TRUE, cache.lazy = FALSE}
 library(devtools)
 library(eegUtils) # remotes::install_github("craddm/eegUtils")
 library(tidyverse)
@@ -1690,8 +1694,8 @@ elec_loc <- elec_loc %>%
 spn_elec <- c("A5")
 
 # merge coordinates with ERP data
-eeg_dat <- read_csv(here("data", "paper_two", "created_data", "erp_mast.csv"))
-eeg_dat$A5[eeg_dat$pid == 206201817 & eeg_dat$block %in% c("Neu_Watch", "Pos_Dec") & between(eeg_dat$ms, 450, 1215)] <- NA
+eeg_dat <- read_csv(here("data", "paper_two", "created_data", "spn.csv")) %>% 
+  mutate(block = str_remove(block, "Pre_"))
 eeg_dat_long <- pivot_longer(eeg_dat, cols = A1:EXG2, names_to = "electrode", values_to = "amplitude")
 eeg_dat_loc <- left_join(eeg_dat_long, elec_loc, by = c("electrode" = "channel"))
 topo_elec <- c(paste0("A", 1:32), paste0("B", 1:32))
@@ -1777,8 +1781,8 @@ elec_loc <- elec_loc %>%
 spn_elec <- c("A5")
 
 # merge coordinates with ERP data
-eeg_dat <- read_csv(here("data", "paper_two", "created_data", "erp_mast.csv"))
-eeg_dat$A5[eeg_dat$pid == 206201817 & eeg_dat$block %in% c("Neu_Watch", "Pos_Dec") & between(eeg_dat$ms, 450, 1215)] <- NA
+eeg_dat <- read_csv(here("data", "paper_two", "created_data", "spn.csv"))  %>% 
+  mutate(block = str_remove(block, "Pre_"))
 eeg_dat_long <- pivot_longer(eeg_dat, cols = A1:EXG2, names_to = "electrode", values_to = "amplitude")
 eeg_dat_loc <- left_join(eeg_dat_long, elec_loc, by = c("electrode" = "channel"))
 topo_elec <- c(paste0("A", 1:32), paste0("B", 1:32))
@@ -1797,7 +1801,7 @@ ggplot(., aes(x = x, y = y, fill = amplitude)) +
   geom_mask(scale_fac = 1.6, size = .01) +
   geom_head() +               
   geom_channels(aes(color = highlight), size = 0.125) +             
-  scale_fill_viridis_c(limits = c(-5, 6), oob = scales::squish) +
+  scale_fill_viridis_c(limits = c(-4, 6), oob = scales::squish) +
   scale_color_manual(breaks = c("black", "white"),
                      values = c("black", "white"),
                      guide = FALSE) +

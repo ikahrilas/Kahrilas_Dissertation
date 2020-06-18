@@ -29,7 +29,7 @@ spn_elec <- "A5" # 450 - 1250 ms
 #'
 #' Omit extreme cases as indicated by histograms and QQ plots in Univarite Exploration script
 #+ Omit extreme cases
-eeg_df_mast$B28[eeg_df_mast$pid == 206201823 & eeg_df_mast$block == "Pos_Inc" & between(eeg_df_mast$ms, 400, 1000)] <- NA
+eeg_df_mast$B28[eeg_df_mast$pid == 206201823 & eeg_df_mast$block == "Pos_Inc" & between(eeg_df_mast$ms, 400, 800)] <- NA
 spn_df$A5[spn_df$pid %in% c(206201817, 206201827) & spn_df$block %in% c("Neu_Watch") & between(spn_df$ms, 315, 1215)] <- NA
 
 #' Create plots for each component with all conditions
