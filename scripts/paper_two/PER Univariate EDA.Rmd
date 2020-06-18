@@ -200,7 +200,7 @@ Omit extreme cases indicated in the histograms and QQ plots, and regenerate hist
 
 ```{r examine extreme cases, warning=FALSE,message=FALSE}
 per_erp$LPP[per_erp$block == "Pos_Inc" & per_erp$LPP < -10] <- NA
-per_erp$SPN[per_erp$block == "Neu_Watch" & per_erp$SPN < -21] <- NA
+per_erp$SPN[per_erp$block == "Neu_Watch" & per_erp$SPN < -20] <- NA
 
 map(components, ~map(blocks, ~hist_qq_fun(trial = .x, component = .y), .y = .x)) %>% 
   walk(print)
