@@ -17,14 +17,8 @@ n170_epn_files <- paste0("/Users/ian/tmp/Kahrilas_Dissertation/data/paper_two/N_
 evt_files <- paste0("/Users/ian/tmp/Kahrilas_Dissertation/data/paper_two/N_EPN_LPP evt/", list.files("/Users/ian/tmp/Kahrilas_Dissertation/data/paper_two/N_EPN_LPP evt/"))
 ## get rid of bad files
 LPP_files <- str_subset(LPP_files, "206201831", negate = TRUE)
-LPP_files <- str_subset(LPP_files, "206201827", negate = TRUE)
-LPP_files <- str_subset(LPP_files, "20620183_av", negate = TRUE)
 n170_epn_files <- str_subset(n170_epn_files, "206201831", negate = TRUE)
-n170_epn_files <- str_subset(n170_epn_files, "206201827", negate = TRUE)
-n170_epn_files <- str_subset(n170_epn_files, "20620183_av", negate = TRUE)
-evt_files <- str_subset(evt_files, "206201827", negate = TRUE)
 evt_files <- str_subset(evt_files, "206201831", negate = TRUE)
-evt_files <- str_subset(evt_files, "20620183_av", negate = TRUE)
 #'
 #' Read in .mul and .evt files
 #+ read data in
