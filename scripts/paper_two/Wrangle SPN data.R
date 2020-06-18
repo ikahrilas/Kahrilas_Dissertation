@@ -96,3 +96,4 @@ spn <- full_join(spn_dat, spn_evt, by = c("pid", "block")) %>%
 
 # write file
 write_csv(spn, here("data", "paper_two", "created_data", "spn.csv"))
+
