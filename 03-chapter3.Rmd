@@ -1851,10 +1851,52 @@ library(lmerTest)
 library(effectsize)
 
 dat <- read_csv("data/paper_two/created_data/per_data_analyses_2020_5_19.csv") %>% 
-  mutate(N170 = (N170_left + N170_right) / 2,
-         EPN = (EPN_left + EPN_right) / 2,
-         pos_affectivity = scale(pos_affectivity, scale = FALSE, center = TRUE)) %>% 
+  mutate(pos_affectivity = scale(pos_affectivity, scale = FALSE, center = TRUE)) %>% 
   select(pid:LPP, N170, EPN, everything())
+
+# SPN as outcome
+dat$block <- relevel(factor(dat$block), ref = "Neu_Watch")
+spn_pa <- lmer(SPN ~ block*pos_affectivity + (1|pid), data = dat)
+summary(spn_pa)
+spn_pa_dat <- data.frame(coef(summary(spn_pa)))
+spn_pa_beta <- spn_pa_dat %>% 
+  mutate(var = row.names(.)) %>% 
+  mutate(Estimate = sprintf("%.2f", Estimate)) %>% 
+  filter(var == "blockPos_Watch:pos_affectivity") %>% 
+  select(Estimate) %>% 
+  pull()
+spn_pa_beta <- standardize_parameters(spn_pa) %>% 
+  filter(Parameter == "blockPos_Watch:pos_affectivity") %>% 
+  mutate(Std_Coefficient = sprintf("%.2f", Std_Coefficient)) %>% 
+  select(`Std_Coefficient`) %>% 
+  pull()
+spn_pa_se <- spn_pa_dat %>% 
+  mutate(var = row.names(.)) %>% 
+  mutate(Std..Error = sprintf("%.2f", Std..Error)) %>% 
+  filter(var == "blockPos_Watch:pos_affectivity") %>% 
+  select(Std..Error) %>% 
+  pull()
+spn_pa_df <- spn_pa_dat %>% 
+  mutate(var = row.names(.)) %>% 
+  mutate(df = sprintf("%.2f", df)) %>% 
+  filter(var == "blockPos_Watch:pos_affectivity") %>% 
+  select(df) %>% 
+  pull()
+spn_pa_t <- spn_pa_dat %>% 
+  mutate(var = row.names(.)) %>% 
+  mutate(t.value = sprintf("%.2f", t.value)) %>% 
+  filter(var == "blockPos_Watch:pos_affectivity") %>% 
+  select(t.value) %>% 
+  pull()
+spn_pa_p <- spn_pa_dat %>% 
+  mutate(var = row.names(.),
+         Pr...t.. = sprintf("%.3f", Pr...t..),
+         Pr...t.. = str_remove(Pr...t.., "^0+"),
+         Pr...t.. = paste("=", Pr...t..),
+         Pr...t.. = if_else(Pr...t.. == "= .000", "< .001", Pr...t..)) %>% 
+  filter(var == "blockPos_Watch:pos_affectivity") %>% 
+  select(Pr...t..) %>% 
+  pull()
 
 # LPP as outcome
 dat$block <- relevel(factor(dat$block), ref = "Neu_Watch")
@@ -1891,6 +1933,50 @@ lpp_pa_t <- lpp_pa_dat %>%
   select(t.value) %>% 
   pull()
 lpp_pa_p <- lpp_pa_dat %>% 
+  mutate(var = row.names(.),
+         Pr...t.. = sprintf("%.3f", Pr...t..),
+         Pr...t.. = str_remove(Pr...t.., "^0+"),
+         Pr...t.. = paste("=", Pr...t..),
+         Pr...t.. = if_else(Pr...t.. == "= .000", "< .001", Pr...t..)) %>% 
+  filter(var == "blockPos_Watch:pos_affectivity") %>% 
+  select(Pr...t..) %>% 
+  pull()
+
+# Late LPP as outcome
+dat$block <- relevel(factor(dat$block), ref = "Neu_Watch")
+late_lpp_pa <- lmer(LPP_late ~ block*pos_affectivity + (1|pid), data = dat)
+summary(late_lpp_pa)
+late_lpp_pa_dat <- data.frame(coef(summary(late_lpp_pa)))
+late_lpp_pa_beta <- late_lpp_pa_dat %>% 
+  mutate(var = row.names(.)) %>% 
+  mutate(Estimate = sprintf("%.2f", Estimate)) %>% 
+  filter(var == "blockPos_Watch:pos_affectivity") %>% 
+  select(Estimate) %>% 
+  pull()
+late_lpp_pa_std_beta <- standardize_parameters(late_lpp_pa) %>% 
+  filter(Parameter == "blockPos_Watch:pos_affectivity") %>% 
+  mutate(Std_Coefficient = sprintf("%.2f", Std_Coefficient)) %>% 
+  select(`Std_Coefficient`) %>% 
+  pull()
+late_lpp_pa_se <- late_lpp_pa_dat %>% 
+  mutate(var = row.names(.)) %>% 
+  mutate(Std..Error = sprintf("%.2f", Std..Error)) %>% 
+  filter(var == "blockPos_Watch:pos_affectivity") %>% 
+  select(Std..Error) %>% 
+  pull()
+late_lpp_pa_df <- late_lpp_pa_dat %>% 
+  mutate(var = row.names(.)) %>% 
+  mutate(df = sprintf("%.2f", df)) %>% 
+  filter(var == "blockPos_Watch:pos_affectivity") %>% 
+  select(df) %>% 
+  pull()
+late_lpp_pa_t <- late_lpp_pa_dat %>% 
+  mutate(var = row.names(.)) %>% 
+  mutate(t.value = sprintf("%.2f", t.value)) %>% 
+  filter(var == "blockPos_Watch:pos_affectivity") %>% 
+  select(t.value) %>% 
+  pull()
+late_lpp_pa_p <- late_lpp_pa_dat %>% 
   mutate(var = row.names(.),
          Pr...t.. = sprintf("%.3f", Pr...t..),
          Pr...t.. = str_remove(Pr...t.., "^0+"),
@@ -2071,9 +2157,52 @@ val_pa_p <- val_pa_dat %>%
   filter(var == "blockPos_Watch:pos_affectivity") %>% 
   select(Pr...t..) %>% 
   pull()
+
+# difficulty as outcome
+diff_pa <- lmer(difficulty ~ block*pos_affectivity + (1|pid), data = dat)
+summary(diff_pa)
+diff_pa_dat <- data.frame(coef(summary(diff_pa)))
+diff_pa_beta <- diff_pa_dat %>% 
+  mutate(var = row.names(.)) %>% 
+  mutate(Estimate = sprintf("%.2f", Estimate)) %>% 
+  filter(var == "blockPos_Watch:pos_affectivity") %>% 
+  select(Estimate) %>% 
+  pull()
+diff_pa_std_beta <- standardize_parameters(diff_pa) %>% 
+  filter(Parameter == "blockPos_Watch:pos_affectivity") %>% 
+  mutate(Std_Coefficient = sprintf("%.2f", Std_Coefficient)) %>% 
+  select(`Std_Coefficient`) %>% 
+  pull()
+diff_pa_se <- diff_pa_dat %>% 
+  mutate(var = row.names(.)) %>% 
+  mutate(Std..Error = sprintf("%.2f", Std..Error)) %>% 
+  filter(var == "blockPos_Watch:pos_affectivity") %>% 
+  select(Std..Error) %>% 
+  pull()
+diff_pa_df <- diff_pa_dat %>% 
+  mutate(var = row.names(.)) %>% 
+  mutate(df = sprintf("%.2f", df)) %>% 
+  filter(var == "blockPos_Watch:pos_affectivity") %>% 
+  select(df) %>% 
+  pull()
+diff_pa_t <- diff_pa_dat %>% 
+  mutate(var = row.names(.)) %>% 
+  mutate(t.value = sprintf("%.2f", t.value)) %>% 
+  filter(var == "blockPos_Watch:pos_affectivity") %>% 
+  select(t.value) %>% 
+  pull()
+diff_pa_p <- diff_pa_dat %>% 
+  mutate(var = row.names(.),
+         Pr...t.. = sprintf("%.3f", Pr...t..),
+         Pr...t.. = str_remove(Pr...t.., "^0+"),
+         Pr...t.. = paste("=", Pr...t..),
+         Pr...t.. = if_else(Pr...t.. == "= .000", "< .001", Pr...t..)) %>% 
+  filter(var == "blockPos_Watch:pos_affectivity") %>% 
+  select(Pr...t..) %>% 
+  pull()
 ```
 
-The second objective was to examine the relationship between personality traits pertaining to positive emotion (i.e., PA and momentary savoring capacity) and EEG components of interest. MLM with variance components covariance matrices to estimate random intercepts for each participant was used to test if the relationship between EEG components and passively viewing positive images versus neutral images varied as a function of trait positive affect. Dummy-coded block (within subjects: neutral watch block as reference level) and mean-centered trait positive affect (between subjects) variables were included in the omnibus model. An interaction term between block and trait positive affect variables was added to probe for a conditional relationship between block and EEG component as a function of trait positive affect. Results did not indicate a significant interaction between viewing condition and PA in predicting LPP ($b$ = `r lpp_pa_beta`, $\beta$ = `r lpp_pa_std_beta`, $SE$ = `r lpp_pa_se`, $t$(`r lpp_pa_df`) = `r lpp_pa_t`, $p$ `r lpp_pa_p`), EPN ($b$ = `r epn_pa_beta`, $\beta$ = `r epn_pa_std_beta`, $SE$ = `r epn_pa_se`, $t$(`r epn_pa_df`) = `r epn_pa_t`, $p$ `r epn_pa_p`), nor N170 ($b$ = `r n170_pa_beta`, $\beta$ = `r n170_pa_std_beta`, $SE$ = `r n170_pa_se`, $t$(`r n170_pa_df`) = `r n170_pa_t`, $p$ `r n170_pa_p`). Exploratory moderation analyses were also run with arousal and valence ratings as the dependent variable. Results did not indicate a significant interaction between viewing condition and PA in predicting arousal ratings ($b$ = `r ar_pa_beta`, $\beta$ = `r ar_pa_std_beta`, $SE$ = `r ar_pa_se`, $t$(`r ar_pa_df`) = `r ar_pa_t`, $p$ `r ar_pa_p`) and predicted a small interaction effect in predicting valence ratings ($b$ = `r val_pa_beta`, $\beta$ = `r val_pa_std_beta`, $SE$ = `r val_pa_se`, $t$(`r val_pa_df`) = `r val_pa_t`, $p$ `r val_pa_p`), such that greater levels of positive affecitivty were associated with more positive valence ratings after passively viewing positive images compared to neutral images. 
+The second objective was to examine the relationship between personality traits pertaining to positive emotion (i.e., PA and momentary savoring capacity) and EEG components of interest. MLM with variance components covariance matrices to estimate random intercepts for each participant was used to test if the relationship between EEG components and passively viewing positive images versus neutral images varied as a function of trait positive affect. Dummy-coded block (within subjects: neutral watch block as reference level) and mean-centered trait positive affect (between subjects) variables were included in the omnibus model. An interaction term between block and trait positive affect variables was added to probe for a conditional relationship between block and EEG component as a function of trait positive affect. Results did not indicate a significant interaction between viewing condition and PA in predicting SPN ($b$ = `r spn_pa_beta`, $\beta$ = `r spn_pa_std_beta`, $SE$ = `r spn_pa_se`, $t$(`r spn_pa_df`) = `r spn_pa_t`, $p$ `r spn_pa_p`), EPN ($b$ = `r epn_pa_beta`, $\beta$ = `r epn_pa_std_beta`, $SE$ = `r epn_pa_se`, $t$(`r epn_pa_df`) = `r epn_pa_t`, $p$ `r epn_pa_p`), N170 ($b$ = `r n170_pa_beta`, $\beta$ = `r n170_pa_std_beta`, $SE$ = `r n170_pa_se`, $t$(`r n170_pa_df`) = `r n170_pa_t`, $p$ `r n170_pa_p`), LPP ($b$ = `r lpp_pa_beta`, $\beta$ = `r lpp_pa_std_beta`, $SE$ = `r lpp_pa_se`, $t$(`r lpp_pa_df`) = `r lpp_pa_t`, $p$ `r lpp_pa_p`), nor late LPP ($b$ = `r late_lpp_pa_beta`, $\beta$ = `r late_lpp_pa_std_beta`, $SE$ = `r late_lpp_pa_se`, $t$(`r late_lpp_pa_df`) = `r late_lpp_pa_t`, $p$ `r late_lpp_pa_p`) . Exploratory moderation analyses were also run with arousal and valence ratings as the dependent variable. Results did not indicate a significant interaction between viewing condition and PA in predicting arousal ratings ($b$ = `r ar_pa_beta`, $\beta$ = `r ar_pa_std_beta`, $SE$ = `r ar_pa_se`, $t$(`r ar_pa_df`) = `r ar_pa_t`, $p$ `r ar_pa_p`) and predicted a small interaction effect in predicting valence ratings ($b$ = `r val_pa_beta`, $\beta$ = `r val_pa_std_beta`, $SE$ = `r val_pa_se`, $t$(`r val_pa_df`) = `r val_pa_t`, $p$ `r val_pa_p`), such that greater levels of positive affectivity were associated with more positive valence ratings after passively viewing positive images compared to neutral images. 
 
 ```{r stm-mlm-analyses, include = FALSE}
 rm(list=ls())
@@ -2082,10 +2211,96 @@ library(lmerTest)
 library(effectsize)
 
 dat <- read_csv("data/paper_two/created_data/per_data_analyses_2020_5_19.csv") %>% 
-  mutate(N170 = (N170_left + N170_right) / 2,
-         EPN = (EPN_left + EPN_right) / 2,
-         savoring_moment = scale(savoring_moment, scale = FALSE, center = TRUE)) %>% 
+  mutate(savoring_moment = scale(savoring_moment, scale = FALSE, center = TRUE)) %>% 
   select(pid:LPP, N170, EPN, everything())
+
+# SPN as outcome
+dat$block <- relevel(factor(dat$block), ref = "Pos_Watch")
+spn_stm <- lmer(SPN ~ block*anticipating + (1|pid), data = dat)
+summary(spn_stm)
+spn_stm_dat <- data.frame(coef(summary(spn_stm)))
+spn_stm_beta <- spn_stm_dat %>% 
+  mutate(var = row.names(.)) %>% 
+  mutate(Estimate = sprintf("%.2f", Estimate)) %>% 
+  filter(var == "blockPos_Inc:ancitipating") %>% 
+  select(Estimate) %>% 
+  pull()
+spn_stm_std_beta <- standardize_parameters(spn_stm) %>% 
+  filter(Parameter == "blockPos_Inc:ancitipating") %>% 
+  mutate(Std_Coefficient = sprintf("%.2f", Std_Coefficient)) %>% 
+  select(`Std_Coefficient`) %>% 
+  pull()
+spn_stm_se <- spn_stm_dat %>% 
+  mutate(var = row.names(.)) %>% 
+  mutate(Std..Error = sprintf("%.2f", Std..Error)) %>% 
+  filter(var == "blockPos_Inc:ancitipating") %>% 
+  select(Std..Error) %>% 
+  pull()
+spn_stm_df <- spn_stm_dat %>% 
+  mutate(var = row.names(.)) %>% 
+  mutate(df = sprintf("%.2f", df)) %>% 
+  filter(var == "blockPos_Inc:ancitipating") %>% 
+  select(df) %>% 
+  pull()
+spn_stm_t <- spn_stm_dat %>% 
+  mutate(var = row.names(.)) %>% 
+  mutate(t.value = sprintf("%.2f", t.value)) %>% 
+  filter(var == "blockPos_Inc:ancitipating") %>% 
+  select(t.value) %>% 
+  pull()
+spn_stm_p <- spn_stm_dat %>% 
+  mutate(var = row.names(.),
+         Pr...t.. = sprintf("%.3f", Pr...t..),
+         Pr...t.. = str_remove(Pr...t.., "^0+"),
+         Pr...t.. = paste("=", Pr...t..),
+         Pr...t.. = if_else(Pr...t.. == "= .000", "< .001", Pr...t..)) %>% 
+  filter(var == "blockPos_Inc:ancitipating") %>% 
+  select(Pr...t..) %>% 
+  pull()
+
+# SPN as outcome reminiscing moderation
+dat$block <- relevel(factor(dat$block), ref = "Pos_Watch")
+spn_rem <- lmer(SPN ~ block*reminiscing + (1|pid), data = dat)
+summary(spn_rem)
+spn_rem_dat <- data.frame(coef(summary(spn_rem)))
+spn_rem_beta <- spn_rem_dat %>% 
+  mutate(var = row.names(.)) %>% 
+  mutate(Estimate = sprintf("%.2f", Estimate)) %>% 
+  filter(var == "blockPos_Inc:reminiscing") %>% 
+  select(Estimate) %>% 
+  pull()
+spn_rem_std_beta <- standardize_parameters(spn_rem) %>% 
+  filter(Parameter == "blockPos_Inc:reminiscing") %>% 
+  mutate(Std_Coefficient = sprintf("%.2f", Std_Coefficient)) %>% 
+  select(`Std_Coefficient`) %>% 
+  pull()
+spn_rem_se <- spn_rem_dat %>% 
+  mutate(var = row.names(.)) %>% 
+  mutate(Std..Error = sprintf("%.2f", Std..Error)) %>% 
+  filter(var == "blockPos_Inc:reminiscing") %>% 
+  select(Std..Error) %>% 
+  pull()
+spn_rem_df <- spn_rem_dat %>% 
+  mutate(var = row.names(.)) %>% 
+  mutate(df = sprintf("%.2f", df)) %>% 
+  filter(var == "blockPos_Inc:reminiscing") %>% 
+  select(df) %>% 
+  pull()
+spn_rem_t <- spn_rem_dat %>% 
+  mutate(var = row.names(.)) %>% 
+  mutate(t.value = sprintf("%.2f", t.value)) %>% 
+  filter(var == "blockPos_Inc:reminiscing") %>% 
+  select(t.value) %>% 
+  pull()
+spn_rem_p <- spn_rem_dat %>% 
+  mutate(var = row.names(.),
+         Pr...t.. = sprintf("%.3f", Pr...t..),
+         Pr...t.. = str_remove(Pr...t.., "^0+"),
+         Pr...t.. = paste("=", Pr...t..),
+         Pr...t.. = if_else(Pr...t.. == "= .000", "< .001", Pr...t..)) %>% 
+  filter(var == "blockPos_Inc:reminiscing") %>% 
+  select(Pr...t..) %>% 
+  pull()
 
 # LPP as outcome
 dat$block <- relevel(factor(dat$block), ref = "Pos_Watch")
@@ -2122,6 +2337,50 @@ lpp_stm_t <- lpp_stm_dat %>%
   select(t.value) %>% 
   pull()
 lpp_stm_p <- lpp_stm_dat %>% 
+  mutate(var = row.names(.),
+         Pr...t.. = sprintf("%.3f", Pr...t..),
+         Pr...t.. = str_remove(Pr...t.., "^0+"),
+         Pr...t.. = paste("=", Pr...t..),
+         Pr...t.. = if_else(Pr...t.. == "= .000", "< .001", Pr...t..)) %>% 
+  filter(var == "blockPos_Inc:savoring_moment") %>% 
+  select(Pr...t..) %>% 
+  pull()
+
+# late LPP as outcome
+dat$block <- relevel(factor(dat$block), ref = "Pos_Watch")
+late_lpp_stm <- lmer(LPP_late ~ block*savoring_moment + (1|pid), data = dat)
+summary(late_lpp_stm)
+late_lpp_stm_dat <- data.frame(coef(summary(late_lpp_stm)))
+late_lpp_stm_beta <- late_lpp_stm_dat %>% 
+  mutate(var = row.names(.)) %>% 
+  mutate(Estimate = sprintf("%.2f", Estimate)) %>% 
+  filter(var == "blockPos_Inc:savoring_moment") %>% 
+  select(Estimate) %>% 
+  pull()
+late_lpp_stm_std_beta <- standardize_parameters(late_lpp_stm) %>% 
+  filter(Parameter == "blockPos_Inc:savoring_moment") %>% 
+  mutate(Std_Coefficient = sprintf("%.2f", Std_Coefficient)) %>% 
+  select(`Std_Coefficient`) %>% 
+  pull()
+late_lpp_stm_se <- late_lpp_stm_dat %>% 
+  mutate(var = row.names(.)) %>% 
+  mutate(Std..Error = sprintf("%.2f", Std..Error)) %>% 
+  filter(var == "blockPos_Inc:savoring_moment") %>% 
+  select(Std..Error) %>% 
+  pull()
+late_lpp_stm_df <- late_lpp_stm_dat %>% 
+  mutate(var = row.names(.)) %>% 
+  mutate(df = sprintf("%.2f", df)) %>% 
+  filter(var == "blockPos_Inc:savoring_moment") %>% 
+  select(df) %>% 
+  pull()
+late_lpp_stm_t <- late_lpp_stm_dat %>% 
+  mutate(var = row.names(.)) %>% 
+  mutate(t.value = sprintf("%.2f", t.value)) %>% 
+  filter(var == "blockPos_Inc:savoring_moment") %>% 
+  select(t.value) %>% 
+  pull()
+late_lpp_stm_p <- late_lpp_stm_dat %>% 
   mutate(var = row.names(.),
          Pr...t.. = sprintf("%.3f", Pr...t..),
          Pr...t.. = str_remove(Pr...t.., "^0+"),
@@ -2304,7 +2563,7 @@ val_stm_p <- val_stm_dat %>%
   pull()
 ```
 
-To test if the relationship between EEG components/behavioral ratings and increasing emotional intensity in response to positive images versus passively watching positive images varied as a function of momentary savoring capacity, dummy-coded block (within subjects: positive watch block as reference level), and mean-centered savoring the moment (between subjects) variables were included in the omnibus model. An interaction term between block and momentary savoring capacity variables was added to probe for a conditional relationships. Results did not indicate a significant interaction between viewing condition and savoring capacity in predicting LPP ($b$ = `r lpp_stm_beta`, $\beta$ = `r lpp_stm_std_beta`, $SE$ = `r lpp_stm_se`, $t$(`r lpp_stm_df`) = `r lpp_stm_t`, $p$ `r lpp_stm_p`), EPN ($b$ = `r epn_stm_beta`, $\beta$ = `r epn_stm_std_beta`, $SE$ = `r epn_stm_se`, $t$(`r epn_stm_df`) = `r epn_stm_t`, $p$ `r epn_stm_p`), N170 ($b$ = `r n170_stm_beta`, $\beta$ = `r n170_stm_std_beta`, $SE$ = `r n170_stm_se`, $t$(`r n170_stm_df`) = `r n170_stm_t`, $p$ `r n170_stm_p`), or behavioral ratings(arousal: $b$ = `r ar_stm_beta`, $\beta$ = `r ar_stm_std_beta`, $SE$ = `r ar_stm_se`, $t$(`r ar_stm_df`) = `r ar_stm_t`, $p$ `r ar_stm_p`, valence: $b$ = `r val_stm_beta`, $\beta$ = `r val_stm_std_beta`, $SE$ = `r val_stm_se`, $t$(`r val_stm_df`) = `r val_stm_t`, $p$ `r val_stm_p`).
+To test if the relationship between EEG components/behavioral ratings and increasing emotional intensity in response to positive images versus passively watching positive images varied as a function of momentary savoring capacity, dummy-coded block (within subjects: positive watch block as reference level), and mean-centered savoring the moment (between subjects) variables were included in the omnibus model. An interaction term between block and momentary savoring capacity variables was added to probe for a conditional relationships. Results did not indicate a significant interaction between viewing condition and savoring capacity in predicting SPN ($b$ = `r spn_stm_beta`, $\beta$ = `r spn_stm_std_beta`, $SE$ = `r spn_stm_se`, $t$(`r spn_stm_df`) = `r spn_stm_t`, $p$ `r spn_stm_p`), EPN ($b$ = `r epn_stm_beta`, $\beta$ = `r epn_stm_std_beta`, $SE$ = `r epn_stm_se`, $t$(`r epn_stm_df`) = `r epn_stm_t`, $p$ `r epn_stm_p`), N170 ($b$ = `r n170_stm_beta`, $\beta$ = `r n170_stm_std_beta`, $SE$ = `r n170_stm_se`, $t$(`r n170_stm_df`) = `r n170_stm_t`, $p$ `r n170_stm_p`), LPP ($b$ = `r lpp_stm_beta`, $\beta$ = `r lpp_stm_std_beta`, $SE$ = `r lpp_stm_se`, $t$(`r lpp_stm_df`) = `r lpp_stm_t`, $p$ `r lpp_stm_p`), Late LPP ($b$ = `r late_lpp_stm_beta`, $\beta$ = `r late_lpp_stm_std_beta`, $SE$ = `r late_lpp_stm_se`, $t$(`r late_lpp_stm_df`), or behavioral ratings(arousal: $b$ = `r ar_stm_beta`, $\beta$ = `r ar_stm_std_beta`, $SE$ = `r ar_stm_se`, $t$(`r ar_stm_df`) = `r ar_stm_t`, $p$ `r ar_stm_p`, valence: $b$ = `r val_stm_beta`, $\beta$ = `r val_stm_std_beta`, $SE$ = `r val_stm_se`, $t$(`r val_stm_df`) = `r val_stm_t`, $p$ `r val_stm_p`).
 
 ### DISCUSSION
 The present study sought to explore the OASIS as an alternative to the IAPS in psychophysiological research as well the role of personality traits in neural affective processing. This research will help introduce more up-to-date and open access materials in affective neuroscience research and devise neuroscience-informed clinical interventions to enhance positive emotion. We found that, similar to the IAPS, highly arousing positive and negative OASIS stimuli elicited augmented LPP activity. Furthermore, PA and capacity to savor the moment did not influence the relationship between passively viewing and increasing emotional intensity in response to positive images, respectively.
