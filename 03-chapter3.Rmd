@@ -174,6 +174,7 @@ Thus, it was hypothesized that the difference in behavioral/valence ratings betw
 # Method 
 ## Participants
 54 participants were recruited for the study, two of which were excluded due to missing EEG or questionnaire data (*n* = 29 women, *n* = 2 non-binary).
+Two additional outlier data points based on visual inspection of histograms of QQ plots for LPP and and late LPP for positive increase conditions.
 Participants ranged in age from 18-29 (*M* = 19.84 years, *SD* = 1.95).
 The sample was 70.6% Caucasian, 17.6% Asian, 2.0% Black or African American, and 7.8% multiracial (2.0% declined to answer); 9.8% reported that they were Hispanic/Latino and 90.2% were not Hispanic/Latino.
 The study was approved by the Institutional Review Board and informed consent was provided to all participants prior to beginning the experiment. 
@@ -190,7 +191,6 @@ The study used 120 different Open Affective Standardized Image Set (OASIS) image
 Previous research has shown that 40 trials is sufficient to evoke a reliable late positive potential (LPP) component [@fotiDeconstructingReappraisalDescriptions2008; @hajcakAttendingAffectAppraisal2006; @hajcakPersistenceAttentionEmotion2008; @hajcakReappraisalModulatesElectrocortical2006].
 The mean normative valence ratings (on a scale of one to seven) were 5.71, 4.09, and 2.18 for positive, neutral, and negative pictures, respectively.
 The mean normative arousal ratings (on a scale of one to seven) were 4.46, 1.99, and 4.52, for positive, neutral, and negative pictures, respectively.
-Though previous studies have used the IAPS, theses means are similar to those reported in other LPP studies [@cuthbertBrainPotentialsAffective2000; @fotiDifferentiatingNeuralResponses2009; @hajcakReappraisalModulatesElectrocortical2006; @keilLargescaleNeuralCorrelates2002; @schuppAttentionEmotionERP2003].
 
 Each block represented an experimental regulation condition: increase (positive/negative), decrease (positive/negative), and watch (positive/negative/neutral).
 During the increase condition, participants were instructed to appraise the picture in a way that will intensify the emotion that is elicited by looking at it.
@@ -198,10 +198,9 @@ During the decrease condition, participants were asked to reduce the intensity o
 When prompted to watch, participants were asked to view the picture as they would naturally.
 The passive “watch” blocks served as baseline conditions for LPP component analyses [@hajcakReappraisalModulatesElectrocortical2006].
 A block design was selected for the proposed study because valenced images outnumber the neutral images two-to-one.
-The relatively rare neutral stimuli may produce a P3 if intermixed with valenced stimuli in the same block [@schuppAffectivePictureProcessing2000].Additionally, LPP signal is increased for stimuli that are percieved as incongruent within a given affective context.
-Thus, a neutral stimulus displayed in a series of emotional stimuli would likely evoke an enahnced LPP activity, thus decreasing effect size [@schuppAffectivePictureProcessing2000].
-Further, a block design paradigm may better emulate one's natural environment.
-Stimuli of congruent valence are typically encountered in clusters rather than isolation [@schuppAffectivePictureProcessing2012].
+The relatively rare neutral stimuli may produce a P3 if intermixed with valenced stimuli in the same block [@schuppAffectivePictureProcessing2000]. Additionally, LPP signal is increased for stimuli that are perceived as incongruent within a given affective context.
+Thus, a neutral stimulus displayed in a series of emotional stimuli would likely evoke an enhanced LPP activity, thus decreasing effect size [@schuppAffectivePictureProcessing2000].
+Further, a block design paradigm may better emulate one's natural environment, as stimuli of congruent valence are typically encountered in clusters rather than isolation [@schuppAffectivePictureProcessing2012].
 Research comparing intermixed and block designs for LPP and EPN have shown comparable findings between the two approaches [@pastorAffectivePicturePerception2008; @schuppAffectivePictureProcessing2012].
 
 First, participants completed three practice trials that consisted of 10 not used during the actual task [@hajcakReappraisalModulatesElectrocortical2006].
@@ -211,10 +210,10 @@ Stimuli were presented in random order.
 Prior to each practice trial, participants were provided with instructions on how to regulate (increase/decrease) their affective response to the stimuli, or to simply view the stimuli [@moserIntentionalModulationEmotional2006].
 Participants were shown which regulation strategy to engage in (increase, decrease, or watch) at the start of each experimental block.
 Once the participant was ready, an OASIS stimulus appeared for 2000 ms [@fotiDifferentiatingNeuralResponses2009; @hajcakPersistenceAttentionEmotion2008].
-Following stimulus offset, a blank screen appeared for 500 ms followed by a fixation cross for 1500 ms (± 250 ms) for a total ISI of 1750 - 2250 ms (see Figure 1).
+Following stimulus offset, a blank screen appeared for 500 ms followed by a fixation cross for 1500 ms (± 250 ms) for a total ISI of 1750 - 2250 ms (see Figure \@ref(fig:paradigm)).
 This interval is identical to other studies utilizing the IAPS and investigating LPP [@dunningSeeNoEvil2009; @hajcakMotivatedControlledAttention2009].
 Stimuli within each block were presented in random order.
-Each block was separated by a break and presented in random order.
+Each block was separated by a break and presented in pseudo-random order, such that no valence (i.e., positive or negative) nor regulation (i.e., increase, decrease, or watch) condition were presented consecutively.
 After each experimental block, valence and arousal ratings were collected using a seven-point likert scale and the same instructions used in Kurdi, Lozano, and Banaji’s [-@kurdiIntroducingOpenAffective2017] norming study of the OASIS stimuli set.
 Furthermore, difficulty ratings on a seven-point likert scale were also obtained.
 
@@ -224,7 +223,7 @@ Furthermore, difficulty ratings on a seven-point likert scale were also obtained
 knitr::include_graphics("images/paper_2/PER_paradigm.png", auto_pdf = TRUE)
 ```
 
-#### Apparatus and Physiological Recording
+## Apparatus and Physiological Recording
 Scalp EEG was measured while participants completed an emotion regulation task.
 Participants were seated in a comfortable chair, approximately 24 inches from a 24-inch LCD monitor in a quiet, dimly lit room.
 Participants were monitored by a task administrator in a nearby room and received task instructions by intercom.
@@ -236,15 +235,15 @@ An additional electrode was placed on the inferior edge of the orbit of each eye
 Data was recorded with a band pass of 0 – 104 Hz at a sampling rate of 512 Hz.
 
 The following EEG data processing steps were implemented in Brain Electrical Source Analysis software [BESA; @schergBESABrainElectric1990].
-EEG data were re-referenced to the average activity of the mastoid electrodes for LPP analyses [@hajcakAttendingAffectAppraisal2006; @hajcakReappraisalModulatesElectrocortical2006] and average reference of all electrodes for EPN and N170 analyses [@stockdaleInfluenceStimulusValence2020; @yoonEnhancedEarlyPosterior2016] and digitally filtered with a 0.01 Hz high-pass filter with a cutoff attenuation of 12 dB/octave.
+EEG data were re-referenced to the average activity of the mastoid electrodes for LPP analyses [@hajcakAttendingAffectAppraisal2006; @hajcakReappraisalModulatesElectrocortical2006] and average reference of all electrodes for EPN and N170 analyses [@stockdaleInfluenceStimulusValence2020; @yoonEnhancedEarlyPosterior2016] and digitally filtered with 0.01 Hz high-pass and 30 Hz low-pass filters with a cutoff attenuation of 12 dB/octave.
 Muscle (e.g., eye blink, eye movement) and other artifacts were removed and/or corrected via implementing automatic algorithms in BESA.
-Stimulus-locked averages were calculated to ascertain LPP, EPN, and N170.
 Data were baseline-adjusted by subtracting the average activity for 200 milliseconds [@moserIntentionalModulationEmotional2006] before stimulus onset.
-LPP activity was calculated as the average activity in the 450 – 800 ms window at Pz, P1, and P2 electrode sites.
-N170 and EPN activity was calculated as the average activity in the 160 - 200 ms and 250 - 375 ms windows, respecitvely, at PO7 and PO8 electrode sites.
-Scoring windows and sites were selected based upon existing literature and visual inspection of the data to determine maximal presence of respective EEG components.
-The selected scoring window and electrode sites were similar to other studies investigating LPP, EPN, and N170 [e.g., @frankHemodynamicElectrocorticalReactivity2019; @hajcakReappraisalModulatesElectrocortical2006; @thomEmotionalScenesElicit2014].
-The experiment was computer-administered, using E-Prime 2.0 software [@schneiderEPrimeUserGuide2002] in order to manipulate the timing and presentation of stimuli.
+LPP activity was calculated as the average activity in the 400 – 800 ms window at the Pz electrode site.
+To account for peak latency variability in N170 and EPN, negative peaks were identified within time windows at PO7 and PO8 electrode sites that captured peak activity within the sample (130 ms - 200 ms for N170 and 225 ms - 325 ms for EPN). 
+A 100 ms window (50 ms before and 50 ms after) surrounding each peak was averaged for each participant within each block.
+was calculated as the average activity in the 160 - 200 ms and 250 - 375 ms windows, respecitvely, at PO7 and PO8 electrode sites.
+Scoring windows and electrode sites were similar to other studies investigating LPP, EPN, and N170 [e.g., @frankHemodynamicElectrocorticalReactivity2019; @hajcakReappraisalModulatesElectrocortical2006; @thomEmotionalScenesElicit2014].
+The experiment was computer-administered using E-Prime 2.0 software [@schneiderEPrimeUserGuide2002] in order to manipulate the timing and presentation of stimuli.
 All stimuli were presented in color and occupied the entirety of the 21-inch monitor.
 The viewing distance was approximately 24 in. and occupied 25° of the vertical visual angle and 30° horizontally (Cuthbert et al., 2000; Hajcak & Nieuwenhuis, 2006).
 
@@ -262,7 +261,7 @@ Descriptive statistics for LPP, EPN, N170 and participant ratings (arousal, vale
 A repeated measures analysis of variance yielded significant variation among experimental image blocks for LPP ($F$(`r df_num_lpp`, `r df_den_lpp` = `r f_lpp`, $p < .001$), EPN ($F$(`r df_num_epn`, `r df_den_epn`) = `r f_epn`, $p < .001$), and N170 ($F$(`r df_num_n170`, `r df_den_n170`) = `r f_n170`, $p < .001$).
 Repeated measures analysis of variance similarly indicated differences among blocks for arousal ($F$(`r df_num_ar`, `r df_den_ar` = `r f_ar`, $p < .001$), valence ($F$(`r df_num_val`, `r df_den_val` = `r f_val`, $p < .001$), and difficulty ($F$(`r df_num_diff`, `r df_den_diff`) = `r f_diff`, $p < .001$) ratings.
 A significant effect of block was not found for SPN and late LPP.
-Pairwise comparisons were conducted using the emmeans package [@lenthEmmeansEstimatedMarginal2020] among passive watch and regulation conditions for EEG components and behavioral ratings, which are summarized in Table \@ref(tab:pairwise-watch-comparison-table and Table \@ref(tab:pairwise-reg-comparison-table, respectively.
+Pairwise comparisons were conducted using the emmeans package [@lenthEmmeansEstimatedMarginal2020] among passive watch and regulation conditions for EEG components and behavioral ratings, which are summarized in Table \@ref(tab:pairwise-watch-comparison-table) and Table \@ref(tab:pairwise-reg-comparison-table), respectively.
 Effect sizes were interpreted using Funder's [-@funderEvaluatingEffectSize2019] recommendations.
 Topographical plots and average ERP waveforms for each component of interest were also created (see Table @\ref:pairwise-reg-comparison-table, @\ref:LPP-pos-topos, @\ref:LPP-neg-topos, @\ref:EPN-N170-watch-topos, @\ref:EPN-N170-pos-topos, @\ref:EPN-N170-neg-topos, @\ref:SPN-watch-topos, @\ref:SPN-pos-topos, & @\ref:SPN-neg-topos).
 
