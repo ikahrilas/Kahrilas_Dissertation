@@ -47,32 +47,62 @@ LPP <- erp_mast_wide %>%
 
 LPP_late <- erp_mast_wide %>%
   select(all_of(lpp_elec), pid:prop_trials) %>% 
-  filter(between(ms, 800, 2000)) %>%
+  filter(between(ms, 1000, 2000)) %>%
   pivot_longer(., cols = all_of(lpp_elec), names_to = "electrode", values_to = "mv") %>% 
   group_by(pid, block) %>% 
   summarize(LPP_late = mean(mv, na.rm = TRUE))
 
+tmp <- erp_avr_wide %>% 
+  select(all_of(epn_elec), pid:prop_trials) %>% 
+  filter(between(ms, 225, 325)) %>% 
+  pivot_longer(., cols = all_of(epn_elec), names_to = "electrode", values_to = "mv") %>% 
+  group_by(pid, block, ms) %>% 
+  summarize(mv = mean(mv)) %>% 
+  group_by(pid, block) %>% 
+  slice(which.min(mv)) %>% 
+  select(-mv) %>% 
+  rename("min_ms" = ms)
+
 EPN <- erp_avr_wide %>%
   select(all_of(epn_elec), pid:prop_trials) %>% 
-  filter(between(ms, 250, 375)) %>%
   pivot_longer(., cols = all_of(epn_elec), names_to = "electrode", values_to = "mv") %>% 
+  group_by(pid, block, ms) %>% 
+  summarize(EPN = mean(mv, na.rm = TRUE)) %>% 
+  left_join(tmp, by = c("pid", "block")) %>% 
   group_by(pid, block) %>% 
-  summarize(EPN = mean(mv, na.rm = TRUE))
+  filter(between(ms, min_ms - 50, min_ms + 50)) %>% 
+  group_by(pid, block) %>% 
+  summarize(EPN = mean(EPN, na.rm = TRUE))
 
-N170 <- erp_avr_wide %>% 
+tmp <- erp_avr_wide %>% 
   select(all_of(N170_elec), pid:prop_trials) %>% 
-  filter(between(ms, 160, 200)) %>% 
+  filter(between(ms, 130, 220)) %>% 
   pivot_longer(., cols = all_of(N170_elec), names_to = "electrode", values_to = "mv") %>% 
+  group_by(pid, block, ms) %>% 
+  summarize(mv = mean(mv)) %>% 
   group_by(pid, block) %>% 
-  summarize(N170 = mean(mv, na.rm = TRUE))
+  slice(which.min(mv)) %>% 
+  select(-mv) %>% 
+  rename("min_ms" = ms)
 
-SPN <- spn_wide %>% 
-  select(all_of(spn_elec), pid:prop_trials) %>% 
-  filter(between(ms, 450, 1250)) %>% 
-  pivot_longer(., cols = all_of(spn_elec), names_to = "electrode", values_to = "mv") %>% 
+N170 <- erp_avr_wide %>%
+  select(all_of(N170_elec), pid:prop_trials) %>% 
+  pivot_longer(., cols = all_of(epn_elec), names_to = "electrode", values_to = "mv") %>% 
+  group_by(pid, block, ms) %>% 
+  summarize(N170 = mean(mv, na.rm = TRUE)) %>% 
+  left_join(tmp, by = c("pid", "block")) %>% 
   group_by(pid, block) %>% 
-  mutate(block = str_remove(block, "Pre_")) %>% 
-  summarize(SPN = mean(mv, na.rm = TRUE))
+  filter(between(ms, min_ms - 50, min_ms + 50)) %>% 
+  group_by(pid, block) %>% 
+  summarize(N170 = mean(N170, na.rm = TRUE))
+
+# SPN <- spn_wide %>% 
+#   select(all_of(spn_elec), pid:prop_trials) %>% 
+#   filter(between(ms, 450, 1250)) %>% 
+#   pivot_longer(., cols = all_of(spn_elec), names_to = "electrode", values_to = "mv") %>% 
+#   group_by(pid, block) %>% 
+#   mutate(block = str_remove(block, "Pre_")) %>% 
+#   summarize(SPN = mean(mv, na.rm = TRUE))
 ```
 
 Join all the tibbles together
@@ -81,7 +111,6 @@ Join all the tibbles together
 per_erp <- left_join(LPP, LPP_late, by = c("pid", "block")) %>%
   left_join(EPN, by = c("pid", "block")) %>%
   left_join(N170, by = c("pid", "block")) %>%
-  left_join(SPN, by = c("pid", "block")) %>% 
   left_join(measures_int, by = c("pid", "block"))
 # change variable classes for parsimonious exploration and analysis
 ## pid as character type
@@ -118,9 +147,7 @@ per_erp %>%
             EPN_mean = mean(EPN, na.rm = TRUE),
             EPN_sd = sd(EPN, na.rm = TRUE),
             N170_mean = mean(N170, na.rm = TRUE),
-            N170_sd = sd(N170, na.rm = TRUE),
-            SPN_mean = mean(SPN, na.rm = TRUE),
-            SPN_sd = sd(SPN, na.rm = TRUE))
+            N170_sd = sd(N170, na.rm = TRUE))
 ```
 
 ## Behavioral Rating Descriptive Statistics by Block
@@ -191,7 +218,7 @@ per_erp %>%
 }
 
 blocks <- unique(as.character(per_erp$block))
-components <- names(per_erp)[4:8]
+components <- names(per_erp)[4:7]
 map(components, ~map(blocks, ~hist_qq_fun(trial = .x, component = .y), .y = .x)) %>% 
   walk(print)
 ```
@@ -200,7 +227,7 @@ Omit extreme cases indicated in the histograms and QQ plots, and regenerate hist
 
 ```{r examine extreme cases, warning=FALSE,message=FALSE}
 per_erp$LPP[per_erp$block == "Pos_Inc" & per_erp$LPP < -10] <- NA
-per_erp$SPN[per_erp$block == "Neu_Watch" & per_erp$SPN < -20] <- NA
+per_erp$LPP_late[per_erp$block == "Pos_Inc" & per_erp$LPP_late < -25] <- NA
 
 map(components, ~map(blocks, ~hist_qq_fun(trial = .x, component = .y), .y = .x)) %>% 
   walk(print)
