@@ -171,15 +171,13 @@ Further, it is expected that regulation conditions will result in behavioral rat
 Last, trait measures of PA and savoring capacity are associated with heightened reactivity and more positive affect [@bryantSavoringNewModel2007; @watsonPositiveAffectivity2009].
 Thus, it was hypothesized that the difference in behavioral/valence ratings between  passively watching positive vs. neutral images would be positively moderated by PA and the difference in behavioral/valence ratings between increasing emotional intensity in response to positive images vs. passively watching positive images would be positive moderated by savoring capacity.
 
-### Method 
-#### Participants
-54 participants were recruited for the study, 51 of which were included in analyses (*n* = 29 women, *n* = 2 non-binary).
-Four participants were excluded due to missing EEG or quesionnaire data.
+# Method 
+## Participants
+54 participants were recruited for the study, two of which were excluded due to missing EEG or questionnaire data (*n* = 29 women, *n* = 2 non-binary).
 Participants ranged in age from 18-29 (*M* = 19.84 years, *SD* = 1.95).
 The sample was 70.6% Caucasian, 17.6% Asian, 2.0% Black or African American, and 7.8% multiracial (2.0% declined to answer); 9.8% reported that they were Hispanic/Latino and 90.2% were not Hispanic/Latino.
 The study was approved by the Institutional Review Board and informed consent was provided to all participants prior to beginning the experiment. 
-
-#### Materials and Procedure
+## Materials and Procedure
 Participants were asked to complete the trait Positive and Negative Affect Schedule (PANAS; Watson, Clark, & Tellegen, 1988) to assess for PA ($\omega = .89$).
 At the beginning and end of the experiment, participants were also asked to complete the state PANAS in order to assess state affect changes over the course of the experiment (state positive affect: $\omega = .86$; state negative affect: $\omega = .89$; Watson et al., 1988).
 Participants also completed the Savoring Beliefs Inventory (SBI; Bryant, 2009).
