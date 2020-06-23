@@ -29,6 +29,7 @@ header-includes:
   - \usepackage{threeparttablex} 
   - \usepackage[normalem]{ulem} - 
   - \usepackage{makecell}
+  - \usepackage{xcolor}
 subparagraph: yes
 link-citations: yes
 ---
