@@ -267,29 +267,27 @@ Topographical plots and average ERP waveforms for each component of interest wer
 
 ```{r corr-table, echo=FALSE, fig.cap = "(ref:corr-table)", message=FALSE} 
 library(tidyverse)
-options(kableExtra.latex.load_packages = FALSE)
 library(kableExtra)
-load("data/paper_two/analyses/2020-06-22_correlation_table-data.RData")
+load("data/paper_two/analyses/2020-06-23_correlation_table-data.RData")
 tab %>%
-  mutate(" " = c("1. SPN",
-                 "2. N170",
-                 "3. EPN",
-                 "4. LPP",
-                 "5. Late LPP",
-                 "6. Arousal Ratings",
-                 "7. Valence Ratings",
-                 "8. Difficulty Ratings",
-                 "9. PA",
-                 "10. Anticipating",
-                 "11. StM",
-                 "12. Reminiscing",
-                 "13. Depression",
-                 "14. Sex")) %>%
+  mutate(" " = c("1. N170",
+                 "2. EPN",
+                 "3. LPP",
+                 "4. Frontal LPP",
+                 "5. Arousal Ratings",
+                 "6. Valence Ratings",
+                 "7. Difficulty Ratings",
+                 "8. PA",
+                 "9. Anticipating",
+                 "10. StM",
+                 "11. Reminiscing",
+                 "12. Depression",
+                 "13. Sex")) %>%
   select(" ", everything()) %>%
   ## create table
   kable(., format = "latex", linesep = "", escape = FALSE, booktabs = TRUE, align = c("l", rep("r", 13)), caption = "(ref:corr-table)") %>%
   kable_styling(latex_options = "scale_down", font_size = 12) %>%
-  column_spec(2:14, width = "3em") %>%
+  column_spec(2:13, width = "3em") %>%
   footnote(general_title = "Note.",
            escape = FALSE,
            general = "*$p < .05$. PA = positive affectivity, StM = savoring the moment. EEG components and behavioral ratings (i.e., arousal, valence, and difficulty) averaged across all regulation blocks.",
@@ -301,16 +299,16 @@ tab %>%
 
 ```{r descriptives-by-block, echo = FALSE, message = FALSE, fig.cap = "(ref:descriptives-by-block)"}
 library(tidyverse)
+library(kableExtra)
 
 dat <- read_csv("data/paper_two/created_data/per_data_analyses_2020_5_19.csv")
 
 desc_stats <- dat %>% 
   group_by(block) %>% 
-  dplyr::summarize("Mean LPP (SD)" = paste0(sprintf("%.1f", mean(LPP, na.rm = TRUE)), " ", "(", sprintf("%.1f", sd(LPP, na.rm = TRUE)), ")"),
-                   "Mean Late LPP (SD)" = paste0(sprintf("%.1f", mean(LPP_late, na.rm = TRUE)), " ", "(", sprintf("%.1f", sd(LPP_late, na.rm = TRUE)), ")"),
-                   "Mean EPN (SD)" = paste0(sprintf("%.1f", mean(EPN)), " ", "(", sprintf("%.1f", sd(EPN)), ")"),
+  dplyr::summarize("Mean EPN (SD)" = paste0(sprintf("%.1f", mean(EPN)), " ", "(", sprintf("%.1f", sd(EPN)), ")"),
                    "Mean N170 (SD)" = paste0(sprintf("%.1f", mean(N170)), " ", "(", sprintf("%.1f", sd(N170)), ")"),
-                   "Mean SPN (SD)" = paste0(sprintf("%.1f", mean(SPN, na.rm = TRUE)), " ", "(", sprintf("%.1f", sd(SPN, na.rm = TRUE)), ")"),
+                   "Mean LPP (SD)" = paste0(sprintf("%.1f", mean(LPP, na.rm = TRUE)), " ", "(", sprintf("%.1f", sd(LPP, na.rm = TRUE)), ")"),
+                   "Mean Frontal LPP (SD)" = paste0(sprintf("%.1f", mean(LPP_front, na.rm = TRUE)), " ", "(", sprintf("%.1f", sd(LPP_front, na.rm = TRUE)), ")"),
                    "Mean Arousal (SD)" = paste0(sprintf("%.1f", mean(arousal)), " ", "(", sprintf("%.1f", sd(arousal)), ")"),
                    "Mean Valence (SD)" = paste0(sprintf("%.1f", mean(valence)), " ", "(", sprintf("%.1f", sd(valence)), ")"),
                    "Mean Difficulty (SD)" = paste0(sprintf("%.1f", mean(difficulty)), " ", "(", sprintf("%.1f", sd(difficulty)), ")")) %>% 
@@ -323,7 +321,7 @@ desc_stats <- dat %>%
                    "Positive Increase",
                    "Positive Watch"))
 
-kable(desc_stats, "latex", escape = FALSE, booktabs = TRUE, align = "lcccccccc", linesep = "", caption = "(ref:descriptives-by-block)") %>% 
+kable(desc_stats, format = "latex", escape = FALSE, booktabs = TRUE, align = "lcccccccc", linesep = "", caption = "(ref:descriptives-by-block)") %>% 
   kable_styling(font_size = 24, latex_options = c("scale_down")) %>% 
   row_spec(0, align = "c") %>% 
   footnote(general_title = "Note.",
@@ -336,23 +334,26 @@ kable(desc_stats, "latex", escape = FALSE, booktabs = TRUE, align = "lcccccccc",
 ```{r pairwise-watch-comparison-table, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:pairwise-watch-comparison-table)", cache = TRUE, cache.lazy = FALSE}
 library(tidyverse)
 
-load("data/paper_two/analyses/2020-06-22pairwise_watch_table-data.RData")
+load("data/paper_two/analyses/2020-06-23pairwise_watch_table-data.RData")
 
-watch_tab %>% 
-  select(-comp) %>% 
-kable(., format = "latex", escape = FALSE, booktabs = TRUE, align = c("l", "c", "c", "c"), linesep = "", caption = "(ref:pairwise-watch-comparison-table)") %>% 
-  row_spec(0, align = "c") %>% 
-  pack_rows("SPN", 1, 3) %>% 
-  pack_rows("N170", 4, 6) %>% 
-  pack_rows("EPN", 7, 9) %>% 
-  pack_rows("LPP", 10, 12) %>% 
-  pack_rows("Late LPP", 13, 15) %>% 
-  pack_rows("Arousal Ratings", 16, 18) %>% 
-  pack_rows("Valence Ratings", 19, 21) %>% 
+watch_tab %>%
+  select(-comp) %>%
+  kable(., format = "latex", escape = FALSE, booktabs = TRUE, align = c("l", "c", "c", "c"), linesep = "", caption = "(ref:pairwise-watch-comparison-table)") %>%
+  row_spec(0, align = "c") %>%
+  pack_rows("N170", 1, 3) %>%
+  pack_rows("EPN", 4, 6) %>%
+  pack_rows("LPP", 7, 9) %>%
+  pack_rows("Frontal LPP", 10, 12) %>%
+  pack_rows("Arousal Ratings", 13, 15) %>%
+  pack_rows("Valence Ratings", 16, 18) %>%
   footnote(escape = FALSE,
            footnote_as_chunk = TRUE,
            general_title = "Note.",
-           general = "Std. Beta (Label) = Absolute value of standardized beta coefficient as measure of effect size derived by fitting model to standardized dataset with effect size label as per Funder's (2019) recommendations, Sig. = $p$ value. $P$ values and confidence intervals adjusted using the Tukey method for comparing a family of three estimates.",
+           general = "Std. Beta (Label) = Absolute value of standardized
+beta coefficient as measure of effect size derived by fitting model to s
+tandardized dataset with effect size label as per Funder's (2019) recommendations,
+Sig. = $p$ value. $P$ values and confidence intervals adjusted using the Tukey method
+for comparing a family of three estimates.",
            threeparttable = TRUE)
 ```
 
@@ -361,60 +362,66 @@ kable(., format = "latex", escape = FALSE, booktabs = TRUE, align = c("l", "c", 
 ```{r pairwise-reg-comparison-table, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:pairwise-reg-comparison-table)", cache = TRUE, cache.lazy = FALSE}
 library(tidyverse)
 
-load("data/paper_two/analyses/2020-06-22_regulations_table-data.RData")
+load("data/paper_two/analyses/2020-06-23_regulations_table-data.RData")
 
-reg_tab_wide[-1] %>% 
-kable(., format = "latex", escape = FALSE, booktabs = TRUE, align = c("l", rep("c", times = 6)), linesep = "", caption = "(ref:pairwise-reg-comparison-table)") %>% 
-  kable_styling(latex_options = "scale_down") %>% 
-  add_header_above(c(" ", "Positive Images" = 3, "Negative Images" = 3), bold = TRUE, italic = TRUE) %>% 
-  row_spec(0, align = "c") %>% 
-  pack_rows("SPN", 1, 3) %>% 
-  pack_rows("N170", 4, 6) %>% 
-  pack_rows("EPN", 7, 9) %>% 
-  pack_rows("LPP", 10, 12) %>% 
-  pack_rows("Late LPP", 13, 15) %>% 
-  pack_rows("Arousal Ratings", 16, 18) %>% 
-  pack_rows("Valence Ratings", 19, 21) %>% 
+reg_tab_wide[-1] %>%
+  kable(., format = "latex", escape = FALSE, booktabs = TRUE, align = c("l", rep("c", times = 6)), linesep = "", caption = "(ref:pairwise-reg-comparison-table)") %>%
+  kable_styling(latex_options = "scale_down") %>%
+  add_header_above(c(" ", "Positive Images" = 3, "Negative Images" = 3), bold = TRUE, italic = TRUE) %>%
+  row_spec(0, align = "c") %>%
+  pack_rows("N170", 1, 3) %>%
+  pack_rows("EPN", 4, 6) %>%
+  pack_rows("LPP", 7, 9) %>%
+  pack_rows("Frontal LPP", 10, 12) %>%
+  pack_rows("Arousal Ratings", 13, 15) %>%
+  pack_rows("Valence Ratings", 16, 18) %>%
   footnote(escape = FALSE,
            general_title = "Note.",
            general = "Std. Beta = Absolute value of standardized beta coefficient as measure of effect size derived by fitting model to standardized dataset with effect size label as per Funder's (2019) recommendations, Sig. = $p$ value. $P$ values and confidence intervals adjusted using the Tukey method for comparing a family of three estimates.",
            threeparttable = TRUE,
-           footnote_as_chunk = TRUE)
+           footnote_as_chunk = TRUE) %>% 
+  as_image()
 ```
 
 (ref:LPP-watch-topos) Topographical plots and average waveforms for LPP during passive watch conditions. Sensor highlighted in white was used to measure LPP for waveform plots and analyses.
 
-```{r LPP-watch-topos, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:LPP-watch-topos)", cahce = TRUE, cache.lazy = FALSE}
+```{r LPP-watch-topos, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:LPP-watch-topos)"}
 knitr::include_graphics("images/paper_2/lpp_watch_topos.png", auto_pdf = TRUE)
 ```
 
-(ref:LPP-pos-topos) Topographical plots and average waveforms for LPP during regulation conditions in response to positive images. Sensor highlighted in white was used to measure LPP for waveform plots and analyses.
+(ref:LPP-reg-topos) Topographical plots and average waveforms for LPP during regulation conditions in response to positive and negative images. Sensor highlighted in white was used to measure LPP for waveform plots and analyses.
 
-```{r LPP-pos-topos, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:LPP-pos-topos)", cache = TRUE, cache.lazy = FALSE}
-knitr::include_graphics("images/paper_2/lpp_pos_topos.png", auto_pdf = TRUE)
+```{r LPP-reg-topos, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:LPP-reg-topos)"}
+knitr::include_graphics("images/paper_2/lpp_reg_topos.png", auto_pdf = TRUE)
 ```
 
-(ref:LPP-neg-topos) Topographical plots and average waveforms for early (400 - 800 ms) and late (800 - 2000 ms) LPP during regulation conditions in response to negative images. Sensor highlighted in white was used to measure LPP for waveform plots and analyses.
+(ref:front-LPP-watch-topos) Topographical plots and average waveforms for frontal LPP during passive watch conditions. Sensor highlighted in white was used to measure LPP for waveform plots and analyses.
 
-```{r LPP-neg-topos, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:LPP-neg-topos)", cache = TRUE, cache.lazy = FALSE}
-knitr::include_graphics("images/paper_2/lpp_neg_topos.png", auto_pdf = TRUE)
+```{r front-LPP-watch-topos, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:front-LPP-watch-topos)"}
+knitr::include_graphics("images/paper_2/front_lpp_watch_topos.png", auto_pdf = TRUE)
 ```
 
-(ref:EPN-N170-watch-topos) Topographical plots and average waveforms for N170 (160 - 200 ms; top row) and EPN (250 - 375 ms; bottom row) during passive watch conditions. Sensor highlighted in white were used to measure N170 and EPN for waveform plots and analyses.
+(ref:front-LPP-reg-topos) Topographical plots and average waveforms for frontal LPP during regulation conditions in response to positive and negative images. Sensor highlighted in white was used to measure frontal LPP for waveform plots and analyses.
 
-```{r EPN-N170-watch-topos, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:EPN-N170-watch-topos)", cache = TRUE, cache.lazy = FALSE}
+```{r front-LPP-reg-topos, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:front-LPP-reg-topos)"}
+knitr::include_graphics("images/paper_2/front_lpp_reg_topos.png", auto_pdf = TRUE)
+```
+
+(ref:EPN-N170-watch-topos) Topographical plots and average waveforms for N170 (bottom row) and EPN (top row) during passive watch conditions. Presented windows are approximations calculated by determining the entire range of participants' scoring windows for N170 (112 ms - 223 ms) and EPN (224 ms - 341 ms) in all watch conditions. Sensor highlighted in white were used to measure N170 and EPN for waveform plots and analyses.
+
+```{r EPN-N170-watch-topos, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:EPN-N170-watch-topos)"}
 knitr::include_graphics("images/paper_2/epn_n170_watch_topos.png", auto_pdf = TRUE)
 ```
 
-(ref:EPN-N170-pos-topos) Topographical plots and average waveforms for N170 (160 - 200 ms; top row) and EPN (250 - 375 ms; bottom row) during regulation conditions in response to positive images. Sensors highlighted in white were used to measure N170 and EPN for waveform plots and analyses.
+(ref:EPN-N170-pos-topos) Topographical plots and average waveforms for N170 (bottom row) and EPN (bottom row) during regulation conditions in response to positive images. Presented windows are approximations calculated by determining the entire range of participants' scoring windows for N170 (113 ms - 218 ms) and EPN (224 ms - 326 ms) in all positive conditions. Sensors highlighted in white were used to measure N170 and EPN for waveform plots and analyses.
 
-```{r EPN-N170-pos-topos, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:EPN-N170-pos-topos)", cache = TRUE, cache.lazy = FALSE}
+```{r EPN-N170-pos-topos, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:EPN-N170-pos-topos)"}
 knitr::include_graphics("images/paper_2/epn_n170_pos_topos.png", auto_pdf = TRUE)
 ```
 
-(ref:EPN-N170-neg-topos) Topographical plots and average waveforms for N170 (160 - 200 ms; top row) and EPN (250 - 375 ms; bottom row) during regulation conditions in response to negative images. Sensors highlighted in white were used to measure N170 and EPN for waveform plots and analyses.
+(ref:EPN-N170-neg-topos) Topographical plots and average waveforms for N170 (bottom row) and EPN (bottom row) during regulation conditions in response to negative images. Presented windows are approximations calculated by determining the entire range of participants' scoring windows for N170 (112 ms - 217 ms) and EPN (223 ms - 325 ms) in all positive conditions. Sensors highlighted in white were used to measure N170 and EPN for waveform plots and analyses.
 
-```{r EPN-N170-neg-topos, echo=FALSE, fig.cap="(ref:EPN-N170-neg-topos)", message=FALSE, warning=FALSE, cache=TRUE, cache.lazy = FALSE}
+```{r EPN-N170-neg-topos, echo=FALSE, fig.cap="(ref:EPN-N170-neg-topos)", message=FALSE, warning=FALSE}
 knitr::include_graphics("images/paper_2/epn_n170_neg_topos.png", auto_pdf = TRUE)
 ```
 
