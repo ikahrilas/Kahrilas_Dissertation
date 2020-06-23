@@ -30,7 +30,7 @@ per_questionnaires <- read_csv(here("data", "paper_two", "archive", "data_from_P
 lpp_elec <- c("B28") # look at 400 - 800 ms and 800 - 2000 ms windows
 epn_elec <- c("A29", "B26") # 250 - 375 ms
 N170_elec <- c("A29", "B26") # 160 - 200 ms
-spn_elec <- "A5" # 450 - 1250 ms
+front_elec <- c("A5") # 900 - 1400 ms
 
 # select variables from questionnaire data set for analyses
 measures_int <- per_questionnaires %>% 
@@ -45,12 +45,12 @@ LPP <- erp_mast_wide %>%
   summarize(LPP = mean(mv, na.rm = TRUE),
             prop_trials = mean(prop_trials, na.rm = TRUE))
 
-LPP_late <- erp_mast_wide %>%
-  select(all_of(lpp_elec), pid:prop_trials) %>% 
-  filter(between(ms, 1000, 2000)) %>%
-  pivot_longer(., cols = all_of(lpp_elec), names_to = "electrode", values_to = "mv") %>% 
+LPP_front <- erp_mast_wide %>%
+  select(all_of(front_elec), pid:prop_trials) %>% 
+  filter(between(ms, 1000, 1300)) %>%
+  pivot_longer(., cols = all_of(front_elec), names_to = "electrode", values_to = "mv") %>% 
   group_by(pid, block) %>% 
-  summarize(LPP_late = mean(mv, na.rm = TRUE))
+  summarize(LPP_front = mean(mv, na.rm = TRUE))
 
 tmp <- erp_avr_wide %>% 
   select(all_of(epn_elec), pid:prop_trials) %>% 
@@ -108,7 +108,7 @@ N170 <- erp_avr_wide %>%
 Join all the tibbles together
 ```{r join all tibbles together, include=FALSE}
 #join all LPP tibbles plus right frontal
-per_erp <- left_join(LPP, LPP_late, by = c("pid", "block")) %>%
+per_erp <- left_join(LPP, LPP_front, by = c("pid", "block")) %>%
   left_join(EPN, by = c("pid", "block")) %>%
   left_join(N170, by = c("pid", "block")) %>%
   left_join(measures_int, by = c("pid", "block"))
@@ -142,8 +142,8 @@ per_erp %>%
   group_by(block) %>% 
   summarize(LPP_mean = mean(LPP, na.rm = TRUE),
             LPP_sd = sd(LPP, na.rm = TRUE),
-            LPP_late_mean = mean(LPP_late, na.rm = TRUE),
-            LPP_late_sd = sd(LPP_late, na.rm = TRUE),
+            LPP_front_mean = mean(LPP_front, na.rm = TRUE),
+            LPP_front_sd = sd(LPP_front, na.rm = TRUE),
             EPN_mean = mean(EPN, na.rm = TRUE),
             EPN_sd = sd(EPN, na.rm = TRUE),
             N170_mean = mean(N170, na.rm = TRUE),
@@ -218,7 +218,7 @@ per_erp %>%
 }
 
 blocks <- unique(as.character(per_erp$block))
-components <- names(per_erp)[4:7]
+components <- names(per_erp)[4:8]
 map(components, ~map(blocks, ~hist_qq_fun(trial = .x, component = .y), .y = .x)) %>% 
   walk(print)
 ```
@@ -226,8 +226,8 @@ map(components, ~map(blocks, ~hist_qq_fun(trial = .x, component = .y), .y = .x))
 Omit extreme cases indicated in the histograms and QQ plots, and regenerate histograms and QQ plots.
 
 ```{r examine extreme cases, warning=FALSE,message=FALSE}
-per_erp$LPP[per_erp$block == "Pos_Inc" & per_erp$LPP < -10] <- NA
-per_erp$LPP_late[per_erp$block == "Pos_Inc" & per_erp$LPP_late < -25] <- NA
+per_erp$pid[per_erp$block == "Pos_Inc" & per_erp$LPP < -10] <- NA
+per_erp$pid[per_erp$block == "Neg_Watch" & per_erp$LPP_front > 40] <- NA
 
 map(components, ~map(blocks, ~hist_qq_fun(trial = .x, component = .y), .y = .x)) %>% 
   walk(print)

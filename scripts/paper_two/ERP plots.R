@@ -15,8 +15,8 @@ library(patchwork)
 #+ read in eeg data, incude = FALSE
 eeg_df_mast <- read_csv(here("data", "paper_two", "created_data", "erp_mast.csv"))
 eeg_df_avr <- read_csv(here("data", "paper_two", "created_data", "erp_avr.csv"))
-spn_df <- read_csv(here("data", "paper_two", "created_data", "spn.csv")) %>%
-  mutate(block = str_remove(block, "Pre_"))
+# spn_df <- read_csv(here("data", "paper_two", "created_data", "spn.csv")) %>%
+#   mutate(block = str_remove(block, "Pre_"))
 
 #'
 #' define clusters of electrodes and time windows for each component
@@ -30,6 +30,7 @@ spn_elec <- "A5" # 450 - 1250 ms
 #' Omit extreme cases as indicated by histograms and QQ plots in Univarite Exploration script
 #+ Omit extreme cases
 eeg_df_mast$B28[eeg_df_mast$pid == 206201823 & eeg_df_mast$block == "Pos_Inc"] <- NA
+eeg_df_mast$A5[eeg_df_mast$pid == 206201843 & eeg_df_mast$block == "Neg_Watch"] <- NA
 
 #' Create plots for each component with all conditions
 #+ plot creation
@@ -321,23 +322,20 @@ eeg_df_mast %>%
         title = element_text(size = 16))
 
 
-eeg_df_avr %>%
-  filter(ms < 500,
-         pid == 20620181) %>%
-  select(pid, block, ms, all_of(epn_elec)) %>%
-  pivot_longer(., cols = all_of(epn_elec), names_to = "electrode", values_to = "mv") %>%
-  group_by(pid, block, ms) %>%
-  summarize(mv = mean(mv, na.rm = TRUE)) %>%
-  group_by(block, ms) %>%
+eeg_df_mast %>%
+  filter(ms < 2000) %>%
+  select(pid, block, ms, A1, A5) %>%
+  pivot_longer(., cols = c(A1, A5), names_to = "electrode", values_to = "mv") %>%
+  group_by(electrode, block, ms) %>%
   mutate(avg_mv = mean(mv, na.rm = TRUE)) %>%
   ggplot() +
-  geom_line(aes(ms, mv, group = pid), alpha = 0.3) +
-  geom_line(aes(ms, avg_mv), color = "red", size = 1.2) +
-  facet_wrap(~ block, ncol = 2, scales = "free_y") +
+  #geom_line(aes(ms, mv, group = pid), alpha = 0.3) +
+  geom_line(aes(ms, avg_mv, color = block), size = 1.2) +
+  facet_wrap(~ electrode) +
   theme_classic() +
   geom_vline(xintercept = 0, linetype = "dashed") +
   geom_hline(yintercept = 0, linetype = "dashed") +
-  annotate("rect", xmin = 250, xmax = 375, ymin = -Inf, ymax = Inf, alpha = .15) +
+  annotate("rect", xmin = 1000, xmax = 1300, ymin = -Inf, ymax = Inf, alpha = .15) +
   labs(x = "Time (ms)",
        y = expression(paste("Amplitude (",mu,"V)")),
        title = paste("Waveform Variability Plots")) +
@@ -349,5 +347,4 @@ eeg_df_avr %>%
         plot.title = element_text(hjust = 0.5),
         title = element_text(size = 16),
         strip.text.x = element_text(size = 14),
-        strip.text.y = element_text(size = 14),
-        legend.position = "none")
+        strip.text.y = element_text(size = 14))
