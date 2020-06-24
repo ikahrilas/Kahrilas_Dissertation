@@ -2,9 +2,7 @@
 
 # load packages
 library(tidyverse)
-library(kableExtra)
 library(here)
-library(pdftools)
 library(magick)
 
 # load data

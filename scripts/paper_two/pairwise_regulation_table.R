@@ -4,7 +4,7 @@ library(emmeans)
 library(lmerTest)
 library(r2glmm)
 library(effectsize)
-library(kableExtra)
+
 
 # read in data and make variables for valence and regulation conditions
 dat <- read_csv("data/paper_two/created_data/per_data_analyses_2020_5_19.csv") %>%
@@ -368,19 +368,19 @@ names(reg_tab_wide) <- c(names(reg_tab_pos), names(reg_tab_pos)[3:5])
 
 save.image(file = paste0("data/paper_two/analyses/", Sys.Date(), "_regulations_table-data", ".RData"))
 
-reg_tab_wide[-1] %>%
-  kable(., escape = FALSE, booktabs = TRUE, align = c("l", rep("c", times = 6)), linesep = "", caption = "(ref:pairwise-reg-comparison-table)") %>%
-  kable_styling(latex_options = "scale_down") %>%
-  add_header_above(c(" ", "Positive Images" = 3, "Negative Images" = 3), bold = TRUE, italic = TRUE) %>%
-  row_spec(0, align = "c") %>%
-  pack_rows("N170", 1, 3) %>%
-  pack_rows("EPN", 4, 6) %>%
-  pack_rows("LPP", 7, 9) %>%
-  pack_rows("Frontal LPP", 10, 12) %>%
-  pack_rows("Arousal Ratings", 13, 15) %>%
-  pack_rows("Valence Ratings", 16, 18) %>%
-  footnote(escape = FALSE,
-           general_title = "Note.",
-           general = "Std. Beta = Absolute value of standardized beta coefficient as measure of effect size derived by fitting model to standardized dataset with effect size label as per Funder's (2019) recommendations, Sig. = $p$ value. $P$ values and confidence intervals adjusted using the Tukey method for comparing a family of three estimates.",
-           threeparttable = TRUE,
-           footnote_as_chunk = TRUE)
+# reg_tab_wide[-1] %>%
+#   kable(., escape = FALSE, booktabs = TRUE, align = c("l", rep("c", times = 6)), linesep = "", caption = "(ref:pairwise-reg-comparison-table)") %>%
+#   kable_styling(latex_options = "scale_down") %>%
+#   add_header_above(c(" ", "Positive Images" = 3, "Negative Images" = 3), bold = TRUE, italic = TRUE) %>%
+#   row_spec(0, align = "c") %>%
+#   pack_rows("N170", 1, 3) %>%
+#   pack_rows("EPN", 4, 6) %>%
+#   pack_rows("LPP", 7, 9) %>%
+#   pack_rows("Frontal LPP", 10, 12) %>%
+#   pack_rows("Arousal Ratings", 13, 15) %>%
+#   pack_rows("Valence Ratings", 16, 18) %>%
+#   footnote(escape = FALSE,
+#            general_title = "Note.",
+#            general = "Std. Beta = Absolute value of standardized beta coefficient as measure of effect size derived by fitting model to standardized dataset with effect size label as per Funder's (2019) recommendations, Sig. = $p$ value. $P$ values and confidence intervals adjusted using the Tukey method for comparing a family of three estimates.",
+#            threeparttable = TRUE,
+#            footnote_as_chunk = TRUE)

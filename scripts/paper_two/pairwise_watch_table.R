@@ -5,7 +5,6 @@ library(emmeans)
 library(lmerTest)
 library(r2glmm)
 library(effectsize)
-library(kableExtra)
 
 # read in data and make variables for valence and regulation conditions
 dat <- read_csv("data/paper_two/created_data/per_data_analyses_2020_5_19.csv")
@@ -212,23 +211,23 @@ watch_tab <- watch_tab %>%
          "Std. Beta (Label)" = paste0(watch_tab$`Std. Beta`, " (", interpretation, ")")) %>%
   select(comp, Contrast, "Estimate (95\\% CI)", "Std. Beta (Label)", Sig.)
 
-watch_tab %>%
-  select(-comp) %>%
-  kable(., escape = FALSE, booktabs = TRUE, align = c("l", "c", "c", "c"), linesep = "", caption = "(ref:pairwise-watch-comparison-table)") %>%
-  row_spec(0, align = "c") %>%
-  pack_rows("N170", 1, 3) %>%
-  pack_rows("EPN", 4, 6) %>%
-  pack_rows("LPP", 7, 9) %>%
-  pack_rows("Frontal LPP", 10, 12) %>%
-  pack_rows("Arousal Ratings", 13, 15) %>%
-  pack_rows("Valence Ratings", 16, 18) %>%
-  footnote(escape = FALSE,
-           footnote_as_chunk = TRUE,
-           general_title = "Note.",
-           general = "Std. Beta (Label) = Absolute value of standardized
-beta coefficient as measure of effect size derived by fitting model to s
-tandardized dataset with effect size label as per Funder's (2019) recommendations,
-Sig. = $p$ value. $P$ values and confidence intervals adjusted using the Tukey method
-for comparing a family of three estimates.",
-           threeparttable = TRUE)
-save.image(file = paste0("data/paper_two/analyses/", Sys.Date(), "pairwise_watch_table-data", ".RData"))
+# watch_tab %>%
+#   select(-comp) %>%
+#   kable(., escape = FALSE, booktabs = TRUE, align = c("l", "c", "c", "c"), linesep = "", caption = "(ref:pairwise-watch-comparison-table)") %>%
+#   row_spec(0, align = "c") %>%
+#   pack_rows("N170", 1, 3) %>%
+#   pack_rows("EPN", 4, 6) %>%
+#   pack_rows("LPP", 7, 9) %>%
+#   pack_rows("Frontal LPP", 10, 12) %>%
+#   pack_rows("Arousal Ratings", 13, 15) %>%
+#   pack_rows("Valence Ratings", 16, 18) %>%
+#   footnote(escape = FALSE,
+#            footnote_as_chunk = TRUE,
+#            general_title = "Note.",
+#            general = "Std. Beta (Label) = Absolute value of standardized
+# beta coefficient as measure of effect size derived by fitting model to s
+# tandardized dataset with effect size label as per Funder's (2019) recommendations,
+# Sig. = $p$ value. $P$ values and confidence intervals adjusted using the Tukey method
+# for comparing a family of three estimates.",
+#            threeparttable = TRUE)
+ save.image(file = paste0("data/paper_two/analyses/", Sys.Date(), "_pairwise_watch_table-data", ".RData"))
