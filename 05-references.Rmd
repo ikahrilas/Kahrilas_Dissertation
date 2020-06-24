@@ -1,2 +1,6 @@
 # REFERENCES {-}
 
+\setlength{\parindent}{-0.5in}
+\setlength{\leftskip}{0.4in}
+\setlength{\parskip}{6pt}
+\noindent
