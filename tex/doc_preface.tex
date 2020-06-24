@@ -4,7 +4,7 @@
 %%%%%%%%%%%%%%%%%%%% Title Page %%%%%%%%%%%%%%%%%%%%
 \begin{titlepage}
 \begin{center}
-\begin{doublespace}
+%\doublespacing
     \MakeUppercase{\myuniversity}
     \vskip .5in
     PAYING MIND TO SAVORING: \\
@@ -21,7 +21,7 @@
     \MakeUppercase{\myname} \\
     \MakeUppercase{\mycitystate} \\
     \MakeUppercase{\propdate}
-\end{doublespace}
+%\end{doublespace}
 \end{center}
 \vskip .5in
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -93,7 +93,7 @@ All Rights Reserved
 \clearpage
 
 
-\mySpacing
+%\mySpacing
 \pagenumbering{roman} \setcounter{page}{3}
 
 
@@ -133,16 +133,15 @@ All Rights Reserved
 \addcontentsline{toc}{chapter}{\listfigurename}
 \listoffigures
 
-\clearpage
-\addcontentsline{toc}{chapter}{\nomname}
-\printnomenclature
-
+\pagestyle{fancy}
+\fancyhf{} % sets both header and footer to nothing
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead[R]{\thepage}
 \clearpage
 \normalsize
-\mySpacing
 \pagenumbering{arabic}
 \setcounter{page}{1}
 
-\cftlocalchange{toc}{450pt}{0cm} %see tocloft documentation
-\cftaddtitleline{toc}{chapter}{Chapter}{}
-\cftlocalchange{toc}{1.55em}{2.55em}
+% \cftlocalchange{toc}{450pt}{0cm} %see tocloft documentation
+% \cftaddtitleline{toc}{chapter}{Chapter}{}
+% \cftlocalchange{toc}{1.55em}{2.55em}
