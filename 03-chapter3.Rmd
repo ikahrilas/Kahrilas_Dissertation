@@ -1,5 +1,9 @@
-# THE NEUROBIOLOGICAL CORRELATES OF POSITIVE EMOTIONS
-## Positive Affectivity Influences Wellbeing
+```{r kable setup, include = FALSE}
+library(kableExtra)
+```
+
+## THE NEUROBIOLOGICAL CORRELATES OF POSITIVE EMOTIONS
+### Positive Affectivity Influences Wellbeing
 Positive affectivity (PA) refers to one's disposition to experience positive affect, or more transient positive emotions (e.g., happiness, interest, energy, and self-assurance) and level of pleasurable engagement with one's environment, [@watsonPositiveAffectivity2009; @watsonPositiveNegativeAffectivity1988; @watsonSpecificityPositiveEmotional2010b] and is theorized to represent a stable individual difference.
 PA may be a key variable influencing overall wellbeing, and strong links have been found between PA and health [@cohenPositiveAffectHealth2006].
 In the famous nun study, Danner, Snowdon, & Friesen [-@dannerPositiveEmotionsEarly2001] demonstrated a strong inverse relationship between positive emotional content written in personal autobiographies (e.g., “emotion sentences” coded for affective states such as happiness, love, gratefulness, etc.) and mortality, above and beyond the influence of negative emotional content. Other studies also indicate that PA is related to lower rates of strokes among the elderly [@ostirAssociationEmotionalWellbeing2001].
@@ -17,7 +21,7 @@ Related, the presence of positive life events alone do not modify depressive sym
 Possible mechanisms between the relationship between depression and the interpretation and experience of positive events include cognitive style [@needlesPositiveLifeEvents1990] and neural factors [@watsonPositiveAffectivity2009].
 As such, advancing the neuroscientific understanding of PA has the potential to facilitate the development of intervention strategies that promote wellbeing for individuals with psychological and medical disorders.
 
-## Neural Correlates of Positive Affectivity
+### Neural Correlates of Positive Affectivity {-}
 Functional magnetic resonance imaging (fMRI) research indicates enhanced blood-oxygenation-level-dependent (BOLD) changes predominately in the right occipital cortex [i.e., fusiform cortex, lateral occipital cortex, & medial parietal cortex; @bradleyActivationVisualCortex2003], as well as the amygdala and visual cortex [@sabatinelliParallelAmygdalaInferotemporal2005] in response to affective (pleasant and unpleasant) compared to neutral images.
 These BOLD signal changes are correlated with emotional arousal ratings of affective stimuli irrespective of valence.
 Indeed, the greatest changes in brain activity are observed for highly arousing stimuli, such as mutilations, erotica, and threat, compared to neutral objects [@bradleyBrainPotentialsPerception2007].
@@ -56,7 +60,7 @@ To facilitate experimental control in the selection of stimuli and facilitating 
 Replicating previous research, it is expected that OASIS stimuli that are rated as more emotionally arousing will be associated with enhanced LPP activity for both positive and negative images compared to neutral images.
 Furthermore, given that a) PA is associated with greater frequency and intensity of positive affect, b) LPP is an established index of emotional arousal, and c) past research has indicated that neural responsivity to positive affective stimuli is correlated with extraversion, it is expected that higher self-reported PA will be associated with enhanced LPP activity in response to positive OASIS stimuli.
 
-## Emotion Regulation and Savoring
+### Emotion Regulation and Savoring
 Healthy emotion regulation abilities are integral to wellbeing [@grossEmergingFieldEmotion1998; @grossEmotionRegulationMental1995; @koolePsychologyEmotionRegulation2009; @sapolskyStressStressrelatedDisease2007].
 Emotion regulation generally refers to individuals’ attempts to influence their emotional states [@carlPositiveEmotionRegulation2013], including modulation of positive and negative emotional states that are emotionally arousing [@koolePsychologyEmotionRegulation2009].
 This also includes attenuating upsetting, or enhancing positive, aspects of a situation [@grossEmergingFieldEmotion1998].
@@ -87,7 +91,7 @@ Further, reductions in PA have been shown to be a more pressing intervention tar
 The importance of positive emotion regulation in depression treatment is underscored by the fact that novel treatments have theorized that increased use of dampening appraisals may be a psychological mechanism of reduced PA [@dunnTurningGoldLead2018] and that greater levels of savoring beliefs are negatively associated with depression symptoms [@bryantSavoringBeliefsInventory2003a; @eisnerPositiveAffectRegulation2009; @houSavoringModeratesAssociation2016; @ramseyAgeDifferencesSubjective2014; @smithSavoringResiliencePsychological2015].
 A more thorough understanding of the neural correlates of PA and savoring may facilitate neuroscience-informed clinical interventions aimed at increased savoring capacity and mitigating depression.
 
-## Neural Correlates of Emotion Regulation
+### Neural Correlates of Emotion Regulation
 A general pattern of findings from fMRI research has illustrated an association between reappraisal of negative emotional stimuli and 1) activation of the dorsal anterior cingulate cortex (dACC) and prefrontal cortex (PFC) systems that are implicated in the selection and use of reappraisal strategies and 2) increases, decreases, or maintenance of activity in the amygdala or insula that is in accordance with the goal of reappraisal [@beauregardNeuralCorrelatesConscious2001; @levesqueNeuralCircuitryUnderlying2003; @ochsnerBetterWorseNeural2004; @ochsnerRethinkingFeelingsFMRI2002; @phanNeuralSubstratesVoluntary2005; @schaeferModulationAmygdalarActivity2002].
 For example, Ochsner et al. [-@ochsnerBetterWorseNeural2004] analyzed brain structures correlated with reappraisal of negative images (to increase or decrease emotional significance of the image) via fMRI.
 Both up and down regulation strategies were associated with increased PFC and ACC activity, while amygdala activity increased or decreased in line with the regulatory goal [@ochsnerBetterWorseNeural2004].
@@ -114,7 +118,7 @@ Savoring is a type of emotion regulation that may be related to structures impli
 Since a) LPP may be an indicator of this cognitive-affective interaction, b) LPP is an index of emotional arousal, and c) savoring is an emotion regulation strategy associated with increased emotional arousal in response to positive affect/events, it is hypothesized that the relationship between increasing emotional arousal in response to positive images and LPP will be dependent on one’s capacity to savor.
 More specifically, LPP may be modulated when increasing emotional intensity in response to positive stimuli, and this relationship is expected to be moderated by savoring capacity.
 
-## The present study
+### The present study
 Past research utilizing EEG has indicated that higher arousal in response to stimuli yields augmented LPP signals [@cuthbertBrainPotentialsAffective2000; @hajcakReappraisalModulatesElectrocortical2006; @schuppAffectivePictureProcessing2000; @thiruchselvamTemporalDynamicsEmotion2011; @trittIdeologicalReactivityPolitical2016].
 Increasing emotional intensity results in enhanced amygdala activity and structures related to cognitive control [@kimNeuralCorrelatesPositive2007].
 fMRI research has demonstrated that personality trait ratings (extraversion and neuroticism) correlate with neural responsivity to affective stimuli [@canliAmygdalaResponseHappy2002; @canliFMRIStudyPersonality2001].
@@ -130,7 +134,7 @@ It was hypothesized that a) highly arousing positive vs. neutral OASIS stimuli w
 The second objective was to examine the relationship between personality traits pertaining to positive emotion and LPP activity.
 It was predicted that a) PA would moderate the relationship between watching positive images and LPP activity and b) savoring capacity would moderate the relationship between increasing emotional intensity in response to positive images and LPP activity.
 
-## Exploratory analyses
+### Exploratory analyses
 The aforementioned aims and hypotheses were preregistered (link: [https://osf.io/p5ba9/](https://osf.io/p5ba9/)).
 Exploratory analyses were also conducted and, thus, should be interpreted with caution.
 In addition to the LPP, the N170 and early posterior negativity (EPN) are also modulated by affective stimuli [@schuppAffectivePictureProcessing2012].
@@ -173,14 +177,15 @@ Further, it is expected that regulation conditions will result in behavioral rat
 Last, trait measures of PA and savoring capacity are associated with heightened reactivity and more positive affect [@bryantSavoringNewModel2007; @watsonPositiveAffectivity2009].
 Thus, it was hypothesized that the difference in behavioral/valence ratings between  passively watching positive vs. neutral images would be positively moderated by PA and the difference in behavioral/valence ratings between increasing emotional intensity in response to positive images vs. passively watching positive images would be positive moderated by savoring capacity.
 
-# Method 
-## Participants
+## Method 
+### Participants
 54 participants were recruited for the study, two of which were excluded due to missing EEG or questionnaire data (*n* = 29 women, *n* = 2 non-binary).
 Two additional outlier data points based on visual inspection of histograms of QQ plots for LPP and and frontal LPP for positive increase condition and negative watch conditions, respectively.
 Participants ranged in age from 18-29 (*M* = 19.84 years, *SD* = 1.95).
 The sample was 70.6% Caucasian, 17.6% Asian, 2.0% Black or African American, and 7.8% multiracial (2.0% declined to answer); 9.8% reported that they were Hispanic/Latino and 90.2% were not Hispanic/Latino.
 The study was approved by the Institutional Review Board and informed consent was provided to all participants prior to beginning the experiment. 
-## Materials and Procedure
+
+### Materials and Procedure
 Participants were asked to complete the trait Positive and Negative Affect Schedule (PANAS; Watson, Clark, & Tellegen, 1988) to assess for PA ($\omega = .89$).
 At the beginning and end of the experiment, participants were also asked to complete the state PANAS in order to assess state affect changes over the course of the experiment (state positive affect: $\omega = .86$; state negative affect: $\omega = .89$; Watson et al., 1988).
 Participants also completed the Savoring Beliefs Inventory (SBI; Bryant, 2009).
@@ -212,20 +217,20 @@ Stimuli were presented in random order.
 Prior to each practice trial, participants were provided with instructions on how to regulate (increase/decrease) their affective response to the stimuli, or to simply view the stimuli [@moserIntentionalModulationEmotional2006].
 Participants were shown which regulation strategy to engage in (increase, decrease, or watch) at the start of each experimental block.
 Once the participant was ready, an OASIS stimulus appeared for 2000 ms [@fotiDifferentiatingNeuralResponses2009; @hajcakPersistenceAttentionEmotion2008].
-Following stimulus offset, a blank screen appeared for 500 ms followed by a fixation cross for 1500 ms (± 250 ms) for a total ISI of 1750 - 2250 ms (see Figure \@ref(fig:paradigm)).
+Following stimulus offset, a blank screen appeared for 500 ms followed by a fixation cross for 1500 ms (± 250 ms) for a total ISI of 1750 - 2250 ms (see Figure \@ref(fig:paradigm-image)).
 This interval is identical to other studies utilizing the IAPS and investigating LPP [@dunningSeeNoEvil2009; @hajcakMotivatedControlledAttention2009].
 Stimuli within each block were presented in random order.
 Each block was separated by a break and presented in pseudo-random order, such that no valence (i.e., positive or negative) nor regulation (i.e., increase, decrease, or watch) condition were presented consecutively.
 After each experimental block, valence and arousal ratings were collected using a seven-point likert scale and the same instructions used in Kurdi, Lozano, and Banaji’s [-@kurdiIntroducingOpenAffective2017] norming study of the OASIS stimuli set.
 Furthermore, difficulty ratings on a seven-point likert scale were also obtained.
 
-(ref:paradigm) Experimental paradigm utilized in the present study. 
+(ref:paradigm-image) Experimental paradigm utilized in the present study. 
 
-```{r paradigm, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:paradigm)", out.height= "45%", out.width="100%"}
+```{r paradigm-image, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:paradigm-image)", out.height= "45%", out.width="100%"}
 knitr::include_graphics("images/paper_2/PER_paradigm.png", auto_pdf = TRUE)
 ```
 
-## Apparatus and Physiological Recording
+### Apparatus and Physiological Recording
 Scalp EEG was measured while participants completed an emotion regulation task.
 Participants were seated in a comfortable chair, approximately 24 inches from a 24-inch LCD monitor in a quiet, dimly lit room.
 Participants were monitored by a task administrator in a nearby room and received task instructions by intercom.
@@ -249,28 +254,27 @@ The experiment was computer-administered using E-Prime 2.0 software [@schneiderE
 All stimuli were presented in color and occupied the entirety of the 21-inch monitor.
 The viewing distance was approximately 24 in. and occupied 25° of the vertical visual angle and 30° horizontally (Cuthbert et al., 2000; Hajcak & Nieuwenhuis, 2006).
 
-# Results
-```{r repeated-measures-ANOVA, message = FALSE, include = FALSE, echo = FALSE}
+## Results
+```{r rm-ANOVA, message = FALSE, include = FALSE, echo = FALSE}
 load("data/paper_two/analyses/2020-06-24_repeated_measures_ANOVA_analysis-data.RData")
 ```
 Analyses were run in R version 4.0.0 [@rcoreteamLanguageEnvironmentStatistical2018].
 Multilevel modeling (MLM) analyses were conducted using the lme4 package [@batesFittingLinearMixedeffects2015].
 All linear mixed models were estimated using REML with particpants included as random intercepts.
 Model assumptions were checked via visual inspection of diagnostic plots (i.e., residual, QQ, scale-location, and residuals vs. leverage) generated with the performance package [@ludeckePerformanceAssessmentRegression2019].
-Correlations among key psychological and demographic variables (see Table \ref(tab:corr-table)) indicated significant associations ranging from small to large in effect size.
+Correlations among key psychological and demographic variables (see Table \@ref(tab:corr-table)) indicated significant associations ranging from small to large in effect size.
 Descriptive statistics for LPP, EPN, N170 and participant ratings (arousal, valence, and difficulty) were calculated for each of the experimental blocks (see Table \@ref(tab:descriptives-by-block)).
 A repeated measures analysis of variance yielded significant variation among experimental image blocks for LPP ($F$(`r df_num_lpp`, `r df_den_lpp` = `r f_lpp`, $p < .001$), EPN ($F$(`r df_num_epn`, `r df_den_epn`) = `r f_epn`, $p < .001$), and N170 ($F$(`r df_num_n170`, `r df_den_n170`) = `r f_n170`, $p < .001$), though significance was not reached for frontal LPP ($F$(`r df_num_front`, `r df_den_front` = `r f_lpp`, $p = .052$).
 Repeated measures analysis of variance similarly indicated differences among blocks for arousal ($F$(`r df_num_ar`, `r df_den_ar` = `r f_ar`, $p < .001$), valence ($F$(`r df_num_val`, `r df_den_val` = `r f_val`, $p < .001$), and difficulty ($F$(`r df_num_diff`, `r df_den_diff`) = `r f_diff`, $p < .001$) ratings.
 Pairwise comparisons were conducted using the emmeans package [@lenthEmmeansEstimatedMarginal2020] among passive watch and regulation conditions for EEG components and behavioral ratings, which are summarized in Table \@ref(tab:pairwise-watch-comparison-table) and Table \@ref(tab:pairwise-reg-comparison-table), respectively.
 Effect sizes were interpreted using Funder's [-@funderEvaluatingEffectSize2019] recommendations.
-Topographical plots and average ERP waveforms for each component of interest were also created (see Table @\ref:pairwise-reg-comparison-table, @\ref:LPP-pos-topos, @\ref:LPP-neg-topos, @\ref:EPN-N170-watch-topos, @\ref:EPN-N170-pos-topos, @\ref:EPN-N170-neg-topos, @\ref:SPN-watch-topos, @\ref:SPN-pos-topos, & @\ref:SPN-neg-topos).
+Topographical plots and average ERP waveforms for each component of interest were also created (see Figures \@ref(fig:LPP-watch-topos), \@ref(fig:LPP-reg-topos), \@ref(fig:EPN-N170-watch-topos), \@ref(fig:EPN-N170-pos-topos), \@ref(fig:EPN-N170-neg-topos), \@ref(fig:front-LPP-watch-topos), & \@ref(fig:front-LPP-reg-topos)).
 
 (ref:corr-table) Correlations among EEG components, behavioral ratings, positive affectivity, and savoring the moment ($N$ = 52)
 
-```{r corr-table, echo=FALSE, fig.cap = "(ref:corr-table)", message=FALSE} 
+```{r corr-table, echo=FALSE, fig.pos="H", fig.cap = "(ref:corr-table)", message=FALSE} 
 library(tidyverse)
-library(kableExtra)
-load("data/paper_two/analyses/2020-06-23_correlation_table-data.RData")
+load("data/paper_two/analyses/2020-06-24_correlation_table-data.RData")
 tab %>%
   mutate(" " = c("1. N170",
                  "2. EPN",
@@ -299,9 +303,8 @@ tab %>%
 
 (ref:descriptives-by-block) Means and standard deviations for LPP, EPN, and N170 EEG components, as well as arousal, valence, and difficulty ratings.
 
-```{r descriptives-by-block, echo = FALSE, message = FALSE, fig.cap = "(ref:descriptives-by-block)"}
+```{r descriptives-by-block, fig.pos="H", echo = FALSE, message = FALSE, fig.cap = "(ref:descriptives-by-block)"}
 library(tidyverse)
-library(kableExtra)
 
 dat <- read_csv("data/paper_two/created_data/per_data_analyses_2020_5_19.csv")
 
@@ -328,13 +331,12 @@ kable(desc_stats, format = "latex", escape = FALSE, booktabs = TRUE, align = "lc
   row_spec(0, align = "c") %>% 
   footnote(general_title = "Note.",
            general = "SD = Standard Deviation.",
-           footnote_as_chunk = TRUE) %>% 
-  as_image()
+           footnote_as_chunk = TRUE)
 ```
 
 (ref:pairwise-watch-comparison-table) Contrasts between passive watch conditions for LPP, EPN, and N170 EEG components.
 
-```{r pairwise-watch-comparison-table, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:pairwise-watch-comparison-table)", cache = TRUE, cache.lazy = FALSE}
+```{r pairwise-watch-comparison-table, echo = FALSE, fig.pos="H", warning = FALSE, message = FALSE, fig.cap = "(ref:pairwise-watch-comparison-table)"}
 library(tidyverse)
 
 load("data/paper_two/analyses/2020-06-24_pairwise_watch_table-data.RData")
@@ -362,7 +364,7 @@ for comparing a family of three estimates.",
 
 (ref:pairwise-reg-comparison-table) Contrasts between regulation conditions for positive and negative OASIS images for LPP, EPN, and N170 EEG components.
 
-```{r pairwise-reg-comparison-table, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:pairwise-reg-comparison-table)", cache = TRUE, cache.lazy = FALSE}
+```{r pairwise-reg-comparison-table, echo = FALSE, fig.pos="H", warning = FALSE, message = FALSE, fig.cap = "(ref:pairwise-reg-comparison-table)"}
 library(tidyverse)
 
 load("data/paper_two/analyses/2020-06-24_regulations_table-data.RData")
@@ -382,49 +384,48 @@ reg_tab_wide[-1] %>%
            general_title = "Note.",
            general = "Std. Beta = Absolute value of standardized beta coefficient as measure of effect size derived by fitting model to standardized dataset with effect size label as per Funder's (2019) recommendations, Sig. = $p$ value. $P$ values and confidence intervals adjusted using the Tukey method for comparing a family of three estimates.",
            threeparttable = TRUE,
-           footnote_as_chunk = TRUE) %>% 
-  as_image()
+           footnote_as_chunk = TRUE)
 ```
 
 (ref:LPP-watch-topos) Topographical plots and average waveforms for LPP during passive watch conditions. Sensor highlighted in white was used to measure LPP for waveform plots and analyses.
 
-```{r LPP-watch-topos, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:LPP-watch-topos)"}
+```{r LPP-watch-topos, echo = FALSE, fig.pos="H", fig.cap = "(ref:LPP-watch-topos)", out.extra="", out.height= "65%", out.width="100%"}
 knitr::include_graphics("images/paper_2/lpp_watch_topos.png", auto_pdf = TRUE)
 ```
 
 (ref:LPP-reg-topos) Topographical plots and average waveforms for LPP during regulation conditions in response to positive and negative images. Sensor highlighted in white was used to measure LPP for waveform plots and analyses.
 
-```{r LPP-reg-topos, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:LPP-reg-topos)"}
+```{r LPP-reg-topos, echo = FALSE, fig.pos="H", fig.cap = "(ref:LPP-reg-topos)", out.extra="", out.height= "65%", out.width="100%"}
 knitr::include_graphics("images/paper_2/lpp_reg_topos.png", auto_pdf = TRUE)
 ```
 
 (ref:front-LPP-watch-topos) Topographical plots and average waveforms for frontal LPP during passive watch conditions. Sensor highlighted in white was used to measure LPP for waveform plots and analyses.
 
-```{r front-LPP-watch-topos, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:front-LPP-watch-topos)"}
+```{r front-LPP-watch-topos, fig.pos="H", echo = FALSE, fig.cap = "(ref:front-LPP-watch-topos)", out.extra="", out.height= "65%", out.width="100%"}
 knitr::include_graphics("images/paper_2/front_lpp_watch_topos.png", auto_pdf = TRUE)
 ```
 
 (ref:front-LPP-reg-topos) Topographical plots and average waveforms for frontal LPP during regulation conditions in response to positive and negative images. Sensor highlighted in white was used to measure frontal LPP for waveform plots and analyses.
 
-```{r front-LPP-reg-topos, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:front-LPP-reg-topos)"}
+```{r front-LPP-reg-topos, fig.pos="H", echo = FALSE, fig.cap = "(ref:front-LPP-reg-topos)", out.extra="", out.height= "65%", out.width="100%"}
 knitr::include_graphics("images/paper_2/front_lpp_reg_topos.png", auto_pdf = TRUE)
 ```
 
 (ref:EPN-N170-watch-topos) Topographical plots and average waveforms for N170 (bottom row) and EPN (top row) during passive watch conditions. Presented windows are approximations calculated by determining the entire range of participants' scoring windows for N170 (112 ms - 223 ms) and EPN (224 ms - 341 ms) in all watch conditions. Sensor highlighted in white were used to measure N170 and EPN for waveform plots and analyses.
 
-```{r EPN-N170-watch-topos, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:EPN-N170-watch-topos)"}
+```{r EPN-N170-watch-topos, fig.pos="H", echo = FALSE, fig.cap = "(ref:EPN-N170-watch-topos)", out.extra="", out.height= "65%", out.width="100%"}
 knitr::include_graphics("images/paper_2/epn_n170_watch_topos.png", auto_pdf = TRUE)
 ```
 
 (ref:EPN-N170-pos-topos) Topographical plots and average waveforms for N170 (bottom row) and EPN (bottom row) during regulation conditions in response to positive images. Presented windows are approximations calculated by determining the entire range of participants' scoring windows for N170 (113 ms - 218 ms) and EPN (224 ms - 326 ms) in all positive conditions. Sensors highlighted in white were used to measure N170 and EPN for waveform plots and analyses.
 
-```{r EPN-N170-pos-topos, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:EPN-N170-pos-topos)"}
+```{r EPN-N170-pos-topos, fig.pos="H", echo = FALSE, fig.cap = "(ref:EPN-N170-pos-topos)", out.extra="", out.height= "65%", out.width="100%"}
 knitr::include_graphics("images/paper_2/epn_n170_pos_topos.png", auto_pdf = TRUE)
 ```
 
 (ref:EPN-N170-neg-topos) Topographical plots and average waveforms for N170 (bottom row) and EPN (bottom row) during regulation conditions in response to negative images. Presented windows are approximations calculated by determining the entire range of participants' scoring windows for N170 (112 ms - 217 ms) and EPN (223 ms - 325 ms) in all positive conditions. Sensors highlighted in white were used to measure N170 and EPN for waveform plots and analyses.
 
-```{r EPN-N170-neg-topos, echo=FALSE, fig.cap="(ref:EPN-N170-neg-topos)", message=FALSE, warning=FALSE}
+```{r EPN-N170-neg-topos, fig.pos="H", echo=FALSE, fig.cap="(ref:EPN-N170-neg-topos)", out.extra="", out.height= "65%", out.width="100%"}
 knitr::include_graphics("images/paper_2/epn_n170_neg_topos.png", auto_pdf = TRUE)
 ```
 
@@ -448,7 +449,7 @@ To test if the relationship between EEG components/behavioral ratings and increa
 An interaction term between block and momentary savoring capacity variables was added to probe for a conditional relationships.
 Results did not indicate a significant interaction between viewing condition and savoring capacity in predicting N170 ($b$ = `r n170_stm_beta`, $\beta$ = `r n170_stm_std_beta`, $SE$ = `r n170_stm_se`, $t$(`r n170_stm_df`) = `r n170_stm_t`, $p$ `r n170_stm_p`), EPN ($b$ = `r epn_stm_beta`, $\beta$ = `r epn_stm_std_beta`, $SE$ = `r epn_stm_se`, $t$(`r epn_stm_df`) = `r epn_stm_t`, $p$ `r epn_stm_p`),  LPP ($b$ = `r lpp_stm_beta`, $\beta$ = `r lpp_stm_std_beta`, $SE$ = `r lpp_stm_se`, $t$(`r lpp_stm_df`) = `r lpp_stm_t`, $p$ `r lpp_stm_p`), frontal LPP ($b$ = `r front_lpp_stm_beta`, $\beta$ = `r front_lpp_stm_std_beta`, $SE$ = `r front_lpp_stm_se`, $t$(`r front_lpp_stm_df`), or behavioral ratings(arousal: $b$ = `r ar_stm_beta`, $\beta$ = `r ar_stm_std_beta`, $SE$ = `r ar_stm_se`, $t$(`r ar_stm_df`) = `r ar_stm_t`, $p$ `r ar_stm_p`, valence: $b$ = `r val_stm_beta`, $\beta$ = `r val_stm_std_beta`, $SE$ = `r val_stm_se`, $t$(`r val_stm_df`) = `r val_stm_t`, $p$ `r val_stm_p`).
 
-# DISCUSSION
+## DISCUSSION
 The present study sought to explore the OASIS as an alternative to the IAPS in psychophysiological research as well the role of personality traits in neural affective processing.
 This research will help introduce more up-to-date and open access materials in affective neuroscience research and devise neuroscience-informed clinical interventions to enhance wellbeing.
 We found that, similar to the IAPS, highly arousing positive and negative OASIS stimuli elicited augmented LPP activity.
