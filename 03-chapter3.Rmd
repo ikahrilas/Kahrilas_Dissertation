@@ -1,5 +1,4 @@
 # THE NEUROBIOLOGICAL CORRELATES OF POSITIVE EMOTIONS
-
 ## Positive Affectivity Influences Wellbeing
 Positive affectivity (PA) refers to one's disposition to experience positive affect, or more transient positive emotions (e.g., happiness, interest, energy, and self-assurance) and level of pleasurable engagement with one's environment, [@watsonPositiveAffectivity2009; @watsonPositiveNegativeAffectivity1988; @watsonSpecificityPositiveEmotional2010b] and is theorized to represent a stable individual difference.
 PA may be a key variable influencing overall wellbeing, and strong links have been found between PA and health [@cohenPositiveAffectHealth2006].
@@ -164,10 +163,13 @@ Additionally, research has drawn associations between trait anxiety and N170/EPN
 Thus, EPN activity in response to positive vs. neutral images may be contingent upon PA.
 Considering the fact that N170 and EPN is are theorized to be rather automatic discrimination processes [@pietrekNeuromagneticIndicationDysfunctional2012], no hypotheses were made regarding the relationship between N170/EPN, regulation conditions, and savoring capacity. 
 
+Research has indicated enhanced frontal LPP as a index of increased cognitive effort [@bernatEffectsInstructedEmotion2011; @moserNeuralMarkersPositive2014; @shafirEmotionalIntensityInfluences2015]. Moser et al. (2014) and Shafir et al. (2015) both observed augmented frontal LPP at Fz electrode sites when positively reappraising relative to passively watching negative images in the 800 ms - 1100 ms time window. Bernat and colleagues (2011) also observed enhanced right frontal LPP in response to suppression and enhancement conditions in response to negative stimuli. In the context of emotion regulation, frontal LPP is only observed while using positive reappraisal strategies rather than distraction [@shafirEmotionalIntensityInfluences2015]. In other words, frontal LPP appears to be contingent upon cognitive exertion, which is underscored by research observing recruitment of PFC and ACC during control efforts [@millerIntegrativeTheoryPrefrontal2001; @ochsnerBetterWorseNeural2004]. While extant literature has not investigated frontal LPP in the context of positive images, research suggests that similar frontal processes are engaged in response to regulating emotion in response to positive and negative images [@kimNeuralCorrelatesPositive2007]. Thus, it was hypothesized that enhanced frontal LPP would be observed during regulation conditions relative to passive watch conditions (i.e., increasing/decreasing vs. passively watching for both positive and negative stimuli).  However, it was not predicted that frontal LPP would vary between passive watch conditions (i.e., passively viewing positive, negative, or neutral images) since observation of this component appears predicated on the engagement of frontal region implicated in attention control.
+
 Other exploratory analyses will focus on characterizing the relationship between behavioral ratings for emotional valence (negative to positive), emotional intensity (not arousing to highly arousing), regulatory blocks, and personality trait measures (PA and savoring capacity).
 Research has demonstrated that highly arousing positively- and negatively-valenced images are associated with heightened behavioral ratings [@bradleyInternationalAffectivePicture2007; @kurdiIntroducingOpenAffective2017].
 Thus, it is hypothesized that passively viewing negative and positive images compared to neutral images will result in heightened arousal ratings, as well as decreased (for negative images) and increase (for positive images) valence ratings.
 Further, it is expected that regulation conditions will result in behavioral ratings consonant with the regulatory goal: arousal ratings will be heightened for increase conditions and lowered for decrease conditions and valence ratings will be closer to the midpoint of the valence ratings scale for decrease conditions and lower when increasing emotional intensity in response to negative images and higher when increasing emotional intensity in response to positive images relative to passive watch conditions, respectively.
+
 Last, trait measures of PA and savoring capacity are associated with heightened reactivity and more positive affect [@bryantSavoringNewModel2007; @watsonPositiveAffectivity2009].
 Thus, it was hypothesized that the difference in behavioral/valence ratings between  passively watching positive vs. neutral images would be positively moderated by PA and the difference in behavioral/valence ratings between increasing emotional intensity in response to positive images vs. passively watching positive images would be positive moderated by savoring capacity.
 
@@ -247,9 +249,9 @@ The experiment was computer-administered using E-Prime 2.0 software [@schneiderE
 All stimuli were presented in color and occupied the entirety of the 21-inch monitor.
 The viewing distance was approximately 24 in. and occupied 25° of the vertical visual angle and 30° horizontally (Cuthbert et al., 2000; Hajcak & Nieuwenhuis, 2006).
 
-## Results
+# Results
 ```{r repeated-measures-ANOVA, message = FALSE, include = FALSE, echo = FALSE}
-load("data/paper_two/analyses/2020-06-21_repeated_measures_ANOVA_analysis-data.RData")
+load("data/paper_two/analyses/2020-06-24_repeated_measures_ANOVA_analysis-data.RData")
 ```
 Analyses were run in R version 4.0.0 [@rcoreteamLanguageEnvironmentStatistical2018].
 Multilevel modeling (MLM) analyses were conducted using the lme4 package [@batesFittingLinearMixedeffects2015].
@@ -326,7 +328,8 @@ kable(desc_stats, format = "latex", escape = FALSE, booktabs = TRUE, align = "lc
   row_spec(0, align = "c") %>% 
   footnote(general_title = "Note.",
            general = "SD = Standard Deviation.",
-           footnote_as_chunk = TRUE)
+           footnote_as_chunk = TRUE) %>% 
+  as_image()
 ```
 
 (ref:pairwise-watch-comparison-table) Contrasts between passive watch conditions for LPP, EPN, and N170 EEG components.
@@ -334,7 +337,7 @@ kable(desc_stats, format = "latex", escape = FALSE, booktabs = TRUE, align = "lc
 ```{r pairwise-watch-comparison-table, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:pairwise-watch-comparison-table)", cache = TRUE, cache.lazy = FALSE}
 library(tidyverse)
 
-load("data/paper_two/analyses/2020-06-23pairwise_watch_table-data.RData")
+load("data/paper_two/analyses/2020-06-24_pairwise_watch_table-data.RData")
 
 watch_tab %>%
   select(-comp) %>%
@@ -362,7 +365,7 @@ for comparing a family of three estimates.",
 ```{r pairwise-reg-comparison-table, echo = FALSE, warning = FALSE, message = FALSE, fig.cap = "(ref:pairwise-reg-comparison-table)", cache = TRUE, cache.lazy = FALSE}
 library(tidyverse)
 
-load("data/paper_two/analyses/2020-06-23_regulations_table-data.RData")
+load("data/paper_two/analyses/2020-06-24_regulations_table-data.RData")
 
 reg_tab_wide[-1] %>%
   kable(., format = "latex", escape = FALSE, booktabs = TRUE, align = c("l", rep("c", times = 6)), linesep = "", caption = "(ref:pairwise-reg-comparison-table)") %>%
@@ -445,7 +448,7 @@ To test if the relationship between EEG components/behavioral ratings and increa
 An interaction term between block and momentary savoring capacity variables was added to probe for a conditional relationships.
 Results did not indicate a significant interaction between viewing condition and savoring capacity in predicting N170 ($b$ = `r n170_stm_beta`, $\beta$ = `r n170_stm_std_beta`, $SE$ = `r n170_stm_se`, $t$(`r n170_stm_df`) = `r n170_stm_t`, $p$ `r n170_stm_p`), EPN ($b$ = `r epn_stm_beta`, $\beta$ = `r epn_stm_std_beta`, $SE$ = `r epn_stm_se`, $t$(`r epn_stm_df`) = `r epn_stm_t`, $p$ `r epn_stm_p`),  LPP ($b$ = `r lpp_stm_beta`, $\beta$ = `r lpp_stm_std_beta`, $SE$ = `r lpp_stm_se`, $t$(`r lpp_stm_df`) = `r lpp_stm_t`, $p$ `r lpp_stm_p`), frontal LPP ($b$ = `r front_lpp_stm_beta`, $\beta$ = `r front_lpp_stm_std_beta`, $SE$ = `r front_lpp_stm_se`, $t$(`r front_lpp_stm_df`), or behavioral ratings(arousal: $b$ = `r ar_stm_beta`, $\beta$ = `r ar_stm_std_beta`, $SE$ = `r ar_stm_se`, $t$(`r ar_stm_df`) = `r ar_stm_t`, $p$ `r ar_stm_p`, valence: $b$ = `r val_stm_beta`, $\beta$ = `r val_stm_std_beta`, $SE$ = `r val_stm_se`, $t$(`r val_stm_df`) = `r val_stm_t`, $p$ `r val_stm_p`).
 
-### DISCUSSION
+# DISCUSSION
 The present study sought to explore the OASIS as an alternative to the IAPS in psychophysiological research as well the role of personality traits in neural affective processing.
 This research will help introduce more up-to-date and open access materials in affective neuroscience research and devise neuroscience-informed clinical interventions to enhance wellbeing.
 We found that, similar to the IAPS, highly arousing positive and negative OASIS stimuli elicited augmented LPP activity.
