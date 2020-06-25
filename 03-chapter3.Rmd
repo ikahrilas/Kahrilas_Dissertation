@@ -279,7 +279,7 @@ Topographical plots and average ERP waveforms for each component of interest wer
 
 ```{r corr-table, echo=FALSE, fig.pos="H", fig.cap = "(ref:corr-table)", message=FALSE} 
 library(tidyverse)
-load("data/paper_two/analyses/2020-06-24_correlation_table-data.RData")
+load("data/paper_two/analyses/2020-06-25_correlation_table-data.RData")
 tab %>%
   mutate(" " = c("1. N170",
                  "2. EPN",
@@ -292,13 +292,12 @@ tab %>%
                  "9. Anticipating",
                  "10. StM",
                  "11. Reminiscing",
-                 "12. Depression",
-                 "13. Sex")) %>%
+                 "12. Sex")) %>%
   select(" ", everything()) %>%
   ## create table
-  kable(., format = "latex", linesep = "", escape = FALSE, booktabs = TRUE, align = c("l", rep("r", 13)), caption = "(ref:corr-table)") %>%
+  kable(., format = "latex", linesep = "", escape = FALSE, booktabs = TRUE, align = c("l", rep("r", 11)), caption = "(ref:corr-table)") %>%
   kable_styling(latex_options = "scale_down", font_size = 12) %>%
-  column_spec(2:13, width = "3em") %>%
+  column_spec(2:12, width = "3em") %>%
   footnote(general_title = "Note.",
            escape = FALSE,
            general = "*$p < .05$. PA = positive affectivity, StM = savoring the moment. EEG components and behavioral ratings (i.e., arousal, valence, and difficulty) averaged across all regulation blocks.",
