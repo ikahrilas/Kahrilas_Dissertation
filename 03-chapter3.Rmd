@@ -329,8 +329,14 @@ desc_stats <- dat %>%
                    "Positive Decrease",
                    "Positive Increase",
                    "Positive Watch"))
-
-kable(desc_stats, format = "latex", escape = FALSE, booktabs = TRUE, align = "lcccccccc", linesep = "", caption = "(ref:descriptives-by-block)") %>% 
+desc_stats %>% 
+  select(Block:`Mean Frontal LPP (SD)`) %>% 
+kable(format = "latex", escape = FALSE, booktabs = TRUE, align = "lcccccccc", linesep = "", caption = "(ref:descriptives-by-block)") %>% 
+  kable_styling(font_size = 24, latex_options = c("scale_down")) %>% 
+  row_spec(0, align = "c")
+desc_stats %>% 
+  select(Block, `Mean Arousal (SD)`:`Mean Difficulty (SD)`) %>% 
+kable(format = "latex", escape = FALSE, booktabs = TRUE, align = "lcccccccc", linesep = "") %>% 
   kable_styling(font_size = 24, latex_options = c("scale_down")) %>% 
   row_spec(0, align = "c") %>% 
   footnote(general_title = "Note.",
