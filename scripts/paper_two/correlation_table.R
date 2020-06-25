@@ -21,7 +21,6 @@ tab <- cor_dat %>%
          anticipating,
          savoring_moment,
          reminiscing,
-         depression,
          sex) %>%
   rename("1. N170" = N170,
          "2. EPN" = EPN,
@@ -34,8 +33,7 @@ tab <- cor_dat %>%
          "9. Anticipating" = anticipating,
          "10. StM" = savoring_moment,
          "11. Reminiscing" = reminiscing,
-         "12. Depression" = depression,
-         "13. Sex" = sex)
+         "12. Sex" = sex)
 
 #Compute correlation matrix
 x <- as.matrix(tab)
@@ -74,7 +72,7 @@ tab <- tab %>%
   map_df(., ~ {
     if_else(str_detect(.x, "-"), paste0("-", str_remove(.x, "-0")), .x)
   })
-colnames(tab) <- paste0(c(1:12), ".")
+colnames(tab) <- paste0(c(1:11), ".")
 save.image(file = paste0("data/paper_two/analyses/", Sys.Date(), "_correlation_table-data", ".RData"))
 # tab %>%
 #   mutate(" " = c("1. N170",
@@ -88,8 +86,7 @@ save.image(file = paste0("data/paper_two/analyses/", Sys.Date(), "_correlation_t
 #                  "9. Anticipating",
 #                  "10. StM",
 #                  "11. Reminiscing",
-#                  "12. Depression",
-#                  "13. Sex")) %>%
+#                  "12. Depression")) %>%
 #   select(" ", everything()) %>%
 #   ## create table
 #   kable(., linesep = "", escape = FALSE, booktabs = TRUE, align = c("l", rep("r", 13)), caption = "(ref:corr-table)") %>%
