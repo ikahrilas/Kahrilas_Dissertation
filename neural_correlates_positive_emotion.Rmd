@@ -352,7 +352,8 @@ tab %>%
            escape = FALSE,
            general = "*$p < .05$. PA = positive affectivity, StM = savoring the moment. EEG components and behavioral ratings (i.e., arousal, valence, and difficulty) averaged across all regulation blocks.",
            threeparttable = TRUE,
-           footnote_as_chunk = TRUE)
+           footnote_as_chunk = TRUE) %>% 
+  as_image()
 ```
 
 (ref:descriptives-by-block) Means and standard deviations for LPP, EPN, and N170 EEG components, as well as arousal, valence, and difficulty ratings.
@@ -383,7 +384,8 @@ desc_stats %>%
   select(Block:`Mean Frontal LPP (SD)`) %>% 
 kable(format = "latex", escape = FALSE, booktabs = TRUE, align = "lcccccccc", linesep = "") %>% 
   kable_styling(font_size = 24, latex_options = c("scale_down")) %>% 
-  row_spec(0, align = "c")
+  row_spec(0, align = "c") %>% 
+  as_image()
 desc_stats %>% 
   select(Block, `Mean Arousal (SD)`:`Mean Difficulty (SD)`) %>% 
 kable(format = "latex", escape = FALSE, booktabs = TRUE, align = "lcccccccc", linesep = "") %>% 
@@ -391,7 +393,8 @@ kable(format = "latex", escape = FALSE, booktabs = TRUE, align = "lcccccccc", li
   row_spec(0, align = "c") %>% 
   footnote(general_title = "Note.",
            general = "SD = Standard Deviation.",
-           footnote_as_chunk = TRUE)
+           footnote_as_chunk = TRUE) %>% 
+  as_image()
 ```
 
 (ref:pairwise-watch-comparison-table) Contrasts between passive watch conditions for LPP, EPN, and N170 EEG components.
@@ -419,7 +422,8 @@ beta coefficient as measure of effect size derived by fitting model to s
 tandardized dataset with effect size label as per Funder's (2019) recommendations,
 Sig. = $p$ value. $P$ values and confidence intervals adjusted using the Tukey method
 for comparing a family of three estimates.",
-           threeparttable = TRUE)
+           threeparttable = TRUE) %>% 
+  as_image()
 ```
 
 (ref:pairwise-reg-comparison-table) Contrasts between regulation conditions for positive and negative OASIS images for LPP, EPN, and N170 EEG components.
@@ -444,7 +448,8 @@ reg_tab_wide[-1] %>%
            general_title = "Note.",
            general = "Std. Beta = Absolute value of standardized beta coefficient as measure of effect size derived by fitting model to standardized dataset with effect size label as per Funder's (2019) recommendations, Sig. = $p$ value. $P$ values and confidence intervals adjusted using the Tukey method for comparing a family of three estimates.",
            threeparttable = TRUE,
-           footnote_as_chunk = TRUE)
+           footnote_as_chunk = TRUE) %>% 
+  as_image()
 ```
 
 (ref:LPP-watch-topos) Topographical plots and average waveforms for LPP during passive watch conditions. Sensor highlighted in white was used to measure LPP for waveform plots and analyses.
