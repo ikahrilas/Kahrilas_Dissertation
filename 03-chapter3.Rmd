@@ -462,8 +462,11 @@ The present study sought to explore the OASIS as an alternative to the IAPS in p
 This research will help introduce more up-to-date and open access materials in affective neuroscience research and devise neuroscience-informed clinical interventions to enhance wellbeing.
 We found that, similar to the IAPS, highly arousing positive and negative OASIS stimuli elicited augmented LPP activity.
 Other components, such as the N170 and EPN, were also modified in response to positive and negative images, though in the opposite direction hypothesized.
-While late LPP was enhanced in response to negative vs neutral images, statistical significance was not reached for positive vs. neutral conditions.
-PA and capacity to savor the moment did not influence the relationship between passively viewing and increasing emotional intensity in response to positive images, respectively.
+As predicted, frontal LPP was not modulated among passive watch conditions.
+No regulation effects of LPP were observed.
+Exploratory contrasts among regulation conditions found significant differences between positive increase and watch conditions for early components (N170 and EPN) and significant differences between negative decrease and negative watch conditions for frontal LPP.
+Regulation effects for arousal and valence ratings were observed in the predicted directions for negative and positive stimuli.
+PA nor capacity to savor the moment influenced the relationship between viewing conditions and EEG components.
 However, exploratory analyses indicated indicated participants' valence ratings after passively viewing positive images compared to neutral images was moderated by PA.
 
 Results suggest that highly arousing positive and negative images are correlated with enhanced LPP.
