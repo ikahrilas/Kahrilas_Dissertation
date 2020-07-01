@@ -137,6 +137,21 @@ Thus, it was hypothesized that the difference in behavioral/valence ratings betw
 2. *Examine EEG component/behavioral rating contrasts among regulatory conditions for positive and negative OASIS stimuli*. It is hypothesized that, relative to passive watch conditions for positive and negative image blocks, there will be modulations in N170, EPN, LPP, and behavioral ratings that are consistent with the regulatory goal (e.g., enhanced and attenuated LPP in increase and decrease conditions, respectively). In contrast, it is hypothesized that there will be enhancements in frontal LPP for all regulation conditions relative to passive watch conditions.
 3. *Examine the role of trait measures pertaining positive emotion in neural affective processing of affective visual stimuli*. It is hypothesized that the difference in LPP and behavioral ratings between watching neutral images and watching positive images will vary depending on PA. It is also hypothesized that the difference in LPP and behavioral ratings between watching positive images and increasing emotional intensity in response to positive images will vary depending on savoring capacity. No hypotheses were made regarding N170, EPN, and frontal LPP, though these analyses will be conducted in an exploratory manner.
 
+## Method 
+### Participants
+54 participants were recruited for the study, two of which were excluded due to missing EEG or questionnaire data (*n* = 29 women, *n* = 2 non-binary).
+Two additional outlier data points for LPP and frontal LPP in positive increase and negative watched conditions were omitted based on visual inspection of histograms of QQ plots.
+Participants ranged in age from 18-29 (*M* = 19.84 years, *SD* = 1.95).
+The sample was 70.6% Caucasian, 17.6% Asian, 2.0% Black or African American, and 7.8% multiracial (2.0% declined to answer); 9.8% reported that they were Hispanic/Latino and 90.2% were not Hispanic/Latino.
+The study was approved by the Institutional Review Board and informed consent was provided to all participants prior to beginning the experiment.
+
+### Materials and Procedure
+#### Questionnaire Measures
+Participants were asked to complete the trait Positive and Negative Affect Schedule (PANAS; Watson, Clark, & Tellegen, 1988) to assess for PA ($\omega = .89$).
+Participants also completed the Savoring Beliefs Inventory (SBI; Bryant, 2009).
+The SBI measures the perception of one’s ability to feel pleasure through anticipating positive outcomes ($\omega = .88$), savoring positive moments ($\omega = .85$), and reminiscing about past positive events ($\omega = .86$; Bryant, 2009).
+Only the momentary savoring subscale was used in the following analyses, as this temporal domain was most relevant to the present hypotheses and experimental paradigm.
+
 #### Emotion Task Paradigm
 64-channel high-density electroencephalography (EEG) data were recorded while participants viewed seven blocks of 40 images (280 total trials).
 The study used 120 different Open Affective Standardized Image Set (OASIS) images [@kurdiIntroducingOpenAffective2017].
