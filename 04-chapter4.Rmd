@@ -85,6 +85,9 @@ This pattern of findings is largely consistent with an emotion context insensiti
 A meta-analysis showed that attenuated emotional reactivity (across self-report, behavioral, and physiological measures) was present for those with MDD compared to healthy controls [@bylsmaMetaanalysisEmotionalReactivity2008a].
 Of note, reductions in emotional reactivity were stronger for positive compared to negative stimuli, which is partially consistent with positive attenuation model of emotional reactivity in MDD [i.e., emotional reactivity is selectively diminished for positive emotions; @clarkTemperamentPersonalityMood].
 Indeed, those with MDD show attenuated startle reflex in response to positive, negative, and neutral visual affective stimuli [e.g., @dichterEarlyLateonsetStartle2004], less facial electromyography activity in response to negative and positive faces [@wexlerDecreasedPerceptualSensitivity1994], and dulled self-report emotional experiences in response to negative and positive film clips [@rottenbergSadnessAmusementReactivity2002].
+Of particular interest is a study conducted by Weinberg and colleagues [-@weinbergDepressionReducedNeural2016] found that, in a sample with diagnoses of MDD and anxiety disorders, a diagnosis of MDD was uniquely associated with attenuated LPP in response to rewarding visual stimuli while an anxiety disorder was not. 
+The aforementioned study did not demonstrate an association with MDD diagnosis and reduced LPP in response to threatening stimuli, though this correlation was in the same direction as the association with rewarding stimuli [@weinbergDepressionReducedNeural2016].
+Thus, it was hypothesized that reductions in depression symptoms in the current study would lead to enhanced LPP reactivity in response to passively viewing both positive and negative stimuli.
 
 
 From Grunewald:
