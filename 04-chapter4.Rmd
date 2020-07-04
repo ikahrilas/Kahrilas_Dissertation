@@ -9,6 +9,7 @@ Outline
   - mindfulness and emotion regulation/processing.
 - present study- hypotheses
 
+overall picture with MDD - dysregulated regulation systems. Hyperactivity of frontal systems during watch conditions and hypoactivity during regulation conditions - not consonant with regulatory goal.
 
 Major Depressive Disorder (MDD) is one of the most common psychological disorders [@goodwinEpidemiologyMoodDisorders2006]. 
 In the United States, 17% of adults experience at least one major depressive episode during their life [@kesslerLifetimePrevalenceAgeofonset2005]. 
