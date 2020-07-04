@@ -41,14 +41,12 @@ Moving forward, a new focus on developing evidence-based strategies to target im
 Research has shown that those with remitted depression exhibit augmented limbic system activity in response to negative images and attenuated limbic system activity in response to positive images compared to never-depressed participants [@thomasInteractionHistoryDepression2011]. 
 Additionally, participants with MDD have demonstrated enhanced activity in the dorsolateral prefrontal cortex (PFC), a region associated with cognitive control and emotion regulation, when viewing positive images compared to healthy controls [@demenescuNeuralCorrelatesPerception2011]. 
 This difference in neural activation, the authors suggest, is indicative of suppression of positive emotion  [@demenescuNeuralCorrelatesPerception2011].
-Those with mood disorders tend to exhibit decreased activation in a fronto-parietal network (recruiting posterior cingulate cortex, dorsomedial prefrontal cortex, angular gyri, and left ventrolateral prefrontal cortex) compared to those without mood disorders [@pico-perezEmotionRegulationMood2017] when downregulating emotional responsivity to aversive stimuli.
+Those with mood disorders tend to exhibit decreased activation in a fronto-parietal network (recruiting posterior cingulate cortex, dorsomedial prefrontal cortex, angular gyri, and left ventrolateral prefrontal cortex) compared to those without mood disorders [@pico-perezEmotionRegulationMood2017; @zilverstandNeuroimagingCognitiveReappraisal2017] when downregulating emotional responsivity to aversive stimuli.
 Hypoactivity of these regions may be indicative of ineffective management of attentional and inhibitory resources [@pico-perezEmotionRegulationMood2017].
 Notably, this pattern of results held when controlling for the effects of particular subgroups of patients [i.e., women, adolescents, patients on medication; @pico-perezEmotionRegulationMood2017].
-
+To the authors' knowledge, no research has investigated the neural timecourse (via EEG) of emotion upregulation in those with mood disorders.
 
 Abler et al (2010) - amygdala hyperactivity as a trait abnormality in those with depression in response to affective stimuli. Supporting this, Drevets et al. (1992) suggested that amygdala hyperactivity might be a trait abnormality in familial pure depressive disease since it is also evident between depressive episodes. Elevated amygdala activity in depressed patients in remission has also been shown to predict symptom relapse (Bremner et al., 1997). Our results therefore add evidence to the hypothesized role of trait amygdala hyperactivity as a predictor of depressive symptoms and potentially related habitual emotion-regulation styles.
-
-
 
 ## Neural Affective Processing in Depression
 Affective disorders such as MDD and dysthymia are associated with abnormal emotional reactivity as indexed by the late positive potential (LPP) in response to affective stimuli [@grunewaldAttenuatedLPPEmotional2019]. LPP is a sustained positive slow wave observed starting as early as 300 ms following stimuli onset and is as an established index of evaluative congruency, valence, and arousal in response to visual stimuli [@olofssonAffectivePictureProcessing2008].
@@ -106,9 +104,9 @@ Cultivating the capacity to experience positive emotions via upregulating the ex
 ## Mindfulness and emotion regulation
 ### neuroscience
 The neural mechanisms of mindfulness remain elusive. 
-Studies that have investigated neural activation during meditative states found increased activation in regions linked with attention and emotion regulatory states, such as PFC and anterior cingulate cortex (ACC), along with reduced amygdala activation [@cahnMeditationStatesTraits2006; @holzelStressReductionCorrelates2010].
+Studies that have investigated neural activation during meditative states found increased activation in regions linked with attention and emotion regulatory states, such as PFC and anterior cingulate cortex (ACC), along with reduced amygdala activation [@cahnMeditationStatesTraits2006; @holzelStressReductionCorrelates2010; @lutzMindfulnessEmotionRegulation2014].
 A meta-analysis indicated that ERP studies investigating effects of medication are marred by, "...lack of methodological sophistication, no replication of critical conditions, and inconsistency of task and study populations" [@cahnMeditationStatesTraits2006, p. 196].
-However, it appears that the P300 component is influenced by meditation practice [@cahnMeditationStatesTraits2006], which may index output from a common system that indicates the neural timecourse of stimulus significance [see @hajcakSignificanceSignificanceEmpirical2020 for a review].
+However, it appears that the P300 component is influenced by meditation practice [@cahnMeditationStatesTraits2006], which may index output from a common system as LPP that indicates the neural timecourse of stimulus significance [see @hajcakSignificanceSignificanceEmpirical2020 for a review].
 
 
 Rather, the P300/LPP is elicited by motivationally significant stimuli, whether they are targets of the task, emotionally evocative, or idiographic for a specific individual. Thus, the P300 and LPP may reflect output from a common system that tracks the time-course of stimulus significance.
