@@ -1,15 +1,15 @@
 # POSITIVELY MINDFUL: NEURAL CHANGES IN POSITIVE AFFECTIVE PROCESSING AFTER EIGHT WEEKS OF HEADSPACE
 
 Outline
+- Depression intro
 - Emotion reactivity/dysregulation in depressive disorders (positive and negative)
-- Neural correlates of emotion processing in depression
+  - Inability to recruit frontal systems to reduce amygdala activities during regulation, hyperactivity of frontal systems when watching       (transition to ECI). No research on upregulation.
+  - In EEG, ECI theory - reduced significance of stimuli with blunted LPP in response to affective stimuli. No ER research in depression       with EEG
 - positive emotion regulation constructs that may be modifiable intervention targets 
 - Mindfulness intro - Headspace - scalable intervention.
   - neural correlates of mindfulness, past RCT studies
   - mindfulness and emotion regulation/processing.
 - present study- hypotheses
-
-overall picture with MDD - dysregulated regulation systems. Hyperactivity of frontal systems during watch conditions and hypoactivity during regulation conditions - not consonant with regulatory goal.
 
 Major Depressive Disorder (MDD) is one of the most common psychological disorders [@goodwinEpidemiologyMoodDisorders2006]. 
 In the United States, 17% of adults experience at least one major depressive episode during their life [@kesslerLifetimePrevalenceAgeofonset2005]. 
@@ -25,7 +25,8 @@ Broadly defined, emotion regulation refers to the psychological processes that m
 Inability to regulate negative emotion has been theorized to result in depression and anxiety [@campbell-sillsl.IncorporatingEmotionRegulation2007; @mclaughlinContributoryRoleWorry2007], and deficits in regulating emotional response to everyday events results in exacerbated periods of distress or clinical levels of psychopathology [@nolen-hoeksemaRethinkingRumination2008].
 Further, Major Depressive Disorder (MDD) is characterized by sustained negative affect and impaired ability to experience positive affect [@joormannEmotionRegulationDepression2014].
 MDD is marked by inability to repair negative emotion, consequently leading to compounded periods of depression [@nolen-hoeksemaRethinkingRumination2008].
-Indeed, those with MDD tend to ruminate (i.e., repetitive thinking focused on one's depressive symptoms as well as implications, causes, and meanings of these symptoms; @nolen-hoeksemaRethinkingRumination2008), which increases negative affect and predicts future depressive episodes [@nolen-hoeksemaRethinkingRumination2008]. Further, there is a tendency for those with depression to use suppression as opposed to reappraisal, the former of which is a maladaptive regulation strategy that is associated with reduced wellbeing [@grossIndividualDifferencesTwo2003] and exacerbated depression symptoms [@joormannEmotionRegulationDepression2010]. While suppressing negative emotion may result in some reduction of expressive behavior (e.g., facial movement) and physiological arousal, subjective experience of negatively-valenced stimuli may be no less distressing than if one did not suppress emotion [@grossEmotionalSuppressionPhysiology1993].
+Indeed, those with MDD tend to ruminate (i.e., repetitive thinking focused on one's depressive symptoms as well as implications, causes, and meanings of these symptoms; @nolen-hoeksemaRethinkingRumination2008), which increases negative affect and predicts future depressive episodes [@nolen-hoeksemaRethinkingRumination2008]. Further, there is a tendency for those with depression to use suppression as opposed to reappraisal, the former of which is a maladaptive regulation strategy that is associated with reduced wellbeing [@grossIndividualDifferencesTwo2003] and exacerbated depression symptoms [@joormannEmotionRegulationDepression2010].
+While suppressing negative emotion may result in some reduction of expressive behavior (e.g., facial movement) and physiological arousal, subjective experience of negatively-valenced stimuli may be no less distressing than if one did not suppress emotion [@grossEmotionalSuppressionPhysiology1993].
 
 Depression is also related to a response style that reduces experience of positive affect [@werner-seidlerInvestigationRelationshipPositive2013]; those who report dampening positive affect are at increased risk of experiencing future depressive symptoms [@raesDampeningPositiveAffect2012]. 
 Previous emotion regulation research has predominantly focused on downregulating negative emotions to decrease sadness and negative affect and has largely overlooked the role of positive emotion regulation [@joormannExaminingEmotionRegulation2016a]. 
@@ -48,6 +49,8 @@ Notably, this pattern of results held when controlling for the effects of partic
 To the authors' knowledge, no research has investigated the neural timecourse (via EEG) of emotion upregulation in those with mood disorders.
 
 Abler et al (2010) - amygdala hyperactivity as a trait abnormality in those with depression in response to affective stimuli. Supporting this, Drevets et al. (1992) suggested that amygdala hyperactivity might be a trait abnormality in familial pure depressive disease since it is also evident between depressive episodes. Elevated amygdala activity in depressed patients in remission has also been shown to predict symptom relapse (Bremner et al., 1997). Our results therefore add evidence to the hypothesized role of trait amygdala hyperactivity as a predictor of depressive symptoms and potentially related habitual emotion-regulation styles.
+
+overall picture with MDD - dysregulated regulation systems. Hyperactivity of frontal systems during watch conditions and hypoactivity during regulation conditions - not consonant with regulatory goal.
 
 ## Neural Affective Processing in Depression
 Affective disorders such as MDD and dysthymia are associated with abnormal emotional reactivity as indexed by the late positive potential (LPP) in response to affective stimuli [@grunewaldAttenuatedLPPEmotional2019]. LPP is a sustained positive slow wave observed starting as early as 300 ms following stimuli onset and is as an established index of evaluative congruency, valence, and arousal in response to visual stimuli [@olofssonAffectivePictureProcessing2008].
