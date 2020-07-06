@@ -1,9 +1,14 @@
 # POSITIVELY MINDFUL: NEURAL CHANGES IN POSITIVE AFFECTIVE PROCESSING AFTER EIGHT WEEKS OF HEADSPACE
 
+- reward processing in depression?
+- reduced bias to positive stimuli
+- emotion stroop literature?
+- annie gelden work on it P3 and faces
+hypotheses: blunted resposne to positive but not negative stimuliw
 Outline
 - Depression intro
 - Emotion reactivity/dysregulation in depressive disorders (positive and negative)
-  - Inability to recruit frontal systems to reduce amygdala activities during regulation, hyperactivity of frontal systems when watching       (transition to ECI). No research on upregulation.
+  - Inability to recruit frontal systems to reduce amygdala activities during regulation, hyperactivity of frontal systems when watching (transition to ECI). No research on upregulation.
   - In EEG, ECI theory - reduced significance of stimuli with blunted LPP in response to affective stimuli. No ER research in depression       with EEG
 - positive emotion regulation constructs that may be modifiable intervention targets 
 - Mindfulness intro - Headspace - scalable intervention.
