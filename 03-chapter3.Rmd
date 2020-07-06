@@ -48,8 +48,7 @@ Advancing our understanding of the neural correlates of PA and savoring may faci
 The aforementioned aims and hypotheses were preregistered (link: [https://osf.io/p5ba9/](https://osf.io/p5ba9/)).
 Exploratory analyses were also conducted and, thus, should be interpreted with caution.
 
-# positive emotion section?
-### Neural Time Course of Affective Processing
+### Neural Time Course of Positive Affective Processing
 While theoretical distinctions have been drawn between emotion reactivity and regulation, there is little extant literature that investigated the distinct time course of these processes, particularly for positive emotion.
 Different psychological ailments may manifest as disordered reaction and/or regulation that may be important considerations in devising interventions.
 For example, those with posttraumatic stress disorder show irregular affective processing in both emotional reactivity to and regulation of negative visual stimuli [@fitzgeraldNeuralIndicesEmotional2018].
@@ -59,8 +58,7 @@ EEG allows for the analysis of event-related potentials (ERPs) that facilitate a
 This is important considering that the rapid processing of emotional stimuli is characteristic of emotional responsivity [@olofssonAffectivePictureProcessing2008] and the perception of threatening/arousing events is enabled by a rapid processing pathway that recruits the thalamus and amygdala [@ledouxEmotionCircuitsBrain2000]. 
 Developing a better understanding of the temporal course of ERPs evoked by affective stimuli will advance knowledge regarding affective processing[@battyEarlyProcessingSix2003; @codispotiRepetitionEventrelatedPotentials2007; @flaischAffectivePrimeTarget2008a; @schuppEmotionAttentionEventrelated2006; @smithEventrelatedPotentialCorrelates2004].
 
-(Batty & Taylor, 2003; Codispoti, Ferrari, & Bradley, 2007; Schupp, Flaisch, Stockburger, & Junghöfer, 2006; Schupp, Stockburger, et al., 2006; Smith, Dolan, & Rugg, 2004).
-
+#### Early Visual Components
 The N170 and early posterior negativity (EPN) are early visual EEG components that are modulated by affective stimuli [@schuppAffectivePictureProcessing2012].
 The N170 is a negative peak occurring approximately 170 ms following stimulus presentation at bilateral occipito-temporal sites [@blauFacespecificN170Component2007] and is thought to reflect rapid structural encoding of faces, with negative N170 amplitude associated with threat-related and positive facial expressions compared to neutral facial expressions [@blauFacespecificN170Component2007; @dasilvaDissociatingNeuralTime2016; @stockdaleInfluenceStimulusValence2020].
 Enhanced (i.e., more negative) N170 amplitude has also been observed in response to negatively-valenced complex affective images (i.e., IAPS; @bekhterevaAttentionalBiasAffective2015), albeit with a later peak latency compared to face stimuli (160 - 200 ms for face stimuli and 200 - 240 ms for IAPS).
@@ -91,7 +89,7 @@ Additionally, research has drawn associations between trait anxiety and N170/EPN
 Thus, EPN activity in response to positive vs. neutral images may be contingent upon PA.
 Considering the fact that N170 and EPN is are theorized to be rather automatic discrimination processes [@pietrekNeuromagneticIndicationDysfunctional2012], no hypotheses were made regarding the relationship between N170/EPN, regulation conditions, and savoring capacity.
 
-## Late Positive Potential
+#### Slow Wave Components
 Research using electroencephalography (EEG) has implicated the late positive potential (LPP), a sustained positive slow wave observed starting as early as 300 ms following stimuli onset, as an established index of evaluative congruency, valence, and arousal in response to visual stimuli [@olofssonAffectivePictureProcessing2008].
 Research has consistently shown that LPP over the centroparietal cortex is augmented in the presence of unpleasant and pleasant compared to neutral images [@cuthbertBrainPotentialsAffective2000; @dillonDissociationEventrelatedPotentials2006; @fotiDeconstructingReappraisalDescriptions2008; @hajcakAttendingAffectAppraisal2006; @hajcakReappraisalModulatesElectrocortical2006; @hajcakTemporalDynamicsEmotion2007; @keilLargescaleNeuralCorrelates2002; @moserIntentionalModulationEmotional2006; @olofssonAffectivePictureProcessing2008; @schuppEmotionalFacilitationSensory2003].
 LPP is most pronounced for images that are rated as highly arousing [@bradleyInternationalAffectivePicture2007] and has been theorized to reflect activation of a brain network engaged in processing affective visual stimuli, including subcortical structures, particularly the amygdala [@bradleyInternationalAffectivePicture2007; @cuthbertBrainPotentialsAffective2000; @keilLargescaleNeuralCorrelates2002; @olofssonAffectivePictureProcessing2008; @schuppEmotionalFacilitationSensory2003], which is corroborated by considerable input and output connections connecting the visual cortex to amygdaloid nuclei in primates [@amaralAnatomicalOrganizationPrimate1992].
