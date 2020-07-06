@@ -49,9 +49,18 @@ The aforementioned aims and hypotheses were preregistered (link: [https://osf.io
 Exploratory analyses were also conducted and, thus, should be interpreted with caution.
 
 # positive emotion section?
+### Neural Time Course of Affective Processing
+While theoretical distinctions have been drawn between emotion reactivity and regulation, there is little extant literature that investigated the distinct time course of these processes, particularly for positive emotion.
+Different psychological ailments may manifest as disordered reaction and/or regulation that may be important considerations in devising interventions.
+For example, those with posttraumatic stress disorder show irregular affective processing in both emotional reactivity to and regulation of negative visual stimuli [@fitzgeraldNeuralIndicesEmotional2018].
+Depression is associated with attenuated emotional reactivity to affective stimuli [e.g., @fotiReducedElectrocorticalResponse2010; @weinbergDepressionReducedNeural2016] and ineffective regulation efforts that are marked by reduced recruitment of structures implicated in cognitive control and attention allocation [@pietrekNeuromagneticIndicationDysfunctional2012].
+Disentangling the affective processing implicated by reactivity and regulation is a task that electroencephalography (EEG) is well suited. 
+EEG allows for the analysis of event-related potentials (ERPs) that facilitate assessment of neural responses to affective stimuli with millisecond temporal resolution [@olofssonAffectivePictureProcessing2008].
+This is important considering that the rapid processing of emotional stimuli is characteristic of emotional responsivity [@olofssonAffectivePictureProcessing2008] and the perception of threatening/arousing events is enabled by a rapid processing pathway that recruits the thalamus and amygdala [@ledouxEmotionCircuitsBrain2000]. 
+Developing a better understanding of the temporal course of ERPs evoked by affective stimuli will advance knowledge regarding affective processing[@battyEarlyProcessingSix2003; @codispotiRepetitionEventrelatedPotentials2007; @flaischAffectivePrimeTarget2008a; @schuppEmotionAttentionEventrelated2006; @smithEventrelatedPotentialCorrelates2004].
 
-### Neural Timecourse of Affectie Processing
-#### Early Visual Components (N170 & EPN)
+(Batty & Taylor, 2003; Codispoti, Ferrari, & Bradley, 2007; Schupp, Flaisch, Stockburger, & Junghöfer, 2006; Schupp, Stockburger, et al., 2006; Smith, Dolan, & Rugg, 2004).
+
 The N170 and early posterior negativity (EPN) are early visual EEG components that are modulated by affective stimuli [@schuppAffectivePictureProcessing2012].
 The N170 is a negative peak occurring approximately 170 ms following stimulus presentation at bilateral occipito-temporal sites [@blauFacespecificN170Component2007] and is thought to reflect rapid structural encoding of faces, with negative N170 amplitude associated with threat-related and positive facial expressions compared to neutral facial expressions [@blauFacespecificN170Component2007; @dasilvaDissociatingNeuralTime2016; @stockdaleInfluenceStimulusValence2020].
 Enhanced (i.e., more negative) N170 amplitude has also been observed in response to negatively-valenced complex affective images (i.e., IAPS; @bekhterevaAttentionalBiasAffective2015), albeit with a later peak latency compared to face stimuli (160 - 200 ms for face stimuli and 200 - 240 ms for IAPS).
