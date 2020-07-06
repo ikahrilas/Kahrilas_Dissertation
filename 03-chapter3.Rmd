@@ -45,33 +45,34 @@ Advancing our understanding of the neural correlates of PA and savoring may faci
 The aforementioned aims and hypotheses were preregistered (link: [https://osf.io/p5ba9/](https://osf.io/p5ba9/)).
 Exploratory analyses were also conducted and, thus, should be interpreted with caution.
 
+# positive emotion section?
+
 ### Neural Correlates of Positive Affectivity and Positive Emotion
-### Exploratory analyses
 #### Early Visual Components (N170 & EPN)
-In addition to the LPP, the N170 and early posterior negativity (EPN) are also modulated by affective stimuli [@schuppAffectivePictureProcessing2012].
+The N170 and early posterior negativity (EPN) are early visual EEG components that are modulated by affective stimuli [@schuppAffectivePictureProcessing2012].
 The N170 is a negative peak occurring approximately 170 ms following stimulus presentation at bilateral occipito-temporal sites [@blauFacespecificN170Component2007] and is thought to reflect rapid structural encoding of faces, with negative N170 amplitude associated with threat-related and positive facial expressions compared to neutral facial expressions [@blauFacespecificN170Component2007; @dasilvaDissociatingNeuralTime2016; @stockdaleInfluenceStimulusValence2020].
 Enhanced (i.e., more negative) N170 amplitude has also been observed in response to negatively-valenced complex affective images (i.e., IAPS; @bekhterevaAttentionalBiasAffective2015), albeit with a later peak latency compared to face stimuli (160 - 200 ms for face stimuli and 200 - 240 ms for IAPS).
 Thus, it was hypothesized that highly arousing positive and negative OASIS images may elicit more negative N170 relative to neutral OASIS images.
 
 The EPN has been observed as a relative negative difference for stimuli as emotionally arousing/valenced compared to neutral stimuli in the 200 - 300 ms window over bilateral occipital-parietal sites [@olofssonAffectivePictureProcessing2008; @schuppAffectivePictureProcessing2000; @schuppAttentionEmotionERP2003] with potential sources residing in the occipital cortex and contributions from parietal regions [@wiensNonemotionalFeaturesSuppress2011].
-For example, Yoon et al. [-@yoonEnhancedEarlyPosterior2016] found that EPN in response to happy and fearful faces were augmented (i.e., enhanced negativity) compared to neutral faces among healthy controls.
-Further, those with anxiety disorders exhibited greater EPN in response to fearful compared to happy and neutral faces, suggesting that those with anxiety disorders may have enhanced selective attention for fearful faces [-@yoonEnhancedEarlyPosterior2016].
-Other research has observed augmented EPN in response to pleasant compared to unpleasant complex emotional stimuli, suggesting a "pleasure bias" [@frankHemodynamicElectrocorticalReactivity2019].
+For example, Yoon et al. [-@yoonEnhancedEarlyPosterior2016] found that EPN amplitude in response to happy and fearful faces were augmented (i.e., enhanced negativity) compared to neutral faces among healthy controls.
+Further, those with anxiety disorders exhibited greater EPN amplitude in response to fearful compared to happy and neutral faces, suggesting that those with anxiety disorders may have enhanced selective attention for fearful faces [-@yoonEnhancedEarlyPosterior2016].
+Other research has observed augmented EPN amplitude in response to pleasant compared to unpleasant complex emotional stimuli, suggesting a "pleasure bias" [@frankHemodynamicElectrocorticalReactivity2019].
 EPN has been observed across a variety of different tasks, inter-stimulus intervals (ISI), and stimulus presentation durations [@olofssonAffectivePictureProcessing2008], leading researchers to surmise that EPN reflects relatively automatic processes observed even when processing resources are limited due to rapid presentation rates [@junghoferFleetingImagesNew2001; @schuppAttentionEmotionERP2003; @schuppEmotionalFacilitationSensory2003].
 This sensitivity may index rapid affective amygdala processing of emotionally salient information [@ledouxEmotionCluesBrain1995; @morrisConsciousUnconsciousEmotional1998] and is also theorized to indicate "natural selective attention" where evaluation of image features is contingent upon affectively arousing perceptual characteristics for additional processing [@dolcosEventrelatedPotentialsEmotional2002; @schuppSelectiveProcessingBriefly2004].
-Thus, highly arousing positive and negative OASIS images may elicit augmented EPN relative to neutral OASIS images.
+Thus, highly arousing positive and negative OASIS images may elicit augmented EPN amplitude relative to neutral OASIS images.
 
 Some research has indicated that N170 and EPN are sensitive to emotion regulation.
 Herbert and colleagues [-@herbertNoFearNo2013] found that EPN signals were significantly attenuated during active downregulation of emotional intensity in response to pictures of fearful faces.
 Such effects were not found for downregulation of emotional intensity in response to happy faces [@herbertNoFearNo2013].
 Another study analyzed N170 and EPN differences among participants with low and high trait anxiety in an implicit emotion regulation task in response to pictures of facial expressions [@liuImplicitEmotionRegulation2018].
-Findings illustrated that implicit emotion regulation processing led to more significant decreases in behavioral negative emotion experience scores, and that these decreases in negative emotion experience scores were correlated with enhanced N170 and EPN [@liuImplicitEmotionRegulation2018].
+Findings illustrated that implicit emotion regulation processing led to more significant decreases in behavioral negative emotion experience scores, and that these decreases in negative emotion experience scores were correlated with enhanced N170 and EPN amplitude[@liuImplicitEmotionRegulation2018].
 Lastly, these enlargements were observed for participants with low trait anxiety but not high trait anxiety, suggesting deficits in implicit emotion regulation among those with anxiety [@liuImplicitEmotionRegulation2018].
-However, other research has shown that implicit emotion regulation modifies N170, but not EPN, suggesting that implicit emotion regulation may be implemented in earlier perceptual stages of emotion processing rather than later selective attention stages (i.e., EPN & LPP; @wangTemporalCourseImplicit2017).
-Given these inconsistent findings and the scarce research investigating the relationship between explicit emotion regulation (as utilized in the present study), no hypotheses were made regarding the relationship among regulation conditions (i.e., increasing/decreasing emotional intensity in response to positive/negative images) and N170/EPN. 
+However, other research has shown that implicit emotion regulation modifies N170, but not EPN, implicating that implicit emotion regulation may be implemented in earlier perceptual stages of emotion processing rather than later selective attention stages (i.e., EPN & LPP; @wangTemporalCourseImplicit2017).
+Given these inconsistent findings and the scarce research investigating the relationship between explicit reappraisal emotion regulation strategies (as utilized in the present study), no hypotheses were made regarding the relationship among regulation conditions (i.e., increasing/decreasing emotional intensity in response to positive/negative images) and N170/EPN. 
 
-As noted earlier, those with higher levels of PA gain more pleasure and exhibit more responsivity to positive stimuli [@grossRelationsAffectPersonality1998; @rustingExtraversionNeuroticismSuceptibility1997].
-Previous research has indicated relationships between extraversion (a personality trait related to PA) and BOLD response of subcortical structures to positive stimuli [@canliFMRIStudyPersonality2001].
+Those with higher levels of PA gain more pleasure and exhibit more responsivity to positive stimuli [@grossRelationsAffectPersonality1998; @rustingExtraversionNeuroticismSuceptibility1997].
+Previous research has shown relationships between extraversion [a personality trait related to PA; @watsonPositiveAffectivity2009] and BOLD response of subcortical structures to positive stimuli [@canliFMRIStudyPersonality2001].
 One of the aforementioned structures in the aforementioned line of research, the amygdala, is also theorized to contribute to N170 and EPN [@vuilleumierDistantInfluencesAmygdala2004].
 Research has supported a "pleasure bias" in EPN reactivity, illustrating selective enhanced signals in response to positive stimuli [@frankHemodynamicElectrocorticalReactivity2019].
 Additionally, research has drawn associations between trait anxiety and N170/EPN [@liuImplicitEmotionRegulation2018], suggesting that these components may be influenced by other trait-like characteristics, such as PA and savoring capacity.
