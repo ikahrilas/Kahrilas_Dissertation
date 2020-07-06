@@ -105,7 +105,6 @@ LPP is theorized to be indicative of an interaction between amygdala and cogniti
 Furthermore, savoring capacity is positively associated with affect intensity and is indicative of one’s ability to bolster positive emotion [@bryantSavoringBeliefsInventory2003a].
 Therefore, higher self-report ratings of one’s capacity to savor were expected to moderate the relationship between LPP and increased emotional intensity in response to positive stimuli.
 
-## Frontal LPP
 Research has indicated enhanced frontal LPP as an index of increased cognitive effort [@bernatEffectsInstructedEmotion2011; @moserNeuralMarkersPositive2014; @shafirEmotionalIntensityInfluences2015]. 
 Moser et al. (2014) and Shafir et al. (2015) both observed augmented frontal LPP at Fz electrode sites when positively reappraising relative to passively watching negative images in the 800 ms - 1100 ms time window. 
 Bernat and colleagues (2011) also observed enhanced right frontal LPP in response to suppression and enhancement conditions in response to negative stimuli. 
@@ -116,12 +115,14 @@ Thus, it was hypothesized that enhanced frontal LPP would be observed during reg
 However, it was not predicted that frontal LPP would vary between passive watch conditions (i.e., passively viewing positive, negative, or neutral images) since observation of this component appears predicated on the engagement of frontal regions implicated in attention control.
 
 ## Behavioral Ratings
-Other analyses will focus on characterizing the relationship between behavioral ratings for emotional valence (negative to positive), emotional intensity (not arousing to highly arousing), regulatory blocks, and personality trait measures (PA and savoring capacity).
-Research has demonstrated that highly arousing positively- and negatively-valenced images are associated with heightened behavioral ratings [@bradleyInternationalAffectivePicture2007; @kurdiIntroducingOpenAffective2017].
+In addition to EEG components, research has shown that affective visual stimuli are associated with increased arousal and valence self-report ratings [@bradleyInternationalAffectivePicture2007; @kurdiIntroducingOpenAffective2017; @olofssonAffectivePictureProcessing2008].
 Thus, it is hypothesized that passively viewing negative and positive images compared to neutral images will result in heightened arousal ratings, as well as decreased (for negative images) and increase (for positive images) valence ratings.
-Further, it is expected that regulation conditions will result in behavioral ratings consonant with the regulatory goal. Arousal ratings will be heightened for increase conditions and lowered for decrease conditions. Valence ratings will be more neutral during decrease conditions and more negative when increasing emotional intensity in response to negative images and more positive when increasing emotional intensity in response to positive images relative to passive watch conditions, respectively.
-Last, trait measures of PA and savoring capacity are associated with heightened reactivity and more positive affect [@bryantSavoringNewModel2007; @watsonPositiveAffectivity2009].
+Further, it is expected that regulation conditions will result in behavioral ratings consonant with the regulatory goal.
+Neural affective picture processing research has demonstrated a reduction in self-report ratings of arousal and valence when participants are tasked with reappraising negative visual stimuli [e.g., @thiruchselvamTemporalDynamicsEmotion2011].
+Arousal ratings will be heightened for increase conditions and lowered for decrease conditions. Valence ratings will be more neutral during decrease conditions and more negative when increasing emotional intensity in response to negative images and more positive when increasing emotional intensity in response to positive images relative to passive watch conditions, respectively.
+Last, trait measures of PA and savoring capacity are associated with heightened arousal and more positive affect in response to reacting to and upregulating positive emotion [@bryantSavoringNewModel2007; @watsonPositiveAffectivity2009].
 Thus, it was hypothesized that the difference in behavioral/valence ratings between passively watching positive vs. neutral images would be positively moderated by PA and the difference in behavioral/valence ratings between increasing emotional intensity in response to positive images vs. passively watching positive images would be positive moderated by savoring capacity.
+<!-- The degree to which self-report ratings correspond with EEG components may offer additional insight into the constructs that these EEG components represent -->
 
 ### Facilitating Reproducibility with Open Access Stimuli
 Much of the aforementioned research has utilized the International Affective Picture System [IAPS; @langInternationalAffectivePicture2008].
