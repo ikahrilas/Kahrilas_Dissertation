@@ -256,10 +256,6 @@ Each block was separated by a break and presented in pseudo-random order, such t
 After each experimental block, valence and arousal ratings were collected using a seven-point likert scale and the same instructions used in Kurdi, Lozano, and Banaji’s [-@kurdiIntroducingOpenAffective2017] norming study of the OASIS stimuli set.
 Furthermore, difficulty ratings on a seven-point likert scale were also obtained.
 
-```{r paradigm-image, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:paradigm-image)", out.height= "45%", out.width="100%"}
-knitr::include_graphics("images/paper_2/PER_paradigm.png", auto_pdf = TRUE)
-```
-
 ### Apparatus and Physiological Recording
 Scalp electroencephalography (EEG) was measured while participants completed an emotion regulation task (Figure \@ref(fig:paradigm-image)).
 Participants were seated in a comfortable chair, approximately 24 inches from a 24-inch LCD monitor in a quiet, dimly lit room.
