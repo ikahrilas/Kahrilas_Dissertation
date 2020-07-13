@@ -97,7 +97,7 @@ LPP is most pronounced for images that are rated as highly arousing [@bradleyInt
 Past research utilizing EEG has indicated that higher arousal in response to stimuli yields augmented LPP amplitude [@cuthbertBrainPotentialsAffective2000; @hajcakReappraisalModulatesElectrocortical2006; @schuppAffectivePictureProcessing2000; @thiruchselvamTemporalDynamicsEmotion2011; @trittIdeologicalReactivityPolitical2016].
 Considering that PA is associated with more positive emotional arousal [@grossRelationsAffectPersonality1998; @rustingExtraversionNeuroticismSuceptibility1997; @watsonPositiveAffectivity2009], it was hypothesized that the relationship between LPP amplitude and viewing positive stimuli will be dependent upon levels of PA.
 
-Enhanced LPP has been observed when participants described affective images in more negative (compared to neutral) terms [@fotiDeconstructingReappraisalDescriptions2008] and when participants are instructed to evaluate images in affective (compared to non-affective) conditions [@hajcakAttendingAffectAppraisal2006].
+Enhanced LPP has been observed when participants described affective images in more negative (compared to neutral) terms [@fotiDeconstructingReappraisalDescriptions2008] and when participants were instructed to evaluate images in affective (compared to non-affective) conditions [@hajcakAttendingAffectAppraisal2006].
 Other research has shown reduced LPP when participants suppressed emotional intensity in response to viewing highly arousing affective images [e.g., @moserIntentionalModulationEmotional2006].
 However, research has not reliably demonstrated that LPP is enhanced when participants are instructed to enhance their emotional intensity in response to negative [@moserIntentionalModulationEmotional2006] and positive [@krompingerModulationsElectrophysiologicalResponse2008] affective stimuli.
 Methodological factors might be contributing to these findings, such as inconsistent stimulus presentation durations, utilization of non-blocked vs. blocked designs, and different offline filter settings.
@@ -110,17 +110,18 @@ Research has indicated enhanced frontal LPP as an index of increased cognitive e
 Moser et al. (2014) and Shafir et al. (2015) both observed augmented frontal LPP at Fz electrode sites when positively reappraising relative to passively watching negative images in the 800 ms - 1100 ms time window. 
 Bernat and colleagues (2011) also observed enhanced right frontal LPP in response to suppression and enhancement conditions in response to negative stimuli. 
 In the context of emotion regulation, frontal LPP is only observed while using positive reappraisal strategies rather than distraction [@shafirEmotionalIntensityInfluences2015].
-In other words, frontal LPP appears to be contingent upon cognitive exertion, which is underscored by research observing recruitment of frontal neural structures (PFC and ACC) during control efforts [@millerIntegrativeTheoryPrefrontal2001; @ochsnerBetterWorseNeural2004]. 
+In other words, frontal LPP appears to be contingent upon cognitive exertion, which is further supported by research observing recruitment of frontal neural structures (PFC and ACC) during control efforts [@millerIntegrativeTheoryPrefrontal2001; @ochsnerBetterWorseNeural2004]. 
 While extant literature has not investigated frontal LPP in the context of positive images, research suggests that similar frontal processes are engaged in response to regulating emotion in response to positive and negative images [@kimNeuralCorrelatesPositive2007]. 
-Thus, it was hypothesized that enhanced frontal LPP would be observed during regulation conditions relative to passive watch conditions (i.e., increasing/decreasing compared to passively watching for both positive and negative stimuli).
+Thus, it was hypothesized that enhanced frontal LPP would be observed during regulation conditions relative to passive watch conditions (i.e., increasing/decreasing compared to passively watching for both positive and negative stimuli) in the present study.
 However, it was not predicted that frontal LPP would vary between passive watch conditions (i.e., passively viewing positive, negative, or neutral images) since observation of this component appears predicated on the engagement of frontal regions implicated in attention control.
 
 ## Self-Report Ratings
 In addition to EEG components, research has shown that affective visual stimuli are associated with increased arousal and valence self-report ratings [@bradleyInternationalAffectivePicture2007; @kurdiIntroducingOpenAffective2017; @olofssonAffectivePictureProcessing2008].
-Thus, it is hypothesized that passively viewing negative and positive images compared to neutral images will result in heightened arousal ratings, as well as decreased (for negative images) and increase (for positive images) valence ratings.
-Further, it is expected that regulation conditions will result in behavioral ratings consonant with the regulatory goal.
+Thus, we hypothesized that passively viewing negative and positive images compared to neutral images will result in heightened arousal ratings, as well as decreased (for negative images) and increase (for positive images) valence ratings.
+Further, we expected that regulation conditions would result in behavioral ratings consistent with the regulatory goal.
 Neural affective picture processing research has demonstrated a reduction in self-report ratings of arousal and valence when participants are tasked with reappraising negative visual stimuli [e.g., @thiruchselvamTemporalDynamicsEmotion2011].
-Arousal ratings will be heightened for increase conditions and lowered for decrease conditions. Valence ratings will be more neutral during decrease conditions and more negative when increasing emotional intensity in response to negative images and more positive when increasing emotional intensity in response to positive images relative to passive watch conditions, respectively.
+We predicted that arousal ratings would be heightened for increase conditions and lowered for decrease conditions. 
+We further predicted that valence ratings would be more neutral during decrease conditions and more negative when increasing emotional intensity in response to negative images and more positive when increasing emotional intensity in response to positive images relative to passive watch conditions, respectively.
 Last, trait measures of PA and savoring capacity are associated with heightened arousal and more positive affect in response to reacting to and upregulating positive emotion, respectively [@bryantSavoringNewModel2007; @watsonPositiveAffectivity2009].
 Thus, it was hypothesized that the difference in behavioral/valence ratings between passively watching positive vs. neutral images would be positively moderated by PA and the difference in behavioral/valence ratings between increasing emotional intensity in response to positive images vs. passively watching positive images would be positive moderated by savoring capacity.
 <!-- The degree to which self-report ratings correspond with EEG components may offer additional insight into the constructs that these EEG components represent -->
@@ -128,7 +129,7 @@ Thus, it was hypothesized that the difference in behavioral/valence ratings betw
 ### Facilitating Reproducibility with Open Access Stimuli
 Much of the aforementioned research has utilized the International Affective Picture System [IAPS; @langInternationalAffectivePicture2008].
 The IAPS is a set of color pictures that span a range of semantic categories, and valence/arousal ratings derived from a normative sample are provided for each image.
-The IAPS was developed to provide a standardized stimulus set of emotional images to facilitate the comparison of results across different studies, and enhance replication across research groups [@bradleyInternationalAffectivePicture2007].
+The IAPS was developed to provide a standardized stimulus set of emotional images to facilitate the comparison of results across different studies and enhance replication across research groups [@bradleyInternationalAffectivePicture2007].
 IAPS images are rated with respect to valence (negative-to-positive) and arousal (low-to-high) on a nine-point visual analogue scale.
 The IAPS has been used in a number of studies investigating neural correlates of affective processing and emotion regulation [e.g., @fotiDeconstructingReappraisalDescriptions2008; @hajcakPersistenceAttentionEmotion2008; @hajcakReappraisalModulatesElectrocortical2006; @keilLargescaleNeuralCorrelates2002; @kimNeuralCorrelatesPositive2007; @moserIntentionalModulationEmotional2006; @olofssonAffectivePictureProcessing2008; @schuppEmotionalFacilitationSensory2003].
 The copyright agreement that accompanies the IAPS mandates that users cannot place any of the images on computer-accessible websites.
@@ -139,8 +140,8 @@ The OASIS is a collection of 900 high quality images collected from open-access 
 The OASIS was normed on valence and arousal ratings collected from a diverse sample recruited through Amazon’s Mechanical Turk [@kurdiIntroducingOpenAffective2017].
 To facilitate experimental control in the selection of stimuli and facilitating comparison of results and replication across different studies using this new image set, the present study utilized OASIS stimuli in lieu of the IAPS.
 
-### The present study
-The present study utilized an experimental paradigm consisting of seven blocks of images using 120 different OASIS stimuli. 40 images were highly-arousing positive images, 40 images were highly-arousing negative images, and 40 were neutral. 
+### The Present Study
+The present study utilized an experimental paradigm consisting of seven blocks of images using 120 different OASIS stimuli. 40 images were highly arousing positive images, 40 images were highly-arousing negative images, and 40 were neutral. 
 Participants were tasked with increasing or decreasing emotional intensity in response to (i.e., upregulating or downregulating) positive and negative images, as well as passively watching them. 
 Participants also passively viewed the block of 40 neutral images.
 Following each block of images, participants were asked to rate on a seven-point scale how positive or negative they feel (valence), the intensity of the emotion they feel (arousal), as well as how difficult the regulation task was (difficulty).
@@ -151,16 +152,11 @@ Related, it was also hypothesized that LPP amplitude would be modulated in a man
 More specifically, reduction of LPP amplitude would be observed in decrease conditions compared to passive watch conditions, and increased LPP amplitude would be observed in increase conditions compared to passive watch conditions.
 Additionally, it was predicted that frontal LPP amplitude would be increased for all regulation conditions (increase and decrease), though not modulated for passive watch conditions.
 The second objective was to examine the relationship between personality traits pertaining to positive emotion and EEG components/self-report ratings.
-It was predicted that a) PA would moderate the relationship between watching positive images and EEG components (N170, EPN, LPP) as well as self-report ratings (increased arousal and more positive valence ratings) and b) savoring capacity would moderate the relationship between increasing emotional intensity in response to positive images and LPP amplitude as well as self-report ratings (increased arousal and more positive valence-ratings). 
+It was predicted that a) PA would moderate the relationship between watching positive images and LPP as well as self-report ratings (increased arousal and more positive valence ratings) and b) savoring capacity would moderate the relationship between increasing emotional intensity in response to positive images and LPP amplitude as well as self-report ratings (increased arousal and more positive valence-ratings). 
 
 Hypotheses pertaining to modulation of LPP amplitude in response to passively viewing OASIS images and personality traits interacting with LPP amplitude and PA/savoring capacity were preregistered (link: [https://osf.io/p5ba9/](https://osf.io/p5ba9/)).
-Other hypotheses were not pre-registered due to transition in lab policies and reanalysis of data collected in the present study.
-Thus, other analyses should be considered exploratory and be interpreted with caution.
-
-## Specific Aims and Hypotheses
-1. *Examine the relationship between EEG components of interest/behavioral ratings and highly arousing OASIS stimuli*. It is hypothesized that highly arousing positive and negative images will be associated with enhanced N170, EPN, and LPP. Further, it is hypothesized that highly arousing positive and negative images will be associated with arousal and valence behavioral ratings.
-2. *Examine EEG component/behavioral rating contrasts among regulatory conditions for positive and negative OASIS stimuli*. It is hypothesized that, relative to passive watch conditions for positive and negative image blocks, there will be modulations in LPP and behavioral ratings that are consistent with the regulatory goal (e.g., enhanced and attenuated LPP in increase and decrease conditions, respectively). In contrast, it is hypothesized that there will be enhancements in frontal LPP for all regulation conditions relative to passive watch conditions. No hypotheses were made regarding N170 and EPN, though these analyses will be conducted in an exploratory manner.
-3. *Examine the role of trait measures pertaining positive emotion in neural affective processing of affective visual stimuli*. It is hypothesized that the difference in N170, EPN, LPP, and behavioral ratings between watching neutral images and watching positive images will vary depending on PA. It is also hypothesized that the difference in LPP and behavioral ratings between watching positive images and increasing emotional intensity in response to positive images will vary depending on savoring capacity. No hypotheses were made regarding N170, EPN, and frontal LPP, though these analyses will be conducted in an exploratory manner.
+As we continued to read the explore the scientific literature about reactivity and regulation, we decided to expand our analyses to other components in order to study the temporal cascade of affective processing.
+Thus, these unregistered analyses should be considered exploratory and interpreted with caution.
 
 ## Method 
 ### Participants
@@ -240,7 +236,7 @@ The experiment was computer-administered using E-Prime 2.0 software [@schneiderE
 All stimuli were presented in color and occupied the entirety of the 21-inch monitor.
 The viewing distance was approximately 24 in. and occupied 25° of the vertical visual angle and 30° horizontally (Cuthbert et al., 2000; Hajcak & Nieuwenhuis, 2006).
 
-## Analytic Plan
+## Analytic Plan for Specific Aims and Hypotheses
 ### Preliminary Analyses
 Prior to hypothesis testing variables will be evaluated for psychometric and distributional properties.
 Descriptive statistics for key variables and demographics will be assessed. 
@@ -248,17 +244,27 @@ Bivariate correlations for these variables will also be calculated to assess for
 Statistical assumptions will be assessed via visual inspection of diagnostic plots (i.e., residual, QQ, scale-location, and residuals vs. leverage) generated with the performance package [@ludeckePerformanceAssessmentRegression2019].
 
 ### Analytic Plan for Aim One
-A repeated measures analysis variance (ANOVA) will be conducted to assess for differences in relevant EEG components (N170, EPN, LPP) and behavioral ratings among passive watch conditions (neutral, positive and negative). Block type will be entered as the within subject factor and separate analyses will be conducted each with each EEG components and behavioral rating as the outcome. The Tukey method will be used to correct for families of three estimates per analysis.
+To examine the relationship between EEG components of interest/behavioral ratings and highly arousing OASIS stimuli, a repeated measures analysis variance (ANOVA) will be conducted to assess for differences in relevant EEG components (N170, EPN, LPP) and behavioral ratings among passive watch conditions (neutral, positive and negative). 
+Block type will be entered as the within subject factor and separate analyses will be conducted each with each EEG components and behavioral rating as the outcome. 
+The Tukey method will be used to correct for families of three estimates per analysis. It is hypothesized that highly arousing positive and negative images will be associated with enhanced N170, EPN, and LPP. 
+Further, it is hypothesized that highly arousing positive and negative images will be associated with arousal and valence behavioral ratings.
 
 ### Analytic Plan for Aim Two
-A repeated measures analysis variance (ANOVA) will be conducted to assess for differences in EEG components (N170, EPN, LPP, frontal LPP) and behavioral ratings among regulation conditions (watch, increase, & decrease) for positive and negative OASIS images. Block type will be entered as the within subject factor and separate analyses will be conducted each with EEG components and behavioral rating as the outcome. The Tukey method will be used to correct for families of three estimates per analysis.
+To examine EEG component/behavioral rating contrasts among regulatory conditions for positive and negative OASIS stimuli, a repeated measures analysis variance (ANOVA) will be conducted to assess for differences in EEG components (N170, EPN, LPP, frontal LPP) and behavioral ratings among regulation conditions (watch, increase, & decrease) for positive and negative OASIS images. 
+Block type will be entered as the within subject factor and separate analyses will be conducted each with EEG components and behavioral rating as the outcome. 
+The Tukey method will be used to correct for families of three estimates per analysis. 
+It is hypothesized that, relative to passive watch conditions for positive and negative image blocks, there will be modulations in LPP and behavioral ratings that are consistent with the regulatory goal (e.g., enhanced and attenuated LPP in increase and decrease conditions, respectively). 
+In contrast, it is hypothesized that there will be enhancements in frontal LPP for all regulation conditions relative to passive watch conditions. 
+No hypotheses were made regarding N170 and EPN, though these analyses will be conducted in an exploratory manner.
 
 ### Analytic Plan for Aim Three
-Building upon the previous models, PA will be added as a mean-centered level-two predictor. 
+To examine the role of trait measures pertaining positive emotion in neural affective processing of affective visual stimuli, the previous models will be built upon by adding PA as a mean-centered level-two predictor.
 A cross-level interaction will be analyzed between viewing condition and positive affectivity to evaluate whether the relationship between watching positive stimuli (relative to watching neutral stimuli) and EEG components of interest (N170, EPN, LPP)/behavioral ratings significantly vary as a function of positive affectivity. 
 To assess whether savoring capacity plays a moderating role in affective neural processing of OASIS stimuli, savoring capacity will be added as a mean-centered level-two predictor. 
 The dummy-coded level-one viewing condition variable will be altered so that the positive passive viewing condition will be the reference group. 
-A cross-level interaction will be analyzed between viewing condition and savoring capacity to evaluate whether the relationship between increasing emotional intensity in response to positive stimuli (relative to watching positive stimuli) and EEG components of interest (N170, EPN, LPP)/behavioral ratings significantly vary as a function of savoring capacity.
+A cross-level interaction will be analyzed between viewing condition and savoring capacity to evaluate whether the relationship between increasing emotional intensity in response to positive stimuli (relative to watching positive stimuli) and EEG components of interest (N170, EPN, LPP)/behavioral ratings significantly vary as a function of savoring capacity. 
+It is hypothesized that the difference in LPP amplitude and behavioral ratings between watching neutral images and watching positive images will vary depending on PA. 
+It is also hypothesized that the difference in LPP amplitude and behavioral ratings between watching positive images and increasing emotional intensity in response to positive images will vary depending on savoring capacity. 
 
 ## Power Analysis
 Power Calculations were conducted using the G-power [@faulPowerFlexibleStatistical2007] software applications.
