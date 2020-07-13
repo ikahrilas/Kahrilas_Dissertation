@@ -21,29 +21,20 @@ Past research has also revealed that savoring is related to present happiness, t
 Furthermore, savoring is negatively associated with depression, neuroticism, and hopelessness [@bryantSavoringBeliefsInventory2003a; @eisnerPositiveAffectRegulation2009; @houSavoringModeratesAssociation2016; @kahrilasSavoringMomentLink2020; @ramseyAgeDifferencesSubjective2014; @smithSavoringResiliencePsychological2015].
 A separate study found that savoring the moment is related to higher life satisfaction, subjective happiness, and overall higher levels of positive affect [@hurleyResultsStudyIncrease2012].
 Other research has similarly revealed that savoring was strongly related to higher levels of present happiness, higher self-esteem, and lower reported levels of depression [@bryantSavoringBeliefsInventory2003a].
-Further, increased savoring capacity is associated with pain resilience [@thongBufferingRolePositive2016].
+Further, increased savoring capacity is associated with pain resilience [@thongBufferingRolePositive2016].[@russellCircumplexModelAffect1980]
 
 The original conceptual formulation of savoring [@bryantSavoringNewModel2007] is predicated on the assumption that people typically initiate savoring responses in reaction to positive events or affect, which people regulate through cognitive or behavioral strategies. 
-Thus, difficulties processing positive emotions and events precludes the ability to savor; one's ability to *regulate* positive emotion is based on the assumption that one is able to *react* and attend to positive emotion.
-Emotion reactivity broadly refers to an individual's response when an emotion arises, which spans subjective feelings, behavioral manifestation, and bodily reactions [@grossEmotionRegulationConceptual2007]. 
-Emotion reactivity varies in arousal (not arousing to strongly arousing) and valence [negative to positive; @grossEmotionEmotionRegulation2014].
+Thus, difficulties processing positive emotions and events preclude the ability to savor; one's ability to *regulate* positive emotion is predicated upon one's ability to attend and *react* to positive emotions.
+Emotion reactivity broadly refers to an individual's initial baseline affective response to a stimulus, which spans feelings, behavioral manifestations, and bodily reactions [@grossEmotionRegulationConceptual2007]. 
+Consistent with the circumplex framework , emotion reactivity varies in arousal (not arousing to strongly arousing) and valence [negative to positive; @grossEmotionEmotionRegulation2014].
 Emotion regulation pertains to the manner in which individuals influence their emotions, as well as when and how they are experienced [@grossEmergingFieldEmotion1998].
-While savoring is a trait-like measure of one's ability to regulate positive emotions, positive affectivity (PA) pertains to one's reactivity to positive emotions, or the ability tp recognize and attend to positive emotions [@watsonPositiveAffectivity2009]. 
-PA is indicative of one's disposition to experience state positive affect, or transient positive emotions (e.g., happiness, interest, energy, and self-assurance) and level of pleasurable engagement with one's environment, [@watsonPositiveAffectivity2009; @watsonPositiveNegativeAffectivity1988; @watsonSpecificityPositiveEmotional2010b] and is theorized to represent a stable trait-like individual difference.
+While savoring is a trait-like measure of one's ability to regulate positive emotions, positive affectivity (PA) pertains to one's reactivity to positive emotions, or a trait-like disposition to recognize and attend to positive emotions [e.g., happiness, interest, energy, and self-assurance; @watsonPositiveAffectivity2009].
 
-PA may be a key variable influencing overall wellbeing, and strong links have been found between PA and health [@cohenPositiveAffectHealth2006].
-Higher levels of PA have also been associated with improved sleep quality, more exercise, and lower levels of the stress hormones epinephrine, norepinephrine, and cortisol [@cohenPositiveAffectHealth2006]. 
+PA may be a key variable influencing overall wellbeing, and strong links have been found between PA and health [@cohenPositiveAffectHealth2006; @pressmanPositiveAffectHealth2019].
+Higher levels of PA have also been associated with improved sleep quality, more exercise, and lower levels of the stress hormones (i.e., epinephrine, norepinephrine, and cortisol; @cohenPositiveAffectHealth2006]. 
 Additionally, PA has been hypothesized to increase levels of hormones and neurotransmitters, such as oxytocin and growth hormone, as well as endogenous opioids [@pressmanDoesPositiveAffect2005a]. 
 PA also promotes prosocial behavior, empathy, cultivating closer relationships, and cultivating larger social networks [@morelliNeuralComponentsEmpathy2014], all of which are factors that positively impact overall health outcomes [@cacioppoLonelinessHealthPotential2002; @cohenPositiveAffectHealth2006].
-
-Since higher levels of PA and savoring are related to enhanced wellbeing [@cohenPositiveAffectHealth2006; @smithEffectsSavoringIntervention2019; @smithNurturingCapacitySavor2014; @watsonPositiveAffectivity2009], these may be critical factors to target in treatments for individuals with depression.
-45-65% of those with depression undergoing common treatments for depression (e.g., cognitive behavioral therapy and psychotropics; @priceNeurocircuitryMoodDisorders2010a) do not achieve remission [@derubeisCognitiveTherapyVs2005].
-These frequently used evidence-based interventions largely focus on mitigating problems associated with negative emotions [@argyropoulosAnhedoniaRevisitedThere2013; @beckCognitiveTherapyEmotional1979].
-While these are important areas to address, negative *and* positive emotion processes are both uniquely associated with depression [@dunnChangesPositiveNegative2019; @kahrilasSavoringMomentLink2020].
-Given the unique contribution and importance of both positive and negative emotion disturbances to the maintenance and severity of depression symptoms, it is problematic that current depression treatments are inadequate in addressing positive emotion.
-In fact, positive emotion may be a more pressing intervention target for patients undergoing depression treatment [@dunnChangesPositiveNegative2019].
-As such, novel treatments aim to reduce the use of dampening appraisal (a theorized psychological mechanism of reduced PA; @dunnTurningGoldLead2018).
-Advancing our understanding of the neural correlates of PA and savoring may facilitate neuroscience-informed clinical interventions that mitigate depression.
+Advancing our understanding of the neural correlates of PA and savoring may facilitate neuroscience-informed clinical interventions that support positive wellbeing outcomes.
 
 ### Neural Time Course of Positive Affective Processing
 While theoretical distinctions have been drawn between emotion reactivity and regulation, there is little extant literature that has investigated the distinct time course of these processes, particularly for positive emotion.
