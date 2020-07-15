@@ -128,7 +128,7 @@ However, it was not predicted that frontal LPP would vary between passive watch 
 
 ## Self-Report Ratings
 In addition to EEG components, research has shown that affective visual stimuli are associated with increased arousal and valence self-report ratings [@bradleyInternationalAffectivePicture2007; @kurdiIntroducingOpenAffective2017; @olofssonAffectivePictureProcessing2008].
-Thus, we hypothesized that passively viewing negative and positive images compared to neutral images will result in heightened arousal ratings, as well as decreased (for negative images) and increase (for positive images) valence ratings.
+Thus, we hypothesized that passively viewing negative and positive images compared to neutral images would result in heightened arousal ratings, as well as decreased (for negative images) and increase (for positive images) valence ratings.
 Further, we expected that regulation conditions would result in behavioral ratings consistent with the regulatory goal.
 Neural affective picture processing research has demonstrated a reduction in self-report ratings of arousal and valence when participants are tasked with reappraising negative visual stimuli [e.g., @thiruchselvamTemporalDynamicsEmotion2011].
 We predicted that arousal ratings would be heightened for increase conditions and lowered for decrease conditions. 
@@ -274,8 +274,8 @@ A cross-level interaction will be analyzed between viewing condition and positiv
 To assess whether savoring capacity plays a moderating role in affective neural processing of OASIS stimuli, savoring capacity will be added as a mean-centered level-two predictor. 
 The dummy-coded level-one viewing condition variable will be altered so that the positive passive viewing condition will be the reference group. 
 A cross-level interaction will be analyzed between viewing condition and savoring capacity to evaluate whether the relationship between increasing emotional intensity in response to positive stimuli (relative to watching positive stimuli) and EEG components of interest (N170, EPN, LPP)/behavioral ratings significantly vary as a function of savoring capacity. 
-It is hypothesized that the difference in LPP amplitude and behavioral ratings between watching neutral images and watching positive images will vary depending on PA. 
-It is also hypothesized that the difference in LPP amplitude and behavioral ratings between watching positive images and increasing emotional intensity in response to positive images will vary depending on savoring capacity. 
+It is hypothesized that differences in EEG component amplitudes and behavioral ratings between watching neutral images and watching positive images will vary depending on PA. 
+It is also hypothesized that differences in EEG component amplitudes and behavioral ratings between watching positive images and increasing emotional intensity in response to positive images will vary depending on savoring capacity. 
 
 ## Power Analysis
 Power Calculations were conducted using the G-power [@faulPowerFlexibleStatistical2007] software applications.
@@ -283,8 +283,7 @@ Power analyses focused on evaluating differences in LPP amplitudes between viewi
 No prior research has successfully examined significant amplitude differences between watch and increase conditions for positive stimuli.
 Therefore, estimates of LPP amplitude differences between watch and suppress conditions for negative stimuli were used from a
 study conducted by Moser et al. (2006) to conduct the present power analysis.
-Given an
-N of 40, we will have 1.0 power to detect a large effect (f = .61; @cohenStatisticalPowerAnalysis1969) of viewing
+Given an N of 40, we will have 1.0 power to detect a large effect (f = .61; @cohenStatisticalPowerAnalysis1969) of viewing
 conditions’ effect on LPP amplitudes. 
 Furthermore, an N of 40 will provide .81 power to
 detect a large effect [@cohenStatisticalPowerAnalysis1969] of the moderation analysis proposed in hypothesis 2b.
