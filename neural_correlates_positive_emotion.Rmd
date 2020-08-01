@@ -93,7 +93,7 @@ While savoring is a trait-like measure of one's ability to regulate positive emo
 In order to better understand how individual differences modify the neural correlates of positive emotion reactivity/regulation, the present study utilized an experimental paradigm where participants were shown blocks of images of varying valence (positive, negative, and neutral) with different regulation instructions (increasing/decreasing emotional intensity in response to images, or passively watching) while recording electroencephalography (EEG) from participants. 
 Additionally, participants were asked to complete self-report measures assessing for PA and savoring capacity.
 
-# Neural Correlates of Emotion Reactivity and Regulation
+## Neural Correlates of Emotion Reactivity and Regulation
 Different psychological problems may manifest as disordered emotion reaction and/or regulation that may be important considerations in devising interventions for individuals with psychopathology [@weinbergDistinctAssociationsLow2018].
 For example, depression is associated with attenuated emotional reactivity to affective stimuli [e.g., @fotiReducedElectrocorticalResponse2010; @weinbergDepressionReducedNeural2016] and ineffective regulation efforts that are marked by reduced recruitment of structures implicated in cognitive control and attention allocation [@pietrekNeuromagneticIndicationDysfunctional2012].
 This research could inform depression treatment by focusing on reactivity to emotional stimuli (e.g., mindfulness-based interventions) and enhancing emotion regulation (e.g., cognitive behavioral therapy to facilitate reappraisal). 
@@ -102,7 +102,7 @@ In particular, event-related potentials (ERPs) facilitate assessment of neural r
 This is critical to evaluate the rapid processing of emotional stimuli that is characteristic of emotional responsivity [@olofssonAffectivePictureProcessing2008]. 
 Developing a better understanding of the temporal course of ERPs evoked by affective stimuli will advance knowledge regarding the dynamic processes contributing to emotion reactivity and regulation and how these processes vary based on emotional valence and personality traits.
 
-# Early Visual ERP Components Associated with Affective Processing
+## Early Visual ERP Components Associated with Affective Processing
 The N170 and early posterior negativity (EPN) are early visual EEG components that are modulated by affective stimuli [@schuppAffectivePictureProcessing2012].
 The N170 is a negative peak occurring approximately 170 ms following stimulus presentation at bilateral occipito-temporal sites [@blauFacespecificN170Component2007].
 The N170 is thought to reflect rapid structural encoding of faces, with increased N170 amplitude associated with threat-related and positive facial expressions compared to neutral facial expressions [@blauFacespecificN170Component2007; @dasilvaDissociatingNeuralTime2016; @stockdaleInfluenceStimulusValence2020].
@@ -142,7 +142,7 @@ The fact that these early "bottom up" visual components can be modified via emot
 However, these findings fit well within the context of conceptualizing reactivity and regulation as a matter of altering motivational significance; though implicit emotion regulation occurs unconsciously, it still serves to manipulate significance of stimuli.
 Given these inconsistent findings and the scarce research investigating the relationship between explicit reappraisal emotion regulation strategies (as utilized in the present study), no hypotheses were made regarding the relationship among regulation conditions (i.e., increasing/decreasing emotional intensity in response to positive/negative images) and N170/EPN. 
 
-# Individual Differences Modulate Early Visual Components
+## Individual Differences Modulate Early Visual Components
 Though early components such as N170 and EPN have been conceptualized as relatively automatic processes, research suggests that they are influenced by individual differences.
 For example, Stockdale and colleagues (2017) found that neural processing at 100 ms varies as a function of a modifiable individual difference (i.e., empathy).
 Additionally, implicit regulatory effects on visual components varies based on one's trait anxiety [@liuImplicitEmotionRegulation2018].
@@ -151,7 +151,7 @@ The amygdala, which is implicated in Canli and colleagues' studies (2001, 2002),
 Thus, EPN activity in response to positive vs. neutral images may be contingent upon PA.
 In light of the conceptual overlap between reactivity and regulation and lack of research investigating explicit emotion regulation's effect on early visual components, no hypotheses were made regarding the relationship between N170/EPN, regulation conditions, and savoring capacity.
 
-# Slow Wave Components Associated with Affective Processing and Individual Differences
+## Slow Wave Components Associated with Affective Processing and Individual Differences
 Research using EEG has implicated the LPP, a sustained positive slow wave observed starting as early as 300 ms following stimuli onset, as an established index of evaluative congruency, valence, and arousal in response to visual stimuli [@olofssonAffectivePictureProcessing2008].
 Research has consistently shown that LPP over the centroparietal cortex is augmented in the presence of unpleasant and pleasant compared to neutral images [@cuthbertBrainPotentialsAffective2000; @dillonDissociationEventrelatedPotentials2006; @fotiDeconstructingReappraisalDescriptions2008; @hajcakAttendingAffectAppraisal2006; @hajcakReappraisalModulatesElectrocortical2006; @hajcakTemporalDynamicsEmotion2007; @keilLargescaleNeuralCorrelates2002; @moserIntentionalModulationEmotional2006; @olofssonAffectivePictureProcessing2008; @schuppEmotionalFacilitationSensory2003].
 LPP is most pronounced for images that are rated as highly arousing [@bradleyInternationalAffectivePicture2007] and has been theorized to reflect activation of a brain network engaged in processing affective visual stimuli, including subcortical structures, particularly the amygdala [@bradleyInternationalAffectivePicture2007; @cuthbertBrainPotentialsAffective2000; @keilLargescaleNeuralCorrelates2002; @olofssonAffectivePictureProcessing2008; @schuppEmotionalFacilitationSensory2003], which is corroborated by considerable input and output connections connecting the visual cortex to amygdaloid nuclei in primates [@amaralAnatomicalOrganizationPrimate1992].
@@ -176,7 +176,7 @@ While extant literature has not investigated frontal LPP in the context of posit
 Thus, it was hypothesized that enhanced frontal LPP would be observed during regulation conditions relative to passive watch conditions (i.e., increasing/decreasing compared to passively watching for both positive and negative stimuli) in the present study.
 However, it was not predicted that frontal LPP would vary between passive watch conditions (i.e., passively viewing positive, negative, or neutral images) since observation of this component appears predicated on the engagement of frontal regions implicated in attention control.
 
-# Self-Report Ratings
+## Self-Report Ratings
 In addition to EEG components, research has shown that affective visual stimuli are associated with increased arousal and valence self-report ratings [@bradleyInternationalAffectivePicture2007; @kurdiIntroducingOpenAffective2017; @olofssonAffectivePictureProcessing2008].
 Thus, we hypothesized that passively viewing negative and positive images compared to neutral images would result in heightened arousal ratings, as well as decreased (for negative images) and increase (for positive images) valence ratings.
 Further, we expected that regulation conditions would result in behavioral ratings consistent with the regulatory goal.
@@ -187,7 +187,7 @@ Last, trait measures of PA and savoring capacity are associated with heightened 
 Thus, it was hypothesized that the difference in behavioral/valence ratings between passively watching positive vs. neutral images would be positively moderated by PA and the difference in behavioral/valence ratings between increasing emotional intensity in response to positive images vs. passively watching positive images would be positive moderated by savoring capacity.
 <!-- The degree to which self-report ratings correspond with EEG components may offer additional insight into the constructs that these EEG components represent -->
 
-# Facilitating Reproducibility with Open Access Stimuli
+## Facilitating Reproducibility with Open Access Stimuli
 Much of the aforementioned research has utilized the International Affective Picture System [IAPS; @langInternationalAffectivePicture2008].
 The IAPS is a set of color pictures that span a range of semantic categories, and valence/arousal ratings derived from a normative sample are provided for each image.
 The IAPS was developed to provide a standardized stimulus set of emotional images to facilitate the comparison of results across different studies and enhance replication across research groups [@bradleyInternationalAffectivePicture2007].
