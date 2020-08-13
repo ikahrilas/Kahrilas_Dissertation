@@ -13,7 +13,7 @@ dat <- read_excel("data/paper_three/headspace_questionnaire_data.xlsx") %>%
          contains(c("T1", "T2", "T3")))
 
 ## race code
-dat <- dat %>%
+dat_hs <- dat %>%
   rowwise() %>%
   mutate(race = if_else(sum(`Q9African-American_T1`,
                             Q9AmericanIndianorAlaskaNat_T1,
@@ -36,5 +36,47 @@ dat <- dat %>%
                                 )
                               )
                         ),
-         race = if_else(race == "666", "Other", race))
+         race = if_else(race == "666", "Other", race)
+  ) %>%
+  rename(pid = StudyID_T1)
+
+# read in PER data for harmonization
+per_dataset <- read_xlsx("data/paper_two/questionnaire/PER Questionnaires.xlsx")
+
+# without running this code, R is unable to recognize some column names
+names(per_dataset) <- enc2native(names(per_dataset))
+
+# rename some of the race categories to match the smile data
+per_dataset <- per_dataset %>%
+  mutate(Race = if_else(Race == "caucasian" & ethnicity == 1, "Hispanic or Latinx", Race),
+         Race = if_else(Race == "multiracial", "Multi-Racial", Race),
+         Race = if_else(Race == "african_american", "African American", Race),
+         Race = str_to_title(Race)) %>%
+  rename(race = Race)
+
+# create smaller dataset of smile data that only contains demographic information
+hs_dem <- dat_hs %>%
+  select(pid, Gender_T1, race, ParentalHouseholdIncome_T1, Age_T1) %>%
+  rename(household_income = ParentalHouseholdIncome_T1,
+         age = Age_T1,
+         sex = Gender_T1)
+
+# create smaller dataset of per data that only contains deompgraphic information
+per_dem <- per_dataset %>%
+  select(pid, age, race, sex, household_income) %>%
+  mutate(sex = if_else(sex == 1, "Male", if_else(
+    sex == 2, "Female", "Other"
+  )),
+  household_income = if_else(household_income == 1, "Under $25,000", if_else(
+    household_income == 2, "$25,000-$50,000", if_else(
+      household_income == 3, "$50,000-$75,000", if_else(
+        household_income == 4, "$75,000-$100,000", if_else(
+          household_income == 5, "$100,000-$150,000", if_else(
+            household_income == 6, "$150,000-$200,000", "Over $200,000"
+            )
+          )
+        )
+      )
+    )
+  )) %>% View()
 
