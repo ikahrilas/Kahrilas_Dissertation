@@ -3,6 +3,8 @@
 ## load packages
 library(tidyverse)
 library(readxl)
+library(MBESS)
+library(naniar)
 
 ## read in data
 dat <- read_excel("data/paper_three/headspace_questionnaire_data.xlsx") %>%
@@ -40,6 +42,9 @@ dat_hs <- dat %>%
          race = if_else(race == "666", "Other", race)
   ) %>%
   rename(pid = StudyID_T1)
+
+dat_hs <- dat_hs %>% replace_with_na_all(condition = ~.x == 666)
+dat_hs <- dat_hs %>% replace_with_na_all(condition = ~.x == 999)
 
 ## create smaller dataset of smile data that only contains demographic information
 hs_dem <- dat_hs %>%
@@ -289,3 +294,43 @@ hs_comp_eeg %>%
 hs_comp_eeg %>%
   group_by(household_income) %>%
   summarize(n = n(), perc = (n() / nrow(.)) * 100)
+
+# reliability coefficients for manuscript
+## SBI measures
+### aim one
+#### anticipating
+sbi_aim_one <- dat_hs %>%
+  select(contains("sb") & contains("t1"))
+
+names(sbi_aim_one) <- paste0("sbi_", 1:24)
+
+sbi_aim_one <- sbi_aim_one %>%
+  mutate(sbi_17 = as.numeric(sbi_17))
+
+# reverse score SBI itmes. Items are a 7-item likert scale, so subtract each score from 8.
+sbi_rev_items <- paste("sbi_", seq(2, 24, by = 2), sep = "") #variable containing SBI items to be reversed, which is every other item from 2 to 24
+
+tmp <- per_dataset %>%
+  select(contains("sbi"))
+
+sbi_aim_one <- bind_rows(sbi_aim_one, tmp)
+
+sbi_aim_one <- sbi_aim_one %>%
+  mutate(across(.cols = sbi_rev_items, .fns = ~ 8 - .x))
+
+ci.reliability(sbi_aim_one %>%
+                 select(sbi_1, sbi_7, sbi_13, sbi_19, sbi_4, sbi_10, sbi_16, sbi_22),
+               type = "omega")
+
+#### savoring the moment
+ci.reliability(sbi_aim_one %>%
+                 select(sbi_5 ,sbi_11, sbi_17, sbi_23, sbi_2, sbi_8, sbi_14, sbi_20),
+               type = "omega")
+#### reminiscing
+ci.reliability(sbi_aim_one %>%
+                 select(sbi_3, sbi_9, sbi_15, sbi_21, sbi_6, sbi_12, sbi_18, sbi_24),
+               type = "omega")
+
+### aim two
+
+### aim three
