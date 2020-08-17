@@ -295,10 +295,10 @@ hs_comp_eeg %>%
   group_by(household_income) %>%
   summarize(n = n(), perc = (n() / nrow(.)) * 100)
 
+
 # reliability coefficients for manuscript
-## SBI measures
-### aim one
-#### anticipating
+## aim one
+### sbi
 sbi_aim_one <- dat_hs %>%
   select(contains("sb") & contains("t1"))
 
@@ -307,7 +307,7 @@ names(sbi_aim_one) <- paste0("sbi_", 1:24)
 sbi_aim_one <- sbi_aim_one %>%
   mutate(sbi_17 = as.numeric(sbi_17))
 
-# reverse score SBI itmes. Items are a 7-item likert scale, so subtract each score from 8.
+##### reverse score SBI items. Items are a 7-item likert scale, so subtract each score from 8.
 sbi_rev_items <- paste("sbi_", seq(2, 24, by = 2), sep = "") #variable containing SBI items to be reversed, which is every other item from 2 to 24
 
 tmp <- per_dataset %>%
@@ -318,6 +318,7 @@ sbi_aim_one <- bind_rows(sbi_aim_one, tmp)
 sbi_aim_one <- sbi_aim_one %>%
   mutate(across(.cols = sbi_rev_items, .fns = ~ 8 - .x))
 
+#### anticipating
 ci.reliability(sbi_aim_one %>%
                  select(sbi_1, sbi_7, sbi_13, sbi_19, sbi_4, sbi_10, sbi_16, sbi_22),
                type = "omega")
@@ -331,6 +332,127 @@ ci.reliability(sbi_aim_one %>%
                  select(sbi_3, sbi_9, sbi_15, sbi_21, sbi_6, sbi_12, sbi_18, sbi_24),
                type = "omega")
 
-### aim two
+### depression
+dep_aim_one <- dat_hs %>%
+  select(contains("phq") & contains("t1"))
 
-### aim three
+names(dep_aim_one) <- paste0("phq_", 1:9)
+
+tmp <- per_dataset %>%
+  select(contains("phq")) %>%
+  select(-c("phq_10", "phq_11", "phq_12"))
+
+dep_aim_one <- bind_rows(dep_aim_one, tmp)
+
+ci.reliability(dep_aim_one, type = "omega")
+
+### PA
+masq_pa_items <- c("masq_2", "masq_4", "masq_5", "masq_7", "masq_11", "masq_14", "masq_19", "masq_23", "masq_26", "masq_28", "masq_32", "masq_34", "masq_36", "masq_37")
+masq_na_items <- c("masq_9", "masq_13", "masq_17", "masq_21", "masq_29", "masq_30", "masq_35", "masq_38")
+masq_aa_items <- c("masq_1", "masq_3", "masq_6", "masq_8", "masq_10", "masq_12", "masq_15", "masq_16", "masq_18", "masq_20", "masq_22", "masq_24", "masq_25", "masq_27", "masq_31", "masq_33", "masq_39")
+
+pa_aim_one <- dat_hs %>%
+  select(contains("masq") & contains("t1"))
+
+names(pa_aim_one) <- paste0("masq_", 1:39)
+
+pa_aim_one <- pa_aim_one %>% select(masq_pa_items)
+
+tmp <- per_dataset %>% select(masq_pa_items)
+
+pa_aim_one <- bind_rows(pa_aim_one, tmp)
+
+ci.reliability(pa_aim_one, type = "omega")
+
+### NA
+na_aim_one <- dat_hs %>%
+  select(contains("masq") & contains("t1"))
+
+names(na_aim_one) <- paste0("masq_", 1:39)
+
+na_aim_one <- na_aim_one %>% select(masq_na_items)
+
+tmp <- per_dataset %>% select(masq_na_items)
+
+na_aim_one <- bind_rows(na_aim_one, tmp)
+
+ci.reliability(na_aim_one, type = "omega")
+
+### AA
+aa_aim_one <- dat_hs %>%
+  select(contains("masq") & contains("t1"))
+
+names(aa_aim_one) <- paste0("masq_", 1:39)
+
+aa_aim_one <- aa_aim_one %>%
+  select(masq_aa_items) %>%
+  mutate(masq_8 = as.numeric(masq_8))
+
+tmp <- per_dataset %>% select(masq_aa_items)
+
+aa_aim_one <- bind_rows(aa_aim_one, tmp)
+
+ci.reliability(aa_aim_one, type = "omega")
+
+
+
+## aim two
+### sbi
+sbi_aim_two_t1 <- dat_hs %>%
+  select(contains("sb") & contains("t1"))
+
+sbi_aim_two_t2 <- dat_hs %>%
+  select(contains("sb") & contains("t2"))
+
+names(sbi_aim_two_t1) <- paste0("sbi_", 1:24)
+
+names(sbi_aim_two_t2) <- paste0("sbi_", 1:24)
+
+sbi_aim_two_t1 <- sbi_aim_two_t1 %>%
+  mutate(sbi_17 = as.numeric(sbi_17))
+
+sbi_aim_two_t2 <- sbi_aim_two_t2 %>%
+  mutate(sbi_17 = as.numeric(sbi_17))
+
+##### reverse score SBI items. Items are a 7-item likert scale, so subtract each score from 8.
+sbi_rev_items <- paste("sbi_", seq(2, 24, by = 2), sep = "") #variable containing SBI items to be reversed, which is every other item from 2 to 24
+
+sbi_aim_two_t1 <- sbi_aim_two_t1 %>%
+  mutate(across(.cols = sbi_rev_items, .fns = ~ 8 - .x))
+
+sbi_aim_two_t2 <- sbi_aim_two_t2 %>%
+  mutate(across(.cols = sbi_rev_items, .fns = ~ 8 - .x))
+
+#### anticipating time 1
+ci.reliability(sbi_aim_two_t1 %>%
+                 select(sbi_1, sbi_7, sbi_13, sbi_19, sbi_4, sbi_10, sbi_16, sbi_22),
+               type = "omega")
+
+#### anticipating time 2
+ci.reliability(sbi_aim_two_t2 %>%
+                 select(sbi_1, sbi_7, sbi_13, sbi_19, sbi_4, sbi_10, sbi_16, sbi_22),
+               type = "omega")
+
+#### savoring the moment time 1
+ci.reliability(sbi_aim_two_t1 %>%
+                 select(sbi_5 ,sbi_11, sbi_17, sbi_23, sbi_2, sbi_8, sbi_14, sbi_20),
+               type = "omega")
+
+#### savoring the moment time 2
+ci.reliability(sbi_aim_two_t2 %>%
+                 select(sbi_5 ,sbi_11, sbi_17, sbi_23, sbi_2, sbi_8, sbi_14, sbi_20),
+               type = "omega")
+
+
+#### reminiscing time 1
+ci.reliability(sbi_aim_two_t1 %>%
+                 select(sbi_3, sbi_9, sbi_15, sbi_21, sbi_6, sbi_12, sbi_18, sbi_24),
+               type = "omega")
+
+#### reminiscing time 2
+ci.reliability(sbi_aim_two_t2 %>%
+                 select(sbi_3, sbi_9, sbi_15, sbi_21, sbi_6, sbi_12, sbi_18, sbi_24),
+               type = "omega")
+
+
+
