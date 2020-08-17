@@ -454,5 +454,89 @@ ci.reliability(sbi_aim_two_t2 %>%
                  select(sbi_3, sbi_9, sbi_15, sbi_21, sbi_6, sbi_12, sbi_18, sbi_24),
                type = "omega")
 
+### depression
+dep_aim_two_t1 <- dat_hs %>%
+  select(contains("phq") & contains("t1"))
+
+dep_aim_two_t2 <- dat_hs %>%
+  select(contains("phq") & contains("t2"))
+
+names(dep_aim_two_t1) <- paste0("phq_", 1:9)
+
+names(dep_aim_two_t2) <- paste0("phq_", 1:9)
+
+#### time one
+ci.reliability(dep_aim_two_t1, type = "omega")
+
+#### time two
+ci.reliability(dep_aim_two_t2, type = "omega")
+
+
+### PA
+masq_pa_items <- c("masq_2", "masq_4", "masq_5", "masq_7", "masq_11", "masq_14", "masq_19", "masq_23", "masq_26", "masq_28", "masq_32", "masq_34", "masq_36", "masq_37")
+masq_na_items <- c("masq_9", "masq_13", "masq_17", "masq_21", "masq_29", "masq_30", "masq_35", "masq_38")
+masq_aa_items <- c("masq_1", "masq_3", "masq_6", "masq_8", "masq_10", "masq_12", "masq_15", "masq_16", "masq_18", "masq_20", "masq_22", "masq_24", "masq_25", "masq_27", "masq_31", "masq_33", "masq_39")
+
+pa_aim_two_t1 <- dat_hs %>%
+  select(contains("masq") & contains("t1"))
+
+pa_aim_two_t2 <- dat_hs %>%
+  select(contains("masq") & contains("t2"))
+
+names(pa_aim_two_t1) <- paste0("masq_", 1:39)
+
+names(pa_aim_two_t2) <- paste0("masq_", 1:39)
+
+pa_aim_two_t1 <- pa_aim_two_t1 %>% select(masq_pa_items)
+
+pa_aim_two_t2 <- pa_aim_two_t2 %>% select(masq_pa_items)
+
+#### time one
+ci.reliability(pa_aim_two_t1, type = "omega")
+
+#### time two
+ci.reliability(pa_aim_two_t2, type = "omega")
+
+### NA
+na_aim_two_t1 <- dat_hs %>%
+  select(contains("masq") & contains("t1"))
+
+na_aim_two_t2 <- dat_hs %>%
+  select(contains("masq") & contains("t2"))
+
+names(na_aim_two_t1) <- paste0("masq_", 1:39)
+
+names(na_aim_two_t2) <- paste0("masq_", 1:39)
+
+na_aim_two_t1 <- na_aim_two_t1 %>% select(masq_na_items)
+
+na_aim_two_t2 <- na_aim_two_t2 %>% select(masq_na_items)
+
+#### time one
+ci.reliability(na_aim_two_t1, type = "omega")
+
+#### time two
+ci.reliability(na_aim_two_t2, type = "omega")
+
+### AA
+aa_aim_two_t1 <- dat_hs %>%
+  select(contains("masq") & contains("t1"))
+
+aa_aim_two_t2 <- dat_hs %>%
+  select(contains("masq") & contains("t2"))
+
+names(aa_aim_two_t1) <- paste0("masq_", 1:39)
+
+names(aa_aim_two_t2) <- paste0("masq_", 1:39)
+
+aa_aim_two_t1 <- aa_aim_two_t1 %>% select(masq_aa_items)
+
+aa_aim_two_t2 <- aa_aim_two_t2 %>% select(masq_aa_items)
+
+#### time one
+ci.reliability(aa_aim_two_t1, type = "omega")
+
+#### time two
+ci.reliability(aa_aim_two_t2, type = "omega")
 
 
