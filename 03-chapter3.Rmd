@@ -5,7 +5,7 @@ library(kableExtra)
 ## THE NEUROBIOLOGICAL CORRELATES OF POSITIVE EMOTION REACTIVITY AND REGULATION
 Healthy emotion regulation abilities are integral to wellbeing [@grossEmergingFieldEmotion1998; @grossEmotionRegulationMental1995; @koolePsychologyEmotionRegulation2009; @sapolskyStressStressrelatedDisease2007].
 Emotion regulation refers to psychological processes that influence an initial emotional response[@lewisAdvancesProblemsChallenges2010a], including modulation of positive and negative affective states [@koolePsychologyEmotionRegulation2009].
-This also includes attenuating upsetting, or enhancing positive aspects of a situation [@grossEmergingFieldEmotion1998].
+This also includes attenuating upsetting, or enhancing positive aspects, of a situation [@grossEmergingFieldEmotion1998].
 Poor emotion regulation strategies are associated with worsened social functioning [i.e., avoidance of close relationships, few positive relationships, and disinclination to share emotions with others; @grossAntecedentandResponsefocusedEmotion1998; @grossEmotionRegulationAffective2002; @koolePsychologyEmotionRegulation2009], as well as lower self-esteem and life satisfaction [@grossAntecedentandResponsefocusedEmotion1998; @koolePsychologyEmotionRegulation2009; @ochsnerRethinkingFeelingsFMRI2002].
 Poor emotion regulation is also associated with bullying and victimization among youth [@walcottRelationDisinhibitionEmotion2004], physical ailments such as hypertension and coronary heart disease [@hintonMechanismsEfficacyCBT2009; @jorgensenElevatedBloodPressure1996], exacerbated cortisol reactivity to stressors [@wirtzLowSocialSupport2006], and impaired cognitive functioning [@keenanEmotionDysregulationRisk2000; @ochsnerRethinkingFeelingsFMRI2002].
 
@@ -253,15 +253,15 @@ Statistical assumptions will be assessed via visual inspection of diagnostic plo
 ### Analytic Plan for Aim One
 To examine the relationship between EEG components of interest/behavioral ratings and highly arousing OASIS stimuli, a repeated measures analysis variance (ANOVA) will be conducted to assess for differences in relevant EEG components (N170, EPN, LPP) and behavioral ratings among passive watch conditions (neutral, positive and negative). 
 Block type will be entered as the within subject factor and separate analyses will be conducted each with each EEG components and behavioral rating as the outcome. 
-The Tukey method will be used to correct for families of three estimates per analysis. It is hypothesized that highly arousing positive and negative images will be associated with enhanced N170, EPN, and LPP. 
-Further, it is hypothesized that highly arousing positive and negative images will be associated with arousal and valence behavioral ratings.
+The Tukey method will be used to correct for families of three estimates per analysis. I hypothesize that highly arousing positive and negative images will be associated with enhanced N170, EPN, and LPP. 
+Further, I am hypothesizing that highly arousing positive and negative images will be associated with arousal and valence behavioral ratings.
 
 ### Analytic Plan for Aim Two
 To examine EEG component/behavioral rating contrasts among regulatory conditions for positive and negative OASIS stimuli, a repeated measures analysis variance (ANOVA) will be conducted to assess for differences in EEG components (N170, EPN, LPP, frontal LPP) and behavioral ratings among regulation conditions (watch, increase, & decrease) for positive and negative OASIS images. 
 Block type will be entered as the within subject factor and separate analyses will be conducted each with EEG components and behavioral rating as the outcome. 
 The Tukey method will be used to correct for families of three estimates per analysis. 
-It is hypothesized that, relative to passive watch conditions for positive and negative image blocks, there will be modulations in LPP and behavioral ratings that are consistent with the regulatory goal (e.g., enhanced and attenuated LPP in increase and decrease conditions, respectively). 
-In contrast, it is hypothesized that there will be enhancements in frontal LPP for all regulation conditions relative to passive watch conditions. 
+I am hypothesizing that, relative to passive watch conditions for positive and negative image blocks, there will be modulations in LPP and behavioral ratings that are consistent with the regulatory goal (e.g., enhanced and attenuated LPP in increase and decrease conditions, respectively). 
+In contrast, I hypothesize that there will be enhancements in frontal LPP for all regulation conditions relative to passive watch conditions. 
 No hypotheses were made regarding N170 and EPN, though these analyses will be conducted in an exploratory manner.
 
 ### Analytic Plan for Aim Three
@@ -270,7 +270,7 @@ A cross-level interaction will be analyzed between viewing condition and positiv
 To assess whether savoring capacity plays a moderating role in affective neural processing of OASIS stimuli, savoring capacity will be added as a mean-centered level-two predictor. 
 The dummy-coded level-one viewing condition variable will be altered so that the positive passive viewing condition will be the reference group. 
 A cross-level interaction will be analyzed between viewing condition and savoring capacity to evaluate whether the relationship between increasing emotional intensity in response to positive stimuli (relative to watching positive stimuli) and EEG components of interest (N170, EPN, LPP)/behavioral ratings significantly vary as a function of savoring capacity. 
-It is hypothesized that differences in EEG component amplitudes and behavioral ratings between watching neutral images and watching positive images will vary depending on PA. 
+I hypothesize that differences in EEG component amplitudes and behavioral ratings between watching neutral images and watching positive images will vary depending on PA. 
 It is also hypothesized that differences in EEG component amplitudes and behavioral ratings between watching positive images and increasing emotional intensity in response to positive images will vary depending on savoring capacity. 
 
 ## Power Analysis
