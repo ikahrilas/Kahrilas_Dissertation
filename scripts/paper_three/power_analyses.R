@@ -17,5 +17,5 @@ wp.rmanova(n = 321, ng = 107, nm = 3, f = .48, nscor = 1,
 
 ## relation between headspace use and emotion reactivity (N = 55) with 6 repeated measures
 ## for each participant (n = 330)
-wp.rmanova(n = 330, ng = 55, nm = 6, f = .46, nscor = 1,
-           alpha = 0.05, power = NULL, type = 2)
+wp.rmanova(n = 55, ng = 2, nm = 2, nscor = 1,
+           alpha = 0.05, power = .8, type = 2)
