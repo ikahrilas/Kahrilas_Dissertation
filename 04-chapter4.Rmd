@@ -164,13 +164,31 @@ Following each block of images, participants were asked to rate on a seven-point
 The present study had three primary objectives:  
 
 1) The first objective as to examine the relation between psychological variables of interest (PA, NA, and savoring) and depression severity, as well as the relation between emotion reactivity (as indexed by LPP, EPN, and N170 ERP components and self-report arousal and valence ratings) and depression severity.
-**I hypothesized that there would be a negative relation between PA/savoring and depression, as well as a positive relation between NA and depression. Regarding emotion reactivity, I hypothesized that the relation between viewing positive compared to neutral images and indices of emotion reactivity (i.e., LPP, EPN, N170, and self-report valence and arousal) would be negatively moderated by depression severity. I also hypothesized that the relation between viewing negative compared to neutral images and LPP amplitude, as well as self-report ratings of valence and arousal, would be negatively moderated by depression severity (see Figure 1).**
+**I hypothesized that there would be a negative relation between PA/savoring and depression, as well as a positive relation between NA and depression. Regarding emotion reactivity, I hypothesized that the relation between viewing positive compared to neutral images and indices of emotion reactivity (i.e., LPP, EPN, N170, and self-report valence and arousal) would be negatively moderated by depression severity. I also hypothesized that the relation between viewing negative compared to neutral images and LPP amplitude, as well as self-report ratings of valence and arousal, would be negatively moderated by depression severity (see \@ref(fig:aim-1-image)).**
 I will conduct exploratory moderation analyses of the relation between viewing negative compared to neutral images and N170/EPN. 
 2) The second objective of the proposed study was to assess efficacy of the Headspace intervention by comparing self-report survey data at pre-trial baseline (T0) and two months later (T2). 
-**I hypothesized that, compared to T0, participants would endorse a) lower levels of depression, b) lower levels of NA, c) higher levels of PA, and d) higher levels of savoring for the Headspace groups compared to the waitlist group two months later.** 
+**I hypothesized that, compared to T0, participants would endorse a) lower levels of depression, b) lower levels of NA, c) higher levels of PA, and d) higher levels of savoring for the Headspace groups compared to the waitlist group two months later (see \@ref(fig:aim-2-image)).** 
 3) The third objective of the proposed study was to analyze changes in emotional reactivity attributed to an eight-week Headspace intervention.
-**It was hypothesized that, compared to T0,  highly arousing positive compared to neutral OASIS stimuli would be associated with enhanced ERP components (N170, EPN, LPP) and self-report ratings (greater arousal, more positive valence ratings) for the Headspace groups compared to the waitlist group (see Figure 2).**
+**It was hypothesized that, compared to T0,  highly arousing positive compared to neutral OASIS stimuli would be associated with enhanced ERP components (N170, EPN, LPP) and self-report ratings (greater arousal, more positive valence ratings) for the Headspace groups compared to the waitlist group (see \@ref(fig:aim-3-image)).**
 Exploratory analyses were conducted regarding highly arousing negative compared to neutral OASIS stimuli and ERP components (N170, EPN, LPP)/self-report ratings at T0 compared to T2 for the Headspace and waitlist groups. All hypotheses will be pre-registered in accordance with Open Science Framework (OSF) guidelines.
+
+(ref:aim-1-image) Conceptual diagram illustrating aim one analyses.
+
+```{r aim-1-image, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:aim-1-image)", out.height= "45%", out.width="100%"}
+knitr::include_graphics("images/paper_3/aim_1_diagram.png", auto_pdf = TRUE)
+```
+
+(ref:aim-2-image) Conceptual diagram illustrating aim two analyses.
+
+```{r aim-2-image, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:aim-2-image)", out.height= "45%", out.width="100%"}
+knitr::include_graphics("images/paper_3/aim_2_diagram.png", auto_pdf = TRUE)
+```
+
+(ref:aim-3-image) Conceptual diagram illustrating aim three analyses.
+
+```{r aim-3-image, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:aim-3-image)", out.height= "45%", out.width="100%"}
+knitr::include_graphics("images/paper_3/aim_3_diagram.png", auto_pdf = TRUE)
+```
 
 ## METHOD
 ### SMiLe Study
