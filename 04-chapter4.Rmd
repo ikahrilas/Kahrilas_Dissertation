@@ -1,4 +1,5 @@
 ## CHAPTER FOUR: POSITIVELY MINDFUL: CHANGES IN POSITIVE EMOTION REACTIVITY AFTER EIGHT WEEKS OF HEADSPACE USE
+
 Major Depressive Disorder (MDD) is one of the most common psychological disorders (World Health Organization, 2017). 
 In the United States, 17% of adults experience at least one major depressive episode during their life [@kesslerLifetimePrevalenceAgeofonset2005], and it is continuing to increase significantly during the backdrop of a global pandemic [@twengeCensusBureauassessedPrevalence2020]. 
 Depression symptoms are associated with challenges in daily life functioning including interpersonal relationship strain, increased likelihood of poor work performance and burnout, and decreased physical wellbeing [@chauvet-gelinierStressAnxietyDepression2017; @drussImpairmentRoleFunctioning2009a; @kesslerPrevalenceEffectsMood2006; @lewinsohnPsychosocialFunctioningYoung2003]. 
@@ -9,6 +10,7 @@ Translational research that strives to develop a better understanding of factors
 The present study sought to examine the effectiveness of an online/smartphone app based intervention (Headspace) in mitigating depression symptoms and modifying emotion reactivity as indexed by neural activity and self-report ratings.
 
 ### Emotion reactivity in depression
+
 Impaired emotion reactivity and regulation are characteristic of MDD [e.g., @joormannExaminingEmotionRegulation2016a; @rottenbergMoodEmotionMajor2005]. 
 Emotion reactivity refers to an individual’s initial baseline affective response to a stimulus and is marked by alterations in a number of response systems, such as perception, expressive behavior, feeling, and physiology [@ekmanArgumentBasicEmotions1992; @keltnerFunctionalAccountsEmotions1999].
 Reactivity can vary in terms of arousal (not arousing to very arousing) and valence [negative to positive; @grossEmotionEmotionRegulation2014], which is consistent with Russell’s [-@russellCircumplexModelAffect1980] circumplex framework. 
@@ -36,6 +38,7 @@ Despite some inconsistent findings regarding negative emotion reactivity in depr
 Therefore, I am hypothesizing that decreased self-report emotion reactivity in response to negative stimuli will be associated with increased depression symptoms.
 
 ### Neural Correlates of Emotion Reactivity in Depression
+
 Research investigating neural correlates of emotional reactivity to affective stimuli using functional magnetic resonance imaging (fMRI) in those without mood disorders indicates enhanced activity predominantly in the right occipital cortex [i.e., fusiform cortex, lateral occipital cortex, and medial parietal cortex; @bradleyActivationVisualCortex2003], as well as amygdala and visual cortex [@sabatinelliParallelAmygdalaInferotemporal2005] in response to arousing affective (pleasant and unpleasant) images compared to neutral images. The largest changes in brain activity are observed for highly arousing stimuli, such as mutilations, erotica, and threat, compared to neutral objects [@bradleyInternationalAffectivePicture2007].
 Attenuated ventral striatum (a structure linked with processing of rewarding/positive stimuli) activity has been observed in response to positive visual stimuli in individuals with MDD [@epsteinLackVentralStriatal2006; @lawrenceSubcorticalVentralPrefrontal2004; @surguladzeDifferentialPatternNeural2005], which is further correlated with participant’s self-reported lack of interest and pleasure in activities, suggesting that hypoactivation of this structure is reflective of anhedonia [i.e., lack of pleasures; @epsteinLackVentralStriatal2006].
 Other studies have found enhanced activity in frontal brain structures involved in emotion regulation (middle frontal gyrus, cingulate cortex, dorsolateral PFC) during emotion reactivity to positive stimuli in those with MDD [@demenescuNeuralCorrelatesPerception2011; @ochsnerBottomUpTopDownProcesses2009].
@@ -49,6 +52,7 @@ In contrast, participants with mild-to-moderate depression severity (with and wi
 This necessitates a dimensional approach to measuring depression symptoms in the context of neural emotional reactivity, as different patterns of neural activity may accompany varying degrees of illness severity and anxiety comorbidity. 
 
 ### Measuring the Temporal Course of Emotion Reactivity in Depression: Event-Related Potentials Index Dynamic Cascade of Processes
+
 Emotion reactivity is enabled by a rapid processing pathway that recruits thalamus and amygdala [@ledouxEmotionCircuitsBrain2000], and research has suggested neural responses as early as 100 ms that are contingent upon modifiable individual differences [e.g., empathy; @stockdaleCoolCallousControl2017].
 Electroencephalography (EEG) allows for the analysis of event-related potentials (ERPs) that facilitate assessment of neural responses to affective stimuli with millisecond temporal resolution [@olofssonAffectivePictureProcessing2008].
 A better understanding of the temporal course of ERPs evoked by affective stimuli will advance knowledge regarding the dynamic cascade of processes contributing to emotion reactivity in those with depression and how these processes can be modified.
@@ -77,6 +81,7 @@ Given the equivocal findings regarding these early components in response to neg
 
 ### Mindfulness-Based Interventions may Modify Emotion Reactivity in Depression
 #### Mindfulness-Based Interventions and Self-Report Psychological Outcomes
+
 The emotion reactivity MDD literature discussed thus far has generally supported attenuated reactivity in response to positive stimuli (i.e., the positive attenuation view). 
 This is supported by a hallmark symptom of MDD, anhedonia [@americanpsychiatricassociationDiagnosticStatisticalManual2013b].
 Anhedonia negatively impacts daily function, predicts poor treatment response, indicates risk for future depressive episodes, and shows specificity with regard to depression diagnosis [@khazanovBrighteningEffectReactions2019; @watsonSpecificityPositiveEmotional2010b].
@@ -106,6 +111,7 @@ Thus, I hypothesized that there would be a negative and positive relation betwee
 Further, I hypothesized that an MBI would result in reductions in depression symptoms and NA, as well as increases in PA.
 
 #### Savoring and mindfulness. 
+
 Savoring-based regulatory strategies are used to sustain and upregulate positive emotions [@heiyBackBasicsNaturalistic2014; @liuSelectionImplementationEmotion2017].
 While savoring, one may eagerly anticipate future positive experiences, focus on ongoing positive experiences as they occur in the present moment, or reminisce about past positive experiences.
 With specific relevance to depression, studies aimed at enhancing savoring capacity show that enriching any of the three temporal domains of savoring (reminiscing, savoring the moment, or anticipating) is associated with increased frequency and intensity of positive affect, and decreased negative affect [@bryantDimensionsSubjectiveMental1984; @bryantSavoringNewModel2007; @kahrilasSavoringMomentLink2020].
@@ -120,6 +126,7 @@ Mindfulness meditation practices and mindfulness-based interventions emphasize t
 Thus, I hypothesized that savoring capacity would be negatively related to depression, and that those undergoing an MBI will report increases in savoring capacity.
 
 ### Mindfulness-Based Interventions and Psychophysiological Outcomes
+
 Research examining changes in emotional reactivity to complex affective stimuli attributed to MBIs in depression has the potential to illustrate ecologically valid emotion reactivity and how it might be modified.
 To the authors’ knowledge, this is the first study examining whether MBIs modify the neural correlates of emotion reactivity in depression.
 Studies of other psychological disorders may offer insight as to how MBIs may ameliorate dysregulated emotion reactivity in depression.
@@ -137,7 +144,8 @@ Lastly, trait mindfulness scales were positively related to LPP amplitude in res
 Based on these previous findings, I hypothesized that those undergoing an eight-week MBI would exhibit increased ERP components in response to positive images following the intervention, along with more positive self-report ratings of valence and mood intensity in response to the images. 
 Considering limited research on the topic, no hypotheses were made with regard to negative images, and these analyses were conducted in an exploratory manner.
 
-###Headspace: A Scalable and Accessible Online/Mobile App
+### Headspace: A Scalable and Accessible Online/Mobile App
+
 Lack of access to evidence-based interventions for psychological disorders remains a major barrier for many individuals [@brittPerceivedStigmaBarriers2008; @reardonWhatParentsPerceive2017; @richardsImprovingAccessPsychological2009; @smalleyRuralMentalHealth2010; @vonaWebBasedPlatformSupport2014].
 Researching and developing behavioral intervention technologies may be a crucial step in closing this gap [@mohrContinuousEvaluationEvolving2013; @schuellerRealizingPotentialBehavioral2013; @vonaWebBasedPlatformSupport2014].
 Headspace is a top-rated mindfulness app per [psyberguide.org](psyberguide.org). 
@@ -150,6 +158,7 @@ This study will elucidate modifiable neural correlates of emotional reactivity i
 Further, it will explore the efficacy of scalable and accessible online/mobile app in treating depression and bolstering wellbeing, which will help promote equity in evidence-based psychological treatments.
 
 ## The Present Study
+
 The present study analyzed data from the Supported Mindful Learning (SMiLe) study, a three month randomized controlled trial investigating the efficacy of Headspace in mitigating psychological symptoms in a sample of college students with depression.
 Participants that met inclusion criteria were randomized to one of three experimental groups, two of which included self-guided Headspace use and another that served as an experimental control (i.e., waitlist).
 Participants also completed batteries of surveys at four separate timepoints. 
@@ -192,6 +201,7 @@ knitr::include_graphics("images/paper_3/aim_3_diagram.png", auto_pdf = TRUE)
 
 ## METHOD
 ### SMiLe Study
+
 The Supported Mindful Learning (SMiLe) study is a three-month randomized controlled trial investigating the effectiveness of Headspace in reducing psychological symptoms in a sample of college students with depression. 
 Participants that met inclusion criteria were randomized to one of three experimental groups and completed batteries of surveys at four separate timepoints. 
 Approximately 15 students per fall and spring semester were recruited over the course of three years (Fall 2017 - Spring 2020) for a total of six semesters. 
@@ -217,6 +227,7 @@ Additionally, a sample ($N$ = 52) of undergraduate students used for a different
 Of the 80 participants in the present study, 55 participants participated in pre- and post-EEG sessions utilizing an emotion reactivity paradigm.
 
 ### Participants
+
 Participants included in analyses in the present study ($N$ = 80) were 18 to 27 years old ($M$ = 19.09, $SD$ = 1.51) at baseline, 90% of which identified as female, 6% as male, and 5% as transgender or non-binary.
 One participant (1%) declined to answer.
 Seventy-one percent identified as heterosexual, 21% as bisexual, 4% as gay, and 4% as a different sexual orientation.
@@ -236,12 +247,14 @@ In terms of self-reported family income, 4% reported less than \$25,000), 15% be
 
 ### Materials and Procedure
 #### Inclusion Criteria
+
 To determine eligibility, interested participants completed an online screening survey through Opinio.
 Inclusion criteria included the following: participants had to be an undergraduate at the institution from which the study was being conducted, at least 18 years old, and endorse clinically significant levels of depressive symptoms as indicated by a score of greater than 10 on the Patient Health Questionnaire-8 (PHQ-8, Kroenke & Spitzer, 2002; Kroenke et al., 2009).
 For screening purposes, an eight-item version of the PHQ-9 was utilized with the suicidality item omitted (per IRB request).
 Individuals were excluded if they had a history of neurological conditions or head trauma, regular practice of mindfulness in the past six months [which is in line with exclusion criteria used in previous research; e.g., @vandamMindHypeCritical2018], prior use of the Headspace app within the past six months, and unwillingness to join the peer support group (if randomized to the Headspace with Peer Support group).
 
 #### Questionnaire Measures 
+
 Participants completed the Savoring Beliefs Inventory [@bryantSavoringBeliefsInventory2003a] to assess participants’ savoring capacity.
 The SBI measures the perception of one’s ability to feel pleasure through anticipating positive experiences, savoring positive moments as they occur, and reminiscing about past positive events [@bryantSavoringNewModel2007]. 
 The SBI was analyzed as three eight-item subscales pertaining to temporal forms of savoring: anticipating (e.g., “Before a good thing happens, I look forward to it in ways that give me pleasure in the present.”), moment (e.g., “I know how to make the most of a good time.”), and reminiscing (e.g., “I enjoy looking back on happy times from my past.”). 
@@ -258,12 +271,14 @@ Participants rated their affectivity and anxiety symptoms using a five-point Lik
 Consistent with previous research [@bredemeierScreeningDepressiveDisorders2010], the MASQ scales demonstrated good to excellent internal consistency for aim one analyses (MASQ-NA8, $\omega = .82$; MASQ-PA14, $\omega = .95$; and MASQ-AA, $\omega = .87$) and acceptable to excellent internal consistency for aim two analyses (MASQ-NA8, time one $\omega = .78$ & time two $\omega = .85$; MASQ-PA14, time one $\omega = .93$ & time two $\omega = .95$; and MASQ-AA, time one $\omega = .89$ & time two $\omega = .86$).
 
 #### Adherence
+
 Research staff from Headspace emailed user data associated with participants’ free access codes activated in the current study.
 The following information was recorded for each Headspace session: session date, time of day, session course (e.g., Basics), session number within the course, session duration (in minutes), session platform (i.e., iOS, Android, Desktop), and participant access code.
 
 Metrics of adherence used in the present study include the cumulative number of minutes and sessions completed across the first eight weeks of the study (computed as a summation of all minutes spent meditating). Additionally, adherence related to specific content included depression practice, or the percentage of time and sessions (calculated separately) of the total that were from the depression-related course (i.e., Handling Sadness) each week, as well as mental health practice, or the percentage of time and sessions (calculated separately) of the total that were from courses related to mental health each week. Courses that were considered to be related to mental health included: Managing Anxiety, Letting Go of Stress, Transforming Anger, Handling Sadness, Dealing with Regret, Grieving, Happiness, and Self-Esteem. Considering the variability in the amount of time spent using the Headspace app, adherence metrics will be used as predictor variables in additional exploratory analyses (as opposed to using a categorical predictor variable denoting randomization group).
 
 #### Emotion task paradigm
+
 64-channel high-density electroencephalography (EEG) data were recorded while participants viewed seven blocks of 40 images (280 total trials).
 The study used 120 different Open Affective Standardized Image Set (OASIS) images [@kurdiIntroducingOpenAffective2017].
 40 of the images were positive, 40 were neutral, and 40 were negative.
@@ -304,12 +319,14 @@ knitr::include_graphics("images/paper_2/PER_paradigm.png", auto_pdf = TRUE)
 
 ## Analytic plan for specific aims and hypotheses
 ### Preliminary analyses
+
 Prior to hypothesis testing, variables will be evaluated for psychometric and distributional properties.
 Descriptive statistics for key variables and demographics will be assessed.
 Bivariate correlations for these variables will also be calculated to assess for relationships between variables.
 Statistical assumptions will be assessed via visual inspection of diagnostic plots (ie., residual, QQ, scale-location, and residuals vs. leverage) generated with the performance R package [@ludeckePerformanceAssessmentRegression2019]. 
 
 ### Analytic plan for determining the relation among depression, psychological variables, and emotion reactivity
+
 To test the hypothesis of whether self-report psychological variables and emotion reactivity vary as a function of depression symptoms, the sample for the present study at pre-trial baseline (T0) will be harmonized with a sample of participants that were not selected on the basis of any psychopathology symptoms ($N$ = 54) used in another study conducted by our lab (Kahrilas et al., in preparation) utilizing the same emotion task paradigm and survey data.
 To assess the relation between self-report psychological variables and depression, linear regressions between variables of interest (PA, NA, and savoring) will be calculated. 
 For analyses involving PA and NA, anxious arousal will be included as a covariate to adjust for comorbid anxiety symptoms.
@@ -323,6 +340,7 @@ It is hypothesized that as depression severity increases, the relation between v
 For valence ratings, it is predicted that the relation will become more negative for positive images and more positive for negative images.
 
 ### Analytic Plan for Determining Changes in Psychological Variables Attributed to Headspace Usage
+
 To test the hypothesis that self-report psychological variables (depression, PA, NA, and savoring) will be modified depending on Headspace usage over the course of two months, MLM analyses will be conducted with time nested within participants.
 Group (Headspace as Usual, Headspace with Peer Support, and Delayed Headspace as Usual) will be entered as a level-two dummy coded predictor with the Delayed Headspace as Usual group as the reference level.
 The Headspace as Usual and Headspace with Peer Support groups will be merged to maximize statistical power for a priori hypotheses.
@@ -332,6 +350,7 @@ Akaike Information Criterion (AIC) and Bayesian Information Criterion (BIC) indi
 It is hypothesized that, relative to T0, participants in the headspace groups compared to the delayed headspace group will endorse higher levels of PA and savoring as well as lower levels of NA and depression at T2.
 
 ### Analytic Plan for Determining Changes in Emotion Reactivity Attributed to Headspace Usage
+
 To test the hypothesis that emotion reactivity among conditions in the emotion task paradigm (positive and negative compared to neutral) will be modified as a function of Headspace usage, three-level MLM models will be analyzed with emotion task conditions nested within time and time nested within participants.
 The dummy-coded randomization group will be modified such that the Delayed Headspace as Usual group will be the reference variable, and the dummy-coded emotion task condition variable will be altered such that the neutral viewing condition will be the reference variable. 
 A three-way cross-level interaction will be analyzed between randomization group, time, and emotion task viewing condition to determine if the interaction term corresponding to the relation between viewing condition, ERP component amplitude (N170, EPN, and LPP)/behavioral ratings (valence and arousal) and time point varies depending upon randomization group (Headspace as Usual merged with Headspace with Peer Support and Delayed Headspace as Usual). 
@@ -343,6 +362,7 @@ It is hypothesized that, relative to T0, participants in the headspace groups co
 Moderation analyses regarding EPN/N170 and negative stimuli were conducted in an exploratory manner.
 
 ## Power Sensitivity Analysis
+
 Power sensitivity analyses were conducted in lieu of power analyses given pre-determined sample sizes.
 Calculations were conducted using the pwr and WebPower packages [@R-pwr; @R-WebPower]. 
 For analyses of the relation between depression symptoms and psychological variables of interest (savoring, NA, and PA), with a sample size of 132, alpha = .05, and beta = .80, the minimum detectable effect is small to medium [r = .21; @cohenStatisticalPowerAnalysis1988a].
