@@ -1,4 +1,4 @@
-```{r kable setup, include = FALSE}
+```{r chapter 3 setup, include = FALSE}
 library(kableExtra)
 ```
 
@@ -200,16 +200,16 @@ Stimuli were presented in random order within each block.
 Prior to each practice trial, participants were provided with instructions on how to regulate (increase/decrease) their affective response to the stimuli, or to simply view the stimuli [@moserIntentionalModulationEmotional2006].
 Participants were shown which regulation strategy to engage in (increase, decrease, or watch) at the start of each experimental block.
 Once the participant was ready, an OASIS stimulus appeared for 2000 ms [@fotiDifferentiatingNeuralResponses2009; @hajcakPersistenceAttentionEmotion2008].
-Following stimulus offset, a blank screen appeared for 500 ms followed by a fixation cross for 1500 ms (± 250 ms) for a total ISI of 1750 - 2250 ms (see Figure \@ref(fig:paradigm-image) for a visual depiction of the experimental paradigm used in the present study).
+Following stimulus offset, a blank screen appeared for 500 ms followed by a fixation cross for 1500 ms (± 250 ms) for a total ISI of 1750 - 2250 ms (see Figure \@ref(fig:paradigm-image-1) for a visual depiction of the experimental paradigm used in the present study).
 This interval is identical to other studies utilizing the IAPS and investigating LPP [@dunningSeeNoEvil2009; @hajcakMotivatedControlledAttention2009].
 Stimuli within each block were presented in random order.
 Each block was separated by a break and presented in pseudo-random order, such that no valence (i.e., positive or negative) nor regulation (i.e., increase, decrease, or watch) condition were presented consecutively.
 After each experimental block, valence and arousal ratings were collected using a seven-point likert scale and the same instructions used in Kurdi, Lozano, and Banaji’s [-@kurdiIntroducingOpenAffective2017] norming study of the OASIS stimuli set.
 Furthermore, difficulty ratings on a seven-point likert scale were also obtained.
 
-(ref:paradigm-image) Experimental paradigm utilized in the present study.
+(ref:paradigm-image-1) Experimental paradigm utilized in the present study.
 
-```{r paradigm-image, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:paradigm-image)", out.height= "45%", out.width="100%"}
+```{r paradigm-image-1, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:paradigm-image)", out.height= "45%", out.width="100%"}
 knitr::include_graphics("images/paper_2/PER_paradigm.png", auto_pdf = TRUE)
 ```
 
