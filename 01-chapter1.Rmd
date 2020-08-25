@@ -6,7 +6,7 @@ knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 There are an estimated 322 million people in the world living with Major Depressive Disorder [MDD; @worldhealthorganizationDepressionOtherCommon2017], which marks an 18.4% increase from 2005 to 2015 [@worldhealthorganizationDepressionOtherCommon2017].
 This is compounded by increases in mental illness due to the current global pandemic [@twengeCensusBureauassessedPrevalence2020]. 
 Depression is associated with decrements in interpersonal relationships, poor work performance and burnout, and reductions in physical wellbeing [@drussImpairmentRoleFunctioning2009a; @kesslerPrevalenceEffectsMood2006; @lewinsohnPsychosocialFunctioningYoung2003].
-Given its ubiquitousness, the economic impact of depression is profound.
+Given its ubiquity, the economic impact of depression is profound.
 Depression is associated with higher levels of healthcare utilization and spending [@donohueReducingSocietalBurden2007].
 In the United States, loss in work productivity related to depression is estimated to surpass \$36 billion [@kesslerPrevalenceEffectsMood2006].
 The cost associated with “presenteeism” (i.e., being present at work with depression) is estimated to be \$5524 per person in the United States[@evans-lackoGlobalPatternsWorkplace2016].
@@ -41,16 +41,16 @@ Beck [-@beckCognitiveTherapyEmotional1979] theorized that dampening positive emo
 Other research has shown that those with depression tend to be apprehensive about experiencing positive affect and thus engage in maladaptive emotion regulation strategies, such as dampening positive affect [@werner-seidlerInvestigationRelationshipPositive2013].
 Further, Werner-Seidler et al. (2013) showed that depression symptoms are inversely related to strategies implemented to amplify positive affect and depression. 
 
-Findings regarding positive reactivity and regulation are largely consistent with a dominant symptom of depression, anhedonia [i.e., lack of pleasure; [@americanpsychiatricassociationDiagnosticStatisticalManual2013b].
+Findings regarding positive reactivity and regulation are largely consistent with a dominant symptom of depression, anhedonia [i.e., lack of pleasure; @americanpsychiatricassociationDiagnosticStatisticalManual2013b].
 Anhedonia negatively impacts daily function, predicts poor treatment response, indicates risk for future depressive episodes, and shows specificity with regard to depression diagnosis [@khazanovBrighteningEffectReactions2019; @watsonSpecificityPositiveEmotional2010b].
-It is theorized that anhedonia involves abnormal bi-directional reactivity and regulatory affective processes including 1) positive attenuation, or hyporeactivity to positive stimuli [@bylsmaMetaanalysisEmotionalReactivity2008a; @forbesNeuralSystemsPositive2005] and 2) impaired capacity to enhance or upregulate affective responses evoked by positive stimuli [@forbesNeuralSystemsPositive2005].
+It is theorized that anhedonia involves abnormal bi-directional reactivity and regulatory affective processes including 1) positive attenuation, or hyporeactivity to positive stimuli [@bylsmaMetaanalysisEmotionalReactivity2008; @forbesNeuralSystemsPositive2005] and 2) impaired capacity to enhance or upregulate affective responses evoked by positive stimuli [@forbesNeuralSystemsPositive2005].
 This suggests that developing interventions that specifically target the experience of positive emotions may prove especially fruitful in ameliorating depression. 
 
 ### Individual differences in positive emotion reactivity and regulation
  
-Positive affectivity (PA)  pertains to one’s reactivity to positive emotions, or a tendency to recognize, attend to, and experience intense and frequent episodes of pleasant moods (e.g., happiness, interest, energy, and self-assurance; [@watsonPositiveAffectivity2009].
+Positive affectivity (PA)  pertains to one’s reactivity to positive emotions, or a tendency to recognize, attend to, and experience intense and frequent episodes of pleasant moods [e.g., happiness, interest, energy, and self-assurance; @watsonPositiveAffectivity2009].
 The tripartite model of anxiety and depression posits that low positive affectivity is a specific risk factor for depression [@clarkDiagnosisClassificationPsychopathology1995; @clarkTripartiteModelAnxiety1991; @lewinsohnPleasantActivitiesDepression1973], whereas high negative affectivity [i.e., disposition to experience negative moods; @watsonNegativeAffectivityDisposition1984] may be a more general indicator of distress that is observed across depression and anxiety disorders, as well as other psychopathology types [@watsonNegativeAffectivityDisposition1984]. 
-This is consistent with the prominence of anhedonic symptoms in depression, as well as research supporting the positive attenuation theory in depression [for a review, see @bylsmaMetaanalysisEmotionalReactivity2008a].
+This is consistent with the prominence of anhedonic symptoms in depression, as well as research supporting the positive attenuation theory in depression [for a review, see @bylsmaMetaanalysisEmotionalReactivity2008].
 The relation between PA and depression symptomatology is likely modulated by individual differences such as cognitive style and neurobiological factors [@needlesPositiveLifeEvents1990; @watsonPositiveAffectivity2009] which serve to influence the interpretation and experience of positive events.
 Characterizing specific cognitive positive emotion regulation strategies that mediate the relationship between affectivity and depression could inform treatment and intervention approaches to depression.
 
@@ -81,7 +81,7 @@ However, research has not reliably demonstrated that LPP is enhanced when partic
 
 With regard to depression, LPP in response to both unpleasant and pleasant affective stimuli is attenuated [@fotiReducedElectrocorticalResponse2010; @kayserEventrelatedPotentialsERPs2000; @macnamaraDiagnosticSymptombasedPredictors2016], which is consistent with the ECI model of MDD [@rottenbergMoodEmotionMajor2005].
 There is a specific relation between LPP activity and depression; Weinberg and colleagues  [-@weinbergDepressionReducedNeural2016] found that, in a sample with diagnoses of MDD and anxiety disorders, a diagnosis of MDD was uniquely associated with attenuated LPP in response to rewarding visual stimuli while a diagnosis of an anxiety disorder was not.
-The relation between LPP and depression may vary depending on levels of the latter, as illustrated by a study showing that those with MDD and previous suicide attempts (an index for illness severity) had blunted LPP in response to threatening stimuli compared to those with MDD and without a history of suicide attempts [@weinbergDecreasedNeuralResponse2017].
+The relation between LPP and depression may vary depending on levels of the former, as illustrated by a study showing that those with MDD and previous suicide attempts (an index for illness severity) had blunted LPP in response to threatening stimuli compared to those with MDD and without a history of suicide attempts [@weinbergDecreasedNeuralResponse2017].
 
 Relations between certain ERP components and regulation or reactivity remain unclear, which is a critical gap in devising treatments for disordered positive emotion reactivity and regulation in depression.
 For example, early visual components such as the N170 (a negative peak occurring approximately 170 ms follow presentation of a stimulus at bilateral occipito-temporal sites) and EPN (a relative negative differences occurring 200 - 300 ms following stimulus presentation) have commonly been researched in the context of affective facial processing [e.g., @stockdaleInfluenceStimulusValence2020; @yoonEnhancedEarlyPosterior2016] rather than complex affective images paradigms. 
@@ -96,18 +96,18 @@ In sum, early ERP components observed in emotion reactivity and regulation may c
 
 Mindfulness meditation practices and mindfulness-based interventions (MBI) emphasize the importance of cultivating non-judgmental attention and awareness in the present moment [@guHowMindfulnessbasedCognitive2015a].
 Mindfulness meditation is theorized to enhance the capacity for and experience of positive emotions [@garlandAllostaticDysregulationNatural2015; @wielgoszMindfulnessMeditationPsychopathology2019a] and ultimately promote wellbeing [@dahlReconstructingDeconstructingSelf2015a].
-Research has supported efficacy of MBIs in treatment of current depression symptoms [e.g., [@greenExpandingScopeMindfulnessBased2012] and reducing risk of relapse for depression [@kuykenMindfulnessbasedCognitiveTherapy2008].
+Research has supported efficacy of MBIs in treatment of current depression symptoms [e.g., @greenExpandingScopeMindfulnessBased2012] and reducing risk of relapse for depression [@kuykenMindfulnessbasedCognitiveTherapy2008].
 MBIs may modify positive valence systems through enhanced emotion awareness, modulations in emotional reactivity, increased use of cognitive reappraisal, and alterations in reward processes [@wielgoszMindfulnessMeditationPsychopathology2019a].
 A systematic review and meta-analysis conducted by Gu and colleagues (2015) indicated that self-reported mindfulness and emotional reactivity are mechanisms driving the efficacy of MBIs for mood disorders, such as depression. 
 
 #### MBIs and individual differences related to positive emotion
 
-Research has indicated relations between facets of mindfulness and factors in Clark and Watson’s tripartite model [i.e., PA, NA, and anxious arousal; [@clarkTripartiteModelAnxiety1991].
+Research has indicated relations between facets of mindfulness and factors in Clark and Watson’s tripartite model [i.e., PA, NA, and anxious arousal; @clarkTripartiteModelAnxiety1991].
 There are negative associations between specific facets of mindfulness (non-reactivity and non-judgment) and both anhedonic depression (low PA) and general distress (high NA) in participants diagnosed with depression and anxiety [@desrosiersMappingMindfulnessFacets2013].
 Mixed methods (cross-sectional and longitudinal) research has found inverse relationships between the mindfulness facets of acting with awareness and non-judging with PA and NA, which suggests that adopting a non-evaluative disposition may serve to mitigate the experience of negative mood and bolster the experience of positive emotion [@raphiphatthanaHowFacetsMindfulness2016].
 The same study showed that acting with awareness [i.e., directing attention to the present activity; @mooreMeditationMindfulnessCognitive2009] predicted lower levels of anhedonia (i.e., higher PA) one month later, indicating that allocating more awareness to present activities may facilitate pleasant experience derived from said activities [@raphiphatthanaHowFacetsMindfulness2016]. 
 
-There may be some overlapping conceptual aspects between savoring and mindfulness[@bryantAppreciatingLifeMidst2015; @bryantSavoringNewModel2007; @hurleyResultsStudyIncrease2012].
+There may be some overlapping conceptual aspects between savoring and mindfulness [@bryantAppreciatingLifeMidst2015; @bryantSavoringNewModel2007; @hurleyResultsStudyIncrease2012].
 Increased attention to positive stimuli is a candidate psychological mechanism through which positive emotion regulation strategies are theorized to mitigate depression symptoms [@carlPositiveEmotionRegulation2013; @joormannExaminingEmotionRegulation2016a].
 Mindfulness meditation practices and mindfulness-based interventions emphasize the importance of cultivating non-judgmental attention and awareness in the present moment [@guHowMindfulnessbasedCognitive2015a], which may broaden one’s cognitive scope and help enhance savoring capacity [@garlandMindfulnessBroadensAwareness2015a].
 Thus, MBIs may prove effective in bolstering savoring capacity.
@@ -137,7 +137,7 @@ In sum, patients presenting with anhedonic depression may require more specific 
 
 This study underscored the importance of momentary awareness and upregulation of positive emotions in managing depression. Increased attention to positive stimuli is likely one mechanism through which savoring influences depression symptoms [@carlPositiveEmotionRegulation2013].
 While there are distinctions between savoring and mindfulness [@bryantSavoringNewModel2007], the importance of moment-to-moment awareness in treating depression is corroborated by the efficacy of mindfulness-based interventions [@guHowMindfulnessbasedCognitive2015a].
-While Study One supports the importance of momentary awareness in treating depression in those with low PA, its use of cross-sectional data precluded causal inference.
+Study One supports the importance of momentary awareness in treating depression in those with low PA, but its use of cross-sectional data precluded causal inference.
 Further, it did not disentangle the neural time course of positive emotion reactivity and regulation and how these concepts related to individual differences (i.e., PA and savoring capacity), which is crucial to devise neuroscience-informed interventions for those with anhedonic depression.
 Studies Two and Three were conducted to address these gaps.
 
@@ -145,7 +145,7 @@ Studies Two and Three were conducted to address these gaps.
 
 In order to explore emotion reactivity and regulation, Study Two, “The neurobiological correlates of positive emotion reactivity and regulation,” will investigate the neural time course associated with reacting to, and regulating, positively- and negatively-valenced images. 
 The study also seeks to elucidate the relation among individual differences (i.e,. PA and savoring capacity from Study One) and neural correlates of positive emotion reactivity and regulation. 
-This study also aims to validate a novel experimental emotion reactivity/regulation paradigm utilizing block design presentation and a new, open source set of standardized images [the Open Affective Standardized Image Set, or OASIS; @kurdiIntroducingOpenAffective2017].
+This study also aims to validate a novel experimental emotion reactivity/regulation paradigm utilizing a block design presentation and a new, open source set of standardized images [the Open Affective Standardized Image Set, or OASIS; @kurdiIntroducingOpenAffective2017].
 This will serve to facilitate comparison of results across various labs and promote open science practices.
 
 To extend findings from Study One, Study Two will address fundamental questions regarding the neural time course of emotion reactivity and regulation. This study tests the hypothesis that specific patterns of enhancement and attenuation in ERP components (N170, EPN, and LPP) accompany passively reacting to, as well as down- and up-regulating emotional intensity in response to, positive and negative images in a sample that is not selected on the basis of psychopathology symptoms ($N$ = 54).
@@ -162,7 +162,7 @@ Building on findings from Study One and Study Three regarding the relations amon
 To this end, participants ($N$ = 80) endorsing clinically significant levels of depression will be assigned to one of three groups (Headspace as Usual, Headspace with Peer Support, and Delayed Headspace as Usual) and complete batteries of questionnaires (including measures of depression, PA, and savoring) at several time points.
 Additionally, EEG will be collected using the same experimental paradigm validated in Study Two at two separate time points: pre-trial baseline and eight weeks later.
 The study will seek to test the following hypotheses: 1) individual differences of emotion reactivity and regulation related to depression established in Study One will increase following eight weeks of Headspace usage and 2) ERP components relevant to emotion reactivity established in Study Two (N170, EPN, and LPP) will be enhanced in response to positive images following eight weeks of Headspace usage. 
-Research suggests that the relation between neural correlates of emotion reactivity and depression vary as a function of depression severity [e.g., [@demenescuNeuralCorrelatesPerception2011; @weinbergDecreasedNeuralResponse2017].
+Research suggests that the relation between neural correlates of emotion reactivity and depression vary as a function of depression severity [e.g., @demenescuNeuralCorrelatesPerception2011; @weinbergDecreasedNeuralResponse2017].
 Thus, the samples from Study Two (not recruited on the basis of psychopathology symptoms) and Study Three (recruited on the basis of depression symptoms) will be harmonized, resulting in a sample with greater variability in depression symptoms.
 Relations among depression symptoms and emotion reactivity will be analyzed to determine how neural correlates of emotion reactivity (i.e., N170, EPN, and LPP) vary depending on depression severity.
 This will afford knowledge regarding deficits in emotion responding for those with depression as well as potential relevant intervention targets.

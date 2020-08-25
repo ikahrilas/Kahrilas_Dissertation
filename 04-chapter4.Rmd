@@ -45,7 +45,7 @@ Other studies have found enhanced activity in frontal brain structures involved 
 This pattern of findings may index increased attention orientation and processing demands to mood-incongruent stimuli [@demenescuNeuralCorrelatesPerception2011]. 
 Regarding negative emotion reactivity, studies have indicated increased responsiveness to, and memory for, negative stimuli as illustrated by enhanced amygdala response to negative emotional stimuli [@falesAlteredEmotionalInterference2008; @savitzImagingPhenotypesMajor2009] in those with MDD compared to controls. 
 
-While the aforementioned research has illustrated differences in emotion reactivity between clinical and non-clinical samples, others studies have found no differences [@almeidaElevatedAmygdalaActivity2010; @demenescuNeuralCorrelatesPerception2011; @diekhofFunctionalNeuroimagingReward2008; @gotlibSubgenualAnteriorCingulate2005; @norburyIncreasedNeuralResponse2010; @siegleCanShakeThat2002]. 
+While the aforementioned research has illustrated differences in emotion reactivity between clinical and non-clinical samples, other studies have found no differences [@almeidaElevatedAmygdalaActivity2010; @demenescuNeuralCorrelatesPerception2011; @diekhofFunctionalNeuroimagingReward2008; @gotlibSubgenualAnteriorCingulate2005; @norburyIncreasedNeuralResponse2010; @siegleCanShakeThat2002]. 
 Possible explanations for mixed findings regarding positive and negative emotional reactivity include depression severity, medication status, and differing levels of co-occurring anxiety.
 Increased amygdala reactivity to negative stimuli has been observed in those with severe depression [@shelineIncreasedAmygdalaResponse2001], and medication may be linked to down-regulation of amygdala response [@fuAttenuationNeuralResponse2004; @lawrenceSubcorticalVentralPrefrontal2004; @shelineIncreasedAmygdalaResponse2001].
 In contrast, participants with mild-to-moderate depression severity (with and without medication) do not exhibit differences in amygdala activity  in emotion reactivity compared to controls [@demenescuNeuralCorrelatesPerception2011].
@@ -159,7 +159,7 @@ Further, it will explore the efficacy of scalable and accessible online/mobile a
 
 ## The Present Study
 
-The present study analyzed data from the Supported Mindful Learning (SMiLe) study, a three month randomized controlled trial investigating the efficacy of Headspace in mitigating psychological symptoms in a sample of college students with depression.
+The present study analyzed data from the Supported Mindful Learning (SMiLe) study, a three-month randomized controlled trial investigating the efficacy of Headspace in mitigating psychological symptoms in a sample of college students with depression.
 Participants that met inclusion criteria were randomized to one of three experimental groups, two of which included self-guided Headspace use and another that served as an experimental control (i.e., waitlist).
 Participants also completed batteries of surveys at four separate timepoints. 
 
