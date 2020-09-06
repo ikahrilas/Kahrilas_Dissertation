@@ -75,11 +75,11 @@ watch_n170_epn <- eeg_dat %>%
   ggplot(., aes(ms, mv, color = block)) +
   geom_line(size = 1.1) +
   geom_vline(xintercept = 0, linetype = "dashed") +
-  geom_vline(xintercept = c(112, 223), linetype = "solid", size = 1.05) +
-  geom_vline(xintercept = c(224, 341), linetype = "solid", size = 1.05) +
+#  geom_vline(xintercept = c(112, 223), linetype = "solid", size = 1.05) +
+#  geom_vline(xintercept = c(224, 341), linetype = "solid", size = 1.05) +
   geom_hline(yintercept = 0, linetype = "dashed") +
-  annotate("rect", xmin = 112, xmax = 223, ymin = -Inf, ymax = Inf, alpha = .2) +
-  annotate("rect", xmin = 224, xmax = 341, ymin = -Inf, ymax = Inf, alpha = .2) +
+#  annotate("rect", xmin = 112, xmax = 223, ymin = -Inf, ymax = Inf, alpha = .2) +
+#  annotate("rect", xmin = 224, xmax = 341, ymin = -Inf, ymax = Inf, alpha = .2) +
   labs(x = "Time (ms)",
        y = expression(paste("Amplitude ( ",mu,"V)"))) +
   #      title = paste("Average LPP Waveforms")) +
