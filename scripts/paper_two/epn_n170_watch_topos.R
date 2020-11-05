@@ -94,8 +94,8 @@ watch_n170_epn <- eeg_dat %>%
   # scale_color_manual(name = "Group", values = c("green", "blue", "red"))
   scale_color_manual(values = c("blue", "green", "red"),
                      name = "Block",
-                     breaks = c("Neu_Watch", "Pos_Watch", "Neg_Watch"),
-                     labels = c("Neutral Watch", "Positive Watch", "Negative Watch"))
+                     breaks = c("Neg_Watch", "Pos_Watch", "Neu_Watch"),
+                     labels = c("Negative Watch", "Positive Watch", "Neutral Watch"))
 
 n170_epn_topos / watch_n170_epn + plot_layout(widths = 2)
 
