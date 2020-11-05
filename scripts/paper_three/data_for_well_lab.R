@@ -48,7 +48,10 @@ dat_hs <- dat_hs %>%
          "Cohort",
          "Group",
          "race",
-         contains(c("PHQ", "MASQ", "SBI", "PSWQ", "PANAS", "BSI")))
+         contains(c("Gender", "age", "PHQ", "MASQ", "SBI", "PSWQ", "PANAS", "BSI")),
+         -contains("Language")) %>%
+  rename("age" = "Age_T1",
+         "gender" = "Gender_T1")
 
 ## replace 666 and 999 with NAs
 dat_hs <- map_df(dat_hs, ~ {
@@ -63,4 +66,7 @@ names(dat_hs) <- str_remove_all(names(dat_hs), "...170")
 names(dat_hs) <- str_remove_all(names(dat_hs), "...173")
 
 ## convert MASQ8 to numeric
-dat$MASQ8_T1 <- as.numeric(dat$MASQ8_T1)
+dat_hs$MASQ8_T1 <- as.numeric(dat_hs$MASQ8_T1)
+
+## output .csv file
+write.csv(dat_hs, "data/paper_three/well_lab_data.csv")
