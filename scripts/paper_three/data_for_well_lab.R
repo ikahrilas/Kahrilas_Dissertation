@@ -7,6 +7,7 @@ library(MBESS)
 library(naniar)
 
 ## read in data
+## this reads in the raw dataset from the IMPACT lab - direct this to whereever you have the file
 dat <- read_excel("data/paper_three/headspace_questionnaire_data.xlsx") %>%
   select("Initials",
          "Cohort",
