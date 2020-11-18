@@ -68,3 +68,9 @@ names(dat_hs) <- str_remove_all(names(dat_hs), "...173")
 ## convert MASQ8 to numeric
 dat_hs$MASQ8_T1 <- as.numeric(dat_hs$MASQ8_T1)
 
+## replace initials column with pid
+dat_hs <- dat_hs %>%
+  select(-Initials) %>%
+  mutate(pid = as.character(1:nrow(.))) %>%
+  relocate(pid, everything())
+table(dat_hs$gender)
