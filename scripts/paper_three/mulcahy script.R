@@ -5,6 +5,7 @@ library(tidyverse)
 library(readxl)
 library(MBESS)
 library(naniar)
+library(janitor)
 
 ## read in data
 dat <- read_excel("data/paper_three/headspace_questionnaire_data.xlsx") %>%
@@ -77,39 +78,14 @@ dat_hs <- dat_hs %>%
   relocate(pid, everything())
 
 ## convert dataframe to long form
-dat_hs %>%
+dat_hs_long <- dat_hs %>%
   pivot_longer(cols = PHQ1_T1:last_col(),
                names_to = c(".value", "time"),
                names_sep = "_"
   )
 
-# reverse score SBI itmes. Items are a 7-item likert scale, so subtract each score from 8.
-
-sbi_rev_items <- paste("sbi_", seq(2, 24, by = 2), sep = "") #variable containing SBI items to be reversed, which is every other item from 2 to 24
-#create names of reversed items to be used in for loop
-sbi_rev_names <- paste0(sbi_rev_items, "_r")
-#define reverse scoring function that can be used for any measure
-reverse <- function(item, subtraction) {
-  subtraction - item
-}
-#for loop that derives reverse scored SBI items
-for (i in seq_along(sbi_rev_items)) {
-  per_dataset[, sbi_rev_names[i]] <- reverse(per_dataset[, sbi_rev_items[i]], 8)
-}
-
-# derive SBI subscales of anticipating, savoring the moment, and anticipating by averaging the appropriate items.
-
-# establish variable containing the number of items in each average, which is 8.
-sbi_sub_n_items <- 8
-#The following code derives the subscales and adds these variables to the per dataset. Subscales are derived by averaging select items.
-per_dataset <- per_dataset %>%
-  mutate(anticipating = (sbi_1 + sbi_7 + sbi_13 + sbi_19 + sbi_4_r + sbi_10_r + sbi_16_r + sbi_22_r) / sbi_sub_n_items,
-         savoring_moment = (sbi_5 + sbi_11 + sbi_17 + sbi_23 + sbi_2_r + sbi_8_r + sbi_14_r + sbi_20_r) / sbi_sub_n_items,
-         reminiscing  = (sbi_3 + sbi_9 + sbi_15 + sbi_21 + sbi_6_r + sbi_12_r + sbi_18_r + sbi_24_r) / sbi_sub_n_items,
-         sbi_tot = (sbi_1 + sbi_7 + sbi_13 + sbi_19 + sbi_4_r + sbi_10_r + sbi_16_r + sbi_22_r + sbi_5 + sbi_11 + sbi_17 +
-                      sbi_23 + sbi_2_r + sbi_8_r + sbi_14_r + sbi_20_r + sbi_3 + sbi_9 + sbi_15 + sbi_21 + sbi_6_r +
-                      sbi_12_r + sbi_18_r + sbi_24_r) / (sbi_sub_n_items * 3) #average total by 24, 3x the amount as the other subscales
-  )
+# names to lower case
+names(dat_hs_long) <- tolower(names(dat_hs_long))
 
 # masq subscales
 per_dataset <- per_dataset %>%
