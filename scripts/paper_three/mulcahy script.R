@@ -88,8 +88,12 @@ dat_hs_long <- dat_hs %>%
 names(dat_hs_long) <- tolower(names(dat_hs_long))
 
 # masq subscales
-per_dataset <- per_dataset %>%
-  mutate(masq_pa = masq_2 + masq_4 + masq_5 + masq_7 + masq_11 + masq_14 + masq_19 + masq_23 + masq_26 + masq_28 + masq_32 + masq_34 + masq_36 + masq_37,
-         masq_na = masq_9 + masq_13 + masq_17 + masq_21 + masq_29 + masq_30 + masq_35 + masq_38,
-         masq_aa = masq_1 + masq_3 + masq_6 + masq_8 + masq_10 + masq_12 + masq_15 + masq_16 + masq_18 + masq_20 + masq_22 + masq_24 + masq_25 + masq_27 + masq_31 + masq_33 + masq_39
+dat_hs_long <- dat_hs_long %>%
+  mutate(masq_pa = masq2 + masq4 + masq5 + masq7 + masq11 + masq14 + masq19 + masq23 + masq26 + masq28 + masq32 + masq34 + masq36 + masq37,
+         masq_na = masq9 + masq13 + masq17 + masq21 + masq29 + masq30 + masq35 + masq38,
+         masq_aa = masq1 + masq3 + masq6 + masq8 + masq10 + masq12 + masq15 + masq16 + masq18 + masq20 + masq22 + masq24 + masq25 + masq27 + masq31 + masq33 + masq39
   )
+# phq total scale
+dat_hs_long <- dat_hs_long %>%
+  mutate(phq_total = phq1 + phq2 + phq3 + phq4 + phq5 + phq6 + phq7 + phq8 + phq9)
+
