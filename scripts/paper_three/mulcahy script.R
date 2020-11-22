@@ -7,6 +7,9 @@ library(MBESS)
 library(naniar)
 library(janitor)
 library(DataExplorer)
+library(lmerTest)
+library(performance)
+library(effectsize)
 
 ## read in data
 dat <- read_excel("data/paper_three/headspace_questionnaire_data.xlsx") %>%
@@ -98,6 +101,16 @@ dat_hs_long <- dat_hs_long %>%
 dat_hs_long <- dat_hs_long %>%
   mutate(phq_total = phq1 + phq2 + phq3 + phq4 + phq5 + phq6 + phq7 + phq8 + phq9)
 
+# change group variable to just HS and WL
+dat_hs_long <- dat_hs_long %>%
+  mutate(
+    group = case_when(
+      group == "PSA" ~ "HS",
+      group == "HS No Orientation" ~ "HS",
+      TRUE ~ group
+    ))
+dat_hs_long$group <- relevel(as.factor(dat_hs_long$group), ref = "WL")
+
 # histograms
 ## depression histogram
 ggplot(dat_hs_long, aes(phq_total)) +
@@ -115,3 +128,11 @@ ggplot(dat_hs_long, aes(masq_na)) +
 ggplot(dat_hs_long, aes(masq_aa)) +
   geom_histogram(fill = "white", color = "black") +
   facet_wrap(~ time)
+
+mod <- lmer(masq_pa ~ time*group + (1|pid), data = dat_hs_long)
+anova(mod)
+summary(mod)
+check_model(mod, panel = FALSE)
+effectsize(mod)
+confint.merMod(mod, parm = "beta_", method = "boot", nsim = 1000)
+
