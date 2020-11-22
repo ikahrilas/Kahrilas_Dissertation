@@ -6,6 +6,7 @@ library(readxl)
 library(MBESS)
 library(naniar)
 library(janitor)
+library(DataExplorer)
 
 ## read in data
 dat <- read_excel("data/paper_three/headspace_questionnaire_data.xlsx") %>%
@@ -97,3 +98,20 @@ dat_hs_long <- dat_hs_long %>%
 dat_hs_long <- dat_hs_long %>%
   mutate(phq_total = phq1 + phq2 + phq3 + phq4 + phq5 + phq6 + phq7 + phq8 + phq9)
 
+# histograms
+## depression histogram
+ggplot(dat_hs_long, aes(phq_total)) +
+  geom_histogram(fill = "white", color = "black") +
+  facet_wrap(~ time)
+## masq pa histogram
+ggplot(dat_hs_long, aes(masq_pa)) +
+  geom_histogram(fill = "white", color = "black") +
+  facet_wrap(~ time)
+## masq na histogram
+ggplot(dat_hs_long, aes(masq_na)) +
+  geom_histogram(fill = "white", color = "black") +
+  facet_wrap(~ time)
+## masq aa histogram
+ggplot(dat_hs_long, aes(masq_aa)) +
+  geom_histogram(fill = "white", color = "black") +
+  facet_wrap(~ time)
