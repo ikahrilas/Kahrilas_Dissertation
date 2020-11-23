@@ -158,3 +158,33 @@ summary(mod_aa)
 effectsize(mod_aa)
 check_model(mod_aa, panel = FALSE)
 confint.merMod(mod_aa, parm = "beta_", method = "boot", nsim = 5000)
+
+# Visualizations for results
+# define ggplot function
+plot_fun <- function(data, mapping, y_title) {
+  ggplot(data, mapping) +
+  geom_line(aes(group = pid, color = group), alpha = 0.5) +
+  geom_jitter(aes(color = group), width = 0.1) +
+  geom_boxplot(aes(fill = group), lwd = 1, fatten = TRUE) +
+  xlab("Time") +
+  ylab(y_title) +
+  scale_fill_discrete() +
+  scale_color_manual(values = c("maroon", "gold"), guide = FALSE) +
+  scale_fill_manual(values = c("maroon", "gold"), name = "Group", labels = c("Waitlist", "Headspace")) +
+  ggtitle(paste(y_title, "over Time in Waitlist and Headspace Groups")) +
+  theme_classic() +
+  theme(
+    title = element_text(size = 16, face = "bold"),
+    legend.title = element_text(size = 14, face = "bold"),
+    legend.text = element_text(size = 12),
+    axis.text = element_text(size = 12),
+    axis.title = element_text(size = 14, face = "bold"),
+    legend.key.size = unit(2, "line")
+  )
+}
+## plot for depression
+plot_fun(dat_hs_long, aes(time, phq_total), "Depression")
+## plot for pa
+plot_fun(dat_hs_long, aes(time, masq_pa), "Positive Affectivity")
+## plot for na
+plot_fun(dat_hs_long, aes(time, masq_na), "Negative Affectivity")
