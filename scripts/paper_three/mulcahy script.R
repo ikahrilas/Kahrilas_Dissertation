@@ -115,24 +115,46 @@ dat_hs_long$group <- relevel(as.factor(dat_hs_long$group), ref = "WL")
 ## depression histogram
 ggplot(dat_hs_long, aes(phq_total)) +
   geom_histogram(fill = "white", color = "black") +
-  facet_wrap(~ time)
+  facet_grid(group ~ time)
 ## masq pa histogram
 ggplot(dat_hs_long, aes(masq_pa)) +
   geom_histogram(fill = "white", color = "black") +
-  facet_wrap(~ time)
+  facet_grid(group ~ time)
 ## masq na histogram
 ggplot(dat_hs_long, aes(masq_na)) +
   geom_histogram(fill = "white", color = "black") +
-  facet_wrap(~ time)
+  facet_grid(group ~ time)
 ## masq aa histogram
 ggplot(dat_hs_long, aes(masq_aa)) +
   geom_histogram(fill = "white", color = "black") +
-  facet_wrap(~ time)
+  facet_grid(group ~ time)
 
-mod <- lmer(masq_pa ~ time*group + (1|pid), data = dat_hs_long)
-anova(mod)
-summary(mod)
-check_model(mod, panel = FALSE)
-effectsize(mod)
-confint.merMod(mod, parm = "beta_", method = "boot", nsim = 1000)
-
+# models
+## depression as outcome
+mod_dep <- lmer(phq_total ~ time*group + (1|pid), data = dat_hs_long)
+anova(mod_dep)
+summary(mod_dep)
+effectsize(mod_dep)
+check_model(mod_dep, panel = FALSE)
+confint.merMod(mod_dep, parm = "beta_", method = "boot", nsim = 5000)
+## PA as outcome
+mod_pa <- lmer(masq_pa ~ time*group + (1|pid), data = dat_hs_long)
+anova(mod_pa)
+summary(mod_pa)
+effectsize(mod_pa)
+check_model(mod_pa, panel = FALSE)
+confint.merMod(mod_pa, parm = "beta_", method = "boot", nsim = 5000)
+## NA as outcome
+mod_na <- lmer(masq_na ~ time*group + (1|pid), data = dat_hs_long)
+anova(mod_na)
+summary(mod_na)
+effectsize(mod_na)
+check_model(mod_na, panel = FALSE)
+confint.merMod(mod_na, parm = "beta_", method = "boot", nsim = 5000)
+## AA as outcome
+mod_aa <- lmer(masq_aa ~ time*group + (1|pid), data = dat_hs_long)
+anova(mod_aa)
+summary(mod_aa)
+effectsize(mod_aa)
+check_model(mod_aa, panel = FALSE)
+confint.merMod(mod_aa, parm = "beta_", method = "boot", nsim = 5000)
