@@ -163,8 +163,8 @@ confint.merMod(mod_aa, parm = "beta_", method = "boot", nsim = 5000)
 # define ggplot function
 plot_fun <- function(data, mapping, y_title) {
   ggplot(data, mapping) +
-  geom_line(aes(group = pid, color = group), alpha = 0.5) +
   geom_jitter(aes(color = group), width = 0.1) +
+  geom_line(aes(group = pid, color = group), alpha = 0.5) +
   geom_boxplot(aes(fill = group), lwd = 1, fatten = TRUE) +
   xlab("Time") +
   ylab(y_title) +
