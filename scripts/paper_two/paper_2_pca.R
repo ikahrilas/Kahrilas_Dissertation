@@ -327,3 +327,58 @@ promax_plot <- promax_df %>%
 
 ggsave(filename = here("images", "paper_2", "pca_images", paste0(.x, "_promax_500.png")), plot = promax_plot, device = "png", width = 14)
 })
+
+# now make factor loading plots for those contditions that you will contrast
+# within the same statistical model
+
+# unrotated
+watch_nr_plots <- nr_df %>%
+  filter(block %in% c("Neu_Watch", "Neg_Watch", "Pos_Watch")) %>%
+  ggplot(., aes(ms, mv)) +
+  geom_line(aes(color = block)) +
+  facet_wrap(~ component, nrow = 2)
+
+ggsave(filename = here("images", "paper_2", "pca_images", paste0("watch_nr_500.png")), plot = watch_nr_plots, device = "png", width = 14)
+
+pos_nr_plots <- nr_df %>%
+  filter(block %in% c("Pos_Watch", "Pos_Inc", "Pos_Dec")) %>%
+  ggplot(., aes(ms, mv)) +
+  geom_line(aes(color = block)) +
+  facet_wrap(~ component, nrow = 2)
+
+ggsave(filename = here("images", "paper_2", "pca_images", paste0("pos_nr_500.png")), plot = pos_nr_plots, device = "png", width = 14)
+
+neg_nr_plots <- nr_df %>%
+  filter(block %in% c("Neg_Watch", "Neg_Inc", "Neg_Dec")) %>%
+  ggplot(., aes(ms, mv)) +
+  geom_line(aes(color = block)) +
+  facet_wrap(~ component, nrow = 2)
+
+ggsave(filename = here("images", "paper_2", "pca_images", paste0("neg_nr_500.png")), plot = neg_nr_plots, device = "png", width = 14)
+
+# promax rotated
+
+watch_promax_plots <- promax_df %>%
+  filter(block %in% c("Neu_Watch", "Neg_Watch", "Pos_Watch")) %>%
+  ggplot(., aes(ms, mv)) +
+  geom_line(aes(color = block)) +
+  facet_wrap(~ component, nrow = 2)
+
+ggsave(filename = here("images", "paper_2", "pca_images", paste0("watch_promax_500.png")), plot = watch_promax_plots, device = "png", width = 14)
+
+pos_promax_plots <- promax_df %>%
+  filter(block %in% c("Pos_Watch", "Pos_Inc", "Pos_Dec")) %>%
+  ggplot(., aes(ms, mv)) +
+  geom_line(aes(color = block)) +
+  facet_wrap(~ component, nrow = 2)
+
+ggsave(filename = here("images", "paper_2", "pca_images", paste0("pos_promax_500.png")), plot = pos_promax_plots, device = "png", width = 14)
+
+neg_promax_plots <- promax_df %>%
+  filter(block %in% c("Neg_Watch", "Neg_Inc", "Neg_Dec")) %>%
+  ggplot(., aes(ms, mv)) +
+  geom_line(aes(color = block)) +
+  facet_wrap(~ component, nrow = 2)
+
+ggsave(filename = here("images", "paper_2", "pca_images", paste0("neg_promax_500.png")), plot = neg_promax_plots, device = "png", width = 14)
+
