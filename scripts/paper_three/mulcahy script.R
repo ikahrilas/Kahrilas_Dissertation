@@ -9,6 +9,7 @@ library(janitor)
 library(DataExplorer)
 library(lmerTest)
 library(performance)
+library(here)
 library(effectsize)
 
 ## read in data
@@ -165,7 +166,7 @@ plot_fun <- function(data, mapping, y_title) {
   ggplot(data, mapping) +
   geom_jitter(aes(color = group), width = 0.1) +
   geom_line(aes(group = pid, color = group), alpha = 0.5) +
-  geom_boxplot(aes(fill = group), lwd = 1, fatten = TRUE) +
+  geom_boxplot(aes(fill = group), lwd = 2, fatten = TRUE, width = 0.6) +
   xlab("Time") +
   ylab(y_title) +
   scale_fill_discrete() +
@@ -174,17 +175,20 @@ plot_fun <- function(data, mapping, y_title) {
   ggtitle(paste(y_title, "over Time in Waitlist and Headspace Groups")) +
   theme_classic() +
   theme(
-    title = element_text(size = 16, face = "bold"),
-    legend.title = element_text(size = 14, face = "bold"),
-    legend.text = element_text(size = 12),
-    axis.text = element_text(size = 12),
-    axis.title = element_text(size = 14, face = "bold"),
-    legend.key.size = unit(2, "line")
+    title = element_text(size = 18, face = "bold"),
+    legend.title = element_text(size = 16, face = "bold"),
+    legend.text = element_text(size = 14),
+    axis.text = element_text(size = 14),
+    axis.title = element_text(size = 16, face = "bold"),
+    legend.key.size = unit(3, "line")
   )
 }
 ## plot for depression
-plot_fun(dat_hs_long, aes(time, phq_total), "Depression")
+dep <- plot_fun(dat_hs_long, aes(time, phq_total), "Depression")
+ggsave(filename = here("images", "paper_3", "mulcahy_poster_images", "dep.png"), plot = dep, device = "png", width = 14, height = 5)
 ## plot for pa
-plot_fun(dat_hs_long, aes(time, masq_pa), "Positive Affectivity")
+pa <- plot_fun(dat_hs_long, aes(time, masq_pa), "Positive Affectivity")
+ggsave(filename = here("images", "paper_3", "mulcahy_poster_images", "pa.png"), plot = pa, device = "png", width = 14, height = 5)
 ## plot for na
-plot_fun(dat_hs_long, aes(time, masq_na), "Negative Affectivity")
+na <- plot_fun(dat_hs_long, aes(time, masq_na), "Negative Affectivity")
+ggsave(filename = here("images", "paper_3", "mulcahy_poster_images", "na.png"), plot = na, device = "png", width = 14, height = 5)
