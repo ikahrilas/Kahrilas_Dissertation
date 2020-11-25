@@ -59,6 +59,7 @@ dat_pca_500_n170_epn_elec <- prcomp(na.omit(dat_500_epn_n170_elec[,-c(1:5)]), ce
 scree_500_n170_epn_elec <- fviz_eig(dat_pca_500_n170_epn_elec)
 ggsave(filename = here("images", "paper_2", "pca_images", "scree_500_n170_epn_elec.png"), plot = scree_500_n170_epn_elec, device = "png")
 
+
 # pca with promax rotation
 ## on average referenced data with promax rotation
 dat_pca_promax <- principal(dat_temp[,-c(1:5)], nfactors = 10, rotate = "promax", cor = "cov", missing = TRUE)
@@ -74,6 +75,9 @@ dat_mast_pca_promax_1500_epn_n170_elec <- principal(dat_1500_epn_n170_elec[,-c(1
 dat_mast_pca_promax_1000_epn_n170_elec <- principal(dat_1000_epn_n170_elec[,-c(1:5)], nfactors = 10, rotate = "promax", cor = "cov", missing = TRUE)
 ### with 500 ms cutoff
 dat_pca_promax_500_epn_n170_elec <- principal(dat_500_epn_n170_elec[,-c(1:5)], nfactors = 10, rotate = "promax", cor = "cov", missing = TRUE)
+### 500 ms cutoff with no rotation
+dat_pca_nr_500_epn_n170_elec <- principal(dat_500_epn_n170_elec[,-c(1:5)], nfactors = 10, rotate = "none", cor = "cov", missing = TRUE)
+
 
 # make visualization
 ## avr
@@ -145,6 +149,19 @@ cov_loadings_trimmed_500_df <- data.frame(cov_loadings_mat_trimmed_500)
 names(cov_loadings_trimmed_500_df) <- paste0("RC", c(1:10))
 cov_loadings_trimmed_500_df <- cov_loadings_trimmed_500_df %>%
   mutate(ms = ms_vec)
+### 500 ms nr
+cov_loadings_mat_trimmed_500_nr <- matrix(dat_pca_nr_500_epn_n170_elec$loadings, nrow = 359)
+ms_vec <- dat %>%
+  filter(ms < 500,
+         pid == 206201832,
+         block == "Pos_Inc") %>%
+  select(ms) %>%
+  pull()
+cov_loadings_trimmed_500_df_nr <- data.frame(cov_loadings_mat_trimmed_500_nr)
+names(cov_loadings_trimmed_500_df_nr) <- paste0("RC", c(1:10))
+cov_loadings_trimmed_500_df_nr <- cov_loadings_trimmed_500_df_nr %>%
+  mutate(ms = ms_vec)
+
 
 # long form so components are factor variables and make visualizations
 ## avr
@@ -189,3 +206,10 @@ trimmed_loadings_500 <- ggplot(cov_loadings_trimmed_df_500_long, aes(ms, mv)) +
   geom_line() +
   facet_wrap(~ component, nrow = 2)
 ggsave(filename = here("images", "paper_2", "pca_images", "trimmed_loadings_500.png"), plot = trimmed_loadings_500, device = "png", width = 14)
+### 500 ms cutoff nr
+cov_loadings_trimmed_df_500_long_nr <- pivot_longer(cov_loadings_trimmed_500_df_nr, cols = RC1:RC10, names_to = "component", values_to = "mv")
+cov_loadings_trimmed_df_500_long_nr$component <- factor(cov_loadings_trimmed_df_500_long_nr$component, levels = c("RC1", "RC2", "RC3", "RC4", "RC5", "RC6", "RC7", "RC8", "RC9", "RC10"))
+trimmed_loadings_500_nr <- ggplot(cov_loadings_trimmed_df_500_long_nr, aes(ms, mv)) +
+  geom_line() +
+  facet_wrap(~ component, nrow = 2)
+ggsave(filename = here("images", "paper_2", "pca_images", "trimmed_loadings_500_nr.png"), plot = trimmed_loadings_500_nr, device = "png", width = 14)
