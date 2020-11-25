@@ -213,3 +213,117 @@ trimmed_loadings_500_nr <- ggplot(cov_loadings_trimmed_df_500_long_nr, aes(ms, m
   geom_line() +
   facet_wrap(~ component, nrow = 2)
 ggsave(filename = here("images", "paper_2", "pca_images", "trimmed_loadings_500_nr.png"), plot = trimmed_loadings_500_nr, device = "png", width = 14)
+
+# PCA for ERPs grouped by regulation block
+
+## split data frame with 500 ms cut off by block
+dat$block <- as.factor(dat$block)
+
+dat_500 <- dat %>%
+  filter(ms < 500) %>%
+  select(prop_trials:pid, A29, B26) %>%
+  pivot_longer(c(A29, B26), names_to = "elec") %>%
+  pivot_wider(names_from = ms, values_from = value)
+
+dat_list <- split(dat_500, dat_500$block)
+block_names <- list(names(dat_list))
+
+# iterative and get scree plots
+map2(dat_list, names(dat_list), ~ {
+pca <- prcomp(na.omit(.x[,-c(1:5)]), center = TRUE, scale. = FALSE)
+scree_pca <- fviz_eig(pca)
+ggsave(filename = here("images", "paper_2", "pca_images", paste0(.y, "_scree_500_n170_epn_elec.png")), plot = scree_pca, device = "png")
+}
+)
+
+# conduct rotated PCAs make plots
+
+## make ms vector
+ms_vec <- dat %>%
+  filter(ms < 500,
+         pid == 206201832,
+         block == "Pos_Inc") %>%
+  select(ms) %>%
+  pull()
+
+## map function for pcas
+promax_list <- map2(dat_list, names(dat_list), ~ {
+## promax rotation
+pca_promax <- principal(.x[,-c(1:5)], nfactors = 10, rotate = "promax", cor = "cov", missing = TRUE)
+
+## promax df
+cov_loadings_mat_promax <- matrix(pca_promax$loadings, nrow = 359)
+cov_loadings_mat_promax_df <- data.frame(cov_loadings_mat_promax)
+names(cov_loadings_mat_promax_df) <- paste0("RC", c(1:10))
+cov_loadings_mat_promax_df <- cov_loadings_mat_promax_df %>%
+  mutate(ms = ms_vec)
+
+## long form
+cov_loadings_mat_promax_df <- pivot_longer(cov_loadings_mat_promax_df, cols = RC1:RC10, names_to = "component", values_to = "mv")
+cov_loadings_mat_promax_df$component <- factor(cov_loadings_mat_promax_df$component, levels = c("RC1", "RC2", "RC3", "RC4", "RC5", "RC6", "RC7", "RC8", "RC9", "RC10"))
+cov_loadings_mat_promax_df <- cov_loadings_mat_promax_df %>%
+  mutate(block = .y)
+}
+)
+# bind list together
+promax_df <- bind_rows(promax_list)
+
+promax_all_blocks <- ggplot(promax_df, aes(ms, mv)) +
+  geom_line(aes(color = block)) +
+  facet_wrap(~ component, nrow = 2)
+
+# save image
+ggsave(filename = here("images", "paper_2", "pca_images", "all_blocks_promax_500.png"), plot = promax_all_blocks, device = "png", width = 14)
+
+
+# unrotated all blocks
+nr_list <- map2(dat_list, names(dat_list), ~ {
+## unrotated
+pca_nr <- principal(.x[,-c(1:5)], nfactors = 10, rotate = "none", cor = "cov", missing = TRUE)
+
+## nr df
+cov_loadings_mat_nr <- matrix(pca_nr$loadings, nrow = 359)
+cov_loadings_mat_nr_df <- data.frame(cov_loadings_mat_nr)
+names(cov_loadings_mat_nr_df) <- paste0("RC", c(1:10))
+cov_loadings_mat_nr_df <- cov_loadings_mat_nr_df %>%
+  mutate(ms = ms_vec)
+
+## long form
+cov_loadings_mat_nr_df <- pivot_longer(cov_loadings_mat_nr_df, cols = RC1:RC10, names_to = "component", values_to = "mv")
+cov_loadings_mat_nr_df$component <- factor(cov_loadings_mat_nr_df$component, levels = c("RC1", "RC2", "RC3", "RC4", "RC5", "RC6", "RC7", "RC8", "RC9", "RC10"))
+cov_loadings_mat_nr_df <- cov_loadings_mat_nr_df %>%
+  mutate(block = .y)
+})
+
+# bind list together for nr
+nr_df <- bind_rows(nr_list)
+
+nr_all_blocks <- ggplot(nr_df, aes(ms, mv)) +
+  geom_line(aes(color = block)) +
+  facet_wrap(~ component, nrow = 2)
+
+# save image
+ggsave(filename = here("images", "paper_2", "pca_images", "all_blocks_nr_500.png"), plot = nr_all_blocks, device = "png", width = 14)
+
+# now, max cov loading plots for each individual block
+nr_df$block <- as.factor(nr_df$block)
+promax_df$block <- as.factor(promax_df$block)
+block_vector <- levels(promax_df$block)
+
+map(block_vector, ~ {
+nr_plot <- nr_df %>%
+  filter(block == .x) %>%
+ggplot(., aes(ms, mv)) +
+  geom_line() +
+  facet_wrap(~ component, nrow = 2)
+
+ggsave(filename = here("images", "paper_2", "pca_images", paste0(.x, "_nr_500.png")), plot = nr_plot, device = "png", width = 14)
+
+promax_plot <- promax_df %>%
+  filter(block == .x) %>%
+  ggplot(., aes(ms, mv)) +
+  geom_line() +
+  facet_wrap(~ component, nrow = 2)
+
+ggsave(filename = here("images", "paper_2", "pca_images", paste0(.x, "_promax_500.png")), plot = promax_plot, device = "png", width = 14)
+})
