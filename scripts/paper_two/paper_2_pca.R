@@ -300,10 +300,10 @@ dat_long_elec_of_int <- dat %>%
   mutate(epn_n170_elec = (A29 + B26) / 2) %>%
   select(prop_trials:pid, epn_n170_elec)
 
-epn_n170_loadings <- cov_loadings_trimmed_500_df_nr %>%
+epn_n170_loadings <- cov_loadings_trimmed_500_df %>%
   select(ms, RC3, RC4) %>%
-  rename(epn_loading = RC3,
-         n170_loading = RC4)
+  rename(epn_loading = RC4,
+         n170_loading = RC3)
 
 dat_w_loadings <- full_join(dat_long_elec_of_int, epn_n170_loadings, by = "ms") %>%
   mutate(epn_factor_score = epn_n170_elec * epn_loading,
@@ -497,7 +497,6 @@ dat_w_loadings %>%
   ggplot(., aes(ms, n170_factor_score)) +
   geom_line(aes(color = block)) +
   theme_classic()
-
 
 
 # unused code for conducting PCAs by regulation block
