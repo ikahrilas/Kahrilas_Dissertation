@@ -135,6 +135,22 @@ weighted_dfs_lst <- map(loadings_lst, ~ {
     mutate(across(.cols = all_of(elec_vec), .fns = ~ all_of(.x) * component))
 })
 
+
+fa.parallel(weighted_dfs_lst[[2]] %>% select(-c(pid, block, ms, n_trials, prop_trials, component)),
+            fm = "ml",
+            fa = "both",
+            n.iter = 10,
+            quant = .95,
+            SMC = TRUE)
+
+test <- principal(weighted_dfs_lst[[2]] %>% select(-c(pid, block, ms, n_trials, prop_trials, component)),
+          nfactors = 10,
+          rotate = "none",
+          cor = "cov",
+          missing = TRUE)
+
+GPArotation::GPFoblq(test$loadings, method = "infomax", normalize = TRUE, maxit = 100000)
+
 # read in EEG coordinate data
 elec_loc <- read_csv(here("data", "paper_two", "Equidistant Layout.csv"))
 elec_loc <- elec_loc %>%
