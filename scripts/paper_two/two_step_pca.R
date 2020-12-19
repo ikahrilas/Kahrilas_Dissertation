@@ -9,6 +9,7 @@ library(psych)
 library(devtools)
 library(eegUtils) # remotes::install_github("craddm/eegUtils")
 library(patchwork)
+library(GPArotation)
 
 # read in average referenced data set
 ## average referenced data
@@ -149,7 +150,7 @@ test <- principal(weighted_dfs_lst[[2]] %>% select(-c(pid, block, ms, n_trials, 
           cor = "cov",
           missing = TRUE)
 
-GPArotation::GPFoblq(test$loadings, method = "infomax", normalize = TRUE, maxit = 100000)
+GPFoblq(test$loadings, method = "infomax", normalize = TRUE, maxit = 100000)
 
 # read in EEG coordinate data
 elec_loc <- read_csv(here("data", "paper_two", "Equidistant Layout.csv"))
