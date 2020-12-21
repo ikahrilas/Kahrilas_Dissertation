@@ -1,6 +1,7 @@
 # 2-step PCA
 
 # load packages
+library(paran)
 library(tidyverse)
 library(here)
 library(factoextra)
@@ -22,6 +23,13 @@ dat_2000 <- dat %>%
   filter(ms < 2000) %>%
   pivot_longer(c(A1:EXG2), names_to = "elec") %>%
   pivot_wider(names_from = ms, values_from = value)
+
+dat_pa <- dat_2000 %>% select(-c(pid, block, elec, n_trials, prop_trials))
+dat_pa <- dat_pa[complete.cases(dat_pa), ]
+
+paran(dat_pa,
+      iterations = 100,
+      centile = 95)
 
 # conduct parallel analysis
 parallel <- fa.parallel(select(dat_2000, -c(pid, block, elec, n_trials, prop_trials)),
@@ -128,29 +136,13 @@ elec_vec <- c(paste0("A", 1:32), paste0("B", 1:32), "EXG1", "EXG2")
 ## covariance loading by component extraction
 loadings_lst <- map(paste0("RC", 1:43), ~ {
   select(cov_loadings_df, all_of(.x), ms) %>%
-    rename("component" = .x)
+    rename("component" = all_of(.x))
 })
 ## 43 data frames with weighted ERPs for each component
 weighted_dfs_lst <- map(loadings_lst, ~ {
   full_join(filter(dat, ms < 2000), all_of(.x), by = "ms") %>%
     mutate(across(.cols = all_of(elec_vec), .fns = ~ all_of(.x) * component))
 })
-
-
-fa.parallel(weighted_dfs_lst[[2]] %>% select(-c(pid, block, ms, n_trials, prop_trials, component)),
-            fm = "ml",
-            fa = "both",
-            n.iter = 10,
-            quant = .95,
-            SMC = TRUE)
-
-test <- principal(weighted_dfs_lst[[2]] %>% select(-c(pid, block, ms, n_trials, prop_trials, component)),
-          nfactors = 10,
-          rotate = "none",
-          cor = "cov",
-          missing = TRUE)
-
-GPFoblq(test$loadings, method = "infomax", normalize = TRUE, maxit = 100000)
 
 # read in EEG coordinate data
 elec_loc <- read_csv(here("data", "paper_two", "Equidistant Layout.csv"))
@@ -161,50 +153,99 @@ elec_loc <- elec_loc %>%
 
 elec_loc$radian_phi <- pi/180 * elec_loc$phi
 
+## data frame with electrode coordinates
 elec_loc <- elec_loc %>%
   mutate(x = theta * cos(radian_phi),
          y = theta * sin(radian_phi))
 
-# start writing code for topo plotting
-long_loading <- pivot_longer(weighted_dfs_lst[[3]],
+# function to create faceted topolots to observe condition differences
+topo_component_plot <- function(dat, component_name) {
+# take data frame for given component and rotate it to long form
+long_loading <- pivot_longer(dat,
                              cols = all_of(elec_vec),
                              names_to = "elec",
                              values_to = "mv")
 
+# merge component data frame with electrode locations
 long_loading_loc <- left_join(long_loading, elec_loc, by = c("elec" = "channel"))
 
-# try plotting
-long_loading_loc %>%
-  filter(!is.na(mv), block %in% c("Neu_Watch", "Pos_Watch", "Neg_Watch")) %>%
+# restructure data frame for plotting and create valence and regulation variables for faceted plotting
+topo_dat <- long_loading_loc %>%
+  filter(!is.na(mv)) %>%
   group_by(block, elec, x, y) %>%
   dplyr::summarize(mv = mean(mv, na.rm = TRUE)) %>%
-  mutate(block = if_else(block == "Neu_Watch", "Neutral",
-                         if_else(block == "Pos_Watch", "Positive", "Negative")),
-         block = factor(block, levels = c("Neutral", "Positive", "Negative"))) %>%
-  ggplot(., aes(x = x, y = y, fill = mv)) +
+  mutate(
+    valence = case_when(
+      str_detect(block, "Pos") ~ "Positive",
+      str_detect(block, "Neg") ~ "Negative",
+      str_detect(block, "Neu") ~ "Neutral"
+  ),
+    regulation = case_when (
+      str_detect(block, "Watch") ~ "Watch",
+      str_detect(block, "Inc") ~ "Increase",
+      str_detect(block, "Dec") ~ "Decrease"
+    ))
+
+# create faceted topoplots
+p <- ggplot(topo_dat, aes(x = x, y = y, fill = mv)) +
   stat_scalpmap() +
   geom_mask(scale_fac = 1.7) +
   geom_head() +
   geom_channels(size = 0.125) +
-  scale_fill_viridis_c(limits = c(-1, 1), oob = scales::squish) +
+  scale_fill_viridis_c(limits = c(min(topo_dat$mv), max(topo_dat$mv)), oob = scales::squish) +
   scale_color_manual(breaks = c("black", "white"),
                      values = c("black", "white"),
                      guide = FALSE) +
   labs(fill = expression(paste("Weighted ", mu,"V"))) +
   coord_equal() +
   theme_void() +
-  facet_wrap(~ block, ncol = 3) +
+  facet_grid(regulation ~ valence, switch = "both") +
   theme(strip.text.x = element_text(size = 12, vjust = 1),
-        strip.text.y = element_text(size = 12, angle = 90))
+        strip.text.y = element_text(size = 12, angle = 90)) +
+  ggtitle(component_name) +
+  theme(plot.title = element_text(hjust = 0.5,
+                                  size = 16))
+# save image
+ggsave(here("images", "paper_2", "component_topos", paste0(component_name, ".png")),
+       plot = p,
+       device = "png",
+       width = 14)
+}
+
+# map function over all component data frames to create faceted topoplots for each
+# rotated component
+topo_lst <- map2(weighted_dfs_lst, paste0("RC", 1:43), ~ topo_component_plot(.x, .y))
+
+
 
 
 plot_butterfly(rename(long_loading_loc, "time" = "ms", "electrode" = "elec", "amplitude" = "mv"))
 
+long_loading_loc %>%
+  rename("time" = "ms", "electrode" = "elec", "amplitude" = "mv") %>%
+  filter(block %in% c("Pos_Watch")) %>%
+erp_scalp(.,
+          montage = "biosemi64alpha")
 
-erp_scalp(rename(long_loading_loc, "time" = "ms", "electrode" = "elec", "amplitude" = "mv"),
-          montage = "biosemi64alpha",
-          size = 0.5,
-          color = as.factor(.data$block))
+
+
+
+
+
+
+
+
+
+
+# code below is for spatial PCA, which might be helpful for P3-like and positive slow wave components.
+test <- principal(weighted_dfs_lst[[2]] %>% select(-c(pid, block, ms, n_trials, prop_trials, component)),
+                  nfactors = 10,
+                  rotate = "none",
+                  cor = "cov",
+                  missing = TRUE)
+
+GPFoblq(test$loadings, method = "infomax", normalize = TRUE, maxit = 100000)
+
 
 
 save.image(file = paste0("scripts/paper_two/", Sys.Date(), "_two_step_pca", ".RData"))
