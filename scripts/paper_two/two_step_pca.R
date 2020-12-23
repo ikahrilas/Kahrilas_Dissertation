@@ -97,13 +97,40 @@ p
 
 # perform temporal PCA with covariance matrix and no rotation
 # with 43 factors, which is informed by the parallel analysis
-dat_pca_nr <- principal(select(dat_2000, -c(pid, block, elec, n_trials, prop_trials)),
-                        nfactors = 43,
-                        rotate = "none",
-                        cor = "cov",
-                        missing = TRUE)
-# perform promax rotation on kaiser-normalized factor loadings
-dat_pca_promax <- kaiser(dat_pca_nr, rotate = "Promax")
+## promax rotation with kappa = 3, tends to give best results for ERPs and is he default for SAS
+## Kaiser normalization before and de-normalize after PCA
+## covariance matrix (mean corrected)
+## derive factor scores using "Harman" method, which finds weights based upon so-called "idealized" variables
+dat_pca_promax <- principal(select(dat_2000, -c(pid, block, elec, n_trials, prop_trials)),
+                            nfactors = 43,
+                            rotate = "promax", # SPSS seems to do a Kaiser normalization before doing
+                            m = 3,             ## Promax, this is done here by the call to "promax"
+                            cor = "cov",       ## which does the normalization before calling Promax in GPArotation.
+                            missing = TRUE,
+                            scores = TRUE,
+                            method = "Harman")
+
+# dat_pca_nr <- principal(select(dat_2000, -c(pid, block, elec, n_trials, prop_trials)),
+#                         nfactors = 43,
+#                         rotate = "none",
+#                         cor = "cov",
+#                         missing = TRUE,
+#                         scores = TRUE,
+#                         method = "Harman")
+#
+# dat_pca_promax <- kaiser(dat_pca_nr, rotate = "Promax")
+# extract factor scores from PCA
+factor_scores_df <- data.frame(dat_pca_promax$scores)
+
+# merge with raw data that has timepoints as variables
+dat_2000_fac_scores <- bind_cols(dat_2000, factor_scores_df)
+
+# turn data into long form for topo plotting
+dat_2000_fac_scores_long <- dat_2000_fac_scores %>%
+  pivot_longer(cols = c("-200":"1999.14395738572"),
+               names_to = "ms",
+               values_to = "mv") %>%
+  mutate(ms = as.numeric(ms))
 
 # create data frame with covariance loadings
 ms_vec <- dat %>%
@@ -129,21 +156,6 @@ temp_loadings_plot <- ggplot(cov_loadings_long, aes(ms, mv)) +
 temp_loadings_plot
 ## based on these loading plots, should retain 1-3, 5, 6, 9, 10, 11, 12-32, 34, 36-38, 41
 
-# this code extracts the covariance loadings for each rotated factor along with its corresponding timepoint
-# in a data frame, such that it can be merged with the raw data to derive factor scores.
-## name of electrodes to be used in tidyeval
-elec_vec <- c(paste0("A", 1:32), paste0("B", 1:32), "EXG1", "EXG2")
-## covariance loading by component extraction
-loadings_lst <- map(paste0("RC", 1:43), ~ {
-  select(cov_loadings_df, all_of(.x), ms) %>%
-    rename("component" = all_of(.x))
-})
-## 43 data frames with weighted ERPs for each component
-weighted_dfs_lst <- map(loadings_lst, ~ {
-  full_join(filter(dat, ms < 2000), all_of(.x), by = "ms") %>%
-    mutate(across(.cols = all_of(elec_vec), .fns = ~ all_of(.x) * component))
-})
-
 # read in EEG coordinate data
 elec_loc <- read_csv(here("data", "paper_two", "Equidistant Layout.csv"))
 elec_loc <- elec_loc %>%
@@ -157,6 +169,74 @@ elec_loc$radian_phi <- pi/180 * elec_loc$phi
 elec_loc <- elec_loc %>%
   mutate(x = theta * cos(radian_phi),
          y = theta * sin(radian_phi))
+
+# create data frame with valence and regulation variables and merge with electrode
+# coordinate data
+topo_dat <- dat_2000_fac_scores_long %>%
+  group_by(block, elec) %>%
+  summarize(across(RC1:RC43, mean)) %>%
+  mutate(
+    valence = case_when(
+      str_detect(block, "Pos") ~ "Positive",
+      str_detect(block, "Neg") ~ "Negative",
+      str_detect(block, "Neu") ~ "Neutral"
+    ),
+    regulation = case_when (
+      str_detect(block, "Watch") ~ "Watch",
+      str_detect(block, "Inc") ~ "Increase",
+      str_detect(block, "Dec") ~ "Decrease"
+    )) %>%
+  left_join(elec_loc, by = c("elec" = "channel"))
+
+# create faceted topoplots
+topo_facet <- function(component) {
+p <- ggplot(topo_dat, aes(x = x, y = y, fill = topo_dat[[component]])) +
+  stat_scalpmap() +
+  geom_mask(scale_fac = 1.7) +
+  geom_head() +
+  geom_channels(size = 0.125) +
+  scale_fill_viridis_c(limits = c(min(topo_dat[[component]]), max(topo_dat[[component]])), oob = scales::squish) +
+  scale_color_manual(breaks = c("black", "white"),
+                     values = c("black", "white"),
+                     guide = FALSE) +
+  labs(fill = "Factor Score") +
+  coord_equal() +
+  theme_void() +
+  facet_grid(regulation ~ valence, switch = "both") +
+  theme(strip.text.x = element_text(size = 12, vjust = 1),
+        strip.text.y = element_text(size = 12, angle = 90)) +
+  ggtitle(component) +
+  theme(plot.title = element_text(hjust = 0.5,
+                                  size = 16))
+p
+# save the plot
+ggsave(here("images", "paper_2", "component_topos", paste0(component, ".png")),
+       plot = p,
+       device = "png",
+       width = 14)
+}
+# iterate the function over each component
+map(paste0("RC", 5:43), ~ topo_facet(.x))
+
+p <- ggplot(topo_dat, aes(x = x, y = y, fill = topo_dat[["RC5"]])) +
+  stat_scalpmap() +
+  geom_mask(scale_fac = 1.7) +
+  geom_head() +
+  geom_channels(size = 0.125) +
+  scale_fill_viridis_c(limits = c(min(topo_dat[["RC5"]]), max(topo_dat[["RC5"]])), oob = scales::squish) +
+  scale_color_manual(breaks = c("black", "white"),
+                     values = c("black", "white"),
+                     guide = FALSE) +
+  labs(fill = "Factor Score") +
+  coord_equal() +
+  theme_void() +
+  facet_grid(regulation ~ valence, switch = "both") +
+  theme(strip.text.x = element_text(size = 12, vjust = 1),
+        strip.text.y = element_text(size = 12, angle = 90)) +
+  ggtitle("RC5") +
+  theme(plot.title = element_text(hjust = 0.5,
+                                  size = 16))
+p
 
 # function to create faceted topolots to observe condition differences
 topo_component_plot <- function(dat, component_name) {
@@ -235,7 +315,18 @@ erp_scalp(.,
 
 
 
-
+## Unused code for deriving factors scores from correlation matrix
+# dat_pca_promax_cor <- principal(select(dat_2000, -c(pid, block, elec, n_trials, prop_trials)),
+#                                 nfactors = 43,
+#                                 rotate = "Promax",
+#                                 m = 3,
+#                                 normalize = TRUE,
+#                                 cor = "cor",
+#                                 missing = TRUE)
+# # perform promax rotation on kaiser-normalized factor loadings
+# dat_pca_promax <- Promax(dat_pca_nr,
+#                          normalize = TRUE,
+#                          m = 3)
 
 # code below is for spatial PCA, which might be helpful for P3-like and positive slow wave components.
 test <- principal(weighted_dfs_lst[[2]] %>% select(-c(pid, block, ms, n_trials, prop_trials, component)),
@@ -249,3 +340,19 @@ GPFoblq(test$loadings, method = "infomax", normalize = TRUE, maxit = 100000)
 
 
 save.image(file = paste0("scripts/paper_two/", Sys.Date(), "_two_step_pca", ".RData"))
+
+# old unused code:
+# # this code extracts the covariance loadings for each rotated factor along with its corresponding timepoint
+# # in a data frame, such that it can be merged with the raw data to derive factor scores.
+# ## name of electrodes to be used in tidyeval
+# elec_vec <- c(paste0("A", 1:32), paste0("B", 1:32), "EXG1", "EXG2")
+# ## covariance loading by component extraction
+# loadings_lst <- map(paste0("RC", 1:43), ~ {
+#   select(cov_loadings_df, all_of(.x), ms) %>%
+#     rename("component" = all_of(.x))
+# })
+# ## 43 data frames with weighted ERPs for each component
+# weighted_dfs_lst <- map(loadings_lst, ~ {
+#   full_join(filter(dat, ms < 2000), all_of(.x), by = "ms") %>%
+#     mutate(across(.cols = all_of(elec_vec), .fns = ~ all_of(.x) * component))
+# })
