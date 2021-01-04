@@ -95,10 +95,9 @@ p <-  ggplot(filter(eigendat, num < 43), aes(x=num, y=eigenvalue, shape=type)) +
   apatheme
 p
 
-# perform temporal PCA with covariance matrix and no rotation
+# perform temporal PCA with covariance matrix and promax rotation
 # with 43 factors, which is informed by the parallel analysis
-## promax rotation with kappa = 3, tends to give best results for ERPs and is he default for SAS
-## Kaiser normalization before and de-normalize after PCA
+## promax rotation with kappa = 3, tends to give best results for ERPs and is the default for SAS
 ## covariance matrix (mean corrected)
 ## derive factor scores using "Harman" method, which finds weights based upon so-called "idealized" variables
 dat_pca_promax <- principal(select(dat_2000, -c(pid, block, elec, n_trials, prop_trials)),
@@ -174,7 +173,7 @@ elec_loc <- elec_loc %>%
 # coordinate data
 topo_dat <- dat_2000_fac_scores_long %>%
   group_by(block, elec) %>%
-  summarize(across(RC1:RC43, mean)) %>%
+  summarize(across(RC1:RC25, mean)) %>%
   mutate(
     valence = case_when(
       str_detect(block, "Pos") ~ "Positive",
@@ -216,7 +215,7 @@ ggsave(here("images", "paper_2", "component_topos", paste0(component, ".png")),
        width = 14)
 }
 # iterate the function over each component
-map(paste0("RC", 5:43), ~ topo_facet(.x))
+map(paste0("RC", 1:43), ~ topo_facet(.x))
 
 p <- ggplot(topo_dat, aes(x = x, y = y, fill = topo_dat[["RC5"]])) +
   stat_scalpmap() +
