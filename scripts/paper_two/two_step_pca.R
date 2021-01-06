@@ -169,8 +169,79 @@ elec_loc <- elec_loc %>%
   mutate(x = theta * cos(radian_phi),
          y = theta * sin(radian_phi))
 
+# The topography of each factor is encoded by the mean amplitude of its factor scores at each site.
+# One can use this information to reproduce the portion of an observation's waveform represented by
+# a given factor by multiplying the time point factor loadings by the observation's factor score and
+# then multiplying each time point by its standard deviation (Dien, 1998a).
+
+# merge covariance loading and factor score data
+
+cov_fac_dat <- full_join(cov_loadings_df %>%
+                           rename_with(.cols = contains("RC"), .fn = ~ paste0(.x, "_cov_loading")),
+                         dat_2000_fac_scores_long %>%
+                           rename_with(.cols = contains("RC"), .fn = ~ paste0(.x, "_fac_score")),
+                         by = "ms") %>%
+                    # this code is so horrendous, forgive me god, but trying to put this in a map function
+                    # keeps throwing an error due to running out of memory.
+                           mutate(RC1_raw = RC1_cov_loading * RC1_fac_score,
+                                  RC2_raw = RC2_cov_loading * RC2_fac_score,
+                                  RC3_raw = RC3_cov_loading * RC3_fac_score,
+                                  RC4_raw = RC4_cov_loading * RC4_fac_score,
+                                  RC5_raw = RC5_cov_loading * RC5_fac_score,
+                                  RC6_raw = RC6_cov_loading * RC6_fac_score,
+                                  RC7_raw = RC7_cov_loading * RC7_fac_score,
+                                  RC8_raw = RC8_cov_loading * RC8_fac_score,
+                                  RC9_raw = RC9_cov_loading * RC9_fac_score,
+                                  RC10_raw = RC10_cov_loading * RC10_fac_score,
+                                  RC11_raw = RC11_cov_loading * RC11_fac_score,
+                                  RC12_raw = RC12_cov_loading * RC12_fac_score,
+                                  RC13_raw = RC13_cov_loading * RC13_fac_score,
+                                  RC14_raw = RC14_cov_loading * RC14_fac_score,
+                                  RC15_raw = RC15_cov_loading * RC15_fac_score,
+                                  RC16_raw = RC16_cov_loading * RC16_fac_score,
+                                  RC17_raw = RC17_cov_loading * RC17_fac_score,
+                                  RC18_raw = RC18_cov_loading * RC18_fac_score,
+                                  RC19_raw = RC19_cov_loading * RC19_fac_score,
+                                  RC20_raw = RC20_cov_loading * RC20_fac_score,
+                                  RC21_raw = RC21_cov_loading * RC21_fac_score,
+                                  RC22_raw = RC22_cov_loading * RC22_fac_score,
+                                  RC23_raw = RC23_cov_loading * RC23_fac_score,
+                                  RC24_raw = RC24_cov_loading * RC24_fac_score,
+                                  RC25_raw = RC25_cov_loading * RC25_fac_score,
+                                  RC26_raw = RC26_cov_loading * RC26_fac_score,
+                                  RC27_raw = RC27_cov_loading * RC27_fac_score,
+                                  RC28_raw = RC28_cov_loading * RC28_fac_score,
+                                  RC29_raw = RC29_cov_loading * RC29_fac_score,
+                                  RC30_raw = RC30_cov_loading * RC30_fac_score,
+                                  RC31_raw = RC31_cov_loading * RC31_fac_score,
+                                  RC32_raw = RC32_cov_loading * RC32_fac_score,
+                                  RC33_raw = RC33_cov_loading * RC33_fac_score,
+                                  RC34_raw = RC34_cov_loading * RC34_fac_score,
+                                  RC35_raw = RC35_cov_loading * RC35_fac_score,
+                                  RC36_raw = RC36_cov_loading * RC36_fac_score,
+                                  RC37_raw = RC37_cov_loading * RC37_fac_score,
+                                  RC38_raw = RC38_cov_loading * RC38_fac_score,
+                                  RC39_raw = RC39_cov_loading * RC39_fac_score,
+                                  RC40_raw = RC40_cov_loading * RC40_fac_score,
+                                  RC41_raw = RC41_cov_loading * RC41_fac_score,
+                                  RC42_raw = RC42_cov_loading * RC42_fac_score,
+                                  RC43_raw = RC43_cov_loading * RC43_fac_score)
+
+cov_loadings <- cov_fac_dat %>%
+  select(RC1_cov_loading:RC43_cov_loading)
+
+fac_scores <- cov_fac_dat %>%
+  select(RC1_fac_score:RC25_fac_score) %>%
+  relocate(RC1_fac_score,
+           RC2_fac_score,
+           RC3_fac_score,
+           RC4_fac_score,
+           RC5_fac_score,
+           )
+
+
 # create data frame with valence and regulation variables and merge with electrode
-# coordinate data
+# coordinate data and merge with covariance loadings
 topo_dat <- dat_2000_fac_scores_long %>%
   group_by(block, elec) %>%
   summarize(across(RC1:RC25, mean)) %>%
@@ -186,6 +257,7 @@ topo_dat <- dat_2000_fac_scores_long %>%
       str_detect(block, "Dec") ~ "Decrease"
     )) %>%
   left_join(elec_loc, by = c("elec" = "channel"))
+
 
 # create faceted topoplots
 topo_facet <- function(component) {
@@ -217,12 +289,9 @@ ggsave(here("images", "paper_2", "component_topos", paste0(component, ".png")),
 # iterate the function over each component
 map(paste0("RC", 1:43), ~ topo_facet(.x))
 
-# merge covariance loading and factor score data
-cov_fac_dat <- full_join(cov_loadings_df %>%
-                           rename_with(.cols = contains("RC"), .fn = ~ paste0(.x, "_cov_loading")),
-                         dat_2000_fac_scores_long %>%
-                           rename_with(.cols = contains("RC"), .fn = ~ paste0(.x, "_fac_score")),
-                         by = "ms")
+
+
+
 
 
 
