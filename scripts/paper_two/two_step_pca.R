@@ -1,4 +1,6 @@
 # 2-step PCA
+## this script performs a temporospatial (i.e., two step) PCA on average-corrected ERP data.
+## the end of the script provides a dataset containing factor scores that can be submitted to analyses.
 
 # load packages
 library(paran)
@@ -284,87 +286,26 @@ principal_info <- function(r,nfactors=1,residuals=FALSE,rotate="varimax",n.obs =
 }
 
 # read in average referenced data set
-## average referenced data
 dat <- read_csv(here("data", "paper_two", "created_data", "erp_avr.csv"))
-## mastoid referenced data
-dat_mast <- read_csv(here("data", "paper_two", "created_data", "erp_mast.csv"))
 
-# make dataset with timepoints as variables and 2000 ms cutoff for early and later components
+# make dataset with timepoints as variables and 2000 ms cutoff
 dat_2000 <- dat %>%
   filter(ms < 2000) %>%
   pivot_longer(c(A1:EXG2), names_to = "elec") %>%
   pivot_wider(names_from = ms, values_from = value)
 
-dat_pa <- dat_2000 %>% select(-c(pid, block, elec, n_trials, prop_trials))
-dat_pa <- dat_pa[complete.cases(dat_pa), ]
-
+# conduct parallel analyses on temporal data to determine number of components to retain for temporal PCA
+dat_pa <- dat_2000 %>% select(-c(pid, block, elec, n_trials, prop_trials)) # filter out variables
+dat_pa <- dat_pa[complete.cases(dat_pa), ] # retain only complete cases
+## run the parallel analysis - this takes a long time.
 paran(dat_pa,
-      iterations = 100,
-      centile = 95)
-
-# conduct parallel analysis
-parallel <- fa.parallel(select(dat_2000, -c(pid, block, elec, n_trials, prop_trials)),
-                        fm = "ml",
-                        fa = "both",
-                        n.iter = 50,
-                        quant = .95,
-                        SMC = TRUE)
-## results of parallel analysis suggest 43 factors and 22 components
-# cleaner ggplot style scree plot
-## create dataframe
-obs <- data.frame(parallel$fa.values)
-obs$type <- c('Observed Data')
-obs$num <- c(row.names(obs))
-obs$num <- as.numeric(obs$num)
-colnames(obs) <- c('eigenvalue', 'type', 'num')
-
-## create quantiles for simulated eigenvalues
-percentile <- apply(parallel$values,2,function(x) quantile(x,.95))
-min <- as.numeric(nrow(obs))
-min <- (4*min) - (min-1)
-max <- as.numeric(nrow(obs))
-max <- 4*max
-percentile1 <- percentile[min:max]
-
-## create data frame for simulated data
-sim <-  data.frame(percentile)
-sim$type <-  c('Simulated Data (95th %ile)')
-sim$num <-  c(row.names(obs))
-sim$num <-  as.numeric(sim$num)
-colnames(sim) <-  c('eigenvalue', 'type', 'num')
-
-## merge the dataframes
-eigendat <- rbind(obs, sim)
-
-## apa theme for scree plot
-apatheme <- theme_bw()+
-  theme(panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank(),
-        panel.background = element_blank(),
-        panel.border = element_blank(),
-        text=element_text(family='Arial'),
-        legend.title=element_blank(),
-        legend.position=c(.7,.8),
-        axis.line.x = element_line(color='black'),
-        axis.line.y = element_line(color='black'))
-
-## now plot it
-p <-  ggplot(filter(eigendat, num < 43), aes(x=num, y=eigenvalue, shape=type)) +
-  #Add lines connecting data points
-  geom_line()+
-  #Add the data points.
-  geom_point(size=4)+
-  #Label the y-axis 'Eigenvalue'
-  scale_y_continuous(name='Eigenvalue')+
-  #Label the x-axis 'Factor Number', and ensure that it ranges from 1-max # of factors, increasing by one with each 'tick' mark.
-  scale_x_continuous(name='Factor Number', breaks=min(eigendat$num):max(eigendat$num))+
-  #Manually specify the different shapes to use for actual and simulated data, in this case, white and black circles.
-  scale_shape_manual(values=c(16,1)) +
-  #Add vertical line indicating parallel analysis suggested max # of factors to retain
-  geom_vline(xintercept = parallel$nfact, linetype = 'dashed')+
-  #Apply our apa-formatting theme
-  apatheme
-p
+      centile = 95,
+      iterations = 100, # the default is 30p (p = # of columns) which takes really long
+      status = TRUE,    # i've seen little variation in using 1 - 100, so settled on 100
+      graph = TRUE,
+      cfa = TRUE
+      )
+## results suggest that 22 components or 43 factors should be retained
 
 # perform temporal PCA with covariance matrix and promax rotation
 # with 43 factors, which is informed by the parallel analysis
@@ -380,28 +321,6 @@ dat_pca_promax <- principal(select(dat_2000, -c(pid, block, elec, n_trials, prop
                             scores = TRUE,
                             method = "Harman")
 
-# dat_pca_nr <- principal(select(dat_2000, -c(pid, block, elec, n_trials, prop_trials)),
-#                         nfactors = 43,
-#                         rotate = "none",
-#                         cor = "cov",
-#                         missing = TRUE,
-#                         scores = TRUE,
-#                         method = "Harman")
-#
-# dat_pca_promax <- kaiser(dat_pca_nr, rotate = "Promax")
-# extract factor scores from PCA
-factor_scores_df <- data.frame(dat_pca_promax$scores)
-
-# merge with raw data that has timepoints as variables - this can be used for topo plots
-dat_2000_fac_scores <- bind_cols(dat_2000, factor_scores_df)
-
-# turn data into long form for ERP raw waveform plotting
-dat_2000_fac_scores_long <- dat_2000_fac_scores %>%
-  pivot_longer(cols = c("-200":"1999.14395738572"),
-               names_to = "ms",
-               values_to = "mv") %>%
-  mutate(ms = as.numeric(ms))
-
 # create data frame with covariance loadings
 ms_vec <- dat %>%
   filter(ms < 2000,
@@ -410,21 +329,47 @@ ms_vec <- dat %>%
   select(ms) %>%
   pull()
 cov_loadings_mat <- matrix(dat_pca_promax$loadings, nrow = length(ms_vec))
+# vector with order of components in output
+comp_vector <- paste0("RC", c(1:3, 8, 26, 35, 7, 5, 31, 11, 12, 33, 17, 30, 43, 42, 29, 28, 40, 14, 4, 34,
+                              10, 21, 41, 23, 15, 22, 27, 39, 38, 13, 16, 37, 32, 6, 36, 9, 20, 24, 19, 18, 25))
 cov_loadings_df <- data.frame(cov_loadings_mat)
-names(cov_loadings_df) <- paste0("RC", c(1:43))
+names(cov_loadings_df) <- comp_vector
 cov_loadings_df <- cov_loadings_df %>%
-  mutate(ms = ms_vec)
+  mutate(ms = ms_vec) %>%
+  relocate(paste0("RC", 1:43))
 
 # long form for plotting
 cov_loadings_long <- pivot_longer(cov_loadings_df, cols = RC1:RC43, names_to = "component", values_to = "mv")
-cov_loadings_long$component <- factor(cov_loadings_long$component, levels = c(paste0("RC", 1:43)))
+cov_loadings_long$component <- factor(cov_loadings_long$component, levels = paste0("RC", 1:43))
 
-# plot it
+# plot it to analyze time course
 temp_loadings_plot <- ggplot(cov_loadings_long, aes(ms, mv)) +
   geom_line() +
   facet_wrap(~ component, nrow = 8)
 temp_loadings_plot
-## based on these loading plots, should retain 1-3, 5, 6, 9, 10, 11, 12-32, 34, 36-38, 41
+
+# components to retain based on time course: 1-7, 10-14, 21-24, 32, 40, 41
+comp_to_retain <- paste0("RC", c(1:7, 10:14, 21, 23, 24, 32, 40, 41))
+
+# The topography of each factor is encoded by the mean amplitude of its factor scores at each site.
+# One can use this information to reproduce the portion of an observation's waveform represented by
+# a given factor by multiplying the time point factor loadings by the observation's factor score and
+# then multiplying each time point by its standard deviation (Dien, 1998a).
+
+# extract factor scores from PCA
+factor_scores_df <- data.frame(dat_pca_promax$scores)
+names(factor_scores_df) <- comp_vector
+
+# merge with raw data that has time points as variables
+dat_2000_fac_scores <- bind_cols(dat_2000, factor_scores_df)
+
+# turn data into long form for ERP raw waveform plotting
+dat_2000_fac_scores_long <- dat_2000_fac_scores %>%
+  pivot_longer(cols = c("-200":"1999.14395738572"),
+               names_to = "ms",
+               values_to = "mv") %>%
+  mutate(ms = as.numeric(ms)) %>%
+  filter(component %in% comp_to_retain)
 
 # read in EEG coordinate data
 elec_loc <- read_csv(here("data", "paper_two", "Equidistant Layout.csv"))
@@ -440,13 +385,7 @@ elec_loc <- elec_loc %>%
   mutate(x = theta * cos(radian_phi),
          y = theta * sin(radian_phi))
 
-# The topography of each factor is encoded by the mean amplitude of its factor scores at each site.
-# One can use this information to reproduce the portion of an observation's waveform represented by
-# a given factor by multiplying the time point factor loadings by the observation's factor score and
-# then multiplying each time point by its standard deviation (Dien, 1998a).
-
 # merge covariance loading and factor score data
-
 comp_raw_dat <- full_join(cov_loadings_df %>%
                            rename_with(.cols = contains("RC"), .fn = ~ paste0(.x, "_cov_loading")),
                          dat_2000_fac_scores_long %>%
@@ -463,45 +402,20 @@ comp_raw_dat <- full_join(cov_loadings_df %>%
                                   RC5_raw = RC5_cov_loading * RC5_fac_score,
                                   RC6_raw = RC6_cov_loading * RC6_fac_score,
                                   RC7_raw = RC7_cov_loading * RC7_fac_score,
-                                  RC8_raw = RC8_cov_loading * RC8_fac_score,
-                                  RC9_raw = RC9_cov_loading * RC9_fac_score,
                                   RC10_raw = RC10_cov_loading * RC10_fac_score,
                                   RC11_raw = RC11_cov_loading * RC11_fac_score,
                                   RC12_raw = RC12_cov_loading * RC12_fac_score,
                                   RC13_raw = RC13_cov_loading * RC13_fac_score,
                                   RC14_raw = RC14_cov_loading * RC14_fac_score,
-                                  RC15_raw = RC15_cov_loading * RC15_fac_score,
-                                  RC16_raw = RC16_cov_loading * RC16_fac_score,
-                                  RC17_raw = RC17_cov_loading * RC17_fac_score,
-                                  RC18_raw = RC18_cov_loading * RC18_fac_score,
-                                  RC19_raw = RC19_cov_loading * RC19_fac_score,
-                                  RC20_raw = RC20_cov_loading * RC20_fac_score,
                                   RC21_raw = RC21_cov_loading * RC21_fac_score,
-                                  RC22_raw = RC22_cov_loading * RC22_fac_score,
                                   RC23_raw = RC23_cov_loading * RC23_fac_score,
                                   RC24_raw = RC24_cov_loading * RC24_fac_score,
-                                  RC25_raw = RC25_cov_loading * RC25_fac_score,
-                                  RC26_raw = RC26_cov_loading * RC26_fac_score,
-                                  RC27_raw = RC27_cov_loading * RC27_fac_score,
-                                  RC28_raw = RC28_cov_loading * RC28_fac_score,
-                                  RC29_raw = RC29_cov_loading * RC29_fac_score,
-                                  RC30_raw = RC30_cov_loading * RC30_fac_score,
-                                  RC31_raw = RC31_cov_loading * RC31_fac_score,
                                   RC32_raw = RC32_cov_loading * RC32_fac_score,
-                                  RC33_raw = RC33_cov_loading * RC33_fac_score,
-                                  RC34_raw = RC34_cov_loading * RC34_fac_score,
-                                  RC35_raw = RC35_cov_loading * RC35_fac_score,
-                                  RC36_raw = RC36_cov_loading * RC36_fac_score,
-                                  RC37_raw = RC37_cov_loading * RC37_fac_score,
-                                  RC38_raw = RC38_cov_loading * RC38_fac_score,
-                                  RC39_raw = RC39_cov_loading * RC39_fac_score,
                                   RC40_raw = RC40_cov_loading * RC40_fac_score,
-                                  RC41_raw = RC41_cov_loading * RC41_fac_score,
-                                  RC42_raw = RC42_cov_loading * RC42_fac_score,
-                                  RC43_raw = RC43_cov_loading * RC43_fac_score)
+                                  RC41_raw = RC41_cov_loading * RC41_fac_score)
 # clean up the dataset a bit and only retain raw component variables plus other vars
 comp_raw_dat <- comp_raw_dat %>%
-                  select(paste0("RC", 1:43, "_raw"),
+                  select(paste0(comp_to_retain, "_raw"),
                          mv,
                          ms,
                          pid,
@@ -512,11 +426,10 @@ comp_raw_dat <- comp_raw_dat %>%
                          )
 
 # create data frame with valence and regulation variables and merge with electrode
-# coordinate data and merge with covariance loadings
-
+# coordinate data and merge with factor score data
 topo_dat <- dat_2000_fac_scores %>%
   group_by(block, elec) %>%
-  summarize(across(paste0("RC", 1:43), ~ mean(.x, na.rm = TRUE))) %>%
+  summarize(across(all_of(comp_to_retain), ~ mean(.x, na.rm = TRUE))) %>%
   mutate(
     valence = case_when(
       str_detect(block, "Pos") ~ "Positive",
@@ -559,33 +472,19 @@ ggsave(here("images", "paper_2", "component_topos", paste0(component, ".png")),
        width = 14)
 }
 # iterate the function over each component
-map(paste0("RC", 1:43), ~ topo_facet(.x))
-
-
-
-
-plot_butterfly(rename(long_loading_loc, "time" = "ms", "electrode" = "elec", "amplitude" = "mv"))
-
-long_loading_loc %>%
-  rename("time" = "ms", "electrode" = "elec", "amplitude" = "mv") %>%
-  filter(block %in% c("Pos_Watch")) %>%
-erp_scalp(.,
-          montage = "biosemi64alpha")
-
-
+map(comp_to_retain, ~ topo_facet(.x))
 
 # prepare factor score data from temporal PCA for 2nd step spatial PCA
-pre_spatial_pca_dat <- bind_cols(select(dat_2000, pid:elec), factor_scores_df) %>%
-  relocate(pid:elec, paste0("RC", 1:43)) %>%
-  pivot_longer(cols = c(RC1:RC43),
+pre_spatial_pca_dat <- bind_cols(select(dat_2000, pid:elec), select(factor_scores_df, comp_to_retain)) %>%
+  pivot_longer(cols = comp_to_retain,
                names_to = "comp",
                values_to = "mv") %>%
   pivot_wider(names_from = elec,
               values_from = mv) %>%
   drop_na()
 
-# parallel analysis
-
+# conduct parallel analysis for each temporal factor
+## define function that returns number of factors to retain
 parallel_fun <- function(component) {
 test <- paran(pre_spatial_pca_dat %>%
               filter(comp == component) %>%
@@ -596,21 +495,44 @@ test <- paran(pre_spatial_pca_dat %>%
 return(test$Retained)
 }
 
-component_vector <- map_dbl(c(paste0("RC", 1:43)), ~ parallel_fun(.x))
-names(component_vector) <- paste0("RC", 1:43)
+component_vector <- map_dbl(comp_to_retain, ~ parallel_fun(.x))
+names(component_vector) <- comp_to_retain
+# the average number of components to retain for each component is ~6, so
+# each spatial PCA will retain 6 components
 
-peepee <- principal_info(pre_spatial_pca_dat %>%
-            filter(comp == names(component_vector)[1]) %>%
-            select(-c(pid:comp)),
-          nfactors = component_vector[1],
-          rotate = "none",
-          cor = "cov",
-          method = "Harman")
+# define function that performs spatial PCA for each of the 18 components
+# from the temporal PCA
+spatial_pca_fun <- function(comp_num){
+principal_info(pre_spatial_pca_dat %>%
+                 filter(comp == names(component_vector)[comp_num]) %>%
+                select(-c(pid:comp)),
+                nfactors = 6,
+                rotate = "none",
+                cor = "cov",
+                method = "Harman")
+}
 
-peepee
+# run the function and return the results into a list of length 18
+spatial_pca_lst <- map(1:18, ~ spatial_pca_fun(.x))
+
+# next: multiply factor scores from spatial PCA by the factor loadings to obtain
+# isolated temporal factor scores attributed to the spatial component. Can use these
+# factor scores to create topo plots and multiply these isolated factor scores by
+# temporal factor loadings to derive raw ERPs.
+
 
 test <- GPFoblq(peepee$loadings, method = "infomax")
 test$Gq
+
+
+
+plot_butterfly(rename(long_loading_loc, "time" = "ms", "electrode" = "elec", "amplitude" = "mv"))
+
+long_loading_loc %>%
+  rename("time" = "ms", "electrode" = "elec", "amplitude" = "mv") %>%
+  filter(block %in% c("Pos_Watch")) %>%
+  erp_scalp(.,
+            montage = "biosemi64alpha")
 # dat_pca_promax_cor <- principal(select(dat_2000, -c(pid, block, elec, n_trials, prop_trials)),
 #                                 nfactors = 43,
 #                                 rotate = "Promax",
@@ -653,13 +575,77 @@ save.image(file = paste0("scripts/paper_two/", Sys.Date(), "_two_step_pca", ".RD
 # })
 
 
-
-
-
-
-
-
-
-
-
-
+# ## unused alternative parallel analysis code
+# # conduct parallel analysis
+# parallel <- fa.parallel(select(dat_2000, -c(pid, block, elec, n_trials, prop_trials)),
+#                         fm = "ml",
+#                         fa = "both",
+#                         n.iter = 50,
+#                         quant = .95,
+#                         SMC = TRUE)
+# ## results of parallel analysis suggest 43 factors and 22 components
+# # cleaner ggplot style scree plot
+# ## create dataframe
+# obs <- data.frame(parallel$fa.values)
+# obs$type <- c('Observed Data')
+# obs$num <- c(row.names(obs))
+# obs$num <- as.numeric(obs$num)
+# colnames(obs) <- c('eigenvalue', 'type', 'num')
+#
+# ## create quantiles for simulated eigenvalues
+# percentile <- apply(parallel$values,2,function(x) quantile(x,.95))
+# min <- as.numeric(nrow(obs))
+# min <- (4*min) - (min-1)
+# max <- as.numeric(nrow(obs))
+# max <- 4*max
+# percentile1 <- percentile[min:max]
+#
+# ## create data frame for simulated data
+# sim <-  data.frame(percentile)
+# sim$type <-  c('Simulated Data (95th %ile)')
+# sim$num <-  c(row.names(obs))
+# sim$num <-  as.numeric(sim$num)
+# colnames(sim) <-  c('eigenvalue', 'type', 'num')
+#
+# ## merge the dataframes
+# eigendat <- rbind(obs, sim)
+#
+# ## apa theme for scree plot
+# apatheme <- theme_bw()+
+#   theme(panel.grid.major = element_blank(),
+#         panel.grid.minor = element_blank(),
+#         panel.background = element_blank(),
+#         panel.border = element_blank(),
+#         text=element_text(family='Arial'),
+#         legend.title=element_blank(),
+#         legend.position=c(.7,.8),
+#         axis.line.x = element_line(color='black'),
+#         axis.line.y = element_line(color='black'))
+#
+# ## now plot it
+# p <-  ggplot(filter(eigendat, num < 43), aes(x=num, y=eigenvalue, shape=type)) +
+#   #Add lines connecting data points
+#   geom_line()+
+#   #Add the data points.
+#   geom_point(size=4)+
+#   #Label the y-axis 'Eigenvalue'
+#   scale_y_continuous(name='Eigenvalue')+
+#   #Label the x-axis 'Factor Number', and ensure that it ranges from 1-max # of factors, increasing by one with each 'tick' mark.
+#   scale_x_continuous(name='Factor Number', breaks=min(eigendat$num):max(eigendat$num))+
+#   #Manually specify the different shapes to use for actual and simulated data, in this case, white and black circles.
+#   scale_shape_manual(values=c(16,1)) +
+#   #Add vertical line indicating parallel analysis suggested max # of factors to retain
+#   geom_vline(xintercept = parallel$nfact, linetype = 'dashed')+
+#   #Apply our apa-formatting theme
+#   apatheme
+# p
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
