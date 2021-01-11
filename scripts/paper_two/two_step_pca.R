@@ -507,7 +507,8 @@ principal_info(pre_spatial_pca_dat %>%
                  filter(comp == names(component_vector)[comp_num]) %>%
                 select(-c(pid:comp)),
                 nfactors = 6,
-                rotate = "none",
+                rotate = "infomaxQ",
+                maxit = 100000,
                 cor = "cov",
                 method = "Harman")
 }
@@ -548,7 +549,7 @@ long_loading_loc %>%
 # code below is for spatial PCA, which might be helpful for P3-like and positive slow wave components.
 test <- principal(weighted_dfs_lst[[2]] %>% select(-c(pid, block, ms, n_trials, prop_trials, component)),
                   nfactors = 10,
-                  rotate = "none",
+                  rotate = "infomaxQ",
                   cor = "cov",
                   missing = TRUE)
 
