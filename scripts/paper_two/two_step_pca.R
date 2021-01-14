@@ -475,7 +475,7 @@ ggsave(here("images", "paper_2", "component_topos", paste0(component, ".png")),
 map(comp_to_retain, ~ topo_facet(.x))
 
 # prepare factor score data from temporal PCA for 2nd step spatial PCA
-pre_spatial_pca_dat <- bind_cols(select(dat_2000, pid:elec), select(factor_scores_df, comp_to_retain)) %>%
+pre_spatial_pca_dat <- bind_cols(select(dat_2000, pid:elec), select(factor_scores_df, all_of(comp_to_retain))) %>%
   pivot_longer(cols = comp_to_retain,
                names_to = "comp",
                values_to = "mv") %>%
@@ -516,14 +516,87 @@ principal_info(pre_spatial_pca_dat %>%
 # run the function and return the results into a list of length 18
 spatial_pca_lst <- map(1:18, ~ spatial_pca_fun(.x))
 
+temp_spat_pca_df <- map_df(1:18, ~ {
+scores_matrix <- as.matrix(spatial_pca_lst[[.x]]$scores)
+loadings_matrix <- t(as.matrix(unclass(spatial_pca_lst[[.x]]$loadings)))
+
+tmp <- map2_df(1:6, c("a", "b", "c", "d", "e", "f"), ~ {
+as.data.frame(scores_matrix[.x,] *
+  matrix(loadings_matrix[.x,],
+       nrow = nrow(scores_matrix),
+       ncol = ncol(loadings_matrix),
+       byrow = TRUE,
+       dimnames = list(NULL, dimnames(loadings_matrix)[[2]]))) %>%
+    mutate(comp = .y) %>%
+    bind_cols(pre_spatial_pca_dat %>%
+                filter(comp == "RC1") %>%
+                select(pid:prop_trials)) %>%
+    relocate(pid:prop_trials, comp)
+})
+
+tmp %>%
+  mutate(comp = paste0(names(component_vector)[.x], comp)) %>%
+  pivot_longer(cols = c(A1:EXG2),
+               names_to = "elec",
+               values_to = "fac_score")
+})
+
+temp_spat_pca_topo_df <- temp_spat_pca_df %>%
+  pivot_wider(names_from = "comp",
+              values_from = "fac_score") %>%
+  group_by(block, elec) %>%
+  summarize(across(RC1a:RC41f, ~ mean(.x, na.rm = TRUE))) %>%
+  mutate(
+    valence = case_when(
+      str_detect(block, "Pos") ~ "Positive",
+      str_detect(block, "Neg") ~ "Negative",
+      str_detect(block, "Neu") ~ "Neutral"
+    ),
+    regulation = case_when (
+      str_detect(block, "Watch") ~ "Watch",
+      str_detect(block, "Inc") ~ "Increase",
+      str_detect(block, "Dec") ~ "Decrease"
+    )) %>%
+  drop_na() %>%
+  left_join(elec_loc, by = c("elec" = "channel"))
+
+topo_facet_spat <- function(component) {
+  p <- ggplot(topo_dat, aes(x = x, y = y, fill = temp_spat_pca_topo_df[[component]])) +
+    stat_scalpmap() +
+    geom_mask(scale_fac = 1.7) +
+    geom_head() +
+    geom_channels(size = 0.125) +
+    scale_fill_viridis_c(limits = c(min(temp_spat_pca_topo_df[[component]]), max(temp_spat_pca_topo_df[[component]])), oob = scales::squish) +
+    scale_color_manual(breaks = c("black", "white"),
+                       values = c("black", "white"),
+                       guide = FALSE) +
+    labs(fill = "Average Mv") +
+    coord_equal() +
+    theme_void() +
+    facet_grid(regulation ~ valence, switch = "both") +
+    theme(strip.text.x = element_text(size = 12, vjust = 1),
+          strip.text.y = element_text(size = 12, angle = 90)) +
+    ggtitle(component) +
+    theme(plot.title = element_text(hjust = 0.5,
+                                    size = 16))
+  p
+  # save the plot
+  ggsave(here("images", "paper_2", "spat_component_topos", paste0(component, ".png")),
+         plot = p,
+         device = "png",
+         width = 14)
+}
+# iterate the function over each component
+map(str_subset(names(temp_spat_pca_topo_df), "RC"), ~ topo_facet_spat(.x))
+
+
 # next: multiply factor scores from spatial PCA by the factor loadings to obtain
 # isolated temporal factor scores attributed to the spatial component. Can use these
 # factor scores to create topo plots and multiply these isolated factor scores by
 # temporal factor loadings to derive raw ERPs.
 
 
-test <- GPFoblq(peepee$loadings, method = "infomax")
-test$Gq
+
 
 
 
