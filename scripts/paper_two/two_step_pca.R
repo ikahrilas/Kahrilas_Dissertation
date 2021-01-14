@@ -292,11 +292,11 @@ dat <- read_csv(here("data", "paper_two", "created_data", "erp_avr.csv"))
 dat_2000 <- dat %>%
   filter(ms < 2000) %>%
   pivot_longer(c(A1:EXG2), names_to = "elec") %>%
-  pivot_wider(names_from = ms, values_from = value)
+  pivot_wider(names_from = ms, values_from = value) %>%
+  drop_na()
 
 # conduct parallel analyses on temporal data to determine number of components to retain for temporal PCA
 dat_pa <- dat_2000 %>% select(-c(pid, block, elec, n_trials, prop_trials)) # filter out variables
-dat_pa <- dat_pa[complete.cases(dat_pa), ] # retain only complete cases
 ## run the parallel analysis - this takes a long time.
 paran(dat_pa,
       centile = 95,
