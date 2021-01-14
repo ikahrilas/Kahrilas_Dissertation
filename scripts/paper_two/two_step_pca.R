@@ -13,7 +13,7 @@ library(devtools)
 library(eegUtils) # remotes::install_github("craddm/eegUtils")
 library(patchwork)
 library(GPArotation)
-
+### FIGURE OUT WHERE THE MISSING FACTOR SCORES ARE COMING FROM!!!
 # define modified principal function from psych package that can perform an oblique infomax rotation for spatial PCA
 principal_info <- function(r,nfactors=1,residuals=FALSE,rotate="varimax",n.obs = NA, covar=FALSE,scores=TRUE,missing=FALSE,impute="median",oblique.scores=TRUE,method="regression",use="pairwise",cor="cor",correct=.5,weight=NULL,...) {
   cl <- match.call()
@@ -351,6 +351,8 @@ temp_loadings_plot
 # components to retain based on time course: 1-7, 10-14, 21-24, 32, 40, 41
 comp_to_retain <- paste0("RC", c(1:7, 10:14, 21, 23, 24, 32, 40, 41))
 
+cov_loadings_df <- cov_loadings_df %>% select(ms, all_of(comp_to_retain))
+
 # The topography of each factor is encoded by the mean amplitude of its factor scores at each site.
 # One can use this information to reproduce the portion of an observation's waveform represented by
 # a given factor by multiplying the time point factor loadings by the observation's factor score and
@@ -369,7 +371,7 @@ dat_2000_fac_scores_long <- dat_2000_fac_scores %>%
                names_to = "ms",
                values_to = "mv") %>%
   mutate(ms = as.numeric(ms)) %>%
-  filter(component %in% comp_to_retain)
+  select(pid:elec, ms, all_of(comp_to_retain))
 
 # read in EEG coordinate data
 elec_loc <- read_csv(here("data", "paper_two", "Equidistant Layout.csv"))
@@ -416,7 +418,6 @@ comp_raw_dat <- full_join(cov_loadings_df %>%
 # clean up the dataset a bit and only retain raw component variables plus other vars
 comp_raw_dat <- comp_raw_dat %>%
                   select(paste0(comp_to_retain, "_raw"),
-                         mv,
                          ms,
                          pid,
                          block,
@@ -473,6 +474,48 @@ ggsave(here("images", "paper_2", "component_topos", paste0(component, ".png")),
 }
 # iterate the function over each component
 map(comp_to_retain, ~ topo_facet(.x))
+
+# plot ERPs for components of interest
+glimpse(comp_raw_dat)
+
+
+comp_raw_dat %>%
+    filter(elec %in% c("A29", "B26")) %>%
+    select(elec:ms, RC2_raw) %>%
+    group_by(block, ms) %>%
+    summarize(mv = mean(RC2_raw)) %>%
+    ggplot(., aes(ms, mv, color = block)) +
+    geom_line(size = 1.1) +
+    geom_vline(xintercept = 0, linetype = "dashed") +
+    geom_hline(yintercept = 0, linetype = "dashed") +
+    labs(x = "Time (ms)",
+         y = expression(paste("Amplitude ( ",mu,"V)")),
+         title = paste("Average", "RC2", "Waveforms")) +
+    theme_classic() +
+    theme(axis.title = element_text(size = 16),
+          axis.text = element_text(size = 12),
+          legend.title = element_text(size = 16),
+          legend.text = element_text(size = 12),
+          legend.key.size = unit(2, "line"),
+          plot.title = element_text(hjust = 0.5),
+          title = element_text(size = 16))
+
+tmp %>%
+  filter(elec %in% c("A29", "B26")) %>%
+  select(elec:ms, RC2_raw) %>%
+  filter(is.na(RC2_raw))
+
+
+erp_plot_fun(cluster = c("A29", "B26"),
+             pca_comp_name = "RC2_raw",
+             eeg_comp_name = "LPP")
+
+
+
+
+
+
+
 
 # prepare factor score data from temporal PCA for 2nd step spatial PCA
 pre_spatial_pca_dat <- bind_cols(select(dat_2000, pid:elec), select(factor_scores_df, all_of(comp_to_retain))) %>%
