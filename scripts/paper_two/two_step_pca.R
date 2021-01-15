@@ -387,45 +387,6 @@ elec_loc <- elec_loc %>%
   mutate(x = theta * cos(radian_phi),
          y = theta * sin(radian_phi))
 
-# merge covariance loading and factor score data
-comp_raw_dat <- full_join(cov_loadings_df %>%
-                           rename_with(.cols = contains("RC"), .fn = ~ paste0(.x, "_cov_loading")),
-                         dat_2000_fac_scores_long %>%
-                           rename_with(.cols = contains("RC"), .fn = ~ paste0(.x, "_fac_score")),
-                         by = "ms") %>%
-                    # this code is so horrendous, forgive me god, but trying to put this in a map function
-                    # keeps throwing an error due to running out of memory. could rewrite this code in the
-                    # future by multiplying matrices of covariance loadings and factor scores together rather
-                    # than employing algebra notation here.
-                           mutate(RC1_raw = RC1_cov_loading * RC1_fac_score,
-                                  RC2_raw = RC2_cov_loading * RC2_fac_score,
-                                  RC3_raw = RC3_cov_loading * RC3_fac_score,
-                                  RC4_raw = RC4_cov_loading * RC4_fac_score,
-                                  RC5_raw = RC5_cov_loading * RC5_fac_score,
-                                  RC6_raw = RC6_cov_loading * RC6_fac_score,
-                                  RC7_raw = RC7_cov_loading * RC7_fac_score,
-                                  RC10_raw = RC10_cov_loading * RC10_fac_score,
-                                  RC11_raw = RC11_cov_loading * RC11_fac_score,
-                                  RC12_raw = RC12_cov_loading * RC12_fac_score,
-                                  RC13_raw = RC13_cov_loading * RC13_fac_score,
-                                  RC14_raw = RC14_cov_loading * RC14_fac_score,
-                                  RC21_raw = RC21_cov_loading * RC21_fac_score,
-                                  RC23_raw = RC23_cov_loading * RC23_fac_score,
-                                  RC24_raw = RC24_cov_loading * RC24_fac_score,
-                                  RC32_raw = RC32_cov_loading * RC32_fac_score,
-                                  RC40_raw = RC40_cov_loading * RC40_fac_score,
-                                  RC41_raw = RC41_cov_loading * RC41_fac_score)
-# clean up the dataset a bit and only retain raw component variables plus other vars
-comp_raw_dat <- comp_raw_dat %>%
-                  select(paste0(comp_to_retain, "_raw"),
-                         ms,
-                         pid,
-                         block,
-                         n_trials,
-                         prop_trials,
-                         elec,
-                         )
-
 # create data frame with valence and regulation variables and merge with electrode
 # coordinate data and merge with factor score data
 topo_dat <- dat_2000_fac_scores %>%
@@ -476,14 +437,58 @@ ggsave(here("images", "paper_2", "component_topos", paste0(component, ".png")),
 map(comp_to_retain, ~ topo_facet(.x))
 
 # plot ERPs for components of interest
-glimpse(comp_raw_dat)
+## derive raw ERPs for each temporal component
+temp_raw_df <- map_df(1:length(comp_vector), ~ {
+scores_matrix <- as.matrix(dat_pca_promax$scores)
+loadings_matrix <- t(as.matrix(unclass(dat_pca_promax$loadings)))
+
+tmp <- matrix(loadings_matrix[.x,],
+        nrow = nrow(scores_matrix),
+        ncol = ncol(loadings_matrix),
+        byrow = TRUE,
+        dimnames = list(NULL, dimnames(loadings_matrix)[[2]]))
+
+tmp_scores_mat <- matrix(rep(scores_matrix[,.x],
+                             times = ncol(loadings_matrix)),
+                         ncol = ncol(loadings_matrix))
+
+raw_mat <- tmp * tmp_scores_mat
+
+raw_dat <- as.tibble(raw_mat) %>%
+  mutate(comp = comp_vector[.x]) %>%
+  bind_cols(dat_2000 %>%
+              select(pid:elec)) %>%
+  relocate(pid:elec, comp)
+})
+
+temp_raw_df_long <-  temp_raw_df %>%
+  pivot_longer(cols = -c(pid:comp),
+               names_to = "ms",
+               values_to = "mv")
 
 
-comp_raw_dat %>%
-    filter(elec %in% c("A29", "B26")) %>%
-    select(elec:ms, RC2_raw) %>%
+map_dbl(temp_raw_df, ~sum(is.na(.x)))
+
+
+tmp <- temp_raw_df %>%
+  filter(elec %in% c("A29", "B26"),
+         comp == "RC2") %>%
+  pivot_longer(cols = -c(pid:comp),
+               names_to = "ms",
+               values_to = "mv") %>%
+  group_by(block, ms) %>%
+  mutate(ms = as.numeric(ms)) %>%
+  summarize(mv = mean(mv))
+
+temp_raw_df %>%
+    filter(elec %in% c("A29", "B26"),
+           comp == "RC3") %>%
+  pivot_longer(cols = -c(pid:comp),
+               names_to = "ms",
+               values_to = "mv") %>%
     group_by(block, ms) %>%
-    summarize(mv = mean(RC2_raw)) %>%
+    mutate(ms = as.numeric(ms)) %>%
+    summarize(mv = mean(mv)) %>%
     ggplot(., aes(ms, mv, color = block)) +
     geom_line(size = 1.1) +
     geom_vline(xintercept = 0, linetype = "dashed") +
@@ -500,10 +505,7 @@ comp_raw_dat %>%
           plot.title = element_text(hjust = 0.5),
           title = element_text(size = 16))
 
-tmp %>%
-  filter(elec %in% c("A29", "B26")) %>%
-  select(elec:ms, RC2_raw) %>%
-  filter(is.na(RC2_raw))
+
 
 
 erp_plot_fun(cluster = c("A29", "B26"),
@@ -583,6 +585,28 @@ tmp %>%
                names_to = "elec",
                values_to = "fac_score")
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 temp_spat_pca_topo_df <- temp_spat_pca_df %>%
   pivot_wider(names_from = "comp",
