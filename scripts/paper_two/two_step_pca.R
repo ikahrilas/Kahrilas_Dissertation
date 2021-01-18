@@ -560,9 +560,9 @@ return(test$Retained)
 
 component_vector <- map_dbl(comp_to_retain, ~ parallel_fun(.x))
 names(component_vector) <- comp_to_retain
-# the average number of components to retain for each component is ~6, so
+# the average number of components to retain for each component is 5.875, so
 # each spatial PCA will retain 6 components
-## PICK UP HERE!
+
 # define function that performs spatial PCA for each of the 8 components
 # from the temporal PCA
 spatial_pca_fun <- function(comp_num){
@@ -576,53 +576,44 @@ principal_info(pre_spatial_pca_dat %>%
                 method = "Harman")
 }
 
-# run the function and return the results into a list of length 18
+# run the function and return the results into a list of length 8
 spatial_pca_lst <- map(1:length(component_vector), ~ spatial_pca_fun(.x))
 
-temp_spat_pca_df <- map_df(1:length(component_vector), ~ {
+temp_component_names <- str_replace(names(component_vector), "R", "T")
+
+temp_spat_pca_df <- map_df(1:length(temp_component_names), ~ {
+
 scores_matrix <- as.matrix(spatial_pca_lst[[.x]]$scores)
 loadings_matrix <- t(as.matrix(unclass(spatial_pca_lst[[.x]]$loadings)))
+spat_comp_names <- str_replace(dimnames(scores_matrix)[[2]], "T", "S")
 
-tmp <- map2_df(1:6, c("a", "b", "c", "d", "e", "f"), ~ {
-as.data.frame(scores_matrix[.x,] *
-  matrix(loadings_matrix[.x,],
-       nrow = nrow(scores_matrix),
-       ncol = ncol(loadings_matrix),
-       byrow = TRUE,
-       dimnames = list(NULL, dimnames(loadings_matrix)[[2]]))) %>%
-    mutate(comp = .y) %>%
+tmp <- map_df(1:length(spat_comp_names), ~ {
+  tmp_loadings_mat <- matrix(loadings_matrix[.x,],
+                             nrow = nrow(scores_matrix),
+                             ncol = ncol(loadings_matrix),
+                             byrow = TRUE,
+                             dimnames = list(NULL, dimnames(loadings_matrix)[[2]]))
+
+  tmp_scores_mat <- matrix(rep(scores_matrix[,.x],
+                               times = ncol(loadings_matrix)),
+                           ncol = ncol(loadings_matrix))
+
+  raw_mat <- tmp_loadings_mat * tmp_scores_mat
+
+  raw_dat <- as_tibble(raw_mat) %>%
+    mutate(comp = spat_comp_names[.x]) %>%
     bind_cols(pre_spatial_pca_dat %>%
-                filter(comp == "RC1") %>%
+                filter(comp == "RC2") %>%
                 select(pid:prop_trials)) %>%
     relocate(pid:prop_trials, comp)
 })
 
 tmp %>%
-  mutate(comp = paste0(names(component_vector)[.x], comp)) %>%
+  mutate(comp = paste(temp_component_names[.x], comp, sep = "/")) %>%
   pivot_longer(cols = c(A1:EXG2),
                names_to = "elec",
                values_to = "fac_score")
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
