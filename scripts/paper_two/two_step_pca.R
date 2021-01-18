@@ -646,6 +646,58 @@ map(temp_spat_comp_names, ~ topo_facet_spat(.x))
 # next:
 # multiply spatial factor scores by temporal factor loadings to derive "raw" ERPs.
 
+loadings_retained_comp <- as_tibble(unclass(dat_pca_promax$loadings)) %>%
+  select(comp_to_retain) %>%
+  as.matrix(ncol = ncol(dat_pca_promax$loadings))
+
+loadings_retained_comp <- t(loadings_retained_comp)
+
+temp_spat_scores_mat <- temp_spat_pca_df %>%
+  pivot_wider(names_from = comp,
+              values_from = fac_score) %>%
+  select(-c(pid:elec)) %>%
+  as.matrix()
+
+
+
+
+
+
+
+
+
+dimnames(dat_pca_promax$loadings)
+
+scores_matrix <- as.matrix(spatial_pca_lst$scores)
+loadings_matrix <- t(as.matrix(unclass(dat_pca_promax$loadings)))
+
+tmp <- matrix(loadings_matrix[.x,],
+              nrow = nrow(scores_matrix),
+              ncol = ncol(loadings_matrix),
+              byrow = TRUE,
+              dimnames = list(NULL, dimnames(loadings_matrix)[[2]]))
+
+tmp_scores_mat <- matrix(rep(scores_matrix[,.x],
+                             times = ncol(loadings_matrix)),
+                         ncol = ncol(loadings_matrix))
+
+raw_mat <- tmp * tmp_scores_mat
+
+raw_dat <- as_tibble(raw_mat) %>%
+  mutate(comp = comp_vector[.x]) %>%
+  bind_cols(dat_2000 %>%
+              select(pid:elec)) %>%
+  relocate(pid:elec, comp)
+
+
+
+
+
+
+
+
+
+
 
 
 
