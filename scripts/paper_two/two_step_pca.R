@@ -402,30 +402,6 @@ topo_dat <- dat_2000_fac_scores %>%
   drop_na() %>%
   left_join(elec_loc, by = c("elec" = "channel"))
 
-
-p <- ggplot(topo_dat,aes(x = x, y = y, fill = RC2, label = elec)) +
-  geom_topo(grid_res = 300,
-            interp_limit = "head",
-            chan_markers = "text",
-            chan_size = 2) +
-  scale_fill_distiller(palette = "RdBu") +
-  theme_void() +
-  coord_equal() +
-  labs(fill = expression(paste("Factor Score"))) +
-  facet_grid(regulation ~ valence, switch = "both") +
-  theme(strip.text.x = element_text(size = 12, vjust = 1),
-        strip.text.y = element_text(size = 12, angle = 90)) +
-  ggtitle("RC2") +
-  theme(plot.title = element_text(hjust = 0.5,
-                                  size = 16))
-
-ggsave(here("images", "paper_2", "component_topos", "test.png"),
-       plot = p,
-       device = "png",
-       width = 10,
-       dpi = "retina")
-
-
 # create faceted topoplots
 topo_facet <- function(component) {
   p <- ggplot(topo_dat,aes(x = x, y = y, fill = topo_dat[[component]], label = elec)) +
@@ -609,19 +585,18 @@ tmp <- map_df(1:length(spat_comp_names), ~ {
 })
 
 tmp %>%
-  mutate(comp = paste(temp_component_names[.x], comp, sep = "/")) %>%
+  mutate(comp = paste(temp_component_names[.x], comp, sep = "-")) %>%
   pivot_longer(cols = c(A1:EXG2),
                names_to = "elec",
                values_to = "fac_score")
 })
 
-
-
+# prepare data frame with temporospatial factors for topo plotting
 temp_spat_pca_topo_df <- temp_spat_pca_df %>%
   pivot_wider(names_from = "comp",
               values_from = "fac_score") %>%
   group_by(block, elec) %>%
-  summarize(across(RC1a:RC41f, ~ mean(.x, na.rm = TRUE))) %>%
+  summarize(across(`TC2-SC5`:`TC12-SC4`, ~ mean(.x, na.rm = TRUE))) %>%
   mutate(
     valence = case_when(
       str_detect(block, "Pos") ~ "Positive",
@@ -636,40 +611,40 @@ temp_spat_pca_topo_df <- temp_spat_pca_df %>%
   drop_na() %>%
   left_join(elec_loc, by = c("elec" = "channel"))
 
+# define function for temporospatial topo plots - nearly identical to the earlier function except that
+# the images are saved to a different location
 topo_facet_spat <- function(component) {
-  p <- ggplot(topo_dat, aes(x = x, y = y, fill = temp_spat_pca_topo_df[[component]])) +
-    stat_scalpmap() +
-    geom_mask(scale_fac = 1.7) +
-    geom_head() +
-    geom_channels(size = 0.125) +
-    scale_fill_viridis_c(limits = c(min(temp_spat_pca_topo_df[[component]]), max(temp_spat_pca_topo_df[[component]])), oob = scales::squish) +
-    scale_color_manual(breaks = c("black", "white"),
-                       values = c("black", "white"),
-                       guide = FALSE) +
-    labs(fill = "Average Mv") +
-    coord_equal() +
+  p <- ggplot(temp_spat_pca_topo_df,aes(x = x, y = y, fill = temp_spat_pca_topo_df[[component]], label = elec)) +
+    geom_topo(grid_res = 300,
+              interp_limit = "head",
+              chan_markers = "text",
+              chan_size = 2) +
+    scale_fill_distiller(palette = "RdBu") +
     theme_void() +
+    coord_equal() +
+    labs(fill = expression(paste("Factor Score"))) +
     facet_grid(regulation ~ valence, switch = "both") +
     theme(strip.text.x = element_text(size = 12, vjust = 1),
           strip.text.y = element_text(size = 12, angle = 90)) +
     ggtitle(component) +
     theme(plot.title = element_text(hjust = 0.5,
                                     size = 16))
-  p
   # save the plot
   ggsave(here("images", "paper_2", "spat_component_topos", paste0(component, ".png")),
          plot = p,
          device = "png",
-         width = 14)
+         width = 10,
+         dpi = "retina")
 }
+# define string of temporospatial components
+temp_spat_comp_names <- str_subset(names(temp_spat_pca_topo_df), pattern = "TC")
+
 # iterate the function over each component
-map(str_subset(names(temp_spat_pca_topo_df), "RC"), ~ topo_facet_spat(.x))
+map(temp_spat_comp_names, ~ topo_facet_spat(.x))
 
 
-# next: multiply factor scores from spatial PCA by the factor loadings to obtain
-# isolated temporal factor scores attributed to the spatial component. Can use these
-# factor scores to create topo plots and multiply these isolated factor scores by
-# temporal factor loadings to derive raw ERPs.
+# next:
+# multiply spatial factor scores by temporal factor loadings to derive "raw" ERPs.
 
 
 
