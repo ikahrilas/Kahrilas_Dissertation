@@ -536,9 +536,10 @@ temp_raw_df %>%
          dpi = "retina")
 })
 
-# prepare factor score data from temporal PCA for 2nd step spatial PCA
-pre_spatial_pca_dat <- bind_cols(select(dat_2000, pid:elec), select(factor_scores_df, all_of(comp_to_retain))) %>%
-  pivot_longer(cols = comp_to_retain,
+# prepare factor score data from temporal PCA for 2nd step spatial PCA with electrodes as columns
+pre_spatial_pca_dat <- bind_cols(select(dat_2000, pid:elec),
+                                 select(factor_scores_df, all_of(comp_to_retain))) %>%
+  pivot_longer(cols = all_of(comp_to_retain),
                names_to = "comp",
                values_to = "mv") %>%
   pivot_wider(names_from = elec,
@@ -561,8 +562,8 @@ component_vector <- map_dbl(comp_to_retain, ~ parallel_fun(.x))
 names(component_vector) <- comp_to_retain
 # the average number of components to retain for each component is ~6, so
 # each spatial PCA will retain 6 components
-
-# define function that performs spatial PCA for each of the 18 components
+## PICK UP HERE!
+# define function that performs spatial PCA for each of the 8 components
 # from the temporal PCA
 spatial_pca_fun <- function(comp_num){
 principal_info(pre_spatial_pca_dat %>%
@@ -576,9 +577,9 @@ principal_info(pre_spatial_pca_dat %>%
 }
 
 # run the function and return the results into a list of length 18
-spatial_pca_lst <- map(1:18, ~ spatial_pca_fun(.x))
+spatial_pca_lst <- map(1:length(component_vector), ~ spatial_pca_fun(.x))
 
-temp_spat_pca_df <- map_df(1:18, ~ {
+temp_spat_pca_df <- map_df(1:length(component_vector), ~ {
 scores_matrix <- as.matrix(spatial_pca_lst[[.x]]$scores)
 loadings_matrix <- t(as.matrix(unclass(spatial_pca_lst[[.x]]$loadings)))
 
