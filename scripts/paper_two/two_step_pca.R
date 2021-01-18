@@ -13,7 +13,7 @@ library(devtools)
 library(eegUtils) # remotes::install_github("craddm/eegUtils")
 library(patchwork)
 library(GPArotation)
-### FIGURE OUT WHERE THE MISSING FACTOR SCORES ARE COMING FROM!!!
+
 # define modified principal function from psych package that can perform an oblique infomax rotation for spatial PCA
 principal_info <- function(r,nfactors=1,residuals=FALSE,rotate="varimax",n.obs = NA, covar=FALSE,scores=TRUE,missing=FALSE,impute="median",oblique.scores=TRUE,method="regression",use="pairwise",cor="cor",correct=.5,weight=NULL,...) {
   cl <- match.call()
@@ -289,23 +289,26 @@ principal_info <- function(r,nfactors=1,residuals=FALSE,rotate="varimax",n.obs =
 dat <- read_csv(here("data", "paper_two", "created_data", "erp_avr.csv"))
 
 # make dataset with timepoints as variables and 2000 ms cutoff
+## beyond 2000 ms is not of interest and was also not subjected to artifact correction in the preprocessing stage
 dat_2000 <- dat %>%
   filter(ms < 2000) %>%
   pivot_longer(c(A1:EXG2), names_to = "elec") %>%
   pivot_wider(names_from = ms, values_from = value) %>%
   drop_na()
 
-# conduct parallel analyses on temporal data to determine number of components to retain for temporal PCA
-dat_pa <- dat_2000 %>% select(-c(pid, block, elec, n_trials, prop_trials)) # filter out variables
-## run the parallel analysis - this takes a long time.
-paran(dat_pa,
-      centile = 95,
-      iterations = 100, # the default is 30p (p = # of columns) which takes really long
-      status = TRUE,    # i've seen little variation in using 1 - 100, so settled on 100
-      graph = TRUE,
-      cfa = TRUE
-      )
-## results suggest that 22 components or 43 factors should be retained
+# The parallel code below is commented out since it is computationally intensive. Uncomment and run
+# to see results of parallel analysis, though results are below in the the comments.
+# # conduct parallel analyses on temporal data to determine number of components to retain for temporal PCA
+# dat_pa <- dat_2000 %>% select(-c(pid, block, elec, n_trials, prop_trials)) # filter out variables
+# ## run the parallel analysis - this takes a long time.
+# paran(dat_pa,
+#       centile = 95,
+#       iterations = 100, # the default is 30p (p = # of columns) which takes really long
+#       status = TRUE,    # i've seen little variation in using 1 - 100, so settled on 100
+#       graph = TRUE,
+#       cfa = TRUE
+#       )
+# ## results suggest that 22 components or 43 factors should be retained
 
 # perform temporal PCA with covariance matrix and promax rotation
 # with 43 factors, which is informed by the parallel analysis
@@ -313,7 +316,7 @@ paran(dat_pa,
 ## covariance matrix (mean corrected)
 ## derive factor scores using "Harman" method, which finds weights based upon so-called "idealized" variables
 dat_pca_promax <- principal(select(dat_2000, -c(pid, block, elec, n_trials, prop_trials)),
-                            nfactors = 43,
+                            nfactors = 22,
                             rotate = "promax", # SPSS seems to do a Kaiser normalization before doing
                             m = 3,             ## Promax, this is done here by the call to "promax"
                             cor = "cov",       ## which does the normalization before calling Promax in GPArotation.
@@ -330,26 +333,25 @@ ms_vec <- dat %>%
   pull()
 cov_loadings_mat <- matrix(dat_pca_promax$loadings, nrow = length(ms_vec))
 # vector with order of components in output
-comp_vector <- paste0("RC", c(1:3, 8, 26, 35, 7, 5, 31, 11, 12, 33, 17, 30, 43, 42, 29, 28, 40, 14, 4, 34,
-                              10, 21, 41, 23, 15, 22, 27, 39, 38, 13, 16, 37, 32, 6, 36, 9, 20, 24, 19, 18, 25))
+comp_vector <- paste0("RC", c(1:3, 18, 22, 17, 9, 21, 5, 11, 7, 19, 12, 4, 20, 6, 15, 10, 14, 13, 16, 8))
 cov_loadings_df <- data.frame(cov_loadings_mat)
 names(cov_loadings_df) <- comp_vector
 cov_loadings_df <- cov_loadings_df %>%
   mutate(ms = ms_vec) %>%
-  relocate(paste0("RC", 1:43))
+  relocate(paste0("RC", 1:22))
 
 # long form for plotting
-cov_loadings_long <- pivot_longer(cov_loadings_df, cols = RC1:RC43, names_to = "component", values_to = "mv")
-cov_loadings_long$component <- factor(cov_loadings_long$component, levels = paste0("RC", 1:43))
+cov_loadings_long <- pivot_longer(cov_loadings_df, cols = RC1:RC22, names_to = "component", values_to = "mv")
+cov_loadings_long$component <- factor(cov_loadings_long$component, levels = paste0("RC", 1:22))
 
 # plot it to analyze time course
 temp_loadings_plot <- ggplot(cov_loadings_long, aes(ms, mv)) +
   geom_line() +
-  facet_wrap(~ component, nrow = 8)
+  facet_wrap(~ component, nrow = 5)
 temp_loadings_plot
 
-# components to retain based on time course: 1-7, 10-14, 21-24, 32, 40, 41
-comp_to_retain <- paste0("RC", c(1:7, 10:14, 21, 23, 24, 32, 40, 41))
+# components to retain based on time course: 2-5, 7, 9 ,11, & 12
+comp_to_retain <- paste0("RC", c(2:5, 7, 9, 11, 12))
 
 cov_loadings_df <- cov_loadings_df %>% select(ms, all_of(comp_to_retain))
 
@@ -362,16 +364,10 @@ cov_loadings_df <- cov_loadings_df %>% select(ms, all_of(comp_to_retain))
 factor_scores_df <- data.frame(dat_pca_promax$scores)
 names(factor_scores_df) <- comp_vector
 
-# merge with raw data that has time points as variables
-dat_2000_fac_scores <- bind_cols(dat_2000, factor_scores_df)
-
-# turn data into long form for ERP raw waveform plotting
-dat_2000_fac_scores_long <- dat_2000_fac_scores %>%
-  pivot_longer(cols = c("-200":"1999.14395738572"),
-               names_to = "ms",
-               values_to = "mv") %>%
-  mutate(ms = as.numeric(ms)) %>%
-  select(pid:elec, ms, all_of(comp_to_retain))
+# merge with original data that has block type and electrode variables
+dat_2000_fac_scores <- bind_cols(dat_2000 %>%
+                                   select(pid:elec),
+                                 factor_scores_df)
 
 # read in EEG coordinate data
 elec_loc <- read_csv(here("data", "paper_two", "Equidistant Layout.csv"))
@@ -406,38 +402,61 @@ topo_dat <- dat_2000_fac_scores %>%
   drop_na() %>%
   left_join(elec_loc, by = c("elec" = "channel"))
 
-# create faceted topoplots
-topo_facet <- function(component) {
-p <- ggplot(topo_dat, aes(x = x, y = y, fill = topo_dat[[component]])) +
-  stat_scalpmap() +
-  geom_mask(scale_fac = 1.7) +
-  geom_head() +
-  geom_channels(size = 0.125) +
-  scale_fill_viridis_c(limits = c(min(topo_dat[[component]]), max(topo_dat[[component]])), oob = scales::squish) +
-  scale_color_manual(breaks = c("black", "white"),
-                     values = c("black", "white"),
-                     guide = FALSE) +
-  labs(fill = "Average Mv") +
-  coord_equal() +
+
+p <- ggplot(topo_dat,aes(x = x, y = y, fill = RC2, label = elec)) +
+  geom_topo(grid_res = 300,
+            interp_limit = "head",
+            chan_markers = "text",
+            chan_size = 2) +
+  scale_fill_distiller(palette = "RdBu") +
   theme_void() +
+  coord_equal() +
+  labs(fill = expression(paste("Factor Score"))) +
   facet_grid(regulation ~ valence, switch = "both") +
   theme(strip.text.x = element_text(size = 12, vjust = 1),
         strip.text.y = element_text(size = 12, angle = 90)) +
-  ggtitle(component) +
+  ggtitle("RC2") +
   theme(plot.title = element_text(hjust = 0.5,
                                   size = 16))
-p
+
+ggsave(here("images", "paper_2", "component_topos", "test.png"),
+       plot = p,
+       device = "png",
+       width = 10,
+       dpi = "retina")
+
+
+# create faceted topoplots
+topo_facet <- function(component) {
+  p <- ggplot(topo_dat,aes(x = x, y = y, fill = topo_dat[[component]], label = elec)) +
+    geom_topo(grid_res = 300,
+              interp_limit = "head",
+              chan_markers = "text",
+              chan_size = 2) +
+    scale_fill_distiller(palette = "RdBu") +
+    theme_void() +
+    coord_equal() +
+    labs(fill = expression(paste("Factor Score"))) +
+    facet_grid(regulation ~ valence, switch = "both") +
+    theme(strip.text.x = element_text(size = 12, vjust = 1),
+          strip.text.y = element_text(size = 12, angle = 90)) +
+    ggtitle(component) +
+    theme(plot.title = element_text(hjust = 0.5,
+                                    size = 16))
 # save the plot
 ggsave(here("images", "paper_2", "component_topos", paste0(component, ".png")),
        plot = p,
        device = "png",
-       width = 14)
+       width = 10,
+       dpi = "retina")
 }
 # iterate the function over each component
 map(comp_to_retain, ~ topo_facet(.x))
 
 # plot ERPs for components of interest
-## derive raw ERPs for each temporal component
+## iterate over each component and multiply covariance loadings by factor scores for each
+## observation.
+## create "comp" variable as well.
 temp_raw_df <- map_df(1:length(comp_vector), ~ {
 scores_matrix <- as.matrix(dat_pca_promax$scores)
 loadings_matrix <- t(as.matrix(unclass(dat_pca_promax$loadings)))
@@ -454,35 +473,41 @@ tmp_scores_mat <- matrix(rep(scores_matrix[,.x],
 
 raw_mat <- tmp * tmp_scores_mat
 
-raw_dat <- as.tibble(raw_mat) %>%
+raw_dat <- as_tibble(raw_mat) %>%
   mutate(comp = comp_vector[.x]) %>%
   bind_cols(dat_2000 %>%
               select(pid:elec)) %>%
   relocate(pid:elec, comp)
 })
 
-temp_raw_df_long <-  temp_raw_df %>%
-  pivot_longer(cols = -c(pid:comp),
-               names_to = "ms",
-               values_to = "mv")
+# derive ERP plots in mV units for each temporal component
+## define list of electrodes of interest for each component based on visual
+## inspection of topo plots
 
+elec_selections <- list(c("A29", "B26"),
+                        c("A29", "B26"),
+                        "B28",
+                        c("A29", "B26"),
+                        c("A29", "A31", "B30", "B26"),
+                        c("A29", "B26"),
+                        "B28", # site of negative activity for RC12
+                        c("A29", "B26"))
 
-map_dbl(temp_raw_df, ~sum(is.na(.x)))
+# list of component sites for map function
+component_list <- list("RC2",
+                       "RC3",
+                       "RC4",
+                       "RC5",
+                       "RC7",
+                       "RC11",
+                       "RC12",
+                       "RC9")
 
-
-tmp <- temp_raw_df %>%
-  filter(elec %in% c("A29", "B26"),
-         comp == "RC2") %>%
-  pivot_longer(cols = -c(pid:comp),
-               names_to = "ms",
-               values_to = "mv") %>%
-  group_by(block, ms) %>%
-  mutate(ms = as.numeric(ms)) %>%
-  summarize(mv = mean(mv))
-
+# iterate over each component and electrode selection to create ERP plots
+map2(component_list, elec_selections, ~ {
 temp_raw_df %>%
-    filter(elec %in% c("A29", "B26"),
-           comp == "RC3") %>%
+    filter(elec %in% c(.y),
+           comp == .x) %>%
   pivot_longer(cols = -c(pid:comp),
                names_to = "ms",
                values_to = "mv") %>%
@@ -494,8 +519,8 @@ temp_raw_df %>%
     geom_vline(xintercept = 0, linetype = "dashed") +
     geom_hline(yintercept = 0, linetype = "dashed") +
     labs(x = "Time (ms)",
-         y = expression(paste("Amplitude ( ",mu,"V)")),
-         title = paste("Average", "RC2", "Waveforms")) +
+         y = expression(paste("Amplitude (",mu,"V)")),
+         title = paste("Average", .x, "Waveforms")) +
     theme_classic() +
     theme(axis.title = element_text(size = 16),
           axis.text = element_text(size = 12),
@@ -504,20 +529,12 @@ temp_raw_df %>%
           legend.key.size = unit(2, "line"),
           plot.title = element_text(hjust = 0.5),
           title = element_text(size = 16))
-
-
-
-
-erp_plot_fun(cluster = c("A29", "B26"),
-             pca_comp_name = "RC2_raw",
-             eeg_comp_name = "LPP")
-
-
-
-
-
-
-
+# save each plot
+  ggsave(here("images", "paper_2", "temporal_component_ERPs", paste0(.x, ".png")),
+         device = "png",
+         width = 12,
+         dpi = "retina")
+})
 
 # prepare factor score data from temporal PCA for 2nd step spatial PCA
 pre_spatial_pca_dat <- bind_cols(select(dat_2000, pid:elec), select(factor_scores_df, all_of(comp_to_retain))) %>%
