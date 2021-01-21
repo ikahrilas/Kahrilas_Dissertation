@@ -13,6 +13,7 @@ library(devtools)
 library(eegUtils) # remotes::install_github("craddm/eegUtils")
 library(patchwork)
 library(GPArotation)
+library(Hmisc)
 
 # define modified principal function from psych package that can perform an oblique infomax rotation for spatial PCA
 principal_info <- function(r,nfactors=1,residuals=FALSE,rotate="varimax",n.obs = NA, covar=FALSE,scores=TRUE,missing=FALSE,impute="median",oblique.scores=TRUE,method="regression",use="pairwise",cor="cor",correct=.5,weight=NULL,...) {
@@ -285,33 +286,49 @@ principal_info <- function(r,nfactors=1,residuals=FALSE,rotate="varimax",n.obs =
   return(result)
 }
 
-# read in average referenced data set
-dat <- read_csv(here("data", "paper_two", "created_data", "erp_avr.csv"))
 
-# make dataset with timepoints as variables and 2000 ms cutoff
-## beyond 2000 ms is not of interest and was also not subjected to artifact correction in the preprocessing stage
-dat_2000 <- dat %>%
-  filter(ms < 2000) %>%
-  pivot_longer(c(A1:EXG2), names_to = "elec") %>%
-  pivot_wider(names_from = ms, values_from = value) %>%
-  drop_na()
+# read in average referenced data set
+dat_2000 <- read_csv(here("data", "paper_two", "pre_pca_dat.csv"))
+
+# this is the code used to impute missing values for raw data set. it is commented out to save computing time
+# # make dataset with timepoints as variables and 2000 ms cutoff
+# ## beyond 2000 ms is not of interest and was also not subjected to artifact correction in the preprocessing stage
+# dat_2000_missing <- dat %>%
+#   filter(ms < 2000) %>%
+#   pivot_longer(cols = c(A1:EXG2),
+#                names_to = "elec",
+#                values_to = "mv")
+#   pivot_wider(names_from = ms,       # create variables that represent a combination of each electrode
+#               values_from = mv) # at each time point
+#
+# dat_2000 <- map_df(unique(dat_2000$block), ~ {# mean impute each missing value by each block, such that averages for
+#     tmp <- filter(dat_2000, block == .x)      ## each electrode/time variable are computed using only values from the
+#     map_df(tmp, ~ {                           ## same block condition
+#         impute(.x, fun = mean)
+#       })
+#   }) %>%
+#   pivot_longer(-c(pid:prop_trials), names_to = "elec_ms", values_to = "mv") %>%
+#   separate(col = "elec_ms", into = c("elec", "ms"), sep = "_") %>%
+#   pivot_wider(names_from = ms, values_from = mv)
+
+write_csv(dat_2000, file = here("data", "paper_two", "pre_pca_dat.csv"))
 
 # The parallel code below is commented out since it is computationally intensive. Uncomment and run
 # to see results of parallel analysis, though results are below in the the comments.
-# # conduct parallel analyses on temporal data to determine number of components to retain for temporal PCA
-# dat_pa <- dat_2000 %>% select(-c(pid, block, elec, n_trials, prop_trials)) # filter out variables
-# ## run the parallel analysis - this takes a long time.
+# conduct parallel analyses on temporal data to determine number of components to retain for temporal PCA
+dat_pa <- dat_2000 %>% select(-c(pid, block, elec, n_trials, prop_trials)) # filter out variables
+## run the parallel analysis - this takes a long time.
 # paran(dat_pa,
 #       centile = 95,
 #       iterations = 100, # the default is 30p (p = # of columns) which takes really long
 #       status = TRUE,    # i've seen little variation in using 1 - 100, so settled on 100
 #       graph = TRUE,
-#       cfa = TRUE
+#       cfa = FALSE
 #       )
-# ## results suggest that 22 components or 43 factors should be retained
+## results suggest that 22 components or 43 factors should be retained
 
 # perform temporal PCA with covariance matrix and promax rotation
-# with 43 factors, which is informed by the parallel analysis
+# with 22 components, which is informed by the parallel analysis
 ## promax rotation with kappa = 3, tends to give best results for ERPs and is the default for SAS
 ## covariance matrix (mean corrected)
 ## derive factor scores using "Harman" method, which finds weights based upon so-called "idealized" variables
@@ -325,20 +342,10 @@ dat_pca_promax <- principal(select(dat_2000, -c(pid, block, elec, n_trials, prop
                             method = "Harman")
 
 # create data frame with covariance loadings
-ms_vec <- dat %>%
-  filter(ms < 2000,
-         pid == 206201832,
-         block == "Pos_Inc") %>%
-  select(ms) %>%
-  pull()
-cov_loadings_mat <- matrix(dat_pca_promax$loadings, nrow = length(ms_vec))
-# vector with order of components in output
-comp_vector <- paste0("RC", c(1:3, 18, 22, 17, 9, 21, 5, 11, 7, 19, 12, 4, 20, 6, 15, 10, 14, 13, 16, 8))
-cov_loadings_df <- data.frame(cov_loadings_mat)
-names(cov_loadings_df) <- comp_vector
-cov_loadings_df <- cov_loadings_df %>%
-  mutate(ms = ms_vec) %>%
-  relocate(paste0("RC", 1:22))
+cov_loadings_mat <- as.matrix(unclass(dat_pca_promax$loadings))
+cov_loadings_df <- as_tibble(cov_loadings_mat) %>%
+  mutate(ms = as.numeric(dimnames(cov_loadings_mat)[[1]])) %>%
+  relocate(ms, paste0("RC", 1:22))
 
 # long form for plotting
 cov_loadings_long <- pivot_longer(cov_loadings_df, cols = RC1:RC22, names_to = "component", values_to = "mv")
@@ -387,7 +394,7 @@ elec_loc <- elec_loc %>%
 # coordinate data and merge with factor score data
 topo_dat <- dat_2000_fac_scores %>%
   group_by(block, elec) %>%
-  summarize(across(all_of(comp_to_retain), ~ mean(.x, na.rm = TRUE))) %>%
+  summarise(across(all_of(comp_to_retain), ~ mean(.x, na.rm = TRUE))) %>%
   mutate(
     valence = case_when(
       str_detect(block, "Pos") ~ "Positive",
@@ -489,7 +496,7 @@ temp_raw_df %>%
                values_to = "mv") %>%
     group_by(block, ms) %>%
     mutate(ms = as.numeric(ms)) %>%
-    summarize(mv = mean(mv)) %>%
+    summarise(mv = mean(mv)) %>%
     ggplot(., aes(ms, mv, color = block)) +
     geom_line(size = 1.1) +
     geom_vline(xintercept = 0, linetype = "dashed") +
@@ -515,12 +522,11 @@ temp_raw_df %>%
 # prepare factor score data from temporal PCA for 2nd step spatial PCA with electrodes as columns
 pre_spatial_pca_dat <- bind_cols(select(dat_2000, pid:elec),
                                  select(factor_scores_df, all_of(comp_to_retain))) %>%
-  pivot_longer(cols = all_of(comp_to_retain),
+  pivot_longer(cols = RC2:RC12,
                names_to = "comp",
                values_to = "mv") %>%
-  pivot_wider(names_from = elec,
-              values_from = mv) %>%
-  drop_na()
+    pivot_wider(names_from = elec,
+              values_from = mv)
 
 # conduct parallel analysis for each temporal factor
 ## define function that returns number of factors to retain
@@ -536,7 +542,7 @@ return(test$Retained)
 
 component_vector <- map_dbl(comp_to_retain, ~ parallel_fun(.x))
 names(component_vector) <- comp_to_retain
-# the average number of components to retain for each component is 5.875, so
+# the average number of components to retain for each component is 6.25, so
 # each spatial PCA will retain 6 components
 
 # define function that performs spatial PCA for each of the 8 components
@@ -596,7 +602,7 @@ temp_spat_pca_topo_df <- temp_spat_pca_df %>%
   pivot_wider(names_from = "comp",
               values_from = "fac_score") %>%
   group_by(block, elec) %>%
-  summarize(across(`TC2-SC5`:`TC12-SC4`, ~ mean(.x, na.rm = TRUE))) %>%
+  summarise(across(`TC2-SC1`:`TC12-SC4`, ~ mean(.x, na.rm = TRUE))) %>%
   mutate(
     valence = case_when(
       str_detect(block, "Pos") ~ "Positive",
@@ -608,7 +614,6 @@ temp_spat_pca_topo_df <- temp_spat_pca_df %>%
       str_detect(block, "Inc") ~ "Increase",
       str_detect(block, "Dec") ~ "Decrease"
     )) %>%
-  drop_na() %>%
   left_join(elec_loc, by = c("elec" = "channel"))
 
 # define function for temporospatial topo plots - nearly identical to the earlier function except that
@@ -646,27 +651,39 @@ map(temp_spat_comp_names, ~ topo_facet_spat(.x))
 # next:
 # multiply spatial factor scores by temporal factor loadings to derive "raw" ERPs.
 
-loadings_retained_comp <- as_tibble(unclass(dat_pca_promax$loadings)) %>%
-  select(comp_to_retain) %>%
-  as.matrix(ncol = ncol(dat_pca_promax$loadings))
+loadings_retained_comp_df <- as_tibble(unclass(dat_pca_promax$loadings)) %>%
+  select(all_of(comp_to_retain))
 
-loadings_retained_comp <- t(loadings_retained_comp)
-
-temp_spat_scores_mat <- temp_spat_pca_df %>%
+temp_spat_scores_df <- temp_spat_pca_df %>%
   pivot_wider(names_from = comp,
               values_from = fac_score) %>%
-  select(-c(pid:elec)) %>%
+  select(-c(pid:elec))
+
+loadings_retained_comp_mat <- loadings_retained_comp_df %>%
+  select(RC2) %>%
+  as.matrix(ncol = ncol(dat_pca_promax$loadings))
+
+loadings_retained_comp_mat <- matrix(t(loadings_retained_comp_mat),
+                                     nrow = nrow(temp_spat_scores_df),
+                                     ncol = ncol(loadings_retained_comp_mat),
+                                     byrow = TRUE)
+
+temp_spat_scores_mat <- temp_spat_scores_df %>%
+  select(contains("TC2")) %>%
+  select(contains("SC1")) %>%
   as.matrix()
 
 
+temp_spat_scores_mat <- matrix(rep(temp_spat_scores_mat,
+             times = ncol(loadings_retained_comp_mat)),
+         ncol = ncol(loadings_retained_comp_mat))
 
+final_mat <- loadings_retained_comp_mat * temp_spat_scores_mat
 
+dimnames(final_mat)[[2]] <- dimnames(dat_pca_promax$loadings)[[1]]
 
+as_tibble(final_mat)
 
-
-
-
-dimnames(dat_pca_promax$loadings)
 
 scores_matrix <- as.matrix(spatial_pca_lst$scores)
 loadings_matrix <- t(as.matrix(unclass(dat_pca_promax$loadings)))
