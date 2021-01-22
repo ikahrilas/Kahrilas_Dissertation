@@ -648,70 +648,111 @@ temp_spat_comp_names <- str_subset(names(temp_spat_pca_topo_df), pattern = "TC")
 map(temp_spat_comp_names, ~ topo_facet_spat(.x))
 
 
-# next:
-# multiply spatial factor scores by temporal factor loadings to derive "raw" ERPs.
+# define vectors of temporal and spatial components for map function
+temp_comp_to_retain <- str_replace_all(comp_to_retain, "R", "T")
+spat_comp_vec <- paste0("SC", 1:6)
 
-loadings_retained_comp_df <- as_tibble(unclass(dat_pca_promax$loadings)) %>%
-  select(all_of(comp_to_retain))
+# multiply temporospatial factor scores and factor loadings from temporal PCA
+# to create data frame for ERP waveforms
+
+temp_spat_erp_df <- map_df(temp_comp_to_retain, ~ {
+
+loadings_retained_comp_mat <- as_tibble(unclass(dat_pca_promax$loadings)) %>%
+  select(.data[[str_replace(.x, "T", "R")]]) %>%
+  as.matrix()
 
 temp_spat_scores_df <- temp_spat_pca_df %>%
   pivot_wider(names_from = comp,
               values_from = fac_score) %>%
-  select(-c(pid:elec))
-
-loadings_retained_comp_mat <- loadings_retained_comp_df %>%
-  select(RC2) %>%
-  as.matrix(ncol = ncol(dat_pca_promax$loadings))
+  select(contains(.x))
 
 loadings_retained_comp_mat <- matrix(t(loadings_retained_comp_mat),
-                                     nrow = nrow(temp_spat_scores_df),
-                                     ncol = ncol(loadings_retained_comp_mat),
-                                     byrow = TRUE)
-
-temp_spat_scores_mat <- temp_spat_scores_df %>%
-  select(contains("TC2")) %>%
-  select(contains("SC1")) %>%
+                                        nrow = 24024,
+                                        ncol = 1126,
+                                        byrow = TRUE)
+final_tbl <- map_df(spat_comp_vec, ~ {
+tmp <- temp_spat_scores_df %>%
+  select(contains(.x)) %>%
   as.matrix()
 
+scores_mat <- matrix(rep(tmp, times = 1126),
+       ncol = 1126)
 
-temp_spat_scores_mat <- matrix(rep(temp_spat_scores_mat,
-             times = ncol(loadings_retained_comp_mat)),
-         ncol = ncol(loadings_retained_comp_mat))
+prod_tbl <- as_tibble(loadings_retained_comp_mat * scores_mat)
 
-final_mat <- loadings_retained_comp_mat * temp_spat_scores_mat
+names(prod_tbl) <- dimnames(dat_pca_promax$loadings)[[1]]
 
-dimnames(final_mat)[[2]] <- dimnames(dat_pca_promax$loadings)[[1]]
-
-as_tibble(final_mat)
-
-
-scores_matrix <- as.matrix(spatial_pca_lst$scores)
-loadings_matrix <- t(as.matrix(unclass(dat_pca_promax$loadings)))
-
-tmp <- matrix(loadings_matrix[.x,],
-              nrow = nrow(scores_matrix),
-              ncol = ncol(loadings_matrix),
-              byrow = TRUE,
-              dimnames = list(NULL, dimnames(loadings_matrix)[[2]]))
-
-tmp_scores_mat <- matrix(rep(scores_matrix[,.x],
-                             times = ncol(loadings_matrix)),
-                         ncol = ncol(loadings_matrix))
-
-raw_mat <- tmp * tmp_scores_mat
-
-raw_dat <- as_tibble(raw_mat) %>%
-  mutate(comp = comp_vector[.x]) %>%
+prod_tbl %>%
+  mutate(comp = .x) %>%
   bind_cols(dat_2000 %>%
               select(pid:elec)) %>%
   relocate(pid:elec, comp)
+})
+
+final_tbl %>%
+  mutate(comp = paste(.x, comp, sep = "-"))
+})
 
 
+# derive ERP plots in mV units for each temporospatial component
+## define list of electrodes of interest for each component based on visual
+## inspection of topo plots
 
+elec_selections_temp_spat <- list(c("A31", "B32"),
+                        c("B29", "B27", "B23", "B19", "B22", "B28"),
+                        "B26",
+                        "B32",
+                        c("B30", "B31", "B32"),
+                        c("A27, A29"),
+                        "A31",
+                        "B32",
+                        "B20",
+                        "A30")
 
+# list of component sites for map function
+component_list_temp_spat <- list("TC2-SC1",
+                       "TC2-SC2",
+                       "TC2-SC6",
+                       "TC3-SC1",
+                       "TC5-SC1",
+                       "TC5-SC4",
+                       "TC5-SC6",
+                       "TC9-SC1",
+                       "TC9-SC2",
+                       "TC11-SC2")
 
-
-
+# iterate over each component and electrode selection to create ERP plots
+map2(component_list_temp_spat, elec_selections_temp_spat, ~ {
+  temp_spat_erp_df %>%
+    filter(elec %in% c(.y),
+           comp == .x) %>%
+    pivot_longer(cols = -c(pid:comp),
+                 names_to = "ms",
+                 values_to = "mv") %>%
+    group_by(block, ms) %>%
+    mutate(ms = as.numeric(ms)) %>%
+    summarise(mv = mean(mv)) %>%
+    ggplot(., aes(ms, mv, color = block)) +
+    geom_line(size = 1.1) +
+    geom_vline(xintercept = 0, linetype = "dashed") +
+    geom_hline(yintercept = 0, linetype = "dashed") +
+    labs(x = "Time (ms)",
+         y = expression(paste("Amplitude (",mu,"V)")),
+         title = paste("Average", .x, "Waveforms")) +
+    theme_classic() +
+    theme(axis.title = element_text(size = 16),
+          axis.text = element_text(size = 12),
+          legend.title = element_text(size = 16),
+          legend.text = element_text(size = 12),
+          legend.key.size = unit(2, "line"),
+          plot.title = element_text(hjust = 0.5),
+          title = element_text(size = 16))
+  # save each plot
+  ggsave(here("images", "paper_2", "temporospatial_components_ERPs", paste0(.x, ".png")),
+         device = "png",
+         width = 12,
+         dpi = "retina")
+})
 
 
 
