@@ -311,7 +311,7 @@ dat_2000 <- read_csv(here("data", "paper_two", "pre_pca_dat.csv"))
 #   separate(col = "elec_ms", into = c("elec", "ms"), sep = "_") %>%
 #   pivot_wider(names_from = ms, values_from = mv)
 
-write_csv(dat_2000, file = here("data", "paper_two", "pre_pca_dat.csv"))
+# write_csv(dat_2000, file = here("data", "paper_two", "pre_pca_dat.csv"))
 
 # The parallel code below is commented out since it is computationally intensive. Uncomment and run
 # to see results of parallel analysis, though results are below in the the comments.
@@ -703,7 +703,7 @@ elec_selections_temp_spat <- list(c("A31", "B32"),
                         "B26",
                         "B32",
                         c("B30", "B31", "B32"),
-                        c("A27, A29"),
+                        c("A27", "A29"),
                         "A31",
                         "B32",
                         "B20",
@@ -723,7 +723,7 @@ component_list_temp_spat <- list("TC2-SC1",
 
 # iterate over each component and electrode selection to create ERP plots
 map2(component_list_temp_spat, elec_selections_temp_spat, ~ {
-  temp_spat_erp_df %>%
+  p <- temp_spat_erp_df %>%
     filter(elec %in% c(.y),
            comp == .x) %>%
     pivot_longer(cols = -c(pid:comp),
@@ -748,10 +748,9 @@ map2(component_list_temp_spat, elec_selections_temp_spat, ~ {
           plot.title = element_text(hjust = 0.5),
           title = element_text(size = 16))
   # save each plot
-  ggsave(here("images", "paper_2", "temporospatial_components_ERPs", paste0(.x, ".png")),
+  ggsave(plot = p, filename = here("images", "paper_2", "temp_spat_ERPs", paste0(.x, ".png")),
          device = "png",
-         width = 12,
-         dpi = "retina")
+         width = 12)
 })
 
 
@@ -760,15 +759,15 @@ map2(component_list_temp_spat, elec_selections_temp_spat, ~ {
 
 
 
-
-plot_butterfly(rename(long_loading_loc, "time" = "ms", "electrode" = "elec", "amplitude" = "mv"))
-
-long_loading_loc %>%
-  rename("time" = "ms", "electrode" = "elec", "amplitude" = "mv") %>%
-  filter(block %in% c("Pos_Watch")) %>%
-  erp_scalp(.,
-            montage = "biosemi64alpha")
-# dat_pca_promax_cor <- principal(select(dat_2000, -c(pid, block, elec, n_trials, prop_trials)),
+# -- UNUSED CODE
+# plot_butterfly(rename(long_loading_loc, "time" = "ms", "electrode" = "elec", "amplitude" = "mv"))
+#
+# long_loading_loc %>%
+#   rename("time" = "ms", "electrode" = "elec", "amplitude" = "mv") %>%
+#   filter(block %in% c("Pos_Watch")) %>%
+#   erp_scalp(.,
+#             montage = "biosemi64alpha")
+# # dat_pca_promax_cor <- principal(select(dat_2000, -c(pid, block, elec, n_trials, prop_trials)),
 #                                 nfactors = 43,
 #                                 rotate = "Promax",
 #                                 m = 3,
@@ -781,17 +780,17 @@ long_loading_loc %>%
 #                          m = 3)
 
 # code below is for spatial PCA, which might be helpful for P3-like and positive slow wave components.
-test <- principal(weighted_dfs_lst[[2]] %>% select(-c(pid, block, ms, n_trials, prop_trials, component)),
-                  nfactors = 10,
-                  rotate = "infomaxQ",
-                  cor = "cov",
-                  missing = TRUE)
-
-GPFoblq(test$loadings, method = "infomax", normalize = TRUE, maxit = 100000)
-
-
-
-save.image(file = paste0("scripts/paper_two/", Sys.Date(), "_two_step_pca", ".RData"))
+# test <- principal(weighted_dfs_lst[[2]] %>% select(-c(pid, block, ms, n_trials, prop_trials, component)),
+#                   nfactors = 10,
+#                   rotate = "infomaxQ",
+#                   cor = "cov",
+#                   missing = TRUE)
+#
+# GPFoblq(test$loadings, method = "infomax", normalize = TRUE, maxit = 100000)
+#
+#
+#
+# save.image(file = paste0("scripts/paper_two/", Sys.Date(), "_two_step_pca", ".RData"))
 
 # old unused code:
 # # this code extracts the covariance loadings for each rotated factor along with its corresponding timepoint
@@ -874,13 +873,3 @@ save.image(file = paste0("scripts/paper_two/", Sys.Date(), "_two_step_pca", ".RD
 #   #Apply our apa-formatting theme
 #   apatheme
 # p
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
