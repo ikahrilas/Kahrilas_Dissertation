@@ -380,13 +380,13 @@ cov_loadings_df <- cov_loadings_df %>% select(ms, all_of(comp_to_retain))
 
 # extract factor scores from PCA
 factor_scores_df <- data.frame(dat_pca_promax$scores)
-names(factor_scores_df) <- comp_vector
 
 # merge with original data that has block type and electrode variables
 dat_2000_fac_scores <- bind_cols(dat_2000 %>%
                                    select(pid:elec),
-                                 factor_scores_df)
-
+                                 factor_scores_df %>%
+                                   select(RC2, RC3, RC5, RC11, RC12)) # save the dataset only with components you want to
+                                                                      # run the analyses on
 # save data set to work space for statistical analyses
 write_csv(dat_2000_fac_scores,
           here("data", "paper_two", "temp_fac_score_dat.csv"))
@@ -592,6 +592,11 @@ spatial_pca_lst <- map(1:length(component_vector), ~ spatial_pca_fun(.x))
 
 # extract factor scores into a dataframe and write csv file
 
+## temporospatial components to retain
+temp_spat_comp_retain <- c("RC2-TC1", "RC2-TC6", "RC3-TC1", "RC3-TC2", "RC5-TC6", "RC5-TC5",
+                           "RC5-TC2", "RC5-TC1", "RC5-TC4", "RC11-TC4", "RC11-TC1", "RC11-TC3",
+                           "RC12-TC3", "RC12-TC2")
+
 data.frame(spatial_pca_lst[[1]]$scores) %>%
   rename_with(.cols = everything(), .fn = ~ paste(names(component_vector)[1], .x, sep = "-")) %>%
   bind_cols(., pre_spatial_pca_dat %>%
@@ -610,6 +615,7 @@ data.frame(spatial_pca_lst[[1]]$scores) %>%
   bind_cols(data.frame(spatial_pca_lst[[5]]$scores) %>%
               rename_with(.cols = everything(),
                           .fn = ~ paste(names(component_vector)[5], .x, sep = "-"))) %>%
+  select(pid:prop_trials, temp_spat_comp_retain) %>%
   write_csv(file = here("data", "paper_two", "temp_spat_fac_score_dat.csv"))
 
 # extract factor scores from PCA
