@@ -316,7 +316,7 @@ dat_2000 <- read_csv(here("data", "paper_two", "pre_pca_dat.csv"))
 # The parallel code below is commented out since it is computationally intensive. Uncomment and run
 # to see results of parallel analysis, though results are below in the the comments.
 # conduct parallel analyses on temporal data to determine number of components to retain for temporal PCA
-dat_pa <- dat_2000 %>% select(-c(pid, block, elec, n_trials, prop_trials)) # filter out variables
+# dat_pa <- dat_2000 %>% select(-c(pid, block, elec, n_trials, prop_trials)) # filter out variables
 ## run the parallel analysis - this takes a long time.
 # paran(dat_pa,
 #       centile = 95,
@@ -345,11 +345,14 @@ dat_pca_promax <- principal(select(dat_2000, -c(pid, block, elec, n_trials, prop
 cov_loadings_mat <- as.matrix(unclass(dat_pca_promax$loadings))
 cov_loadings_df <- as_tibble(cov_loadings_mat) %>%
   mutate(ms = as.numeric(dimnames(cov_loadings_mat)[[1]])) %>%
-  relocate(ms, paste0("RC", 1:22))
+  relocate(ms, RC1:RC18, RC17, RC9, RC22, everything()) # components in order of % of explained variance
+
+## define string vector with components in proper order
+comp_order <- paste0("RC", c(1, 2, 3, 18, 17, 9, 22, 21, 5, 11, 7, 19, 12, 4, 20, 6, 15, 10, 14, 13, 16, 8))
 
 # long form for plotting
-cov_loadings_long <- pivot_longer(cov_loadings_df, cols = RC1:RC22, names_to = "component", values_to = "mv")
-cov_loadings_long$component <- factor(cov_loadings_long$component, levels = paste0("RC", 1:22))
+cov_loadings_long <- pivot_longer(cov_loadings_df, cols = RC1:RC8, names_to = "component", values_to = "mv")
+cov_loadings_long$component <- factor(cov_loadings_long$component, levels = comp_order)
 
 # plot it to analyze time course
 temp_loadings_plot <- ggplot(cov_loadings_long, aes(ms, mv)) +
@@ -357,8 +360,16 @@ temp_loadings_plot <- ggplot(cov_loadings_long, aes(ms, mv)) +
   facet_wrap(~ component, nrow = 5)
 temp_loadings_plot
 
-# components to retain based on time course: 2-5, 7, 9 ,11, & 12
-comp_to_retain <- paste0("RC", c(2:5, 7, 9, 11, 12))
+# components to explore based on time course: 2-5, 7, 9 ,11, & 12
+comp_to_retain <- paste0("RC", c(2, 3, 9, 22, 5, 11, 7, 12))
+
+# replot with just components of interest and save image
+cov_loadings_long %>%
+  filter(component %in% comp_to_retain) %>%
+ggplot(., aes(ms, mv)) +
+  geom_line() +
+  facet_wrap(~ component, nrow = 4)
+ggsave(here("images", "paper_2", "cov_loadings_comp_of_interest.png"), device = "png", width = 10)
 
 cov_loadings_df <- cov_loadings_df %>% select(ms, all_of(comp_to_retain))
 
@@ -375,6 +386,10 @@ names(factor_scores_df) <- comp_vector
 dat_2000_fac_scores <- bind_cols(dat_2000 %>%
                                    select(pid:elec),
                                  factor_scores_df)
+
+# save data set to work space for statistical analyses
+write_csv(dat_2000_fac_scores,
+          here("data", "paper_two", "temp_fac_score_dat.csv"))
 
 # read in EEG coordinate data
 elec_loc <- read_csv(here("data", "paper_two", "Equidistant Layout.csv"))
@@ -440,7 +455,7 @@ map(comp_to_retain, ~ topo_facet(.x))
 ## iterate over each component and multiply covariance loadings by factor scores for each
 ## observation.
 ## create "comp" variable as well.
-temp_raw_df <- map_df(1:length(comp_vector), ~ {
+temp_raw_df <- map_df(1:length(names(dat_pca_promax$R2)), ~ {
 scores_matrix <- as.matrix(dat_pca_promax$scores)
 loadings_matrix <- t(as.matrix(unclass(dat_pca_promax$loadings)))
 
@@ -457,34 +472,44 @@ tmp_scores_mat <- matrix(rep(scores_matrix[,.x],
 raw_mat <- tmp * tmp_scores_mat
 
 raw_dat <- as_tibble(raw_mat) %>%
-  mutate(comp = comp_vector[.x]) %>%
+  mutate(comp = names(dat_pca_promax$R2)[.x]) %>%
   bind_cols(dat_2000 %>%
               select(pid:elec)) %>%
   relocate(pid:elec, comp)
 })
 
+# write data set with "raw" factor ERPs to work space
+temp_raw_df %>%
+  pivot_longer(-c(pid:comp),
+               names_to = "ms",
+               values_to = "mv") %>%
+  write_csv(here("data", "paper_two", "temp_fac_score_erp.csv"))
+
 # derive ERP plots in mV units for each temporal component
 ## define list of electrodes of interest for each component based on visual
 ## inspection of topo plots
 
+###################################################
+# temporal components that change across conditions
+## RC2 @ c(A29, B26)
+## RC3 @ c(A29, B26, A26, B23, B28)
+## RC5 @ c(A29, B26)
+## RC11 @ c(A29, B26)
+## RC12 @ c(B21, B28) for negativity
+## RC12 @ c(A29, A31, B30, B26) for positivity
+
 elec_selections <- list(c("A29", "B26"),
+                        c("A29", "B26", "A26", "B23", "B28"),
                         c("A29", "B26"),
-                        "B28",
                         c("A29", "B26"),
-                        c("A29", "A31", "B30", "B26"),
-                        c("A29", "B26"),
-                        "B28", # site of negative activity for RC12
-                        c("A29", "B26"))
+                        c("B21", "B28")) # site of negative activity for RC12
 
 # list of component sites for map function
 component_list <- list("RC2",
                        "RC3",
-                       "RC4",
                        "RC5",
-                       "RC7",
                        "RC11",
-                       "RC12",
-                       "RC9")
+                       "RC12")
 
 # iterate over each component and electrode selection to create ERP plots
 map2(component_list, elec_selections, ~ {
@@ -519,10 +544,14 @@ temp_raw_df %>%
          dpi = "retina")
 })
 
+
 # prepare factor score data from temporal PCA for 2nd step spatial PCA with electrodes as columns
+## only bother with components of interest from temporal PCA
+comp_to_retain <- c("RC2", "RC3", "RC5", "RC11", "RC12")
+
 pre_spatial_pca_dat <- bind_cols(select(dat_2000, pid:elec),
                                  select(factor_scores_df, all_of(comp_to_retain))) %>%
-  pivot_longer(cols = RC2:RC12,
+  pivot_longer(cols = all_of(comp_to_retain),
                names_to = "comp",
                values_to = "mv") %>%
     pivot_wider(names_from = elec,
@@ -561,6 +590,43 @@ principal_info(pre_spatial_pca_dat %>%
 # run the function and return the results into a list of length 8
 spatial_pca_lst <- map(1:length(component_vector), ~ spatial_pca_fun(.x))
 
+# extract factor scores into a dataframe and write csv file
+
+data.frame(spatial_pca_lst[[1]]$scores) %>%
+  rename_with(.cols = everything(), .fn = ~ paste(names(component_vector)[1], .x, sep = "-")) %>%
+  bind_cols(., pre_spatial_pca_dat %>%
+              filter(comp == names(component_vector)[1]) %>%
+              select(pid:prop_trials)) %>%
+              relocate(pid:prop_trials) %>%
+  bind_cols(data.frame(spatial_pca_lst[[2]]$scores) %>%
+              rename_with(.cols = everything(),
+                          .fn = ~ paste(names(component_vector)[2], .x, sep = "-"))) %>%
+  bind_cols(data.frame(spatial_pca_lst[[3]]$scores) %>%
+              rename_with(.cols = everything(),
+                          .fn = ~ paste(names(component_vector)[3], .x, sep = "-"))) %>%
+  bind_cols(data.frame(spatial_pca_lst[[4]]$scores) %>%
+              rename_with(.cols = everything(),
+                          .fn = ~ paste(names(component_vector)[4], .x, sep = "-"))) %>%
+  bind_cols(data.frame(spatial_pca_lst[[5]]$scores) %>%
+              rename_with(.cols = everything(),
+                          .fn = ~ paste(names(component_vector)[5], .x, sep = "-"))) %>%
+  write_csv(file = here("data", "paper_two", "temp_spat_fac_score_dat.csv"))
+
+# extract factor scores from PCA
+factor_scores_df <- data.frame(dat_pca_promax$scores)
+names(factor_scores_df) <- comp_vector
+
+# merge with original data that has block type and electrode variables
+dat_2000_fac_scores <- bind_cols(dat_2000 %>%
+                                   select(pid:elec),
+                                 factor_scores_df)
+
+# save data set to work space for statistical analyses
+write_csv(dat_2000_fac_scores,
+          here("data", "paper_two", "temp_fac_score_dat.csv"))
+
+
+# run function to derive factor scores for each electrode for each participant in each block (for topo plots)
 temp_component_names <- str_replace(names(component_vector), "R", "T")
 
 temp_spat_pca_df <- map_df(1:length(temp_component_names), ~ {
@@ -647,6 +713,22 @@ temp_spat_comp_names <- str_subset(names(temp_spat_pca_topo_df), pattern = "TC")
 # iterate the function over each component
 map(temp_spat_comp_names, ~ topo_facet_spat(.x))
 
+##############################
+# TS factors that change across conditions:
+## 2-1 @ c(A31, B32)
+## 2-6 @ B26
+## 3-1 @ B32
+## 3-2 @ c(B7, B8, B9, B14, B15)
+## 5-6 @ c(A30, A31)
+## 5-5 @ B21
+## 5-2 @ B26
+## 5-1 @ c(B30, B31, B32)
+## 5-4 @ A27
+## 11-4 @ A27
+## 11-1 @ c(A31, B30, B32)
+## 11-3 @ B26
+## 12-3 @ c(A27, A29)
+## 12-2 @ B29
 
 # define vectors of temporal and spatial components for map function
 temp_comp_to_retain <- str_replace_all(comp_to_retain, "R", "T")
@@ -664,7 +746,7 @@ loadings_retained_comp_mat <- as_tibble(unclass(dat_pca_promax$loadings)) %>%
 temp_spat_scores_df <- temp_spat_pca_df %>%
   pivot_wider(names_from = comp,
               values_from = fac_score) %>%
-  select(contains(.x))
+  select(contains(paste0(.x, "-")))
 
 loadings_retained_comp_mat <- matrix(t(loadings_retained_comp_mat),
                                         nrow = 24024,
@@ -693,33 +775,40 @@ final_tbl %>%
   mutate(comp = paste(.x, comp, sep = "-"))
 })
 
-
 # derive ERP plots in mV units for each temporospatial component
 ## define list of electrodes of interest for each component based on visual
 ## inspection of topo plots
 
 elec_selections_temp_spat <- list(c("A31", "B32"),
-                        c("B29", "B27", "B23", "B19", "B22", "B28"),
-                        "B26",
-                        "B32",
-                        c("B30", "B31", "B32"),
-                        c("A27", "A29"),
-                        "A31",
-                        "B32",
-                        "B20",
-                        "A30")
+                                  "B26",
+                                  "B32",
+                                  c("B7", "B8", "B9", "B14", "B15"),
+                                  c("A30", "A31"),
+                                  "B21",
+                                  "B26",
+                                  c("B30", "B31", "B32"),
+                                  "A27",
+                                  "A27",
+                                  c("A31", "B30", "B32"),
+                                  "B26",
+                                  c("A27", "A29"),
+                                  "B29")
 
 # list of component sites for map function
 component_list_temp_spat <- list("TC2-SC1",
-                       "TC2-SC2",
-                       "TC2-SC6",
-                       "TC3-SC1",
-                       "TC5-SC1",
-                       "TC5-SC4",
-                       "TC5-SC6",
-                       "TC9-SC1",
-                       "TC9-SC2",
-                       "TC11-SC2")
+                                 "TC2-SC6",
+                                 "TC3-SC1",
+                                 "TC3-SC2",
+                                 "TC5-SC6",
+                                 "TC5-SC5",
+                                 "TC5-SC2",
+                                 "TC5-SC1",
+                                 "TC5-SC4",
+                                 "TC11-SC4",
+                                 "TC11-SC1",
+                                 "TC11-SC3",
+                                 "TC12-SC3",
+                                 "TC12-SC2")
 
 # iterate over each component and electrode selection to create ERP plots
 map2(component_list_temp_spat, elec_selections_temp_spat, ~ {
@@ -753,6 +842,8 @@ map2(component_list_temp_spat, elec_selections_temp_spat, ~ {
          width = 12)
 })
 
+
+# save data sets to work space
 
 
 
