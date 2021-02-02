@@ -5,6 +5,7 @@ library(emmeans)
 library(lmerTest)
 library(r2glmm)
 library(effectsize)
+library(kableExtra)
 
 # read in data and make variables for valence and regulation conditions
 dat <- read_csv("data/paper_two/created_data/per_data_analyses_2020_5_19.csv")
@@ -38,7 +39,7 @@ tmp <- tmp %>%
   filter(Parameter == "blockNeg_Watch") %>%
   mutate(Parameter = "Negative - Positive")
 lpp_std_beta <- bind_rows(lpp_std_beta, tmp) %>%
-  mutate(interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "funder2019")))
+  mutate(interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "gignac2016")))
 lpp_watch_tab <- full_join(lpp_watch_tab, lpp_std_beta, by = c("contrast" = "Parameter")) %>%
   select(contrast, estimate, lower.CL, upper.CL, Std_Coefficient, interpretation, t.ratio, p.value)
 lpp_watch_tab <- lpp_watch_tab %>%
@@ -66,7 +67,7 @@ tmp <- tmp %>%
   filter(Parameter == "blockNeg_Watch") %>%
   mutate(Parameter = "Negative - Positive")
 lpp_front_std_beta <- bind_rows(lpp_front_std_beta, tmp) %>%
-  mutate(interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "funder2019")))
+  mutate(interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "gignac2016")))
 lpp_front_watch_tab <- full_join(lpp_front_watch_tab, lpp_front_std_beta, by = c("contrast" = "Parameter")) %>%
   select(contrast, estimate, lower.CL, upper.CL, Std_Coefficient, interpretation, t.ratio, p.value)
 lpp_front_watch_tab <- lpp_front_watch_tab %>%
@@ -94,7 +95,7 @@ tmp <- tmp %>%
   filter(Parameter == "blockNeg_Watch") %>%
   mutate(Parameter = "Negative - Positive")
 epn_std_beta <- bind_rows(epn_std_beta, tmp) %>%
-  mutate(interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "funder2019")))
+  mutate(interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "gignac2016")))
 epn_watch_tab <- full_join(epn_watch_tab, epn_std_beta, by = c("contrast" = "Parameter")) %>%
   select(contrast, estimate, lower.CL, upper.CL, Std_Coefficient, interpretation, t.ratio, p.value)
 epn_watch_tab <- epn_watch_tab %>%
@@ -122,7 +123,7 @@ tmp <- tmp %>%
   filter(Parameter == "blockNeg_Watch") %>%
   mutate(Parameter = "Negative - Positive")
 n170_std_beta <- bind_rows(n170_std_beta, tmp) %>%
-  mutate(interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "funder2019")))
+  mutate(interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "gignac2016")))
 n170_watch_tab <- full_join(n170_watch_tab, n170_std_beta, by = c("contrast" = "Parameter")) %>%
   select(contrast, estimate, lower.CL, upper.CL, Std_Coefficient, interpretation, t.ratio, p.value)
 n170_watch_tab <- n170_watch_tab %>%
@@ -150,7 +151,7 @@ tmp <- tmp %>%
   filter(Parameter == "blockNeg_Watch") %>%
   mutate(Parameter = "Negative - Positive")
 ar_std_beta <- bind_rows(ar_std_beta, tmp) %>%
-  mutate(interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "funder2019")))
+  mutate(interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "gignac2016")))
 ar_watch_tab <- full_join(ar_watch_tab, ar_std_beta, by = c("contrast" = "Parameter")) %>%
   select(contrast, estimate, lower.CL, upper.CL, Std_Coefficient, interpretation, t.ratio, p.value)
 ar_watch_tab <- ar_watch_tab %>%
@@ -178,7 +179,7 @@ tmp <- tmp %>%
   filter(Parameter == "blockNeg_Watch") %>%
   mutate(Parameter = "Negative - Positive")
 val_std_beta <- bind_rows(val_std_beta, tmp) %>%
-  mutate(interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "funder2019")))
+  mutate(interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "gignac2016")))
 val_watch_tab <- full_join(val_watch_tab, val_std_beta, by = c("contrast" = "Parameter")) %>%
   select(contrast, estimate, lower.CL, upper.CL, Std_Coefficient, interpretation, t.ratio, p.value)
 val_watch_tab <- val_watch_tab %>%
@@ -211,23 +212,24 @@ watch_tab <- watch_tab %>%
          "Std. Beta (Label)" = paste0(watch_tab$`Std. Beta`, " (", interpretation, ")")) %>%
   select(comp, Contrast, "Estimate (95\\% CI)", "Std. Beta (Label)", Sig.)
 
-# watch_tab %>%
-#   select(-comp) %>%
-#   kable(., escape = FALSE, booktabs = TRUE, align = c("l", "c", "c", "c"), linesep = "", caption = "(ref:pairwise-watch-comparison-table)") %>%
-#   row_spec(0, align = "c") %>%
-#   pack_rows("N170", 1, 3) %>%
-#   pack_rows("EPN", 4, 6) %>%
-#   pack_rows("LPP", 7, 9) %>%
-#   pack_rows("Frontal LPP", 10, 12) %>%
-#   pack_rows("Arousal Ratings", 13, 15) %>%
-#   pack_rows("Valence Ratings", 16, 18) %>%
-#   footnote(escape = FALSE,
-#            footnote_as_chunk = TRUE,
-#            general_title = "Note.",
-#            general = "Std. Beta (Label) = Absolute value of standardized
-# beta coefficient as measure of effect size derived by fitting model to s
-# tandardized dataset with effect size label as per Funder's (2019) recommendations,
-# Sig. = $p$ value. $P$ values and confidence intervals adjusted using the Tukey method
-# for comparing a family of three estimates.",
-#            threeparttable = TRUE)
+watch_tab %>%
+  select(-comp) %>%
+  kable(., escape = FALSE, booktabs = TRUE, align = c("l", "c", "c", "c"), linesep = "", caption = "(ref:pairwise-watch-comparison-table)") %>%
+  row_spec(0, align = "c") %>%
+  pack_rows("N170", 1, 3) %>%
+  pack_rows("EPN", 4, 6) %>%
+  pack_rows("LPP", 7, 9) %>%
+  pack_rows("Frontal LPP", 10, 12) %>%
+  pack_rows("Arousal Ratings", 13, 15) %>%
+  pack_rows("Valence Ratings", 16, 18) %>%
+  footnote(escape = FALSE,
+           footnote_as_chunk = TRUE,
+           general_title = "Note.",
+           general = "Std. Beta (Label) = Absolute value of standardized
+beta coefficient as measure of effect size derived by fitting model to s
+tandardized dataset with effect size label as per Funder's (2019) recommendations,
+Sig. = $p$ value. $P$ values and confidence intervals adjusted using the Tukey method
+for comparing a family of three estimates.",
+           threeparttable = TRUE)
+
  save.image(file = paste0("data/paper_two/analyses/", Sys.Date(), "_pairwise_watch_table-data", ".RData"))
