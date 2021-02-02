@@ -63,3 +63,40 @@ ggplot(aes(block, .data[[.x]])) +
   theme_classic()
 })
 
+# all looks fine, so create data set that has factor scores calculated based on appropriate electrodes
+# and save the file
+
+dat %>%
+  filter(elec %in% rc2_elec) %>%
+  group_by(pid, block) %>%
+  summarise(RC2 = mean(RC2, na.rm = TRUE)) %>%
+  bind_cols(
+    dat %>%
+      filter(elec %in% rc3_elec) %>%
+      group_by(pid, block) %>%
+      summarise(RC3 = mean(RC3, na.rm = TRUE))
+            ) %>%
+  bind_cols(
+    dat %>%
+      filter(elec %in% rc5_elec) %>%
+      group_by(pid, block) %>%
+      summarise(RC5 = mean(RC5, na.rm = TRUE))
+            ) %>%
+  bind_cols(
+    dat %>%
+      filter(elec %in% rc11_elec) %>%
+      group_by(pid, block) %>%
+      summarise(RC11 = mean(RC11, na.rm = TRUE))
+      ) %>%
+  bind_cols(
+    dat %>%
+      filter(elec %in% rc12_elec) %>%
+      group_by(pid, block) %>%
+      summarise(RC12 = mean(RC12, na.rm = TRUE))
+  ) %>%
+  select(pid...1, block...2, comps) %>%
+  rename("pid" = pid...1,
+         "block" = block...2) %>%
+  full_join(per_sr_dat, by = c("pid", "block")) %>%
+  select(pid:valence, ethnicity, Race, anticipating:masq_aa, tmms_repair:depression) %>%
+  write_csv(file = paste0("data/paper_two/created_data/temp_fac_score_dat_analyses", Sys.Date(), ".csv"))
