@@ -255,8 +255,8 @@ watch_tab %>%
            footnote_as_chunk = TRUE,
            general_title = "Note.",
            general = "Std. Beta (Label) = Absolute value of standardized
-beta coefficient as measure of effect size derived by fitting model to s
-tandardized dataset with effect size label as per Gignac's (2016) recommendations,
+beta coefficient as measure of effect size derived by fitting model to
+standardized dataset with effect size label as per Gignac's (2016) recommendations,
 Sig. = $p$ value. $P$ values and confidence intervals adjusted using the Tukey method
 for comparing a family of three estimates.",
            threeparttable = TRUE)
