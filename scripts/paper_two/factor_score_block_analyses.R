@@ -174,4 +174,4 @@ df_num_difficulty <- difficulty_block_aov$NumDF
 df_den_difficulty <- sprintf("%.2f", difficulty_block_aov$DenDF)
 f_difficulty <- sprintf("%.2f", difficulty_block_aov[["F value"]])
 
-save.image(file = paste0("data/paper_two/analyses/", Sys.Date(), "_repeated_measures_ANOVA_analysis-data", ".RData"))
+save.image(file = paste0("data/paper_two/analyses/", Sys.Date(), "_factor_score_block_analyses-data", ".RData"))
