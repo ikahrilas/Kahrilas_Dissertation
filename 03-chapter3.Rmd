@@ -230,9 +230,25 @@ EEG data were re-referenced to the average activity of the mastoid electrodes fo
 Muscle activity and other artifacts were corrected through implementing an algorithmic scan of continuous EEG data in BESA (fixed threshold criteria: amplitude > 120 uV; gradient > 75 uV, low signal <.01 uV).
 Data were baseline-adjusted by subtracting the average activity for 200 milliseconds [@moserIntentionalModulationEmotional2006] before stimulus onset.
 
-LPP activity was calculated as the average activity in the 400 – 800 ms window at the Pz electrode site.
-Adaptive means for N170 and EPN were computed separately to account for peak latency variability among participants. N170 was defined as the minimum mean-peak amplitude (average amplitude across +/- 15 ms around the peak) between 130 - 200 ms post-stimulus at PO7 and PO8 electrode sites. The EPN was defined as the minimum mean-peak amplitude (average amplitude across +/- 25 ms around the peak) detected between 225 to 325 ms post-stimulus at PO7 and PO8 electrode sites.
-Scoring windows and electrode sites were similar to other studies investigating LPP, EPN, and N170 [e.g., @frankHemodynamicElectrocorticalReactivity2019; @hajcakReappraisalModulatesElectrocortical2006; @thomEmotionalScenesElicit2014].
+To discriminate among sources of variance (i.e., ERP components) in the time course of ERPs, ERP averages were submitted to a principal components analysis (PCA) to derive linear combinations of data that distinguish activity across time points. 
+A temporal PCA was performed using the Psych package [@revellePsychProceduresPsychological2020] in R version 4.0.3 [@rcoreteamLanguageEnvironmentStatistical2020] with a covariance matrix.
+A covariance matrix was used to retain the original units of measurement (i.e., voltage) for the average ERPs for each time point [@donchinMultivariateAnalysisEventrelated1978].
+The temporal PCA used all time points (-200 ms - 2000 ms) as variables and all 55 participants, seven blocks, and 66 recording sites as observations, yielding linear combinations of time points and "temporal" factors [@dienApplyingPrincipalComponents2012].
+To determine the number of components to retain for rotation, a parallel analysis [@hornRationaleTestNumber1965] was performed on the resultant Scree plot.
+The parallel analysis creates Scree plots of the actual and simulated fully random data to determine the number of components that explain more variance than if only chance alone were acting. 
+Based on the parallel analysis, 22 components were retained for rotation. 
+An Promax rotation was then used on the 22 components.
+A Promax rotation was used because it does not impose orthogonality on the components, and simulation studies suggest that Promax is most effective for temporal PCA [@dienERPPCAToolkit2010; @dienEvaluationPCAICA2007].
+The time course of each of the 22 components was inspected by plotting the covariance loadings along each time point. 
+Given the a priori nature of the ERP components of interest, those PCA components with covariance loadings in time windows that fit descriptions of LPP and early visual components (e.g., N170, EPN) were retained for further analyses.
+Spatial information is retained in PCA; the topography of each factor is encoded in the mean amplitude of factor scores at each recording site [@dienAddressingMisallocationVariance1998].
+Thus, scalp topographies of each component for each condition was inspected to determine correspondence of components and ERP components of interest.
+Of note, portions of waveforms represented by a given PCA component can be reproduced by multiplying covariance loadings by observations' factor scores [@dienAddressingMisallocationVariance1998]. 
+Five components were retained for statistical analyses based on the above steps, two of which represented LPP-like components, and three that represented early visual components (P100, N170, and EPN).
+
+<!-- LPP activity was calculated as the average activity in the 400 – 800 ms window at the Pz electrode site. -->
+<!-- Adaptive means for N170 and EPN were computed separately to account for peak latency variability among participants. N170 was defined as the minimum mean-peak amplitude (average amplitude across +/- 15 ms around the peak) between 130 - 200 ms post-stimulus at PO7 and PO8 electrode sites. The EPN was defined as the minimum mean-peak amplitude (average amplitude across +/- 25 ms around the peak) detected between 225 to 325 ms post-stimulus at PO7 and PO8 electrode sites. -->
+<!-- Scoring windows and electrode sites were similar to other studies investigating LPP, EPN, and N170 [e.g., @frankHemodynamicElectrocorticalReactivity2019; @hajcakReappraisalModulatesElectrocortical2006; @thomEmotionalScenesElicit2014]. -->
 The experiment was computer-administered using E-Prime 2.0 software [@schneiderEPrimeUserGuide2002] in order to manipulate the timing and presentation of stimuli.
 All stimuli were presented in color and occupied the entirety of the 21-inch monitor.
 The viewing distance was approximately 24 in. and occupied 25° of the vertical visual angle and 30° horizontally (Cuthbert et al., 2000; Hajcak & Nieuwenhuis, 2006).
