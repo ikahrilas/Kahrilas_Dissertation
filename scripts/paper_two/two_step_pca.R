@@ -513,9 +513,10 @@ component_list <- list("RC2",
 
 # iterate over each component and electrode selection to create ERP plots
 map2(component_list, elec_selections, ~ {
-temp_raw_df %>%
+watch <- temp_raw_df %>%
     filter(elec %in% c(.y),
-           comp == .x) %>%
+           comp == .x,
+           block %in% c("Pos_Watch", "Neu_Watch", "Neg_Watch")) %>%
   pivot_longer(cols = -c(pid:comp),
                names_to = "ms",
                values_to = "mv") %>%
@@ -537,8 +538,68 @@ temp_raw_df %>%
           legend.key.size = unit(2, "line"),
           plot.title = element_text(hjust = 0.5),
           title = element_text(size = 16))
+
+positive <- temp_raw_df %>%
+  filter(elec %in% c(.y),
+         comp == .x,
+         block %in% c("Pos_Watch", "Pos_Inc", "Pos_Dec")) %>%
+  pivot_longer(cols = -c(pid:comp),
+               names_to = "ms",
+               values_to = "mv") %>%
+  group_by(block, ms) %>%
+  mutate(ms = as.numeric(ms)) %>%
+  summarise(mv = mean(mv)) %>%
+  ggplot(., aes(ms, mv, color = block)) +
+  geom_line(size = 1.1) +
+  geom_vline(xintercept = 0, linetype = "dashed") +
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  labs(x = "Time (ms)",
+       y = expression(paste("Amplitude (",mu,"V)")),
+       title = paste("Average", .x, "Waveforms")) +
+  theme_classic() +
+  theme(axis.title = element_text(size = 16),
+        axis.text = element_text(size = 12),
+        legend.title = element_text(size = 16),
+        legend.text = element_text(size = 12),
+        legend.key.size = unit(2, "line"),
+        plot.title = element_text(hjust = 0.5),
+        title = element_text(size = 16))
+
+negative <- temp_raw_df %>%
+  filter(elec %in% c(.y),
+         comp == .x,
+         block %in% c("Neg_Watch", "Neg_Inc", "Neg_Dec")) %>%
+  pivot_longer(cols = -c(pid:comp),
+               names_to = "ms",
+               values_to = "mv") %>%
+  group_by(block, ms) %>%
+  mutate(ms = as.numeric(ms)) %>%
+  summarise(mv = mean(mv)) %>%
+  ggplot(., aes(ms, mv, color = block)) +
+  geom_line(size = 1.1) +
+  geom_vline(xintercept = 0, linetype = "dashed") +
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  labs(x = "Time (ms)",
+       y = expression(paste("Amplitude (",mu,"V)")),
+       title = paste("Average", .x, "Waveforms")) +
+  theme_classic() +
+  theme(axis.title = element_text(size = 16),
+        axis.text = element_text(size = 12),
+        legend.title = element_text(size = 16),
+        legend.text = element_text(size = 12),
+        legend.key.size = unit(2, "line"),
+        plot.title = element_text(hjust = 0.5),
+        title = element_text(size = 16))
 # save each plot
-  ggsave(here("images", "paper_2", "temporal_component_ERPs", paste0(.x, ".png")),
+  ggsave(plot = watch, here("images", "paper_2", "temporal_component_ERPs", paste0(.x, "_watch.png")),
+         device = "png",
+         width = 12,
+         dpi = "retina")
+  ggsave(plot = positive, here("images", "paper_2", "temporal_component_ERPs", paste0(.x, "_positive.png")),
+         device = "png",
+         width = 12,
+         dpi = "retina")
+  ggsave(plot = negative, here("images", "paper_2", "temporal_component_ERPs", paste0(.x, "_negative.png")),
          device = "png",
          width = 12,
          dpi = "retina")
