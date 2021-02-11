@@ -20,7 +20,7 @@ dat$block <- factor(dat$block, levels = c("Neg_Inc", "Neg_Dec", "Neg_Watch",
                                           "Pos_Watch", "Pos_Dec", "Pos_Inc"))
 
 # observe histograms for each of the factors
-comps <- c("RC2", "RC3", "RC5", "RC11", "RC12")
+comps <- c("RC2", "RC3", "RC5", "RC11", "RC12", "RC12")
 
 # define electrodes
 rc2_elec <- c("A29", "B26")
@@ -29,12 +29,15 @@ rc3_elec <- c("A29", "B26", "A26", "B23",
 rc5_elec <- c("A29", "B26")
 rc11_elec <- c("A29", "B26")
 rc12_elec <- c("B21", "B28")
+pos_rc12_elec <- c("A29", "B26")
+
 ## list for function
 elec_list <- list(rc2_elec,
                   rc3_elec,
                   rc5_elec,
                   rc11_elec,
-                  rc12_elec)
+                  rc12_elec,
+                  pos_rc12_elec)
 
 map2(comps, elec_list, ~ {
   dat %>%
@@ -94,7 +97,13 @@ dat %>%
       group_by(pid, block) %>%
       summarise(RC12 = mean(RC12, na.rm = TRUE))
   ) %>%
-  select(pid...1, block...2, comps) %>%
+  bind_cols(
+    dat %>%
+      filter(elec %in% pos_rc12_elec) %>%
+      group_by(pid, block) %>%
+      summarise(pos_RC12 = mean(RC12, na.rm = TRUE))
+  ) %>%
+  select(pid...1, block...2, RC2, RC3, RC5, RC11, RC12, pos_RC12) %>%
   rename("pid" = pid...1,
          "block" = block...2) %>%
   full_join(per_sr_dat, by = c("pid", "block")) %>%
