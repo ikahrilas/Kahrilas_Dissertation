@@ -9,7 +9,7 @@ library(performance)
 library(effectsize)
 
 # read in data
-dat <- read_csv("data/paper_two/created_data/temp_fac_score_dat_analyses2021-02-02.csv")
+dat <- read_csv("data/paper_two/created_data/temp_fac_score_dat_analyses2021-02-11.csv")
 
 # relevel block variable
 dat$block <- relevel(factor(dat$block), ref = "Pos_Watch")
@@ -249,6 +249,54 @@ RC12_stm_mod_t <- RC12_stm_mod_dat %>%
   select(t.value) %>%
   pull()
 RC12_stm_mod_p <- RC12_stm_mod_dat %>%
+  mutate(var = row.names(.),
+         Pr...t.. = sprintf("%.3f", Pr...t..),
+         Pr...t.. = str_remove(Pr...t.., "^0+"),
+         Pr...t.. = paste("=", Pr...t..),
+         Pr...t.. = if_else(Pr...t.. == "= .000", "< .001", Pr...t..)) %>%
+  filter(var == "blockPos_Inc:savoring_moment") %>%
+  select(Pr...t..) %>%
+  pull()
+
+# positive RC12 as outcome
+pos_RC12_stm_mod <- lmer(pos_RC12 ~ block*savoring_moment + (1|pid), data = dat)
+## check assumptions
+check_model(pos_RC12_stm_mod)
+## model results
+summary(pos_RC12_stm_mod)
+### nothing
+## extract information
+pos_RC12_stm_mod_dat <- data.frame(coef(summary(pos_RC12_stm_mod)))
+pos_RC12_stm_mod_beta <- pos_RC12_stm_mod_dat %>%
+  mutate(var = row.names(.)) %>%
+  mutate(Estimate = sprintf("%.2f", Estimate)) %>%
+  filter(var == "blockPos_Inc:savoring_moment") %>%
+  select(Estimate) %>%
+  pull()
+pos_RC12_stm_mod_std_beta <- standardize_parameters(pos_RC12_stm_mod) %>%
+  filter(Parameter == "blockPos_Inc:savoring_moment") %>%
+  mutate(Std_Coefficient = sprintf("%.2f", Std_Coefficient)) %>%
+  select(`Std_Coefficient`) %>%
+  pull()
+pos_RC12_stm_mod_se <- pos_RC12_stm_mod_dat %>%
+  mutate(var = row.names(.)) %>%
+  mutate(Std..Error = sprintf("%.2f", Std..Error)) %>%
+  filter(var == "blockPos_Inc:savoring_moment") %>%
+  select(Std..Error) %>%
+  pull()
+pos_RC12_stm_mod_df <- pos_RC12_stm_mod_dat %>%
+  mutate(var = row.names(.)) %>%
+  mutate(df = sprintf("%.2f", df)) %>%
+  filter(var == "blockPos_Inc:savoring_moment") %>%
+  select(df) %>%
+  pull()
+pos_RC12_stm_mod_t <- pos_RC12_stm_mod_dat %>%
+  mutate(var = row.names(.)) %>%
+  mutate(t.value = sprintf("%.2f", t.value)) %>%
+  filter(var == "blockPos_Inc:savoring_moment") %>%
+  select(t.value) %>%
+  pull()
+pos_RC12_stm_mod_p <- pos_RC12_stm_mod_dat %>%
   mutate(var = row.names(.),
          Pr...t.. = sprintf("%.3f", Pr...t..),
          Pr...t.. = str_remove(Pr...t.., "^0+"),
