@@ -7,9 +7,9 @@ library(effectsize)
 library(kableExtra)
 
 # read in data and make variables for valence and regulation conditions
-dat <- read_csv("data/paper_two/created_data/temp_fac_score_dat_analyses2021-02-02.csv")
+dat <- read_csv("data/paper_two/created_data/temp_fac_score_dat_analyses2021-02-11.csv")
 
-per_dat_cond <- read_csv("data/paper_two/created_data/temp_fac_score_dat_analyses2021-02-02.csv") %>%
+per_dat_cond <- read_csv("data/paper_two/created_data/temp_fac_score_dat_analyses2021-02-11.csv") %>%
   separate(block, c("valence_cond", "regulation_cond"), "_") %>%
   mutate(valence_condition = if_else(valence_cond == "Neg", "Negative",
                                      if_else(valence_cond == "Pos", "Positive", "Neutral")),
@@ -44,7 +44,7 @@ RC2_std_beta_pos <- RC2_std_beta_pos %>%
   mutate(Parameter = if_else(Parameter == "blockPos_Dec", "Decrease - Watch", "Increase - Watch")) %>%
   bind_rows(., filter(tmp_pos, Parameter == "blockPos_Dec")) %>%
   mutate(Parameter = if_else(Parameter == "blockPos_Dec", "Decrease - Increase", Parameter),
-         interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "gignac2016")),
+         interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "cohen1988")),
          valence_condition = "Positive")
 
 RC2_std_beta_neg <- RC2_std_beta_neg %>%
@@ -52,7 +52,7 @@ RC2_std_beta_neg <- RC2_std_beta_neg %>%
   mutate(Parameter = if_else(Parameter == "blockNeg_Dec", "Decrease - Watch", "Increase - Watch")) %>%
   bind_rows(., filter(tmp_neg, Parameter == "blockNeg_Dec")) %>%
   mutate(Parameter = if_else(Parameter == "blockNeg_Dec", "Decrease - Increase", Parameter),
-         interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "gignac2016")),
+         interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "cohen1988")),
          valence_condition = "Negative")
 
 RC2_std_beta <- bind_rows(RC2_std_beta_pos, RC2_std_beta_neg)
@@ -88,7 +88,7 @@ RC3_std_beta_pos <- RC3_std_beta_pos %>%
   mutate(Parameter = if_else(Parameter == "blockPos_Dec", "Decrease - Watch", "Increase - Watch")) %>%
   bind_rows(., filter(tmp_pos, Parameter == "blockPos_Dec")) %>%
   mutate(Parameter = if_else(Parameter == "blockPos_Dec", "Decrease - Increase", Parameter),
-         interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "gignac2016")),
+         interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "cohen1988")),
          valence_condition = "Positive")
 
 RC3_std_beta_neg <- RC3_std_beta_neg %>%
@@ -96,7 +96,7 @@ RC3_std_beta_neg <- RC3_std_beta_neg %>%
   mutate(Parameter = if_else(Parameter == "blockNeg_Dec", "Decrease - Watch", "Increase - Watch")) %>%
   bind_rows(., filter(tmp_neg, Parameter == "blockNeg_Dec")) %>%
   mutate(Parameter = if_else(Parameter == "blockNeg_Dec", "Decrease - Increase", Parameter),
-         interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "gignac2016")),
+         interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "cohen1988")),
          valence_condition = "Negative")
 
 RC3_std_beta <- bind_rows(RC3_std_beta_pos, RC3_std_beta_neg)
@@ -132,7 +132,7 @@ RC5_std_beta_pos <- RC5_std_beta_pos %>%
   mutate(Parameter = if_else(Parameter == "blockPos_Dec", "Decrease - Watch", "Increase - Watch")) %>%
   bind_rows(., filter(tmp_pos, Parameter == "blockPos_Dec")) %>%
   mutate(Parameter = if_else(Parameter == "blockPos_Dec", "Decrease - Increase", Parameter),
-         interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "gignac2016")),
+         interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "cohen1988")),
          valence_condition = "Positive")
 
 RC5_std_beta_neg <- RC5_std_beta_neg %>%
@@ -140,7 +140,7 @@ RC5_std_beta_neg <- RC5_std_beta_neg %>%
   mutate(Parameter = if_else(Parameter == "blockNeg_Dec", "Decrease - Watch", "Increase - Watch")) %>%
   bind_rows(., filter(tmp_neg, Parameter == "blockNeg_Dec")) %>%
   mutate(Parameter = if_else(Parameter == "blockNeg_Dec", "Decrease - Increase", Parameter),
-         interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "gignac2016")),
+         interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "cohen1988")),
          valence_condition = "Negative")
 
 RC5_std_beta <- bind_rows(RC5_std_beta_pos, RC5_std_beta_neg)
@@ -176,7 +176,7 @@ RC11_std_beta_pos <- RC11_std_beta_pos %>%
   mutate(Parameter = if_else(Parameter == "blockPos_Dec", "Decrease - Watch", "Increase - Watch")) %>%
   bind_rows(., filter(tmp_pos, Parameter == "blockPos_Dec")) %>%
   mutate(Parameter = if_else(Parameter == "blockPos_Dec", "Decrease - Increase", Parameter),
-         interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "gignac2016")),
+         interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "cohen1988")),
          valence_condition = "Positive")
 
 RC11_std_beta_neg <- RC11_std_beta_neg %>%
@@ -184,7 +184,7 @@ RC11_std_beta_neg <- RC11_std_beta_neg %>%
   mutate(Parameter = if_else(Parameter == "blockNeg_Dec", "Decrease - Watch", "Increase - Watch")) %>%
   bind_rows(., filter(tmp_neg, Parameter == "blockNeg_Dec")) %>%
   mutate(Parameter = if_else(Parameter == "blockNeg_Dec", "Decrease - Increase", Parameter),
-         interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "gignac2016")),
+         interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "cohen1988")),
          valence_condition = "Negative")
 
 RC11_std_beta <- bind_rows(RC11_std_beta_pos, RC11_std_beta_neg)
@@ -220,7 +220,7 @@ RC12_std_beta_pos <- RC12_std_beta_pos %>%
   mutate(Parameter = if_else(Parameter == "blockPos_Dec", "Decrease - Watch", "Increase - Watch")) %>%
   bind_rows(., filter(tmp_pos, Parameter == "blockPos_Dec")) %>%
   mutate(Parameter = if_else(Parameter == "blockPos_Dec", "Decrease - Increase", Parameter),
-         interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "gignac2016")),
+         interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "cohen1988")),
          valence_condition = "Positive")
 
 RC12_std_beta_neg <- RC12_std_beta_neg %>%
@@ -228,7 +228,7 @@ RC12_std_beta_neg <- RC12_std_beta_neg %>%
   mutate(Parameter = if_else(Parameter == "blockNeg_Dec", "Decrease - Watch", "Increase - Watch")) %>%
   bind_rows(., filter(tmp_neg, Parameter == "blockNeg_Dec")) %>%
   mutate(Parameter = if_else(Parameter == "blockNeg_Dec", "Decrease - Increase", Parameter),
-         interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "gignac2016")),
+         interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "cohen1988")),
          valence_condition = "Negative")
 
 RC12_std_beta <- bind_rows(RC12_std_beta_pos, RC12_std_beta_neg)
@@ -236,6 +236,51 @@ RC12_std_beta <- bind_rows(RC12_std_beta_pos, RC12_std_beta_neg)
 RC12_reg_tab <- full_join(RC12_reg_tab, RC12_std_beta, by = c("contrast" = "Parameter", "valence_condition")) %>%
   mutate(comp = "EPN Component") %>%
   select(comp, valence_condition, contrast, estimate, lower.CL, upper.CL, Std_Coefficient, interpretation, p.value)
+
+# pos_RC12 regulation comparisons
+reg_mod_pos_RC12 <- lmer(pos_RC12 ~ valence_condition * regulation_condition + (1|pid), data = per_dat_cond)
+pos_RC12_reg <- emmeans(reg_mod_pos_RC12, pairwise ~ regulation_condition | valence_condition)
+
+pos_RC12_reg_confint <- data.frame(confint(pos_RC12_reg)$contrasts) %>%
+  filter(valence_condition %in% c("Negative", "Positive")) %>%
+  select(contrast, valence_condition, lower.CL, upper.CL)
+
+pos_RC12_reg_tab <- data.frame(pos_RC12_reg$contrasts) %>%
+  filter(valence_condition %in% c("Negative", "Positive")) %>%
+  left_join(., pos_RC12_reg_confint, by = c("contrast", "valence_condition"))
+
+# derive standardized beta for effect size
+dat$block <- relevel(factor(dat$block), ref = "Pos_Watch")
+pos_RC12_std_beta_pos <- standardize_parameters(lmer(pos_RC12 ~ block + (1|pid), data = dat))
+dat$block <- relevel(factor(dat$block), ref = "Pos_Inc")
+tmp_pos <- standardize_parameters(lmer(pos_RC12 ~ block + (1|pid), data = dat))
+dat$block <- relevel(factor(dat$block), ref = "Neg_Watch")
+pos_RC12_std_beta_neg <- standardize_parameters(lmer(pos_RC12 ~ block + (1|pid), data = dat))
+dat$block <- relevel(factor(dat$block), ref = "Neg_Inc")
+tmp_neg <- standardize_parameters(lmer(pos_RC12 ~ block + (1|pid), data = dat))
+
+pos_RC12_std_beta_pos <- pos_RC12_std_beta_pos %>%
+  filter(Parameter %in% c("blockPos_Dec", "blockPos_Inc")) %>%
+  mutate(Parameter = if_else(Parameter == "blockPos_Dec", "Decrease - Watch", "Increase - Watch")) %>%
+  bind_rows(., filter(tmp_pos, Parameter == "blockPos_Dec")) %>%
+  mutate(Parameter = if_else(Parameter == "blockPos_Dec", "Decrease - Increase", Parameter),
+         interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "cohen1988")),
+         valence_condition = "Positive")
+
+pos_RC12_std_beta_neg <- pos_RC12_std_beta_neg %>%
+  filter(Parameter %in% c("blockNeg_Dec", "blockNeg_Inc")) %>%
+  mutate(Parameter = if_else(Parameter == "blockNeg_Dec", "Decrease - Watch", "Increase - Watch")) %>%
+  bind_rows(., filter(tmp_neg, Parameter == "blockNeg_Dec")) %>%
+  mutate(Parameter = if_else(Parameter == "blockNeg_Dec", "Decrease - Increase", Parameter),
+         interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "cohen1988")),
+         valence_condition = "Negative")
+
+pos_RC12_std_beta <- bind_rows(pos_RC12_std_beta_pos, pos_RC12_std_beta_neg)
+
+pos_RC12_reg_tab <- full_join(pos_RC12_reg_tab, pos_RC12_std_beta, by = c("contrast" = "Parameter", "valence_condition")) %>%
+  mutate(comp = "EPP Component") %>%
+  select(comp, valence_condition, contrast, estimate, lower.CL, upper.CL, Std_Coefficient, interpretation, p.value)
+
 
 # Arousal regulation comparisons
 reg_mod_ar <- lmer(arousal ~ valence_condition * regulation_condition + (1|pid), data = per_dat_cond)
@@ -264,7 +309,7 @@ ar_std_beta_pos <- ar_std_beta_pos %>%
   mutate(Parameter = if_else(Parameter == "blockPos_Dec", "Decrease - Watch", "Increase - Watch")) %>%
   bind_rows(., filter(tmp_pos, Parameter == "blockPos_Dec")) %>%
   mutate(Parameter = if_else(Parameter == "blockPos_Dec", "Decrease - Increase", Parameter),
-         interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "gignac2016")),
+         interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "cohen1988")),
          valence_condition = "Positive")
 
 ar_std_beta_neg <- ar_std_beta_neg %>%
@@ -272,7 +317,7 @@ ar_std_beta_neg <- ar_std_beta_neg %>%
   mutate(Parameter = if_else(Parameter == "blockNeg_Dec", "Decrease - Watch", "Increase - Watch")) %>%
   bind_rows(., filter(tmp_neg, Parameter == "blockNeg_Dec")) %>%
   mutate(Parameter = if_else(Parameter == "blockNeg_Dec", "Decrease - Increase", Parameter),
-         interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "gignac2016")),
+         interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "cohen1988")),
          valence_condition = "Negative")
 
 ar_std_beta <- bind_rows(ar_std_beta_pos, ar_std_beta_neg)
@@ -308,7 +353,7 @@ val_std_beta_pos <- val_std_beta_pos %>%
   mutate(Parameter = if_else(Parameter == "blockPos_Dec", "Decrease - Watch", "Increase - Watch")) %>%
   bind_rows(., filter(tmp_pos, Parameter == "blockPos_Dec")) %>%
   mutate(Parameter = if_else(Parameter == "blockPos_Dec", "Decrease - Increase", Parameter),
-         interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "gignac2016")),
+         interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "cohen1988")),
          valence_condition = "Positive")
 
 val_std_beta_neg <- val_std_beta_neg %>%
@@ -316,7 +361,7 @@ val_std_beta_neg <- val_std_beta_neg %>%
   mutate(Parameter = if_else(Parameter == "blockNeg_Dec", "Decrease - Watch", "Increase - Watch")) %>%
   bind_rows(., filter(tmp_neg, Parameter == "blockNeg_Dec")) %>%
   mutate(Parameter = if_else(Parameter == "blockNeg_Dec", "Decrease - Increase", Parameter),
-         interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "gignac2016")),
+         interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "cohen1988")),
          valence_condition = "Negative")
 
 val_std_beta <- bind_rows(val_std_beta_pos, ar_std_beta_neg)
@@ -326,7 +371,7 @@ val_reg_tab <- full_join(val_reg_tab, val_std_beta, by = c("contrast" = "Paramet
   select(comp, valence_condition, contrast, estimate, lower.CL, upper.CL, Std_Coefficient, interpretation, p.value)
 
 # collate components and behavioral ratings
-reg_tab <- bind_rows(RC2_reg_tab, RC3_reg_tab, RC5_reg_tab, RC11_reg_tab, RC12_reg_tab, ar_reg_tab, val_reg_tab) %>%
+reg_tab <- bind_rows(RC2_reg_tab, RC3_reg_tab, RC5_reg_tab, RC11_reg_tab, RC12_reg_tab, pos_RC12_reg_tab, ar_reg_tab, val_reg_tab) %>%
   mutate(Std_Coefficient = abs(Std_Coefficient))
 names(reg_tab) <- c("comp", "valence_condition", "Contrast", "Estimate", "lower.CL", "upper.CL", "Std. Beta", "interpretation", "Sig.")
 reg_tab <- reg_tab %>%
@@ -370,16 +415,17 @@ reg_tab_wide[-1] %>%
   kable_styling(latex_options = "scale_down") %>%
   add_header_above(c(" ", "Positive Images" = 3, "Negative Images" = 3), bold = TRUE, italic = TRUE) %>%
   row_spec(0, align = "c") %>%
-  pack_rows("First LPP Component", 1, 3) %>%
-  pack_rows("Second LPP Component", 4, 6) %>%
-  pack_rows("P100 Component", 7, 9) %>%
+  pack_rows("Early LPP Component", 1, 3) %>%
+  pack_rows("Late LPP Component", 4, 6) %>%
+  pack_rows("P125 Component", 7, 9) %>%
   pack_rows("N170 Component", 10, 12) %>%
   pack_rows("EPN Component", 13, 15) %>%
-  pack_rows("Arousal Ratings", 16, 18) %>%
-  pack_rows("Valence Ratings", 19, 21) %>%
+  pack_rows("EPP Component", 16, 18) %>%
+  pack_rows("Arousal Ratings", 19, 21) %>%
+  pack_rows("Valence Ratings", 22, 24) %>%
   footnote(escape = FALSE,
            general_title = "Note.",
-           general = "Std. Beta = Absolute value of standardized beta coefficient as measure of effect size derived by fitting model to standardized dataset with effect size label as per Gignac's (2016) recommendations, Sig. = $p$ value. $P$ values and confidence intervals adjusted using the Tukey method for comparing a family of three estimates.",
+           general = "Std. Beta = Absolute value of standardized beta coefficient as measure of effect size derived by fitting model to standardized dataset with effect size label as per Cohen's (1988) recommendations, Sig. = $p$ value. $P$ values and confidence intervals adjusted using the Tukey method for comparing a family of three estimates.",
            threeparttable = TRUE,
            footnote_as_chunk = TRUE)
 
