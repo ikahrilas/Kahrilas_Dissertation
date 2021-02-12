@@ -272,8 +272,8 @@ watch_tab %>%
   select(-comp) %>%
   kable(., escape = FALSE, booktabs = TRUE, align = c("l", "c", "c", "c"), linesep = "", caption = "(ref:pairwise-watch-comparison-table)") %>%
   row_spec(0, align = "c") %>%
-  pack_rows("First LPP Component", 1, 3) %>%
-  pack_rows("Second LPP Component", 4, 6) %>%
+  pack_rows("Early LPP Component", 1, 3) %>%
+  pack_rows("Late LPP Component", 4, 6) %>%
   pack_rows("P100 Component", 7, 9) %>%
   pack_rows("N170 Component", 10, 12) %>%
   pack_rows("EPN Component", 13, 15) %>%
