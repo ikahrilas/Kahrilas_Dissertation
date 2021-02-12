@@ -274,12 +274,12 @@ watch_tab %>%
   row_spec(0, align = "c") %>%
   pack_rows("Early LPP Component", 1, 3) %>%
   pack_rows("Late LPP Component", 4, 6) %>%
-  pack_rows("P100 Component", 7, 9) %>%
+  pack_rows("P125 Component", 7, 9) %>%
   pack_rows("N170 Component", 10, 12) %>%
   pack_rows("EPN Component", 13, 15) %>%
   pack_rows("EPP Component", 16, 18) %>%
   pack_rows("Arousal Ratings", 19, 21) %>%
-  pack_rows("Valence Ratings", 21, 23) %>%
+  pack_rows("Valence Ratings", 22, 24) %>%
   footnote(escape = FALSE,
            footnote_as_chunk = TRUE,
            general_title = "Note.",
