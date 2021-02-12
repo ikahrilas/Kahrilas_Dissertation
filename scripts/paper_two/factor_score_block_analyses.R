@@ -25,7 +25,7 @@ emmeans(RC2_block_mod, data = dat, ~block) %>%
 ### no regulation effects for negative stimuli
 ### significant difference between positive watch and positive inc, no positive decrease
 
-RC2_block_aov <- anova(RC2_block_mod)
+RC2_block_aov <- anova(RC2_block_mod) # significant anova
 df_num_rc2 <- RC2_block_aov$NumDF
 df_den_rc2 <- sprintf("%.2f", RC2_block_aov$DenDF)
 f_rc2 <- sprintf("%.2f", RC2_block_aov[["F value"]])
@@ -46,7 +46,7 @@ emmeans(RC3_block_mod, data = dat, ~block) %>%
 ### no regulation effects for negative stimuli, but trending for negative decrease
 ### trending difference between positive watch and positive inc, no positive decrease
 
-RC3_block_aov <- anova(RC3_block_mod)
+RC3_block_aov <- anova(RC3_block_mod) # significant anova
 df_num_rc3 <- RC3_block_aov$NumDF
 df_den_rc3 <- sprintf("%.2f", RC3_block_aov$DenDF)
 f_rc3 <- sprintf("%.2f", RC2_block_aov[["F value"]])
@@ -65,7 +65,7 @@ emmeans(RC5_block_mod, data = dat, ~block) %>%
   contrast("pairwise", adjust = "none")
 ### total dud - nothing interesting
 
-RC5_block_aov <- anova(RC5_block_mod)
+RC5_block_aov <- anova(RC5_block_mod) # significant anova, non-significant post hoc
 df_num_rc5 <- RC5_block_aov$NumDF
 df_den_rc5 <- sprintf("%.2f", RC5_block_aov$DenDF)
 f_rc5 <- sprintf("%.2f", RC5_block_aov[["F value"]])
@@ -86,7 +86,7 @@ emmeans(RC11_block_mod, data = dat, ~block) %>%
 ### no negative regulatory effects
 ### no positive regulatory effects
 
-RC11_block_aov <- anova(RC11_block_mod)
+RC11_block_aov <- anova(RC11_block_mod) # significant anova
 df_num_rc11 <- RC11_block_aov$NumDF
 df_den_rc11 <- sprintf("%.2f", RC11_block_aov$DenDF)
 f_rc11 <- sprintf("%.2f", RC11_block_aov[["F value"]])
@@ -107,7 +107,7 @@ emmeans(RC12_block_mod, data = dat, ~block) %>%
 ### negative increase effect
 ### positive increase effect (!)
 
-RC12_block_aov <- anova(RC12_block_mod)
+RC12_block_aov <- anova(RC12_block_mod) # significant anova
 df_num_rc12 <- RC12_block_aov$NumDF
 df_den_rc12 <- sprintf("%.2f", RC12_block_aov$DenDF)
 f_rc12 <- sprintf("%.2f", RC12_block_aov[["F value"]])
@@ -124,10 +124,10 @@ summary(pos_RC12_block_mod)
 emmeans(pos_RC12_block_mod, data = dat, ~block) %>%
   contrast("pairwise", adjust = "none")
 ### arousal effect for negative stimuli, not so with positive
-### negative increase effect
-### positive increase effect (!)
+### no neg regulation effects
+### no pos regulation effects
 
-pos_RC12_block_aov <- anova(pos_RC12_block_mod)
+pos_RC12_block_aov <- anova(pos_RC12_block_mod) # significant anova
 df_num_pos_RC12 <- pos_RC12_block_aov$NumDF
 df_den_pos_RC12 <- sprintf("%.2f", pos_RC12_block_aov$DenDF)
 f_pos_RC12 <- sprintf("%.2f", pos_RC12_block_aov[["F value"]])
