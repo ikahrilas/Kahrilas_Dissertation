@@ -9,9 +9,9 @@ library(effectsize)
 library(kableExtra)
 
 # read in data and make variables for valence and regulation conditions
-dat <- read_csv("data/paper_two/created_data/temp_fac_score_dat_analyses2021-02-02.csv")
+dat <- read_csv("data/paper_two/created_data/temp_fac_score_dat_analyses2021-02-11.csv")
 
-per_dat_cond <- read_csv("data/paper_two/created_data/temp_fac_score_dat_analyses2021-02-02.csv") %>%
+per_dat_cond <- read_csv("data/paper_two/created_data/temp_fac_score_dat_analyses2021-02-11.csv") %>%
   separate(block, c("valence_cond", "regulation_cond"), "_") %>%
   mutate(valence_condition = if_else(valence_cond == "Neg", "Negative",
                                      if_else(valence_cond == "Pos", "Positive", "Neutral")),
@@ -39,7 +39,7 @@ tmp <- tmp %>%
   filter(Parameter == "blockNeg_Watch") %>%
   mutate(Parameter = "Negative - Positive")
 rc2_std_beta <- bind_rows(rc2_std_beta, tmp) %>%
-  mutate(interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "gignac2016")))
+  mutate(interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "cohen1988")))
 rc2_watch_tab <- full_join(rc2_watch_tab, rc2_std_beta, by = c("contrast" = "Parameter")) %>%
   select(contrast, estimate, lower.CL, upper.CL, Std_Coefficient, interpretation, t.ratio, p.value)
 rc2_watch_tab <- rc2_watch_tab %>%
@@ -67,7 +67,7 @@ tmp <- tmp %>%
   filter(Parameter == "blockNeg_Watch") %>%
   mutate(Parameter = "Negative - Positive")
 rc3_std_beta <- bind_rows(rc3_std_beta, tmp) %>%
-  mutate(interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "gignac2016")))
+  mutate(interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "cohen1988")))
 rc3_watch_tab <- full_join(rc3_watch_tab, rc3_std_beta, by = c("contrast" = "Parameter")) %>%
   select(contrast, estimate, lower.CL, upper.CL, Std_Coefficient, interpretation, t.ratio, p.value)
 rc3_watch_tab <- rc3_watch_tab %>%
@@ -95,7 +95,7 @@ tmp <- tmp %>%
   filter(Parameter == "blockNeg_Watch") %>%
   mutate(Parameter = "Negative - Positive")
 RC5_std_beta <- bind_rows(RC5_std_beta, tmp) %>%
-  mutate(interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "gignac2016")))
+  mutate(interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "cohen1988")))
 RC5_watch_tab <- full_join(RC5_watch_tab, RC5_std_beta, by = c("contrast" = "Parameter")) %>%
   select(contrast, estimate, lower.CL, upper.CL, Std_Coefficient, interpretation, t.ratio, p.value)
 RC5_watch_tab <- RC5_watch_tab %>%
@@ -123,7 +123,7 @@ tmp <- tmp %>%
   filter(Parameter == "blockNeg_Watch") %>%
   mutate(Parameter = "Negative - Positive")
 RC11_std_beta <- bind_rows(RC11_std_beta, tmp) %>%
-  mutate(interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "gignac2016")))
+  mutate(interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "cohen1988")))
 RC11_watch_tab <- full_join(RC11_watch_tab, RC11_std_beta, by = c("contrast" = "Parameter")) %>%
   select(contrast, estimate, lower.CL, upper.CL, Std_Coefficient, interpretation, t.ratio, p.value)
 RC11_watch_tab <- RC11_watch_tab %>%
@@ -151,11 +151,39 @@ tmp <- tmp %>%
   filter(Parameter == "blockNeg_Watch") %>%
   mutate(Parameter = "Negative - Positive")
 RC12_std_beta <- bind_rows(RC12_std_beta, tmp) %>%
-  mutate(interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "gignac2016")))
+  mutate(interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "cohen1988")))
 RC12_watch_tab <- full_join(RC12_watch_tab, RC12_std_beta, by = c("contrast" = "Parameter")) %>%
   select(contrast, estimate, lower.CL, upper.CL, Std_Coefficient, interpretation, t.ratio, p.value)
 RC12_watch_tab <- RC12_watch_tab %>%
   mutate(comp = "EPN Component") %>%
+  select(comp, everything())
+
+# pos_RC12 watch comparisons
+reg_mod_pos_RC12 <- lmer(pos_RC12 ~ valence_condition * regulation_condition + (1|pid), data = per_dat_cond)
+pos_RC12_watch <- emmeans(reg_mod_pos_RC12, pairwise ~ valence_condition | regulation_condition)
+pos_RC12_watch_confint <- data.frame(confint(pos_RC12_watch)$contrasts) %>%
+  filter(regulation_condition == "Watch") %>%
+  select(contrast, lower.CL, upper.CL)
+pos_RC12_watch_tab <- data.frame(pos_RC12_watch$contrasts) %>%
+  filter(regulation_condition == "Watch") %>%
+  left_join(., pos_RC12_watch_confint, by = "contrast")
+# derive standardized beta for effect size
+dat$block <- relevel(factor(dat$block), ref = "Neu_Watch")
+pos_RC12_std_beta <- standardize_parameters(lmer(pos_RC12 ~ block + (1|pid), data = dat))
+pos_RC12_std_beta <- pos_RC12_std_beta %>%
+  filter(Parameter %in% c("blockNeg_Watch", "blockPos_Watch")) %>%
+  mutate(Parameter = if_else(Parameter == "blockNeg_Watch", "Negative - Neutral", "Neutral - Positive"))
+dat$block <- relevel(factor(dat$block), ref = "Pos_Watch")
+tmp <- standardize_parameters(lmer(pos_RC12 ~ block + (1|pid), data = dat))
+tmp <- tmp %>%
+  filter(Parameter == "blockNeg_Watch") %>%
+  mutate(Parameter = "Negative - Positive")
+pos_RC12_std_beta <- bind_rows(pos_RC12_std_beta, tmp) %>%
+  mutate(interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "cohen1988")))
+pos_RC12_watch_tab <- full_join(pos_RC12_watch_tab, pos_RC12_std_beta, by = c("contrast" = "Parameter")) %>%
+  select(contrast, estimate, lower.CL, upper.CL, Std_Coefficient, interpretation, t.ratio, p.value)
+pos_RC12_watch_tab <- pos_RC12_watch_tab %>%
+  mutate(comp = "EPP Component") %>%
   select(comp, everything())
 
 # Arousal comparisons
@@ -179,7 +207,7 @@ tmp <- tmp %>%
   filter(Parameter == "blockNeg_Watch") %>%
   mutate(Parameter = "Negative - Positive")
 ar_std_beta <- bind_rows(ar_std_beta, tmp) %>%
-  mutate(interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "gignac2016")))
+  mutate(interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "cohen1988")))
 ar_watch_tab <- full_join(ar_watch_tab, ar_std_beta, by = c("contrast" = "Parameter")) %>%
   select(contrast, estimate, lower.CL, upper.CL, Std_Coefficient, interpretation, t.ratio, p.value)
 ar_watch_tab <- ar_watch_tab %>%
@@ -207,14 +235,14 @@ tmp <- tmp %>%
   filter(Parameter == "blockNeg_Watch") %>%
   mutate(Parameter = "Negative - Positive")
 val_std_beta <- bind_rows(val_std_beta, tmp) %>%
-  mutate(interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "gignac2016")))
+  mutate(interpretation = tools::toTitleCase(interpret_d(Std_Coefficient, rules = "cohen1988")))
 val_watch_tab <- full_join(val_watch_tab, val_std_beta, by = c("contrast" = "Parameter")) %>%
   select(contrast, estimate, lower.CL, upper.CL, Std_Coefficient, interpretation, t.ratio, p.value)
 val_watch_tab <- val_watch_tab %>%
   mutate(comp = "valence_rating") %>%
   select(comp, everything())
 
-watch_tab <- bind_rows(rc2_watch_tab, rc3_watch_tab, RC5_watch_tab, RC11_watch_tab, RC12_watch_tab, ar_watch_tab, val_watch_tab) %>%
+watch_tab <- bind_rows(rc2_watch_tab, rc3_watch_tab, RC5_watch_tab, RC11_watch_tab, RC12_watch_tab, pos_RC12_watch_tab, ar_watch_tab, val_watch_tab) %>%
   mutate(Std_Coefficient = abs(Std_Coefficient))
 names(watch_tab) <- c("comp", "Contrast", "Estimate", "lower.CL", "upper.CL", "Std. Beta", "interpretation", "$t$ ratio", "Sig.")
 watch_tab <- watch_tab %>%
@@ -249,14 +277,15 @@ watch_tab %>%
   pack_rows("P100 Component", 7, 9) %>%
   pack_rows("N170 Component", 10, 12) %>%
   pack_rows("EPN Component", 13, 15) %>%
-  pack_rows("Arousal Ratings", 16, 18) %>%
-  pack_rows("Valence Ratings", 19, 21) %>%
+  pack_rows("EPP Component", 16, 18) %>%
+  pack_rows("Arousal Ratings", 19, 21) %>%
+  pack_rows("Valence Ratings", 21, 23) %>%
   footnote(escape = FALSE,
            footnote_as_chunk = TRUE,
            general_title = "Note.",
            general = "Std. Beta (Label) = Absolute value of standardized
 beta coefficient as measure of effect size derived by fitting model to
-standardized dataset with effect size label as per Gignac's (2016) recommendations,
+standardized dataset with effect size label as per Cohen's (1988) recommendations,
 Sig. = $p$ value. $P$ values and confidence intervals adjusted using the Tukey method
 for comparing a family of three estimates.",
            threeparttable = TRUE)
