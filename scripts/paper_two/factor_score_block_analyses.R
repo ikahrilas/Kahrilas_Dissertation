@@ -8,7 +8,7 @@ library(here)
 library(performance)
 
 # read in data
-dat <- read_csv("data/paper_two/created_data/temp_fac_score_dat_analyses2021-02-02.csv")
+dat <- read_csv("data/paper_two/created_data/temp_fac_score_dat_analyses2021-02-11.csv")
 
 # RC2 analyses
 ## relevel block factor so that neutral watch is the reference
@@ -111,6 +111,26 @@ RC12_block_aov <- anova(RC12_block_mod)
 df_num_rc12 <- RC12_block_aov$NumDF
 df_den_rc12 <- sprintf("%.2f", RC12_block_aov$DenDF)
 f_rc12 <- sprintf("%.2f", RC12_block_aov[["F value"]])
+
+# pos_RC12 analyses
+## relevel block factor so that neutral watch is the reference
+dat$block <- relevel(as.factor(dat$block), ref = "Neu_Watch")
+pos_RC12_block_mod <- lmer(pos_RC12 ~ block + (1|pid), data = dat)
+## check assumptions
+check_model(pos_RC12_block_mod)
+## check results
+summary(pos_RC12_block_mod)
+## all contrasts
+emmeans(pos_RC12_block_mod, data = dat, ~block) %>%
+  contrast("pairwise", adjust = "none")
+### arousal effect for negative stimuli, not so with positive
+### negative increase effect
+### positive increase effect (!)
+
+pos_RC12_block_aov <- anova(pos_RC12_block_mod)
+df_num_pos_RC12 <- pos_RC12_block_aov$NumDF
+df_den_pos_RC12 <- sprintf("%.2f", pos_RC12_block_aov$DenDF)
+f_pos_RC12 <- sprintf("%.2f", pos_RC12_block_aov[["F value"]])
 
 
 # arousal analyses

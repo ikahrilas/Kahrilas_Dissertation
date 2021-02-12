@@ -9,7 +9,7 @@ library(performance)
 library(effectsize)
 
 # read in data
-dat <- read_csv("data/paper_two/created_data/temp_fac_score_dat_analyses2021-02-02.csv")
+dat <- read_csv("data/paper_two/created_data/temp_fac_score_dat_analyses2021-02-11.csv")
 
 # RC2 as outcome
 ## relevel block variable
@@ -255,6 +255,55 @@ rc12_pa_mod_p <- rc12_pa_mod_dat %>%
   filter(var == "blockPos_Watch:pos_affectivity") %>%
   select(Pr...t..) %>%
   pull()
+
+# pos_RC12 as outcome
+pos_RC12_pa_mod <- lmer(pos_RC12 ~ block*pos_affectivity + (1|pid), data = dat)
+## check model
+check_model(pos_RC12_pa_mod)
+## model results
+summary(pos_RC12_pa_mod)
+### nothing
+## extract info
+pos_RC12_pa_mod_dat <- data.frame(coef(summary(pos_RC12_pa_mod)))
+pos_RC12_pa_mod_beta <- pos_RC12_pa_mod_dat %>%
+  mutate(var = row.names(.)) %>%
+  mutate(Estimate = sprintf("%.2f", Estimate)) %>%
+  filter(var == "blockPos_Watch:pos_affectivity") %>%
+  select(Estimate) %>%
+  pull()
+pos_RC12_pa_mod_std_beta <- standardize_parameters(pos_RC12_pa_mod) %>%
+  filter(Parameter == "blockPos_Watch:pos_affectivity") %>%
+  mutate(Std_Coefficient = sprintf("%.2f", Std_Coefficient)) %>%
+  select(`Std_Coefficient`) %>%
+  pull()
+pos_RC12_pa_mod_se <- pos_RC12_pa_mod_dat %>%
+  mutate(var = row.names(.)) %>%
+  mutate(Std..Error = sprintf("%.2f", Std..Error)) %>%
+  filter(var == "blockPos_Watch:pos_affectivity") %>%
+  select(Std..Error) %>%
+  pull()
+pos_RC12_pa_mod_df <- pos_RC12_pa_mod_dat %>%
+  mutate(var = row.names(.)) %>%
+  mutate(df = sprintf("%.2f", df)) %>%
+  filter(var == "blockPos_Watch:pos_affectivity") %>%
+  select(df) %>%
+  pull()
+pos_RC12_pa_mod_t <- pos_RC12_pa_mod_dat %>%
+  mutate(var = row.names(.)) %>%
+  mutate(t.value = sprintf("%.2f", t.value)) %>%
+  filter(var == "blockPos_Watch:pos_affectivity") %>%
+  select(t.value) %>%
+  pull()
+pos_RC12_pa_mod_p <- pos_RC12_pa_mod_dat %>%
+  mutate(var = row.names(.),
+         Pr...t.. = sprintf("%.3f", Pr...t..),
+         Pr...t.. = str_remove(Pr...t.., "^0+"),
+         Pr...t.. = paste("=", Pr...t..),
+         Pr...t.. = if_else(Pr...t.. == "= .000", "< .001", Pr...t..)) %>%
+  filter(var == "blockPos_Watch:pos_affectivity") %>%
+  select(Pr...t..) %>%
+  pull()
+
 
 # arousal as outcome
 ar_pa <- lmer(arousal ~ block*pos_affectivity + (1|pid), data = dat)
