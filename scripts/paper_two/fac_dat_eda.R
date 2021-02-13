@@ -69,7 +69,7 @@ ggplot(aes(block, .data[[.x]])) +
 # all looks fine, so create data set that has factor scores calculated based on appropriate electrodes
 # and save the file
 
-dat %>%
+fac_score_dat <- dat %>%
   filter(elec %in% rc2_elec) %>%
   group_by(pid, block) %>%
   summarise(RC2 = mean(RC2, na.rm = TRUE)) %>%
@@ -107,5 +107,38 @@ dat %>%
   rename("pid" = pid...1,
          "block" = block...2) %>%
   full_join(per_sr_dat, by = c("pid", "block")) %>%
-  select(pid:valence, ethnicity, Race, anticipating:masq_aa, tmms_repair:depression) %>%
-  write_csv(file = paste0("data/paper_two/created_data/temp_fac_score_dat_analyses", Sys.Date(), ".csv"))
+  select(pid:valence, ethnicity, Race, anticipating:masq_aa, tmms_repair:depression)
+
+
+write_csv(x = fac_score_dat,
+          file = paste0("data/paper_two/created_data/temp_fac_score_dat_analyses", Sys.Date(), ".csv"))
+
+
+glimpse(fac_score_dat)
+
+fac_score_dat_long <- fac_score_dat %>%
+  pivot_longer(cols = RC2:pos_RC12,
+               names_to = "component",
+               values_to = "fac_score") %>%
+  relocate(pid, block, component, fac_score, everything())
+
+fac_score_dat_long$component <- factor(fac_score_dat_long$component,
+                                       levels = c("RC5", "RC11", "RC12", "pos_RC12", "RC3", "RC2"))
+
+levels(fac_score_dat_long$component) <- c("RC5", "RC11", "neg_RC12", "RC12", "RC3", "RC2")
+
+levels(fac_score_dat_long$component) <- c("125 ms Peak",
+                                          "170 ms Peak",
+                                          "250 ms Negative Peak",
+                                          "250 ms Positive Peak",
+                                          "375 ms Peak",
+                                          "800 ms Peak")
+
+# envisioning 3 grouped box plots, one with watch conditions, one with positive conditions
+# and one with negative conditions, with simple topo plots with electrode regions highlighted.
+# use this stackoverflow post: https://stackoverflow.com/questions/29263046/how-to-draw-the-boxplot-with-significant-level
+# for significance bars
+ggplot(fac_score_dat_long, aes(component, fac_score, )) +
+  geom_violin(aes(color = block)) +
+  theme_classic()
+
