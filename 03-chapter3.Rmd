@@ -299,8 +299,7 @@ tab %>%
            escape = FALSE,
            general = "*$p < .05$. PA = positive affectivity, StM = savoring the moment. EEG components and behavioral ratings (i.e., arousal, valence, and difficulty) averaged across all regulation blocks.",
            threeparttable = TRUE,
-           footnote_as_chunk = TRUE) %>% 
-  save_kable("corr_table.pdf")
+           footnote_as_chunk = TRUE)
 ```
 
 (ref:descriptives-by-block) Means and standard deviations for LPP, EPN, and N170 EEG components, as well as arousal, arousal, and difficulty ratings.
@@ -331,7 +330,7 @@ desc_stats <- dat %>%
                    "Positive Increase",
                    "Positive Watch"))
 desc_stats %>%
-kable(format = "latex", escape = FALSE, booktabs = TRUE, align = "lcccccccc", linesep = "", caption = "(ref:descriptives-by-block)") %>%
+kable(format = "latex", escape = FALSE, booktabs = TRUE, align = "lccccccccc", linesep = "", caption = "(ref:descriptives-by-block)") %>%
   kable_styling(font_size = 24, latex_options = c("scale_down")) %>%
   row_spec(0, align = "c")
 desc_stats %>%
@@ -347,6 +346,7 @@ kable(format = "latex", escape = FALSE, booktabs = TRUE, align = "lccccccccc", l
 
 ```{r pairwise-watch-comparison-table, echo = FALSE, fig.pos="H", warning = FALSE, message = FALSE, fig.cap = "(ref:pairwise-watch-comparison-table)"}
 library(tidyverse)
+library(kableExtra)
 
 load("data/paper_two/analyses/2021-02-11factor_score_pairwise_watch_table-data.RData")
 
