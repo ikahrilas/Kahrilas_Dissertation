@@ -170,14 +170,13 @@ cor_block_tab %>%
   mutate(" " = col_names_for_table) %>%
   select(" ", everything()) %>%
   ## create table
-  kable(., format = "latex",  linesep = "", escape = FALSE, booktabs = TRUE, align = c("l", rep("r", 13)), caption = "(ref:corr-block-table)") %>%
+  kable(., format = "html",  linesep = "", escape = FALSE, booktabs = TRUE, align = c("l", rep("r", 13)), caption = "(ref:corr-block-table)") %>%
   kable_styling(latex_options = "scale_down", font_size = 12) %>%
-  column_spec(2:65, width = "3em") %>%
+  column_spec(2:66, width = "3em") %>%
   footnote(general_title = "Note.",
            escape = FALSE,
            general = "*$p < .05$. PA = positive affectivity, StM = savoring the moment",
            threeparttable = TRUE,
-           footnote_as_chunk = TRUE) %>%
-  save_kable("block_corr_table.pdf")
+           footnote_as_chunk = TRUE)
 
 # create correlation plot just highlighting the strongest relations among variables
