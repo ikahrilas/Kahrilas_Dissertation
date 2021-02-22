@@ -8,6 +8,7 @@ library(hrbrthemes)
 library(viridis)
 library(gridExtra)
 library(patchwork)
+library(eegUtils)
 
 # read in factor score data
 temp_score_dat <- read_csv(here("data", "paper_two", "temp_fac_score_dat.csv"))
@@ -169,7 +170,7 @@ neg_cases <- fac_score_dat_long %>%
 
 
 # first plot the neutral conditions
-p_1 <-
+#p_1 <-
   ggplot(watch_cases, aes(x = component, y = fac_score)) +
     geom_violin(aes(fill = block),
               position = position_dodge(width = .75),
@@ -200,26 +201,37 @@ p_1 <-
              y = 5.5,
              yend = c(5, 4, 4, 5),
              color = "black") +
+    annotate(geom = "segment",
+             x = 1.75,
+             xend = 2.25,
+             y = -1.8,
+             yend = -1.8,
+             color = "black") +
+    annotate(geom = "segment",
+             x = c(1.75, 2.25),
+             xend = c(1.75, 2.25),
+             y = c(-1.8, -1.8),
+             yend = c(-0.2, -1.0)) +
     annotate(geom = "text",
-             x = c(1.8625, 2.1375),
-             y = 5.6,
+             x = c(1.8625, 2, 2.1375),
+             y = c(5.6, -2.05, 5.6),
              label = "*",
              size = 5) +
     annotate(geom = "segment", # 250 ms negative peak annotations
-             x = c(2.75),
-             xend = c(3),
-             y = 2.5,
-             yend = 2.5,
+             x = c(2.75, 2.75),
+             xend = c(3, 3.25),
+             y = c(2.5, -3.8),
+             yend = c(2.5, -3.8),
              color = "black") +
     annotate(geom = "segment",
-             x = c(2.75, 3),
-             xend = c(2.75, 3),
-             y = 2.5,
-             yend = c(2.25, 1.5),
+             x = c(2.75, 3, 2.75, 3.25),
+             xend = c(2.75, 3, 2.75, 3.25),
+             y = c(2.5, 2.5, -3.8, -3.8),
+             yend = c(2.25, 1.5, -3.55, -3),
              color = "black") +
     annotate(geom = "text",
-             x = c(2.875),
-             y = 2.6,
+             x = c(2.875, 3),
+             y = c(2.6, -4.05),
              label = "*",
              size = 5) +
     annotate(geom = "segment", # 250 ms positive peak annotations
@@ -240,35 +252,35 @@ p_1 <-
              label = "*",
              size = 5) +
     annotate(geom = "segment", # 375 ms peak annotations
-             x = c(4.75, 5.025),
-             xend = c(4.975, 5.25),
-             y = 3.35,
-             yend = 3.35,
+             x = c(4.75, 5.025, 4.75),
+             xend = c(4.975, 5.25, 5.25),
+             y = c(3.35, 3.35, -1.5),
+             yend = c(3.35, 3.35, -1.5),
              color = "black") +
     annotate(geom = "segment",
-             x = c(4.75, 4.975, 5.025, 5.25),
-             xend = c(4.75, 4.975, 5.025, 5.25),
-             y = c(3.35, 3.35, 3.35, 3.35),
-             yend = c(3.15, 1.8, 1.8, 2)) +
+             x = c(4.75, 4.975, 5.025, 5.25, 4.75, 5.25),
+             xend = c(4.75, 4.975, 5.025, 5.25, 4.75, 5.25),
+             y = c(3.35, 3.35, 3.35, 3.35, -1.5, -1.5),
+             yend = c(3.15, 1.8, 1.8, 2, -0.4, -0.5)) +
     annotate(geom = "text",
-             x = c(4.8625, 5.1375),
-             y = 3.45,
+             x = c(4.8625, 5.1375, 5),
+             y = c(3.45, 3.45, -1.75),
              label = "*",
              size = 5) +
     annotate(geom = "segment", # 800 ms peak annotations
-             x = c(5.75, 6.025),
-             xend = c(5.975, 6.25),
-             y = 5,
-             yend = 5,
+             x = c(5.75, 6.025, 5.75),
+             xend = c(5.975, 6.25, 6.25),
+             y = c(5, 5, -1.5),
+             yend = c(5, 5, -1.5),
              color = "black") +
     annotate(geom = "segment",
-             x = c(5.75, 5.975, 6.025, 6.25),
-             xend = c(5.75, 5.975, 6.025, 6.25),
-             y = c(5, 5, 5, 5),
-             yend = c(4.6, 2.85, 2.85, 3.6)) +
+             x = c(5.75, 5.975, 6.025, 6.25, 5.75, 6.25),
+             xend = c(5.75, 5.975, 6.025, 6.25, 5.75, 6.25),
+             y = c(5, 5, 5, 5, -1.5, -1.5),
+             yend = c(4.6, 2.85, 2.85, 3.6, -0.2, -0.6)) +
     annotate(geom = "text",
-             x = c(5.8625, 6.1375),
-             y = 5.1,
+             x = c(5.8625, 6.1375, 6),
+             y = c(5.1, 5.1, -1.75),
              label = "*",
              size = 5)
 
@@ -323,7 +335,7 @@ p_2 <-
            x = c(5.1275),
            y = 2.75,
            label = "*",
-           size = 5) +
+           size = 5)
 
 p_3 <-
   ggplot(neg_cases, aes(x = component, y = fac_score)) +
@@ -384,28 +396,42 @@ grid.arrange(p_1, p_2, p_3)
 
 p_1 / p_2 / p_3
 
+# load electrode layout
+elec_loc <- read_csv(here("data", "paper_two", "Equidistant Layout.csv"))
+elec_loc <- elec_loc %>%
+  rename("channel" = `channel name`) %>%
+  filter(channel != "CMS", channel != "DRL")
+
+elec_loc$radian_phi <- pi/180 * elec_loc$phi
+
+elec_loc <- elec_loc %>%
+  mutate(x = theta * cos(radian_phi),
+         y = theta * sin(radian_phi),
+         amplitude = rep(0, nrow(elec_loc))) %>%
+  rename("electrode" = "channel")
 
 
 
+elec_loc
 
+ggplot(elec_loc, aes(x, y, fill = amplitude)) +
+  geom_topo(show.legend = FALSE)
 
-
-
-
-ggplot(fac_score_dat_long, aes(x = component, y = fac_score, fill = block)) +
-  geom_violin(width = 1.4,
-              position = position_dodge(width = 1)) +
-  geom_boxplot(aes(group = interaction(block, component)),
-               width = 0.1,
-               color="grey",
-               alpha = 0.2,
-               position = position_dodge(width = 1)) +
-  scale_fill_viridis(discrete = TRUE) +
-  theme_ipsum()
-
-
-ggplot(fac_score_dat_long, aes(x = component, y = fac_score, fill = block))+
-  geom_violin(position = position_dodge(width = 1)) +
-  geom_boxplot(aes(col = block), fill = "white",
-               position = position_dodge(width = 1), width = 0.3, outlier.shape = NA)
-  geom_boxplot(position = position_dodge(width = 1), alpha = 0, width = 0.3)
+# ggplot(fac_score_dat_long, aes(x = component, y = fac_score, fill = block)) +
+#   geom_violin(width = 1.4,
+#               position = position_dodge(width = 1)) +
+#   geom_boxplot(aes(group = interaction(block, component)),
+#                width = 0.1,
+#                color="grey",
+#                alpha = 0.2,
+#                position = position_dodge(width = 1)) +
+#   scale_fill_viridis(discrete = TRUE) +
+#   theme_ipsum()
+#
+#
+# ggplot(fac_score_dat_long, aes(x = component, y = fac_score, fill = block))+
+#   geom_violin(position = position_dodge(width = 1)) +
+#   geom_boxplot(aes(col = block), fill = "white",
+#                position = position_dodge(width = 1), width = 0.3, outlier.shape = NA)
+#   geom_boxplot(position = position_dodge(width = 1), alpha = 0, width = 0.3)
+View(elec_loc)
