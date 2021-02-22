@@ -134,12 +134,12 @@ fac_score_dat_long$component <- factor(fac_score_dat_long$component,
 
 levels(fac_score_dat_long$component) <- c("RC5", "RC11", "neg_RC12", "RC12", "RC3", "RC2")
 
-levels(fac_score_dat_long$component) <- c("125 ms Peak",
-                                          "170 ms Peak",
-                                          "250 ms Negative Peak",
-                                          "250 ms Positive Peak",
-                                          "375 ms Peak",
-                                          "800 ms Peak")
+levels(fac_score_dat_long$component) <- c("125 ms Pos Peak",
+                                          "170 ms Pos Peak",
+                                          "250 ms Neg Peak",
+                                          "250 ms Pos Peak",
+                                          "375 ms Pos Peak",
+                                          "800 ms Pos Peak")
 
 # envisioning 3 grouped box plots, one with watch conditions, one with positive conditions
 # and one with negative conditions, with simple topo plots with electrode regions highlighted.
@@ -189,6 +189,7 @@ p_1 <-
     labs(x = NULL,
          y = expression(paste("Amplitude (",mu,"V)")),
          fill = "Block") +
+    ylim(-4.5, 6) +
     annotate(geom = "segment", # 170 ms peak annotations
              x = c(1.75, 2.025),
              xend = c(1.975, 2.25),
@@ -214,7 +215,7 @@ p_1 <-
              yend = c(-0.2, -1.0)) +
     annotate(geom = "text",
              x = c(1.8625, 2, 2.1375),
-             y = c(5.6, -2.05, 5.6),
+             y = c(5.6, -2.4, 5.6),
              label = "*",
              size = 5) +
     annotate(geom = "segment", # 250 ms negative peak annotations
@@ -231,7 +232,7 @@ p_1 <-
              color = "black") +
     annotate(geom = "text",
              x = c(2.875, 3),
-             y = c(2.6, -4.05),
+             y = c(2.6, -4.4),
              label = "*",
              size = 5) +
     annotate(geom = "segment", # 250 ms positive peak annotations
@@ -264,7 +265,7 @@ p_1 <-
              yend = c(3.15, 1.8, 1.8, 2, -0.4, -0.5)) +
     annotate(geom = "text",
              x = c(4.8625, 5.1375, 5),
-             y = c(3.45, 3.45, -1.75),
+             y = c(3.45, 3.45, -2.1),
              label = "*",
              size = 5) +
     annotate(geom = "segment", # 800 ms peak annotations
@@ -280,11 +281,11 @@ p_1 <-
              yend = c(4.6, 2.85, 2.85, 3.6, -0.2, -0.6)) +
     annotate(geom = "text",
              x = c(5.8625, 6.1375, 6),
-             y = c(5.1, 5.1, -1.75),
+             y = c(5.1, 5.1, -2.1),
              label = "*",
              size = 5)
 
-#p_2 <-
+p_2 <-
   ggplot(pos_cases, aes(x = component, y = fac_score)) +
   geom_violin(aes(fill = block),
               position = position_dodge(width = .75),
@@ -303,6 +304,7 @@ p_1 <-
   labs(x = NULL,
        y = expression(paste("Amplitude (",mu,"V)")),
        fill = "Block") +
+  ylim(-4.5, 6) +
   annotate(geom = "segment", # 250 ms negative peak annotations
            x = c(2.75, 3),
            xend = c(3.25, 3.25),
@@ -317,7 +319,7 @@ p_1 <-
            color = "black") +
   annotate(geom = "text",
            x = c(3, 3.125),
-           y = c(-3.75, 1.85),
+           y = c(-4.1, 1.85),
            label = "*",
            size = 5) +
   annotate(geom = "segment", # 375 ms peak annotations
@@ -333,7 +335,7 @@ p_1 <-
            yend = c(-.95, -.7, 2.05, 2.3)) +
   annotate(geom = "text",
            x = c(5, 5.1275),
-           y = c(-1.45, 2.75),
+           y = c(-1.8, 2.75),
            label = "*",
            size = 5) +
   annotate(geom = "segment", # 800 ms peak annotations
@@ -349,7 +351,7 @@ p_1 <-
              yend = c(-0.3, -0.7)) +
   annotate(geom = "text",
              x = c(6),
-             y = c(-1.25),
+             y = c(-1.6),
              label = "*",
              size = 5)
 
@@ -373,6 +375,7 @@ p_3 <-
   labs(x = "Component",
        y = expression(paste("Amplitude (",mu,"V)")),
        fill = "Block") +
+  ylim(-4.5, 6) +
   annotate(geom = "segment", # 125 ms peak annotations
            x = c(1),
            xend = c(1.25),
