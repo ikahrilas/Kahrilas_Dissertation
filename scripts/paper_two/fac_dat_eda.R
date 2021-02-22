@@ -170,7 +170,7 @@ neg_cases <- fac_score_dat_long %>%
 
 
 # first plot the neutral conditions
-#p_1 <-
+p_1 <-
   ggplot(watch_cases, aes(x = component, y = fac_score)) +
     geom_violin(aes(fill = block),
               position = position_dodge(width = .75),
@@ -284,7 +284,7 @@ neg_cases <- fac_score_dat_long %>%
              label = "*",
              size = 5)
 
-p_2 <-
+#p_2 <-
   ggplot(pos_cases, aes(x = component, y = fac_score)) +
   geom_violin(aes(fill = block),
               position = position_dodge(width = .75),
@@ -304,38 +304,54 @@ p_2 <-
        y = expression(paste("Amplitude (",mu,"V)")),
        fill = "Block") +
   annotate(geom = "segment", # 250 ms negative peak annotations
-           x = c(3),
-           xend = c(3.25),
-           y = 1.75,
-           yend = 1.75,
+           x = c(2.75, 3),
+           xend = c(3.25, 3.25),
+           y = c(-3.5, 1.75),
+           yend = c(-3.5, 1.75),
            color = "black") +
   annotate(geom = "segment",
-           x = c(3, 3.25),
-           xend = c(3, 3.25),
-           y = 1.75,
-           yend = c(1.5, 1.5),
+           x = c(2.75, 3.25, 3, 3.25),
+           xend = c(2.75, 3.25, 3, 3.25),
+           y = c(-3.5, -3.5, 1.75, 1.75),
+           yend = c(-2.5, -3.25, 1.5, 1.5),
            color = "black") +
   annotate(geom = "text",
-           x = c(3.125),
-           y = 1.85,
+           x = c(3, 3.125),
+           y = c(-3.75, 1.85),
            label = "*",
            size = 5) +
   annotate(geom = "segment", # 375 ms peak annotations
-           x = c(5),
-           xend = c(5.25),
-           y = 2.65,
-           yend = 2.65,
+           x = c(4.75, 5),
+           xend = c(5.25, 5.25),
+           y = c(-1.2, 2.65),
+           yend = c(-1.2, 2.65),
            color = "black") +
   annotate(geom = "segment",
-           x = c(5, 5.25),
-           xend = c(5, 5.25),
-           y = c(2.65, 2.65),
-           yend = c(2.05, 2.3)) +
+           x = c(4.75, 5.25, 5, 5.25),
+           xend = c(4.75, 5.25, 5, 5.25),
+           y = c(-1.2, -1.2, 2.65, 2.65),
+           yend = c(-.95, -.7, 2.05, 2.3)) +
   annotate(geom = "text",
-           x = c(5.1275),
-           y = 2.75,
+           x = c(5, 5.1275),
+           y = c(-1.45, 2.75),
            label = "*",
-           size = 5)
+           size = 5) +
+  annotate(geom = "segment", # 800 ms peak annotations
+           x = c(5.75),
+           xend = c(6.25),
+           y = c(-1),
+           yend = c(-1),
+           color = "black") +
+  annotate(geom = "segment",
+             x = c(5.75, 6.25),
+             xend = c(5.75, 6.25),
+             y = c(-1, -1),
+             yend = c(-0.3, -0.7)) +
+  annotate(geom = "text",
+             x = c(6),
+             y = c(-1.25),
+             label = "*",
+             size = 5)
 
 p_3 <-
   ggplot(neg_cases, aes(x = component, y = fac_score)) +
