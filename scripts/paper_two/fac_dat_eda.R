@@ -189,7 +189,13 @@ p_1 <-
     labs(x = NULL,
          y = expression(paste("Amplitude (",mu,"V)")),
          fill = "Block") +
-    ylim(-4.5, 6) +
+  coord_cartesian(
+    xlim = NULL,
+    ylim = c(-4.5, 6),
+    expand = TRUE,
+    default = FALSE,
+    clip = "on"
+  ) +
     annotate(geom = "segment", # 170 ms peak annotations
              x = c(1.75, 2.025),
              xend = c(1.975, 2.25),
@@ -413,7 +419,7 @@ p_3 <-
 
 grid.arrange(p_1, p_2, p_3)
 
-p_1 / p_2 / p_3
+contrast_plots <- p_1 / p_2 / p_3
 
 # load electrode layout
 elec_loc <- read_csv(here("data", "paper_two", "Equidistant Layout.csv"))
@@ -429,28 +435,73 @@ elec_loc <- elec_loc %>%
          amplitude = rep(0, nrow(elec_loc))) %>%
   rename("electrode" = "channel")
 
-
-
 elec_loc
 
-ggplot(elec_loc, aes(x, y, fill = amplitude)) +
-  geom_topo(show.legend = FALSE)
+rc2_elec <- c("A29", "B26")
+rc3_elec <- c("A29", "B26", "A26", "B23",
+              "B28", "A30", "B27", "A25", "B22")
+rc5_elec <- c("A29", "B26")
+rc11_elec <- c("A29", "B26")
+rc12_elec <- c("B21", "B28")
+pos_rc12_elec <- c("A29", "B26")
 
-# ggplot(fac_score_dat_long, aes(x = component, y = fac_score, fill = block)) +
-#   geom_violin(width = 1.4,
-#               position = position_dodge(width = 1)) +
-#   geom_boxplot(aes(group = interaction(block, component)),
-#                width = 0.1,
-#                color="grey",
-#                alpha = 0.2,
-#                position = position_dodge(width = 1)) +
-#   scale_fill_viridis(discrete = TRUE) +
-#   theme_ipsum()
-#
-#
-# ggplot(fac_score_dat_long, aes(x = component, y = fac_score, fill = block))+
-#   geom_violin(position = position_dodge(width = 1)) +
-#   geom_boxplot(aes(col = block), fill = "white",
-#                position = position_dodge(width = 1), width = 0.3, outlier.shape = NA)
-#   geom_boxplot(position = position_dodge(width = 1), alpha = 0, width = 0.3)
-View(elec_loc)
+elec_loc <- elec_loc %>%
+  mutate(rc2_color = if_else(electrode %in% rc2_elec, TRUE, FALSE),
+         rc3_color = if_else(electrode %in% rc3_elec, TRUE, FALSE),
+         rc5_color = if_else(electrode %in% rc5_elec, TRUE, FALSE),
+         rc11_color = if_else(electrode %in% rc11_elec, TRUE, FALSE),
+         rc12_color = if_else(electrode %in% rc12_elec, TRUE, FALSE),
+         pos_rc12_color = if_else(electrode %in% pos_rc12_elec, TRUE, FALSE)
+         )
+
+var_to_iter <- c("rc5_color", "rc11_color", "rc12_color", "pos_rc12_color", "rc3_color", "rc2_color")
+
+topo_plot_highlights <-
+  map(var_to_iter, ~ {
+ggplot(elec_loc, aes(x = x, y = y)) +
+  geom_mask(size = 6) +
+  geom_head(interp_limit = "head") +
+  geom_channels(aes(color = elec_loc[[.x]])) +
+  scale_color_manual(values = c("black", "red")) +
+  coord_equal() +
+  theme_void() +
+  theme(legend.position = "none")
+})
+
+layout <- "
+ABCDEF
+GGGGGG
+HHHHHH
+IIIIII
+"
+
+layout <- c(
+  area(t = 1, l = 1, b = 2, r = 2),
+  area(t = 1, l = 2, b = 2, r = 3),
+  area(t = 1, l = 3, b = 2, r = 4),
+  area(t = 1, l = 4, b = 2, r = 5),
+  area(t = 1, l = 5, b = 2, r = 6),
+  area(t = 1, l = 6, b = 2, r = 7),
+  area(t = 2, l = 1, b = 3.5, r = 7),
+  area(t = 3.5, l = 1, b = 5, r = 7),
+  area(t = 5, l = 1, b = 6.5, r = 7)
+)
+
+topo_plot_highlights[[1]] +
+  topo_plot_highlights[[2]] +
+  topo_plot_highlights[[3]] +
+  topo_plot_highlights[[4]] +
+  topo_plot_highlights[[5]] +
+  topo_plot_highlights[[6]] +
+  p_1 +
+  p_2 +
+  p_3 +
+  plot_layout(design = layout,
+              heights = c(1, 1.5, 1.5, 1.5))
+
+
+
+# Show the layout to make sure it looks as it should
+plot(layout)
+
+
