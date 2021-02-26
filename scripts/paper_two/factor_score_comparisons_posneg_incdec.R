@@ -48,6 +48,11 @@ inc_mod_rc12 <- lmer(RC12 ~ block + (1|pid), data = dat)
 summary(inc_mod_rc12)
 ### sig difference, positive increase greater than negative increase
 
+## positive RC12
+inc_mod_pos_rc12 <- lmer(pos_RC12 ~ block + (1|pid), data = dat)
+summary(inc_mod_pos_rc12)
+### sig difference, positive increase greater than negative increase
+
 # run analyses of decrease conditions
 dat$block <- relevel(dat$block, "Neg_Dec")
 
@@ -64,7 +69,7 @@ summary(dec_mod_rc3)
 ## RC5
 dec_mod_rc5 <- lmer(RC5 ~ block + (1|pid), data = dat)
 summary(dec_mod_rc5)
-### sig difference, negative decrease greater than positive decrease
+### no sig difference
 
 ## RC11
 dec_mod_rc11 <- lmer(RC11 ~ block + (1|pid), data = dat)
@@ -76,4 +81,7 @@ dec_mod_rc12 <- lmer(RC12 ~ block + (1|pid), data = dat)
 summary(dec_mod_rc12)
 ### sig difference, positive decrease greater than negative decrease
 
-
+## positive RC12
+dec_mod_pos_rc12 <- lmer(pos_RC12 ~ block + (1|pid), data = dat)
+summary(dec_mod_pos_rc12)
+### no sig difference

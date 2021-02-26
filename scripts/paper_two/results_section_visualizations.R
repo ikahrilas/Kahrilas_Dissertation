@@ -381,3 +381,189 @@ ggsave(here("images", "paper_2", "results_images", "contrast_plot.png"),
       plot = last_plot(),
       height = 9,
       width = 10)
+
+##########################################
+# plots grouped by regulation condition #
+##########################################
+
+# make separate data frames for each facet, but this time by increase/decrease
+inc_cases <- fac_score_dat_long %>%
+  filter(str_detect(block, "Increase")) %>%
+  mutate(facet = 2, # facet variable
+         block = factor(block, levels = c("Negative Increase", "Positive Increase")))
+
+dec_cases <- fac_score_dat_long %>%
+  filter(str_detect(block, "Decrease")) %>%
+  mutate(facet = 3, # facet variable
+         block = factor(block, levels = c("Negative Decrease", "Positive Decrease")))
+
+ p_1 <-
+  ggplot(inc_cases, aes(x = component, y = fac_score)) +
+  geom_violin(aes(fill = block),
+              position = position_dodge(width = .75),
+              trim = TRUE) +
+  scale_fill_manual(values = c(`Negative Increase` = "magenta",
+                               `Positive Increase` = "purple")) +
+  geom_boxplot(aes(group = interaction(block, component)),
+               width = 0.2, fill = "white", position = position_dodge(width = .75)) +
+  facet_wrap(~ facet, ncol = 1) +
+  theme_classic() +
+  theme(
+    strip.background = element_blank(),
+    strip.text.x = element_blank()
+  ) +
+  labs(x = NULL,
+       y = expression(paste("Amplitude (",mu,"V)")),
+       fill = "Block") +
+  coord_cartesian(
+    xlim = NULL,
+    ylim = c(-4.5, 6),
+    expand = TRUE,
+    default = FALSE,
+    clip = "on"
+  ) +
+  annotate(geom = "segment", # 250 ms negative peak annotations
+           x = 2.815,
+           xend = 3.185,
+           y = 1.5,
+           yend = 1.5,
+           color = "black") +
+  annotate(geom = "segment",
+           x = c(2.815, 3.185),
+           xend = c(2.815, 3.185),
+           y = c(1.5, 1.5),
+           yend = c(0.6, 1.25),
+           color = "black") +
+  annotate(geom = "text",
+           x = 3,
+           y = 1.6,
+           label = "*",
+           size = 5) +
+  annotate(geom = "segment", # 250 ms positive peak annotations
+           x = 3.815,
+           xend = 4.185,
+           y = 4,
+           yend = 4,
+           color = "black") +
+  annotate(geom = "segment",
+             x = c(3.815, 4.185),
+             xend = c(3.815, 4.185),
+             y = c(4, 4),
+             yend = c(3.35, 3.75),
+             color = "black") +
+  annotate(geom = "text",
+             x = 4,
+             y = 4.1,
+             label = "*",
+             size = 5) +
+    annotate(geom = "segment", # 800 ms positive peak annotations
+             x = 5.815,
+             xend = 6.185,
+             y = 4.3,
+             yend = 4.3,
+             color = "black") +
+    annotate(geom = "segment",
+             x = c(5.815, 6.185),
+             xend = c(5.815, 6.185),
+             y = c(4.3, 4.3),
+             yend = c(4.05, 3.8),
+             color = "black") +
+    annotate(geom = "text",
+             x = 6,
+             y = 4.4,
+             label = "*",
+             size = 5)
+
+p_2 <-
+  ggplot(dec_cases, aes(x = component, y = fac_score)) +
+  geom_violin(aes(fill = block),
+              position = position_dodge(width = .75),
+              trim = TRUE) +
+  scale_fill_manual(values = c(`Negative Decrease` = "coral",
+                               `Positive Decrease` = "cadetblue1")) +
+  geom_boxplot(aes(group = interaction(block, component)),
+               width = 0.2, fill = "white", position = position_dodge(width = .75)) +
+  facet_wrap(~ facet, ncol = 1) +
+  theme_classic() +
+  theme(
+    strip.background = element_blank(),
+    strip.text.x = element_blank(),
+  ) +
+  labs(x = NULL,
+       y = expression(paste("Amplitude (",mu,"V)")),
+       fill = "Block") +
+  ylim(-4.5, 6) +
+  annotate(geom = "segment", # 250 ms negative peak annotations
+           x = 2.815,
+           xend = 3.185,
+           y = 1.7,
+           yend = 1.7,
+           color = "black") +
+  annotate(geom = "segment",
+             x = c(2.815, 3.185),
+             xend = c(2.815, 3.185),
+             y = c(1.7, 1.7),
+             yend = c(1.2, 1.45),
+             color = "black") +
+  annotate(geom = "text",
+             x = 3,
+             y = 1.8,
+             label = "*",
+             size = 5) +
+    annotate(geom = "segment", # 375 ms negative peak annotations
+             x = 4.815,
+             xend = 5.185,
+             y = 3.1,
+             yend = 3.1,
+             color = "black") +
+    annotate(geom = "segment",
+             x = c(4.815, 5.185),
+             xend = c(4.815, 5.185),
+             y = c(3.1, 3.1),
+             yend = c(2.8, 2.8),
+             color = "black") +
+    annotate(geom = "text",
+             x = 5,
+             y = 3.2,
+             label = "*",
+             size = 5) +
+    annotate(geom = "segment", # 800 ms negative peak annotations
+             x = 5.815,
+             xend = 6.185,
+             y = 4.3,
+             yend = 4.3,
+             color = "black") +
+    annotate(geom = "segment",
+             x = c(5.815, 6.185),
+             xend = c(5.815, 6.185),
+             y = c(4.3, 4.3),
+             yend = c(4.0, 3.8),
+             color = "black") +
+    annotate(geom = "text",
+             x = 6,
+             y = 4.4,
+             label = "*",
+             size = 5)
+
+layout <- "
+ABCDEF
+GGGGGG
+HHHHHH
+"
+
+# final plot with topos
+topo_plot_highlights[[1]] +
+  topo_plot_highlights[[2]] +
+  topo_plot_highlights[[3]] +
+  topo_plot_highlights[[4]] +
+  topo_plot_highlights[[5]] +
+  topo_plot_highlights[[6]] +
+  p_1 +
+  p_2 +
+  plot_layout(design = layout,
+              heights = c(1, 1.75, 1.75))
+
+ggsave(here("images", "paper_2", "results_images", "inc_dec_contrast_plot.png"),
+       plot = last_plot(),
+       height = 8,
+       width = 10)
