@@ -271,7 +271,7 @@ p_3 <-
     strip.text.x = element_blank(),
     axis.title.x = element_text(size = 16)
   ) +
-  labs(x = "Component",
+  labs(x = NULL,
        y = expression(paste("Amplitude (",mu,"V)")),
        fill = "Block") +
   ylim(-4.5, 6) +
@@ -312,76 +312,6 @@ p_3 <-
 
 contrast_plots <- p_1 / p_2 / p_3
 
-# load electrode layout
-elec_loc <- read_csv(here("data", "paper_two", "Equidistant Layout.csv"))
-elec_loc <- elec_loc %>%
-  rename("channel" = `channel name`) %>%
-  filter(channel != "CMS", channel != "DRL")
-
-elec_loc$radian_phi <- pi/180 * elec_loc$phi
-
-elec_loc <- elec_loc %>%
-  mutate(x = theta * cos(radian_phi),
-         y = theta * sin(radian_phi),
-         amplitude = rep(0, nrow(elec_loc))) %>%
-  rename("electrode" = "channel")
-
-rc2_elec <- c("A29", "B26")
-rc3_elec <- c("A29", "B26", "A26", "B23",
-              "B28", "A30", "B27", "A25", "B22")
-rc5_elec <- c("A29", "B26")
-rc11_elec <- c("A29", "B26")
-rc12_elec <- c("B21", "B28")
-pos_rc12_elec <- c("A29", "B26")
-
-elec_loc <- elec_loc %>%
-  mutate(rc2_color = if_else(electrode %in% rc2_elec, TRUE, FALSE),
-         rc3_color = if_else(electrode %in% rc3_elec, TRUE, FALSE),
-         rc5_color = if_else(electrode %in% rc5_elec, TRUE, FALSE),
-         rc11_color = if_else(electrode %in% rc11_elec, TRUE, FALSE),
-         rc12_color = if_else(electrode %in% rc12_elec, TRUE, FALSE),
-         pos_rc12_color = if_else(electrode %in% pos_rc12_elec, TRUE, FALSE)
-  )
-
-var_to_iter <- c("rc5_color", "rc11_color", "rc12_color", "pos_rc12_color", "rc2_color", "rc3_color")
-
-topo_plot_highlights <-
-  map(var_to_iter, ~ {
-    ggplot(elec_loc, aes(x = x, y = y)) +
-      geom_mask(size = 6) +
-      geom_head(interp_limit = "head") +
-      geom_channels(aes(color = elec_loc[[.x]])) +
-      scale_color_manual(values = c("black", "red")) +
-      coord_equal() +
-      theme_void() +
-      theme(legend.position = "none")
-  })
-
-layout <- "
-ABCDEF
-GGGGGG
-HHHHHH
-IIIIII
-"
-
-# final plot with topos
-topo_plot_highlights[[1]] +
-  topo_plot_highlights[[2]] +
-  topo_plot_highlights[[3]] +
-  topo_plot_highlights[[4]] +
-  topo_plot_highlights[[5]] +
-  topo_plot_highlights[[6]] +
-  p_1 +
-  p_2 +
-  p_3 +
-  plot_layout(design = layout,
-              heights = c(1, 1.5, 1.5, 1.5))
-
-ggsave(here("images", "paper_2", "results_images", "contrast_plot.png"),
-      plot = last_plot(),
-      height = 9,
-      width = 10)
-
 ##########################################
 # plots grouped by regulation condition #
 ##########################################
@@ -397,7 +327,7 @@ dec_cases <- fac_score_dat_long %>%
   mutate(facet = 3, # facet variable
          block = factor(block, levels = c("Negative Decrease", "Positive Decrease")))
 
- p_1 <-
+ p_4 <-
   ggplot(inc_cases, aes(x = component, y = fac_score)) +
   geom_violin(aes(fill = block),
               position = position_dodge(width = .75),
@@ -474,38 +404,38 @@ dec_cases <- fac_score_dat_long %>%
              label = "*",
              size = 5)
 
-p_2 <-
+p_5 <-
   ggplot(dec_cases, aes(x = component, y = fac_score)) +
-  geom_violin(aes(fill = block),
+    geom_violin(aes(fill = block),
               position = position_dodge(width = .75),
               trim = TRUE) +
-  scale_fill_manual(values = c(`Negative Decrease` = "coral",
-                               `Positive Decrease` = "cadetblue1")) +
-  geom_boxplot(aes(group = interaction(block, component)),
-               width = 0.2, fill = "white", position = position_dodge(width = .75)) +
-  facet_wrap(~ facet, ncol = 1) +
-  theme_classic() +
-  theme(
-    strip.background = element_blank(),
-    strip.text.x = element_blank(),
-  ) +
-  labs(x = NULL,
-       y = expression(paste("Amplitude (",mu,"V)")),
-       fill = "Block") +
-  ylim(-4.5, 6) +
-  annotate(geom = "segment", # 250 ms negative peak annotations
+    scale_fill_manual(values = c(`Negative Decrease` = "coral",
+                                 `Positive Decrease` = "cadetblue1")) +
+    geom_boxplot(aes(group = interaction(block, component)),
+                 width = 0.2, fill = "white", position = position_dodge(width = .75)) +
+    facet_wrap(~ facet, ncol = 1) +
+    theme_classic() +
+    theme(
+      strip.background = element_blank(),
+      strip.text.x = element_blank(),
+    ) +
+    labs(x = "Component",
+         y = expression(paste("Amplitude (",mu,"V)")),
+         fill = "Block") +
+    ylim(-4.5, 6) +
+    annotate(geom = "segment", # 250 ms negative peak annotations
            x = 2.815,
            xend = 3.185,
            y = 1.7,
            yend = 1.7,
            color = "black") +
-  annotate(geom = "segment",
+    annotate(geom = "segment",
              x = c(2.815, 3.185),
              xend = c(2.815, 3.185),
              y = c(1.7, 1.7),
              yend = c(1.2, 1.45),
              color = "black") +
-  annotate(geom = "text",
+    annotate(geom = "text",
              x = 3,
              y = 1.8,
              label = "*",
@@ -545,10 +475,58 @@ p_2 <-
              label = "*",
              size = 5)
 
+# load electrode layout for topo plots
+elec_loc <- read_csv(here("data", "paper_two", "Equidistant Layout.csv"))
+elec_loc <- elec_loc %>%
+  rename("channel" = `channel name`) %>%
+  filter(channel != "CMS", channel != "DRL")
+
+elec_loc$radian_phi <- pi/180 * elec_loc$phi
+
+elec_loc <- elec_loc %>%
+  mutate(x = theta * cos(radian_phi),
+         y = theta * sin(radian_phi),
+         amplitude = rep(0, nrow(elec_loc))) %>%
+  rename("electrode" = "channel")
+
+rc2_elec <- c("A29", "B26")
+rc3_elec <- c("A29", "B26", "A26", "B23",
+              "B28", "A30", "B27", "A25", "B22")
+rc5_elec <- c("A29", "B26")
+rc11_elec <- c("A29", "B26")
+rc12_elec <- c("B21", "B28")
+pos_rc12_elec <- c("A29", "B26")
+
+elec_loc <- elec_loc %>%
+  mutate(rc2_color = if_else(electrode %in% rc2_elec, TRUE, FALSE),
+         rc3_color = if_else(electrode %in% rc3_elec, TRUE, FALSE),
+         rc5_color = if_else(electrode %in% rc5_elec, TRUE, FALSE),
+         rc11_color = if_else(electrode %in% rc11_elec, TRUE, FALSE),
+         rc12_color = if_else(electrode %in% rc12_elec, TRUE, FALSE),
+         pos_rc12_color = if_else(electrode %in% pos_rc12_elec, TRUE, FALSE)
+  )
+
+var_to_iter <- c("rc5_color", "rc11_color", "rc12_color", "pos_rc12_color", "rc2_color", "rc3_color")
+
+topo_plot_highlights <-
+  map(var_to_iter, ~ {
+    ggplot(elec_loc, aes(x = x, y = y)) +
+      geom_mask(size = 6) +
+      geom_head(interp_limit = "head") +
+      geom_channels(aes(color = elec_loc[[.x]])) +
+      scale_color_manual(values = c("black", "red")) +
+      coord_equal() +
+      theme_void() +
+      theme(legend.position = "none")
+  })
+
 layout <- "
 ABCDEF
 GGGGGG
 HHHHHH
+IIIIII
+JJJJJJ
+KKKKKK
 "
 
 # final plot with topos
@@ -560,10 +538,13 @@ topo_plot_highlights[[1]] +
   topo_plot_highlights[[6]] +
   p_1 +
   p_2 +
+  p_3 +
+  p_4 +
+  p_5 +
   plot_layout(design = layout,
-              heights = c(1, 1.75, 1.75))
+              heights = c(1, 1.5, 1.5, 1.5, 1.5, 1.5))
 
-ggsave(here("images", "paper_2", "results_images", "inc_dec_contrast_plot.png"),
+ggsave(here("images", "paper_2", "results_images", "contrast_plot.png"),
        plot = last_plot(),
-       height = 8,
+       height = 9,
        width = 10)
