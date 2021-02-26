@@ -332,7 +332,7 @@ dat_2000 <- read_csv(here("data", "paper_two", "pre_pca_dat.csv"))
 ## promax rotation with kappa = 3, tends to give best results for ERPs and is the default for SAS
 ## covariance matrix (mean corrected)
 ## derive factor scores using "Harman" method, which finds weights based upon so-called "idealized" variables
-dat_pca_promax <- principal(select(dat_2000, -c(pid, block, elec, n_trials, prop_trials)),
+dat_pca_promax <- principal(dplyr::select(dat_2000, -c(pid, block, elec, n_trials, prop_trials)),
                             nfactors = 22,
                             rotate = "promax", # SPSS seems to do a Kaiser normalization before doing
                             m = 3,             ## Promax, this is done here by the call to "promax"
@@ -372,6 +372,17 @@ ggplot(., aes(ms, mv)) +
 ggsave(here("images", "paper_2", "cov_loadings_comp_of_interest.png"), device = "png", width = 10)
 
 cov_loadings_df <- cov_loadings_df %>% select(ms, all_of(comp_to_retain))
+
+# find peaks for components of interest
+comps_for_peaks <- c("RC2", "RC3", "RC5", "RC11", "RC12")
+
+map_chr(comps_for_peaks, ~{
+max_ms <- cov_loadings_df %>%
+  filter(cov_loadings_df[[.x]] == max(cov_loadings_df[[.x]])) %>%
+  select(ms) %>%
+  pull()
+return(paste("The maximum timepoint for", .x, "is", max_ms))
+})
 
 # The topography of each factor is encoded by the mean amplitude of its factor scores at each site.
 # One can use this information to reproduce the portion of an observation's waveform represented by
