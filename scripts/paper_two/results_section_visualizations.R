@@ -26,12 +26,12 @@ fac_score_dat_long$component <- factor(fac_score_dat_long$component,
 # rename the factor levels
 levels(fac_score_dat_long$component) <- c("RC5", "RC11", "neg_RC12", "RC12", "RC3", "RC2")
 
-levels(fac_score_dat_long$component) <- c("125 ms Pos Peak",
-                                          "170 ms Pos Peak",
-                                          "250 ms Neg Peak",
-                                          "250 ms Pos Peak",
-                                          "375 ms Pos Peak",
-                                          "800 ms Pos Peak")
+levels(fac_score_dat_long$component) <- c("124 ms Pos Peak",
+                                          "162 ms Pos Peak",
+                                          "259 ms Neg Peak",
+                                          "259 ms Pos Peak",
+                                          "381 ms Pos Peak",
+                                          "740 ms Pos Peak")
 
 # reorder block factor for proper plotting of legend
 fac_score_dat_long$block <- as.factor(fac_score_dat_long$block)
@@ -191,7 +191,7 @@ p_2 <-
               trim = TRUE) +
   scale_fill_manual(values = c(`Positive Decrease` = "cadetblue1",
                                `Positive Watch` = "blue",
-                               `Positive Increase` = "purple")) +
+                               `Positive Increase` = "springgreen")) +
   geom_boxplot(aes(group = interaction(block, component)),
                width = 0.2, fill = "white", position = position_dodge(width = .75)) +
   facet_wrap(~ facet, ncol = 1) +
@@ -403,7 +403,7 @@ dec_cases <- fac_score_dat_long %>%
               position = position_dodge(width = .75),
               trim = TRUE) +
   scale_fill_manual(values = c(`Negative Increase` = "magenta",
-                               `Positive Increase` = "purple")) +
+                               `Positive Increase` = "springgreen")) +
   geom_boxplot(aes(group = interaction(block, component)),
                width = 0.2, fill = "white", position = position_dodge(width = .75)) +
   facet_wrap(~ facet, ncol = 1) +
