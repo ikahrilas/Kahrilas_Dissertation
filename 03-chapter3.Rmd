@@ -158,11 +158,11 @@ It was predicted that a) PA would moderate the relationship between watching pos
 Hypotheses pertaining to modulation of LPP amplitude in response to passively viewing OASIS images and personality traits interacting with LPP amplitude and PA/savoring capacity were preregistered (link: [https://osf.io/p5ba9/](https://osf.io/p5ba9/)).
 As we continued to read the explore the scientific literature about reactivity and regulation, we decided to expand our analyses to the other components (N170, EPN) in order to characterize the broader temporal cascade of affective processing.
 Thus, these unregistered analyses should be considered exploratory and interpreted with caution.
+Further, the decision to implement principal components analysis (PCA) was made following preregistration to more effectively isolate ERPs for subsequent statistical analyses.
 
 ## Method 
 ### Participants
 54 participants were recruited for the study, two of which were excluded due to missing EEG or questionnaire data (*n* = 29 women, *n* = 2 non-binary).
-Two additional outlier data points for LPP and frontal LPP in positive increase and negative watched conditions were omitted based on visual inspection of histograms of QQ plots.
 Participants ranged in age from 18-29 (*M* = 19.84 years, *SD* = 1.95).
 The sample was 70.6% Caucasian, 17.6% Asian, 2.0% Black or African American, and 7.8% multiracial (2.0% declined to answer); 9.8% reported that they were Hispanic/Latino and 90.2% were not Hispanic/Latino.
 The study was approved by the Institutional Review Board and informed consent was provided to all participants prior to beginning the experiment.
@@ -187,7 +187,7 @@ During the increase condition, participants were instructed to appraise the pict
 During the decrease condition, participants were asked to reduce the intensity of the emotion that is elicited by looking at the picture.
 When prompted to watch, participants were asked to view the picture as they would naturally.
 The passive “watch” blocks served as baseline conditions for LPP component analyses [@hajcakReappraisalModulatesElectrocortical2006].
-A block design was selected for the proposed study because arousald images outnumber the neutral images two-to-one.
+A block design was selected for the proposed study because arousing images outnumber the neutral images two-to-one.
 The relatively rare neutral stimuli may produce a P3 if intermixed with arousald stimuli in the same block [@schuppAffectivePictureProcessing2000]. Additionally, LPP signal is increased for stimuli that are perceived as incongruent within a given affective context.
 Thus, a neutral stimulus displayed in a series of emotional stimuli would likely evoke an enhanced LPP activity, thus decreasing effect size [@schuppAffectivePictureProcessing2000].
 Further, a block design paradigm may better emulate one's natural environment, as stimuli of congruent arousal are typically encountered in clusters rather than isolation [@schuppAffectivePictureProcessing2012].
@@ -226,25 +226,31 @@ Data were recorded with a band pass of 0 – 104 Hz at a sampling rate of 512 Hz
 
 The following EEG data processing steps were implemented in Brain Electrical Source Analysis software [BESA, Version 7; @schergBESABrainElectric1990].
 Following the adaptive artifact correction method [@illeArtifactCorrectionOngoing2002], ocular artifacts were corrected using a spatial PCA filter.
-EEG data were re-referenced to the average activity of the mastoid electrodes for LPP analyses [@hajcakAttendingAffectAppraisal2006; @hajcakReappraisalModulatesElectrocortical2006] and average reference of all electrodes for EPN and N170 analyses [@stockdaleInfluenceStimulusarousal2020; @yoonEnhancedEarlyPosterior2016] and digitally filtered with 0.01 Hz high-pass and 30 Hz low-pass filters with a cutoff attenuation of 12 dB/octave
+EEG data were re-referenced to the average activity of the mastoid electrodes for LPP analyses [@hajcakAttendingAffectAppraisal2006; @hajcakReappraisalModulatesElectrocortical2006] and average reference of all electrodes for EPN and N170 analyses [@stockdaleInfluenceStimulusarousal2020; @yoonEnhancedEarlyPosterior2016] and digitally filtered with 0.01 Hz high-pass and 30 Hz low-pass filters with a cutoff attenuation of 12 dB/octave.
 Muscle activity and other artifacts were corrected through implementing an algorithmic scan of continuous EEG data in BESA (fixed threshold criteria: amplitude > 120 uV; gradient > 75 uV, low signal <.01 uV).
 Data were baseline-adjusted by subtracting the average activity for 200 milliseconds [@moserIntentionalModulationEmotional2006] before stimulus onset.
 
-To discriminate among sources of variance (i.e., ERP components) in the time course of ERPs, ERP averages were submitted to a principal components analysis (PCA) to derive linear combinations of data that distinguish activity across time points. 
+To discriminate among temporal sources of variance (i.e., ERP components) in the time course of ERPs, ERP averages were submitted to a temporal PCA to derive linear combinations of data that distinguish activity across time points. 
 A temporal PCA was performed using the Psych package [@revellePsychProceduresPsychological2020] in R version 4.0.3 [@rcoreteamLanguageEnvironmentStatistical2020] with a covariance matrix.
 A covariance matrix was used to retain the original units of measurement (i.e., voltage) for the average ERPs for each time point [@donchinMultivariateAnalysisEventrelated1978].
 The temporal PCA used all time points (-200 ms - 2000 ms) as variables and all 55 participants, seven blocks, and 66 recording sites as observations, yielding linear combinations of time points and "temporal" factors [@dienApplyingPrincipalComponents2012].
 To determine the number of components to retain for rotation, a parallel analysis [@hornRationaleTestNumber1965] was performed on the resultant Scree plot.
 The parallel analysis creates Scree plots of the actual and simulated fully random data to determine the number of components that explain more variance than if only chance alone were acting. 
 Based on the parallel analysis, 22 components were retained for rotation. 
-An Promax rotation was then used on the 22 components.
-A Promax rotation was used because it does not impose orthogonality on the components, and simulation studies suggest that Promax is most effective for temporal PCA [@dienERPPCAToolkit2010; @dienEvaluationPCAICA2007].
+An Promax rotation was then used on the 22 components because it does not impose orthogonality, and simulation studies suggest that Promax is most effective for temporal PCA [@dienERPPCAToolkit2010; @dienEvaluationPCAICA2007].
 The time course of each of the 22 components was inspected by plotting the covariance loadings along each time point. 
 Given the a priori nature of the ERP components of interest, those PCA components with covariance loadings in time windows that fit descriptions of LPP and early visual components (e.g., N170, EPN) were retained for further analyses.
 Spatial information is retained in PCA; the topography of each factor is encoded in the mean amplitude of factor scores at each recording site [@dienAddressingMisallocationVariance1998].
 Thus, scalp topographies of each component for each condition was inspected to determine correspondence of components and ERP components of interest.
 Of note, portions of waveforms represented by a given PCA component can be reproduced by multiplying covariance loadings by observations' factor scores [@dienAddressingMisallocationVariance1998]. 
-Five components were retained for statistical analyses based on the above steps, two of which represented LPP-like components, and three that represented early visual components (P100, N170, and EPN).
+Five components were retained for statistical analyses based inspection of topographic plots and ERP waveforms.
+Two of the retained components represented LPP-like components that have positive peaks at 381 ms and 740 ms with the former demonstrating activity at PO7 and PO8 electrode sites and the latter at PO7, PO8, PO3, PO4, P1, P2, P5/P3, P6/P4 and Pz electrode sites. 
+Three components represented early visual components with positive peaks at 124 ms, 162 ms, and 259 ms with activity at PO7 and PO8 electrodes sites.
+While no a priori hypotheses were made regarding ERP components occurring as early as 124 ms, we decided to retain the component for exploratory analyses.
+While the time course of the 162 ms and 259 ms component corresponded to N170 and EPN, the positive directionality of the waveforms did not.
+A final component with a negative peak at 259 ms was retained, with negative activity at CPz and Pz electrodes sites, which represented EPN.
+No frontal LPP component was identified.
+See Figures (XXX) for grand average ERP waveforms and topographic plots, as well as ERP waveforms and topographic plots that correspond to each retained component.
 
 <!-- LPP activity was calculated as the average activity in the 400 – 800 ms window at the Pz electrode site. -->
 <!-- Adaptive means for N170 and EPN were computed separately to account for peak latency variability among participants. N170 was defined as the minimum mean-peak amplitude (average amplitude across +/- 15 ms around the peak) between 130 - 200 ms post-stimulus at PO7 and PO8 electrode sites. The EPN was defined as the minimum mean-peak amplitude (average amplitude across +/- 25 ms around the peak) detected between 225 to 325 ms post-stimulus at PO7 and PO8 electrode sites. -->
@@ -261,7 +267,7 @@ Analyses were run in R version 4.0.3 [@R-base].
 Multilevel modeling (MLM) analyses were conducted using the lme4 package [@batesFittingLinearMixedeffects2015].
 All linear mixed models were estimated using REML with particpants included as random intercepts.
 Model assumptions were checked via visual inspection of diagnostic plots (i.e., residual, QQ, scale-location, and residuals vs. leverage) generated with the performance package [@ludeckePerformanceAssessmentRegression2019].
-Correlations among key psychological and demographic variables (see Table \@ref(tab:corr-table)) indicated significant associations ranging from small to large in effect size.
+<!-- Correlations among key psychological and demographic variables (see Table \@ref(tab:corr-table)) indicated significant associations ranging from small to large in effect size. -->
 Descriptive statistics for LPP, EPN, N170 and participant ratings (arousal, arousal, and difficulty) were calculated for each of the experimental blocks (see Table \@ref(tab:descriptives-by-block)).
 A repeated measures analysis of variance yielded significant variation among experimental image blocks for LPP ($F$(`r df_num_lpp`, `r df_den_lpp` = `r f_lpp`, $p < .001$), EPN ($F$(`r df_num_epn`, `r df_den_epn`) = `r f_epn`, $p < .001$), and N170 ($F$(`r df_num_n170`, `r df_den_n170`) = `r f_n170`, $p < .001$), though significance was not reached for frontal LPP ($F$(`r df_num_front`, `r df_den_front` = `r f_lpp`, $p = .052$).
 However, given the exploratory nature of frontal LPP analyses in the present study and trend towards statistical significance, contrasts between each regulation condition were still calculated.
@@ -312,12 +318,12 @@ dat <- read_csv("data/paper_two/created_data/temp_fac_score_dat_analyses2021-02-
 
 desc_stats <- dat %>%
   group_by(block) %>%
-  dplyr::summarise("Mean P125 (SD)" = paste0(sprintf("%.1f", mean(RC5, na.rm = TRUE)), " ", "(", sprintf("%.1f", sd(RC5, na.rm = TRUE)), ")"),
-                   "Mean N170 (SD)" = paste0(sprintf("%.1f", mean(RC11, na.rm = TRUE)), " ", "(", sprintf("%.1f", sd(RC11, na.rm = TRUE)), ")"),
-                   "Mean EPN (SD)" = paste0(sprintf("%.1f", mean(RC12, na.rm = TRUE)), " ", "(", sprintf("%.1f", sd(RC12, na.rm = TRUE)), ")"),
-                   "Mean EPP (SD)" = paste0(sprintf("%.1f", mean(pos_RC12, na.rm = TRUE)), " ", "(", sprintf("%.1f", sd(pos_RC12, na.rm = TRUE)), ")"),
-                   "Mean Early LPP (SD)" = paste0(sprintf("%.1f", mean(RC2, na.rm = TRUE)), " ", "(", sprintf("%.1f", sd(RC2, na.rm = TRUE)), ")"),
-                   "Mean Late LPP (SD)" = paste0(sprintf("%.1f", mean(RC3, na.rm = TRUE)), " ", "(", sprintf("%.1f", sd(RC3, na.rm = TRUE)), ")"),
+  dplyr::summarise("Mean Pos 124 ms (SD)" = paste0(sprintf("%.1f", mean(RC5, na.rm = TRUE)), " ", "(", sprintf("%.1f", sd(RC5, na.rm = TRUE)), ")"),
+                   "Mean Pos 162 ms (SD)" = paste0(sprintf("%.1f", mean(RC11, na.rm = TRUE)), " ", "(", sprintf("%.1f", sd(RC11, na.rm = TRUE)), ")"),
+                   "Mean Neg 259 ms (SD)" = paste0(sprintf("%.1f", mean(RC12, na.rm = TRUE)), " ", "(", sprintf("%.1f", sd(RC12, na.rm = TRUE)), ")"),
+                   "Mean Pos 259 ms (SD)" = paste0(sprintf("%.1f", mean(pos_RC12, na.rm = TRUE)), " ", "(", sprintf("%.1f", sd(pos_RC12, na.rm = TRUE)), ")"),
+                   "Mean Pos 381 ms (SD)" = paste0(sprintf("%.1f", mean(RC2, na.rm = TRUE)), " ", "(", sprintf("%.1f", sd(RC2, na.rm = TRUE)), ")"),
+                   "Mean Pos 740 ms (SD)" = paste0(sprintf("%.1f", mean(RC3, na.rm = TRUE)), " ", "(", sprintf("%.1f", sd(RC3, na.rm = TRUE)), ")"),
                    "Mean Arousal (SD)" = paste0(sprintf("%.1f", mean(arousal, na.rm = TRUE)), " ", "(", sprintf("%.1f", sd(arousal, na.rm = TRUE)), ")"),
                    "Mean Valence (SD)" = paste0(sprintf("%.1f", mean(valence, na.rm = TRUE)), " ", "(", sprintf("%.1f", sd(valence, na.rm = TRUE)), ")"),
                    "Mean Difficulty (SD)" = paste0(sprintf("%.1f", mean(difficulty, na.rm = TRUE)), " ", "(", sprintf("%.1f", sd(difficulty, na.rm = TRUE)), ")")) %>%
@@ -339,7 +345,8 @@ kable(format = "latex", escape = FALSE, booktabs = TRUE, align = "lccccccccc", l
   row_spec(0, align = "c") %>%
   footnote(general_title = "Note.",
            general = "SD = Standard Deviation.",
-           footnote_as_chunk = TRUE)
+           footnote_as_chunk = TRUE) %>% 
+  save_kable()
 ```
 
 (ref:pairwise-watch-comparison-table) Contrasts between passive watch conditions for LPP, EPN, and N170 EEG components.
