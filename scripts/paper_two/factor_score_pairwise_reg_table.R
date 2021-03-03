@@ -16,6 +16,80 @@ per_dat_cond <- read_csv("data/paper_two/created_data/temp_fac_score_dat_analyse
          regulation_condition = if_else(regulation_cond == "Dec", "Decrease",
                                         if_else(regulation_cond == "Inc", "Increase", "Watch")))
 
+## -- differences between increase and decrease conditions not included in table yet
+# rc5
+dat$block <- relevel(as.factor(dat$block), "Pos_Inc")
+standardize_parameters(lmer(RC5 ~ block + (1|pid), data = dat)) %>%
+  as_tibble() %>%
+  mutate(label = interpret_d(Std_Coefficient, rules = "cohen1988")) %>%
+  filter(Parameter == "blockNeg_Inc")
+dat$block <- relevel(as.factor(dat$block), "Pos_Dec")
+standardize_parameters(lmer(RC5 ~ block + (1|pid), data = dat)) %>%
+  as_tibble() %>%
+  mutate(label = interpret_d(Std_Coefficient, rules = "cohen1988")) %>%
+  filter(Parameter == "blockNeg_Dec")
+
+# rc11
+dat$block <- relevel(as.factor(dat$block), "Pos_Inc")
+standardize_parameters(lmer(RC11 ~ block + (1|pid), data = dat)) %>%
+  as_tibble() %>%
+  mutate(label = interpret_d(Std_Coefficient, rules = "cohen1988")) %>%
+  filter(Parameter == "blockNeg_Inc")
+dat$block <- relevel(as.factor(dat$block), "Pos_Dec")
+standardize_parameters(lmer(RC11 ~ block + (1|pid), data = dat)) %>%
+  as_tibble() %>%
+  mutate(label = interpret_d(Std_Coefficient, rules = "cohen1988")) %>%
+  filter(Parameter == "blockNeg_Dec")
+
+# rc12
+dat$block <- relevel(as.factor(dat$block), "Pos_Inc")
+standardize_parameters(lmer(RC12 ~ block + (1|pid), data = dat)) %>%
+  as_tibble() %>%
+  mutate(label = interpret_d(Std_Coefficient, rules = "cohen1988")) %>%
+  filter(Parameter == "blockNeg_Inc")
+dat$block <- relevel(as.factor(dat$block), "Pos_Dec")
+standardize_parameters(lmer(RC12 ~ block + (1|pid), data = dat)) %>%
+  as_tibble() %>%
+  mutate(label = interpret_d(Std_Coefficient, rules = "cohen1988")) %>%
+  filter(Parameter == "blockNeg_Dec")
+
+# pos rc12
+dat$block <- relevel(as.factor(dat$block), "Pos_Inc")
+standardize_parameters(lmer(pos_RC12 ~ block + (1|pid), data = dat)) %>%
+  as_tibble() %>%
+  mutate(label = interpret_d(Std_Coefficient, rules = "cohen1988")) %>%
+  filter(Parameter == "blockNeg_Inc")
+dat$block <- relevel(as.factor(dat$block), "Pos_Dec")
+standardize_parameters(lmer(pos_RC12 ~ block + (1|pid), data = dat)) %>%
+  as_tibble() %>%
+  mutate(label = interpret_d(Std_Coefficient, rules = "cohen1988")) %>%
+  filter(Parameter == "blockNeg_Dec")
+
+# rc2
+dat$block <- relevel(as.factor(dat$block), "Pos_Inc")
+standardize_parameters(lmer(RC2 ~ block + (1|pid), data = dat)) %>%
+  as_tibble() %>%
+  mutate(label = interpret_d(Std_Coefficient, rules = "cohen1988")) %>%
+  filter(Parameter == "blockNeg_Inc")
+dat$block <- relevel(as.factor(dat$block), "Pos_Dec")
+standardize_parameters(lmer(RC2 ~ block + (1|pid), data = dat)) %>%
+  as_tibble() %>%
+  mutate(label = interpret_d(Std_Coefficient, rules = "cohen1988")) %>%
+  filter(Parameter == "blockNeg_Dec")
+
+# rc3
+dat$block <- relevel(as.factor(dat$block), "Pos_Inc")
+standardize_parameters(lmer(RC3 ~ block + (1|pid), data = dat)) %>%
+  as_tibble() %>%
+  mutate(label = interpret_d(Std_Coefficient, rules = "cohen1988")) %>%
+  filter(Parameter == "blockNeg_Inc")
+dat$block <- relevel(as.factor(dat$block), "Pos_Dec")
+standardize_parameters(lmer(RC3 ~ block + (1|pid), data = dat)) %>%
+  as_tibble() %>%
+  mutate(label = interpret_d(Std_Coefficient, rules = "cohen1988")) %>%
+  filter(Parameter == "blockNeg_Dec")
+
+
 
 # RC2 regulation comparisons
 reg_mod_RC2 <- lmer(RC2 ~ valence_condition * regulation_condition + (1|pid), data = per_dat_cond)
