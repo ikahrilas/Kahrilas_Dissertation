@@ -65,7 +65,7 @@ RC2_stm_mod_p <- RC2_stm_mod_dat %>%
   select(Pr...t..) %>%
   pull()
 
-# frontal LPP as outcome
+# RC3 as outcome
 dat$block <- relevel(factor(dat$block), ref = "Pos_Watch")
 RC3_stm_mod <- lmer(RC3 ~ block*savoring_moment + (1|pid), data = dat)
 ## check assumptions
