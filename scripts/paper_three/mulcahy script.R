@@ -55,7 +55,7 @@ beta <- function(formula, data, indices) {
   return(summary(fit)$coef[2])
 }
 
-## bootstrapping with 5000 replications
+## bootstrapping with 10000 replications
 results <- boot(data = dat_hs,
                 statistic = beta,
                 R = 10000,
@@ -69,7 +69,7 @@ plot(results)
 boot.ci(results, type = "bca")
 
 ##-- PA
-## bootstrapping with 5000 replications
+## bootstrapping with 10000 replications
 results <- boot(data = dat_hs,
                 statistic = beta,
                 R = 10000,
@@ -84,7 +84,7 @@ boot.ci(results, type = "bca")
 
 
 ## -- NA
-## bootstrapping with 5000 replications
+## bootstrapping with 10000 replications
 results <- boot(data = dat_hs,
                 statistic = beta,
                 R = 10000,
