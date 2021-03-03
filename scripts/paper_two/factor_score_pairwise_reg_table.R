@@ -90,7 +90,6 @@ standardize_parameters(lmer(RC3 ~ block + (1|pid), data = dat)) %>%
   filter(Parameter == "blockNeg_Dec")
 
 
-
 # RC2 regulation comparisons
 reg_mod_RC2 <- lmer(RC2 ~ valence_condition * regulation_condition + (1|pid), data = per_dat_cond)
 RC2_reg <- emmeans(reg_mod_RC2, pairwise ~ regulation_condition | valence_condition)

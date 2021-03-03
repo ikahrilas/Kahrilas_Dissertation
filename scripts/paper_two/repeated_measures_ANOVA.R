@@ -1,51 +1,54 @@
 # Repeated measures ANOVA
 
+## load packages
 library(tidyverse)
 library(lmerTest)
 library(here)
+library(afex)
+library(papaja)
 
-dat <- read_csv("data/paper_two/created_data/per_data_analyses_2020_5_19.csv")
+## read in data
+dat <- read_csv("data/paper_two/created_data/temp_fac_score_dat_analyses2021-02-18.csv")
 
-mod_front <- lmer(LPP_front ~ block + (1|pid), data = dat)
-av_front <- anova(mod_front)
-df_num_front <- av_front$NumDF
-df_den_front <- sprintf("%.2f", av_front$DenDF)
-f_front <- sprintf("%.2f", av_front[["F value"]])
+########## ANALYSES ##########
 
-mod_lpp <- lmer(LPP ~ block + (1|pid), data = dat)
-av_lpp <- anova(mod_lpp)
-df_num_lpp <- av_lpp$NumDF
-df_den_lpp <- sprintf("%.2f", av_lpp$DenDF)
-f_lpp <- sprintf("%.2f", av_lpp[["F value"]])
+dv <- c("RC5", "RC11", "RC12", "pos_RC12", "RC2", "RC3", "valence", "arousal", "difficulty")
 
-mod_epn <- lmer(EPN ~ block + (1|pid), data = dat)
-av_epn <- anova(mod_epn)
-df_num_epn <- av_epn$NumDF
-df_den_epn <- round(av_epn$DenDF, digits = 0)
-f_epn <- sprintf("%.2f", av_epn[["F value"]])
+aov_lst <- map(dv, ~ {
+afex::aov_ez(
+  data = dat
+  , dv = .x
+  , id = "pid"
+  , within = "block"
+)
+})
+## EVERYTHING'S SIGNIFICANT
+# 124 ms component
+rc5_results <- apa_print(aov_lst[[1]])$full_result$block
 
-mod_n170 <- lmer(N170 ~ block + (1|pid), data = dat)
-av_n170 <- anova(mod_n170)
-df_num_n170 <- av_n170$NumDF
-df_den_n170 <- round(av_n170$DenDF, digits = 0)
-f_n170 <- sprintf("%.2f", av_n170[["F value"]])
+# 162 ms component
+rc11_results <- apa_print(aov_lst[[2]])$full_result$block
 
-mod_ar <- lmer(arousal ~ block + (1|pid), data = dat)
-av_ar <- anova(mod_ar)
-df_num_ar <- av_ar$NumDF
-df_den_ar <- round(av_ar$DenDF, digits = 0)
-f_ar <- sprintf("%.2f", av_ar[["F value"]])
+# negative 259 component
+neg_rc12_results <- apa_print(aov_lst[[3]])$full_result$block
 
-mod_val <- lmer(valence ~ block + (1|pid), data = dat)
-av_val <- anova(mod_val)
-df_num_val <- av_val$NumDF
-df_den_val <- round(av_val$DenDF, digits = 0)
-f_val <- sprintf("%.2f", av_val[["F value"]])
+# positive 259 component
+pos_rc12_results <- apa_print(aov_lst[[4]])$full_result$block
 
-mod_diff <- lmer(difficulty ~ block + (1|pid), data = dat)
-av_diff <- anova(mod_diff)
-df_num_diff <- av_diff$NumDF
-df_den_diff <- round(av_diff$DenDF, digits = 0)
-f_diff <- sprintf("%.2f", av_diff[["F value"]])
+# 381 component
+pos_rc2_results <- apa_print(aov_lst[[5]])$full_result$block
 
+# 740 component
+pos_rc3_results <- apa_print(aov_lst[[6]])$full_result$block
+
+# valence
+val_results <- apa_print(aov_lst[[7]])$full_result$block
+
+# arousal
+ar_results <- apa_print(aov_lst[[8]])$full_result$block
+
+# difficulty
+diff_results <- apa_print(aov_lst[[9]])$full_result$block
+
+# save the results to be accessed in the paper
 save.image(file = paste0("data/paper_two/analyses/", Sys.Date(), "_repeated_measures_ANOVA_analysis-data", ".RData"))
