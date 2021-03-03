@@ -10,13 +10,6 @@ library(kableExtra)
 
 dat <- read_csv("data/paper_two/created_data/temp_fac_score_dat_analyses2021-02-11.csv")
 
-per_dat_cond <- read_csv("data/paper_two/created_data/temp_fac_score_dat_analyses2021-02-11.csv") %>%
-  separate(block, c("valence_cond", "regulation_cond"), "_") %>%
-  mutate(valence_condition = if_else(valence_cond == "Neg", "Negative",
-                                     if_else(valence_cond == "Pos", "Positive", "Neutral")),
-         regulation_condition = if_else(regulation_cond == "Dec", "Decrease",
-                                        if_else(regulation_cond == "Inc", "Increase", "Watch")))
-
 # change block to factor type
 dat$block <- as.factor(dat$block)
 dat$block <- relevel(dat$block, "Neg_Inc")
