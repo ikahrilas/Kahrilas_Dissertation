@@ -149,11 +149,11 @@ Following each block of images, participants were asked to rate on a seven-point
 The present study had two primary objectives.
 The first objective of the proposed study was to replicate previous research using the IAPS with the OASIS.
 We hypothesized that a) highly arousing positive compared to neutral OASIS stimuli would be associated with enhanced ERP components (N170, EPN, LPP) and self-report ratings (greater arousal, more positive arousal ratings) and b) highly arousing negative compared to neutral OASIS stimuli would be associated with enhanced ERP components (N170, EPN, LPP) and self-report ratings (greater arousal and more negative arousal ratings).
-Related, it was also hypothesized that LPP amplitude would be modulated in a manner congruent with the regulatory goal.
+Related, we hypothesized that LPP amplitude would be modulated in a manner congruent with the regulatory goal.
 More specifically, reduction of LPP amplitude would be observed in decrease conditions compared to passive watch conditions, and increased LPP amplitude would be observed in increase conditions compared to passive watch conditions.
-Additionally, it was predicted that frontal LPP amplitude would be increased for all regulation conditions (increase and decrease), though not modulated for passive watch conditions.
+Additionally, we predicted that frontal LPP amplitude would be increased for all regulation conditions (increase and decrease), though not modulated for passive watch conditions.
 The second objective was to examine the relationship between personality traits pertaining to positive emotion and EEG components/self-report ratings.
-It was predicted that a) PA would moderate the relationship between watching positive images and LPP as well as self-report ratings (increased arousal and more positive arousal ratings) and b) savoring capacity would moderate the relationship between increasing emotional intensity in response to positive images and LPP amplitude as well as self-report ratings (increased arousal and more positive arousal-ratings). 
+We predicted that a) PA would moderate the relationship between watching positive images and LPP as well as self-report ratings (increased arousal and more positive arousal ratings) and b) savoring capacity would moderate the relationship between increasing emotional intensity in response to positive images and LPP amplitude as well as self-report ratings (increased arousal and more positive arousal-ratings). 
 
 Hypotheses pertaining to modulation of LPP amplitude in response to passively viewing OASIS images and personality traits interacting with LPP amplitude and PA/savoring capacity were preregistered (link: [https://osf.io/p5ba9/](https://osf.io/p5ba9/)).
 As we continued to read the explore the scientific literature about reactivity and regulation, we decided to expand our analyses to the other components (N170, EPN) in order to characterize the broader temporal cascade of affective processing.
@@ -226,7 +226,9 @@ Data were recorded with a band pass of 0 – 104 Hz at a sampling rate of 512 Hz
 
 The following EEG data processing steps were implemented in Brain Electrical Source Analysis software [BESA, Version 7; @schergBESABrainElectric1990].
 Following the adaptive artifact correction method [@illeArtifactCorrectionOngoing2002], ocular artifacts were corrected using a spatial PCA filter.
-EEG data were re-referenced to the average activity of the mastoid electrodes for LPP analyses [@hajcakAttendingAffectAppraisal2006; @hajcakReappraisalModulatesElectrocortical2006] and average reference of all electrodes for EPN and N170 analyses [@stockdaleInfluenceStimulusarousal2020; @yoonEnhancedEarlyPosterior2016] and digitally filtered with 0.01 Hz high-pass and 30 Hz low-pass filters with a cutoff attenuation of 12 dB/octave.
+EEG data were re-referenced to the [@hajcakAttendingAffectAppraisal2006; @hajcakReappraisalModulatesElectrocortical2006]  average reference of all electrodes for analyses and digitally filtered with 0.01 Hz high-pass and 30 Hz low-pass filters with a cutoff attenuation of 12 dB/octave.
+While it is convention to re-reference data to average activity of the mastoids for LPP, a covariance matrix was utilized in the PCA, which is inherently mean corrected [@dienApplyingPrincipalComponents2012].
+Thus, minimal effects would be expected as a function of referencing scheme for temporal PCA (though this is not the case spatial PCAj; see @dienApplyingPrincipalComponents2012)
 Muscle activity and other artifacts were corrected through implementing an algorithmic scan of continuous EEG data in BESA (fixed threshold criteria: amplitude > 120 uV; gradient > 75 uV, low signal <.01 uV).
 Data were baseline-adjusted by subtracting the average activity for 200 milliseconds [@moserIntentionalModulationEmotional2006] before stimulus onset.
 
@@ -261,20 +263,45 @@ The viewing distance was approximately 24 in. and occupied 25° of the vertical 
 
 ## Results
 ```{r rm-ANOVA, message = FALSE, include = FALSE, echo = FALSE}
-load("data/paper_two/analyses/2020-06-24_repeated_measures_ANOVA_analysis-data.RData")
+load("data/paper_two/analyses/2021-03-01_repeated_measures_ANOVA_analysis-data.RData")
 ```
 Analyses were run in R version 4.0.3 [@R-base].
 Multilevel modeling (MLM) analyses were conducted using the lme4 package [@batesFittingLinearMixedeffects2015].
-All linear mixed models were estimated using REML with particpants included as random intercepts.
+All linear mixed models were estimated using REML with participants included as random intercepts.
 Model assumptions were checked via visual inspection of diagnostic plots (i.e., residual, QQ, scale-location, and residuals vs. leverage) generated with the performance package [@ludeckePerformanceAssessmentRegression2019].
 <!-- Correlations among key psychological and demographic variables (see Table \@ref(tab:corr-table)) indicated significant associations ranging from small to large in effect size. -->
-Descriptive statistics for LPP, EPN, N170 and participant ratings (arousal, arousal, and difficulty) were calculated for each of the experimental blocks (see Table \@ref(tab:descriptives-by-block)).
-A repeated measures analysis of variance yielded significant variation among experimental image blocks for LPP ($F$(`r df_num_lpp`, `r df_den_lpp` = `r f_lpp`, $p < .001$), EPN ($F$(`r df_num_epn`, `r df_den_epn`) = `r f_epn`, $p < .001$), and N170 ($F$(`r df_num_n170`, `r df_den_n170`) = `r f_n170`, $p < .001$), though significance was not reached for frontal LPP ($F$(`r df_num_front`, `r df_den_front` = `r f_lpp`, $p = .052$).
-However, given the exploratory nature of frontal LPP analyses in the present study and trend towards statistical significance, contrasts between each regulation condition were still calculated.
-Repeated measures analysis of variance similarly indicated differences among blocks for arousal ($F$(`r df_num_ar`, `r df_den_ar` = `r f_ar`, $p < .001$) and arousal ($F$(`r df_num_val`, `r df_den_val` = `r f_val`, $p < .001$) ratings.
-Pairwise comparisons were conducted using the emmeans package [@lenthEmmeansEstimatedMarginal2020] among passive watch and regulation conditions for EEG components and behavioral ratings, which are summarized in Table \@ref(tab:pairwise-watch-comparison-table) and Table \@ref(tab:pairwise-reg-comparison-table), respectively.
-Effect sizes were interpreted using Funder's [-@funderEvaluatingEffectSize2019] recommendations.
-Topographical plots and average ERP waveforms for each component of interest were also created (see Figures \@ref(fig:LPP-watch-topos), \@ref(fig:LPP-reg-topos), \@ref(fig:EPN-N170-watch-topos), \@ref(fig:EPN-N170-pos-topos), \@ref(fig:EPN-N170-neg-topos), \@ref(fig:front-LPP-watch-topos), & \@ref(fig:front-LPP-reg-topos)).
+Descriptive statistics for each of the retained components from the temporal PCA and participant ratings (arousal, arousal, and difficulty) were calculated for each of the experimental blocks (see Table \@ref(tab:descriptives-by-block)).
+
+Repeated measures ANOVA was performed to probe for significant deviations from the average activity of each component and behavioral rating as a function of experimental block.
+Greenhouse-Geisser corrections were implemented to account for significant departures from sphericity as tested by Mauchly's test for sphericity.
+Significant variation among experimental image blocks were found for the 124 ms component (`rc_5 results`), 162 ms component (`rc11_results`), negative 259 component (`neg_rc12_results`), positive 259 component (`post_rc12_results`), 381 ms component (`pos_rc2_results`), and 740 ms component (`pos_rc3_results`). 
+Further, significant variation was examined with valence ratings (`val_results`), arousal ratings (`ar_results`), and difficulty ratings (`diff_results`).
+
+Follow up pairwise *t* tests were conducted using the emmeans package [@lenthEmmeansEstimatedMarginal2020] among passive watch and regulation conditions for PCA EEG components and behavioral ratings.
+Findings for EEG components are summarized in Figure XXXX.
+Of note in Figure XXXX, the top row of topographic plots represents the average activity collapsed across all blocks for the time window of activity suggested by visual inspection of covariance loadings.
+The second row of topographic plots represent the average activity across the entire -200 to 2000 ms time window, collapsed across all blocks to illustrate how the temporal PCA isolated EEG activity.
+Differences among blocks are illustrated with box-and-whisker/violin plots in the subsequent plots.
+<!-- which are summarized in Table \@ref(tab:pairwise-watch-comparison-table) and Table \@ref(tab:pairwise-reg-comparison-table), respectively. -->
+<!-- Effect sizes were interpreted using Funder's [-@funderEvaluatingEffectSize2019] recommendations. -->
+<!-- Topographical plots and average ERP waveforms for each component of interest were also created (see Figures \@ref(fig:LPP-watch-topos), \@ref(fig:LPP-reg-topos), \@ref(fig:EPN-N170-watch-topos), \@ref(fig:EPN-N170-pos-topos), \@ref(fig:EPN-N170-neg-topos), \@ref(fig:front-LPP-watch-topos), & \@ref(fig:front-LPP-reg-topos)). -->
+More detailed statistical findings for each comparison are provided in Table XXXX.
+In summary, findings indicate that there were a larger number of significant contrasts among passive watch conditions.
+Significant differences among all three passive watch conditions first emerged at the 162 ms component ranging in effect size from small to medium [@cohenStatisticalPowerAnalysis1988a], with positive and negative images eliciting larger amplitudes compared to neutral images.
+All three significant differences were again present at the 381 ms and 740 ms components with larger effects, ranging from small to large.
+Medium sized significant differences were noted between negative and neutral watch conditions for the negative and positive 259 ms components; negative images had more negative amplitudes for both.
+There was an additional small significant difference between the positive and negative passive watch conditions for the negative 259 ms component, where the negative condition exhibited more negative amplitudes compared to the positive condition.
+Regarding comparisons among regulation conditions, there were small significant difference between the positive increase and positive watch conditions for the negative 259 ms component and 381 ms component. 
+More specifically, the positive increase condition had more negative amplitude compared to the positive watch conditions for the 259 ms component, and more positive amplitude in the 381 ms component. 
+There were also small differences between the positive increase and positive decrease conditions for the negative 259 ms, 381 ms, and 740 ms components; the positive increase conditions elicited more negative amplitude in the negative 259 ms component and more positive amplitude for the 381 ms and 740 ms components.
+Within comparisons among negative images, the small significant differences were noted between the negative increase and negative watch conditions for the 124 ms component and negative 259 ms component.
+The negative increase condition had more positive amplitudes for the 125 ms component and more negative amplitudes for the 259 ms component compared to the negative watch condition.
+Comparisons between negative increase and positive increase conditions as well as negative decrease and positive decrease were also performed for each temporal PCA component.
+A small significant difference was found between the negative and positive increase conditions with the negative 259 ms component as the outcome, such that the negative increase condition elicited more negative amplitude. 
+A difference in the same direction was found for negative and positive decrease conditions, except with a medium-sized effect.
+Another small, significant difference was found between the negative and positive increase conditions, with the more positive amplitude in the positive condition.
+A small significant difference was found between the negative decrease and positive increase conditions, with larger amplitude associated with the negative decrease condition.
+Finally, with the 740 ms component as the outcome, the negative increase and decrease elicited greater amplitude than their positive counterparts, with small- and medium-sized effects, respectively.
 
 (ref:corr-table) Correlations among EEG components, behavioral ratings, positive affectivity, and savoring the moment ($N$ = 52)
 
@@ -344,7 +371,7 @@ kable(format = "latex", escape = FALSE, booktabs = TRUE, align = "lccccccccc", l
   kable_styling(font_size = 24, latex_options = c("scale_down")) %>%
   row_spec(0, align = "c") %>%
   footnote(general_title = "Note.",
-           general = "SD = Standard Deviation.",
+           general = "SD = Standard Deviation. Column headers represent the timepoint (in ms) of maximal activity for each component and the directionality (positive or negative) of the component.",
            footnote_as_chunk = TRUE) %>% 
   save_kable()
 ```
@@ -489,7 +516,7 @@ Differences between the present study and Liu et al. (2012) may be attributed to
 Future researchers should be mindful of these factors as to facilitate replicability of results.
 As noted earlier, rating scales in the present study indicated that passively viewing positive and negative image blocks were associated with higher arousal ratings when compared to neutral images.
 Passively viewing negative images was associated with arousal scores that were significantly lower than neutral images, and passively viewing positive images was associated with arousal scores that were significantly higher than neutral images.
-Overall, this suggests that our block design paradigm had profound state mood manipulations on participants, and negatively-arousald stimuli may have stronger manipulations of emotion than positively-arousald stimuli.
+Overall, this suggests that our block design paradigm had profound state mood manipulations on participants, and negatively-arousing stimuli may have stronger manipulations of emotion than positively-arousing stimuli.
 While positive and negative image sets were matched on average arousal and arousal ratings, it should be noted that pornographic images were omitted, which are commonly rated as highly arousing positive images [@bradleyInternationalAffectivePicture2007:1; @kurdiIntroducingOpenAffective2017] and used in other studies investigating neural time course of affective processing with positive images [e.g., @hajcakTemporalDynamicsEmotion2007; @liuNeuralSubstrateLate2012].
 Notably, behavioral ratings correlated with LPP activity, reflecting a relation among state manipulations of arousal and arousal in and parietal cortical activity.
 Overall, these findings lend support to the OASIS image set being used in subsequent psychophysiological studies investigating the neural time course of affective processing.
