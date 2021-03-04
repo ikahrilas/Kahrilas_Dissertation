@@ -490,10 +490,14 @@ raw_dat <- as_tibble(raw_mat) %>%
 })
 
 # write data set with "raw" factor ERPs to work space
+comp_for_erp <- c("RC2", "RC3", "RC5", "RC11", "RC12")
+
 temp_raw_df %>%
+  filter(block %in% comp_for_erp) %>%
   pivot_longer(-c(pid:comp),
                names_to = "ms",
                values_to = "mv") %>%
+  mutate(ms = as.numeric(ms)) %>%
   write_csv(here("data", "paper_two", "temp_fac_score_erp.csv"))
 
 # derive ERP plots in mV units for each temporal component
