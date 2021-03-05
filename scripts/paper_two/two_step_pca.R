@@ -493,7 +493,7 @@ raw_dat <- as_tibble(raw_mat) %>%
 comp_for_erp <- c("RC2", "RC3", "RC5", "RC11", "RC12")
 
 temp_raw_df %>%
-  filter(block %in% comp_for_erp) %>%
+  filter(comp %in% comp_for_erp) %>%
   pivot_longer(-c(pid:comp),
                names_to = "ms",
                values_to = "mv") %>%
