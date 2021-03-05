@@ -252,7 +252,7 @@ While no a priori hypotheses were made regarding ERP components occurring as ear
 While the time course of the 162 ms and 259 ms component corresponded to N170 and EPN, the positive directionality of the waveforms did not.
 A final component with a negative peak at 259 ms was retained, with negative activity at CPz and Pz electrodes sites, which represented EPN.
 No frontal LPP component was identified.
-See Figures (XXX) for grand average ERP waveforms and topographic plots, as well as ERP waveforms and topographic plots that correspond to each retained component.
+See Figures (XXX) for grand average ERPs before and after PCA (collapsed across all blocks) as well as the top two rows of Table (XXX) for grand average topographic plots before and after PCA for an illustration of how the temporal PCA partitioned variance associated with each component.
 
 <!-- LPP activity was calculated as the average activity in the 400 – 800 ms window at the Pz electrode site. -->
 <!-- Adaptive means for N170 and EPN were computed separately to account for peak latency variability among participants. N170 was defined as the minimum mean-peak amplitude (average amplitude across +/- 15 ms around the peak) between 130 - 200 ms post-stimulus at PO7 and PO8 electrode sites. The EPN was defined as the minimum mean-peak amplitude (average amplitude across +/- 25 ms around the peak) detected between 225 to 325 ms post-stimulus at PO7 and PO8 electrode sites. -->
@@ -279,13 +279,20 @@ Further, significant variation was examined with valence ratings (`val_results`)
 
 Follow up pairwise *t* tests were conducted using the emmeans package [@lenthEmmeansEstimatedMarginal2020] among passive watch and regulation conditions for PCA EEG components and behavioral ratings.
 Findings for EEG components are summarized in Figure XXXX.
-Of note in Figure XXXX, the top row of topographic plots represents the average activity collapsed across all blocks for the time window of activity suggested by visual inspection of covariance loadings.
+More detailed statistical findings for each comparison are provided in Appendix A of the supplementary materials.
+As noted earlier, the top row of topographic plots represents the average activity collapsed across all blocks for the time window of activity suggested by visual inspection of covariance loadings.
 The second row of topographic plots represent the average activity across the entire -200 to 2000 ms time window, collapsed across all blocks to illustrate how the temporal PCA isolated EEG activity.
 Differences among blocks are illustrated with box-and-whisker/violin plots in the subsequent plots.
+Encoded within the box-and-whisker plots are information regarding each distributional properties.
+The width of the violin plots corresponds to the number of cases with that level of the dependent variable.
+Thus, they can largely be interpreted as one would a histogram, excepted rotated 90 degrees and symmetrical.
+Regarding the box-and-whisker plots, the area between the lower and upper hinges correspond to the interquartile range (the 25th and 75th percentiles). 
+The upper whisker extends from the hinge to the largest value no further than 1.5 times the interquartile range from the hinge. 
+The lower whisker extends from the hinge to the smallest value at most 1.5 times the interquartile range of the hinge. 
+Data beyond the end of the whiskers are are plotted individually as dots.
 <!-- which are summarized in Table \@ref(tab:pairwise-watch-comparison-table) and Table \@ref(tab:pairwise-reg-comparison-table), respectively. -->
 <!-- Effect sizes were interpreted using Funder's [-@funderEvaluatingEffectSize2019] recommendations. -->
 <!-- Topographical plots and average ERP waveforms for each component of interest were also created (see Figures \@ref(fig:LPP-watch-topos), \@ref(fig:LPP-reg-topos), \@ref(fig:EPN-N170-watch-topos), \@ref(fig:EPN-N170-pos-topos), \@ref(fig:EPN-N170-neg-topos), \@ref(fig:front-LPP-watch-topos), & \@ref(fig:front-LPP-reg-topos)). -->
-More detailed statistical findings for each comparison are provided in Table XXXX.
 In summary, findings indicate that there were a larger number of significant contrasts among passive watch conditions.
 Significant differences among all three passive watch conditions first emerged at the 162 ms component ranging in effect size from small to medium [@cohenStatisticalPowerAnalysis1988a], with positive and negative images eliciting larger amplitudes compared to neutral images.
 All three significant differences were again present at the 381 ms and 740 ms components with larger effects, ranging from small to large.
@@ -303,39 +310,7 @@ Another small, significant difference was found between the negative and positiv
 A small significant difference was found between the negative decrease and positive increase conditions, with larger amplitude associated with the negative decrease condition.
 Finally, with the 740 ms component as the outcome, the negative increase and decrease elicited greater amplitude than their positive counterparts, with small- and medium-sized effects, respectively.
 
-(ref:corr-table) Correlations among EEG components, behavioral ratings, positive affectivity, and savoring the moment ($N$ = 52)
-
-```{r corr-table, echo=FALSE, fig.pos="H", fig.cap = "(ref:corr-table)", message=FALSE}
-library(tidyverse)
-library(kableExtra)
-
-load("data/paper_two/analyses/2021-02-11_correlation_table-data.RData")
-tab %>%
-  mutate(" " = c("1. P125",
-                 "2. N170",
-                 "3. EPN",
-                 "4. EPP",
-                 "5. Early LPP",
-                 "6. Late LPP",
-                 "7. Arousal Ratings",
-                 "8. Valence Ratings",
-                 "9. Difficulty Ratings",
-                 "10. PA",
-                 "11. StM",
-                 "12. Depression")) %>%
-  select(" ", everything()) %>%
-  ## create table
-  kable(., format = "latex", linesep = "", escape = FALSE, booktabs = TRUE, align = c("l", rep("r", 13)), caption = "(ref:corr-table)") %>%
-  kable_styling(latex_options = "scale_down", font_size = 12) %>%
-  column_spec(2:12, width = "3em") %>%
-  footnote(general_title = "Note.",
-           escape = FALSE,
-           general = "*$p < .05$. PA = positive affectivity, StM = savoring the moment. EEG components and behavioral ratings (i.e., arousal, valence, and difficulty) averaged across all regulation blocks.",
-           threeparttable = TRUE,
-           footnote_as_chunk = TRUE)
-```
-
-(ref:descriptives-by-block) Means and standard deviations for LPP, EPN, and N170 EEG components, as well as arousal, arousal, and difficulty ratings.
+(ref:descriptives-by-block) Means and standard deviations for all PCA components, as well as arousal, arousal, and difficulty ratings partitioned by regulation block.
 
 ```{r descriptives-by-block, fig.pos="H", echo = FALSE, message = FALSE, fig.cap = "(ref:descriptives-by-block)"}
 library(tidyverse)
@@ -376,105 +351,10 @@ kable(format = "latex", escape = FALSE, booktabs = TRUE, align = "lccccccccc", l
   save_kable()
 ```
 
-(ref:pairwise-watch-comparison-table) Contrasts between passive watch conditions for LPP, EPN, and N170 EEG components.
+(ref:contrast-plot) Pre- and post-PCA topographical plots collapsed across block and statistical findings for pairwise *t* tests among each block for each component. Electrode sites used to measure each component highlighted in the corresponding topographic plot.
 
-```{r pairwise-watch-comparison-table, echo = FALSE, fig.pos="H", warning = FALSE, message = FALSE, fig.cap = "(ref:pairwise-watch-comparison-table)"}
-library(tidyverse)
-library(kableExtra)
-
-load("data/paper_two/analyses/2021-02-11factor_score_pairwise_watch_table-data.RData")
-
-watch_tab %>%
-  select(-comp) %>%
-  kable(., format = "latex", escape = FALSE, booktabs = TRUE, align = c("l", "c", "c", "c"), linesep = "", caption = "(ref:pairwise-watch-comparison-table)") %>%
-  row_spec(0, align = "c") %>%
-  pack_rows("Early LPP Component", 1, 3) %>%
-  pack_rows("Late LPP Component", 4, 6) %>%
-  pack_rows("P125 Component", 7, 9) %>%
-  pack_rows("N170 Component", 10, 12) %>%
-  pack_rows("EPN Component", 13, 15) %>%
-  pack_rows("EPP Component", 16, 18) %>%
-  pack_rows("Arousal Ratings", 19, 21) %>%
-  pack_rows("Valence Ratings", 22, 24) %>%
-  footnote(escape = FALSE,
-           footnote_as_chunk = TRUE,
-           general_title = "Note.",
-           general = "Std. Beta (Label) = Absolute value of standardized
-beta coefficient as measure of effect size derived by fitting model to
-standardized dataset with effect size label as per Cohen's (1988) recommendations,
-Sig. = $p$ value. $P$ values and confidence intervals adjusted using the Tukey method
-for comparing a family of three estimates.",
-           threeparttable = TRUE)
-```
-
-(ref:pairwise-reg-comparison-table) Contrasts between regulation conditions for positive and negative OASIS images for LPP, EPN, and N170 EEG components.
-
-```{r pairwise-reg-comparison-table, echo = FALSE, fig.pos="H", warning = FALSE, message = FALSE, fig.cap = "(ref:pairwise-reg-comparison-table)"}
-library(tidyverse)
-library(kableExtra)
-
-load("data/paper_two/analyses/2021-02-11factor_score_regulations_table-data.RData")
-
-reg_tab_wide[-1] %>%
-  kable(., format = "latex", escape = FALSE, booktabs = TRUE, align = c("l", rep("c", times = 6)), linesep = "", caption = "(ref:pairwise-reg-comparison-table)") %>%
-  kable_styling(latex_options = "scale_down") %>%
-  add_header_above(c(" ", "Positive Images" = 3, "Negative Images" = 3), bold = TRUE, italic = TRUE) %>%
-  row_spec(0, align = "c") %>%
-  pack_rows("Early LPP Component", 1, 3) %>%
-  pack_rows("Late LPP Component", 4, 6) %>%
-  pack_rows("P125 Component", 7, 9) %>%
-  pack_rows("N170 Component", 10, 12) %>%
-  pack_rows("EPN Component", 13, 15) %>%
-  pack_rows("EPP Component", 16, 18) %>%
-  pack_rows("Arousal Ratings", 19, 21) %>%
-  pack_rows("Valence Ratings", 22, 24) %>%
-  footnote(escape = FALSE,
-           general_title = "Note.",
-           general = "Std. Beta = Absolute value of standardized beta coefficient as measure of effect size derived by fitting model to standardized dataset with effect size label as per Cohen's (1988) recommendations, Sig. = $p$ value. $P$ values and confidence intervals adjusted using the Tukey method for comparing a family of three estimates.",
-           threeparttable = TRUE,
-           footnote_as_chunk = TRUE)
-```
-
-(ref:LPP-watch-topos) Topographical plots and average waveforms for LPP during passive watch conditions. Electrode highlighted in white was used to measure LPP for waveform plots and analyses.
-
-```{r LPP-watch-topos, echo = FALSE, fig.pos="H", fig.cap = "(ref:LPP-watch-topos)", out.extra="", out.height= "65%", out.width="100%"}
-knitr::include_graphics("images/paper_2/lpp_watch_topos.png", auto_pdf = TRUE)
-```
-
-(ref:LPP-reg-topos) Topographical plots and average waveforms for LPP during regulation conditions in response to positive and negative images. Electrode highlighted in white was used to measure LPP for waveform plots and analyses.
-
-```{r LPP-reg-topos, echo = FALSE, fig.pos="H", fig.cap = "(ref:LPP-reg-topos)", out.extra="", out.height= "65%", out.width="100%"}
-knitr::include_graphics("images/paper_2/lpp_reg_topos.png", auto_pdf = TRUE)
-```
-
-(ref:front-LPP-watch-topos) Topographical plots and average waveforms for frontal LPP during passive watch conditions. Electrode highlighted in white was used to measure LPP for waveform plots and analyses.
-
-```{r front-LPP-watch-topos, fig.pos="H", echo = FALSE, fig.cap = "(ref:front-LPP-watch-topos)", out.extra="", out.height= "65%", out.width="100%"}
-knitr::include_graphics("images/paper_2/front_lpp_watch_topos.png", auto_pdf = TRUE)
-```
-
-(ref:front-LPP-reg-topos) Topographical plots and average waveforms for frontal LPP during regulation conditions in response to positive and negative images. Electrode highlighted in white was used to measure frontal LPP for waveform plots and analyses.
-
-```{r front-LPP-reg-topos, fig.pos="H", echo = FALSE, fig.cap = "(ref:front-LPP-reg-topos)", out.extra="", out.height= "65%", out.width="100%"}
-knitr::include_graphics("images/paper_2/front_lpp_reg_topos.png", auto_pdf = TRUE)
-```
-
-(ref:EPN-N170-watch-topos) Topographical plots and average waveforms for N170 (bottom row) and EPN (top row) during passive watch conditions. Presented windows are approximations calculated by determining the entire range of participants' scoring windows for N170 (112 ms - 223 ms) and EPN (224 ms - 341 ms) in all watch conditions. Electrodes highlighted in white were used to measure N170 and EPN for waveform plots and analyses.
-
-```{r EPN-N170-watch-topos, fig.pos="H", echo = FALSE, fig.cap = "(ref:EPN-N170-watch-topos)", out.extra="", out.height= "65%", out.width="100%"}
-knitr::include_graphics("images/paper_2/epn_n170_watch_topos.png", auto_pdf = TRUE)
-```
-
-(ref:EPN-N170-pos-topos) Topographical plots and average waveforms for N170 (bottom row) and EPN (bottom row) during regulation conditions in response to positive images. Presented windows are approximations calculated by determining the entire range of participants' scoring windows for N170 (113 ms - 218 ms) and EPN (224 ms - 326 ms) in all positive conditions. Electrodes highlighted in white were used to measure N170 and EPN for waveform plots and analyses.
-
-```{r EPN-N170-pos-topos, fig.pos="H", echo = FALSE, fig.cap = "(ref:EPN-N170-pos-topos)", out.extra="", out.height= "65%", out.width="100%"}
-knitr::include_graphics("images/paper_2/epn_n170_pos_topos.png", auto_pdf = TRUE)
-```
-
-(ref:EPN-N170-neg-topos) Topographical plots and average waveforms for N170 (bottom row) and EPN (bottom row) during regulation conditions in response to negative images. Presented windows are approximations calculated by determining the entire range of participants' scoring windows for N170 (112 ms - 217 ms) and EPN (223 ms - 325 ms) in all positive conditions. Electrodes highlighted in white were used to measure N170 and EPN for waveform plots and analyses.
-
-```{r EPN-N170-neg-topos, fig.pos="H", echo=FALSE, fig.cap="(ref:EPN-N170-neg-topos)", out.extra="", out.height= "65%", out.width="100%"}
-knitr::include_graphics("images/paper_2/epn_n170_neg_topos.png", auto_pdf = TRUE)
+```{r contrast-plot, echo = FALSE, fig.pos="H", fig.cap = "(ref:contrast-plot)", out.extra="", out.height= "65%", out.width="100%"}
+knitr::include_graphics("images/paper_2/results_images/contrast_plot.png", auto_pdf = TRUE)
 ```
 
 ```{r positive-affectivity-mlm-analyses, echo = FALSE, include = FALSE}
@@ -499,11 +379,56 @@ An interaction term between block and momentary savoring capacity variables was 
 Results did not indicate a significant interaction between viewing condition and savoring in predicting any of the PCA components (124 ms component: $b$ = `r rc5_stm_beta`, $SE$ = `r rc5_stm_se`, $t$(`r rc5_stm_df`) = `r rc5_stm_t`, $p$ `r rc5_stm_p`; 162 ms component: $b$ = `r rc11_stm_beta`, $SE$ = `r rc11_stm_se`, $t$(`r rc11_stm_df`) = `r rc11_stm_t`, $p$ `r rc11_stm_p`); negative 259 ms component: $b$ = `r rc12_stm_beta`, $SE$ = `r rc12_stm_se`, $t$(`r rc12_stm_df`) = `r rc12_stm_t`, $p$ `r rc12_stm_p`; positive 259 component: $b$ = `r pos_rc12_stm_beta`, $SE$ = `r pos_rc12_stm_se`, $t$(`r pos_rc12_stm_df`) = `r pos_rc12_stm_t`, $p$ `r pos_rc12_stm_p`; 381 ms component: $b$ = `r rc2_stm_beta`, $SE$ = `r rc2_stm_se`, $t$(`r rc2_stm_df`) = `r rc2_stm_t`, $p$ `r rc2_stm_p`; 740 ms component: $b$ = `r rc3_stm_beta`, $SE$ = `r rc3_stm_se`, $t$(`r rc3_stm_df`) = `r rc3_stm_t`, $p$ `r rc3_stm_p`).
 Null findings were also found for behavioral ratings (arousal: $b$ = `r ar_stm_beta`, $\beta$ = `r ar_stm_std_beta`, $SE$ = `r ar_stm_se`, $t$(`r ar_stm_df`) = `r ar_stm_t`, $p$ `r ar_stm_p`, valence: $b$ = `r val_stm_beta`, $\beta$ = `r val_stm_std_beta`, $SE$ = `r val_stm_se`, $t$(`r val_stm_df`) = `r val_stm_t`, $p$ `r val_stm_p`).
 
-Pearson product-moment correlations among relevant questionnaire data and temporal PCA components yielded a number of significant associations. These data in table XXXX are grouped by regulation condition to streamline presentation.
+Pearson product-moment correlations among relevant questionnaire data and temporal PCA components yielded a number of significant associations. These data in Tables XXXX are grouped by regulation condition to streamline presentation.
+
+(ref:corr-table) Correlations among EEG components, behavioral ratings, positive affectivity, and savoring the moment ($N$ = 52)
+
+```{r corr-table, echo=FALSE, fig.pos="H", fig.cap = "(ref:corr-table)", message=FALSE}
+library(tidyverse)
+library(kableExtra)
+
+load("data/paper_two/analyses/2021-02-11_correlation_table-data.RData")
+tab %>%
+  mutate(" " = c("1. P125",
+                 "2. N170",
+                 "3. EPN",
+                 "4. EPP",
+                 "5. Early LPP",
+                 "6. Late LPP",
+                 "7. Arousal Ratings",
+                 "8. Valence Ratings",
+                 "9. Difficulty Ratings",
+                 "10. PA",
+                 "11. StM",
+                 "12. Depression")) %>%
+  select(" ", everything()) %>%
+  ## create table
+  kable(., format = "latex", linesep = "", escape = FALSE, booktabs = TRUE, align = c("l", rep("r", 13)), caption = "(ref:corr-table)") %>%
+  kable_styling(latex_options = "scale_down", font_size = 12) %>%
+  column_spec(2:12, width = "3em") %>%
+  footnote(general_title = "Note.",
+           escape = FALSE,
+           general = "*$p < .05$. PA = positive affectivity, StM = savoring the moment. EEG components and behavioral ratings (i.e., arousal, valence, and difficulty) averaged across all regulation blocks.",
+           threeparttable = TRUE,
+           footnote_as_chunk = TRUE)
+```
 
 ## DISCUSSION
 The present study sought to explore the OASIS as an alternative to the IAPS in psychophysiological research as well the role of personality traits in neural affective processing.
 This research will help introduce more up-to-date and open access materials in affective neuroscience research and devise neuroscience-informed clinical interventions to enhance wellbeing.
+Further, we sought to explore the time course of neural activity associated with a series of regulation blocks which included passively reacting to neutral and emotional stimuli, as well as regulating (i.e., upregulating and downregulating) one's emotional intensity in response to the emotional stimuli.
+We found that highly arousing positive and negative OASIS stimuli elicited augmented amplitude across most, but not all, components. 
+The earliest component retained from the PCA to demonstrate a valence effect for both negative and positive images compared to neutral images occurred at 162 ms with negative images eliciting greater amplitude compared to positive images.
+This pattern did not hold across the entire time course of ERP components.
+A valence effect for negative images occurred at the negative 259 ms temporal peak component (EPN), though not positive images.
+Further, while a difference between negative and neutral images was found at the positive 259 ms temporal peak component, neutral images actually elicited greater amplitudes that negative.
+Replicating previous research, a valence effect for positive and negative images was found for LPP-like components, with negative stimuli eliciting greater amplitudes than positive stimuli.
+This finding is largely consistent with past research examining emotion reactivity utilized the IAPS using PCA [e.g., @fotiDifferentiatingNeuralResponses2009] and otherwise [@frankHemodynamicElectrocorticalReactivity2019].
+This overall pattern lends partial support to earlier accounts suggesting that earlier processes (< 300 ms) reflect initial emotional attentional capture and later processes (> 300 ms) reflect continued encoding and processing of these stimuli [@codispotiRepetitionEventrelatedPotentials2007; @fotiDifferentiatingNeuralResponses2009; @olofssonAffectiveVisualEventrelated2007].
+It is notable that the earliest component retained from our PCA with a temporal peak at 124 ms (P1) did not show valence effects, which may suggest that emotion reactivity does not occur before this point.
+
+
+
 We found that, similar to the IAPS, highly arousing positive and negative OASIS stimuli elicited augmented LPP activity.
 Other components, such as the N170 and EPN, were also modified in response to positive and negative images, though in the opposite direction hypothesized.
 As predicted, frontal LPP was not modulated among passive watch conditions.
