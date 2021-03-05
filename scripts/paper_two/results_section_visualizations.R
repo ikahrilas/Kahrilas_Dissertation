@@ -69,7 +69,7 @@ p_1 <-
   geom_violin(aes(fill = block),
               position = position_dodge(width = .75),
               trim = TRUE) +
-  scale_fill_manual(values = c(`Negative Watch` = "red",
+  scale_fill_manual(values = c(`Negative Watch` = "purple",
                                `Neutral Watch` = "grey",
                                `Positive Watch` ="blue")) +
   geom_boxplot(aes(group = interaction(block, component)), fatten = 0.75, outlier.size = 1,
@@ -115,7 +115,7 @@ p_1 <-
            yend = c(-0.25, -1.05)) +
   annotate(geom = "text",
            x = c(1.8625, 2, 2.1375),
-           y = c(5.7, -2.8, 5.7),
+           y = c(5.7, -2.9, 5.7),
            label = "*",
            size = 5) +
   annotate(geom = "segment", # 250 ms negative peak annotations
@@ -132,7 +132,7 @@ p_1 <-
            color = "black") +
   annotate(geom = "text",
            x = c(2.875, 3),
-           y = c(2.7, -4.8),
+           y = c(2.7, -4.9),
            label = "*",
            size = 5) +
   annotate(geom = "segment", # 250 ms positive peak annotations
@@ -165,23 +165,23 @@ p_1 <-
            yend = c(3.25, 1.8, 1.8, 2, -0.4, -0.5)) +
   annotate(geom = "text",
            x = c(4.8625, 5.1375, 5),
-           y = c(3.55, 3.55, -2.4),
+           y = c(3.55, 3.55, -2.5),
            label = "*",
            size = 5) +
   annotate(geom = "segment", # 800 ms peak annotations
            x = c(5.75, 6.025, 5.75),
            xend = c(5.975, 6.25, 6.25),
-           y = c(5, 5, -1.5),
-           yend = c(5, 5, -1.5),
+           y = c(5, 5, -1.7),
+           yend = c(5, 5, -1.7),
            color = "black") +
   annotate(geom = "segment",
            x = c(5.75, 5.975, 6.025, 6.25, 5.75, 6.25),
            xend = c(5.75, 5.975, 6.025, 6.25, 5.75, 6.25),
-           y = c(5, 5, 5, 5, -1.5, -1.5),
+           y = c(5, 5, 5, 5, -1.7, -1.7),
            yend = c(4.7, 2.85, 2.85, 3.6, -0.2, -0.7)) +
   annotate(geom = "text",
            x = c(5.8625, 6.1375, 6),
-           y = c(5.1, 5.1, -2.4),
+           y = c(5.1, 5.1, -2.7),
            label = "*",
            size = 5)
 
@@ -219,7 +219,7 @@ p_2 <-
            color = "black") +
   annotate(geom = "text",
            x = c(3, 3.125),
-           y = c(-4.3, 1.85),
+           y = c(-4.5, 1.85),
            label = "*",
            size = 5) +
   annotate(geom = "segment", # 375 ms peak annotations
@@ -235,7 +235,7 @@ p_2 <-
            yend = c(-.95, -.7, 2.05, 2.3)) +
   annotate(geom = "text",
            x = c(5, 5.1275),
-           y = c(-2.1, 2.75),
+           y = c(-2.2, 2.75),
            label = "*",
            size = 5) +
   annotate(geom = "segment", # 800 ms peak annotations
@@ -251,7 +251,7 @@ p_2 <-
            yend = c(-0.3, -0.7)) +
   annotate(geom = "text",
            x = c(6),
-           y = c(-1.9),
+           y = c(-2),
            label = "*",
            size = 5)
 
@@ -260,9 +260,9 @@ p_3 <-
   geom_violin(aes(fill = block),
               position = position_dodge(width = .75),
               trim = TRUE) +
-  scale_fill_manual(values = c(`Negative Decrease` = "coral",
-                               `Negative Watch` = "red",
-                               `Negative Increase` = "magenta")) +
+  scale_fill_manual(values = c(`Negative Decrease` = "plum",
+                               `Negative Watch` = "purple",
+                               `Negative Increase` = "red")) +
   geom_boxplot(aes(group = interaction(block, component)), fatten = 0.75, outlier.size = 1,
                width = 0.2, fill = "white", position = position_dodge(width = .75)) +
   facet_wrap(~ facet, ncol = 1) +
@@ -332,7 +332,7 @@ dec_cases <- fac_score_dat_long %>%
   geom_violin(aes(fill = block),
               position = position_dodge(width = .75),
               trim = TRUE) +
-  scale_fill_manual(values = c(`Negative Increase` = "magenta",
+  scale_fill_manual(values = c(`Negative Increase` = "red",
                                `Positive Increase` = "springgreen")) +
   geom_boxplot(aes(group = interaction(block, component)), fatten = 0.75, outlier.size = 1,
                width = 0.2, fill = "white", position = position_dodge(width = .75)) +
@@ -409,7 +409,7 @@ p_5 <-
     geom_violin(aes(fill = block),
               position = position_dodge(width = .75),
               trim = TRUE) +
-    scale_fill_manual(values = c(`Negative Decrease` = "coral",
+    scale_fill_manual(values = c(`Negative Decrease` = "plum",
                                  `Positive Decrease` = "cadetblue1")) +
     geom_boxplot(aes(group = interaction(block, component)), fatten = 0.75, outlier.size = 1,
                  width = 0.2, fill = "white", position = position_dodge(width = .75)) +
@@ -502,17 +502,17 @@ eeg_dat_loc <- left_join(eeg_dat_long, elec_loc, by = c("electrode" = "channel")
 topo_elec <- c(paste0("A", 1:32), paste0("B", 1:32))
 
 # define lists of time windows for iteration
-lower_time_windows <- list(122,
-                           160,
-                           257,
-                           379,
-                           738)
+lower_time_windows <- list(62.5,
+                           120,
+                           235,
+                           70,
+                           500)
 
-upper_time_windows <- list(124,
-                           164,
-                           261,
-                           383,
-                           741)
+upper_time_windows <- list(187.5,
+                           240,
+                           350,
+                           1000,
+                           1200)
 
 # iterate over time windows and create list of topoplots
 topo_plot_lst <- map2(lower_time_windows,
@@ -525,8 +525,13 @@ topo_plot_lst <- map2(lower_time_windows,
   dplyr::summarize(amplitude = mean(amplitude, na.rm = TRUE)) %>%
   topoplot(interp_limit = "head",
            scaling = 0.25) +
-  theme(legend.position = "none")
-                                            })
+  # coord_fixed(clip = 'off') +
+  ggtitle(paste(as.character(.x), "-", as.character(.y), "ms")) +
+  theme(legend.position = "none",
+        plot.title = element_text(hjust = 0.5,
+                                  size = 10))
+})
+
 ###  Now the component  topoplots
 # read in factor score data with ms variable
 temp_dat_fac_scores <- read_csv(here("data", "paper_two", "temp_fac_score_dat.csv")) %>%
@@ -555,6 +560,7 @@ temp_dat_fac_scores %>%
     topoplot(interp_limit = "head",
              highlights = .y,
              scaling = 0.25) +
+    # coord_fixed(clip = 'off') +
     theme(legend.position = "none")
     # guides(fill = guide_colorbar(title = expression(paste("Average ",
     #                                                       mu, "V")),
@@ -699,8 +705,8 @@ VVVVVVVVVVVVVVVVVV"
 
 ggsave(here("images", "paper_2", "results_images", "contrast_plot.png"),
        plot = last_plot(),
-       height = 9,
-       width = 10)
+       height = 11,
+       width = 9)
 
 
 
