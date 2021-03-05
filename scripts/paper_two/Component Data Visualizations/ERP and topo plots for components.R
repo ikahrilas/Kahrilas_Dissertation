@@ -99,7 +99,7 @@ watch_plots <-
              plot.title = element_text(hjust = 0.5),
              title = element_text(size = 16)) +
        scale_color_manual(breaks = c("Negative Watch", "Positive Watch", "Neutral Watch"),
-                          values=c("red", "blue", "gray"))
+                          values=c("purple", "blue", "gray"))
 })
 
 pos_plots <-
@@ -163,7 +163,7 @@ neg_plots <-
           plot.title = element_text(hjust = 0.5),
           title = element_text(size = 16)) +
     scale_color_manual(breaks = c("Negative Watch", "Negative Increase", "Negative Decrease"),
-                       values=c("red", "magenta", "coral"))
+                       values=c("purple", "red", "plum"))
 })
 
 reg_plots <-
@@ -195,7 +195,7 @@ reg_plots <-
           plot.title = element_text(hjust = 0.5),
           title = element_text(size = 16)) +
     scale_color_manual(breaks = c("Negative Increase", "Negative Decrease", "Positive Increase", "Positive Decrease"),
-                       values=c("magenta", "coral", "springgreen", "cadetblue1"))
+                       values=c("red", "plum", "springgreen", "cadetblue1"))
 })
 
 ######### Topo plots ###########
@@ -614,6 +614,11 @@ rc5_component_plots <-
                     theme = theme(plot.title = element_text(hjust = 0.5,
                                                           size = 16)))
 
+ggsave(here("images", "paper_2", "component_erps_topos", "rc5_plots.png"),
+       plot = last_plot(),
+       height = 16,
+       width = 13)
+
 rc11_component_plots <-
   all_watch_topos[[2]][[1]] +
   all_watch_topos[[2]][[2]] +
@@ -637,6 +642,11 @@ rc11_component_plots <-
   plot_annotation(title = "162 ms Component",
                   theme = theme(plot.title = element_text(hjust = 0.5,
                                                           size = 16)))
+
+ggsave(here("images", "paper_2", "component_erps_topos", "rc11_plots.png"),
+       plot = last_plot(),
+       height = 16,
+       width = 13)
 
 neg_rc12_component_plots <-
   all_watch_topos[[3]][[1]] +
@@ -662,6 +672,11 @@ neg_rc12_component_plots <-
                   theme = theme(plot.title = element_text(hjust = 0.5,
                                                           size = 16)))
 
+ggsave(here("images", "paper_2", "component_erps_topos", "neg_rc12_plots.png"),
+       plot = last_plot(),
+       height = 16,
+       width = 13)
+
 pos_rc12_component_plots <-
   all_watch_topos[[4]][[1]] +
   all_watch_topos[[4]][[2]] +
@@ -685,6 +700,11 @@ pos_rc12_component_plots <-
   plot_annotation(title = "Positive 259 ms Component",
                   theme = theme(plot.title = element_text(hjust = 0.5,
                                                           size = 16)))
+
+ggsave(here("images", "paper_2", "component_erps_topos", "pos_rc11_plots.png"),
+       plot = last_plot(),
+       height = 16,
+       width = 13)
 
 rc2_component_plots <-
   all_watch_topos[[5]][[1]] +
@@ -710,6 +730,11 @@ rc2_component_plots <-
                   theme = theme(plot.title = element_text(hjust = 0.5,
                                                           size = 16)))
 
+ggsave(here("images", "paper_2", "component_erps_topos", "rc2_plots.png"),
+       plot = last_plot(),
+       height = 16,
+       width = 13)
+
 rc3_component_plots <-
   all_watch_topos[[6]][[1]] +
   all_watch_topos[[6]][[2]] +
@@ -733,3 +758,8 @@ rc3_component_plots <-
   plot_annotation(title = "740 ms Component",
                   theme = theme(plot.title = element_text(hjust = 0.5,
                                                           size = 16)))
+
+ggsave(here("images", "paper_2", "component_erps_topos", "rc3_plots.png"),
+       plot = last_plot(),
+       height = 16,
+       width = 13)
