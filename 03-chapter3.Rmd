@@ -142,7 +142,7 @@ Neural affective picture processing research has demonstrated a reduction in sel
 We predicted that arousal ratings would be heightened for increase conditions and lowered for decrease conditions. 
 We further predicted that arousal ratings would be more neutral during decrease conditions and more negative when increasing emotional intensity in response to negative images and more positive when increasing emotional intensity in response to positive images relative to passive watch conditions, respectively.
 Last, trait measures of PA and savoring capacity are associated with heightened arousal and more positive affect in response to reacting to and upregulating positive emotion, respectively [@bryantSavoringNewModel2007; @watsonPositiveAffectivity2009].
-Thus, it was hypothesized that the difference in behavioral/arousal ratings between passively watching positive vs. neutral images would be positively moderated by PA and the difference in behavioral/arousal ratings between increasing emotional intensity in response to positive images vs. passively watching positive images would be positive moderated by savoring capacity.
+Thus, it was hypothesized that the difference in behavioral/arousal ratings between passively watching positive vs. neutral images would be positively moderated by PA and the difference in behavioral/arousal ratings between increasing emotional intensity in response to positive images vs. passively watching positive images would be positively moderated by savoring capacity.
 
 ### Facilitating Reproducibility with Open Access Stimuli
 Much of the aforementioned research has utilized the International Affective Picture System [IAPS; @langInternationalAffectivePicture2008].
@@ -169,13 +169,14 @@ We hypothesized that a) highly arousing positive compared to neutral OASIS stimu
 Related, we hypothesized that LPP amplitude would be modulated in a manner congruent with the regulatory goal.
 More specifically, reduction of LPP amplitude would be observed in decrease conditions compared to passive watch conditions, and increased LPP amplitude would be observed in increase conditions compared to passive watch conditions.
 Additionally, we predicted that frontal LPP amplitude would be increased for all regulation conditions (increase and decrease), though not modulated for passive watch conditions.
-The second objective was to examine the relationship between personality traits pertaining to positive emotion and EEG components/self-report ratings.
+The second objective was to examine the relation between personality traits pertaining to positive emotion and EEG components/self-report ratings.
 We predicted that a) PA would moderate the relationship between watching positive images and LPP as well as self-report ratings (increased arousal and more positive arousal ratings) and b) savoring capacity would moderate the relationship between increasing emotional intensity in response to positive images and LPP amplitude as well as self-report ratings (increased arousal and more positive arousal-ratings). 
 
 Hypotheses pertaining to modulation of LPP amplitude in response to passively viewing OASIS images and personality traits interacting with LPP amplitude and PA/savoring capacity were preregistered (link: [https://osf.io/p5ba9/](https://osf.io/p5ba9/)).
 As we continued to read the explore the scientific literature about reactivity and regulation, we decided to expand our analyses to the other components (N170, EPN) in order to characterize the broader temporal cascade of affective processing.
 Thus, these unregistered analyses should be considered exploratory and interpreted with caution.
 Further, the decision to implement principal components analysis (PCA) was made following preregistration to more effectively isolate ERPs for subsequent statistical analyses.
+All data and R code are availabe on the Open Science Framework [https://osf.io/p5ba9/](https://osf.io/p5ba9/).
 
 ## Method 
 ### Participants
@@ -186,10 +187,10 @@ The study was approved by the Institutional Review Board and informed consent wa
 
 ### Materials and Procedure
 #### Questionnaire Measures
-Participants were asked to complete the trait Positive and Negative Affect Schedule (PANAS; Watson, Clark, & Tellegen, 1988) to assess for PA ($\omega = .89$).
+Participants were asked to complete the trait Positive and Negative Affect Schedule (PANAS; Watson, Clark, & Tellegen, 1988) to assess for PA ($\omega = .89$) and NA ($\omega = .89$).
 Participants also completed the Savoring Beliefs Inventory (SBI; Bryant, 2009).
 The SBI measures the perception of one’s ability to feel pleasure through anticipating positive outcomes ($\omega = .88$), savoring positive moments ($\omega = .85$), and reminiscing about past positive events ($\omega = .86$; Bryant, 2009).
-Only the momentary savoring subscale was used in the following analyses, as this temporal domain was most relevant to the present hypotheses and experimental paradigm.
+Only the momentary savoring subscale was used in the following moderation analyses, as this temporal domain was most relevant to the present hypotheses and experimental paradigm.
 
 #### Emotion Task Paradigm
 64-channel high-density electroencephalography (EEG) data were recorded while participants viewed seven blocks of 40 images (280 total trials).
@@ -244,8 +245,9 @@ Data were recorded with a band pass of 0 – 104 Hz at a sampling rate of 512 Hz
 The following EEG data processing steps were implemented in Brain Electrical Source Analysis software [BESA, Version 7; @schergBESABrainElectric1990].
 Following the adaptive artifact correction method [@illeArtifactCorrectionOngoing2002], ocular artifacts were corrected using a spatial PCA filter.
 EEG data were re-referenced to the [@hajcakAttendingAffectAppraisal2006; @hajcakReappraisalModulatesElectrocortical2006]  average reference of all electrodes for analyses and digitally filtered with 0.01 Hz high-pass and 30 Hz low-pass filters with a cutoff attenuation of 12 dB/octave.
+EEG data were re-referenced to the average activity of all electrodes.
 While it is convention to re-reference data to average activity of the mastoids for LPP, a covariance matrix was utilized in the PCA, which is inherently mean corrected [@dienApplyingPrincipalComponents2012].
-Thus, minimal effects would be expected as a function of referencing scheme for temporal PCA (though this is not the case spatial PCAj; see @dienApplyingPrincipalComponents2012)
+Thus, minimal effects would be expected as a function of referencing scheme for temporal PCA (though this is not the case for spatial PCAj; see @dienApplyingPrincipalComponents2012).
 Muscle activity and other artifacts were corrected through implementing an algorithmic scan of continuous EEG data in BESA (fixed threshold criteria: amplitude > 120 uV; gradient > 75 uV, low signal <.01 uV).
 Data were baseline-adjusted by subtracting the average activity for 200 milliseconds [@moserIntentionalModulationEmotional2006] before stimulus onset.
 
@@ -266,8 +268,8 @@ Five components were retained for statistical analyses based inspection of topog
 Two of the retained components represented LPP-like components that have positive peaks at 381 ms and 740 ms with the former demonstrating activity at PO7 and PO8 electrode sites and the latter at PO7, PO8, PO3, PO4, P1, P2, P5/P3, P6/P4 and Pz electrode sites. 
 Three components represented early visual components with positive peaks at 124 ms, 162 ms, and 259 ms with activity at PO7 and PO8 electrodes sites.
 While no a priori hypotheses were made regarding ERP components occurring as early as 124 ms, we decided to retain the component for exploratory analyses.
-While the time course of the 162 ms and 259 ms component corresponded to N170 and EPN, the positive directionality of the waveforms did not.
-A final component with a negative peak at 259 ms was retained, with negative activity at CPz and Pz electrodes sites, which represented EPN.
+While the time course of the 162 ms component corresponded to N170, the positive directionality of the waveform did not.
+Two components with temporal loading peaks 259 ms were retained: a positive component noted earlier and a negative component at CPz and Pz electrodes sites, which represents EPN.
 No frontal LPP component was identified.
 See Figures (XXX) for grand average ERPs before and after PCA (collapsed across all blocks) as well as the top two rows of Table (XXX) for grand average topographic plots before and after PCA for an illustration of how the temporal PCA partitioned variance associated with each component.
 
