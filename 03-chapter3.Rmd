@@ -2,7 +2,7 @@
 library(kableExtra)
 ```
 
-## THE NEUROBIOLOGICAL CORRELATES OF POSITIVE EMOTION REACTIVITY AND REGULATION
+## THE NEURAL TIME COURSE OF EMOTION REACTIVITY AND REGULATION
 Healthy emotion regulation abilities are integral to wellbeing [@grossEmergingFieldEmotion1998; @grossEmotionRegulationMental1995; @koolePsychologyEmotionRegulation2009; @sapolskyStressStressrelatedDisease2007].
 Emotion regulation refers to psychological processes that influence an initial emotional response [@lewisAdvancesProblemsChallenges2010a], including modulation of positive and negative affective states [@koolePsychologyEmotionRegulation2009].
 This also includes attenuating upsetting, or enhancing positive aspects, of a situation [@grossEmergingFieldEmotion1998].
@@ -10,7 +10,7 @@ Poor emotion regulation strategies are associated with worsened social functioni
 Poor emotion regulation is also associated with bullying and victimization among youth [@walcottRelationDisinhibitionEmotion2004], physical ailments such as hypertension and coronary heart disease [@hintonMechanismsEfficacyCBT2009; @jorgensenElevatedBloodPressure1996], exacerbated cortisol reactivity to stressors [@wirtzLowSocialSupport2006], and impaired cognitive functioning [@keenanEmotionDysregulationRisk2000; @ochsnerRethinkingFeelingsFMRI2002].
 
 While emotion regulation is frequently studied in the context of negative emotion, it also pertains to modulating positive emotion.
-Savoring refers to an awareness of positive experiences and the use of positive emotion regulation strategies to enhance and extend positive feelings that are derived from those experiences [@bryantFourfactorModelPerceived1989; @bryantSavoringBeliefsInventory2003a; @bryantSavoringNewModel2007; @bryantUnderstandingProcessesThat2011; @smithSavoringWellbeingMapping2017].
+For example, savoring refers to an awareness of positive experiences and the use of positive emotion regulation strategies to enhance and extend positive feelings that are derived from those experiences [@bryantFourfactorModelPerceived1989; @bryantSavoringBeliefsInventory2003a; @bryantSavoringNewModel2007; @bryantUnderstandingProcessesThat2011; @smithSavoringWellbeingMapping2017].
 People initiate savoring responses in reaction to a positive event or affect as a way to maintain, intensify, or prolong the initial positive experience [@bryantSavoringNewModel2007].
 While savoring, one may reminisce about past positive experiences, focus on ongoing positive experiences as they occur, or anticipate the enjoyments of future positive experiences [@bryantSavoringNewModel2007].
 Regardless of the temporal focus, savoring processes regulate positive emotions in the present moment.
@@ -26,13 +26,20 @@ Further, increased savoring capacity is associated with pain resilience [@thongB
 The original conceptual formulation of savoring [@bryantSavoringNewModel2007] is predicated on the assumption that people typically initiate savoring responses in reaction to positive events or affect, which people regulate through cognitive or behavioral strategies.
 Thus, difficulties processing positive emotions and events preclude the ability to savor; one's ability to *regulate* positive emotion is predicated upon one's ability to attend and *react* to positive emotions.
 Emotion reactivity broadly refers to an individual's initial baseline affective response to a stimulus, which spans feelings, behavioral manifestations, and bodily reactions [@grossEmotionRegulationConceptual2007]. 
-Consistent with the circumplex framework [@russellCircumplexModelAffect1980], emotion reactivity varies in arousal (not arousing to strongly arousing) and arousal [negative to positive; @grossEmotionEmotionRegulation2014].
+Consistent with the circumplex framework [@russellCircumplexModelAffect1980], emotion reactivity varies in arousal (not arousing to strongly arousing) and valence [negative to positive; @grossEmotionEmotionRegulation2014].
 As noted earlier, emotion regulation pertains to the psychological processes that influence an initial emotional response [@lewisAdvancesProblemsChallenges2010a] and implies that a change has occurred from initial reactivity.
 Disentangling emotion reactivity and regulation is complex [@joormannExaminingEmotionRegulation2016a], and the two often share considerable temporal overlap in terms of affective chronometry [@davidsonReactivityRecoveryRegulation2018].
 A distinction between reactivity and regulation may lie in whether the motivational significance of the emotional stimulus is being altered [@hajcakSignificanceSignificanceEmpirical2020].
 Emotion reactivity implies that the motivational significance of the stimulus is not being altered, while regulation (whether consciously or unconsciously) implies that it is being manipulated, and both of these processes are influenced by a host of related factors (e.g., contextual, environmental, neurobiological).
-This view is supported by a recent paper by Foti and Hajcak [-@hajcakSignificanceSignificanceEmpirical2020] where they conceptualize the late positive potential (LPP; a sustained positive electroencephalography component that is increased for emotionally arousing stimuli) as an index for motivational significance that can be manipulated across an array of experimental paradigms [@hajcakSignificanceSignificanceEmpirical2020]. While savoring is a trait-like measure of one's ability to regulate positive emotions, positive affectivity (PA) pertains to one's reactivity to positive emotions, or a trait-like disposition to recognize, attend to, and ultimately experience positive emotions [e.g., happiness, interest, energy, and self-assurance; @watsonPositiveAffectivity2009].
-Understanding how individual differences modify the neural correlates of positive emotion reactivity/regulation may facilitate development of neuroscience-informed interventions for those with psychological problems marked by low levels of positive emotion (e.g., depression). To this end, the present study utilized an experimental paradigm where participants were shown blocks of images of varying arousal (positive, negative, and neutral) with different regulation instructions (increasing/decreasing emotional intensity in response to images, or passively watching) while recording electroencephalography (EEG) from participants. Additionally, participants were asked to complete self-report measures assessing for PA and savoring capacity.
+This view is supported by a recent paper by Foti and Hajcak [-@hajcakSignificanceSignificanceEmpirical2020] where they conceptualize the late positive potential (LPP; a sustained positive electroencephalography component that is increased for emotionally arousing stimuli) as an index for motivational significance that can be manipulated across an array of experimental paradigms [@hajcakSignificanceSignificanceEmpirical2020]. 
+While savoring is a trait-like measure of one's ability to regulate positive emotions, positive affectivity (PA) pertains to one's reactivity to positive emotions, or a trait-like disposition to recognize, attend to, and ultimately experience positive emotions [e.g., happiness, interest, energy, and self-assurance; @watsonPositiveAffectivity2009].
+Understanding how individual differences modify the neural correlates of positive emotion reactivity/regulation may facilitate development of neuroscience-informed interventions for those with psychological problems marked by low levels of positive emotion (e.g., depression). 
+
+ERP studies investigating emotion reactivity commonly incorporate both negatively- and positively-valenced stimuli. 
+The same is not true of emotion regulation studies, where it is convention to investigate regulation conditions with only negative or positive images [e.g., @krompingerModulationsElectrophysiologicalResponse2008; @moserElectrophysiologicalCorrelatesDecreasing2009].
+Incorporating negative and positive images in an emotion regulation paradigm facilitates direct comparison of regulation conditions for either stimuli, differences in the neural time course of negative versus positive emotion regulation, and how these processes are similarly and uniquely modifiable.
+To this end, the present study utilized an experimental paradigm where participants were shown blocks of images of varying arousal (positive, negative, and neutral) with different regulation instructions (increasing/decreasing emotional intensity in response to images, or passively watching) while recording electroencephalography (EEG) from participants. 
+Additionally, participants were asked to complete self-report measures assessing for PA and savoring capacity.
 
 ### Neural Correlates of Emotion Reactivity and Regulation
 Different psychological problems may manifest as disordered emotion reactivity and/or regulation that may be important considerations in devising interventions for individuals with psychopathology [@weinbergDistinctAssociationsLow2018].
@@ -44,8 +51,7 @@ This is critical to evaluate the rapid processing of and dynamic processes that 
 
 #### Early Visual ERP Components Associated with Affective Processing
 The N170 and early posterior negativity (EPN) are early visual EEG components that are modulated by affective stimuli [@schuppAffectivePictureProcessing2012].
-The N170 is a negative peak occurring approximately 170 ms following stimulus presentation at bilateral occipito-temporal sites [@blauFacespecificN170Component2007].
-The N170 is thought to reflect rapid structural encoding of faces, with increased N170 amplitude associated with threat-related and positive facial expressions compared to neutral facial expressions [@blauFacespecificN170Component2007; @dasilvaDissociatingNeuralTime2016; @stockdaleInfluenceStimulusarousal2020].
+The N170 is a negative peak occurring approximately 170 ms following stimulus presentation at bilateral occipito-temporal sites [@blauFacespecificN170Component2007] and is thought to reflect rapid structural encoding of faces, with increased N170 amplitude associated with threat-related and positive facial expressions compared to neutral facial expressions [@blauFacespecificN170Component2007; @dasilvaDissociatingNeuralTime2016; @stockdaleInfluenceStimulusarousal2020].
 Of note, other research has supported the notion that the N170 specifically indexes structural encoding of facial features independent of emotional expression [e.g., @thierryControllingInterstimulusPerceptual2007] and that studies observing N170 modulation due to emotional expressions may be due to superimposed EPN activity [@relleckeEmotionEffectsN1702013].
 This suggests that neural sources for face- and emotion-related processes may be independent parallel processes [@bruceUnderstandingFaceRecognition1986; @relleckeEmotionEffectsN1702013].
 However, this notion is at odds with a meta-analysis conducted by Hinojosa and colleagues [-@hinojosaN170SensitivityFacial2015] that showed N170 sensitivity to facial expressions.
@@ -54,13 +60,12 @@ A network of posterior neural structures of the extrastriate visual cortex contr
 These structures include the occipital/fusiform face areas and the superior temporal sulcus in the lateral temporal cortex [@haxbyDistributedHumanNeural2000].
 Of note, precise identification of structures necessary for observation of the N170 remains unclear; it is likely that N170 is the product of concomitant activation of various brain regions that are dynamically recruited contingent upon the task at hand [@calderUnderstandingRecognitionFacial2005; @hoffmanDistinctRepresentationsEye2000].
 Some research indicates comparable N170 amplitude for positive and negative facial expressions, while other studies show enhanced N170 amplitude for negative compared to positive facial expressions [for a review, see @hinojosaN170SensitivityFacial2015].
-Enhanced (i.e., more negative) N170 amplitude has also been observed in response to negatively-arousald complex affective images [i.e., IAPS; @bekhterevaAttentionalBiasAffective2015], albeit with a later peak latency compared to face stimuli (160 - 200 ms for face stimuli and 200 - 240 ms for IAPS).
-To the author's knowledge, previous research has not investigated N170 in response to positively arousald complex visual stimuli.
+Enhanced (i.e., more negative) N170 amplitude has also been observed in response to negatively-valenced complex affective images [i.e., IAPS; @bekhterevaAttentionalBiasAffective2015], albeit with a later peak latency compared to face stimuli (160 - 200 ms for face stimuli and 200 - 240 ms for IAPS).
+To the author's knowledge, previous research has not investigated N170 in response to positively arousing complex visual stimuli.
 This information may elucidate distinct neural time course patterns for positive and negative emotions that may inform treatment for psychological problems marked by dysregulated emotion reactivity and regulation.
 Thus, it was hypothesized in the present study that highly arousing positive and negative affective images may elicit more negative N170 relative to neutral visual affective stimuli.
-Considering N170 in response to complex affective stimuli may have later latency compared to faces, potential scoring windows will likely be widened to accommodate for this potential variability.
 
-The EPN has been observed as a relative negative difference for emotionally arousing/arousald compared to neutral stimuli in the 200 - 300 ms window over bilateral occipital-parietal sites [@olofssonAffectivePictureProcessing2008; @schuppAffectivePictureProcessing2000; @schuppAttentionEmotionERP2003]. 
+The EPN has been observed as a relative negative difference for emotionally arousing compared to neutral stimuli in the 200 - 300 ms window over bilateral occipital-parietal sites [@olofssonAffectivePictureProcessing2008; @schuppAffectivePictureProcessing2000; @schuppAttentionEmotionERP2003]. 
 Potential neural generators of the EPN reside in the occipital cortex and also include contributions from parietal regions [@wiensNonemotionalFeaturesSuppress2011].
 Yoon et al. [-@yoonEnhancedEarlyPosterior2016] found that EPN amplitude in response to happy and fearful faces was augmented (i.e., enhanced negativity) compared to neutral faces in healthy control participants.
 Further, those with anxiety disorders exhibited greater EPN amplitude in response to fearful compared to happy and neutral faces, suggesting that those with anxiety disorders may have enhanced selective attention for fearful faces [-@yoonEnhancedEarlyPosterior2016].
@@ -71,7 +76,7 @@ Thus, highly arousing positive and negative affective visual stimuli may elicit 
 
 Most of the research reviewed above involves passive viewing of affective stimuli (i.e., reactivity) and has not involved regulatory contexts. 
 However, an emerging body of research indicates that N170 and EPN are modulated via implicit emotion regulation.
-While explicit emotion regulation requires conscious effort (e.g., intentionally downregulating one's emotions in response to a negative stimuli), implicit emotion regulation is automatically evoked by stimuli and occurs unconsciously, or without awareness [e.g., presenting a arousald word prior to a stimulus of an incongruent arousal; @gyurakExplicitImplicitEmotion2011].
+While explicit emotion regulation requires conscious effort (e.g., intentionally downregulating one's emotions in response to a negative stimuli), implicit emotion regulation is automatically evoked by stimuli and occurs unconsciously, or without awareness [e.g., presenting a valenced word prior to a stimulus of an incongruent arousal; @gyurakExplicitImplicitEmotion2011].
 Herbert and colleagues [-@herbertNoFearNo2013] found that EPN signals were significantly attenuated during downregulation of emotional intensity in response to pictures of fearful faces.
 Such effects were not found for downregulation of emotional intensity in response to happy faces [@herbertNoFearNo2013].
 Another study analyzed N170 and EPN differences among participants with low and high trait anxiety in an implicit emotion regulation task in response to pictures of facial expressions [@liuImplicitEmotionRegulation2018].
@@ -105,6 +110,8 @@ Methodological factors might be contributing to these findings, such as inconsis
 In addition, trait measures such as savoring capacity may explain additional variance in affective neural processing as suggested by previous fMRI research finding correlations between personality trait measures and neural activation in response to emotional stimuli [@canliAmygdalaResponseHappy2002; @canliFMRIStudyPersonality2001].
 LPP is theorized to be indicative of an interaction between amygdala and cognitive control structures [@moserIntentionalModulationEmotional2006] as indicated by LPP amplitude being sensitive to reappraisal efforts [e.g., reduced LPP amplitude in response to reappraising negative visual stimuli; @moserIntentionalModulationEmotional2006].
 Furthermore, savoring capacity is positively associated with affect intensity and is indicative of one’s ability to bolster positive emotion [@bryantSavoringBeliefsInventory2003a].
+This is corroborated by a recent study conducted by Wilson and MacNamara [-@wilsonSavorMomentWillful2021], that found increases in centroparietal LPP with a savoring paradigm.
+More specifically, increases in LPP were observed when participants were asked to savor a positive image compared to just viewing positive images.
 Therefore, higher self-report ratings of one’s capacity to savor were expected to moderate the relationship between LPP and increased emotional intensity in response to positive stimuli.
 
 Research has indicated enhanced frontal LPP as an index of increased cognitive effort [@bernatEffectsInstructedEmotion2011; @moserNeuralMarkersPositive2014; @shafirEmotionalIntensityInfluences2015]. 
@@ -112,9 +119,20 @@ Moser et al. (2014) and Shafir et al. (2015) both observed augmented frontal LPP
 Bernat and colleagues (2011) also observed enhanced right frontal LPP in response to suppression and enhancement conditions in response to negative stimuli. 
 In the context of emotion regulation, frontal LPP is only observed while using positive reappraisal strategies rather than distraction [@shafirEmotionalIntensityInfluences2015].
 In other words, frontal LPP appears to be contingent upon cognitive exertion, which is further supported by research observing recruitment of frontal neural structures (PFC and ACC) during control efforts [@millerIntegrativeTheoryPrefrontal2001; @ochsnerBetterWorseNeural2004]. 
-While extant literature has not investigated frontal LPP in the context of positive images, research suggests that similar frontal processes are engaged in response to regulating emotion in response to positive and negative images [@kimNeuralCorrelatesPositive2007]. 
+With regards to positive images, Wilson and MacNamara (2021) found increased frontal LPP in response to passively viewing positive images compared to neutral images, as well as savoring (i.e., upregulating) positive and neutral images.
 Thus, it was hypothesized that enhanced frontal LPP would be observed during regulation conditions relative to passive watch conditions (i.e., increasing/decreasing compared to passively watching for both positive and negative stimuli) in the present study.
-However, it was not predicted that frontal LPP would vary between passive watch conditions (i.e., passively viewing positive, negative, or neutral images) since observation of this component appears predicated on the engagement of frontal regions implicated in attention control.
+It was also predicted that frontal LPP would vary between passive watch conditions (i.e., passively viewing positive and negative versus neutral images).
+
+#### Using Principal Components Analysis to Disentangle Overlapping Processes
+The method of submitting windowed averages, or area measures, to statistical analyses is common practice in ERP research. 
+However, this method is inadequate in dealing with the thorny issue of overlapping components [@donchinMultivariateAnalysisEventrelated1978].
+Indeed, there is speculation that N170 modulation due to emotional expressions may be due to superimposed EPN activity [@relleckeEmotionEffectsN1702013].
+Similarly, LPP may overlap with P3, a parietally maximal component peaking in the 300-400 ms window that is sensitive to task relevant and motivationally significant stimuli [@polichCognitiveBiologicalDeterminants1995], and even later portions of EPN [@schuppSelectiveProcessingBriefly2004].
+To address this issue, we utilized an exploratory temporal principal components analysis (PCA) to better isolate distinct ERP components across time.
+PCA is a dimension reduction technique that identifies a new set of variables that are linear combinations of the original variables.
+In the context of ERPs, these new variables represent latent components that may not be apparent by visually inspecting ERP averages.
+For example, if there were two temporally overlapping ERP components with equal magnitude but opposite directionality (positive and negative), the two components would negate each other and not be observable via inspection of grand average ERPs.
+Temporal PCA, on the other hand, would theoretically be able to retain these components provided that the experimental paradigm reliably produces them.
 
 ## Self-Report Ratings
 In addition to EEG components, research has shown that affective visual stimuli are associated with increased arousal and arousal self-report ratings [@bradleyInternationalAffectivePicture2007; @kurdiIntroducingOpenAffective2017; @olofssonAffectivePictureProcessing2008].
@@ -125,7 +143,6 @@ We predicted that arousal ratings would be heightened for increase conditions an
 We further predicted that arousal ratings would be more neutral during decrease conditions and more negative when increasing emotional intensity in response to negative images and more positive when increasing emotional intensity in response to positive images relative to passive watch conditions, respectively.
 Last, trait measures of PA and savoring capacity are associated with heightened arousal and more positive affect in response to reacting to and upregulating positive emotion, respectively [@bryantSavoringNewModel2007; @watsonPositiveAffectivity2009].
 Thus, it was hypothesized that the difference in behavioral/arousal ratings between passively watching positive vs. neutral images would be positively moderated by PA and the difference in behavioral/arousal ratings between increasing emotional intensity in response to positive images vs. passively watching positive images would be positive moderated by savoring capacity.
-<!-- The degree to which self-report ratings correspond with EEG components may offer additional insight into the constructs that these EEG components represent -->
 
 ### Facilitating Reproducibility with Open Access Stimuli
 Much of the aforementioned research has utilized the International Affective Picture System [IAPS; @langInternationalAffectivePicture2008].
@@ -188,7 +205,7 @@ During the decrease condition, participants were asked to reduce the intensity o
 When prompted to watch, participants were asked to view the picture as they would naturally.
 The passive “watch” blocks served as baseline conditions for LPP component analyses [@hajcakReappraisalModulatesElectrocortical2006].
 A block design was selected for the proposed study because arousing images outnumber the neutral images two-to-one.
-The relatively rare neutral stimuli may produce a P3 if intermixed with arousald stimuli in the same block [@schuppAffectivePictureProcessing2000]. Additionally, LPP signal is increased for stimuli that are perceived as incongruent within a given affective context.
+The relatively rare neutral stimuli may produce a P3 if intermixed with valenced stimuli in the same block [@schuppAffectivePictureProcessing2000]. Additionally, LPP signal is increased for stimuli that are perceived as incongruent within a given affective context.
 Thus, a neutral stimulus displayed in a series of emotional stimuli would likely evoke an enhanced LPP activity, thus decreasing effect size [@schuppAffectivePictureProcessing2000].
 Further, a block design paradigm may better emulate one's natural environment, as stimuli of congruent arousal are typically encountered in clusters rather than isolation [@schuppAffectivePictureProcessing2012].
 Research comparing intermixed and block designs for LPP and EPN have shown comparable findings between the two approaches [@pastorAffectivePicturePerception2008; @schuppAffectivePictureProcessing2012].
@@ -417,32 +434,22 @@ tab %>%
 The present study sought to explore the OASIS as an alternative to the IAPS in psychophysiological research as well the role of personality traits in neural affective processing.
 This research will help introduce more up-to-date and open access materials in affective neuroscience research and devise neuroscience-informed clinical interventions to enhance wellbeing.
 Further, we sought to explore the time course of neural activity associated with a series of regulation blocks which included passively reacting to neutral and emotional stimuli, as well as regulating (i.e., upregulating and downregulating) one's emotional intensity in response to the emotional stimuli.
-We found that highly arousing positive and negative OASIS stimuli elicited augmented amplitude across most, but not all, components. 
+In support of our hypotheses, we found that highly arousing positive and negative OASIS stimuli elicited augmented amplitude across most, but not all, components.
+No valence effect for positive images was observed for the negative and positive 259 ms temporal loading peak component.
+We found differences among all passive watch blocks with behavioral ratings as well.
 The earliest component retained from the PCA to demonstrate a valence effect for both negative and positive images compared to neutral images occurred at 162 ms with negative images eliciting greater amplitude compared to positive images.
 This pattern did not hold across the entire time course of ERP components.
 A valence effect for negative images occurred at the negative 259 ms temporal peak component (EPN), though not positive images.
 Further, while a difference between negative and neutral images was found at the positive 259 ms temporal peak component, neutral images actually elicited greater amplitudes that negative.
-Replicating previous research, a valence effect for positive and negative images was found for LPP-like components, with negative stimuli eliciting greater amplitudes than positive stimuli.
-This finding is largely consistent with past research examining emotion reactivity utilized the IAPS using PCA [e.g., @fotiDifferentiatingNeuralResponses2009] and otherwise [@frankHemodynamicElectrocorticalReactivity2019].
-This overall pattern lends partial support to earlier accounts suggesting that earlier processes (< 300 ms) reflect initial emotional attentional capture and later processes (> 300 ms) reflect continued encoding and processing of these stimuli [@codispotiRepetitionEventrelatedPotentials2007; @fotiDifferentiatingNeuralResponses2009; @olofssonAffectiveVisualEventrelated2007].
-It is notable that the earliest component retained from our PCA with a temporal peak at 124 ms (P1) did not show valence effects, which may suggest that emotion reactivity does not occur before this point.
-
-
-
-We found that, similar to the IAPS, highly arousing positive and negative OASIS stimuli elicited augmented LPP activity.
-Other components, such as the N170 and EPN, were also modified in response to positive and negative images, though in the opposite direction hypothesized.
-As predicted, frontal LPP was not modulated among passive watch conditions.
-No regulation effects of LPP were observed.
-Exploratory contrasts among regulation conditions found significant differences between positive increase and watch conditions for early components (N170 and EPN) and significant differences between negative decrease and negative watch conditions for frontal LPP.
-Regulation effects for arousal and arousal ratings were observed in the predicted directions for negative and positive stimuli.
-PA nor capacity to savor the moment influenced the relationship between viewing conditions and EEG components.
-However, exploratory analyses indicated indicated participants' arousal ratings after passively viewing positive images compared to neutral images was moderated by PA.
-
+A valence effect for positive and negative images was found for LPP-like components, with negative stimuli eliciting greater amplitudes than positive stimuli.
 Highly arousing positive and negative images eliciting enhanced LPP is a common finding in research investigating the neural time course of affective processing with the IAPS [@cuthbertBrainPotentialsAffective2000; @hajcakMotivatedControlledAttention2009; @hajcakNeuralResponseEmotional2007; @krompingerModulationsElectrophysiologicalResponse2008; @moserIntentionalModulationEmotional2006; @schuppAffectivePictureProcessing2000; @trittIdeologicalReactivityPolitical2016].
+It is also largely consistent with past research examining emotion reactivity with PCA [e.g., @fotiDifferentiatingNeuralResponses2009].
 Smaller effects were found for positive images compared to negative images for LPP, which is consistent with previous literature [@fotiDifferentiatingNeuralResponses2009; @frankHemodynamicElectrocorticalReactivity2019] and behavioral ratings in the present study illustrating greater arousal and arousal effects for negative images.
 Of note, these LPP findings are somewhat at odds with a 2012 study by Liu and colleagues [-@liuNeuralSubstrateLate2012] that found comparable effect sizes between positive and negative stimuli.
-Differences between the present study and Liu et al. (2012) may be attributed to different referencing schemes (linked average mastoid vs. average), high-pass filters (.01 Hz vs. .1 Hz), and experimental paradigms (block vs. randomized design).
+Differences between the present study and Liu et al. (2012) may be attributed to different high-pass filters (.01 Hz versus .1 Hz), experimental paradigms (block vs. randomized design), and use of PCA vs. averaging of time windows. 
 Future researchers should be mindful of these factors as to facilitate replicability of results.
+This overall pattern lends partial support to earlier accounts suggesting that earlier processes (< 300 ms) reflect initial emotional attentional capture and later processes (> 300 ms) reflect continued encoding and processing of these stimuli [@codispotiRepetitionEventrelatedPotentials2007; @fotiDifferentiatingNeuralResponses2009; @olofssonAffectiveVisualEventrelated2007].
+It is notable that the earliest component retained from our PCA with a positive temporal peak at 124 ms did not show valence effects, which may suggest that emotion reactivity does not occur before this point.
 As noted earlier, rating scales in the present study indicated that passively viewing positive and negative image blocks were associated with higher arousal ratings when compared to neutral images.
 Passively viewing negative images was associated with arousal scores that were significantly lower than neutral images, and passively viewing positive images was associated with arousal scores that were significantly higher than neutral images.
 Overall, this suggests that our block design paradigm had profound state mood manipulations on participants, and negatively-arousing stimuli may have stronger manipulations of emotion than positively-arousing stimuli.
@@ -451,34 +458,57 @@ Notably, behavioral ratings correlated with LPP activity, reflecting a relation 
 Overall, these findings lend support to the OASIS image set being used in subsequent psychophysiological studies investigating the neural time course of affective processing.
 The OASIS also has several advantages over the IAPS; it is up-to-date, spans a number of semantic categories, and is open access [@kurdiIntroducingOpenAffective2017].
 
-Exploratory analyses indicated that early parietal occipital activity (i.e., N170 and EPN) were modulated depending on the arousal of visual stimuli.
-While it was predicted that more arousing images would be associated with enhanced negativity of these components, the present study yielded findings in the opposite direction (i.e., more positive N170 and EPN components for negative and positive compared to neutral images).
-This is in contrast to past research utilizing complex image sets (IAPS) illustrating enhanced negativity in these components [e.g., @frankHemodynamicElectrocorticalReactivity2019; @schuppAttentionEmotionERP2003], though Foti and colleagues (2009) noted similar directionality of early visual components in their comparison of neutral, pleasant, and unpleasant images.
-This may be attributed to the present study's use of a block design paradigm where neural signals may partly reflect aggregated mood effects over the course of each experimental block, which is underscored by correlations among these early components and behavioral arousal ratings.
-It is also possible that there are concomitant slow frequency components contributing to manifest waveforms that were submitted to statistical analyses.
-Future research should consider time-frequency and source analysis analysis to disentangle constituent components and neural source generators.
-
-Comparisons among regulation conditions revealed no differences for LPP. This diverges from previous findings showing a reduction in LPP for when decreasing emotional intensity in response to negative and positive images [@krompingerModulationsElectrophysiologicalResponse2008; @moserElectrophysiologicalCorrelatesDecreasing2009; @moserIntentionalModulationEmotional2006; @moserNeuralMarkersPositive2014].
-The present study's utilization of a block design with a relatively large number of regulation trials may have resulted in a reduction in LPP activity over the course of each block due to habituation effects and declines in attention allocation [@codispotiRepetitivePictureProcessing2006].
-The lack of a significant increase effect on LPP for positive and negative images has been found elsewhere [@krompingerModulationsElectrophysiologicalResponse2008; @moserElectrophysiologicalCorrelatesDecreasing2009].
-This may be due to a theorized ceiling effect reported by Moser (2008) and Krompinger (2009) that results from automatic capture of attentional resources by motivationally relevant stimuli and the fact that the present study was underpowered to observe small effects.
-
-Exploratory analyses revealed temporal distinctions among regulation of positive and negative images. Significant differences were noted between increase and watch conditions for positive, but not negative, images for N170 and EPN, such that positive increase conditions elicited higher amplitudes. The overall pattern of findings for early visual components in the present study is concomitantly consistent with literature noting a negativity bias [@carretieNeuralResponseSustained2006] and positivity bias [@fotiDifferentiatingNeuralResponses2009; @schuppEmotionAttentionEventrelated2006; @schuppSelectiveProcessingBriefly2004]. On the other hand, a frontal LPP enhancement was observed between decrease and watch for negative, but not positive, images that was consistent with previous literature [@moserNeuralMarkersPositive2014; @shafirEmotionalIntensityInfluences2015]. Overall, this suggests that emotion regulation processes may follow different neural time courses depending on emotional arousal.
+Regarding emotion regulation conditions, the earliest effect was observed at the 124 ms temporal peak component between the negative increase and negative watch condition.
+Said effect precedes all valence effects found in the previous study and challenges the notion of emotion regulation implying change from *initial* reactivity [@lewisAdvancesProblemsChallenges2010a].
+This begs the question: does emotion reactivity necessarily precede regulation?
+More research is needed to adequately address this question, though it appears that our findings support Joormann's and Stanton's assertion that disentangling the two processes is complex and may share overlap in terms of chronometry [@joormannExaminingEmotionRegulation2016a].
+Exploratory analyses investigating earlier ERP components revealed regulatory effects for the negative 259 ms temporal loading peak component for the negative and positive increase conditions.
+Effects on N170 and EPN have been observed as a result of implicit emotion regulation [e.g., @gyurakExplicitImplicitEmotion2011; @liuImplicitEmotionRegulation2018].
+Interestingly, some researchers have noted implicit emotion regulation effects only on N170 and not EPN [@wangTemporalCourseImplicit2017].
+This suggests there may be distinct neural time courses of implicit and explicit emotion regulation.
+Future research should seek to elucidate upon these differences in more depth.
+To our knowledge, this is the first study to demonstrate such an effect with explicit emotion regulation strategies.
+The fact than an early "bottom up" visual component is modifiable via emotion regulation blurs the conceptual lines between emotion reactivity and regulation.
+Regulation effects were also observed with the later 381 ms LPP-like component for the positive increase condition.
+This contrasts with previous literature reporting null findings [@krompingerModulationsElectrophysiologicalResponse2008; @moserElectrophysiologicalCorrelatesDecreasing2009], which was attributed to a theorized ceiling effect that results from automatic capture of attentional resources by motivationally relevant stimuli.
+Possible explanations to the difference in our findings is the utilization of a block design paradigm and temporal PCA.
+However, regulatory effects were not found for negative stimuli or for decrease conditions across negative and positive images for ERP components or behavioral ratings.
+This diverges from previous findings showing a reduction in LPP for when decreasing emotional intensity in response to negative and positive images [@krompingerModulationsElectrophysiologicalResponse2008; @moserElectrophysiologicalCorrelatesDecreasing2009; @moserIntentionalModulationEmotional2006; @moserNeuralMarkersPositive2014].
+Indeed, it is possible that our block-design paradigm with seven different regulatory conditions failed to capture such an effect, as other researchers have utilized randomized designs.
+The presence of type II error also cannot be ruled out, and future replication is the only way to ascertain the presence of a true effect.
+Overall, this pattern of findings suggests that emotion regulation and reactivity processes are not constrained to one time window or ERP component. 
+Further, it does not appear that there is a clear start and end point for either process.
+For example, while regulatory effects were observed at an early 259 ms component, they were not present in some later LPP-like component.
+Rather than asking *when* emotion regulation begins or ends, a better question may be  *what* processes are modified and considering that said processes occur at different time windows.
+This is a question well-suited to PCA, which in the authors' opinion, should be more commonly utilized in ERP research and a staple in the ERP researcher's toolbox [@dienERPPCAToolkit2010; @donchinMultivariateAnalysisEventrelated1978].
 Findings for behavioral arousal and arousal ratings in regulation conditions supported our hypotheses.
 Increasing and decreasing emotional intensity in response to positive and negative stimuli resulted in increased and decreased arousal/arousal ratings compared to passively watching, respectively.
 This indicates that while the experiment was unsuccessful in manipulating certain EEG components via regulation conditions, it was successful in producing state mood manipulations that were commensurate with participants' regulatory goal.
 Thus, physiological and behavioral measures may be indexing overlapping, yet distinct, processes.
 Future research utilizing similar experimental paradigms would benefit from collecting behavioral data in addition to physiological measure to further elucidate their relation.
 
-Evidence of conditional relationships between regulating one’s emotion in response to affective images and EEG components as a function of personality traits pertaining to positive emotion was not found.
+Regarding out second set of hypotheses, PA nor capacity to savor the moment influenced the relation between viewing conditions and EEG components.
 This is a departure from earlier fMRI research investigating correlations between neural activation in response to pleasant stimuli/happy faces and the personality trait of extraversion [@canliAmygdalaResponseHappy2002; @canliFMRIStudyPersonality2001].
 This discrepancy could be due to different methods.
 Canli et al. (2001, 2002) utilized fMRI and presented five blocks of four pictures that were presented for 7.5 seconds each while the present study used EEG and utilized seven blocks of 40 image blocks that were presented for two seconds each.
 fMRI does not have the temporal resolution necessary to analyze timing in the 0 – 3000 ms time window as the present study did.
 Thus, it is possible that different components were being analyzed in Canli et al. (2001, 2002) and the present study.
-Furthermore, Canli et al. (2001) limited their sample to only women on the grounds that, “...they are more likely to report intense emotional experiences (Shields, 1991) and because they show more physiological reactivity in concordance with arousal judgments than men (Lang, Greenwald, Bradley, & Hamm, 1993).” In contrast, the present study recruited participants regardless of gender to facilitate generalizability.
+Furthermore, Canli et al. (2001) limited their sample to only women on the grounds that, “...they are more likely to report intense emotional experiences (Shields, 1991) and because they show more physiological reactivity in concordance with arousal judgments than men (Lang, Greenwald, Bradley, & Hamm, 1993).” 
+In contrast, the present study recruited participants regardless of gender to facilitate generalizability.
 Of note, a significant moderating effect of PA was found when analyzing difference in behavioral arousal scores between passively viewing positive vs. neutral images, such that those reporting higher levels of PA tended to endorse more positive state mood manipulations after passively viewing the positive image block.
 This suggests that PA may be a viable clinical intervention target for those with mood disorders, such as depression, which is marked by a negative emotional disposition [@beckCognitiveTherapyEmotional1979] and is further supported by research suggesting that positive emotions are as important an intervention target as negative emotions in treating depression [@demyttenaereWhatImportantBeing2015; @dunnChangesPositiveNegative2019].
+Of note is a recent study published by Wilson and MacNamara [-@wilsonSavorMomentWillful2021] where the authors found an LPP effect in a savoring paradigm.
+While our study did not find a moderating effect of savoring on viewing condition and ERP components, our findings largely align with Wilson's and MacNamara's.
+Wilson and MacNamara adopted a novel paradigm that instructed participants to savor positive IAPS stimuli, with language borrowed from Bryant's [@bryantFourfactorModelPerceived1989; @bryantSavoringNewModel2007] conceptualization of savoring.
+This condition is most similar to our positive increase condition (see supplementary materials for instructions used in the present experiment), which did elicit a greater LPP-like component and behavioral ratings when compared to a passive viewing positive stimulus condition.
+However, our instructions prompted participants to reappraise the images in a manner that elicited greater emotional intensity, while Wilson and MacNamara were careful not to adopt such instructions on the basis that the cognitive demands of reappraisal may actually contradict the goal of increasing emotional intensity.
+This may explain why our later LPP component with a 740 ms temporal peak loading was not modulated as a result of regulatory condition, while Wilson and MacNamara found such an effect at a parieto-occipital LPP site occurring in the 1,000 - 6,000 ms time window using windowed averages. 
+Indeed, a reason why a moderating effect was not found in the present study is because our paradigm did not tap into a savoring construct.
+Future researchers would benefit from incorporating elements of Wilson and MacNamara's study as well as ours: inspection of earlier EEG components, examination of the relation among psychological questionnaire data (i.e., savoring) and psychophysiological data, use of PCA vs. windowed averages, and employing paradigms designed to more directly tap into the psychological constructs of interest.
+
+
+<!-- This may be attributed to the present study's use of a block design paradigm where neural signals may partly reflect aggregated mood effects over the course of each experimental block, which is underscored by correlations among these early components and behavioral arousal ratings. -->
+<!-- Future research should consider time-frequency and source analysis analysis to disentangle constituent components and neural source generators. -->
 
 There several limitations to the present study.
 The psychophysiological data collected are cross-sectional and causation cannot be inferred.
@@ -515,3 +545,12 @@ Past research on affective processing has overwhelmingly focused on negative emo
 This work is useful for mitigating the effects of unpleasant emotion but may not benefit individuals in need of bolstered levels of positive emotion.
 Uncovering the biological implementations of positive emotion will be crucial for developing therapeutic and pharmacological interventions for those suffering from psychological and physiological ailments.
 It may also bring us a step closer to harnessing the mechanisms of wellbeing.
+
+<!-- On a final note, we propose a call to action. -->
+<!-- Review of many ERP papers while writing this manuscript revealed an alarming and persistent trend: the use of cartoon topography visualizations with white skin and, more often than not, masculine features.  -->
+<!-- It is time we call out these cartoons for what they are: racist. -->
+<!-- While many have moved in this direction through disseminating research materials in accordance with the open science framework, it very surprising that this simple change in presentation of data has remained. -->
+<!-- We argue that not only are these cartoons racist, but they are also ineffective in presenting topographical data as they obscure portions of the scalp. -->
+<!-- We believe that a more equitable and effective way of presenting topographical data are in the form of two-dimensional topographical plots, for which there are many high quality open-source packages in MATLAB [@lopez-calderonERPLABOpensourceToolbox2014], python [@gramfortMEGEEGData2013], and R `r citation(package = "EEGUtils")` available. -->
+<!-- It is incumbent on psychophysiology researchers to promote equity in their work, and the use of these visualizations is unacceptable. -->
+
