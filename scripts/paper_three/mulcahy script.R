@@ -9,6 +9,7 @@ library(performance)
 library(here)
 library(effectsize)
 library(boot)
+library(parameters)
 
 ## read in data
 dat_hs <-
@@ -60,6 +61,9 @@ results <- boot(data = dat_hs,
                 statistic = beta,
                 R = 10000,
                 formula = phq_diff ~ group)
+
+lm(phq_diff ~ group, data = dat_hs) %>%
+  bootstrap_parameters(iterations = 10000)
 
 ## view results
 results
@@ -382,32 +386,23 @@ boot.ci(results, type = "bca")
 # effectsize(mod_aa)
 # check_model(mod_aa, panel = FALSE)
 # confint.merMod(mod_aa, parm = "beta_", method = "boot", nsim = 5000)
-
+dat_hs$group <- droplevels(as.factor(dat_hs$group))
+dat_hs$group <- relevel(dat_hs$group, "WL")
+dat_hs <-
+  dat_hs %>%
+    filter(group %in% c("WL", "HS")) %>%
+  group_by(group) %>%
+  mutate(mean_phq = mean(phq_diff))
 # Visualizations for results
 # define ggplot function
-plot_fun <- function(data, mapping, y_title) {
-  ggplot(data, mapping) +
-  geom_jitter(aes(color = group), width = 0.1) +
-  geom_line(aes(group = pid, color = group), alpha = 0.5) +
-  geom_boxplot(aes(fill = group), lwd = 2, fatten = TRUE, width = 0.6) +
-  xlab("Time") +
-  ylab(y_title) +
-  scale_fill_discrete() +
-  scale_color_manual(values = c("maroon", "gold"), guide = FALSE) +
-  scale_fill_manual(values = c("maroon", "gold"), name = "Group", labels = c("Waitlist", "Headspace")) +
-  ggtitle(paste(y_title, "over Time in Waitlist and Headspace Groups")) +
-  theme_classic() +
-  theme(
-    title = element_text(size = 18, face = "bold"),
-    legend.title = element_text(size = 16, face = "bold"),
-    legend.text = element_text(size = 14),
-    axis.text = element_text(size = 14),
-    axis.title = element_text(size = 16, face = "bold"),
-    legend.key.size = unit(3, "line")
-  )
-}
+ggplot(dat_hs, aes(group, phq_diff)) +
+  geom_violin(fill = "gold", width = 0.5) +
+  geom_jitter(color = "maroon", width = 0.1) +
+  geom_smooth(aes(as.numeric(group)), method = "lm", se = FALSE, color = "black") +
+  theme_classic()
+
 ## plot for depression
-dep <- plot_fun(dat_hs_long, aes(time, phq_total), "Depression")
+dep <- plot_fun(dat_hs, aes(group, phq_diff), "Depression")
 ggsave(filename = here("images", "paper_3", "mulcahy_poster_images", "dep.png"), plot = dep, device = "png", width = 14, height = 5)
 ## plot for pa
 pa <- plot_fun(dat_hs_long, aes(time, masq_pa), "Positive Affectivity")
