@@ -24,6 +24,8 @@ anova(inc_mod_rc2)
 ## RC3
 inc_mod_rc3 <- lmer(RC3 ~ block + (1|pid), data = dat)
 summary(inc_mod_rc3)
+effectsize(inc_mod_rc3)
+interpret_d(0.23, "cohen1988")
 ### sig difference, negative increase greater than positive increase
 
 ## RC5
@@ -39,6 +41,8 @@ summary(inc_mod_rc11)
 ## RC12
 inc_mod_rc12 <- lmer(RC12 ~ block + (1|pid), data = dat)
 summary(inc_mod_rc12)
+effectsize(inc_mod_rc12)
+interpret_d(0.36, rules = "cohen1988")
 ### sig difference, positive increase greater than negative increase
 
 ## positive RC12
@@ -52,11 +56,15 @@ dat$block <- relevel(dat$block, "Neg_Dec")
 ## RC2
 dec_mod_rc2 <- lmer(RC2 ~ block + (1|pid), data = dat)
 summary(dec_mod_rc2)
+effectsize(dec_mod_rc2)
+interpret_d(-0.23, "cohen1988")
 ### sig difference, negative decrease greater than positive decrease
 
 ## RC3
 dec_mod_rc3 <- lmer(RC3 ~ block + (1|pid), data = dat)
 summary(dec_mod_rc3)
+effectsize(dec_mod_rc3)
+interpret_d(-0.51, "cohen1988")
 ### sig difference, negative decrease greater than positive decrease
 
 ## RC5
