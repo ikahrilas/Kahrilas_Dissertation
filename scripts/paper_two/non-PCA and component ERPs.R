@@ -87,7 +87,7 @@ lpp_plot <-
   geom_hline(yintercept = 0, linetype = "dashed") +
   labs(x = "Time (ms)",
        y = expression(paste("Amplitude (",mu,"V)")),
-       title = paste("Average PO3/PO4, PO7/PO8, P1/P2,\nP3/P5, P6/P4, and Pz Waveform")) +
+       title = paste("Average PO3/PO4, PO7/PO8, P1/P2,\nP3/P4, P5/P6, and Pz Waveform")) +
   theme_classic() +
   theme(axis.title = element_text(size = 14),
         axis.text = element_text(size = 12),

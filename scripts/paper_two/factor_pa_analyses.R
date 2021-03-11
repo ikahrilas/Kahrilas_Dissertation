@@ -73,36 +73,36 @@ summary(rc3_pa_mod)
 ### no significant moderation effect, p = .09
 ## extract model statistcs
 rc3_pa_mod_dat <- data.frame(coef(summary(rc3_pa_mod)))
-rc3_pa_mod_beta <- rc3_pa_mod_dat %>%
+rc3_pa_beta <- rc3_pa_mod_dat %>%
   mutate(var = row.names(.)) %>%
   mutate(Estimate = sprintf("%.2f", Estimate)) %>%
   filter(var == "blockPos_Watch:pos_affectivity") %>%
   select(Estimate) %>%
   pull()
-rc3_pa_mod_std_beta <- standardize_parameters(rc3_pa_mod) %>%
+rc3_pa_std_beta <- standardize_parameters(rc3_pa_mod) %>%
   filter(Parameter == "blockPos_Watch:pos_affectivity") %>%
   mutate(Std_Coefficient = sprintf("%.2f", Std_Coefficient)) %>%
   select(`Std_Coefficient`) %>%
   pull()
-rc3_pa_mod_se <- rc3_pa_mod_dat %>%
+rc3_pa_se <- rc3_pa_mod_dat %>%
   mutate(var = row.names(.)) %>%
   mutate(Std..Error = sprintf("%.2f", Std..Error)) %>%
   filter(var == "blockPos_Watch:pos_affectivity") %>%
   select(Std..Error) %>%
   pull()
-rc3_pa_mod_df <- rc3_pa_mod_dat %>%
+rc3_pa_df <- rc3_pa_mod_dat %>%
   mutate(var = row.names(.)) %>%
   mutate(df = sprintf("%.2f", df)) %>%
   filter(var == "blockPos_Watch:pos_affectivity") %>%
   select(df) %>%
   pull()
-rc3_pa_mod_t <- rc3_pa_mod_dat %>%
+rc3_pa_t <- rc3_pa_mod_dat %>%
   mutate(var = row.names(.)) %>%
   mutate(t.value = sprintf("%.2f", t.value)) %>%
   filter(var == "blockPos_Watch:pos_affectivity") %>%
   select(t.value) %>%
   pull()
-rc3_pa_mod_p <- rc3_pa_mod_dat %>%
+rc3_pa_p <- rc3_pa_mod_dat %>%
   mutate(var = row.names(.),
          Pr...t.. = sprintf("%.3f", Pr...t..),
          Pr...t.. = str_remove(Pr...t.., "^0+"),
@@ -121,36 +121,36 @@ summary(rc5_pa_mod)
 ### nothing
 ## extract model stats
 rc5_pa_mod_dat <- data.frame(coef(summary(rc5_pa_mod)))
-rc5_pa_mod_beta <- rc5_pa_mod_dat %>%
+rc5_pa_beta <- rc5_pa_mod_dat %>%
   mutate(var = row.names(.)) %>%
   mutate(Estimate = sprintf("%.2f", Estimate)) %>%
   filter(var == "blockPos_Watch:pos_affectivity") %>%
   select(Estimate) %>%
   pull()
-rc5_pa_mod_std_beta <- standardize_parameters(rc5_pa_mod) %>%
+rc5_pa_std_beta <- standardize_parameters(rc5_pa_mod) %>%
   filter(Parameter == "blockPos_Watch:pos_affectivity") %>%
   mutate(Std_Coefficient = sprintf("%.2f", Std_Coefficient)) %>%
   select(`Std_Coefficient`) %>%
   pull()
-rc5_pa_mod_se <- rc5_pa_mod_dat %>%
+rc5_pa_se <- rc5_pa_mod_dat %>%
   mutate(var = row.names(.)) %>%
   mutate(Std..Error = sprintf("%.2f", Std..Error)) %>%
   filter(var == "blockPos_Watch:pos_affectivity") %>%
   select(Std..Error) %>%
   pull()
-rc5_pa_mod_df <- rc5_pa_mod_dat %>%
+rc5_pa_df <- rc5_pa_mod_dat %>%
   mutate(var = row.names(.)) %>%
   mutate(df = sprintf("%.2f", df)) %>%
   filter(var == "blockPos_Watch:pos_affectivity") %>%
   select(df) %>%
   pull()
-rc5_pa_mod_t <- rc5_pa_mod_dat %>%
+rc5_pa_t <- rc5_pa_mod_dat %>%
   mutate(var = row.names(.)) %>%
   mutate(t.value = sprintf("%.2f", t.value)) %>%
   filter(var == "blockPos_Watch:pos_affectivity") %>%
   select(t.value) %>%
   pull()
-rc5_pa_mod_p <- rc5_pa_mod_dat %>%
+rc5_pa_p <- rc5_pa_mod_dat %>%
   mutate(var = row.names(.),
          Pr...t.. = sprintf("%.3f", Pr...t..),
          Pr...t.. = str_remove(Pr...t.., "^0+"),
@@ -169,36 +169,36 @@ summary(rc11_pa_mod)
 ### nothing
 ## extract info
 rc11_pa_mod_dat <- data.frame(coef(summary(rc11_pa_mod)))
-rc11_pa_mod_beta <- rc11_pa_mod_dat %>%
+rc11_pa_beta <- rc11_pa_mod_dat %>%
   mutate(var = row.names(.)) %>%
   mutate(Estimate = sprintf("%.2f", Estimate)) %>%
   filter(var == "blockPos_Watch:pos_affectivity") %>%
   select(Estimate) %>%
   pull()
-rc11_pa_mod_std_beta <- standardize_parameters(rc11_pa_mod) %>%
+rc11_pa_std_beta <- standardize_parameters(rc11_pa_mod) %>%
   filter(Parameter == "blockPos_Watch:pos_affectivity") %>%
   mutate(Std_Coefficient = sprintf("%.2f", Std_Coefficient)) %>%
   select(`Std_Coefficient`) %>%
   pull()
-rc11_pa_mod_se <- rc11_pa_mod_dat %>%
+rc11_pa_se <- rc11_pa_mod_dat %>%
   mutate(var = row.names(.)) %>%
   mutate(Std..Error = sprintf("%.2f", Std..Error)) %>%
   filter(var == "blockPos_Watch:pos_affectivity") %>%
   select(Std..Error) %>%
   pull()
-rc11_pa_mod_df <- rc11_pa_mod_dat %>%
+rc11_pa_df <- rc11_pa_mod_dat %>%
   mutate(var = row.names(.)) %>%
   mutate(df = sprintf("%.2f", df)) %>%
   filter(var == "blockPos_Watch:pos_affectivity") %>%
   select(df) %>%
   pull()
-rc11_pa_mod_t <- rc11_pa_mod_dat %>%
+rc11_pa_t <- rc11_pa_mod_dat %>%
   mutate(var = row.names(.)) %>%
   mutate(t.value = sprintf("%.2f", t.value)) %>%
   filter(var == "blockPos_Watch:pos_affectivity") %>%
   select(t.value) %>%
   pull()
-rc11_pa_mod_p <- rc11_pa_mod_dat %>%
+rc11_pa_p <- rc11_pa_mod_dat %>%
   mutate(var = row.names(.),
          Pr...t.. = sprintf("%.3f", Pr...t..),
          Pr...t.. = str_remove(Pr...t.., "^0+"),
@@ -217,36 +217,36 @@ summary(rc12_pa_mod)
 ### nothing
 ## extract info
 rc12_pa_mod_dat <- data.frame(coef(summary(rc12_pa_mod)))
-rc12_pa_mod_beta <- rc12_pa_mod_dat %>%
+rc12_pa_beta <- rc12_pa_mod_dat %>%
   mutate(var = row.names(.)) %>%
   mutate(Estimate = sprintf("%.2f", Estimate)) %>%
   filter(var == "blockPos_Watch:pos_affectivity") %>%
   select(Estimate) %>%
   pull()
-rc12_pa_mod_std_beta <- standardize_parameters(rc12_pa_mod) %>%
+rc12_pa_std_beta <- standardize_parameters(rc12_pa_mod) %>%
   filter(Parameter == "blockPos_Watch:pos_affectivity") %>%
   mutate(Std_Coefficient = sprintf("%.2f", Std_Coefficient)) %>%
   select(`Std_Coefficient`) %>%
   pull()
-rc12_pa_mod_se <- rc12_pa_mod_dat %>%
+rc12_pa_se <- rc12_pa_mod_dat %>%
   mutate(var = row.names(.)) %>%
   mutate(Std..Error = sprintf("%.2f", Std..Error)) %>%
   filter(var == "blockPos_Watch:pos_affectivity") %>%
   select(Std..Error) %>%
   pull()
-rc12_pa_mod_df <- rc12_pa_mod_dat %>%
+rc12_pa_df <- rc12_pa_mod_dat %>%
   mutate(var = row.names(.)) %>%
   mutate(df = sprintf("%.2f", df)) %>%
   filter(var == "blockPos_Watch:pos_affectivity") %>%
   select(df) %>%
   pull()
-rc12_pa_mod_t <- rc12_pa_mod_dat %>%
+rc12_pa_t <- rc12_pa_mod_dat %>%
   mutate(var = row.names(.)) %>%
   mutate(t.value = sprintf("%.2f", t.value)) %>%
   filter(var == "blockPos_Watch:pos_affectivity") %>%
   select(t.value) %>%
   pull()
-rc12_pa_mod_p <- rc12_pa_mod_dat %>%
+rc12_pa_p <- rc12_pa_mod_dat %>%
   mutate(var = row.names(.),
          Pr...t.. = sprintf("%.3f", Pr...t..),
          Pr...t.. = str_remove(Pr...t.., "^0+"),
@@ -265,36 +265,36 @@ summary(pos_RC12_pa_mod)
 ### nothing
 ## extract info
 pos_RC12_pa_mod_dat <- data.frame(coef(summary(pos_RC12_pa_mod)))
-pos_RC12_pa_mod_beta <- pos_RC12_pa_mod_dat %>%
+pos_RC12_pa_beta <- pos_RC12_pa_mod_dat %>%
   mutate(var = row.names(.)) %>%
   mutate(Estimate = sprintf("%.2f", Estimate)) %>%
   filter(var == "blockPos_Watch:pos_affectivity") %>%
   select(Estimate) %>%
   pull()
-pos_RC12_pa_mod_std_beta <- standardize_parameters(pos_RC12_pa_mod) %>%
+pos_RC12_pa_std_beta <- standardize_parameters(pos_RC12_pa_mod) %>%
   filter(Parameter == "blockPos_Watch:pos_affectivity") %>%
   mutate(Std_Coefficient = sprintf("%.2f", Std_Coefficient)) %>%
   select(`Std_Coefficient`) %>%
   pull()
-pos_RC12_pa_mod_se <- pos_RC12_pa_mod_dat %>%
+pos_RC12_pa_se <- pos_RC12_pa_mod_dat %>%
   mutate(var = row.names(.)) %>%
   mutate(Std..Error = sprintf("%.2f", Std..Error)) %>%
   filter(var == "blockPos_Watch:pos_affectivity") %>%
   select(Std..Error) %>%
   pull()
-pos_RC12_pa_mod_df <- pos_RC12_pa_mod_dat %>%
+pos_RC12_pa_df <- pos_RC12_pa_mod_dat %>%
   mutate(var = row.names(.)) %>%
   mutate(df = sprintf("%.2f", df)) %>%
   filter(var == "blockPos_Watch:pos_affectivity") %>%
   select(df) %>%
   pull()
-pos_RC12_pa_mod_t <- pos_RC12_pa_mod_dat %>%
+pos_RC12_pa_t <- pos_RC12_pa_mod_dat %>%
   mutate(var = row.names(.)) %>%
   mutate(t.value = sprintf("%.2f", t.value)) %>%
   filter(var == "blockPos_Watch:pos_affectivity") %>%
   select(t.value) %>%
   pull()
-pos_RC12_pa_mod_p <- pos_RC12_pa_mod_dat %>%
+pos_RC12_pa_p <- pos_RC12_pa_mod_dat %>%
   mutate(var = row.names(.),
          Pr...t.. = sprintf("%.3f", Pr...t..),
          Pr...t.. = str_remove(Pr...t.., "^0+"),
