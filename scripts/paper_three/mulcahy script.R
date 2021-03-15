@@ -10,10 +10,11 @@ library(here)
 library(effectsize)
 library(boot)
 library(parameters)
+library(gtsummary)
 
 ## read in data
 dat_hs <-
-  read_sav("data/paper_three/SMILE full data 9 2 2020.sav") %>%
+  read_sav("data/paper_three/questionnaire/SMILE full data 9 2 2020.sav") %>%
   select(StudyID_T1,
          Group,
          Group_R,
@@ -44,7 +45,8 @@ dat_hs <- dat_hs %>%
          na_diff = masq_na_t3 - masq_na_t1,
          aa_diff = masq_aa_t3 - masq_aa_t1,
          )
-
+dat_hs$group <- as.factor(dat_hs$group)
+dat_hs$group <- relevel(dat_hs$group, "WL")
 # models
 
 ## -- DEPRESSION
@@ -63,7 +65,10 @@ results <- boot(data = dat_hs,
                 formula = phq_diff ~ group)
 
 lm(phq_diff ~ group, data = dat_hs) %>%
-  bootstrap_parameters(iterations = 10000)
+  tbl_regression(label = list(group ~ "Group")) %>%
+  modify_header(
+    update = list(label ~ "**Variable**",
+                  p.value ~ "***p* value**"))
 
 ## view results
 results
@@ -86,6 +91,11 @@ plot(results)
 ## get 95% confidence interval
 boot.ci(results, type = "bca")
 
+lm(pa_diff ~ group, data = dat_hs) %>%
+  tbl_regression(label = list(group ~ "Group")) %>%
+  modify_header(
+    update = list(label ~ "**Variable**",
+                  p.value ~ "***p* value**"))
 
 ## -- NA
 ## bootstrapping with 10000 replications
@@ -93,6 +103,12 @@ results <- boot(data = dat_hs,
                 statistic = beta,
                 R = 10000,
                 formula = na_diff ~ group)
+
+lm(na_diff ~ group, data = dat_hs) %>%
+  tbl_regression(label = list(group ~ "Group")) %>%
+  modify_header(
+    update = list(label ~ "**Variable**",
+                  p.value ~ "***p* value**"))
 
 ## view results
 results
@@ -386,20 +402,75 @@ boot.ci(results, type = "bca")
 # effectsize(mod_aa)
 # check_model(mod_aa, panel = FALSE)
 # confint.merMod(mod_aa, parm = "beta_", method = "boot", nsim = 5000)
+
 dat_hs$group <- droplevels(as.factor(dat_hs$group))
 dat_hs$group <- relevel(dat_hs$group, "WL")
+dat_hs$group <- droplevels(dat_hs$group)
+
 dat_hs <-
   dat_hs %>%
     filter(group %in% c("WL", "HS")) %>%
   group_by(group) %>%
   mutate(mean_phq = mean(phq_diff))
 # Visualizations for results
-# define ggplot function
-ggplot(dat_hs, aes(group, phq_diff)) +
-  geom_violin(fill = "gold", width = 0.5) +
+# depression change
+dep_plot <- ggplot(dat_hs, aes(group, phq_diff)) +
+  geom_violin(fill = "gold", width = 0.25, alpha = 0.5) +
   geom_jitter(color = "maroon", width = 0.1) +
   geom_smooth(aes(as.numeric(group)), method = "lm", se = FALSE, color = "black") +
-  theme_classic()
+  xlab("Group") +
+  ylab("Change in Depression") +
+  ggtitle("Depression in Waitlist vs. Headspace Group") +
+  theme_classic() +
+  theme(plot.title = element_text(face = "bold",
+                                  size = 24),
+        axis.title = element_text(face = "bold",
+                                  size = 22),
+        axis.text = element_text(face = "bold",
+                                 size = 20))
+
+# positive affectivity change
+pa_plot <- ggplot(dat_hs, aes(group, pa_diff)) +
+  geom_violin(fill = "gold", width = 0.25, alpha = 0.5) +
+  geom_jitter(color = "maroon", width = 0.1) +
+  geom_smooth(aes(as.numeric(group)), method = "lm", se = FALSE, color = "black") +
+  xlab("Group") +
+  ylab("Change in\nPositive Affectivity") +
+  ggtitle("Positive Affectivity in\nWaitlist vs. Headspace Group") +
+  theme_classic() +
+  theme(plot.title = element_text(face = "bold",
+                                  size = 24),
+        axis.title = element_text(face = "bold",
+                                  size = 22),
+        axis.text = element_text(face = "bold",
+                                 size = 20))
+
+# negative affectivity change
+na_plot <- ggplot(dat_hs, aes(group, na_diff)) +
+  geom_violin(fill = "gold", width = 0.25, alpha = 0.5) +
+  geom_jitter(color = "maroon", width = 0.1) +
+  geom_smooth(aes(as.numeric(group)), method = "lm", se = FALSE, color = "black") +
+  xlab("Group") +
+  ylab("Change in\nNegative Affectivity") +
+  ggtitle("Negative Affectivity\nin Waitlist vs. Headspace Group") +
+  theme_classic() +
+  theme(plot.title = element_text(face = "bold",
+                                  size = 24),
+        axis.title = element_text(face = "bold",
+                                  size = 22),
+        axis.text = element_text(face = "bold",
+                                 size = 20))
+
+plots <- list(dep_plot, pa_plot, na_plot)
+titles <- list("depression.png", "pa.png", "na.png")
+
+map2(plots, titles, ~ {
+  ggsave(plot = .x,
+         filename = here("data", "paper_three", "mulcahy_plots",  .y),
+         device = "png",
+         width = 9,
+         height = 4)
+})
 
 ## plot for depression
 dep <- plot_fun(dat_hs, aes(group, phq_diff), "Depression")
@@ -410,5 +481,6 @@ ggsave(filename = here("images", "paper_3", "mulcahy_poster_images", "pa.png"), 
 ## plot for na
 na <- plot_fun(dat_hs_long, aes(time, masq_na), "Negative Affectivity")
 ggsave(filename = here("images", "paper_3", "mulcahy_poster_images", "na.png"), plot = na, device = "png", width = 14, height = 5)
+
 
 
