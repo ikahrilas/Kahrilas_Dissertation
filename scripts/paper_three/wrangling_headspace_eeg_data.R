@@ -15,16 +15,7 @@ files <- files[!str_detect(files, c("22585452_T1_av-export.mul"))]
 files <- files[!str_detect(files, c("22585473_T1_av-export.mul"))]
 files <- files[!str_detect(files, c("22585488_T1_av-export.mul"))]
 
-# Read in .mul and .evt files
-## preallocate space
-avg_dat <- as_tibble(matrix(data = NA_real_, nrow = 580454, ncol = 80))
-evt <- tibble(
-  Tmu = rep(NA, times = 51*7),
-  block = rep(NA, times = 51*7),
-  n_trials = rep(NA, times = 51*7),
-  pid = rep(NA, times = 51*7),
-  prop_trials = rep(NA, times = 51*7)
-)
+##-- Read in .mul and .evt files
 
 # make list of block names
 block_names <- c("Pos_Inc",
@@ -59,7 +50,6 @@ eeg_dat <- map_df(here("data", "paper_three", "headspace_mul_files",  files), ~ 
     relocate(pid, block, ms, everything())
 }
 )
-length(unique(eeg_dat$pid))
 
 # Merge lingering cases with the rest of the data
 ## r take care of split case
@@ -99,12 +89,25 @@ eeg_dat <-
     relocate(pid, block, ms, everything())
 }) %>%
   bind_rows(eeg_dat)
-
+unique(eeg_dat$ms)
 # clean up electrode names
 names(eeg_dat) <- gsub("_.*", "", names(eeg_dat))
 
 # merge eeg and evt data
 eeg_evt_dat <- full_join(eeg_dat, evt, by = c("pid", "block")) %>%
-  relocate(pid, block, n_trials)
+  relocate(pid, block, n_trials) %>%
+  mutate(group = "hs")
 
+# write to workspace
 write_csv(eeg_evt_dat, file = here("data", "paper_three", "erp_dat.csv"))
+
+# read in per eeg data
+per_eeg <- read_csv(here("data", "paper_two", "created_data", "erp_avr_lp.csv")) %>%
+  select(-Tmu, -prop_trials) %>%
+  mutate(group = "per")
+
+# merge data sets
+write_csv(bind_rows(eeg_evt_dat, per_eeg),
+          here("data", "paper_three", "total_erp_dat.csv"))
+
+
