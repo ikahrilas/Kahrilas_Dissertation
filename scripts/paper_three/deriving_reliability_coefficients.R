@@ -34,9 +34,9 @@ items = list(masq_pa = c("masq2", "masq4", "masq5", "masq7", "masq11", "masq14",
 # define function that finds omega for each set of items and prints the coefficient
 reliability_fun <- function(items) {
   tmp <- ci.reliability(dat %>% select(all_of(items)), type = "omega")
-  tmp$est
+  round(tmp$est, digits = 2)
 }
 
 # loop over all items to derive the coefficients
-map_chr(items, ~ reliability_fun(.x))
+map_dbl(items, ~ reliability_fun(.x))
 
