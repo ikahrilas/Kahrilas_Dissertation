@@ -126,7 +126,6 @@ dat_hs <-
            (phq7 - 1) +
            (phq8 - 1) +
            (phq9 - 1))
-glimpse(dat_hs)
 
 ## -- PSWQ
 dat_hs <-
@@ -139,7 +138,8 @@ dat_hs <-
 ## -- PSS
 dat_hs <-
   dat_hs %>%
-  mutate(pss_total = (pss1 - 1) + (4 - (pss2 - 1)) + (4 - (pss3 - 1)) + (pss4 - 1)) %>% glimpse()
+  mutate(across(.cols = c(pss1, pss2, pss3, pss4), .fns = ~(.x - 1)),
+  pss_total = pss1 + (4 - pss2) + (4 - pss3) + pss4)
 
 ## -- PANAS
 dat_hs <-
@@ -174,9 +174,11 @@ setnames(per_dat,
                    "panas18", "panas20"))
 
 ## -- SCORE 14-ITEM PSS TO 4-ITEM
+# the PSS in the per data set has the proper range of 0-4, so DO NOT subtract one from each
+# score like you did for the headspace data.
 per_dat <-
   per_dat %>%
-  mutate(pss_total = (pss_2 - 1) + (4 - (pss_6 - 1)) + (4 - (pss_7 - 1)) + (pss_14 - 1))
+  mutate(pss_total = pss_2 + (4 - pss_6) + (4 - pss_7) + pss_14)
 
 ## rename pss items to match hs
 setnames(per_dat,
@@ -205,7 +207,7 @@ per_dat <-
            pswq9 + (6 - pswq10) + (6 - pswq11) + pswq12 +
            pswq13 + pswq14 + pswq15 + pswq16)
 
-## -- MASQ AD SCALE
+## --  %>%  AD SCALE
 per_dat <-
   per_dat %>%
   mutate(masq_ad = (6 - masq_2) + (6 - masq_4) + (6 - masq_5) + (6 - masq_7) +
@@ -233,7 +235,7 @@ dat_hs <-
            -c(paste0("pss", c(1, 2, 3, 4), "r")),
            -c(paste0("pss", c(2, 3), "rr")),
            -c(phq_mean, pss_mean, phq9t1, masq_mean, masq_total, pswq_mean, pswqt1, panas_mean, panas_total,
-              panasnt1, panas_pos_mean, panas_neg_mean, panaspt1)) %>% glimpse()
+              panasnt1, panas_pos_mean, panas_neg_mean, panaspt1))
 
 per_dat <-
   per_dat %>%
@@ -256,12 +258,37 @@ per_dat <-
           group) %>%
   rename(gender = sex,
          race = Race) %>%
-  rename_with(~ str_remove(.x, "_"), .cols = c(phq_1:phq_9, masq_1:masq_39)) %>% glimpse()
+  rename_with(~ str_remove(.x, "_"), .cols = c(phq_1:phq_9, masq_1:masq_39))
 
 sum(!(names(per_dat) %in% names(dat_hs))) # all column names match
 
 # merge together
 total_dat <- bind_rows(dat_hs, per_dat)
+
+# include reverse scored items for reliability coefficents later
+total_dat <-
+  total_dat %>%
+  mutate(pss2r = 4 - pss2,
+         pss3r = 4 - pss3,
+         masq2r = 6 - masq2,
+         masq4r = 6 - masq4,
+         masq5r = 6 - masq5,
+         masq7r = 6 - masq7,
+         masq11r = 6 - masq11,
+         masq14r = 6 - masq14,
+         masq19r = 6 - masq19,
+         masq23r = 6 - masq23,
+         masq26r = 6 - masq26,
+         masq28r = 6 - masq28,
+         masq32r = 6 - masq32,
+         masq34r = 6 - masq34,
+         masq36r = 6 - masq36,
+         masq37r = 6 - masq37,
+         pswq1r = 6 - pswq1,
+         pswq3r = 6 - pswq3,
+         pswq8r = 6 - pswq8,
+         pswq10r = 6 - pswq10,
+         pswq11r = 6 - pswq11)
 
 # write to workspace
 write_csv(total_dat, file = here::here("data", "paper_three", "total_questionnaire_data.csv"))
