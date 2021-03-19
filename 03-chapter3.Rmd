@@ -2,52 +2,55 @@
 library(kableExtra)
 ```
 
-## THE NEURAL TIME COURSE OF EMOTION REACTIVITY AND REGULATION
+## DIFFERENCES IN NEURAL TIME COURSE OF EMOTION REACTIVITY AND REGULATION FOR POSITIVE AND NEGATIVE STIMULI
 Healthy emotion regulation abilities are integral to wellbeing [@grossEmergingFieldEmotion1998; @grossEmotionRegulationMental1995; @koolePsychologyEmotionRegulation2009; @sapolskyStressStressrelatedDisease2007].
-Emotion regulation refers to psychological processes that influence an initial emotional response [@lewisAdvancesProblemsChallenges2010a], including modulation of positive and negative affective states [@koolePsychologyEmotionRegulation2009].
+Emotion regulation refers to psychological processes that influence an emotional response [@lewisAdvancesProblemsChallenges2010a], including modulation of positive and negative affective states [@koolePsychologyEmotionRegulation2009].
 This also includes attenuating upsetting, or enhancing positive aspects, of a situation [@grossEmergingFieldEmotion1998].
-Poor emotion regulation strategies are associated with worsened social functioning [i.e., avoidance of close relationships, few positive relationships, and disinclination to share emotions with others; @grossAntecedentandResponsefocusedEmotion1998; @grossEmotionRegulationAffective2002; @koolePsychologyEmotionRegulation2009], as well as lower self-esteem and life satisfaction [@grossAntecedentandResponsefocusedEmotion1998; @koolePsychologyEmotionRegulation2009; @ochsnerRethinkingFeelingsFMRI2002].
+Poor emotion regulation strategies are associated with worsened social functioning [e.g., avoidance of close relationships, few positive relationships, and disinclination to share emotions with others; @grossAntecedentandResponsefocusedEmotion1998; @grossEmotionRegulationAffective2002; @koolePsychologyEmotionRegulation2009], as well as lower self-esteem and life satisfaction [@grossAntecedentandResponsefocusedEmotion1998; @koolePsychologyEmotionRegulation2009; @ochsnerRethinkingFeelingsFMRI2002].
 Poor emotion regulation is also associated with bullying and victimization among youth [@walcottRelationDisinhibitionEmotion2004], physical ailments such as hypertension and coronary heart disease [@hintonMechanismsEfficacyCBT2009; @jorgensenElevatedBloodPressure1996], exacerbated cortisol reactivity to stressors [@wirtzLowSocialSupport2006], and impaired cognitive functioning [@keenanEmotionDysregulationRisk2000; @ochsnerRethinkingFeelingsFMRI2002].
 
-While emotion regulation is frequently studied in the context of negative emotion, it also pertains to modulating positive emotion.
-For example, savoring refers to an awareness of positive experiences and the use of positive emotion regulation strategies to enhance and extend positive feelings that are derived from those experiences [@bryantFourfactorModelPerceived1989; @bryantSavoringBeliefsInventory2003a; @bryantSavoringNewModel2007; @bryantUnderstandingProcessesThat2011; @smithSavoringWellbeingMapping2017].
-People initiate savoring responses in reaction to a positive event or affect as a way to maintain, intensify, or prolong the initial positive experience [@bryantSavoringNewModel2007].
-While savoring, one may reminisce about past positive experiences, focus on ongoing positive experiences as they occur, or anticipate the enjoyments of future positive experiences [@bryantSavoringNewModel2007].
-Regardless of the temporal focus, savoring processes regulate positive emotions in the present moment.
+<!-- People initiate savoring responses in reaction to a positive event or affect as a way to maintain, intensify, or prolong the initial positive experience [@bryantSavoringNewModel2007]. -->
+<!-- While savoring, one may reminisce about past positive experiences, focus on ongoing positive experiences as they occur, or anticipate the enjoyments of future positive experiences [@bryantSavoringNewModel2007]. -->
+<!-- Regardless of the temporal focus, savoring processes regulate positive emotions in the present moment. -->
 
-Savoring is associated with a number of positive outcomes.
-Research has indicated that those with a greater capacity to savor possess increased life satisfaction, affective intensity, and self-esteem [@bryantUnderstandingProcessesThat2011].
-Past research has also revealed that savoring is related to present happiness, total percent of time feeling happy versus sad, extraversion, optimism, and self-esteem.
-Furthermore, savoring is negatively associated with depression, neuroticism, and hopelessness [@bryantSavoringBeliefsInventory2003a; @eisnerPositiveAffectRegulation2009; @houSavoringModeratesAssociation2016; @kahrilasSavoringMomentLink2020; @ramseyAgeDifferencesSubjective2014; @smithSavoringResiliencePsychological2015].
-A separate study found that savoring the moment is related to higher life satisfaction, subjective happiness, and overall higher levels of positive affect [@hurleyResultsStudyIncrease2012].
-Other research has similarly revealed that savoring was strongly related to higher levels of present happiness, higher self-esteem, and lower reported levels of depression [@bryantSavoringBeliefsInventory2003a].
-Further, increased savoring capacity is associated with pain resilience [@thongBufferingRolePositive2016].
+<!-- Savoring is associated with a number of positive outcomes. -->
+<!-- Research has indicated that those with a greater capacity to savor possess increased life satisfaction, affective intensity, and self-esteem [@bryantUnderstandingProcessesThat2011]. -->
+<!-- Past research has also revealed that savoring is related to present happiness, total percent of time feeling happy versus sad, extraversion, optimism, and self-esteem. -->
+<!-- Furthermore, savoring is negatively associated with depression, neuroticism, and hopelessness [@bryantSavoringBeliefsInventory2003a; @eisnerPositiveAffectRegulation2009; @houSavoringModeratesAssociation2016; @kahrilasSavoringMomentLink2020; @ramseyAgeDifferencesSubjective2014; @smithSavoringResiliencePsychological2015]. -->
+<!-- A separate study found that savoring the moment is related to higher life satisfaction, subjective happiness, and overall higher levels of positive affect [@hurleyResultsStudyIncrease2012]. -->
+<!-- Other research has similarly revealed that savoring was strongly related to higher levels of present happiness, higher self-esteem, and lower reported levels of depression [@bryantSavoringBeliefsInventory2003a]. -->
+<!-- Further, increased savoring capacity is associated with pain resilience [@thongBufferingRolePositive2016]. -->
 
-The original conceptual formulation of savoring [@bryantSavoringNewModel2007] is predicated on the assumption that people typically initiate savoring responses in reaction to positive events or affect, which people regulate through cognitive or behavioral strategies.
-Thus, difficulties processing positive emotions and events preclude the ability to savor; one's ability to *regulate* positive emotion is predicated upon one's ability to attend and *react* to positive emotions.
+<!-- The original conceptual formulation of savoring [@bryantSavoringNewModel2007] is predicated on the assumption that people typically initiate savoring responses in reaction to positive events or affect, which people regulate through cognitive or behavioral strategies. -->
+<!-- Thus, difficulties processing positive emotions and events preclude the ability to savor; --> 
+Emotion regulation and reactivity are interrelated constructs.
+An individual's ability to *regulate* emotions is predicated upon the capacity to attend and *react* to emotions.
 Emotion reactivity broadly refers to an individual's initial baseline affective response to a stimulus, which spans feelings, behavioral manifestations, and bodily reactions [@grossEmotionRegulationConceptual2007]. 
 Consistent with the circumplex framework [@russellCircumplexModelAffect1980], emotion reactivity varies in arousal (not arousing to strongly arousing) and valence [negative to positive; @grossEmotionEmotionRegulation2014].
-As noted earlier, emotion regulation pertains to the psychological processes that influence an initial emotional response [@lewisAdvancesProblemsChallenges2010a] and implies that a change has occurred from initial reactivity.
-Disentangling emotion reactivity and regulation is complex [@joormannExaminingEmotionRegulation2016a], and the two often share considerable temporal overlap in terms of affective chronometry [@davidsonReactivityRecoveryRegulation2018].
+Emotion regulation implies that a change has occurred from the initial reactivity to an affective stimulus.
+
 A distinction between reactivity and regulation may lie in whether the motivational significance of the emotional stimulus is being altered [@hajcakSignificanceSignificanceEmpirical2020].
-Emotion reactivity implies that the motivational significance of the stimulus is not being altered, while regulation (whether consciously or unconsciously) implies that it is being manipulated, and both of these processes are influenced by a host of related factors (e.g., contextual, environmental, neurobiological).
-This view is supported by a recent paper by Foti and Hajcak [-@hajcakSignificanceSignificanceEmpirical2020] where they conceptualize the late positive potential (LPP; a sustained positive electroencephalography component that is increased for emotionally arousing stimuli) as an index for motivational significance that can be manipulated across an array of experimental paradigms [@hajcakSignificanceSignificanceEmpirical2020]. 
-While savoring is a trait-like measure of one's ability to regulate positive emotions, positive affectivity (PA) pertains to one's reactivity to positive emotions, or a trait-like disposition to recognize, attend to, and ultimately experience positive emotions [e.g., happiness, interest, energy, and self-assurance; @watsonPositiveAffectivity2009].
-Understanding how individual differences modify the neural correlates of positive emotion reactivity/regulation may facilitate development of neuroscience-informed interventions for those with psychological problems marked by low levels of positive emotion (e.g., depression). 
+Emotion reactivity implies that the motivational significance of the stimulus is not being altered, while regulation (whether consciously or unconsciously) implies that it is being manipulated, and both of these processes are influenced by a host of related factors (e.g., contextual and environmental, etc.).
+Disentangling emotion reactivity and regulation is complex [@joormannExaminingEmotionRegulation2016a], and these two constructs share considerable temporal overlap in terms of affective chronometry [@davidsonReactivityRecoveryRegulation2018].
+Many types of psychopathology are known to involve dysfunctions in emotion reactivity and regulation [e.g., @liuImplicitEmotionRegulation2018; @moserNeuralMarkersPositive2014; @siltonRegulatingPositiveEmotions2020a; @weinbergDecreasedNeuralResponse2017; @weinbergDistinctAssociationsLow2018], and identifying the temporal course of these constructs will contribute to informing the development of more targeted psychological treatments and interventions.
 
-ERP studies investigating emotion reactivity commonly incorporate both negatively- and positively-valenced stimuli. 
-The same is not true of emotion regulation studies, where it is convention to investigate regulation conditions with only negative or positive images [e.g., @krompingerModulationsElectrophysiologicalResponse2008; @moserElectrophysiologicalCorrelatesDecreasing2009].
+Electroencephalography (EEG) is a psychophysiological method that can be used for disentangling the chronometry of reactivity and regulation processes. 
+In particular, event-related potentials (ERPs) facilitate assessment of neural responses to affective stimuli with millisecond temporal resolution [@olofssonAffectivePictureProcessing2008].
+This is critical to evaluate the rapid processing of and dynamic processes that are characteristic of emotional reactivity and regulation [@olofssonAffectivePictureProcessing2008]. Thus, the present study used EEG methods to explore the time course of reactivity and regulation of positive and negative affective visual stimuli. 
+Previous psychophysiological research has typically focused on either the neural correlates of reactivity *or* regulation, within positive or negative valence task conditions or mood states, which has precluded researchers from identifying a comprehensive picture of the temporal course of reactivity and regulation in the context of both positive and negative valence. 
+Incorporating negative and positive images in emotion reactivity and regulation paradigms facilitates direct comparison of reactivity and regulation conditions across valenced stimuli.
 Incorporating negative and positive images in an emotion regulation paradigm facilitates direct comparison of regulation conditions for either stimuli, differences in the neural time course of negative versus positive emotion regulation, and how these processes are similarly and uniquely modifiable.
-To this end, the present study utilized an experimental paradigm where participants were shown blocks of images of varying arousal (positive, negative, and neutral) with different regulation instructions (increasing/decreasing emotional intensity in response to images, or passively watching) while recording electroencephalography (EEG) from participants. 
-Additionally, participants were asked to complete self-report measures assessing for PA and savoring capacity.
+To this end, in the present study, we implemented an experimental paradigm where participants were shown blocks of images of varying arousal (positive, negative, and neutral) with different regulation instructions (increasing/decreasing emotional intensity in response to images, or passively watching).
 
+<!-- While savoring is a trait-like measure of one's ability to regulate positive emotions, positive affectivity (PA) pertains to one's reactivity to positive emotions, or a trait-like disposition to recognize, attend to, and ultimately experience positive emotions [e.g., happiness, interest, energy, and self-assurance; @watsonPositiveAffectivity2009]. -->
+<!-- Understanding how individual differences modify the neural correlates of positive emotion reactivity/regulation may facilitate development of neuroscience-informed interventions for those with psychological problems marked by low levels of positive emotion (e.g., depression).  -->
+
+<!-- ERP studies investigating emotion reactivity commonly incorporate both negatively- and positively-valenced stimuli.  -->
+<!-- The same is not true of emotion regulation studies, where it is convention to investigate regulation conditions with only negative or positive images [e.g., @krompingerModulationsElectrophysiologicalResponse2008; @moserElectrophysiologicalCorrelatesDecreasing2009]. -->
 ### Neural Correlates of Emotion Reactivity and Regulation
 Different psychological problems may manifest as disordered emotion reactivity and/or regulation that may be important considerations in devising interventions for individuals with psychopathology [@weinbergDistinctAssociationsLow2018].
 For example, depression is associated with attenuated emotional reactivity to affective stimuli [e.g., @fotiReducedElectrocorticalResponse2010; @weinbergDepressionReducedNeural2016] and ineffective regulation efforts that are marked by reduced recruitment of structures implicated in cognitive control and attention allocation [@pietrekNeuromagneticIndicationDysfunctional2012].
 This research could inform depression treatment by focusing on reactivity to emotional stimuli (e.g., mindfulness-based interventions) and enhancing emotion regulation (e.g., cognitive behavioral therapy to facilitate reappraisal). 
-Electroencephalography (EEG) is a psychophysiological method that can be used for disentangling the chronometry of reactivity and regulation processes. 
-In particular, event-related potentials (ERPs) facilitate assessment of neural responses to affective stimuli with millisecond temporal resolution [@olofssonAffectivePictureProcessing2008].
-This is critical to evaluate the rapid processing of and dynamic processes that are characteristic of emotional responsivity [@olofssonAffectivePictureProcessing2008]. 
 
 #### Early Visual ERP Components Associated with Affective Processing
 The N170 and early posterior negativity (EPN) are early visual EEG components that are modulated by affective stimuli [@schuppAffectivePictureProcessing2012].
