@@ -5,6 +5,7 @@ library(tidyverse)
 library(here)
 library(magick)
 library(kableExtra)
+library(GGally)
 
 ## peaks from hs_per_pca script:
 # [1] "The maximum timepoint for RC2 is 370.800031605892"
@@ -16,13 +17,14 @@ library(kableExtra)
 # [7] "The maximum timepoint for RC17 is 1176.17541866626"
 
 # load data
-cor_dat <- read_csv("data/paper_three/dat_for_analyses_2021-03-18.csv")%>%
-  rename("381 ms Comp" = "RC2", # rename components
-         "740 ms Comp" = "RC3",
-         "124 ms Comp" = "RC5",
-         "162 ms Comp" = "RC11",
-         "Neg 259 ms Comp" = "RC12",
-         "Pos 259 ms Comp" = "pos_RC12")
+cor_dat <- read_csv("data/paper_three/dat_for_analyses_2021-03-19.csv") %>%
+  filter(!is.na(RC2)) %>%
+  rename("371 ms Comp" = "RC2", # rename components
+         "736 ms Comp" = "RC3",
+         "134 ms Comp" = "RC5",
+         "195 ms Comp" = "RC7",
+         "257 ms Comp" = "RC8",
+         "1176 ms Comp" = "RC17")
 
 glimpse(cor_dat)
 
@@ -30,35 +32,19 @@ glimpse(cor_dat)
 cor_list_fun <- function(block_type) {
   tab <- cor_dat %>%
     filter(block == block_type) %>%
-    select(`381 ms Comp`:valence,
-           anticipating:reminiscing,
-           pos_affectivity,
-           neg_affectivity,
-           erq_reappraisal,
-           erq_suppression) %>%
-    relocate(`124 ms Comp`,
-             `162 ms Comp`,
-             `Neg 259 ms Comp`,
-             `Pos 259 ms Comp`,
-             `381 ms Comp`,
-             `740 ms Comp`,
-             everything()) %>%
-    rename("1. 124 ms Comp" = "124 ms Comp",
-           "2. 162 ms Comp" = "162 ms Comp",
-           "3. Neg 259 ms Comp" =  "Neg 259 ms Comp",
-           "4. Pos 259 ms Comp" = "Pos 259 ms Comp",
-           "5. 381 ms Comp" = "381 ms Comp",
-           "6. 740 ms Comp" = "740 ms Comp",
-           "7. Arousal Ratings" = arousal,
-           "8. Valence Ratings" = valence,
-           "9. Difficulty Ratings" = difficulty,
-           "10. PA" = pos_affectivity,
-           "11. NA" = neg_affectivity,
-           "12. Ant" = anticipating,
-           "13. StM" = savoring_moment,
-           "14. Rem" = reminiscing,
-           "15. Reapp" = erq_reappraisal,
-           "16. Supp" = erq_suppression)
+    select(`371 ms Comp`:`1176 ms Comp`,
+           phq_total,
+           masq_pa:masq_ad,
+           pswq_total,
+           panas_pos_total:panas_neg_total,
+           pss_total) %>%
+    relocate(`134 ms Comp`,
+             `195 ms Comp`,
+             `257 ms Comp`,
+             `371 ms Comp`,
+             `736 ms Comp`,
+             `1176 ms Comp`,
+             everything())
 
   #Compute correlation matrix
   x <- as.matrix(tab)
@@ -100,44 +86,98 @@ cor_list_fun <- function(block_type) {
   colnames(tab) <- paste0(c(1:15), ".")
 
   tab %>%
-    mutate(" " = c("1. 124 ms Comp",
-                   "2. 162 ms Comp",
-                   "3. Neg 259 ms Comp",
-                   "4. Pos 259 ms Comp",
-                   "5. 381 ms Comp",
-                   "6. 740 ms Comp",
-                   "7. Arousal Ratings",
-                   "8. Valence Ratings",
-                   "9. Difficulty Ratings",
-                   "10. PA",
-                   "11. NA",
-                   "12. Ant",
-                   "13. StM",
-                   "14. Rem",
-                   "15. Reapp",
-                   "16. Supp")) %>%
+    mutate(" " = c("1. 134 ms Comp",
+                   "2. 195 ms Comp",
+                   "3. 257 ms Comp",
+                   "4. 371 ms Comp",
+                   "5. 736 ms Comp",
+                   "6. 1176 ms Comp",
+                   "7. Depression",
+                   "8. MASQ PA",
+                   "9. MASQ NA",
+                   "10. MASQ AA",
+                   "11. MASQ AD",
+                   "12. Worry",
+                   "13. PANAS PA",
+                   "14. PANAS NA",
+                   "15. Stress")) %>%
     select(" ", everything())
 }
 
 corr_list <- map(unique(cor_dat$block), ~ cor_list_fun(.x))
 
-save.image(file = paste0("data/paper_two/analyses/", Sys.Date(), "_correlation_table-data", ".RData"))
+#save.image(file = paste0("data/paper_two/analyses/", Sys.Date(), "_correlation_table-data", ".RData"))
 
 ## create tables
-blocks <- c("Negative Increase", "Negative Decrease", "Negative Watch",
+blocks <- c("Negative Watch",
             "Neutral Watch",
-            "Positive Watch", "Positive Decrease", "Positive Increase")
+            "Positive Watch")
 
 map2(corr_list, blocks, ~ {
   .x %>%
-    kable(linesep = "", escape = FALSE, booktabs = TRUE, align = c("l", rep("r", 16)), caption = .y) %>%
+    kable(linesep = "", escape = FALSE, booktabs = TRUE, align = c("l", rep("r", 14)), caption = .y) %>%
     kable_styling(latex_options = "scale_down", font_size = 12) %>%
-    column_spec(1:16, width = "3em") %>%
+    column_spec(1:15, width = "3em") %>%
     footnote(general_title = "Note.",
              escape = FALSE,
              general = "*$p < .05$. PA = positive affectivity, NA = negative affectivity,
-           Ant = anticipating, StM = savoring the moment, Rem = reminiscing,
-           Reapp = reappraisal, Supp = suppression.",
+          AA = Anxious Arousal, AD = Anhedonic Depression.",
              threeparttable = TRUE,
              footnote_as_chunk = TRUE)
 })
+
+# create scatterplot matrix for each block
+
+pos <-
+  cor_dat %>%
+  filter(block == "Pos_Watch") %>%
+  select(`371 ms Comp`:`1176 ms Comp`,
+         phq_total,
+         masq_pa:masq_ad,
+         pswq_total,
+         panas_pos_total:panas_neg_total,
+         pss_total) %>%
+  relocate(`134 ms Comp`,
+           `195 ms Comp`,
+           `257 ms Comp`,
+           `371 ms Comp`,
+           `736 ms Comp`,
+           `1176 ms Comp`,
+           everything()) %>%
+    ggpairs(title = "Positive Watch")
+
+neg <-
+  cor_dat %>%
+  filter(block == "Neg_Watch") %>%
+  select(`371 ms Comp`:`1176 ms Comp`,
+         phq_total,
+         masq_pa:masq_ad,
+         pswq_total,
+         panas_pos_total:panas_neg_total,
+         pss_total) %>%
+  relocate(`134 ms Comp`,
+           `195 ms Comp`,
+           `257 ms Comp`,
+           `371 ms Comp`,
+           `736 ms Comp`,
+           `1176 ms Comp`,
+           everything()) %>%
+  ggpairs(title = "Negative Watch")
+
+neu <-
+  cor_dat %>%
+  filter(block == "Neu_Watch") %>%
+  select(`371 ms Comp`:`1176 ms Comp`,
+         phq_total,
+         masq_pa:masq_ad,
+         pswq_total,
+         panas_pos_total:panas_neg_total,
+         pss_total) %>%
+  relocate(`134 ms Comp`,
+           `195 ms Comp`,
+           `257 ms Comp`,
+           `371 ms Comp`,
+           `736 ms Comp`,
+           `1176 ms Comp`,
+           everything()) %>%
+  ggpairs(title = "Neutral Watch")

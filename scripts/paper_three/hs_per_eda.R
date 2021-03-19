@@ -207,94 +207,90 @@ ggscatterhist(dat, x = "panas_neg_total", y = "pss_total",
               margin.params = list(fill = "red"))
 
 ## -- bivariate relations with EEG components
-dat <-
+dat_wide <-
   dat %>%
   pivot_wider(names_from = block,
               values_from = RC2:RC17) %>%
   relocate(pid:race, RC2_Neg_Watch:RC17_NA) %>%
   select(-c(RC2_NA, RC3_NA, RC5_NA, RC7_NA, RC8_NA, RC17_NA))
 
-## omit negative watch condition for participants 2258577, as she closed her eyes during those blocks
-dat %>%
-  filter(pid == 22585577)
 ## RC2
-ggscatterhist(dat, x = "RC2_Pos_Watch", y = "RC2_Neg_Watch",
+ggscatterhist(dat_wide, x = "RC2_Pos_Watch", y = "RC2_Neg_Watch",
               color = "#00AFBB",
               margin.params = list(fill = "red"))
 
-ggscatterhist(dat, x = "RC2_Pos_Watch", y = "RC2_Neu_Watch",
+ggscatterhist(dat_wide, x = "RC2_Pos_Watch", y = "RC2_Neu_Watch",
               color = "#00AFBB",
               margin.params = list(fill = "red"))
 
-ggscatterhist(dat, x = "RC2_Neu_Watch", y = "RC2_Neg_Watch",
+ggscatterhist(dat_wide, x = "RC2_Neu_Watch", y = "RC2_Neg_Watch",
               color = "#00AFBB",
               margin.params = list(fill = "red"))
 
 ## RC3
-ggscatterhist(dat, x = "RC3_Pos_Watch", y = "RC3_Neg_Watch",
+ggscatterhist(dat_wide, x = "RC3_Pos_Watch", y = "RC3_Neg_Watch",
               color = "#00AFBB",
               margin.params = list(fill = "red"))
 
-ggscatterhist(dat, x = "RC3_Pos_Watch", y = "RC3_Neu_Watch",
+ggscatterhist(dat_wide, x = "RC3_Pos_Watch", y = "RC3_Neu_Watch",
               color = "#00AFBB",
               margin.params = list(fill = "red"))
 
-ggscatterhist(dat, x = "RC3_Neu_Watch", y = "RC3_Neg_Watch",
+ggscatterhist(dat_wide, x = "RC3_Neu_Watch", y = "RC3_Neg_Watch",
               color = "#00AFBB",
               margin.params = list(fill = "red"))
 
 ## RC5
-ggscatterhist(dat, x = "RC5_Pos_Watch", y = "RC5_Neg_Watch",
+ggscatterhist(dat_wide, x = "RC5_Pos_Watch", y = "RC5_Neg_Watch",
               color = "#00AFBB",
               margin.params = list(fill = "red"))
 
-ggscatterhist(dat, x = "RC5_Pos_Watch", y = "RC5_Neu_Watch",
+ggscatterhist(dat_wide, x = "RC5_Pos_Watch", y = "RC5_Neu_Watch",
               color = "#00AFBB",
               margin.params = list(fill = "red"))
 
-ggscatterhist(dat, x = "RC5_Neu_Watch", y = "RC5_Neg_Watch",
+ggscatterhist(dat_wide, x = "RC5_Neu_Watch", y = "RC5_Neg_Watch",
               color = "#00AFBB",
               margin.params = list(fill = "red"))
 
 ## RC7
-ggscatterhist(dat, x = "RC7_Pos_Watch", y = "RC7_Neg_Watch",
+ggscatterhist(dat_wide, x = "RC7_Pos_Watch", y = "RC7_Neg_Watch",
               color = "#00AFBB",
               margin.params = list(fill = "red"))
 
-ggscatterhist(dat, x = "RC7_Pos_Watch", y = "RC7_Neu_Watch",
+ggscatterhist(dat_wide, x = "RC7_Pos_Watch", y = "RC7_Neu_Watch",
               color = "#00AFBB",
               margin.params = list(fill = "red"))
 
-ggscatterhist(dat, x = "RC7_Neu_Watch", y = "RC7_Neg_Watch",
+ggscatterhist(dat_wide, x = "RC7_Neu_Watch", y = "RC7_Neg_Watch",
               color = "#00AFBB",
               margin.params = list(fill = "red"))
 
 ## RC8
-ggscatterhist(dat, x = "RC8_Pos_Watch", y = "RC8_Neg_Watch",
+ggscatterhist(dat_wide, x = "RC8_Pos_Watch", y = "RC8_Neg_Watch",
               color = "#00AFBB",
               margin.params = list(fill = "red"))
 
-ggscatterhist(dat, x = "RC8_Pos_Watch", y = "RC8_Neu_Watch",
+ggscatterhist(dat_wide, x = "RC8_Pos_Watch", y = "RC8_Neu_Watch",
               color = "#00AFBB",
               margin.params = list(fill = "red"))
 
-ggscatterhist(dat, x = "RC8_Neu_Watch", y = "RC8_Neg_Watch",
+ggscatterhist(dat_wide, x = "RC8_Neu_Watch", y = "RC8_Neg_Watch",
               color = "#00AFBB",
               margin.params = list(fill = "red"))
 
 ## RC17
-ggscatterhist(dat, x = "RC17_Pos_Watch", y = "RC17_Neg_Watch",
+ggscatterhist(dat_wide, x = "RC17_Pos_Watch", y = "RC17_Neg_Watch",
               color = "#00AFBB",
               margin.params = list(fill = "red"))
 
-ggscatterhist(dat, x = "RC17_Pos_Watch", y = "RC17_Neu_Watch",
+ggscatterhist(dat_wide, x = "RC17_Pos_Watch", y = "RC17_Neu_Watch",
               color = "#00AFBB",
               margin.params = list(fill = "red"))
 
-ggscatterhist(dat, x = "RC17_Neu_Watch", y = "RC17_Neg_Watch",
+ggscatterhist(dat_wide, x = "RC17_Neu_Watch", y = "RC17_Neg_Watch",
               color = "#00AFBB",
               margin.params = list(fill = "red"))
-
 
 # save the file
 write_csv(x = dat,
