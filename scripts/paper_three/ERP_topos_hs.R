@@ -188,7 +188,7 @@ plot_layout(design = layout,
                                                           size = 16)))
 
 ggsave(here("images", "paper_3", "ERP Topo Images", "rc5_plots.png"),
-       plot = rc7_component_plots,
+       plot = rc5_component_plots,
        height = 5,
        width = 8)
 
@@ -206,7 +206,7 @@ rc7_component_plots <-
                                                           size = 16)))
 
 ggsave(here("images", "paper_3", "ERP Topo Images", "rc7_plots.png"),
-       plot = rc8_component_plots,
+       plot = rc7_component_plots,
        height = 5,
        width = 8)
 
@@ -224,7 +224,7 @@ rc8_component_plots <-
                                                           size = 16)))
 
 ggsave(here("images", "paper_3", "ERP Topo Images", "rc8_plots.png"),
-       plot = rc2_component_plots,
+       plot = rc8_component_plots,
        height = 5,
        width = 8)
 
@@ -242,15 +242,15 @@ rc2_component_plots <-
                                                           size = 16)))
 
 ggsave(here("images", "paper_3", "ERP Topo Images", "rc2_plots.png"),
-       plot = rc3_component_plots,
+       plot = rc2_component_plots,
        height = 5,
        width = 8)
 
 rc3_component_plots <-
-  topo_list[[4]][[2]] +
-  topo_list[[4]][[1]] +
-  topo_list[[4]][[3]] +
-  watch_plots[[4]] +
+  topo_list[[5]][[2]] +
+  topo_list[[5]][[1]] +
+  topo_list[[5]][[3]] +
+  watch_plots[[5]] +
   plot_layout(design = layout,
               heights = c(1, 1.4),
               widths = 2,
