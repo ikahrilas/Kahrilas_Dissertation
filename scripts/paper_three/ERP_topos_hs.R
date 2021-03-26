@@ -9,8 +9,8 @@ library(patchwork)
 #'
 #' read in data
 dat <- read_csv(here("data", "paper_three", "hs_per_temp_fac_score_erp.csv")) %>%
-  filter(comp %in% c("RC2", "RC3", "RC7", "RC8")) # retain only those components identified in study two
-                                                  # that are sensitive to image valence
+  filter(comp %in% c("RC2", "RC3", "RC5", "RC7", "RC8")) # retain only those components identified in study two
+                                                         # that are sensitive to image valence
 ## peaks from hs_per_pca script:
 # [1] "The maximum timepoint for RC2 is 370.800031605892"
 # [2] "The maximum timepoint for RC3 is 736.346627189118"
@@ -22,6 +22,7 @@ dat <- read_csv(here("data", "paper_three", "hs_per_temp_fac_score_erp.csv")) %>
 
 ############################################
 ## electrodes for each component ordered chronologically
+rc5_elec <- c("A29", "B26")
 rc7_elec <- c("A29", "B26", "A31", "B30")
 rc8_elec <- c("B21", "B28")
 rc2_elec <- c("A29", "B26")
@@ -30,19 +31,22 @@ rc3_elec <- c("A29", "B26", "A26", "B23",
               "A30", "B27", "A25", "B22")
 ###########################################
 ## list of component sites for map function ordered chronologically
-component_list <- list("RC7",
+component_list <- list("RC5",
+                       "RC7",
                        "RC8",
                        "RC2",
                        "RC3")
 
 # list of component selections
-elec_selections <- list(rc7_elec,
+elec_selections <- list(rc5_elec,
+                        rc7_elec,
                         rc8_elec,
                         rc2_elec,
                         rc3_elec)
 
 # titles for each of the plots
-titles <- list("195 ms Component Waveforms",
+titles <- list("134 ms Component Waveforms",
+               "195 ms Component Waveforms",
                "257 ms Component Waveforms",
                "371 ms Component Waveforms",
                "736 ms Component Waveforms")
@@ -170,7 +174,7 @@ AAABBBCCC
 DDDDDDDDD
 '
 
-rc7_component_plots <-
+rc5_component_plots <-
   topo_list[[1]][[2]] +
   topo_list[[1]][[1]] +
   topo_list[[1]][[3]] +
@@ -179,20 +183,38 @@ plot_layout(design = layout,
             heights = c(1, 1.4),
             widths = 2,
             guides = "auto") +
+  plot_annotation(title = "134 ms Component",
+                  theme = theme(plot.title = element_text(hjust = 0.5,
+                                                          size = 16)))
+
+ggsave(here("images", "paper_3", "ERP Topo Images", "rc5_plots.png"),
+       plot = rc7_component_plots,
+       height = 5,
+       width = 8)
+
+rc7_component_plots <-
+  topo_list[[2]][[2]] +
+  topo_list[[2]][[1]] +
+  topo_list[[2]][[3]] +
+  watch_plots[[2]] +
+  plot_layout(design = layout,
+              heights = c(1, 1.4),
+              widths = 2,
+              guides = "auto") +
   plot_annotation(title = "195 ms Component",
                   theme = theme(plot.title = element_text(hjust = 0.5,
                                                           size = 16)))
 
 ggsave(here("images", "paper_3", "ERP Topo Images", "rc7_plots.png"),
-       plot = rc7_component_plots,
+       plot = rc8_component_plots,
        height = 5,
        width = 8)
 
 rc8_component_plots <-
-  topo_list[[2]][[2]] +
-  topo_list[[2]][[1]] +
-  topo_list[[2]][[3]] +
-  watch_plots[[2]] +
+  topo_list[[3]][[2]] +
+  topo_list[[3]][[1]] +
+  topo_list[[3]][[3]] +
+  watch_plots[[3]] +
   plot_layout(design = layout,
               heights = c(1, 1.4),
               widths = 2,
@@ -202,15 +224,15 @@ rc8_component_plots <-
                                                           size = 16)))
 
 ggsave(here("images", "paper_3", "ERP Topo Images", "rc8_plots.png"),
-       plot = rc8_component_plots,
+       plot = rc2_component_plots,
        height = 5,
        width = 8)
 
 rc2_component_plots <-
-  topo_list[[3]][[2]] +
-  topo_list[[3]][[1]] +
-  topo_list[[3]][[3]] +
-  watch_plots[[3]] +
+  topo_list[[4]][[2]] +
+  topo_list[[4]][[1]] +
+  topo_list[[4]][[3]] +
+  watch_plots[[4]] +
   plot_layout(design = layout,
               heights = c(1, 1.4),
               widths = 2,
@@ -220,7 +242,7 @@ rc2_component_plots <-
                                                           size = 16)))
 
 ggsave(here("images", "paper_3", "ERP Topo Images", "rc2_plots.png"),
-       plot = rc2_component_plots,
+       plot = rc3_component_plots,
        height = 5,
        width = 8)
 
@@ -241,4 +263,5 @@ ggsave(here("images", "paper_3", "ERP Topo Images", "rc3_plots.png"),
        plot = rc3_component_plots,
        height = 5,
        width = 8)
+
 
