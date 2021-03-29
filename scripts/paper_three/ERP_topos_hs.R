@@ -24,7 +24,8 @@ dat <- read_csv(here("data", "paper_three", "hs_per_temp_fac_score_erp.csv")) %>
 ## electrodes for each component ordered chronologically
 rc5_elec <- c("A29", "B26")
 rc7_elec <- c("A29", "B26", "A31", "B30")
-rc8_elec <- c("B21", "B28")
+neg_rc8_elec <- c("B21", "B28")
+pos_rc8_elec <- c("A29", "B26", "A31", "B30")
 rc2_elec <- c("A29", "B26")
 rc3_elec <- c("A29", "B26", "A26", "B23",
               "B28",
@@ -34,23 +35,25 @@ rc3_elec <- c("A29", "B26", "A26", "B23",
 component_list <- list("RC5",
                        "RC7",
                        "RC8",
+                       "RC8",
                        "RC2",
                        "RC3")
 
 # list of component selections
 elec_selections <- list(rc5_elec,
                         rc7_elec,
-                        rc8_elec,
+                        neg_rc8_elec,
+                        pos_rc8_elec,
                         rc2_elec,
                         rc3_elec)
 
 # titles for each of the plots
 titles <- list("134 ms Component Waveforms",
                "195 ms Component Waveforms",
-               "257 ms Component Waveforms",
+               "Positive 257 ms Component Waveforms",
+               "Negative 257 ms Component Waveforms",
                "371 ms Component Waveforms",
                "736 ms Component Waveforms")
-
 
 # change block variable to factor, reorder, and rename
 dat$block <- factor(dat$block, levels = c("Neg_Watch",
@@ -210,7 +213,7 @@ ggsave(here("images", "paper_3", "ERP Topo Images", "rc7_plots.png"),
        height = 5,
        width = 8)
 
-rc8_component_plots <-
+neg_rc8_component_plots <-
   topo_list[[3]][[2]] +
   topo_list[[3]][[1]] +
   topo_list[[3]][[3]] +
@@ -219,20 +222,39 @@ rc8_component_plots <-
               heights = c(1, 1.4),
               widths = 2,
               guides = "auto") +
-  plot_annotation(title = "257 ms Component (EPN)",
+  plot_annotation(title = "Negative 257 ms Component (EPN)",
                   theme = theme(plot.title = element_text(hjust = 0.5,
                                                           size = 16)))
 
-ggsave(here("images", "paper_3", "ERP Topo Images", "rc8_plots.png"),
-       plot = rc8_component_plots,
+ggsave(here("images", "paper_3", "ERP Topo Images", "neg_rc8_plots.png"),
+       plot = neg_rc8_component_plots,
        height = 5,
        width = 8)
 
-rc2_component_plots <-
+pos_rc8_component_plots <-
   topo_list[[4]][[2]] +
   topo_list[[4]][[1]] +
   topo_list[[4]][[3]] +
   watch_plots[[4]] +
+  plot_layout(design = layout,
+              heights = c(1, 1.4),
+              widths = 2,
+              guides = "auto") +
+  plot_annotation(title = "Positive 257 ms Component (EPN)",
+                  theme = theme(plot.title = element_text(hjust = 0.5,
+                                                          size = 16)))
+
+ggsave(here("images", "paper_3", "ERP Topo Images", "pos_rc8_plots.png"),
+       plot = pos_rc8_component_plots,
+       height = 5,
+       width = 8)
+
+
+rc2_component_plots <-
+  topo_list[[5]][[2]] +
+  topo_list[[5]][[1]] +
+  topo_list[[5]][[3]] +
+  watch_plots[[5]] +
   plot_layout(design = layout,
               heights = c(1, 1.4),
               widths = 2,
@@ -247,10 +269,10 @@ ggsave(here("images", "paper_3", "ERP Topo Images", "rc2_plots.png"),
        width = 8)
 
 rc3_component_plots <-
-  topo_list[[5]][[2]] +
-  topo_list[[5]][[1]] +
-  topo_list[[5]][[3]] +
-  watch_plots[[5]] +
+  topo_list[[6]][[2]] +
+  topo_list[[6]][[1]] +
+  topo_list[[6]][[3]] +
+  watch_plots[[6]] +
   plot_layout(design = layout,
               heights = c(1, 1.4),
               widths = 2,
