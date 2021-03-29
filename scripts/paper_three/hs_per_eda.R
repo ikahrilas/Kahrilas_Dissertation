@@ -23,7 +23,8 @@ rc3_elec <- c("A29", "B26", "A26", "B23",
               "A30", "B27", "A25", "B22")
 rc5_elec <- c("A29", "B26")
 rc7_elec <- c("A29", "B26", "A31", "B30")
-rc8_elec <- c("B21", "B28")
+neg_rc8_elec <- c("B21", "B28")
+pos_rc8_elec <- c("A29", "B26", "A31", "B30")
 rc17_elec <- c("A29", "B26")
 
 ## code for creating component variables
@@ -52,9 +53,15 @@ temp_score_dat <-
     by = c("pid", "block", "group")) %>%
   full_join(
     temp_score_dat %>%
-      filter(elec %in% rc8_elec) %>%
+      filter(elec %in% neg_rc8_elec) %>%
       group_by(pid, block, group) %>%
-      summarise(RC8 = mean(RC8, na.rm = TRUE)),
+      summarise(nRC8 = mean(RC8, na.rm = TRUE)),
+    by = c("pid", "block", "group")) %>%
+  full_join(
+    temp_score_dat %>%
+      filter(elec %in% pos_rc8_elec) %>%
+      group_by(pid, block, group) %>%
+      summarise(pRC8 = mean(RC8, na.rm = TRUE)),
     by = c("pid", "block", "group")) %>%
   full_join(
     temp_score_dat %>%
@@ -79,7 +86,7 @@ dat$block <- factor(dat$block, levels = c("Neg_Watch",
 dat$block <- droplevels(dat$block)
 levels(dat$block)
 # observe histograms for each of the factors
-comps <- c("RC2", "RC3", "RC5", "RC7", "RC8", "RC17")
+comps <- c("RC2", "RC3", "RC5", "RC7", "nRC8", "pRC8", "RC17")
 
 # observe histograms of component data
 map(comps, ~ {
@@ -212,7 +219,7 @@ dat_wide <-
   pivot_wider(names_from = block,
               values_from = RC2:RC17) %>%
   relocate(pid:race, RC2_Neg_Watch:RC17_NA) %>%
-  select(-c(RC2_NA, RC3_NA, RC5_NA, RC7_NA, RC8_NA, RC17_NA))
+  select(-c(RC2_NA, RC3_NA, RC5_NA, RC7_NA, nRC8_NA, pRC8_NA, RC17_NA))
 
 ## RC2
 ggscatterhist(dat_wide, x = "RC2_Pos_Watch", y = "RC2_Neg_Watch",
