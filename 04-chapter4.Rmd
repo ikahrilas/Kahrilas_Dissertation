@@ -195,34 +195,26 @@ Sixty-nine percent of participants identified as Caucasian, 15% Asian, 8% Hispan
 ### Materials and Procedure
 #### Inclusion Criteria
 
-To determine eligibility, interested participants completed an online screening survey through Opinio.
+To determine eligibility for the SMiLe study, interested participants completed an online screening survey through Opinio.
 Inclusion criteria included the following: participants had to be an undergraduate at the institution from which the study was being conducted, at least 18 years old, and endorse clinically significant levels of depressive symptoms as indicated by a score of greater than 10 on the Patient Health Questionnaire-8 (PHQ-8, Kroenke & Spitzer, 2002; Kroenke et al., 2009).
 For screening purposes, an eight-item version of the PHQ-9 was utilized with the suicidality item omitted (per IRB request).
 Individuals were excluded if they had a history of neurological conditions or head trauma, regular practice of mindfulness in the past six months [which is in line with exclusion criteria used in previous research; e.g., @vandamMindHypeCritical2018], prior use of the Headspace app within the past six months, and unwillingness to join the peer support group (if randomized to the Headspace with Peer Support group).
 
 #### Questionnaire Measures 
 
-Participants completed the Savoring Beliefs Inventory [@bryantSavoringBeliefsInventory2003a] to assess participants’ savoring capacity.
-The SBI measures the perception of one’s ability to feel pleasure through anticipating positive experiences, savoring positive moments as they occur, and reminiscing about past positive events [@bryantSavoringNewModel2007]. 
-The SBI was analyzed as three eight-item subscales pertaining to temporal forms of savoring: anticipating (e.g., “Before a good thing happens, I look forward to it in ways that give me pleasure in the present.”), moment (e.g., “I know how to make the most of a good time.”), and reminiscing (e.g., “I enjoy looking back on happy times from my past.”). 
-Items are rated on a seven-point Likert scale from “1” (strongly disagree) to “7” (strongly agree). Bryant (2003) found moderate to high internal consistency across all three subscales. The present study replicated these findings for aim one analyses (Anticipating, $\omega = .88$; Savoring the Moment, $\omega = .82$; and Reminiscing, $\omega = .87$) and aim two analyses (Anticipating, time one $\omega = .88$ & time two $\omega  = .91$; Savoring the Moment, time one $\omega = .77$ & time two $\omega = .86$; Reminiscing, time one $\omega = .87$ & time two $\omega = .89$).
-
 To evaluate depression severity, the nine-item Patient Health Questionnaire [PHQ-9; @kroenkePHQ9ValidityBrief2001]was administered.
 PHQ-9 items are scored from “0” (not at all) to “3” (nearly every day) and are based on the depression criteria from the Diagnostic and Statistical Manual of Mental Disorders, Fourth Edition. 
-Internal consistency of the PHQ-9 in the present study was good for aim one analyses ($\omega = .85$) and acceptable to good for aim two analyses (time one $\omega = .75$; time two $\omega = .83$).
+Internal consistency of the PHQ-9 in the present study was good ($\omega = .82$).
 
-To assess for positive and negative affectivity as well as anxiety, the 39-item Mood and Anxiety Symptoms Questionnaire (Watson, Clark, et al., 1995; Watson, Weber, et al., 1995) was administered. 
-The MASQ was analyzed as two separate subscales: the eight-item negative affectivity (NA) Scale (MASQ-NA8; e.g., “Felt withdrawn from other people”) and the 14-item positive affectivity (PA) Scale (MASQ-PA14; e.g., “Felt cheerful”), and the 17-item Anxious Arousal Scale (MASQ-AA; e.g., “Startled easily”).
+To assess for positive affectivity and anxious arousal, the 39-item Mood and Anxiety Symptoms Questionnaire (Watson, Clark, et al., 1995; Watson, Weber, et al., 1995) was administered. 
+The 14-item positive affectivity (PA) Scale (MASQ-PA14; e.g., “Felt cheerful”) and the 17-item Anxious Arousal Scale (MASQ-AA; e.g., “Startled easily”) were used for subsequent analyses.
 Previous literature has supported these oblique factors in two independent samples of individuals at-risk for depression and anxiety (Kahrilas et al., 2020; Kendall et al., 2015; Nitschke et al., 2001).
 Participants rated their affectivity and anxiety symptoms using a five-point Likert scale from “1” (not at all) to “5” (extremely).
-Consistent with previous research [@bredemeierScreeningDepressiveDisorders2010], the MASQ scales demonstrated good to excellent internal consistency for aim one analyses (MASQ-NA8, $\omega = .82$; MASQ-PA14, $\omega = .95$; and MASQ-AA, $\omega = .87$) and acceptable to excellent internal consistency for aim two analyses (MASQ-NA8, time one $\omega = .78$ & time two $\omega = .85$; MASQ-PA14, time one $\omega = .93$ & time two $\omega = .95$; and MASQ-AA, time one $\omega = .89$ & time two $\omega = .86$).
+Consistent with previous research [@bredemeierScreeningDepressiveDisorders2010] the MASQ scales demonstrated good to excellent internal consistency (MASQ-PA14, $\omega = .95$ and MASQ-AA, $\omega = .85$).
 
-#### Adherence
-
-Research staff from Headspace emailed user data associated with participants’ free access codes activated in the current study.
-The following information was recorded for each Headspace session: session date, time of day, session course (e.g., Basics), session number within the course, session duration (in minutes), session platform (i.e., iOS, Android, Desktop), and participant access code.
-
-Metrics of adherence used in the present study include the cumulative number of minutes and sessions completed across the first eight weeks of the study (computed as a summation of all minutes spent meditating). Additionally, adherence related to specific content included depression practice, or the percentage of time and sessions (calculated separately) of the total that were from the depression-related course (i.e., Handling Sadness) each week, as well as mental health practice, or the percentage of time and sessions (calculated separately) of the total that were from courses related to mental health each week. Courses that were considered to be related to mental health included: Managing Anxiety, Letting Go of Stress, Transforming Anger, Handling Sadness, Dealing with Regret, Grieving, Happiness, and Self-Esteem. Considering the variability in the amount of time spent using the Headspace app, adherence metrics will be used as predictor variables in additional exploratory analyses (as opposed to using a categorical predictor variable denoting randomization group).
+To measure anxious apprehension, the 16-item Penn State Worry Questionnaire (PSWQ; Meyer et al., 1990) was administered. 
+PSWQ items are rated on a five-point Likert scale from “1” (not at all typical) to “5” (very typical). 
+Meyer and colleagues (1990) found a high degree of internal consistency in the PSWQ, and the present study found excellent consistency ($\omega = 0.94$).
 
 #### Emotion task paradigm
 
