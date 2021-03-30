@@ -178,45 +178,19 @@ No hypotheses were made regarding early visual component activity in response to
 The Supported Mindful Learning (SMiLe) study is a three-month randomized controlled trial investigating the effectiveness of Headspace in reducing psychological symptoms in a sample of college students with depression. 
 Participants that met inclusion criteria were randomized to one of three experimental groups and completed batteries of surveys at four separate timepoints. 
 Approximately 15 students per fall and spring semester were recruited over the course of three years (Fall 2017 - Spring 2020) for a total of six semesters. 
-Students were randomized into one of three groups: Headspace as Usual, Headspace with Peer Support, and a Delayed Headspace as Usual (formerly waitlist control) group.
-The first two groups attended an orientation session providing information on study procedures, basic principles of mindfulness, and the Headspace app. 
-Participants in these groups were then provided an access code that allowed free access to Headspace for three months.
-Participants’ engagement with Headspace was self-guided, though daily use was encouraged. 
-There was no further organized contact between the research team and the Headspace as Usual group (aside from inspection of survey data, the second EEG session, and compensation).
-The Headspace with Peer Support group received additional orientation regarding online and in-person procedures.
-The Delayed Headspace as Usual group did not attend the orientation session and also did not have contact with other study participants.
-At the final assessment three months after baseline, participants in this group were offered the opportunity to meet with research staff and activate access codes for Headspace.
-No hypotheses were made regarding the Headspace as Usual and Headspace with Peer Support in the present study.
-Variables of interest will be examined separately for each group in an exploratory manner, though the groups will be harmonized and compared to the Delayed Headspace as Usual group to maximize statistical power for a priori hypotheses.
-
-Eighty undergraduate students have been recruited thus far from a mid-sized, Midwestern university.
+As noted earlier, only pre-trial baseline data was used fro the present study.
+Eighty undergraduate students were recruited from a mid-sized, Midwestern university for the SMiLe study.
 Participants were recruited using listserv emails, flyers, and Sona postings.
-The randomization procedure for each of the three study groups was as follows. 
-Three different colored markers representing each of the study groups were placed in a bag.
-The number of each marker was predetermined based upon enrollment targets.
-Participants blindly selected a marker from the bag.
-Twenty-nine participants were assigned to the Headspace as Usual group (five of which did not attend an orientation), 36 to the Headspace with Peer Support, and 27 to the Delayed Headspace as Usual group.
-Additionally, a sample ($N$ = 52) of undergraduate students used for a different study in our lab (Kahrilas et al., in preparation) that were not selected on the basis of depression symptoms will be harmonized with the present sample at pre-trial baseline (total $N$ = 134) to investigate the relation between self-report survey data/emotion reactivity and depression severity.
-Of the 80 participants in the present study, 55 participants participated in pre- and post-EEG sessions utilizing an emotion reactivity paradigm.
+Additionally, a sample ($N$ = 52) of undergraduate students used for a different study in our lab (Kahrilas et al., in preparation) that were not selected on the basis of depression symptoms were harmonized with the present sample at pre-trial baseline (total $N$ = 134) for the present study.
 
 ### Participants
-
-Participants included in analyses in the present study ($N$ = 80) were 18 to 27 years old ($M$ = 19.09, $SD$ = 1.51) at baseline, 90% of which identified as female, 6% as male, and 5% as transgender or non-binary.
-One participant (1%) declined to answer.
+Of the 80 participants recruited for the SMiLe study, 72 underwent the EEG paradigm, and nine we excluded due to messy EEG data.
+One participant was dropped from the study following their EEG session, and thus was not included in final analyses.
+This resulted in a final total of 62 from the SMiLe study.
+These 62 participants were pooled with the sample of 52 from Kahrilas et al. (in preparation) for a total $n$ of 114.
+In this harmonized sample, participants were 18 to 29 years old ($M$ = 19.4, $SD$ = 1.64), 75% of which identified as female, 21% as male, 0.9% as transgender, 0.9% as non-binary, and 1.7% as other.
 Seventy-one percent identified as heterosexual, 21% as bisexual, 4% as gay, and 4% as a different sexual orientation.
-Sixty-three percent of participants identified as Caucasian, 13% Hispanic or Latinx, 11% Asian American, 4% Middle Easter, 4% Multi-Racial, 3% Asian, 1% East Asian, 1% as Native Hawaiian or Pacific Islander, and 1% as Other.
-In terms of self-reported family income, 6% reported less than \$25,000, 14% between \$25,000 - \$50,000, 18% between \$50,000 - \$75,000, 20% between \$75,000 - \$100,000, 25% between \$100,000 - \$150,000, 9% between \$150,000 - \$200,000, and 9% over \$200,000. 
-
-A sample of 52 participants from Kahrilas et al. (in preparation) will be harmonized with the present sample.
-This sample ranged in age from 18-29 ($M$ = 19.84 years, $SD$ = 1.95). 
-Fifty-six percent of the sample identified as women and 4% identified as other/non-binary. 
-The sample was 70.6% Caucasian, 17.6% Asian, 2.0% Black or African American, and 7.8% multiracial (2.0% declined to answer); 9.8% reported that they were Hispanic/Latinx and 90.2% were not Hispanic/Latinx. 
-Two percent reported a household income of less than \$10,000, 2% between \$10,000 - \$19,999, 2% between \$20,000 - \$29,999, 6% between \$30,000 - \$49,999, 12% between \$50,000 - \$69,999, 14% between \$70,000 - \$89,999, 15% between \$90,000 - \$109,999, 21% between \$110,000 - \$129,999, and 31% over \$130,000. 
-
-Of the 80 participants in the present study that underwent the EEG paradigm at both timepoints ($N$ = 55) were 18 to 24 years old ($M$ = 18.95, $SD$  = 1.25), 89% of which identified as female, 5% as male, 4% as non-binary or transgender. One participant (2%) declined to answer.
-Seventy-one percent identified as heterosexual, 20% as bisexual, 5% as gay, and 4% as a different sexual orientation.
-Sixty-nine percent of participants identified as Caucasian, 11% Asian American, 11% Hispanic or Latinx, 5% multi-racial, 2% Middle Eastern, and 2% Other.
-In terms of self-reported family income, 4% reported less than \$25,000), 15% between \$25,000 - \$50,000, 18% between \$50,000 - \$75,000, 16% between \$75,000 - \$100,000, 22% between \$100,000 - \$150,000, 13% between \$150,000 - \$200,000, and 13% over \$200,000.
+Sixty-nine percent of participants identified as Caucasian, 15% Asian, 8% Hispanic or Latinx, 5% Multi-Racial, 1% as Black, and 1% as Other.
 
 ### Materials and Procedure
 #### Inclusion Criteria
