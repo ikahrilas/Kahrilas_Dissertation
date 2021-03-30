@@ -57,15 +57,6 @@ Dunn et al. [-@dunnHelpingDepressedClients2012; -@dunnOpportunitiesChallengesEme
 Findings showed that high NA and low PA were both important targets in treating depression, and that treatments aimed at enhancing the experience of positive emotions (i.e., enhancing reactivity to positive events/stimuli) in depression may improve efficacy.
 Thus, we aimed to examine relations among PA and emotion reactivity in the present study.
 
-Accounting for co-occurring dimensions of anxiety can help clarify distinct patterns of emotion reactivity associated with PA.
-Neuroscience research investigating depression that does not account for comorbid anxious apprehension and anxious arousal can yield mixed findings [@herringtonLocalizationAsymmetricBrain2010; @sharpTransdiagnosticDimensionsAnxiety2015].
-Further, [-@engelsCooccurringAnxietyInfluences2010] found evidence for interactions among anxious arousal and apprehension with anhedonic depression.
-Anxious apprehension can be defined as a tendency to engage in negative, ruminative thinking, and is analogous to enduring state worry [@burdwoodRestingstateFunctionalConnectivity2016; @ruscioTaxometricInvestigationLatent2001], while anxious arousal can entail hypervigilance and sympathetic nervous system hyperarousal to mild stressors [@nitschkeContrastingPatternsBrain1999].
-Thus, in order to more adequately investigate relations among low PA and emotion reactivity, we included measures of anxious arousal and anxious apprehension in subsequent analyses.
-
-Both constructs are subsumed under the superordinate construct of anxiety, and thus share variance.
-
-
 ### Neural Correlates of Emotion Reactivity in Depression
 
 Research investigating neural correlates of emotional reactivity to affective stimuli using functional magnetic resonance imaging (fMRI) in those without mood disorders indicates enhanced activity predominantly in the right occipital cortex [i.e., fusiform cortex, lateral occipital cortex, and medial parietal cortex; @bradleyActivationVisualCortex2003], as well as amygdala and visual cortex [@sabatinelliParallelAmygdalaInferotemporal2005] in response to arousing affective (pleasant and unpleasant) images compared to neutral images. The largest changes in brain activity are observed for highly arousing stimuli, such as mutilations, erotica, and threat, compared to neutral objects [@bradleyInternationalAffectivePicture2007].
@@ -75,10 +66,15 @@ This pattern of findings may index increased attention orientation and processin
 Regarding negative emotion reactivity, studies have indicated increased responsiveness to, and memory for, negative stimuli as illustrated by enhanced amygdala response to negative emotional stimuli [@falesAlteredEmotionalInterference2008; @savitzImagingPhenotypesMajor2009] in those with MDD compared to controls. 
 
 While the aforementioned research has illustrated differences in emotion reactivity between clinical and non-clinical samples, other studies have found no differences [@almeidaElevatedAmygdalaActivity2010; @demenescuNeuralCorrelatesPerception2011; @diekhofFunctionalNeuroimagingReward2008; @gotlibSubgenualAnteriorCingulate2005; @norburyIncreasedNeuralResponse2010; @siegleCanShakeThat2002]. 
-Possible explanations for mixed findings regarding positive and negative emotional reactivity include depression severity, medication status, and differing levels of co-occurring anxiety.
+Possible explanations for mixed findings regarding positive and negative emotional reactivity include depression severity, medication status, and differing levels of co-occurring anxiety dimensions.
 Increased amygdala reactivity to negative stimuli has been observed in those with severe depression [@shelineIncreasedAmygdalaResponse2001], and medication may be linked to down-regulation of amygdala response [@fuAttenuationNeuralResponse2004; @lawrenceSubcorticalVentralPrefrontal2004; @shelineIncreasedAmygdalaResponse2001].
 In contrast, participants with mild-to-moderate depression severity (with and without medication) do not exhibit differences in amygdala activity  in emotion reactivity compared to controls [@demenescuNeuralCorrelatesPerception2011].
-This necessitates a dimensional approach to measuring depression symptoms in the context of neural emotional reactivity, as different patterns of neural activity may accompany varying degrees of illness severity and anxiety comorbidity. 
+Accounting for co-occurring dimensions of anxiety can help clarify distinct patterns of emotion reactivity and neural activity associated with PA [@sharpTransdiagnosticDimensionsAnxiety2015].
+Neuroscience research investigating depression that does not account for comorbid anxious apprehension and anxious arousal can yield mixed findings [@herringtonLocalizationAsymmetricBrain2010; @sharpTransdiagnosticDimensionsAnxiety2015].
+Further, [-@engelsCooccurringAnxietyInfluences2010] found evidence for interactions among anxious arousal and apprehension with anhedonic depression.
+Anxious apprehension can be defined as a tendency to engage in negative, ruminative thinking, and is analogous to enduring state worry [@burdwoodRestingstateFunctionalConnectivity2016; @ruscioTaxometricInvestigationLatent2001], while anxious arousal can entail hypervigilance and sympathetic nervous system hyperarousal to mild stressors [@nitschkeContrastingPatternsBrain1999].
+Altogether, this necessitates a dimensional approach to measuring depression symptoms in the context of neural emotional reactivity, as different patterns of neural activity may accompany varying degrees of illness severity and anxiety comorbidity. 
+Additionally, we included measures of anxious arousal and anxious apprehension in subsequent analyses in order to more adequately investigate relations among low PA and emotion reactivity.
 
 ### Measuring the Temporal Course of Emotion Reactivity in Depression: Event-Related Potentials Index Dynamic Cascade of Processes
 
@@ -91,12 +87,29 @@ LPP is a sustained positive slow wave EEG component observed starting as early a
 LPP over the centroparietal cortex is augmented in the presence of unpleasant and pleasant compared to neutral images [@cuthbertBrainPotentialsAffective2000; @dillonDissociationEventrelatedPotentials2006; @fotiDeconstructingReappraisalDescriptions2008; @hajcakAttendingAffectAppraisal2006; @hajcakReappraisalModulatesElectrocortical2006; @hajcakTemporalDynamicsEmotion2007; @keilLargescaleNeuralCorrelates2002; @moserIntentionalModulationEmotional2006; @olofssonAffectivePictureProcessing2008; @schuppEmotionalFacilitationSensory2003] and is most pronounced for images that are rated as highly arousing [@bradleyInternationalAffectivePicture2007]. 
 LPP has been theorized to reflect activation of a brain network engaged in processing affective visual stimuli, including subcortical structures, particularly the amygdala [@bradleyInternationalAffectivePicture2007; @cuthbertBrainPotentialsAffective2000; @keilLargescaleNeuralCorrelates2002; @olofssonAffectivePictureProcessing2008; @schuppEmotionalFacilitationSensory2003]. 
 
-Research has demonstrated attenuated LPP in response to both unpleasant and pleasant affective stimuli [@fotiReducedElectrocorticalResponse2010; @kayserEventrelatedPotentialsERPs2000; @macnamaraDiagnosticSymptombasedPredictors2016] for those with MDD, which is consistent with the ECI model of MDD [@rottenbergEmotionContextInsensitivity2005].
+Attenuated LPP in response to both unpleasant and pleasant affective stimuli as been observed in those with MDD [@fotiReducedElectrocorticalResponse2010; @kayserEventrelatedPotentialsERPs2000; @macnamaraDiagnosticSymptombasedPredictors2016], which is consistent with the ECI view of emotion reactivity in depression [@rottenbergEmotionContextInsensitivity2005].
 A study conducted by Weinberg and colleagues [-@weinbergDepressionReducedNeural2016] found that, in a sample with diagnoses of MDD and anxiety disorders, a diagnosis of MDD was uniquely associated with attenuated LPP in response to rewarding visual stimuli while a diagnosis of an anxiety disorder was not. 
-The aforementioned study did not demonstrate an association with MDD diagnosis and reduced LPP in response to threatening stimuli [@weinbergDepressionReducedNeural2016].
+The aforementioned study did not demonstrate an association with MDD diagnosis and reduced LPP in response to threatening stimuli [@weinbergDepressionReducedNeural2016], thus ultimately showing support for the positive attenuation view of emotion reactivity.
 A follow up study found that those with MDD and previous suicide attempts (an index for illness severity) had blunted LPP in response to threatening stimuli compared to those with MDD and without a history of suicide attempts [@weinbergDecreasedNeuralResponse2017].
 This effect was unique to threatening (not rewarding) images, which is consistent with fMRI accounts of depression severity altering amygdala activity patterns in response to negative stimuli [@demenescuNeuralCorrelatesPerception2011].
-Thus, I hypothesized that depression would be negatively associated with LPP amplitude in response to positive and negative stimuli.
+Overall, this suggests difference in neural reactivity depending on illness severity and further underscores the need for dimensional measures of psychopathology rather than a categorical nosology.
+Lending additional support to the ECI view are findings that illustrate negative associations among LPP elicited in response to positive and negative images and depression symptoms [@hillAbnormalEmotionalReactivity2019]. 
+Of note in the Hill et al. (2019) study was the use of structural equation modeling (SEM).
+In contrast to more ubiquitous OLS regression methods, SEM allows the researcher to explicitly model measurement error, assess overall model fit, and statistically compare competing models.
+Thus, Hill and colleagues constructed two separate factors: a neural reactivity and internalizing model.
+The former was created by estimating covariances among LPP in response to neutral, positive, and negative images and the latter among the depression, anxiety, and stress subscales of the DASS-21.
+This allowed the researchers to then estimate covariances among the variances unique to each manifest, or observed, variable while controlling for the shared variance among each of the other indicator variables.
+For example, this technique allows the user to estimate relations between the unique variances of each each viewing condition and specific facets of psychopathology.
+Not only does this method afford more flexibility and ability to test more intricate theories, it is also more reliable than calculating difference scores (e.g., difference in LPP elicited between positive and neutral images) and allows to examine variance that is unique to a given condition [@cronbachHowWeShould1970; @weinbergHeritabilityNeuralResponse2015].
+By comparing Akaike and Bayesian Information Criteria, Hill et al. found that the model corresponding to the ECI view provided the best fit to the data.
+Additionally, parameter estimates that approached significance (*p* = .05) were found by estimating covariances among LPP in response to positive/negative images and depression symptoms [@hillAbnormalEmotionalReactivity2019].
+A notable omission in the aforementioned study were likelihood ratio tests between the nested comparison and baseline models.
+This information would inform the reader as to whether various statistical models actually fit the data better that the initial measurement model that treated the neural reactivity and internalizing factors as entirely orthogonal constructs.
+Further, the depression subscale of the DASS-21 gives emphasis to anhedonia, hopelessness, and devaluation of life, and is thus not specific to low PA [@lovibondManualDepressionAnxiety1996].
+Measuring relations among neural activity and specific facets of depression are important considerations given the heterogeneity inherent in depression [@monroeDepressionShroudHeterogeneity2015].
+Indeed, more granular assessments of psychopathology will afford more targeted interventions and refined theories of how self report data relate to neurobiological constructs.
+Related, Weinberg and colleagues [-@weinbergDistinctAssociationsLow2018] found blunted LPP in response to rewarding and threatening images in those endorsing lower levels of PA, a pattern of results ultimately lending support to the ECI view.
+Thus, we hypothesized that PA would be uniquely and negatively associated with LPP amplitude in response to positive and negative stimuli.
 
 Research conducted by our lab and others have identified early visual ERP components that are sensitive to reactivity to emotional stimuli [i.e., N170 & EPN; @frankHemodynamicElectrocorticalReactivity2019; @kahrilasNeurobiologicalCorrelatesEmotioninpreparation].
 Studies investigating whether these ERP components are modified in depression have produced mixed findings.
@@ -105,68 +118,59 @@ In contrast, Dai and Feng [-@daiMoreExcitedNegative2012] found smaller N170 ampl
 Chen and colleagues [-@chenDistinctFacialProcessing2014] noted lower N170 amplitude in response to happy, neutral, and sad faces in a visual emotions oddball paradigm using face stimuli for those with a first episode of major depression. 
 The same study indicated that those with recurrent depression exhibited enhanced N170 amplitude in response to sad faces and attenuated N170 amplitude in response to happy and neutral faces [@chenDistinctFacialProcessing2014], demonstrating patterns of emotion reactivity that vary as a function of illness history.
 Research investigating N170/EPN and emotional reactivity in response to complex affective images (e.g., International Affective Pictures System, or IAPS) in depression is scant, with one study finding enhanced EPN activation in response to negative compared to neutral images for individuals with depression among binge drinkers [@connellBingeDrinkingDepression2015].
-Following these findings, I hypothesized that depression levels would be associated with attenuated N170 and EPN amplitude in response to passively viewing positive stimuli compared to neutral stimuli.
-Given the equivocal findings regarding these early components in response to negative images, analyses regarding the relationship between depression and N170/EPN in response to passively viewing negative compared to neutral stimuli were conducted in an exploratory manner.
+Following these findings, I hypothesized that PA would be associated with attenuated N170 and EPN amplitude in response to passively viewing positive stimuli compared to neutral stimuli.
+Given the equivocal findings regarding these early components in response to negative images, analyses regarding the relationship between PA and N170/EPN in response to passively viewing negative compared to neutral stimuli were conducted in an exploratory manner.
 
+Most of the aforementioned research utilizes windowed averages, or area measures, for measuring ERP components.
+However, this method is inadequate in dealing with the thorny issue of overlapping components [@donchinMultivariateAnalysisEventrelated1978].
+Indeed, there is speculation that N170 modulation due to emotional expressions may be due to superimposed EPN activity [@relleckeEmotionEffectsN1702013].
+Similarly, LPP may overlap with P3, a parietally maximal component peaking in the 300-400 ms window that is sensitive to task relevant and motivationally significant stimuli [@polichCognitiveBiologicalDeterminants1995], and even later portions of EPN [@schuppSelectiveProcessingBriefly2004].
+To address this issue, we utilized an exploratory temporal principal components analysis (PCA) to better isolate distinct ERP components across time.
+PCA is a dimension reduction technique that identifies a new set of variables that are linear combinations of the original variables.
+In the context of ERPs, these new variables represent latent components that may not be apparent by visually inspecting ERP averages.
+For example, if there were two temporally overlapping ERP components with equal magnitude but opposite directionality (positive and negative), the two components would negate each other and not be observable via inspection of grand average ERPs.
+Temporal PCA, on the other hand, would theoretically be able to retain these components provided that the experimental paradigm reliably produces them.
 
+Thus, the present study aimed to contributed to the literature in several ways while building upon the SEM framework in Hill et al. (2019).
+Rather than analyzing associations with later components, analyses will be expanded to incorporate other early visual components to determine their relations with internalizing symptoms.
+Next, rather than using windowed averages for scoring ERP components, we utilized PCA identify ERP components of interest to submit to statistical analyses.
+Further, the present study will examine unique relations among ERP components and PA while controlling for dimensions of anxiety.
+<!-- Last, in addition to comparing AIC and BIC among models with equal degrees of freedom, we also conducted chi-square likelihood ratio tests to determine if competing models afforded superior data fit when compared to nested comparison (i.e., measurement) models. -->
 
+<!-- #### Savoring and mindfulness.  -->
 
-#### Savoring and mindfulness. 
+<!-- Savoring-based regulatory strategies are used to sustain and upregulate positive emotions [@heiyBackBasicsNaturalistic2014; @liuSelectionImplementationEmotion2017]. -->
+<!-- While savoring, one may eagerly anticipate future positive experiences, focus on ongoing positive experiences as they occur in the present moment, or reminisce about past positive experiences. -->
+<!-- With specific relevance to depression, studies aimed at enhancing savoring capacity show that enriching any of the three temporal domains of savoring (reminiscing, savoring the moment, or anticipating) is associated with increased frequency and intensity of positive affect, and decreased negative affect [@bryantDimensionsSubjectiveMental1984; @bryantSavoringNewModel2007; @kahrilasSavoringMomentLink2020]. -->
+<!-- Training on momentary positive emotion regulation (i.e., memory building, expressing positive emotions) resulted in decreased self-reported depression symptoms when compared to a control group after two weeks [@hurleyResultsStudyIncrease2012]. -->
+<!-- Intervention studies with older adults have shown that savoring was positively related to decreased depression, increased activity engagement, and increased wellbeing [@smithEffectsSavoringIntervention2017; @smithImpactSavoringAbility2020]. -->
+<!-- Savoring may improve the capacity to recognize and enjoy positive moments, even during difficult times [@smithEffectsSavoringIntervention2017]. -->
+<!-- Positive self-attributions for recent positive events have been associated with attenuated depression symptoms and enhanced positive affect following positive events in a sample of college-aged women [@mcmakinPositiveAffectStimulation2011].  -->
 
-Savoring-based regulatory strategies are used to sustain and upregulate positive emotions [@heiyBackBasicsNaturalistic2014; @liuSelectionImplementationEmotion2017].
-While savoring, one may eagerly anticipate future positive experiences, focus on ongoing positive experiences as they occur in the present moment, or reminisce about past positive experiences.
-With specific relevance to depression, studies aimed at enhancing savoring capacity show that enriching any of the three temporal domains of savoring (reminiscing, savoring the moment, or anticipating) is associated with increased frequency and intensity of positive affect, and decreased negative affect [@bryantDimensionsSubjectiveMental1984; @bryantSavoringNewModel2007; @kahrilasSavoringMomentLink2020].
-Training on momentary positive emotion regulation (i.e., memory building, expressing positive emotions) resulted in decreased self-reported depression symptoms when compared to a control group after two weeks [@hurleyResultsStudyIncrease2012].
-Intervention studies with older adults have shown that savoring was positively related to decreased depression, increased activity engagement, and increased wellbeing [@smithEffectsSavoringIntervention2017; @smithImpactSavoringAbility2020].
-Savoring may improve the capacity to recognize and enjoy positive moments, even during difficult times [@smithEffectsSavoringIntervention2017].
-Positive self-attributions for recent positive events have been associated with attenuated depression symptoms and enhanced positive affect following positive events in a sample of college-aged women [@mcmakinPositiveAffectStimulation2011]. 
-
-While savoring and mindfulness are not analogous, there may be some overlapping conceptual aspects [@bryantAppreciatingLifeMidst2015; @bryantSavoringNewModel2007; @hurleyResultsStudyIncrease2012].
-Increased attention to positive stimuli is a candidate psychological mechanism through which positive emotion regulation strategies are theorized to mitigate depression symptoms [@carlPositiveEmotionRegulation2013; @joormannExaminingEmotionRegulation2016a].
-Mindfulness meditation practices and mindfulness-based interventions emphasize the importance of cultivating non-judgmental attention and awareness in the present moment [@guHowMindfulnessbasedCognitive2015a], which may broaden one’s cognitive scope and help enhance savoring capacity [@garlandMindfulnessBroadensAwareness2015a].
-Thus, I hypothesized that savoring capacity would be negatively related to depression, and that those undergoing an MBI will report increases in savoring capacity.
+<!-- While savoring and mindfulness are not analogous, there may be some overlapping conceptual aspects [@bryantAppreciatingLifeMidst2015; @bryantSavoringNewModel2007; @hurleyResultsStudyIncrease2012]. -->
+<!-- Increased attention to positive stimuli is a candidate psychological mechanism through which positive emotion regulation strategies are theorized to mitigate depression symptoms [@carlPositiveEmotionRegulation2013; @joormannExaminingEmotionRegulation2016a]. -->
+<!-- Mindfulness meditation practices and mindfulness-based interventions emphasize the importance of cultivating non-judgmental attention and awareness in the present moment [@guHowMindfulnessbasedCognitive2015a], which may broaden one’s cognitive scope and help enhance savoring capacity [@garlandMindfulnessBroadensAwareness2015a]. -->
+<!-- Thus, I hypothesized that savoring capacity would be negatively related to depression, and that those undergoing an MBI will report increases in savoring capacity. -->
 
 ## The Present Study
 
-The present study analyzed data from the Supported Mindful Learning (SMiLe) study, a three-month randomized controlled trial investigating the efficacy of Headspace in mitigating psychological symptoms in a sample of college students with depression.
-Participants that met inclusion criteria were randomized to one of three experimental groups, two of which included self-guided Headspace use and another that served as an experimental control (i.e., waitlist).
-Participants also completed batteries of surveys at four separate timepoints. 
+The present study utilized a sample from an earlier experiment (Kahrilas et al., in prep) where participants were not recruited on the basis of depression severity, and the Supported Mindful Learning (SMiLe) study, a three-month randomized controlled trial investigating the efficacy of Headspace in mitigating psychological symptoms in a sample of college students with depression.
+Participants that met inclusion criteria in the SMILE study were randomized to one of three experimental groups, two of which included self-guided Headspace use and another that served as an experimental control (i.e., wait list).
+Participants also completed batteries of surveys at four separate time points. 
 
-At two timepoints (before orientation and two months later), participants also underwent an experimental paradigm consisting of seven blocks of images using 120 different Open Affective Standardized Image Set (OASIS) stimuli.
+At two time points (before orientation and two months later), participants also underwent an experimental paradigm consisting of seven blocks of images using 120 different Open Affective Standardized Image Set (OASIS) stimuli.
 Forty images were highly arousing positive images, 40 images were highly arousing negative images, and 40 were neutral.
 Participants were tasked with increasing or decreasing emotional intensity in response to (i.e., upregulating or downregulating) positive and negative images, as well as passively watching them.
 Participants also passively viewed the block of 40 neutral images.
 EEG was recorded during the experimental paradigm.
-Following each block of images, participants were asked to rate on a seven-point scale how positive or negative they feel (valence), the intensity of the emotion they feel (arousal), as well as how difficult the regulation task was (difficulty). Only the passive viewing conditions (positive, negative, and neutral) were analyzed for the present study.
+Following each block of images, participants were asked to rate on a seven-point scale how positive or negative they feel (valence), the intensity of the emotion they feel (arousal), as well as how difficult the regulation task was (difficulty).
+Only the passive viewing conditions (positive, negative, and neutral) were analyzed for the present study.
+The data from time one of the SMiLe study was harmonized with the data from Kahrilas et al. to afford greater variability in variables of interest (e.g., PA), which will afford more dimensionality in statistical analyses.
 
-The present study had three primary objectives:  
-
-1) The first objective as to examine the relation between psychological variables of interest (PA, NA, and savoring) and depression severity, as well as the relation between emotion reactivity (as indexed by LPP, EPN, and N170 ERP components and self-report arousal and valence ratings) and depression severity.
-**I hypothesized that there would be a negative relation between PA/savoring and depression, as well as a positive relation between NA and depression. Regarding emotion reactivity, I hypothesized that the relation between viewing positive compared to neutral images and indices of emotion reactivity (i.e., LPP, EPN, N170, and self-report valence and arousal) would be negatively moderated by depression severity. I also hypothesized that the relation between viewing negative compared to neutral images and LPP amplitude, as well as self-report ratings of valence and arousal, would be negatively moderated by depression severity (see \@ref(fig:aim-1-image)).**
-I will conduct exploratory moderation analyses of the relation between viewing negative compared to neutral images and N170/EPN. 
-2) The second objective of the proposed study was to assess efficacy of the Headspace intervention by comparing self-report survey data at pre-trial baseline (T0) and two months later (T2). 
-**I hypothesized that, compared to T0, participants would endorse a) lower levels of depression, b) lower levels of NA, c) higher levels of PA, and d) higher levels of savoring for the Headspace groups compared to the waitlist group two months later (see \@ref(fig:aim-2-image)).** 
-3) The third objective of the proposed study was to analyze changes in emotional reactivity attributed to an eight-week Headspace intervention.
-**It was hypothesized that, compared to T0,  highly arousing positive compared to neutral OASIS stimuli would be associated with enhanced ERP components (N170, EPN, LPP) and self-report ratings (greater arousal, more positive valence ratings) for the Headspace groups compared to the waitlist group (see \@ref(fig:aim-3-image)).**
-Exploratory analyses were conducted regarding highly arousing negative compared to neutral OASIS stimuli and ERP components (N170, EPN, LPP)/self-report ratings at T0 compared to T2 for the Headspace and waitlist groups. All hypotheses will be pre-registered in accordance with Open Science Framework (OSF) guidelines.
-
-(ref:aim-1-image) Conceptual diagram illustrating aim one analyses.
-
-```{r aim-1-image, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:aim-1-image)", out.height= "45%", out.width="100%"}
-knitr::include_graphics("images/paper_3/aim_1_diagram.png", auto_pdf = TRUE)
-```
-
-(ref:aim-2-image) Conceptual diagram illustrating aim two analyses.
-
-```{r aim-2-image, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:aim-2-image)", out.height= "45%", out.width="100%"}
-knitr::include_graphics("images/paper_3/aim_2_diagram.png", auto_pdf = TRUE)
-```
-
-(ref:aim-3-image) Conceptual diagram illustrating aim three analyses.
-
-```{r aim-3-image, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:aim-3-image)", out.height= "45%", out.width="100%"}
-knitr::include_graphics("images/paper_3/aim_3_diagram.png", auto_pdf = TRUE)
-```
+Overall, the primary objective of the present study was to evaluate several statistical models characterizing patterns of emotion reactivity (as indexed by N170, EPN, and LPP, derived with PCA) with PA (while accounting for anxious arousal and anxious apprehension) within an SEM framework.
+We hypothesized that there would be negative associations between LPP reactivity in response to positive/negative images and PA, and that this model would afford superior fit compared to competing models.
+Regarding earlier visual components (N170, EPN), we hypothesized that emotion reactivity in response to positive images would be negatively associated with PA.
+No hypotheses were made regarding early visual component activity in response to negative images and its relation to PA, and these analyses were carried out in an exploratory manner.
 
 ## METHOD
 ### SMiLe Study
@@ -203,7 +207,7 @@ Seventy-one percent identified as heterosexual, 21% as bisexual, 4% as gay, and 
 Sixty-three percent of participants identified as Caucasian, 13% Hispanic or Latinx, 11% Asian American, 4% Middle Easter, 4% Multi-Racial, 3% Asian, 1% East Asian, 1% as Native Hawaiian or Pacific Islander, and 1% as Other.
 In terms of self-reported family income, 6% reported less than \$25,000, 14% between \$25,000 - \$50,000, 18% between \$50,000 - \$75,000, 20% between \$75,000 - \$100,000, 25% between \$100,000 - \$150,000, 9% between \$150,000 - \$200,000, and 9% over \$200,000. 
 
-A sample of 52 participants from Kahrilas et al. (in preparation) will  be harmonized with the present sample.
+A sample of 52 participants from Kahrilas et al. (in preparation) will be harmonized with the present sample.
 This sample ranged in age from 18-29 ($M$ = 19.84 years, $SD$ = 1.95). 
 Fifty-six percent of the sample identified as women and 4% identified as other/non-binary. 
 The sample was 70.6% Caucasian, 17.6% Asian, 2.0% Black or African American, and 7.8% multiracial (2.0% declined to answer); 9.8% reported that they were Hispanic/Latinx and 90.2% were not Hispanic/Latinx. 
@@ -287,6 +291,11 @@ knitr::include_graphics("images/paper_2/PER_paradigm.png", auto_pdf = TRUE)
 ```
 
 ## Analytic plan for specific aims and hypotheses
+
+These competing models were informed by a previous study [@hillAbnormalEmotionalReactivity2019] and are as follows: an ECI model, an neural reactivity model, an internalizing model, and an anxiety model. 
+An initial measurement model will also be defined for each ERP component that treats each factor as completely orthogonal (i.e., no parameters will be estimated among neural reactivity and internalizing factors).
+In addition to inspecting parameter estimates, each model will be compared with the initial measurement (i.e., nested comparison) model using likelihood ratio tests to determine if each model baseline model affords a superior fit to the data.
+For those models with equal degrees of freedom, AIC and BIC will compared.
 ### Preliminary analyses
 
 Prior to hypothesis testing, variables will be evaluated for psychometric and distributional properties.
