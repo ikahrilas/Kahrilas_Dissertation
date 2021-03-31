@@ -9,7 +9,7 @@ library(patchwork)
 #'
 #' read in data
 dat <- read_csv(here("data", "paper_three", "hs_per_temp_fac_score_erp.csv")) %>%
-  filter(comp %in% c("RC2", "RC3", "RC5", "RC7", "RC8")) # retain only those components identified in study two
+  filter(comp %in% c("RC2", "RC3", "RC5", "RC7", "RC8", "RC9")) # retain only those components identified in study two
                                                          # that are sensitive to image valence
 ## peaks from hs_per_pca script:
 # [1] "The maximum timepoint for RC2 is 370.800031605892"
@@ -19,6 +19,7 @@ dat <- read_csv(here("data", "paper_three", "hs_per_temp_fac_score_erp.csv")) %>
 # [5] "The maximum timepoint for RC12 is 102.993167462032"
 # [6] "The maximum timepoint for RC8 is 257.421943136229"
 # [7] "The maximum timepoint for RC17 is 1176.17541866626"
+# [8] "The maximum timepoint for RC9 is 159.682211696864"
 
 ############################################
 ## electrodes for each component ordered chronologically
@@ -30,14 +31,16 @@ rc2_elec <- c("A29", "B26")
 rc3_elec <- c("A29", "B26", "A26", "B23",
               "B28",
               "A30", "B27", "A25", "B22")
+rc9_elec <- c("A28", "B25")
 ###########################################
-## list of component sites for map function ordered chronologically
+## list of component sites for map function
 component_list <- list("RC5",
                        "RC7",
                        "RC8",
                        "RC8",
                        "RC2",
-                       "RC3")
+                       "RC3",
+                       "RC9")
 
 # list of component selections
 elec_selections <- list(rc5_elec,
@@ -45,7 +48,8 @@ elec_selections <- list(rc5_elec,
                         neg_rc8_elec,
                         pos_rc8_elec,
                         rc2_elec,
-                        rc3_elec)
+                        rc3_elec,
+                        rc9_elec)
 
 # titles for each of the plots
 titles <- list("134 ms Component Waveforms",
@@ -53,7 +57,8 @@ titles <- list("134 ms Component Waveforms",
                "Positive 257 ms Component Waveforms",
                "Negative 257 ms Component Waveforms",
                "371 ms Component Waveforms",
-               "736 ms Component Waveforms")
+               "736 ms Component Waveforms",
+               "160 ms Component Waveforms")
 
 # change block variable to factor, reorder, and rename
 dat$block <- factor(dat$block, levels = c("Neg_Watch",
@@ -286,4 +291,20 @@ ggsave(here("images", "paper_3", "ERP Topo Images", "rc3_plots.png"),
        height = 5,
        width = 8)
 
+rc9_component_plots <-
+  topo_list[[7]][[2]] +
+  topo_list[[7]][[1]] +
+  topo_list[[7]][[3]] +
+  watch_plots[[7]] +
+  plot_layout(design = layout,
+              heights = c(1, 1.4),
+              widths = 2,
+              guides = "auto") +
+  plot_annotation(title = "160 ms Component",
+                  theme = theme(plot.title = element_text(hjust = 0.5,
+                                                          size = 16)))
 
+ggsave(here("images", "paper_3", "ERP Topo Images", "rc9_plots.png"),
+       plot = rc9_component_plots,
+       height = 5,
+       width = 8)
