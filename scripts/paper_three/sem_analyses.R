@@ -10,7 +10,7 @@ library(tidySEM)
 library(performance)
 
 ## read in data and pivot to wide format
-dat <- read_csv(here("data", "paper_three", "dat_for_analyses_2021-03-19.csv")) %>%
+dat <- read_csv(here("data", "paper_three", "dat_for_analyses_2021-03-26.csv")) %>%
   pivot_wider(names_from = block,
               values_from = RC2:RC17) %>%
   relocate(pid:race, RC2_Neg_Watch:RC17_NA) %>%
