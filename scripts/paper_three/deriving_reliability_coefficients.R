@@ -4,7 +4,13 @@ library(MBESS)
 library(tidyverse)
 
 # read in data
-dat <- read_csv(here("data", "paper_three", "total_questionnaire_data.csv"))
+dat <- read_csv(here("data", "paper_three", "dat_for_analyses_2021-03-29.csv")) %>%
+  pivot_wider(names_from = block,
+              values_from = RC2:RC17) %>%
+  relocate(pid:race, RC2_Neg_Watch:RC17_NA) %>%
+  select(-c(RC2_NA, RC3_NA, RC5_NA, RC7_NA, nRC8_NA, pRC8_NA, RC17_NA)) %>%
+  filter(!is.na(RC2_Pos_Watch),
+         pid != 22585512)
 
 ## -- Code for deriving omega reliability coefficients
 # make list of all items for sub scales
