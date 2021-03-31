@@ -256,59 +256,72 @@ Furthermore, difficulty ratings on a seven-point likert scale were also obtained
 knitr::include_graphics("images/paper_2/PER_paradigm.png", auto_pdf = TRUE)
 ```
 
-## Analytic plan for specific aims and hypotheses
+### Apparatus and Physiological Recording
+Scalp electroencephalography (EEG) was measured while participants completed an emotion regulation task (Figure \@ref(fig:paradigm-image-2)).
+Participants were seated in a comfortable chair, approximately 24 inches from a 24-inch LCD monitor in a quiet, dimly lit room.
+Participants were monitored by a task administrator in a nearby room and received task instructions by intercom.
+EEG data were recorded using a Biosemi Active2 EEG system.
+A custom-designed Falk Minow 64-channel cap with equidistantly spaced BioSemi active Ag and AgCl electrodes was used for data collection.
+CMS/DRL was placed near the vertex, and two electrodes were located on the mastoid bones.
+After placement of the electrode cap, electrode positions were digitized.
+An additional electrode was placed on the inferior edge of the orbit of each eye to monitor vertical eye movements; nearby electrodes in the cap (lateral to each eye) monitored horizontal eye movements.
+Data were recorded with a band pass of 0 – 104 Hz at a sampling rate of 512 Hz.
 
-These competing models were informed by a previous study [@hillAbnormalEmotionalReactivity2019] and are as follows: an ECI model, an neural reactivity model, an internalizing model, and an anxiety model. 
-An initial measurement model will also be defined for each ERP component that treats each factor as completely orthogonal (i.e., no parameters will be estimated among neural reactivity and internalizing factors).
-In addition to inspecting parameter estimates, each model will be compared with the initial measurement (i.e., nested comparison) model using likelihood ratio tests to determine if each model baseline model affords a superior fit to the data.
-For those models with equal degrees of freedom, AIC and BIC will compared.
-### Preliminary analyses
+The following EEG data processing steps were implemented in Brain Electrical Source Analysis software [BESA, Version 7; @schergBESABrainElectric1990].
+Following the adaptive artifact correction method [@illeArtifactCorrectionOngoing2002], ocular artifacts were corrected using a spatial PCA filter.
+EEG data were re-referenced to the [@hajcakAttendingAffectAppraisal2006; @hajcakReappraisalModulatesElectrocortical2006]  average reference of all electrodes for analyses and digitally filtered with 0.01 Hz high-pass and 30 Hz low-pass filters with a cutoff attenuation of 12 dB/octave.
+EEG data were re-referenced to the average activity of all electrodes.
+While it is convention to re-reference data to average activity of the mastoids for LPP, a covariance matrix was utilized in the PCA, which is inherently mean corrected [@dienApplyingPrincipalComponents2012].
+Thus, minimal effects would be expected as a function of referencing scheme for temporal PCA (though this is not the case for spatial PCA; see @dienApplyingPrincipalComponents2012).
+Muscle activity and other artifacts were corrected through implementing an algorithmic scan of continuous EEG data in BESA (fixed threshold criteria: amplitude > 120 uV; gradient > 75 uV, low signal <.01 uV).
+Data were baseline-adjusted by subtracting the average activity for 200 milliseconds [@moserIntentionalModulationEmotional2006] before stimulus onset.
 
-Prior to hypothesis testing, variables will be evaluated for psychometric and distributional properties.
-Descriptive statistics for key variables and demographics will be assessed.
-Bivariate correlations for these variables will also be calculated to assess for relationships between variables.
-Statistical assumptions will be assessed via visual inspection of diagnostic plots (ie., residual, QQ, scale-location, and residuals vs. leverage) generated with the performance R package [@ludeckePerformanceAssessmentRegression2019]. 
+### Temporal PCA
+To discriminate among temporal sources of variance (i.e., ERP components) in the time course of ERPs, ERP averages were submitted to a temporal PCA to derive linear combinations of data that distinguish activity across time points. 
+A temporal PCA was performed using the Psych package [@revellePsychProceduresPsychological2020] in R version 4.0.3 [@rcoreteamLanguageEnvironmentStatistical2020] with a covariance matrix.
+A covariance matrix was used to retain the original units of measurement (i.e., voltage) for the average ERPs for each time point [@donchinMultivariateAnalysisEventrelated1978].
+The temporal PCA used all time points (-200 ms - 2000 ms) as variables and all 114 participants, three blocks, and 64 recording sites as observations, yielding linear combinations of time points and "temporal" factors [@dienApplyingPrincipalComponents2012].
+To determine the number of components to retain for rotation, a parallel analysis [@hornRationaleTestNumber1965] was performed on the resultant Scree plot.
+The parallel analysis creates Scree plots of the actual and simulated fully random data to determine the number of components that explain more variance than if only chance alone were acting. 
+Based on the parallel analysis, 22 components were retained for rotation. 
+An Promax rotation was then used on the 22 components because it does not impose orthogonality, and simulation studies suggest that Promax is most effective for temporal PCA [@dienERPPCAToolkit2010; @dienEvaluationPCAICA2007].
+The time course of each of the 22 components was inspected by plotting the covariance loadings along each time point. 
+To further guide our selection of components, we used a previous study conducted by our lab (Kahrilas et al., in prep) that analyzed the time course of emotion reactivity and regulation using PCA.
+PCA components with covariance loadings in time windows that fit descriptions of LPP and early visual components (e.g., N170, EPN) that matched components sensitive to emotion reactivity in Kahrilas et al. (in prep) were retained for statistical analyses.
+Spatial information is retained in PCA; the topography of each factor is encoded in the mean amplitude of factor scores at each recording site [@dienAddressingMisallocationVariance1998].
+Thus, scalp topographies of each component for each condition was inspected to determine correspondence of components and ERP components of interest.
+Of note, portions of waveforms represented by a given PCA component can be reproduced by multiplying covariance loadings by observations' factor scores [@dienAddressingMisallocationVariance1998]. 
+Three components were retained for statistical analyses based inspection of topographic plots and ERP waveforms.
+Two of the retained components represented LPP-like components that have positive peaks at 371 ms and 736 ms with the former demonstrating activity at PO7 and PO8 electrode sites and the latter at PO7, PO8, PO3, PO4, P1, P2, P5/P3, P6/P4 and Pz electrode sites. 
+Similar to findings from Kahrilas et al. (in preparation), topography of a 257 ms component indicated two distinct sources of activity: positive going waveforms in the occipital region (PO7, PO8, O1, and O2) and negative waveforms in the centroparietal region (CPz and Pz).
+Each of these sites were scored separately and submitted to statistical analyses.
+See Figures \@ref(fig:neg-257-component-plot), \@ref(fig:pos-257-component-plot), \@ref(fig:371-component-plot), and \@ref(fig:736-component-plot) for grand average ERP and topographic plots of the retained PCA components.
+Refer to Figures XXXX for ERP and topographic plots before the PCA was performed.
 
-### Analytic plan for determining the relation among depression, psychological variables, and emotion reactivity
 
-To test the hypothesis of whether self-report psychological variables and emotion reactivity vary as a function of depression symptoms, the sample for the present study at pre-trial baseline (T0) will be harmonized with a sample of participants that were not selected on the basis of any psychopathology symptoms ($N$ = 54) used in another study conducted by our lab (Kahrilas et al., in preparation) utilizing the same emotion task paradigm and survey data.
-To assess the relation between self-report psychological variables and depression, linear regressions between variables of interest (PA, NA, and savoring) will be calculated. 
-For analyses involving PA and NA, anxious arousal will be included as a covariate to adjust for comorbid anxiety symptoms.
-It is hypothesized that there will be negative correlations between PA/savoring and depression, and a positive correlation between NA and depression. 
-To assess the relation between emotion reactivity and depression, multilevel modeling (MLM) will be conducted using the lme4 package [@batesFittingLinearMixedeffects2015].
-Previous literature suggests that emotion reactivity patterns depend on depression severity, necessitating a statistical technique that is able to accommodate dimensional measurements of moderator variables, such as MLM. 
-Variance components covariance matrices to estimate random intercepts for each participant will be used to to test whether ERP components of interest/self-report ratings are associated with passively viewing highly arousing affective compared to neutral OASIS stimuli. Depression severity (measured by the PHQ-9) will be added as a mean-centered level-two predictor.
-The dummy-coded level-one viewing condition variable will be altered such that the neutral viewing condition will be the reference group.
-A cross-level interaction between viewing condition and depression will be analyzed to evaluate whether the relation between viewing highly arousing positive and negative affective images and variables of interest (ERP components and self-report ratings) vary as a function of depression severity.
-It is hypothesized that as depression severity increases, the relation between viewing affective compared to neutral images and LPP, EPN, N170, and arousal will become more negative.
-For valence ratings, it is predicted that the relation will become more negative for positive images and more positive for negative images.
+component ERPs before and after PCA (collapsed across all blocks) as well as the top two rows of Figure  for grand average topographic plots before and after PCA.
 
-### Analytic Plan for Determining Changes in Psychological Variables Attributed to Headspace Usage
+(ref:neg-257-component-plot) Topographic and ERP plots of the negative 257 ms PCA component.
 
-To test the hypothesis that self-report psychological variables (depression, PA, NA, and savoring) will be modified depending on Headspace usage over the course of two months, MLM analyses will be conducted with time nested within participants.
-Group (Headspace as Usual, Headspace with Peer Support, and Delayed Headspace as Usual) will be entered as a level-two dummy coded predictor with the Delayed Headspace as Usual group as the reference level.
-The Headspace as Usual and Headspace with Peer Support groups will be merged to maximize statistical power for a priori hypotheses.
-A cross-level interaction will be analyzed between time and randomization group with psychological variables of interest as the dependent variable (PA, NA, depression, and savoring, for a total of four models) to determine if the relation between time and these variables vary depending on group.
-Unconditional growth models will be tested initially (with random intercept terms), followed by conditional models (with added random slope terms). 
-Akaike Information Criterion (AIC) and Bayesian Information Criterion (BIC) indicators of model performance will be compared to determine which model has a superior fit to the data.
-It is hypothesized that, relative to T0, participants in the headspace groups compared to the delayed headspace group will endorse higher levels of PA and savoring as well as lower levels of NA and depression at T2.
+```{r neg-257-component-plot, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:paradigm-image)", out.height= "45%", out.width="100%"}
+knitr::include_graphics("images/paper_3/ERP Topo Images/neg_rc8_plots.png", auto_pdf = TRUE)
+```
 
-### Analytic Plan for Determining Changes in Emotion Reactivity Attributed to Headspace Usage
+(ref:pos-257-component-plot) Topographic and ERP plots of the positive 257 ms PCA component.
 
-To test the hypothesis that emotion reactivity among conditions in the emotion task paradigm (positive and negative compared to neutral) will be modified as a function of Headspace usage, three-level MLM models will be analyzed with emotion task conditions nested within time and time nested within participants.
-The dummy-coded randomization group will be modified such that the Delayed Headspace as Usual group will be the reference variable, and the dummy-coded emotion task condition variable will be altered such that the neutral viewing condition will be the reference variable. 
-A three-way cross-level interaction will be analyzed between randomization group, time, and emotion task viewing condition to determine if the interaction term corresponding to the relation between viewing condition, ERP component amplitude (N170, EPN, and LPP)/behavioral ratings (valence and arousal) and time point varies depending upon randomization group (Headspace as Usual merged with Headspace with Peer Support and Delayed Headspace as Usual). 
-Unconditional growth models will be tested initially (with random intercept terms), followed by conditional models (with added random slope terms).
-Akaike Information Criterion (AIC) and Bayesian Information Criterion (BIC) indicators of model performance will be compared to determine which model has a superior fit to the data. 
-Changes in variables of interest will also be analyzed between the Headspace as Usual and Headspace with Peer Support groups in the same manner to determine.
-If no significant differences are observed between these two groups, they will be merged into a single Headspace group and compared to the Delayed Headspace as Usual group.
-It is hypothesized that, relative to T0, participants in the headspace groups compared to the delayed headspace group will exhibit increased LPP/EPN/N170 amplitude and self-report ratings in response to positive images, as well as increased LPP and self-report ratings in response to negative images.
-Moderation analyses regarding EPN/N170 and negative stimuli were conducted in an exploratory manner.
+```{r pos-257-component-plot, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:paradigm-image)", out.height= "45%", out.width="100%"}
+knitr::include_graphics("images/paper_3/ERP Topo Images/pos_rc8_plots.png", auto_pdf = TRUE)
+```
 
-## Power Sensitivity Analysis
+(ref:371-component-plot) Topographic and ERP plots of the 371 ms PCA component.
 
-Power sensitivity analyses were conducted in lieu of power analyses given pre-determined sample sizes.
-Calculations were conducted using the pwr and WebPower packages [@R-pwr; @R-WebPower]. 
-For analyses of the relation between depression symptoms and psychological variables of interest (savoring, NA, and PA), with a sample size of 132, alpha = .05, and beta = .80, the minimum detectable effect is small to medium [r = .21; @cohenStatisticalPowerAnalysis1988a].
-For analyses of the relation between depression symptoms and emotion reactivity (ERP components/self-report arousal & valence ratings), with a sample size of 107, three measurements per participant, alpha = .05, and beta = .80, the minimum detectable effect for the interaction term is large [$f$ = .38; @cohenStatisticalPowerAnalysis1988a]. 
-For analyses of the relation between Headspace use and emotion reactivity (ERP components/self-report arousal & valence ratings), with a sample size of 55, six measurements per participant (three viewing conditions in the emotion regulation paradigm at two separate time points), alpha = .05, and beta = .80, the minimum detectable effect for the interaction term is iarge [$f$ = .49; @cohenStatisticalPowerAnalysis1988a].
+```{r 371-component-plot, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:paradigm-image)", out.height= "45%", out.width="100%"}
+knitr::include_graphics("images/paper_3/ERP Topo Images/rc2_plots.png", auto_pdf = TRUE)
+```
+
+(ref:736-component-plot) Topographic and ERP plots of the 736 ms PCA component.
+
+```{r 736-component-plot, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:paradigm-image)", out.height= "45%", out.width="100%"}
+knitr::include_graphics("images/paper_3/ERP Topo Images/rc3_plots.png", auto_pdf = TRUE)
+```
+
