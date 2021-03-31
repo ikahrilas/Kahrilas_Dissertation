@@ -165,7 +165,7 @@ neg_rc8_component_plots <-
                                                           size = 16)))
 
 ggsave(here("images", "paper_3", "ERP Topo Images", "pre_PCA", "neg_rc8_plots.png"),
-       plot = neg_rc2_component_plots,
+       plot = neg_rc8_component_plots,
        height = 5,
        width = 8)
 
@@ -200,8 +200,8 @@ rc2_component_plots <-
                   theme = theme(plot.title = element_text(hjust = 0.5,
                                                           size = 16)))
 
-ggsave(here("images", "paper_3", "ERP Topo Images", "pre_PCA", "rc2_component_plots"),
-       plot = neg_rc8_component_plots,
+ggsave(here("images", "paper_3", "ERP Topo Images", "pre_PCA", "rc2_plots.png"),
+       plot = rc2_component_plots,
        height = 5,
        width = 8)
 
@@ -214,11 +214,11 @@ rc3_component_plots <-
               heights = c(1, 1.4),
               widths = 2,
               guides = "auto") +
-  plot_annotation(title = "PO7, PO8, PO3, PO4, P1, P2, /nP5/P3, P6/P4 and Pz Activity",
+  plot_annotation(title = "PO7, PO8, PO3, PO4, P1, P2,\nP5/P3, P6/P4 and Pz Activity",
                   theme = theme(plot.title = element_text(hjust = 0.5,
                                                           size = 16)))
 
 ggsave(here("images", "paper_3", "ERP Topo Images", "pre_PCA", "rc3_plots.png"),
-       plot = pos_rc8_component_plots,
+       plot = rc3_component_plots,
        height = 5,
        width = 8)
