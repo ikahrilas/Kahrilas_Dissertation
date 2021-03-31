@@ -348,7 +348,7 @@ temp_loadings_plot <- ggplot(cov_loadings_long, aes(ms, mv)) +
 temp_loadings_plot
 
 # components to explore based on time course: 2-5, 7, 9 ,11, & 12
-comp_to_retain <- paste0("RC", c(2, 3, 5, 7, 12, 8, 17))
+comp_to_retain <- paste0("RC", c(2, 3, 5, 7, 12, 8, 9, 17))
 
 # replot with just components of interest and save image
 cov_loadings_long %>%
@@ -362,6 +362,15 @@ cov_loadings_df <- cov_loadings_df %>% select(ms, all_of(comp_to_retain))
 
 # find peaks for components of interest
 map_chr(comp_to_retain, ~{
+  max_ms <- cov_loadings_df %>%
+    filter(cov_loadings_df[[.x]] == max(cov_loadings_df[[.x]])) %>%
+    select(ms) %>%
+    pull()
+  return(paste("The maximum timepoint for", .x, "is", max_ms))
+})
+
+# find peaks for all components
+map_chr(names(cov_loadings_df)[-1], ~{
   max_ms <- cov_loadings_df %>%
     filter(cov_loadings_df[[.x]] == max(cov_loadings_df[[.x]])) %>%
     select(ms) %>%
@@ -476,7 +485,7 @@ temp_raw_df <- map_df(1:length(names(dat_pca_promax$R2)), ~ {
 })
 
 # write data set with "raw" factor ERPs to work space
-comp_for_erp <- c("RC2", "RC3", "RC5", "RC7", "RC8", "RC17")
+comp_for_erp <- c("RC2", "RC3", "RC5", "RC7", "RC8", "RC9", "RC17")
 
 temp_raw_df %>%
   filter(comp %in% comp_for_erp) %>%
