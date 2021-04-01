@@ -295,33 +295,92 @@ Three components were retained for statistical analyses based inspection of topo
 Two of the retained components represented LPP-like components that have positive peaks at 371 ms and 736 ms with the former demonstrating activity at PO7 and PO8 electrode sites and the latter at PO7, PO8, PO3, PO4, P1, P2, P5/P3, P6/P4 and Pz electrode sites. 
 Similar to findings from Kahrilas et al. (in preparation), topography of a 257 ms component indicated two distinct sources of activity: positive going waveforms in the occipital region (PO7, PO8, O1, and O2) and negative waveforms in the centroparietal region (CPz and Pz).
 Each of these sites were scored separately and submitted to statistical analyses.
+No component resembling an N170 was derived from the PCA.
 See Figures \@ref(fig:neg-257-component-plot), \@ref(fig:pos-257-component-plot), \@ref(fig:371-component-plot), and \@ref(fig:736-component-plot) for grand average ERP and topographic plots of the retained PCA components.
-Refer to Figures XXXX for ERP and topographic plots before the PCA was performed.
-
-
-component ERPs before and after PCA (collapsed across all blocks) as well as the top two rows of Figure  for grand average topographic plots before and after PCA.
+Refer to Figures \@ref(fig:raw-neg-257-component-plot), \@ref(fig:raw-pos-257-component-plot), \@ref(fig:raw-371-component-plot), and \@ref(fig:raw-736-component-plot) for ERP and topographic plots before the PCA was performed.
+All visualizations were composed using the ggplot (Wickham, 2016) and eegUtils (Craddock, 2019) packages.
 
 (ref:neg-257-component-plot) Topographic and ERP plots of the negative 257 ms PCA component.
 
-```{r neg-257-component-plot, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:paradigm-image)", out.height= "45%", out.width="100%"}
+```{r neg-257-component-plot, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:neg-257-component-plot)", out.height= "45%", out.width="100%"}
 knitr::include_graphics("images/paper_3/ERP Topo Images/neg_rc8_plots.png", auto_pdf = TRUE)
 ```
 
 (ref:pos-257-component-plot) Topographic and ERP plots of the positive 257 ms PCA component.
 
-```{r pos-257-component-plot, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:paradigm-image)", out.height= "45%", out.width="100%"}
+```{r pos-257-component-plot, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:pos-257-component-plot)", out.height= "45%", out.width="100%"}
 knitr::include_graphics("images/paper_3/ERP Topo Images/pos_rc8_plots.png", auto_pdf = TRUE)
 ```
 
 (ref:371-component-plot) Topographic and ERP plots of the 371 ms PCA component.
 
-```{r 371-component-plot, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:paradigm-image)", out.height= "45%", out.width="100%"}
+```{r 371-component-plot, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:371-component-plot)", out.height= "45%", out.width="100%"}
 knitr::include_graphics("images/paper_3/ERP Topo Images/rc2_plots.png", auto_pdf = TRUE)
 ```
 
 (ref:736-component-plot) Topographic and ERP plots of the 736 ms PCA component.
 
-```{r 736-component-plot, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:paradigm-image)", out.height= "45%", out.width="100%"}
+```{r 736-component-plot, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:736-component-plot)", out.height= "45%", out.width="100%"}
 knitr::include_graphics("images/paper_3/ERP Topo Images/rc3_plots.png", auto_pdf = TRUE)
 ```
 
+(ref:raw-neg-257-component-plot) Topographic and ERP plots of PO7, PO8, O1, and O2 activity.
+
+```{r raw-neg-257-component-plot, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:raw-neg-257-component-plot)", out.height= "45%", out.width="100%"}
+knitr::include_graphics("images/paper_3/ERP Topo Images/pre_PCA/neg_rc8_plots.png", auto_pdf = TRUE)
+```
+
+(ref:raw-pos-257-component-plot) Topographic and ERP plots of CPz and Pz activity.
+
+```{r raw-neg-257-component-plot, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:raw-pos-257-component-plot)", out.height= "45%", out.width="100%"}
+knitr::include_graphics("images/paper_3/ERP Topo Images/pre_PCA/pos_rc8_plots.png", auto_pdf = TRUE)
+```
+
+(ref:raw-371-component-plot) Topographic and ERP plots of PO7 and PO8 activity.
+
+```{r raw-371-component-plot, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:raw-371-component-plot)", out.height= "45%", out.width="100%"}
+knitr::include_graphics("images/paper_3/ERP Topo Images/pre_PCA/rc2_plots.png", auto_pdf = TRUE)
+```
+
+(ref:raw-736-component-plot) Topographic and ERP plots of PO7, PO8, PO3, PO4, P1, P2, P5, P3, P6, P4 and Pz activity.
+
+```{r raw-736-component-plot, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:raw-736-component-plot)", out.height= "45%", out.width="100%"}
+knitr::include_graphics("images/paper_3/ERP Topo Images/pre_PCA/rc3_plots.png", auto_pdf = TRUE)
+```
+
+### Analytical approach
+
+Descriptive statistics were calculated using R version 4.0.3 [@rcoreteamLanguageEnvironmentStatistical2020]. 
+SEM was conducted using the lavaan package [@rosseelLavaanPackageStructural2012].
+Further, the first author made extensive use of the dplyr (Wickham et al., 2021) package in data cleaning and manipulation.
+Our modeling process largely followed that of Hill et al. (2019).
+Our first stage of modeling was to construct a measurement model with two latent orthogonal factors.
+Neutral, negative, and positive viewing conditions served as indicator variables of the *Neural Reactivity* factor.
+Measures of anxious apprehension (PSWQ), anxious arousal (MASQ-AA), and PA (MASQ-PA) served as indicator variables for the *Internalizing* factor.
+Four separate measurement models were constructed for each ERP component retained from the earlier PCA.
+Across these measurement models, indicators of the *Neural Reactivity* factor changed to reflect each PCA component being tested, while the *Internalizing* factor remained the same.
+Thus, while loadings of he indicators for the *Internalizing* factor remained constained throughout, the overall model fit varied due to different covariance matrices being used across the models.
+Across each measurement model, one loading for each latent factor was set to one in order to set a metric for the factors.
+All other loadings were freely estimated, as were the variances of each factor and residual variances of each indicator variable.
+Each of the subsequent competing models were compared to their respective measurement model with a chi-square likelihood ratio test to determine of each model offered superior fit to the data compared to the measurement model.
+
+We then tested the ECI model by estimating covariances among the positive/negative viewing conditions and PA. 
+While Hill and colleagues (2019) constrained these covariances to be equal, we allowed these values to be freely estimated on the basis that the ECI view makes no hypotheses as to whether the *degree* of blunting is equal for positive and negative images, just the negative directionality.
+If both estimated covariances were positive (negative for negative peak waveforms) and significant, and if this model offered superior fit to the data compared to the nested comparison measurement model, then we would interpret this as support for the ECI view.
+Allowing these covariances to be freely estimated allowed us to determine if the positive attenuation or negative potentiation views offered superior fit, as well.
+If a significant positive (negative for negative peak waveforms) covariance between PA and the positive viewing condition was found with no association with the negative viewing condition, this would be evidence for the positive attenuation theory (in the presence of a significant likelihood ratio test compared to the measurement model).
+In contrast, if a significant negative (positive for negative peak waveforms) covariance between PA and the negative viewing condition was found in the absence of an association between the positive viewing condition and PA, this would be evidence for the positive attenuation theory (in the presence of a significant likelihood ratio test compared to the measurement model).
+Note that the positive attenutation and negative potentiation views are not mutually exclusive, thus these patterns could be observed simultaneously.
+Other competing models were directly informed from Hill and colleagues 2019 study.
+We tested a neural reactivity model that estimated a covariance between the *Neural Reactivity* latent factor and PA.
+This tested whether general neural reactivity to stimuli was associated with PA rather than the residual variances of the positive/negative viewing conditions, specifically.
+We then tested an internalizing model that estimated covariances among the positive/negative viewing conditions and the latent *Internalizing* factor, which tested whether emotion reactivity was associated with more general internalizing symptoms rather than PA specifically.
+Last, we tested an anxious arousal model that estimated covariances among the positive/negative viewing conditions and the residual variance of the anxious arousal indicator.
+This tested the hypothesis of whether reactivity to emotional stimuli was associated with physiological symptoms associated with anxiety specifically.
+See Figure XXX for model diagrams of each of the models described.
+
+(ref:sem-diagrams) Topographic and ERP plots of PO7, PO8, PO3, PO4, P1, P2, P5, P3, P6, P4 and Pz activity.
+
+```{r sem-diagrams, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:sem-diagrams)", out.height= "100%", out.width="100%"}
+knitr::include_graphics("images/paper_3/sem_diagrams/sem_diagrams_for_manuscript.png", auto_pdf = TRUE)
+```
