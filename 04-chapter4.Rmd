@@ -370,17 +370,24 @@ If both estimated covariances were positive (negative for negative peak waveform
 Allowing these covariances to be freely estimated allowed us to determine if the positive attenuation or negative potentiation views offered superior fit, as well.
 If a significant positive (negative for negative peak waveforms) covariance between PA and the positive viewing condition was found with no association with the negative viewing condition, this would be evidence for the positive attenuation theory (in the presence of a significant likelihood ratio test compared to the measurement model).
 In contrast, if a significant negative (positive for negative peak waveforms) covariance between PA and the negative viewing condition was found in the absence of an association between the positive viewing condition and PA, this would be evidence for the positive attenuation theory (in the presence of a significant likelihood ratio test compared to the measurement model).
-Note that the positive attenutation and negative potentiation views are not mutually exclusive, thus these patterns could be observed simultaneously.
+Note that the positive attenuation and negative potentiation views are not mutually exclusive, thus these patterns could be observed simultaneously.
 Other competing models were directly informed from Hill and colleagues 2019 study.
 We tested a neural reactivity model that estimated a covariance between the *Neural Reactivity* latent factor and PA.
 This tested whether general neural reactivity to stimuli was associated with PA rather than the residual variances of the positive/negative viewing conditions, specifically.
 We then tested an internalizing model that estimated covariances among the positive/negative viewing conditions and the latent *Internalizing* factor, which tested whether emotion reactivity was associated with more general internalizing symptoms rather than PA specifically.
 Last, we tested an anxious arousal model that estimated covariances among the positive/negative viewing conditions and the residual variance of the anxious arousal indicator.
 This tested the hypothesis of whether reactivity to emotional stimuli was associated with physiological symptoms associated with anxiety specifically.
-See Figure XXX for model diagrams of each of the models described.
+See Figure \@ref(fig:sem-diagrams) for model diagrams of each of the models described.
 
-(ref:sem-diagrams) Topographic and ERP plots of PO7, PO8, PO3, PO4, P1, P2, P5, P3, P6, P4 and Pz activity.
+(ref:sem-diagrams) The model diagrams show each model that was fitted to the data for each ERP component retained from the PCA. The Measurement Model (top) treats the latent *Neural Reactivity* and *Internalizing* factors as orthogonal constructs. The ECI Model (second from top) estimates covariances among the positive/negative viewing conditions for a given ERP component and positive affectivity. The Neural Reactivity Model (third from top) estimates covariance between the neural reactivity latent factor (rather than specific emotional reactivity) and positive affectivity. The Internalizing Model Diagram (second from bottom) estimates covariances among positive and negative viewing conditions for a given ERP PCA component and global internalizing symptoms, rather than PA specifically. Last, the Anxiety Model (bottom) estimates covariances among positive/negative viewing conditions for a given ERP component and anxious arousal. PA = positive affectivity, Anx Aro = anxious arousal, Anx App = Anxious apprehension, ECI = emotion context insensitivity.
 
 ```{r sem-diagrams, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:sem-diagrams)", out.height= "100%", out.width="100%"}
-knitr::include_graphics("images/paper_3/sem_diagrams/sem_diagrams_for_manuscript.png", auto_pdf = TRUE)
+knitr::include_graphics("images/paper_3/sem_diagrams/sem_diagrams_for_manuscript_long.png", auto_pdf = TRUE)
 ```
+
+
+
+
+
+
+
