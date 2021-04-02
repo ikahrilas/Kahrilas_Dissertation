@@ -24,7 +24,7 @@ rc3_elec <- c("A29", "B26", "A26", "B23",
 rc5_elec <- c("A29", "B26")
 rc7_elec <- c("A29", "B26", "A31", "B30")
 neg_rc8_elec <- c("B21", "B28")
-pos_rc8_elec <- c("A29", "B26", "A31", "B30")
+pos_rc8_elec <- c("A31", "B30")
 rc17_elec <- c("A29", "B26")
 
 ## code for creating component variables
