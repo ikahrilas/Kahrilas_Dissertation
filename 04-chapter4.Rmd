@@ -184,10 +184,10 @@ Participants were recruited using listserv emails, flyers, and Sona postings.
 Additionally, a sample ($N$ = 52) of undergraduate students used for a different study in our lab (Kahrilas et al., in preparation) that were not selected on the basis of depression symptoms were harmonized with the present sample at pre-trial baseline (total $N$ = 134) for the present study.
 
 ### Participants
-Of the 80 participants recruited for the SMiLe study, 72 underwent the EEG paradigm, and nine we excluded due to messy EEG data.
+Of the 80 participants recruited for the SMiLe study, 72 underwent the EEG paradigm, and 10 participants were excluded from analyses due to large amounts of EEG artifact.
 One participant was dropped from the study following their EEG session, and thus was not included in final analyses.
 This resulted in a final total of 62 from the SMiLe study.
-These 62 participants were pooled with the sample of 52 from Kahrilas et al. (in preparation) for a total $n$ of 114.
+These 62 participants were pooled with the sample of 52 from Kahrilas et al. (in preparation) for a total $n$ of 113.
 In this harmonized sample, participants were 18 to 29 years old ($M$ = 19.4, $SD$ = 1.64), 75% of which identified as female, 21% as male, 0.9% as transgender, 0.9% as non-binary, and 1.7% as other.
 Seventy-one percent identified as heterosexual, 21% as bisexual, 4% as gay, and 4% as a different sexual orientation.
 Sixty-nine percent of participants identified as Caucasian, 15% Asian, 8% Hispanic or Latinx, 5% Multi-Racial, 1% as Black, and 1% as Other.
@@ -280,7 +280,7 @@ Data were baseline-adjusted by subtracting the average activity for 200 millisec
 To discriminate among temporal sources of variance (i.e., ERP components) in the time course of ERPs, ERP averages were submitted to a temporal PCA to derive linear combinations of data that distinguish activity across time points. 
 A temporal PCA was performed using the Psych package [@revellePsychProceduresPsychological2020] in R version 4.0.3 [@rcoreteamLanguageEnvironmentStatistical2020] with a covariance matrix.
 A covariance matrix was used to retain the original units of measurement (i.e., voltage) for the average ERPs for each time point [@donchinMultivariateAnalysisEventrelated1978].
-The temporal PCA used all time points (-200 ms - 2000 ms) as variables and all 114 participants, three blocks, and 64 recording sites as observations, yielding linear combinations of time points and "temporal" factors [@dienApplyingPrincipalComponents2012].
+The temporal PCA used all time points (-200 ms - 2000 ms) as variables and all 113 participants, three blocks, and 64 recording sites as observations, yielding linear combinations of time points and "temporal" factors [@dienApplyingPrincipalComponents2012].
 To determine the number of components to retain for rotation, a parallel analysis [@hornRationaleTestNumber1965] was performed on the resultant Scree plot.
 The parallel analysis creates Scree plots of the actual and simulated fully random data to determine the number of components that explain more variance than if only chance alone were acting. 
 Based on the parallel analysis, 22 components were retained for rotation. 
@@ -382,8 +382,21 @@ See Figure \@ref(fig:sem-diagrams) for model diagrams of each of the models desc
 (ref:sem-diagrams) The model diagrams show each model that was fitted to the data for each ERP component retained from the PCA. The Measurement Model (top) treats the latent *Neural Reactivity* and *Internalizing* factors as orthogonal constructs. The ECI Model (second from top) estimates covariances among the positive/negative viewing conditions for a given ERP component and positive affectivity. The Neural Reactivity Model (third from top) estimates covariance between the neural reactivity latent factor (rather than specific emotional reactivity) and positive affectivity. The Internalizing Model Diagram (second from bottom) estimates covariances among positive and negative viewing conditions for a given ERP PCA component and global internalizing symptoms, rather than PA specifically. Last, the Anxiety Model (bottom) estimates covariances among positive/negative viewing conditions for a given ERP component and anxious arousal. PA = positive affectivity, Anx Aro = anxious arousal, Anx App = Anxious apprehension, ECI = emotion context insensitivity.
 
 ```{r sem-diagrams, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:sem-diagrams)", out.height= "100%", out.width="100%"}
-knitr::include_graphics("images/paper_3/sem_diagrams/sem_diagrams_for_manuscript_long.png", auto_pdf = TRUE)
+knitr::include_graphics("images/paper_3/sem_diagrams/sem_diagrams_final.png", auto_pdf = TRUE)
 ```
+
+All models were estimated using full information maximum likelihood with robust (Huber-White) standard errors and a scaled test statistic. 
+Of the 113 cases used for analyses, 10 (8.8%) were missing one questionnaire subscale used for the *Internalizing* latent factor.
+Inspection of missing cases did not reveal any indications that these data were missing not at random [@endersIntroductionMissingData2010].
+Model fit was evaluated with measures of absolute fit, including the goodness-of-fit chi-square value with accompanying degrees of freedom, root mean squared error of approximation (RMSEA) < .06, standardized root mean square residual (SRMR) < .08.
+Fit was also evaluated with measures of relative fit, including non-normed fit index (NNFI) > .90, and the Comparative Fit Index (CFI) > .90.
+A chi-square difference test will be performed between the nested measurement model and its corresponding ECI, neural reactivity, internalizing, and anxiety model.
+The chi-square difference test evaluates the equal-fit hypothesis for two hierarchical models.
+If the chi-square difference value is non-significant, then the two models fit the data equally well and the more parsimonious (i.e., measurement model) is the preferred model.
+If the chi-square difference value is significant, then the model with fewer degrees of freedom (i.e., not the measurement model) fits the data better and is thus preferred over the measurement model.
+The ECI, Neural Reactivity, Internalizing, and Anxiety Model are not hierarchical and thus cannot be comaprd using a chi-square difference test.
+Thus, the Akaike information criterion (AIC) and Bayesian information criterion (BIC) will be used to determine best fit among these non-nested models, with lower values indicating superior fit
+[@markonEmpiricalComparisonInformationtheoretic2004].
 
 
 
