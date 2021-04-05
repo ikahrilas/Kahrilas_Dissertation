@@ -332,7 +332,7 @@ knitr::include_graphics("images/paper_3/ERP Topo Images/pre_PCA/neg_rc8_plots.pn
 
 (ref:raw-pos-257-component-plot) Topographic and ERP plots of CPz and Pz activity.
 
-```{r raw-neg-257-component-plot, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:raw-pos-257-component-plot)", out.height= "45%", out.width="100%"}
+```{r raw-pos-257-component-plot, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:raw-pos-257-component-plot)", out.height= "45%", out.width="100%"}
 knitr::include_graphics("images/paper_3/ERP Topo Images/pre_PCA/pos_rc8_plots.png", auto_pdf = TRUE)
 ```
 
@@ -382,7 +382,7 @@ See Figure \@ref(fig:sem-diagrams) for model diagrams of each of the models desc
 
 (ref:sem-diagrams) The model diagrams show each model that was fitted to the data for each ERP component retained from the PCA. The Measurement Model (top) treats the latent *Neural Reactivity* and *Internalizing* factors as orthogonal constructs. The ECI Model (second from top) estimates covariances among the positive/negative viewing conditions for a given ERP component and positive affectivity. The Neural Reactivity Model (third from top) estimates covariance between the neural reactivity latent factor (rather than specific emotional reactivity) and positive affectivity. The Internalizing Model Diagram (second from bottom) estimates covariances among positive and negative viewing conditions for a given ERP PCA component and global internalizing symptoms, rather than PA specifically. Last, the Anxiety Model (bottom) estimates covariances among positive/negative viewing conditions for a given ERP component and anxious arousal. PA = positive affectivity, Anx Aro = anxious arousal, Anx App = Anxious apprehension, ECI = emotion context insensitivity.
 
-```{r sem-diagrams, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:sem-diagrams)", out.height= "100%", out.width="100%"}
+```{r sem-diagrams, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:sem-diagrams)", out.height= "120%", out.width="120%"}
 knitr::include_graphics("images/paper_3/sem_diagrams/sem_diagrams_final.png", auto_pdf = TRUE)
 ```
 
@@ -401,14 +401,14 @@ Thus, the Akaike information criterion (AIC) and Bayesian information criterion 
 
 ## RESULTS
 All parameter estimates are tabulated in Table \@ref(tab:parameter-estimate-tab).
-Model fit indices and chi-square difference test results are contained in Table (\@ref(tab:fit-measure-tab)).
+Model fit indices and chi-square difference test results are contained in Table \@ref(tab:fit-measure-tab).
 The PA, anxious arousal, and anxious apprehension variables each loaded significantly onto the *Internalizing* factor, with correlations ranging from moderate to large [@cohenStatisticalPowerAnalysis1988a; .35, -.40, and .89, respectively).
 While each sequence of models contained a different ERP component, they each contained the same set of indicator variables for the *Internalizing* factor.
 Thus, the factor loadings for this factor remained the same for each model.
 
-(ref:parameter-estimate-tab) Parameter estimates, standard errors, and test statistics from each structural equation model using ERP components retained from PCA ($n$ = 113). Each model contains two factors: $Neural \ Reactivity$ and $Internalizing$. The $Neural \ Reactivity$ factor represents the shared variance for each of the passive viewing conditions (positive, negative, and neutral) for each PCA ERP component, and the residual variance of each indicator variable represents that variable's unique variance. The $Internalizing$ factor represents the shared variance of the PA, anxious arousal, and anxious apprehension measures, and the residual variance of each indciator variable represents that variable's unique variance.
+(ref:parameter-estimate-tab) Parameter estimates, standard errors, and test statistics from each structural equation model using ERP components retained from PCA ($n$ = 113). Each model contains two factors: $Neural \ Reactivity$ and $Internalizing$. The $Neural \ Reactivity$ factor represents the shared variance for each of the passive viewing conditions (positive, negative, and neutral) for each PCA ERP component, and the residual variance of each indicator variable represents that variable's unique variance. The $Internalizing$ factor represents the shared variance of the PA, anxious arousal, and anxious apprehension measures, and the residual variance of each inindicator variable represents that variable's unique variance.
 
-```{r parameter-estimate-tab, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:parameter-estimate-tab)", out.height= "100%", out.width="100%"}
+```{r parameter-estimate-tab, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:parameter-estimate-tab)", message=FALSE, warning=FALSE}
 # results tables for paper three
 
 # load packages
@@ -606,8 +606,9 @@ tab <- bind_rows(int_fac_table_wide,
 names(tab) <- gsub("...[[:digit:]]+", "", names(tab))
 
 # construct the table
-kable(tab, "latex", escape = FALSE, booktabs = TRUE, align = c("l", rep("r", 9)), linesep = "") %>%
-  kable_styling(font_size = 12, latex_options = c("scale_down")) %>%
+kable(tab, "latex", escape = FALSE, booktabs = TRUE, align = c("l", rep("r", 9)), linesep = "",
+      caption = "(ref:parameter-estimate-tab)") %>%
+  kable_styling(font_size = 7, latex_options="scale_down") %>% 
   add_header_above(c(" ", "257 ms Comp" = 3, "371 ms Comp" = 3, "736 ms Comp" = 3),
                    bold = TRUE,
                    italic = TRUE) %>%
@@ -629,7 +630,7 @@ kable(tab, "latex", escape = FALSE, booktabs = TRUE, align = c("l", rep("r", 9))
 
 (ref:fit-measure-tab) Fit measures and chi-square difference test results for each model. Chi-square difference test results represent the comparison of each model with its respective nested measurement model (i.e., initial model with completely orthogonal $Neural \ Reactivity$ and $Internalizing$ factors and indicator variables).
 
-```{r fit-measure-tab, echo = FALSE, fig.pos = "H", out.extra="", fig.cap = "(ref:fit-measure-tab)", out.height = "100%", out.width = "100%"}
+```{r fit-measure-tab, echo = FALSE, fig.pos = "H", out.extra="", fig.cap = "(ref:fit-measure-tab)", out.height = "100%", out.width = "100%", message=FALSE, warning=FALSE}
 ## -- fit index table -- ##
 # results tables for paper three
 
@@ -753,7 +754,8 @@ fit_tab <-
 
 # construct the table
 kable(fit_tab, "latex", escape = FALSE, booktabs = TRUE,
-      align = c("l", rep("r", times = 8), "l"), linesep = "") %>%
+      align = c("l", rep("r", times = 8), "l"), linesep = "",
+      caption = "(ref:fit-measure-tab)") %>%
   kable_styling(font_size = 12, latex_options = c("scale_down")) %>%
   pack_rows("257 ms Component", 1, 6) %>%
   pack_rows("371 ms Component", 7, 12) %>%
