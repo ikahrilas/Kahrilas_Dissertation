@@ -310,6 +310,53 @@ rc8_anxapp_fit <- fitMeasures(fit_anxapp_rc8, c("chisq.scaled",
 chi_nrc8_anxapp_meas <- lavTestLRT(mod_meas_rc8, rc8_anxapp_fit)
 ### comparison model does NOT fit the data significantly better
 
+# RC8 brightening effect model
+rc8_be_mod <- '
+# neural responsivity factor
+  NR =~ nRC8_Neu_Watch + nRC8_Pos_Watch + nRC8_Neg_Watch
+# internalizing measurement model with MASQ subscales
+  INT =~ pswq_total + masq_pa + masq_aa
+# orthogonal model
+  NR ~~ 0*INT
+# residual covariances (constrained to equality)
+  masq_pa ~~ nRC8_Pos_Watch
+'
+
+rc8_be_mod <- cfa(rc8_be_mod,
+                  data = dat,
+                  estimator = "MLR",
+                  missing = "ML",
+                  std.lv = TRUE)
+
+summary(rc8_be_mod, fit.measures = TRUE, standardized = TRUE)
+
+rc8_be_params <- tidy(rc8_be_mod)
+
+rc8_be_fit <-   fitMeasures(rc8_be_mod, c("chisq.scaled",
+                                            "df",
+                                            "rmsea.scaled",
+                                            "srmr",
+                                            "cfi.scaled",
+                                            "nnfi.scaled",
+                                            "aic",
+                                            "bic"))
+modificationIndices(mod_meas_rc8, sort. = TRUE)
+semPaths(rc8_be_mod,
+         what = "diagram",
+         whatLabels = "est",
+         style = "lisrel",
+         nCharNodes = 0,
+         intercepts = FALSE,
+         sizeMan = 8,
+         sizeLat = 10,
+         nodeLabels = c("NEU", "POS", "NEG",
+                        "AA", "PA", "WOR",
+                        "NR", "INT"))
+
+## model comparison test with measurement model
+chi_nrc8_be_meas <- lavTestLRT(mod_meas_rc8, rc8_be_mod)
+chi_nrc8_be_eci <- lavTestLRT(fit_eci_rc8, rc8_be_mod)
+
 # ###################
 # ## -- pos RC8 -- ##
 # ###################
