@@ -353,6 +353,7 @@ knitr::include_graphics("images/paper_3/ERP Topo Images/pre_PCA/rc3_plots.png", 
 Descriptive statistics were calculated using R version 4.0.3 [@rcoreteamLanguageEnvironmentStatistical2020]. 
 SEM was conducted using the lavaan package [@rosseelLavaanPackageStructural2012].
 Further, the first author made extensive use of the dplyr (Wickham et al., 2021) package in data cleaning and manipulation.
+Tables were constructed using the kableExtra package (Zhu, 2021).
 Our modeling process largely followed that of Hill et al. (2019).
 Our first stage of modeling was to construct a measurement model with two latent orthogonal factors.
 Neutral, negative, and positive viewing conditions served as indicator variables of the *Neural Reactivity* factor.
@@ -398,9 +399,418 @@ The ECI, Neural Reactivity, Internalizing, and Anxiety Model are not hierarchica
 Thus, the Akaike information criterion (AIC) and Bayesian information criterion (BIC) will be used to determine best fit among these non-nested models, with lower values indicating superior fit
 [@markonEmpiricalComparisonInformationtheoretic2004].
 
+## RESULTS
+All parameter estimates are tabulated in Table \@ref(tab:parameter-estimate-tab).
+Model fit indices and chi-square difference test results are contained in Table (\@ref(tab:fit-measure-tab)).
+The PA, anxious arousal, and anxious apprehension variables each loaded significantly onto the *Internalizing* factor, with correlations ranging from moderate to large [@cohenStatisticalPowerAnalysis1988a; .35, -.40, and .89, respectively).
+While each sequence of models contained a different ERP component, they each contained the same set of indicator variables for the *Internalizing* factor.
+Thus, the factor loadings for this factor remained the same for each model.
 
+(ref:parameter-estimate-tab) Parameter estimates, standard errors, and test statistics from each structural equation model using ERP components retained from PCA ($n$ = 113). Each model contains two factors: $Neural \ Reactivity$ and $Internalizing$. The $Neural \ Reactivity$ factor represents the shared variance for each of the passive viewing conditions (positive, negative, and neutral) for each PCA ERP component, and the residual variance of each indicator variable represents that variable's unique variance. The $Internalizing$ factor represents the shared variance of the PA, anxious arousal, and anxious apprehension measures, and the residual variance of each indciator variable represents that variable's unique variance.
 
+```{r parameter-estimate-tab, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:parameter-estimate-tab)", out.height= "100%", out.width="100%"}
+# results tables for paper three
 
+# load packages
+library(kableExtra)
+library(tidyverse)
+library(lavaan)
+library(broom)
+
+# read in sem analyses results
+load("data/paper_three/sem_analyses_results.RData")
+
+## -- parameter table -- ##
+# p value formatting function
+num_format <- function(val) {sub("^(-?)0.", "\\1.", sprintf("%.3f", val))}
+
+# parameter estimates for internalizing factor
+int_param_table <-
+  int_params %>%
+  select(term, estimate, std.all, std.error, p.value) %>%
+  filter(str_detect(term, "INT =~")) %>%
+  mutate(across(.cols = c(estimate, std.all, std.error),
+                .fns = ~ sprintf("%.2f", .x))) %>%
+  mutate(p.value = if_else(p.value < .001, "<.001",
+                           num_format(p.value))) %>%
+  unite("Est/Std", estimate, std.all, sep = "/") %>%
+  rename("Path" = "term",
+         "$SE$" = "std.error",
+         "$p$" = "p.value") %>%
+  mutate(Path = str_replace(Path, "=~", "→"),
+         Path = str_replace(Path, "masq_aa", "Anx Aro"),
+         Path = str_replace(Path, "masq_pa", "PA"),
+         Path = str_replace(Path, "pswq_total", "Anx App"))
+
+int_fac_table_wide <- bind_cols(int_param_table, # repeat these three times so they can be merged
+                                int_param_table, # with the three ERP components
+                                int_param_table)
+
+# parameter estimates for erp measurement components
+meas_params_list <- list(rc8_meas_params,
+                         rc2_meas_params,
+                         rc3_meas_params)
+
+meas_params_list <-
+  map(meas_params_list, ~{
+    .x %>%
+      select(term, estimate, std.all, std.error, p.value) %>%
+      filter(str_detect(term, "NR =~")) %>%
+      mutate(across(.cols = c(estimate, std.all, std.error),
+                    .fns = ~ sprintf("%.2f", .x))) %>%
+      mutate(p.value = if_else(p.value < .001, "<.001",
+                               num_format(p.value))) %>%
+      unite("Est/Std", estimate, std.all, sep = "/") %>%
+      rename("Path" = "term",
+             "$SE$" = "std.error",
+             "$p$" = "p.value") %>%
+      mutate(Path = c("NR $\\rightarrow$ Neutral",
+                      "NR $\\rightarrow$ Positive",
+                      "NR $\\rightarrow$ Negative"))
+  })
+
+meas_params_wide <- bind_cols(meas_params_list)
+
+# parameter estimates for erp eci components
+eci_params_list <- list(rc8_eci_params,
+                        rc2_eci_params,
+                        rc3_eci_params)
+
+eci_params_list <-
+  map(eci_params_list, ~{
+    .x %>%
+      select(term, estimate, std.all, std.error, p.value) %>%
+      filter(str_detect(term, "~~ masq_pa"),
+             term != "masq_pa ~~ masq_pa") %>%
+      mutate(across(.cols = c(estimate, std.all, std.error),
+                    .fns = ~ sprintf("%.2f", .x))) %>%
+      mutate(p.value = if_else(p.value < .001, "<.001",
+                               num_format(p.value))) %>%
+      unite("Est/Std", estimate, std.all, sep = "/") %>%
+      rename("Path" = "term",
+             "$SE$" = "std.error",
+             "$p$" = "p.value") %>%
+      mutate(Path = c("Positive $\\leftrightarrow$ PA",
+                      "Negative $\\leftrightarrow$ PA"))
+  })
+
+eci_params_wide <- bind_cols(eci_params_list)
+
+# parameter estimates for NR components
+nr_params_list <- list(rc8_nr_params,
+                       rc2_nr_params,
+                       rc3_nr_params)
+
+nr_params_list <-
+  map(nr_params_list, ~{
+    .x %>%
+      select(term, estimate, std.all, std.error, p.value) %>%
+      filter(term == "NR ~~ masq_pa") %>%
+      mutate(across(.cols = c(estimate, std.all, std.error),
+                    .fns = ~ sprintf("%.2f", .x))) %>%
+      mutate(p.value = if_else(p.value < .001, "<.001",
+                               num_format(p.value))) %>%
+      unite("Est/Std", estimate, std.all, sep = "/") %>%
+      rename("Path" = "term",
+             "$SE$" = "std.error",
+             "$p$" = "p.value") %>%
+      mutate(Path = "NR $\\leftrightarrow$ PA")
+  })
+
+nr_params_wide <- bind_cols(nr_params_list)
+
+# parameter estimates for internalizing components
+int_params_list <- list(nrc8_int_params,
+                        rc2_int_params,
+                        rc3_int_params)
+
+int_params_list <-
+  map(int_params_list, ~{
+    .x %>%
+      select(term, estimate, std.all, std.error, p.value) %>%
+      filter(str_detect(term, "INT ~~"),
+             term != "INT ~~ INT") %>%
+      mutate(across(.cols = c(estimate, std.all, std.error),
+                    .fns = ~ sprintf("%.2f", .x))) %>%
+      mutate(p.value = if_else(p.value < .001, "<.001",
+                               num_format(p.value))) %>%
+      unite("Est/Std", estimate, std.all, sep = "/") %>%
+      rename("Path" = "term",
+             "$SE$" = "std.error",
+             "$p$" = "p.value") %>%
+      mutate(Path = c("INT $\\leftrightarrow$ Positive",
+                      "INT $\\leftrightarrow$ Negative"))
+  })
+
+int_params_wide <- bind_cols(int_params_list)
+
+# parameter estimates for anxiety components
+anx_params_list <- list(rc8_anx_params,
+                        rc2_anx_params,
+                        rc3_anx_params)
+
+anx_params_list <-
+  map(anx_params_list, ~{
+    .x %>%
+      select(term, estimate, std.all, std.error, p.value) %>%
+      filter(str_detect(term, "Watch ~~ masq_aa")) %>%
+      mutate(across(.cols = c(estimate, std.all, std.error),
+                    .fns = ~ sprintf("%.2f", .x))) %>%
+      mutate(p.value = if_else(p.value < .001, "<.001",
+                               num_format(p.value))) %>%
+      unite("Est/Std", estimate, std.all, sep = "/") %>%
+      rename("Path" = "term",
+             "$SE$" = "std.error",
+             "$p$" = "p.value") %>%
+      mutate(Path = c("Positive $\\leftrightarrow$ Anx Aro",
+                      "Negative $\\leftrightarrow$ Anx Aro"))
+  })
+
+anx_params_wide <- bind_cols(anx_params_list)
+
+# parameter estimates for anxious apprehension components
+anxapp_params_list <- list(rc8_anxapp_params,
+                           rc2_anxapp_params,
+                           rc3_anxapp_params)
+
+anxapp_params_list <-
+  map(anxapp_params_list, ~{
+    .x %>%
+      select(term, estimate, std.all, std.error, p.value) %>%
+      filter(str_detect(term, "Watch ~~ pswq_total")) %>%
+      mutate(across(.cols = c(estimate, std.all, std.error),
+                    .fns = ~ sprintf("%.2f", .x))) %>%
+      mutate(p.value = if_else(p.value < .001, "<.001",
+                               num_format(p.value))) %>%
+      unite("Est/Std", estimate, std.all, sep = "/") %>%
+      rename("Path" = "term",
+             "$SE$" = "std.error",
+             "$p$" = "p.value") %>%
+      mutate(Path = c("Positive $\\leftrightarrow$ Anx App",
+                      "Negative $\\leftrightarrow$ Anx App"))
+  })
+
+anxapp_params_wide <- bind_cols(anxapp_params_list)
+
+# bind all wide tables together
+tab <- bind_rows(int_fac_table_wide,
+                 meas_params_wide,
+                 eci_params_wide,
+                 nr_params_wide,
+                 int_params_wide,
+                 anx_params_wide,
+                 anxapp_params_wide) %>%
+  select(-c("Path...5",
+            "Path...9"))
+
+names(tab) <- gsub("...[[:digit:]]+", "", names(tab))
+
+# construct the table
+kable(tab, "latex", escape = FALSE, booktabs = TRUE, align = c("l", rep("r", 9)), linesep = "") %>%
+  kable_styling(font_size = 12, latex_options = c("scale_down")) %>%
+  add_header_above(c(" ", "257 ms Comp" = 3, "371 ms Comp" = 3, "736 ms Comp" = 3),
+                   bold = TRUE,
+                   italic = TRUE) %>%
+  pack_rows("Measurement Model", 1, 6) %>%
+  pack_rows("ECI Model", 7, 8) %>%
+  pack_rows("Neural Responsivity Model", 9, 9) %>%
+  pack_rows("Internalizing Model", 10, 11) %>%
+  pack_rows("Anxious Arousal Model", 12, 13) %>%
+  pack_rows("Anxious Apprehension Model", 14, 15) %>%
+  row_spec(0, align = "c") %>%
+  landscape() %>%
+  footnote(general = "Path labels correspond to a parameter estimates in each model. Group headings in the 'path' column denote the specific model that the following parameter estimates are unique to to. ECI = emotion context insensitivity, $\\SE$ = standard error, Est/Std = undstandardized and standardized parameter estimate, $\\\\rightarrow$ = latent factor loading,
+           \n$\\\\leftrightarrow$ = covariance.",
+           threeparttable = TRUE,
+           escape = FALSE,
+           general_title = "Note.",
+           footnote_as_chunk = TRUE)
+```
+
+(ref:fit-measure-tab) Fit measures and chi-square difference test results for each model. Chi-square difference test results represent the comparison of each model with its respective nested measurement model (i.e., initial model with completely orthogonal $Neural \ Reactivity$ and $Internalizing$ factors and indicator variables).
+
+```{r fit-measure-tab, echo = FALSE, fig.pos = "H", out.extra="", fig.cap = "(ref:fit-measure-tab)", out.height = "100%", out.width = "100%"}
+## -- fit index table -- ##
+# results tables for paper three
+
+# load packages
+library(kableExtra)
+library(tidyverse)
+library(lavaan)
+library(broom)
+
+# read in sem analyses results
+load("data/paper_three/sem_analyses_results.RData")
+# define function that inputs chi square difference test output is input and outputs
+# latex formatted test statistic and p value
+chisq_format_fn <- function(chi){
+  p <- chi$`Pr(>Chisq)`[2]
+  if (p < .001) {
+    p <- "< .001"
+  } else {
+    p <- paste("=", sub("^(-?)0.", "\\1.", sprintf("%.3f", p)))
+  }
+  df_diff <- chi$`Df diff`[2]
+  chi_diff <- sprintf("%.2f", chi$`Chisq diff`[2])
+  paste0("$\\Delta$", "${\\chi}^2$","(", df_diff, ") ", "= ", chi_diff, ", ", "$p$ ", p)
+}
+
+# table for rc8 fit indices
+rc8_fit_table <-
+  bind_rows(rc8_meas_fit,
+            rc8_eci_fit,
+            rc8_nr_fit,
+            nrc8_int_fit,
+            rc8_anx_fit,
+            rc8_anxapp_fit) %>%
+    mutate("Model" = c("Measurement",
+                       "Emotion Context Insensitivity",
+                       "Neural Responsivity",
+                       "Internalizing",
+                       "Anxious Arousal",
+                       "Anxious Apprehension")) %>%
+    relocate(Model, everything()) %>%
+    mutate("$\\Delta{\\chi}^2$" =
+             c("",
+               chisq_format_fn(chi_nrc8_eci_meas),
+               chisq_format_fn(chi_nrc8_nr_meas),
+               chisq_format_fn(chi_nrc8_int_meas),
+               chisq_format_fn(chi_nrc8_anx_meas),
+               chisq_format_fn(chi_nrc8_anxapp_meas))
+           )
+
+# table for rc2 fit indices
+rc2_fit_table <-
+  bind_rows(rc2_meas_fit,
+            rc2_eci_fit,
+            rc2_nr_fit,
+            rc2_int_fit,
+            rc2_anx_fit,
+            rc2_anxapp_fit) %>%
+  mutate("Model" = c("Measurement",
+                     "Emotion Context Insensitivity",
+                     "Neural Responsivity",
+                     "Internalizing",
+                     "Anxious Arousal",
+                     "Anxious Apprehension")) %>%
+  relocate(Model, everything()) %>%
+  mutate("$\\Delta{\\chi}^2$" =
+           c("",
+             chisq_format_fn(chi_rc2_eci_meas),
+             chisq_format_fn(chisq_rc2_nr_meas),
+             chisq_format_fn(chisq_rc2_int_meas),
+             chisq_format_fn(chi_rc2_anx_meas),
+             chisq_format_fn(chi_nrc8_anxapp_meas))
+        )
+
+# table for rc3 fit indices
+rc3_fit_table <-
+  bind_rows(rc3_meas_fit,
+            rc3_eci_fit,
+            rc3_nr_fit,
+            rc3_int_fit,
+            rc3_anx_fit,
+            rc3_anxapp_fit) %>%
+  mutate("Model" = c("Measurement",
+                     "Emotion Context Insensitivity",
+                     "Neural Responsivity",
+                     "Internalizing",
+                     "Anxious Arousal",
+                     "Anxious Apprehension")) %>%
+  relocate(Model, everything()) %>%
+  mutate("$\\Delta{\\chi}^2$" =
+           c("",
+             chisq_format_fn(chisq_rc3_eci_meas),
+             chisq_format_fn(chisq_rc3_nr_meas),
+             chisq_format_fn(chisq_rc3_int_meas),
+             chisq_format_fn(chisq_rc3_anx_meas),
+             chisq_format_fn(chi_rc3_anxapp_meas))
+  )
+
+# put all the tables together
+fit_tab <-
+  bind_rows(
+    rc8_fit_table,
+    rc2_fit_table,
+    rc3_fit_table
+  ) %>%
+    mutate(nnfi.scaled = if_else(nnfi.scaled > 1.0, "1.00", sprintf("%.2f", nnfi.scaled)),
+           across(.cols = c(chisq.scaled,  # round to two decimal places
+                            rmsea.scaled,
+                            srmr,
+                            cfi.scaled,
+                            aic,
+                            bic),
+                  .fns = ~ sprintf("%.2f", .x))) %>%
+           rename("${\\chi}^2$" = "chisq.scaled",
+                  "$df$" = "df",
+                  "RMSEA" = "rmsea.scaled",
+                  "SRMR" = "srmr",
+                  "CFI" = "cfi.scaled",
+                  "NNFI" = "nnfi.scaled",
+                  "AIC" = "aic",
+                  "BIC" = "bic")
+
+# construct the table
+kable(fit_tab, "latex", escape = FALSE, booktabs = TRUE,
+      align = c("l", rep("r", times = 8), "l"), linesep = "") %>%
+  kable_styling(font_size = 12, latex_options = c("scale_down")) %>%
+  pack_rows("257 ms Component", 1, 6) %>%
+  pack_rows("371 ms Component", 7, 12) %>%
+  pack_rows("736 ms Component", 13, 18) %>%
+  row_spec(0, align = c("l", rep("c", times = 9))) %>%
+  landscape() %>%
+  footnote(general = "${\\\\chi}^2$ = chi-square, $df$ = degrees of freedom, RMSEA = root mean square error of
+           approximation, SRMR = standardized root mean square residual, CFI = comparative fit index,
+           NNFI = non-normed fit index, AIC = Akaike Information Criteria, BIC = Bayesian Information Criteria,
+           $\\\\Delta{\\\\chi}^2$ = Satorra-Bentler scaled difference chi-square test comparing each model with its respective
+           nested measurement model.",
+           threeparttable = TRUE,
+           escape = FALSE,
+           general_title = "Note.",
+           footnote_as_chunk = TRUE)
+```
+
+### 257 ms Component
+The two-factor confirmatory factor analysis measurement model with the 257 ms component did not meet standards for acceptable model fit.
+While the CFI > .90, the SRMR, NNFI, and RMSEA indicated poor fit (Table \@ref(tab:fit-measure-tab)).
+The positive, negative, and neutral viewing conditions each loaded strongly and significantly on the *Neural Reactivity* factor.
+When the positive and negative indicators of the *Neural Reactivity* factor were allowed to covary with the PA indicator of the *Internalizing* factor for the ECI model, model fit drastically improved, with all fit measures satisfying criteria for acceptable model fit (Table \@ref(tab:fit-measure-tab)).
+Further, a Satorra-Bentler scaled difference chi-square test that compared the ECI model with the measurement model indicated superior fit to the data ($\chi^2(2) = 13.52, \ p=.001$; Table \@ref(tab:fit-measure-tab)).
+In other words, the ECI model was a superior characterization of the covariance structure compared to a fully orthogonal solution.
+Additionally, there was a large, positive correlation between the positive viewing condition and PA ($r = .61,\ p < .001$; Table \@ref(tab:parameter-estimate-tab)).
+Of note, since the 257 ms component has a negative peak, this directionality is in the opposite direction hypothesized in the ECI view of emotion reactivity in depression.
+More specifically, as self-reported PA increases, the 257 ms attenuates for positive stimuli.
+No significant relation was found between the 257 ms component and PA.
+When the data were fitted to a Neural Reactivity model, such that the latent *Neural Reactivity* factor was allowed to covary with the PA indicator of the *Internalizing* factor, all measure of model fit indicated acceptable model fit (Table \@ref(tab:fit-measure-tab)).
+The Neural Reactivity model provided a signficantly better fit to the data compared to the nested measurement model ($\chi^2(1) = 13.96,\ p<.001$).
+Further, there was a significant, positive, moderate correlation between the *Neural Reactivity* factor and PA ($r = .36,\ p < .001$).
+In determining whether the ECI and Neural Reactivity model were better fits to the data, neither model emerged a clear victor.
+Both afforded good fit to the data, and while the ECI model had a lower AIC compared to the Neural Reactivity model (AIC difference = -1.8), it also had a slightly larger BIC value (BIC difference = 0.93).
+Considering that the directionality of the parameter estimates was in the opposite direction hypothesized for the ECI view of emotion reactivity and given the non-significant covariance of the negative viewing condition indicator and PA, we fit another model to the data in a post-hoc exploratory fashion.
+In this model, we dropped the covariance estimate between the negative viewing condition and PA (i.e., constrained the value to zero), which is in line with the brightening effect described in ecological momentary assessment (EMA) research [e.g., @khazanovBrighteningEffectReactions2019a].
+In contrast to laboratory research, the brightening effect pertains to the phenomenon of enhanced emotion reactivity that is specific to positive emotions.
+This model provided excellent fit to the data ($\chi^2(8) = 7.98$, RMSEA = 0.00, SRMR = 0.05, CFI = 1.00, NNFI = 1.00) that was superior to the nested measurement model ($\Delta\chi^2(1) = 9.43,\ p=.002$).
+Additional, this brightening effect model did not result in an appreciable decrement in model fit compared to the ECI model, which has an additional parameter estimate and one fewer degree of freedom ($\Delta\chi^2(1) = 3.38,\ p=.07$).
+In line with the brightening effect, we found a large positive effect between the positive condition and PA (Est/Std = 1.942/.48, $SE = 0.57$, $z = 3.43$, $p = .001$), such that decreases in PA (i.e., greater depression) would result in enhanced 257 ms component activity in response to positive stimuli.
+While small in magnitude, this brightening effect model afforded lower AIC and BIC values compared to the neural reactivity model (AIC difference = -.30, BIC difference = -.30).
+The Internalizing, Anxious Arousal, nor the Anxious Apprehension model provided acceptable fit to the data (Table \@ref(tab:fit-measure-tab)), and no  significant associations were found by freeing parameters in these models (Table \@ref(tab:parameter-estimate-tab)).
+
+### 371 ms Component
+With the 371 ms component *Neural Reactivity* factor, we found acceptable model fit with the measurement model (Table \@ref(tab:fit-measure-tab)).
+Each of the positive, negative, and neutral indicator variables loaded strongly onto the *Neural Reactivity* factor ($r = .97, .90, .89$, respectively; Table \@ref(tab:parameter-estimate-tab)).
+While each of the subsequent competing models afforded good model fit, none fit the data significantly better than the initial nested measurement model
+(Table \@ref(tab:fit-measure-tab)).
+None of the freed parameters unique to each competing model were significant.
+Of the competing models, the ECI model offered superior fit as indicated by lower AIC and BIC values (Table \@ref(tab:fit-measure-tab)).
+Overall, we found that an orthogonal solution that separated the *Neural Reactivity* factor and *Internalizing* factor and all indicator variables offered superior fit to the data.
+
+### 736 ms Component
+The 736 ms component measurement model afforded acceptable model fit to the data ((Table \@ref(tab:fit-measure-tab))), and positive, negative, and neutral indicator variables loaded significantly and strongly onto the latent *Neural Reactivity* factor ($r = .81, .75, .68$, respectively, Table \@ref(tab:parameter-estimate-tab)).
+Similar to the 371 ms component, we found that the initial measurement model had the best fit to the data.
+While competing models had model fit measures indicating acceptable fit, none constituted significantly improved fit to the data compared to the measurement model (\@ref(tab:fit-measure-tab))).
+Additionally, we found no significant covariance estimates as a result of freeing parameters in each of the competing models.
+Of these competing models, the Neural Reactivity model afforded the best fit as indicated by lower AIC and BIC values.
 
 
 
