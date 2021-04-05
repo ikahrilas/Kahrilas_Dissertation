@@ -342,7 +342,7 @@ kable(fit_tab, "latex", escape = FALSE, booktabs = TRUE,
   footnote(general = "${\\\\chi}^2$ = chi-square, $df$ = degrees of freedom, RMSEA = root mean square error of
            approximation, SRMR = standardized root mean square residual, CFI = comparative fit index,
            NNFI = non-normed fit index, AIC = Akaike Information Criteria, BIC = Bayesian Information Criteria,
-           $\\\\Delta{\\\\chi}^2$ = Satorra-Bentler scaled difference chi-square test comparing model with its respective
+           $\\\\Delta{\\\\chi}^2$ = Satorra-Bentler scaled difference chi-square test comparing each model with its respective
            nested measurement model.",
            threeparttable = TRUE,
            escape = FALSE,
