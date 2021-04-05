@@ -633,7 +633,7 @@ semPaths(fit_eci_rc2,
                         "NR", "INT"))
 
 ## model comparison test with measurement model
-chi_rc2_eci_meas <- lavTestLRT(fit_meas_rc2, rc2_eci_mod)
+chi_rc2_eci_meas <- lavTestLRT(fit_meas_rc2, fit_eci_rc2)
 ### comparison model does NOT fit the data significantly better
 
 # define neural reactivity model with RC2
