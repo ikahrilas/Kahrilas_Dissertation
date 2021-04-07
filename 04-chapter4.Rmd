@@ -814,5 +814,27 @@ While competing models had model fit measures indicating acceptable fit, none co
 Additionally, we found no significant covariance estimates as a result of freeing parameters in each of the competing models.
 Of these competing models, the Neural Reactivity model afforded the best fit as indicated by lower AIC and BIC values.
 
+## DISCUSSION
+In the present study, we sought to test competing views of emotion reactivity in depression by utilizing PCA and SEM.
+We examined three separate ERP components retained from a PCA analysis, one that resembled an EPN and two others resembling later components (e.g., P300 and LPP).
+These components were similar to a previous study conducted by our lab (Kahrilas et al., in preparation), where we found these components to be sensitive to emotional (negative and positive) stimuli, relative to neutral stimuli.
+Our analytic strategy was similar to that of Hill and colleagues (2019), though we implemented some distinct elements in the present paper.
+Hill and colleagues utilized windowed averages to derive measures of LPP, while we implemented a temporal PCA.
+Further, while Hill and colleagues focused on LPP, we expanded our analyses to include three separate components that were sensitive to emotional stimuli.
+Additionally, we took a adopted a more granular approach in measure depression symptomatology by focusing on PA, as informed by literature surmising a distinct relation between this construct and emotion reactivity (CITATIONS HERE).
+Last, we conducted chi-square difference tests comparing each model with its respective measurement model to determine if the additional parameters in each model constituted a significantly superior fit to the data compared to an orthogonal solution.
+
+While we hypothesized results resembling that of previous laboratory research [e.g., @hillAbnormalEmotionalReactivity2019] and supporting the ECI view, our findings did not support this pattern of findings.
+With regards to the 371 ms and 736 ms component, no competing model outperformed the initial measurement model.
+In other words, our results supported the notion that these components are distinct from internalizing symptoms.
+This finding contrasts with a plethora of research that has examined relations between depression symptoms and LPP [@fotiReducedElectrocorticalResponse2010; @hillAbnormalEmotionalReactivity2019; @proudfitDepressionCventrelatedPotentials2015; @weinbergDecreasedNeuralResponse2017; @weinbergDistinctAssociationsLow2018].
+This could be attributed to the block design paradigm we employed in the present study in contrast to a more ubiquitous randomized design, which may interfere with picture processing and produce an oddball effect [@weinbergDepressionReducedNeural2016].
+Our analytic strategy also differs from a majority of other studies in that we utilized PCA and SEM.
+Indeed, other studies measuring windowed averages are susceptible to including superimposed ERP signals in their independent/dependent variables, particularly for slow wave components such as the LPP (CITATION).
+Thus, researchers may not always be measuring the constructs they believe they are.
+Additionally, SEM allowed us to explicitly model measurement error in constructing our latent  *Neural Reactivity* and *Internalizing* variables, which represented variance unique to psychophysiological and internalizing symptoms of interest [@hillAbnormalEmotionalReactivity2019].
+Last, this finding could also simply be a product of type II error that can only be clarified with further research.
+
+
 
 
