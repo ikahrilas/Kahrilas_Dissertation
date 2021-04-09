@@ -22,7 +22,6 @@ rc3_elec <- c("A29", "B26", "A26", "B23",
 ###########################################
 # list of component selections
 elec_selections <- list(neg_rc8_elec,
-                        pos_rc8_elec,
                         rc2_elec,
                         rc3_elec
                         )
@@ -36,9 +35,13 @@ levels(dat$block) <- c("Negative",
                        "Positive",
                        "Neutral")
 
+time_windows <- list(c(200, 350),
+                     c(80, 1000),
+                     c(475, 1100))
+
 # iterate over each component and electrode selection to create ERP plots
-watch_plots <-
-  map(elec_selections, ~ {
+raw_watch_plots <-
+  map2(elec_selections, time_windows, ~ {
               # watch plots
               dat %>%
                 select(pid:ms, .x) %>%
@@ -53,6 +56,7 @@ watch_plots <-
                 geom_line(size = 1.1, alpha = 0.9) +
                 geom_vline(xintercept = 0, linetype = "dashed") +
                 geom_hline(yintercept = 0, linetype = "dashed") +
+                annotate("rect", xmin = .y[[1]], xmax = .y[[2]], ymin = 0, ymax = Inf, fill = "blue", alpha = .1) +
                 labs(x = "Time (ms)",
                      y = expression(paste("Amplitude (",mu,"V)")),
                      #title = paste("Average", ..3),
@@ -93,9 +97,10 @@ dat_loc <- dat %>%
          electrode != "EXG2") # not used in plotting, so omit
 
 # define functions for topo plots
-topo_plot_fun <- function(elec) {
+topo_plot_fun <- function(elec, time) {
   values <-
     dat_loc %>%
+    filter(between(ms, time[1], time[2])) %>%
     group_by(block, electrode) %>%
     summarise(mv = mean(mv, na.rm = TRUE)) %>%
     select(mv) %>%
@@ -106,7 +111,8 @@ topo_plot_fun <- function(elec) {
 
   neu <-
     dat_loc %>%
-    filter(block == "Neutral") %>%
+    filter(block == "Neutral",
+           between(ms, time[1], time[2])) %>%
     rename("amplitude" = mv) %>%
     topoplot(interp_limit = "head",
              highlights = elec,
@@ -118,7 +124,8 @@ topo_plot_fun <- function(elec) {
 
   pos <-
     dat_loc %>%
-    filter(block == "Positive") %>%
+    filter(block == "Positive",
+           between(ms, time[1], time[2])) %>%
     rename("amplitude" = mv) %>%
     topoplot(interp_limit = "head",
              highlights = elec,
@@ -130,7 +137,8 @@ topo_plot_fun <- function(elec) {
 
   neg <-
     dat_loc %>%
-    filter(block == "Negative") %>%
+    filter(block == "Negative",
+           between(ms, time[1], time[2])) %>%
     rename("amplitude" = mv) %>%
     topoplot(interp_limit = "head",
              highlights = elec,
@@ -143,7 +151,11 @@ topo_plot_fun <- function(elec) {
 }
 
 # iterate and create topo plots
-topo_list <- map(elec_selections, ~ topo_plot_fun(.x))
+raw_topo_list <- map2(elec_selections, time_windows, ~ topo_plot_fun(.x, .y))
+
+# save raw topo information
+saveRDS(raw_watch_plots, file = "data/paper_three/raw_erp_plots.rds")
+saveRDS(raw_topo_list, file = "data/paper_three/raw_topo_plots.rds")
 
 # compose the final images
 layout <- '
@@ -152,10 +164,10 @@ DDDDDDDDD
 '
 
 neg_rc8_component_plots <-
-  topo_list[[1]][[2]] +
-  topo_list[[1]][[1]] +
-  topo_list[[1]][[3]] +
-  watch_plots[[1]] +
+  raw_topo_list[[1]][[2]] +
+  raw_topo_list[[1]][[1]] +
+  raw_topo_list[[1]][[3]] +
+  raw_watch_plots[[1]] +
   plot_layout(design = layout,
               heights = c(1, 1.4),
               widths = 2,
@@ -170,11 +182,11 @@ ggsave(here("images", "paper_3", "ERP Topo Images", "pre_PCA", "neg_rc8_plots.pn
        width = 8)
 
 pos_rc8_component_plots <-
-  topo_list[[2]][[2]] +
-  topo_list[[2]][[1]] +
-  topo_list[[2]][[3]] +
-  watch_plots[[2]] +
-  plot_layout(design = layout,
+  raw_topo_list[[2]][[2]] +
+  raw_topo_list[[2]][[1]] +
+  raw_topo_list[[2]][[3]] +
+  raw_watch_plots[[2]] +
+  raw_plot_layout(design = layout,
               heights = c(1, 1.4),
               widths = 2,
               guides = "auto") +
@@ -188,11 +200,11 @@ ggsave(here("images", "paper_3", "ERP Topo Images", "pre_PCA", "pos_rc8_plots.pn
        width = 8)
 
 rc2_component_plots <-
-  topo_list[[3]][[2]] +
-  topo_list[[3]][[1]] +
-  topo_list[[3]][[3]] +
-  watch_plots[[3]] +
-  plot_layout(design = layout,
+  raw_topo_list[[3]][[2]] +
+  raw_topo_list[[3]][[1]] +
+  raw_topo_list[[3]][[3]] +
+  raw_watch_plots[[3]] +
+  raw_plot_layout(design = layout,
               heights = c(1, 1.4),
               widths = 2,
               guides = "auto") +
@@ -206,11 +218,11 @@ ggsave(here("images", "paper_3", "ERP Topo Images", "pre_PCA", "rc2_plots.png"),
        width = 8)
 
 rc3_component_plots <-
-  topo_list[[4]][[2]] +
-  topo_list[[4]][[1]] +
-  topo_list[[4]][[3]] +
-  watch_plots[[4]] +
-  plot_layout(design = layout,
+  raw_topo_list[[4]][[2]] +
+  raw_topo_list[[4]][[1]] +
+  raw_topo_list[[4]][[3]] +
+  raw_watch_plots[[4]] +
+  raw_plot_layout(design = layout,
               heights = c(1, 1.4),
               widths = 2,
               guides = "auto") +
