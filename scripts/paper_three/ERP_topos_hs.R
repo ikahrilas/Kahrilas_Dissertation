@@ -176,6 +176,10 @@ topo_plot_fun <- function(comp, elec) {
 # iterate and create topo plots
 topo_list <- map2(component_list, elec_selections, ~ topo_plot_fun(.x, .y))
 
+# save objects
+saveRDS(watch_plots, file = "data/paper_three/erp_plots.rds")
+saveRDS(topo_list, file = "data/paper_three/topo_plots.rds")
+
 # compose the final images
 layout <- '
 AAABBBCCC
