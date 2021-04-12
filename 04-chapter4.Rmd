@@ -1,13 +1,12 @@
-## CHAPTER FOUR: TOO MUCH OF A GOOD THING: EPN AND THE "BRIGHTENING EFFECT"
+## CHAPTER FOUR: TOO MUCH OF A GOOD THING? THE EPN AS A POTENTIAL BIOMARKER OF THE BRIGHTENING EFFECT.
 
 Major Depressive Disorder (MDD) is one of the most common psychological disorders (World Health Organization, 2017). 
 In the United States, 17% of adults experience at least one major depressive episode during their life [@kesslerLifetimePrevalenceAgeofonset2005], and it is continuing to increase significantly during the backdrop of a global pandemic [@twengeCensusBureauassessedPrevalence2020]. 
 Depression symptoms are associated with challenges in daily life functioning including interpersonal relationship strain, increased likelihood of poor work performance and burnout, and decreased physical wellbeing [@chauvet-gelinierStressAnxietyDepression2017; @drussImpairmentRoleFunctioning2009a; @kesslerPrevalenceEffectsMood2006; @lewinsohnPsychosocialFunctioningYoung2003]. 
 In the United States alone, depression-related loss in work productivity has been estimated to exceed $36 billion per year [@kesslerPrevalenceEffectsMood2006]. 
 Treatment outcomes for depression suggest that even after the completion of therapy, 54% of individuals relapse within two years following treatment [@vittenglReducingRelapseRecurrence2007]. 
-Depression is currently a highly intractable disorder with a high rate of recurrence and relapse. 
+Depression is currently a highly intractable disorder with a high rate of recurrence and relapse that involves dysregulated emotion reactivity.
 Translational research that strives to develop a better understanding of factors that contribute to ongoing symptoms and relapse is urgently needed to develop effective treatments. 
-The present study sought to examine the effectiveness of an online/smartphone app based intervention (Headspace) in mitigating depression symptoms and modifying emotion reactivity as indexed by neural activity and self-report ratings.
 
 ### Emotion reactivity in depression
 
@@ -17,12 +16,12 @@ Reactivity can vary in terms of arousal (not arousing to very arousing) and vale
 Emotion regulation refers to psychological processes that influence an initial emotional response [@lewisAdvancesProblemsChallenges2010a] and suggests a change from baseline reactivity.
 Although it may seem intuitive to define reactivity and regulation in terms of chronometry, it is unclear when reactivity ends and regulation begins. 
 Further, there is often (at least) partial overlap between the two processes [@davidsonReactivityRecoveryRegulation2018], making it difficult to disentangle the two, which is supported by previous work in our lab (Kahrilas et al., in prep).
-A possible defining characteristic between reactivity and regulation is whether the motivational significance of an emotional stimulus is being altered [@hajcakSignificanceSignificanceEmpirical2020; @kahrilasNeurobiologicalCorrelatesEmotioninpreparation].
+A possible defining characteristic between reactivity and regulation is whether the motivational significance of an emotional stimulus is being altered [@hajcakSignificanceSignificanceEmpirical2020; Kahrilas et al., in prep].
 
 There are three predominant views of emotion reactivity in depression: negative potentiation, positive attenuation, and emotion context insensitivity (ECI). 
 The negative potentiation view states that negative mood [i.e., diffuse and slow-moving feeling states with weaker ties to specific events and stimuli in one’s environment; @watsonMoodTemperament2000] in MDD is due to potentiated emotional reactivity in response to negative emotional stimuli. 
 Positive attenuation holds that those with MDD will have reduced emotional reactivity in response to positive stimuli [@rottenbergMoodEmotionMajor2005]. 
-The negative and positive attenuation views are not mutually exclusive, and those with MDD can theoretically display attenuation to positive and negative stimuli  concomitantly. 
+The negative potentiation and positive attenuation views are not mutually exclusive; those with MDD can theoretically display both attenuated positive and potentiated negative emotion reactivity. 
 The ECI theory maintains that MDD is marked by a pattern of reduced reactivity to both positive and negative stimuli [@rottenbergMoodEmotionMajor2005]. 
 While the ECI theory is compatible with the positive attenuation theory, it hypothesizes attenuated reactivity in response to negative stimuli as well, which is at odds with the negative potentiation theory.
 
@@ -32,10 +31,10 @@ Results illustrated that MDD was associated with consistent reductions in positi
 More research is needed to reconcile these findings with research that has found support for the negative potentiation theory [@chanHighlyNeuroticNeverdepressed2007; @ellisDysphoriaBeingRed2010], though results support that positive attenuation is a robust feature of depression. 
 Despite some inconsistent findings regarding negative emotion reactivity in depression, a plurality of research utilizing self-report and physiological methods to measure emotion reactivity support the ECI view [@bylsmaMetaanalysisEmotionalReactivity2008a], or that there is attenuated emotion reactivity in response to positive *and* negative stimuli.
 
-It should be noted that research utilizing ecological momentary assessment methods have found results in the opposite direction than those derived in laboratory assessments, or that individuals with MDD exhibit a “brightening effect” with greater reactivity to positive events [@khazanovBrighteningEffectReactions2019].
+It should be noted that research utilizing ecological momentary assessment methods have found results in the opposite direction than those derived in laboratory assessments, or that individuals with MDD exhibit a "brightening effect” with greater reactivity to positive events [@khazanovBrighteningEffectReactions2019].
 One explanation for these findings is that those with depression harbor more negative expectations for future events [@khazanovBrighteningEffectReactions2019].
 These lower expectations, then, amplify responses to positive stimuli [@mcnamaraAdaptiveResponseUncertainty2013]. 
-It is unclear why laboratory settings have failed to replicate a "brightening effect," though it is possible that standardized stimuli are less salient that real day-to-day experiences [@khazanovBrighteningEffectReactions2019].
+It is unclear why laboratory settings have failed to replicate a brightening effect, though it is possible that standardized stimuli are less salient that real day-to-day experiences [@khazanovBrighteningEffectReactions2019].
 Given the laboratory context of the present study, our hypotheses were ultimately informed from other laboratory studies. 
 Therefore, we hypothesized that attenuated reactivity to positive and negative stimuli would be associated with increased depression symptoms.
 
@@ -59,7 +58,8 @@ Thus, we aimed to examine relations among PA and emotion reactivity in the prese
 
 ### Neural Correlates of Emotion Reactivity in Depression
 
-Research investigating neural correlates of emotional reactivity to affective stimuli using functional magnetic resonance imaging (fMRI) in those without mood disorders indicates enhanced activity predominantly in the right occipital cortex [i.e., fusiform cortex, lateral occipital cortex, and medial parietal cortex; @bradleyActivationVisualCortex2003], as well as amygdala and visual cortex [@sabatinelliParallelAmygdalaInferotemporal2005] in response to arousing affective (pleasant and unpleasant) images compared to neutral images. The largest changes in brain activity are observed for highly arousing stimuli, such as mutilations, erotica, and threat, compared to neutral objects [@bradleyInternationalAffectivePicture2007].
+Research investigating neural correlates of emotional reactivity to affective stimuli using functional magnetic resonance imaging (fMRI) in those without mood disorders indicates enhanced activity predominantly in the right occipital cortex [i.e., fusiform cortex, lateral occipital cortex, and medial parietal cortex; @bradleyActivationVisualCortex2003], as well as amygdala and visual cortex [@sabatinelliParallelAmygdalaInferotemporal2005] in response to arousing affective (pleasant and unpleasant) images compared to neutral images. 
+The largest changes in brain activity are observed for highly arousing stimuli, such as mutilations, erotica, and threat, compared to neutral objects [@bradleyInternationalAffectivePicture2007].
 Attenuated ventral striatum (a structure linked with processing of rewarding/positive stimuli) activity has been observed in response to positive visual stimuli in individuals with MDD [@epsteinLackVentralStriatal2006; @lawrenceSubcorticalVentralPrefrontal2004; @surguladzeDifferentialPatternNeural2005], which is further correlated with participant’s self-reported lack of interest and pleasure in activities, suggesting that hypoactivation of this structure is reflective of anhedonia [i.e., lack of pleasures; @epsteinLackVentralStriatal2006].
 Other studies have found enhanced activity in frontal brain structures involved in emotion regulation (middle frontal gyrus, cingulate cortex, dorsolateral PFC) during emotion reactivity to positive stimuli in those with MDD [@demenescuNeuralCorrelatesPerception2011; @ochsnerBottomUpTopDownProcesses2009].
 This pattern of findings may index increased attention orientation and processing demands to mood-incongruent stimuli [@demenescuNeuralCorrelatesPerception2011]. 
@@ -68,13 +68,13 @@ Regarding negative emotion reactivity, studies have indicated increased responsi
 While the aforementioned research has illustrated differences in emotion reactivity between clinical and non-clinical samples, other studies have found no differences [@almeidaElevatedAmygdalaActivity2010; @demenescuNeuralCorrelatesPerception2011; @diekhofFunctionalNeuroimagingReward2008; @gotlibSubgenualAnteriorCingulate2005; @norburyIncreasedNeuralResponse2010; @siegleCanShakeThat2002]. 
 Possible explanations for mixed findings regarding positive and negative emotional reactivity include depression severity, medication status, and differing levels of co-occurring anxiety dimensions.
 Increased amygdala reactivity to negative stimuli has been observed in those with severe depression [@shelineIncreasedAmygdalaResponse2001], and medication may be linked to down-regulation of amygdala response [@fuAttenuationNeuralResponse2004; @lawrenceSubcorticalVentralPrefrontal2004; @shelineIncreasedAmygdalaResponse2001].
-In contrast, participants with mild-to-moderate depression severity (with and without medication) do not exhibit differences in amygdala activity  in emotion reactivity compared to controls [@demenescuNeuralCorrelatesPerception2011].
+In contrast, participants with mild-to-moderate depression severity (with and without medication) do not exhibit differences in amygdala activity in emotion reactivity compared to controls [@demenescuNeuralCorrelatesPerception2011].
 Accounting for co-occurring dimensions of anxiety can help clarify distinct patterns of emotion reactivity and neural activity associated with PA [@sharpTransdiagnosticDimensionsAnxiety2015].
+Altogether, this necessitates a dimensional approach to measuring depression symptoms in the context of neural emotional reactivity, as different patterns of neural activity may accompany varying degrees of illness severity and anxiety comorbidity. 
 Neuroscience research investigating depression that does not account for comorbid anxious apprehension and anxious arousal can yield mixed findings [@herringtonLocalizationAsymmetricBrain2010; @sharpTransdiagnosticDimensionsAnxiety2015].
 Further, [-@engelsCooccurringAnxietyInfluences2010] found evidence for interactions among anxious arousal and apprehension with anhedonic depression.
 Anxious apprehension can be defined as a tendency to engage in negative, ruminative thinking, and is analogous to enduring state worry [@burdwoodRestingstateFunctionalConnectivity2016; @ruscioTaxometricInvestigationLatent2001], while anxious arousal can entail hypervigilance and sympathetic nervous system hyperarousal to mild stressors [@nitschkeContrastingPatternsBrain1999].
-Altogether, this necessitates a dimensional approach to measuring depression symptoms in the context of neural emotional reactivity, as different patterns of neural activity may accompany varying degrees of illness severity and anxiety comorbidity. 
-Additionally, we included measures of anxious arousal and anxious apprehension in subsequent analyses in order to more adequately investigate relations among low PA and emotion reactivity.
+Therefore, we included measures of anxious arousal and anxious apprehension in subsequent analyses in order to more adequately capture distinct relations among low PA and neural activity.
 
 ### Measuring the Temporal Course of Emotion Reactivity in Depression: Event-Related Potentials Index Dynamic Cascade of Processes
 
@@ -92,19 +92,19 @@ A study conducted by Weinberg and colleagues [-@weinbergDepressionReducedNeural2
 The aforementioned study did not demonstrate an association with MDD diagnosis and reduced LPP in response to threatening stimuli [@weinbergDepressionReducedNeural2016], thus ultimately showing support for the positive attenuation view of emotion reactivity.
 A follow up study found that those with MDD and previous suicide attempts (an index for illness severity) had blunted LPP in response to threatening stimuli compared to those with MDD and without a history of suicide attempts [@weinbergDecreasedNeuralResponse2017].
 This effect was unique to threatening (not rewarding) images, which is consistent with fMRI accounts of depression severity altering amygdala activity patterns in response to negative stimuli [@demenescuNeuralCorrelatesPerception2011].
-Overall, this suggests difference in neural reactivity depending on illness severity and further underscores the need for dimensional measures of psychopathology rather than a categorical nosology.
+Overall, this illustrates differences in neural reactivity depending on illness severity and further underscores the need for dimensional measures of psychopathology rather than categorical nosology.
 Lending additional support to the ECI view are findings that illustrate negative associations among LPP elicited in response to positive and negative images and depression symptoms [@hillAbnormalEmotionalReactivity2019]. 
 Of note in the Hill et al. (2019) study was the use of structural equation modeling (SEM).
 In contrast to more ubiquitous OLS regression methods, SEM allows the researcher to explicitly model measurement error, assess overall model fit, and statistically compare competing models.
-Thus, Hill and colleagues constructed two separate factors: a neural reactivity and internalizing model.
+Hill and colleagues (2019) constructed two separate factors: a neural reactivity and internalizing model.
 The former was created by estimating covariances among LPP in response to neutral, positive, and negative images and the latter among the depression, anxiety, and stress subscales of the DASS-21.
-This allowed the researchers to then estimate covariances among the variances unique to each manifest, or observed, variable while controlling for the shared variance among each of the other indicator variables.
-For example, this technique allows the user to estimate relations between the unique variances of each each viewing condition and specific facets of psychopathology.
-Not only does this method afford more flexibility and ability to test more intricate theories, it is also more reliable than calculating difference scores (e.g., difference in LPP elicited between positive and neutral images) and allows to examine variance that is unique to a given condition [@cronbachHowWeShould1970; @weinbergHeritabilityNeuralResponse2015].
-By comparing Akaike and Bayesian Information Criteria, Hill et al. found that the model corresponding to the ECI view provided the best fit to the data.
-Additionally, parameter estimates that approached significance (*p* = .05) were found by estimating covariances among LPP in response to positive/negative images and depression symptoms [@hillAbnormalEmotionalReactivity2019].
+This allowed the researchers to then estimate covariances among residual variances for each indicator (i.e., observed) variable while controlling for the shared variance among each of the other indicator variables.
+For example, this technique allows the user to estimate relations between the unique variances of each each viewing condition for a specified ERP component and specific facets of psychopathology.
+This method affords more flexibility, the ability to test more intricate theories, and is also more reliable than calculating mean difference scores (e.g., difference in LPP elicited between positive and neutral images) by allowing examination of variance that is unique to a given condition [@cronbachHowWeShould1970; @weinbergHeritabilityNeuralResponse2015].
+By comparing Akaike and Bayesian Information Criteria, Hill et al. (2019) found that the model corresponding to the ECI view provided the best fit to the data.
+Additionally, parameter estimates that approached significance (*p* = .05) were found between LPP in response to positive/negative images and depression symptoms [@hillAbnormalEmotionalReactivity2019].
 A notable omission in the aforementioned study were likelihood ratio tests between the nested comparison and baseline models.
-This information would inform the reader as to whether various statistical models actually fit the data better that the initial measurement model that treated the neural reactivity and internalizing factors as entirely orthogonal constructs.
+This information would inform the reader as to whether the various statistical models actually fit the data better that the initial measurement model that treated the neural reactivity and internalizing factors as entirely orthogonal constructs.
 Further, the depression subscale of the DASS-21 gives emphasis to anhedonia, hopelessness, and devaluation of life, and is thus not specific to low PA [@lovibondManualDepressionAnxiety1996].
 Measuring relations among neural activity and specific facets of depression are important considerations given the heterogeneity inherent in depression [@monroeDepressionShroudHeterogeneity2015].
 Indeed, more granular assessments of psychopathology will afford more targeted interventions and refined theories of how self report data relate to neurobiological constructs.
@@ -131,26 +131,10 @@ In the context of ERPs, these new variables represent latent components that may
 For example, if there were two temporally overlapping ERP components with equal magnitude but opposite directionality (positive and negative), the two components would negate each other and not be observable via inspection of grand average ERPs.
 Temporal PCA, on the other hand, would theoretically be able to retain these components provided that the experimental paradigm reliably produces them.
 
-Thus, the present study aimed to contributed to the literature in several ways while building upon the SEM framework in Hill et al. (2019).
-Rather than analyzing associations with later components, analyses will be expanded to incorporate other early visual components to determine their relations with internalizing symptoms.
-Next, rather than using windowed averages for scoring ERP components, we utilized PCA identify ERP components of interest to submit to statistical analyses.
+Thus, the present study aimed to build upon the SEM framework in Hill et al. (2019) in several ways.
+Rather than analyzing associations with solely later components, analyses will be expanded to incorporate other early visual components retained in a temporal PCA to determine their relations with internalizing symptoms.
 Further, the present study will examine unique relations among ERP components and PA while controlling for dimensions of anxiety.
-<!-- Last, in addition to comparing AIC and BIC among models with equal degrees of freedom, we also conducted chi-square likelihood ratio tests to determine if competing models afforded superior data fit when compared to nested comparison (i.e., measurement) models. -->
-
-<!-- #### Savoring and mindfulness.  -->
-
-<!-- Savoring-based regulatory strategies are used to sustain and upregulate positive emotions [@heiyBackBasicsNaturalistic2014; @liuSelectionImplementationEmotion2017]. -->
-<!-- While savoring, one may eagerly anticipate future positive experiences, focus on ongoing positive experiences as they occur in the present moment, or reminisce about past positive experiences. -->
-<!-- With specific relevance to depression, studies aimed at enhancing savoring capacity show that enriching any of the three temporal domains of savoring (reminiscing, savoring the moment, or anticipating) is associated with increased frequency and intensity of positive affect, and decreased negative affect [@bryantDimensionsSubjectiveMental1984; @bryantSavoringNewModel2007; @kahrilasSavoringMomentLink2020]. -->
-<!-- Training on momentary positive emotion regulation (i.e., memory building, expressing positive emotions) resulted in decreased self-reported depression symptoms when compared to a control group after two weeks [@hurleyResultsStudyIncrease2012]. -->
-<!-- Intervention studies with older adults have shown that savoring was positively related to decreased depression, increased activity engagement, and increased wellbeing [@smithEffectsSavoringIntervention2017; @smithImpactSavoringAbility2020]. -->
-<!-- Savoring may improve the capacity to recognize and enjoy positive moments, even during difficult times [@smithEffectsSavoringIntervention2017]. -->
-<!-- Positive self-attributions for recent positive events have been associated with attenuated depression symptoms and enhanced positive affect following positive events in a sample of college-aged women [@mcmakinPositiveAffectStimulation2011].  -->
-
-<!-- While savoring and mindfulness are not analogous, there may be some overlapping conceptual aspects [@bryantAppreciatingLifeMidst2015; @bryantSavoringNewModel2007; @hurleyResultsStudyIncrease2012]. -->
-<!-- Increased attention to positive stimuli is a candidate psychological mechanism through which positive emotion regulation strategies are theorized to mitigate depression symptoms [@carlPositiveEmotionRegulation2013; @joormannExaminingEmotionRegulation2016a]. -->
-<!-- Mindfulness meditation practices and mindfulness-based interventions emphasize the importance of cultivating non-judgmental attention and awareness in the present moment [@guHowMindfulnessbasedCognitive2015a], which may broaden one’s cognitive scope and help enhance savoring capacity [@garlandMindfulnessBroadensAwareness2015a]. -->
-<!-- Thus, I hypothesized that savoring capacity would be negatively related to depression, and that those undergoing an MBI will report increases in savoring capacity. -->
+Last, in addition to comparing AIC and BIC among unnested models, we also conducted chi-square likelihood ratio tests to determine if competing models afforded superior data fit when compared to nested comparison (i.e., measurement) models.
 
 ## The Present Study
 
@@ -158,14 +142,14 @@ The present study utilized a sample from an earlier experiment (Kahrilas et al.,
 Participants that met inclusion criteria in the SMILE study were randomized to one of three experimental groups, two of which included self-guided Headspace use and another that served as an experimental control (i.e., wait list).
 Participants also completed batteries of surveys at four separate time points. 
 
-At two time points (before orientation and two months later), participants also underwent an experimental paradigm consisting of seven blocks of images using 120 different Open Affective Standardized Image Set (OASIS) stimuli.
+Participants in both samples underwent an experimental paradigm consisting of seven blocks of images using 120 different Open Affective Standardized Image Set (OASIS) stimuli.
 Forty images were highly arousing positive images, 40 images were highly arousing negative images, and 40 were neutral.
 Participants were tasked with increasing or decreasing emotional intensity in response to (i.e., upregulating or downregulating) positive and negative images, as well as passively watching them.
 Participants also passively viewed the block of 40 neutral images.
 EEG was recorded during the experimental paradigm.
 Following each block of images, participants were asked to rate on a seven-point scale how positive or negative they feel (valence), the intensity of the emotion they feel (arousal), as well as how difficult the regulation task was (difficulty).
 Only the passive viewing conditions (positive, negative, and neutral) were analyzed for the present study.
-The data from time one of the SMiLe study was harmonized with the data from Kahrilas et al. to afford greater variability in variables of interest (e.g., PA), which will afford more dimensionality in statistical analyses.
+The data from time one of the SMiLe study was harmonized with the data from Kahrilas et al. to afford greater variability in variables of interest (e.g., PA), which will afford more dimensionality in our constructs.
 
 Overall, the primary objective of the present study was to evaluate several statistical models characterizing patterns of emotion reactivity (as indexed by N170, EPN, and LPP, derived with PCA) with PA (while accounting for anxious arousal and anxious apprehension) within an SEM framework.
 We hypothesized that there would be negative associations between LPP reactivity in response to positive/negative images and PA, and that this model would afford superior fit compared to competing models.
@@ -178,7 +162,7 @@ No hypotheses were made regarding early visual component activity in response to
 The Supported Mindful Learning (SMiLe) study is a three-month randomized controlled trial investigating the effectiveness of Headspace in reducing psychological symptoms in a sample of college students with depression. 
 Participants that met inclusion criteria were randomized to one of three experimental groups and completed batteries of surveys at four separate timepoints. 
 Approximately 15 students per fall and spring semester were recruited over the course of three years (Fall 2017 - Spring 2020) for a total of six semesters. 
-As noted earlier, only pre-trial baseline data was used fro the present study.
+Only pre-trial baseline data was used fro the present study.
 Eighty undergraduate students were recruited from a mid-sized, Midwestern university for the SMiLe study.
 Participants were recruited using listserv emails, flyers, and Sona postings.
 Additionally, a sample ($N$ = 52) of undergraduate students used for a different study in our lab (Kahrilas et al., in preparation) that were not selected on the basis of depression symptoms were harmonized with the present sample at pre-trial baseline (total $N$ = 134) for the present study.
@@ -252,7 +236,7 @@ Furthermore, difficulty ratings on a seven-point likert scale were also obtained
 
 (ref:paradigm-image-2) Experimental paradigm utilized in the present study.
 
-```{r paradigm-image-2, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:paradigm-image)", out.height= "45%", out.width="100%"}
+```{r paradigm-image-2, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:paradigm-image-2)", out.height= "45%", out.width="100%"}
 knitr::include_graphics("images/paper_2/PER_paradigm.png", auto_pdf = TRUE)
 ```
 
@@ -280,77 +264,45 @@ Data were baseline-adjusted by subtracting the average activity for 200 millisec
 To discriminate among temporal sources of variance (i.e., ERP components) in the time course of ERPs, ERP averages were submitted to a temporal PCA to derive linear combinations of data that distinguish activity across time points. 
 A temporal PCA was performed using the Psych package [@revellePsychProceduresPsychological2020] in R version 4.0.3 [@rcoreteamLanguageEnvironmentStatistical2020] with a covariance matrix.
 A covariance matrix was used to retain the original units of measurement (i.e., voltage) for the average ERPs for each time point [@donchinMultivariateAnalysisEventrelated1978].
-The temporal PCA used all time points (-200 ms - 2000 ms) as variables and all 113 participants, three blocks, and 64 recording sites as observations, yielding linear combinations of time points and "temporal" factors [@dienApplyingPrincipalComponents2012].
+The temporal PCA used all time points (-200 ms - 2000 ms) as variables and all 113 participants, three blocks (passive positive, negative, and neutral viewing blocks), and 64 recording sites as observations, yielding linear combinations of time points and "temporal" factors [@dienApplyingPrincipalComponents2012].
 To determine the number of components to retain for rotation, a parallel analysis [@hornRationaleTestNumber1965] was performed on the resultant Scree plot.
 The parallel analysis creates Scree plots of the actual and simulated fully random data to determine the number of components that explain more variance than if only chance alone were acting. 
 Based on the parallel analysis, 22 components were retained for rotation. 
-An Promax rotation was then used on the 22 components because it does not impose orthogonality, and simulation studies suggest that Promax is most effective for temporal PCA [@dienERPPCAToolkit2010; @dienEvaluationPCAICA2007].
+A Promax rotation was then used on the 22 components because it does not impose orthogonality, and simulation studies suggest that Promax is most effective for temporal PCA [@dienERPPCAToolkit2010; @dienEvaluationPCAICA2007].
 The time course of each of the 22 components was inspected by plotting the covariance loadings along each time point. 
 To further guide our selection of components, we used a previous study conducted by our lab (Kahrilas et al., in prep) that analyzed the time course of emotion reactivity and regulation using PCA.
-PCA components with covariance loadings in time windows that fit descriptions of LPP and early visual components (e.g., N170, EPN) that matched components sensitive to emotion reactivity in Kahrilas et al. (in prep) were retained for statistical analyses.
+PCA components with covariance loadings in time windows that fit descriptions of later and early visual components (e.g., EPN, P300, and LPP) that matched components sensitive to emotion reactivity in Kahrilas et al. (in prep) were retained for statistical analyses.
 Spatial information is retained in PCA; the topography of each factor is encoded in the mean amplitude of factor scores at each recording site [@dienAddressingMisallocationVariance1998].
 Thus, scalp topographies of each component for each condition was inspected to determine correspondence of components and ERP components of interest.
 Of note, portions of waveforms represented by a given PCA component can be reproduced by multiplying covariance loadings by observations' factor scores [@dienAddressingMisallocationVariance1998]. 
 Three components were retained for statistical analyses based inspection of topographic plots and ERP waveforms.
-Two of the retained components represented LPP-like components that have positive peaks at 371 ms and 736 ms with the former demonstrating activity at PO7 and PO8 electrode sites and the latter at PO7, PO8, PO3, PO4, P1, P2, P5/P3, P6/P4 and Pz electrode sites. 
-Similar to findings from Kahrilas et al. (in preparation), topography of a 257 ms component indicated two distinct sources of activity: positive going waveforms in the occipital region (PO7, PO8, O1, and O2) and negative waveforms in the centroparietal region (CPz and Pz).
-Each of these sites were scored separately and submitted to statistical analyses.
+Two of the retained components represented later components that have positive peaks at 371 ms and 736 ms, with the former demonstrating activity at PO7 and PO8 electrode sites and the latter at PO7, PO8, PO3, PO4, P1, P2, P5/P3, P6/P4 and Pz electrode sites. 
+Similar to findings from Kahrilas et al. (in preparation), topography of a 257 ms component indicated a dipole of scalp activity, with positive going waveforms in the occipital region (PO7, PO8, O1, and O2) and negative waveforms in the centroparietal region (CPz and Pz).
+Based on our a apriori interest in the EPN and other research demonstrated EPN activity in response to emotional images, we submitted the negative centroparietal activity to statistical analyses.
 No component resembling an N170 was derived from the PCA.
-See Figures \@ref(fig:neg-257-component-plot), \@ref(fig:pos-257-component-plot), \@ref(fig:371-component-plot), and \@ref(fig:736-component-plot) for grand average ERP and topographic plots of the retained PCA components.
-Refer to Figures \@ref(fig:raw-neg-257-component-plot), \@ref(fig:raw-pos-257-component-plot), \@ref(fig:raw-371-component-plot), and \@ref(fig:raw-736-component-plot) for ERP and topographic plots before the PCA was performed.
+See Figures \@ref(fig:neg-257-component-plot), \@ref(fig:371-component-plot), and \@ref(fig:736-component-plot) for grand average ERP and topographic plots of the retained components before and after the PCA was performed.
 All visualizations were composed using the ggplot (Wickham, 2016) and eegUtils (Craddock, 2019) packages.
 
-(ref:neg-257-component-plot) Topographic and ERP plots of the negative 257 ms PCA component.
+(ref:neg-257-component-plot) Topographic and ERP plots of the negative 257 ms PCA component before and after temporal PCA. Top row topographic plots represent average activity in the shaded region of the ERP plot below it (200 - 350 ms). ERP plots represent average activity in highlighted sensors topographic plots (CPz and Pz).
 
-```{r neg-257-component-plot, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:neg-257-component-plot)", out.height= "45%", out.width="100%"}
+```{r neg-257-component-plot, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:neg-257-component-plot)", out.height= "100%", out.width="100%"}
 knitr::include_graphics("images/paper_3/ERP Topo Images/neg_rc8_plots.png", auto_pdf = TRUE)
 ```
 
-(ref:pos-257-component-plot) Topographic and ERP plots of the positive 257 ms PCA component.
+(ref:371-component-plot) Topographic and ERP plots of the negative 371 ms PCA component before and after temporal PCA. Top row topographic plots represent average activity in the shaded region of the ERP plot below it (80 - 1000 ms). ERP plots represent average activity in highlighted sensors topographic plots (PO7 and PO8).
 
-```{r pos-257-component-plot, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:pos-257-component-plot)", out.height= "45%", out.width="100%"}
-knitr::include_graphics("images/paper_3/ERP Topo Images/pos_rc8_plots.png", auto_pdf = TRUE)
-```
-
-(ref:371-component-plot) Topographic and ERP plots of the 371 ms PCA component.
-
-```{r 371-component-plot, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:371-component-plot)", out.height= "45%", out.width="100%"}
+```{r 371-component-plot, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:371-component-plot)", out.height= "100%", out.width="100%"}
 knitr::include_graphics("images/paper_3/ERP Topo Images/rc2_plots.png", auto_pdf = TRUE)
 ```
 
-(ref:736-component-plot) Topographic and ERP plots of the 736 ms PCA component.
+(ref:736-component-plot) Topographic and ERP plots of the negative 736 ms PCA component before and after temporal PCA. Top row topographic plots represent average activity in the shaded region of the ERP plot below it (475 - 1100 ms). ERP plots represent average activity in highlighted sensors topographic plots (PO7, PO8, PO3, PO4, P1, P2, P3, P4, P5, P6, and Pz).
 
-```{r 736-component-plot, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:736-component-plot)", out.height= "45%", out.width="100%"}
+```{r 736-component-plot, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:736-component-plot)", out.height= "100%", out.width="100%"}
 knitr::include_graphics("images/paper_3/ERP Topo Images/rc3_plots.png", auto_pdf = TRUE)
-```
-
-(ref:raw-neg-257-component-plot) Topographic and ERP plots of PO7, PO8, O1, and O2 activity.
-
-```{r raw-neg-257-component-plot, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:raw-neg-257-component-plot)", out.height= "45%", out.width="100%"}
-knitr::include_graphics("images/paper_3/ERP Topo Images/pre_PCA/neg_rc8_plots.png", auto_pdf = TRUE)
-```
-
-(ref:raw-pos-257-component-plot) Topographic and ERP plots of CPz and Pz activity.
-
-```{r raw-pos-257-component-plot, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:raw-pos-257-component-plot)", out.height= "45%", out.width="100%"}
-knitr::include_graphics("images/paper_3/ERP Topo Images/pre_PCA/pos_rc8_plots.png", auto_pdf = TRUE)
-```
-
-(ref:raw-371-component-plot) Topographic and ERP plots of PO7 and PO8 activity.
-
-```{r raw-371-component-plot, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:raw-371-component-plot)", out.height= "45%", out.width="100%"}
-knitr::include_graphics("images/paper_3/ERP Topo Images/pre_PCA/rc2_plots.png", auto_pdf = TRUE)
-```
-
-(ref:raw-736-component-plot) Topographic and ERP plots of PO7, PO8, PO3, PO4, P1, P2, P5, P3, P6, P4 and Pz activity.
-
-```{r raw-736-component-plot, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:raw-736-component-plot)", out.height= "45%", out.width="100%"}
-knitr::include_graphics("images/paper_3/ERP Topo Images/pre_PCA/rc3_plots.png", auto_pdf = TRUE)
 ```
 
 ### Analytical approach
 
-Descriptive statistics were calculated using R version 4.0.3 [@rcoreteamLanguageEnvironmentStatistical2020]. 
 SEM was conducted using the lavaan package [@rosseelLavaanPackageStructural2012].
 Further, the first author made extensive use of the dplyr (Wickham et al., 2021) package in data cleaning and manipulation.
 Tables were constructed using the kableExtra package (Zhu, 2021).
@@ -358,11 +310,10 @@ Our modeling process largely followed that of Hill et al. (2019).
 Our first stage of modeling was to construct a measurement model with two latent orthogonal factors.
 Neutral, negative, and positive viewing conditions served as indicator variables of the *Neural Reactivity* factor.
 Measures of anxious apprehension (PSWQ), anxious arousal (MASQ-AA), and PA (MASQ-PA) served as indicator variables for the *Internalizing* factor.
-Four separate measurement models were constructed for each ERP component retained from the earlier PCA.
-Across these measurement models, indicators of the *Neural Reactivity* factor changed to reflect each PCA component being tested, while the *Internalizing* factor remained the same.
-Thus, while loadings of he indicators for the *Internalizing* factor remained constained throughout, the overall model fit varied due to different covariance matrices being used across the models.
-Across each measurement model, one loading for each latent factor was set to one in order to set a metric for the factors.
-All other loadings were freely estimated, as were the variances of each factor and residual variances of each indicator variable.
+Three separate measurement models were constructed for each ERP component retained from the earlier PCA.
+Across these measurement models, indicators of the *Neural Reactivity* factor changed to reflect each PCA component being tested, while the *Internalizing* factor remained identical.
+The variances of both latent variables were standardized set a metric for the factors.
+All  loadings were freely estimated, as were the variances of each factor and residual variances of each indicator variable.
 Each of the subsequent competing models were compared to their respective measurement model with a chi-square likelihood ratio test to determine of each model offered superior fit to the data compared to the measurement model.
 
 We then tested the ECI model by estimating covariances among the positive/negative viewing conditions and PA. 
@@ -371,31 +322,33 @@ If both estimated covariances were positive (negative for negative peak waveform
 Allowing these covariances to be freely estimated allowed us to determine if the positive attenuation or negative potentiation views offered superior fit, as well.
 If a significant positive (negative for negative peak waveforms) covariance between PA and the positive viewing condition was found with no association with the negative viewing condition, this would be evidence for the positive attenuation theory (in the presence of a significant likelihood ratio test compared to the measurement model).
 In contrast, if a significant negative (positive for negative peak waveforms) covariance between PA and the negative viewing condition was found in the absence of an association between the positive viewing condition and PA, this would be evidence for the positive attenuation theory (in the presence of a significant likelihood ratio test compared to the measurement model).
-Note that the positive attenuation and negative potentiation views are not mutually exclusive, thus these patterns could be observed simultaneously.
+Note that the positive attenuation and negative potentiation views are not mutually exclusive, and these patterns could be observed simultaneously.
 Other competing models were directly informed from Hill and colleagues 2019 study.
 We tested a neural reactivity model that estimated a covariance between the *Neural Reactivity* latent factor and PA.
 This tested whether general neural reactivity to stimuli was associated with PA rather than the residual variances of the positive/negative viewing conditions, specifically.
 We then tested an internalizing model that estimated covariances among the positive/negative viewing conditions and the latent *Internalizing* factor, which tested whether emotion reactivity was associated with more general internalizing symptoms rather than PA specifically.
-Last, we tested an anxious arousal model that estimated covariances among the positive/negative viewing conditions and the residual variance of the anxious arousal indicator.
+We also tested an anxious arousal model that estimated covariances among the positive/negative viewing conditions and the residual variance of the anxious arousal indicator.
 This tested the hypothesis of whether reactivity to emotional stimuli was associated with physiological symptoms associated with anxiety specifically.
+Last, also tested an anxious apprehension model that estimated covariances among the positive/negative viewing conditions and the residual variacne of the anxious apprehension indicator.
+This tested the hypothesis of whether reactivtiy to emotional stimuli was associated with apprehension symptoms associated with anxiety specifically.
 See Figure \@ref(fig:sem-diagrams) for model diagrams of each of the models described.
 
-(ref:sem-diagrams) The model diagrams show each model that was fitted to the data for each ERP component retained from the PCA. The Measurement Model (top) treats the latent *Neural Reactivity* and *Internalizing* factors as orthogonal constructs. The ECI Model (second from top) estimates covariances among the positive/negative viewing conditions for a given ERP component and positive affectivity. The Neural Reactivity Model (third from top) estimates covariance between the neural reactivity latent factor (rather than specific emotional reactivity) and positive affectivity. The Internalizing Model Diagram (second from bottom) estimates covariances among positive and negative viewing conditions for a given ERP PCA component and global internalizing symptoms, rather than PA specifically. Last, the Anxiety Model (bottom) estimates covariances among positive/negative viewing conditions for a given ERP component and anxious arousal. PA = positive affectivity, Anx Aro = anxious arousal, Anx App = Anxious apprehension, ECI = emotion context insensitivity.
+(ref:sem-diagrams) The model diagrams show each model that was fitted to the data for each ERP component retained from the PCA. The Measurement Model (top left) treats the latent *Neural Reactivity* and *Internalizing* factors as orthogonal constructs. The ECI Model (top right) estimates covariances among the positive/negative viewing conditions for a given ERP component and positive affectivity. The Neural Reactivity Model (left second row) estimates covariance between the neural reactivity latent factor (rather than specific emotional reactivity) and positive affectivity. The Internalizing Model Diagram (right second row) estimates covariances among positive and negative viewing conditions for a given ERP PCA component and global internalizing symptoms, rather than PA specifically. The Anxious Arousal Model (bottom left) estimates covariances among positive/negative viewing conditions for a given ERP component and anxious arousal. Last, the Anxious Apprehension model estiamtes covariances among positive/negative viewing conditions ofr a given ERP component and anxious apprehension. PA = positive affectivity, Anx Aro = anxious arousal, Anx App = Anxious apprehension, ECI = emotion context insensitivity.
 
-```{r sem-diagrams, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:sem-diagrams)", out.height= "120%", out.width="120%"}
-knitr::include_graphics("images/paper_3/sem_diagrams/sem_diagrams_final.png", auto_pdf = TRUE)
+```{r sem-diagrams, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:sem-diagrams)", out.height= "100%", out.width="100%"}
+knitr::include_graphics("images/paper_3/sem_diagrams/SEM_diagrams.png", auto_pdf = TRUE)
 ```
 
-All models were estimated using full information maximum likelihood with robust (Huber-White) standard errors and a scaled test statistic. 
+All models were estimated using full information maximum likelihood (FIML) with robust (Huber-White) standard errors and a scaled test statistic. 
 Of the 113 cases used for analyses, 10 (8.8%) were missing one questionnaire subscale used for the *Internalizing* latent factor.
-Inspection of missing cases did not reveal any indications that these data were missing not at random [@endersIntroductionMissingData2010].
+Inspection of missing cases did not reveal any indications that these data were missing not at random [@endersIntroductionMissingData2010], and thus FIML was used to address missing data.
 Model fit was evaluated with measures of absolute fit, including the goodness-of-fit chi-square value with accompanying degrees of freedom, root mean squared error of approximation (RMSEA) < .06, standardized root mean square residual (SRMR) < .08.
 Fit was also evaluated with measures of relative fit, including non-normed fit index (NNFI) > .90, and the Comparative Fit Index (CFI) > .90.
-A chi-square difference test will be performed between the nested measurement model and its corresponding ECI, neural reactivity, internalizing, and anxiety model.
+A chi-square difference test was performed between the nested measurement model and its corresponding ECI, neural reactivity, internalizing, and anxious arousal, and anxious apprehension model.
 The chi-square difference test evaluates the equal-fit hypothesis for two hierarchical models.
 If the chi-square difference value is non-significant, then the two models fit the data equally well and the more parsimonious (i.e., measurement model) is the preferred model.
 If the chi-square difference value is significant, then the model with fewer degrees of freedom (i.e., not the measurement model) fits the data better and is thus preferred over the measurement model.
-The ECI, Neural Reactivity, Internalizing, and Anxiety Model are not hierarchical and thus cannot be comaprd using a chi-square difference test.
+The ECI, Neural Reactivity, Internalizing, and Anxious Arousal, and Anxious Apprehension models are not hierarchical and thus cannot be compared using a chi-square difference test.
 Thus, the Akaike information criterion (AIC) and Bayesian information criterion (BIC) will be used to determine best fit among these non-nested models, with lower values indicating superior fit
 [@markonEmpiricalComparisonInformationtheoretic2004].
 
@@ -406,9 +359,9 @@ The PA, anxious arousal, and anxious apprehension variables each loaded signific
 While each sequence of models contained a different ERP component, they each contained the same set of indicator variables for the *Internalizing* factor.
 Thus, the factor loadings for this factor remained the same for each model.
 
-(ref:parameter-estimate-tab) Parameter estimates, standard errors, and test statistics from each structural equation model using ERP components retained from PCA ($n$ = 113). Each model contains two factors: $Neural \ Reactivity$ and $Internalizing$. The $Neural \ Reactivity$ factor represents the shared variance for each of the passive viewing conditions (positive, negative, and neutral) for each PCA ERP component, and the residual variance of each indicator variable represents that variable's unique variance. The $Internalizing$ factor represents the shared variance of the PA, anxious arousal, and anxious apprehension measures, and the residual variance of each inindicator variable represents that variable's unique variance.
+(ref:parameter-estimate-tab) Parameter estimates, standard errors, and test statistics from each structural equation model using ERP components retained from PCA ($n$ = 113). Each model contains two factors: $Neural \ Reactivity$ and $Internalizing$. The $Neural \ Reactivity$ factor represents the shared variance for each of the passive viewing conditions (positive, negative, and neutral) for each PCA ERP component, and the residual variance of each indicator variable represents that variable's unique variance. The $Internalizing$ factor represents the shared variance of the PA, anxious arousal, and anxious apprehension measures, and the residual variance of each indicator variable represents that variable's unique variance.
 
-```{r parameter-estimate-tab, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:parameter-estimate-tab)", message=FALSE, warning=FALSE}
+```{r parameter-estimate-tab, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:parameter-estimate-tab)", , out.height = "100%", out.width = "100%", message=FALSE, warning=FALSE}
 # results tables for paper three
 
 # load packages
@@ -620,8 +573,7 @@ kable(tab, "latex", escape = FALSE, booktabs = TRUE, align = c("l", rep("r", 9))
   pack_rows("Anxious Apprehension Model", 14, 15) %>%
   row_spec(0, align = "c") %>%
   landscape() %>%
-  footnote(general = "Path labels correspond to a parameter estimates in each model. Group headings in the 'path' column denote the specific model that the following parameter estimates are unique to to. ECI = emotion context insensitivity, $\\SE$ = standard error, Est/Std = undstandardized and standardized parameter estimate, $\\\\rightarrow$ = latent factor loading,
-           \n$\\\\leftrightarrow$ = covariance.",
+  footnote(general = "Path labels correspond to a parameter estimates in each model. Group headings in the 'path' column denote the specific model that the following parameter estimates are unique to to. ECI = emotion context insensitivity, $\\SE$ = standard error, Est/Std = undstandardized and standardized parameter estimate, $\\\\rightarrow$ = latent factor loading, $\\\\leftrightarrow$ = covariance.",
            threeparttable = TRUE,
            escape = FALSE,
            general_title = "Note.",
@@ -672,7 +624,7 @@ rc8_fit_table <-
                        "Anxious Apprehension")) %>%
     relocate(Model, everything()) %>%
     mutate("$\\Delta{\\chi}^2$" =
-             c("",
+             c("Nested Model",
                chisq_format_fn(chi_nrc8_eci_meas),
                chisq_format_fn(chi_nrc8_nr_meas),
                chisq_format_fn(chi_nrc8_int_meas),
@@ -696,7 +648,7 @@ rc2_fit_table <-
                      "Anxious Apprehension")) %>%
   relocate(Model, everything()) %>%
   mutate("$\\Delta{\\chi}^2$" =
-           c("",
+           c("Nested Model",
              chisq_format_fn(chi_rc2_eci_meas),
              chisq_format_fn(chisq_rc2_nr_meas),
              chisq_format_fn(chisq_rc2_int_meas),
@@ -720,7 +672,7 @@ rc3_fit_table <-
                      "Anxious Apprehension")) %>%
   relocate(Model, everything()) %>%
   mutate("$\\Delta{\\chi}^2$" =
-           c("",
+           c("Nested Model",
              chisq_format_fn(chisq_rc3_eci_meas),
              chisq_format_fn(chisq_rc3_nr_meas),
              chisq_format_fn(chisq_rc3_int_meas),
@@ -765,8 +717,8 @@ kable(fit_tab, "latex", escape = FALSE, booktabs = TRUE,
   footnote(general = "${\\\\chi}^2$ = chi-square, $df$ = degrees of freedom, RMSEA = root mean square error of
            approximation, SRMR = standardized root mean square residual, CFI = comparative fit index,
            NNFI = non-normed fit index, AIC = Akaike Information Criteria, BIC = Bayesian Information Criteria,
-           $\\\\Delta{\\\\chi}^2$ = Satorra-Bentler scaled difference chi-square test comparing each model with its respective
-           nested measurement model.",
+           $\\\\Delta{\\\\chi}^2$ = Satorra-Bentler scaled difference chi-square test comparing each model with its
+           respective nested measurement model.",
            threeparttable = TRUE,
            escape = FALSE,
            general_title = "Note.",
@@ -783,20 +735,19 @@ In other words, the ECI model was a superior characterization of the covariance 
 Additionally, there was a large, positive correlation between the positive viewing condition and PA ($r = .61,\ p < .001$; Table \@ref(tab:parameter-estimate-tab)).
 Of note, since the 257 ms component has a negative peak, this directionality is in the opposite direction hypothesized in the ECI view of emotion reactivity in depression.
 More specifically, as self-reported PA increases, the 257 ms attenuates for positive stimuli.
-No significant relation was found between the 257 ms component and PA.
+No significant relation was found between the 257 ms component negative viewing condition and PA.
 When the data were fitted to a Neural Reactivity model, such that the latent *Neural Reactivity* factor was allowed to covary with the PA indicator of the *Internalizing* factor, all measure of model fit indicated acceptable model fit (Table \@ref(tab:fit-measure-tab)).
-The Neural Reactivity model provided a signficantly better fit to the data compared to the nested measurement model ($\chi^2(1) = 13.96,\ p<.001$).
+The Neural Reactivity model provided a significantly better fit to the data compared to the nested measurement model ($\chi^2(1) = 13.96,\ p<.001$).
 Further, there was a significant, positive, moderate correlation between the *Neural Reactivity* factor and PA ($r = .36,\ p < .001$).
 In determining whether the ECI and Neural Reactivity model were better fits to the data, neither model emerged a clear victor.
 Both afforded good fit to the data, and while the ECI model had a lower AIC compared to the Neural Reactivity model (AIC difference = -1.8), it also had a slightly larger BIC value (BIC difference = 0.93).
-Considering that the directionality of the parameter estimates was in the opposite direction hypothesized for the ECI view of emotion reactivity and given the non-significant covariance of the negative viewing condition indicator and PA, we fit another model to the data in a post-hoc exploratory fashion.
-In this model, we dropped the covariance estimate between the negative viewing condition and PA (i.e., constrained the value to zero), which is in line with the brightening effect described in ecological momentary assessment (EMA) research [e.g., @khazanovBrighteningEffectReactions2019a].
-In contrast to laboratory research, the brightening effect pertains to the phenomenon of enhanced emotion reactivity that is specific to positive emotions.
+Considering that the directionality of the parameter estimates was in the opposite direction hypothesized for the ECI view of emotion reactivity, and given the non-significant covariance of the negative viewing condition indicator and PA, we fit another model to the data in a post-hoc exploratory fashion.
+In this model, we dropped the covariance estimate between the negative viewing condition and PA (i.e., constrained the value to zero), which is in line with the brightening effect described in EMA research [e.g., @khazanovBrighteningEffectReactions2019a].
 This model provided excellent fit to the data ($\chi^2(8) = 7.98$, RMSEA = 0.00, SRMR = 0.05, CFI = 1.00, NNFI = 1.00) that was superior to the nested measurement model ($\Delta\chi^2(1) = 9.43,\ p=.002$).
-Additional, this brightening effect model did not result in an appreciable decrement in model fit compared to the ECI model, which has an additional parameter estimate and one fewer degree of freedom ($\Delta\chi^2(1) = 3.38,\ p=.07$).
+Additionally, this brightening effect model did not result in an appreciable decrement in model fit compared to the ECI model, which has an additional parameter estimate and one fewer degree of freedom ($\Delta\chi^2(1) = 3.38,\ p=.07$).
 In line with the brightening effect, we found a large positive effect between the positive condition and PA (Est/Std = 1.942/.48, $SE = 0.57$, $z = 3.43$, $p = .001$), such that decreases in PA (i.e., greater depression) would result in enhanced 257 ms component activity in response to positive stimuli.
 While small in magnitude, this brightening effect model afforded lower AIC and BIC values compared to the neural reactivity model (AIC difference = -.30, BIC difference = -.30).
-The Internalizing, Anxious Arousal, nor the Anxious Apprehension model provided acceptable fit to the data (Table \@ref(tab:fit-measure-tab)), and no  significant associations were found by freeing parameters in these models (Table \@ref(tab:parameter-estimate-tab)).
+The Internalizing, Anxious Arousal, nor the Anxious Apprehension model provided acceptable fit to the data (Table \@ref(tab:fit-measure-tab)), and no significant associations were found by freeing parameters in these models (Table \@ref(tab:parameter-estimate-tab)).
 
 ### 371 ms Component
 With the 371 ms component *Neural Reactivity* factor, we found acceptable model fit with the measurement model (Table \@ref(tab:fit-measure-tab)).
@@ -816,25 +767,103 @@ Of these competing models, the Neural Reactivity model afforded the best fit as 
 
 ## DISCUSSION
 In the present study, we sought to test competing views of emotion reactivity in depression by utilizing PCA and SEM.
-We examined three separate ERP components retained from a PCA analysis, one that resembled an EPN and two others resembling later components (e.g., P300 and LPP).
+We examined three separate ERP components retained from a PCA analysis, one that resembled an EPN and two others resembling later components (i.e., P300 and LPP).
 These components were similar to a previous study conducted by our lab (Kahrilas et al., in preparation), where we found these components to be sensitive to emotional (negative and positive) stimuli, relative to neutral stimuli.
-Our analytic strategy was similar to that of Hill and colleagues (2019), though we implemented some distinct elements in the present paper.
+No N170 component was observed in the present study, suggested that our block design paradigm consisting of complex affective images was not successful in eliciting this component.
+It may be that this component is unique to facial processing, rather than complex affective stimuli.
+Our SEM analytic strategy was similar to that of Hill and colleagues (2019) with some key differences.
 Hill and colleagues utilized windowed averages to derive measures of LPP, while we implemented a temporal PCA.
 Further, while Hill and colleagues focused on LPP, we expanded our analyses to include three separate components that were sensitive to emotional stimuli.
-Additionally, we took a adopted a more granular approach in measure depression symptomatology by focusing on PA, as informed by literature surmising a distinct relation between this construct and emotion reactivity (CITATIONS HERE).
+Additionally, we took a adopted a more granular approach in measuring depression symptomatology by focusing on PA, as informed by literature surmising a distinct relation between this construct and emotion reactivity [@weinbergDistinctAssociationsLow2018] and to investigate patterns of neural reactivity are associated with this specific facet of depression.
 Last, we conducted chi-square difference tests comparing each model with its respective measurement model to determine if the additional parameters in each model constituted a significantly superior fit to the data compared to an orthogonal solution.
 
-While we hypothesized results resembling that of previous laboratory research [e.g., @hillAbnormalEmotionalReactivity2019] and supporting the ECI view, our findings did not support this pattern of findings.
+While we hypothesized results resembling that of previous laboratory research [e.g., @hillAbnormalEmotionalReactivity2019], our findings did not support the ECI view of emotion reactivity, or that there would be a negative relation between positive and negative emotion reactivity and PA.
 With regards to the 371 ms and 736 ms component, no competing model outperformed the initial measurement model.
-In other words, our results supported the notion that these components are distinct from internalizing symptoms.
+In other words, our results supported that these components are distinct from internalizing symptoms.
 This finding contrasts with a plethora of research that has examined relations between depression symptoms and LPP [@fotiReducedElectrocorticalResponse2010; @hillAbnormalEmotionalReactivity2019; @proudfitDepressionCventrelatedPotentials2015; @weinbergDecreasedNeuralResponse2017; @weinbergDistinctAssociationsLow2018].
 This could be attributed to the block design paradigm we employed in the present study in contrast to a more ubiquitous randomized design, which may interfere with picture processing and produce an oddball effect [@weinbergDepressionReducedNeural2016].
-Our analytic strategy also differs from a majority of other studies in that we utilized PCA and SEM.
-Indeed, other studies measuring windowed averages are susceptible to including superimposed ERP signals in their independent/dependent variables, particularly for slow wave components such as the LPP (CITATION).
-Thus, researchers may not always be measuring the constructs they believe they are.
+Further, our focus on PA may contribute to these differences, as others have analyzed relations among slow wave components and more heterogeneous symptomatology [e.g., @fotiReducedElectrocorticalResponse2010; @hillAbnormalEmotionalReactivity2019; @weinbergDecreasedNeuralResponse2017].
+However, Weinberg and colleagues (2016) also utilized a block design paradigm and observed a blunted LPP effect in response to rewarding images in a community sample.
+Further, Weinberg and Sandre (2018) investigated more granular features of internalizing symptoms (i.e., low PA, panic) and observed small partial correlations among P300/LPP and positive images with a sample size of 211.
+Both of the aforementioned studies utilized windowed averages in their analyses rather than PCA components as the present study has.
+Indeed, difference in results here could be attributed to an amalgamation of differences in samples and analytic choices.
+Further research should clarify the role of these factors in the neural correlates of depressive symptomatology.
+A unique aspect of our study is our utilization of both PCA and SEM.
+Researchers that utilize windowed averages in their analyses run the risk of including superimposed ERP signals in their independent/dependent variables, which may conflate the constructs that researchers believe to be measuring.
 Additionally, SEM allowed us to explicitly model measurement error in constructing our latent  *Neural Reactivity* and *Internalizing* variables, which represented variance unique to psychophysiological and internalizing symptoms of interest [@hillAbnormalEmotionalReactivity2019].
-Last, this finding could also simply be a product of type II error that can only be clarified with further research.
+In conjunction, these two techniques allotted greater precision in our constructs, and thus allowed us to observed more specific and refined associations.
+Importantly, our discrepant findings could also simply be a product of type II error that can only be clarified with additional research.
 
+We hypothesized that there were would EPN activity in response to positive stimuli would be negatively associated with depression symptoms (i.e., lower self-reported PA), while no a priori hypothesis was made regarding negative images.
+Once again, our hypothesis was not supported.
+Rather, we found large, significant effects in the opposite direction. 
+More specifically, lower levels of PA (i.e., more depression) were associated with enhanced EPN activity.
+No relation was observed among negative emotion reactivity and PA for EPN, and when this relation was constrained to zero, we obtained a model that provided the best fit to the data (albeit marginally).
+This pattern of observations does not match any laboratory-based views of emotion reactivity (i.e., positive attenuation, negative potentiation, ECI), which are predicated upon blunted emotion reactivity in response to positive images as a function of depressive symptomatology.
+However, it does fit with the brightening effect that has been observed in EMA research, or that those with depression report greater changes in affect in response to positive events [e.g., @khazanovBrighteningEffectReactions2019a] compared to healthy controls.
+Moreover, this effect is specific to MDD compared to anxiety disorders and is specific to positive emotion [@bylsmaEmotionalReactivityDaily2011; @khazanovBrighteningEffectReactions2019a; @peetersEffectsDailyEvents2003; @thompsonEverydayEmotionalExperience2012], which coincides with the present study's unique relation among EPN activity in response to positive stimuli and PA when controlling for anxious arousal and anxious apprehension.
+Why would the EPN act in this manner?
+It may be that the EPN is capturing more ecologically valid activity.
+A large body of research has found robust relations among EPN and evolutionarily salient stimuli, such as snakes and curvilinear objects [e.g., @langeslagEarlyVisualProcessing2018a; @strienCurvilinearShapesSnake2016].
+Perhaps it is these same processes that make EPN a viable indicator of real world emotion reactivity.
 
+With regards to clinical intervention, targeting early reactive processes with specificity to positive events may be effective in treating those with low PA and depression.
+This is supported by research suggesting that depression treatments focusing on positive emotions may improve efficacy as opposed to solely focusing on negative emotions (Dunn et al., 2012, 2017).
+Mindfulness meditation practices and mindfnulness-based interventions (MBIs) emphasize the importance of cultivating non-judgmental attention and awareness in the present moment (Gu et al., 2015). 
+Further, mindfulness meditation is theorized to enhance the capacity for and experience of positive emotions (Garland, Farb, et al., 2015; Wielgosz et al., 2019) and ultimately promote wellbeing (Dahl et al., 2015). 
+MBIs may modify positive valence systems through enhanced emotion awareness, modulations in emotional reactivity, increased use of cognitive reappraisal, and alterations in reward processes (Wielgosz et al., 2019). 
+A systematic review and meta-analysis conducted by Gu and colleagues (2015) indicated that self-reported mindfulness and emotional reactivity are mechanisms driving the efficacy of MBIs for mood disorders, such as depression.
+Research has also indicated relations between facets of mindfulness and factors in Clark and Watson’s tripartite model (i.e., PA, NA, and anxious arousal). 
+Studies utilizing cross-sectional data have illustrated negative associations between specific facets of mindfulness (non-reactivity and non-judgment) and both anhedonic depression (low PA) and general distress (high NA) in participants diagnosed with depression and anxiety (Desrosiers et al., 2013). 
+Another study utilizing cross-sectional and longitudinal methods in a non-clinical sample found inverse relationships between the mindfulness facets of acting with awareness and non-judging with PA and NA, which suggests that adopting a non-evaluative disposition may serve to mitigate the experience of negative mood and bolster the experience of positive emotion (Raphiphatthana et al., 2016). 
+The same study showed that acting with awareness (i.e., directing attention to the present activity; Moore & Malinowski, 2009) predicted lower levels of anhedonia (i.e., higher PA) one month later, indicating that awareness to present activities may facilitate pleasant experience derived from said activities (Raphiphatthana et al., 2016). 
+Future work in our lab will seek to investigate changes in EPN as a function of MBIs to further clarify this component as a modifiable biomarker of low PA in depression.
+Other work by our lab (Kahrilas et al., in prep) has illustrated the blurred lines between emotion reactivity and regulation. 
+Thus, developing emotion regulation strategies may also serve to repair early reactivity processes associated with low PA.
+This is corroborated by the fact that the brightening effect may stem from more negative expectations for future events in depression [@strunkDepressiveSymptomsAre2006].
+Research has illustrated that low expectation for positive events actually results in *amplified* reactions to positive stimuli [@mcnamaraAdaptiveResponseUncertainty2013].
+Savoring-based regulatory strategies are used to sustain and upregulate positive emotions [@heiyBackBasicsNaturalistic2014; @liuSelectionImplementationEmotion2017].
+While savoring, one may eagerly anticipate future positive experiences, focus on ongoing positive experiences as they occur in the present moment, or reminisce about past positive experiences.
+With specific relevance to depression, studies aimed at enhancing savoring capacity show that enriching any of the three temporal domains of savoring (reminiscing, savoring the moment, or anticipating) is associated with increased frequency and intensity of positive affect, and decreased negative affect [@bryantDimensionsSubjectiveMental1984; @bryantSavoringNewModel2007; @kahrilasSavoringMomentLink2020].
+Training on momentary positive emotion regulation (i.e., memory building, expressing positive emotions) resulted in decreased self-reported depression symptoms when compared to a control group after two weeks [@hurleyResultsStudyIncrease2012].
+Intervention studies with older adults have shown that savoring was positively related to decreased depression, increased activity engagement, and increased wellbeing [@smithEffectsSavoringIntervention2017; @smithImpactSavoringAbility2020].
+Savoring may improve the capacity to recognize and enjoy positive moments, even during difficult times [@smithEffectsSavoringIntervention2017].
+Thus, anticipatory-based interventions aimed at constructing more positive expectations for future events may mitigate brightening and repair EPN and PA.
+While other researchers have suggested that low PA emerges only in later attentional stages [@weinbergDistinctAssociationsLow2018], our work underscores the importance of considering the role that earlier processes play in depression as well.
 
+While others have not observed relations between EPN and PA [@weinbergDistinctAssociationsLow2018], it seems reasonable to attribute this to our use of PCA to isolate these components.
+Visual inspection of waveforms indicated that the 371 ms component (which was not found to be related to PA in the present study) starting at around 70 ms, overlapped considerably with the 271 ms peak EPN.
+Relying on windowed averages likely would not have successfully captured the EPN component, which may explain these previous null findings. 
+While there is no one best way to measure one's ERP data, we do encourage other ERP researchers to add multivariate techniques such as PCA to their toolbox. 
 
+There are several limitations to the present study.
+First, these data are cross sectional and causation cannot be inferred among neural activity and self-report measures.
+Future RCT based work should focus on modifying low PA and related neurobiological factors to further clarify their relation.
+As noted above, mindfulness- and savoring-based interventions may be a particularly fruitful endeavor in this regard.
+Further, while our sample contained dimensional variability on constructs of interest (e.g., depression, PA), it is still primarily a Caucasian undergraduate sample.
+Thus, generalizability of our findings is hindered.
+Future work should work with community samples and participants throughout the lifespan.
+Related, research has suggested that older individuals may have higher savoring (i.e., positive emotion regulation) capacity, which may have implications for EPN and PA [@smithSavoringResiliencePsychological2015] and inform intervention strategies for older and younger individuals with depression alike.
+Future work should also employ other EEG methods, such as source analysis, to investigate the time course of specific neural structures and their relation with self-report data.
+This research will elucidate brain-behavior relations within the context of psychopathology and inform clinical and pharmacological interventions.
+Last, despite the methodological rigor of our analytical plan, our results are still merely associations.
+Future researchers should strive to test more intricate theories of how psychophysiological constructs relate to questionnaire-based data (e.g., mediation and moderation).
+Such information regarding mechanisms of change among neurobiological factors and psychopathology will be crucial to developing more refined clinical interventions.
+While sample size can be a limitation, SEM is one such analytical framework that is catered to more testing such theories and models.
+For those researchers with smaller sample sizes that wish to test more complex models, partial least squares structural equation modeling allows for such analyses with reduced demands on sample size [@sarstedtTandemAnalysisSEM2020].
+
+### Conclusion
+The present study examined relations among three ERP components derived from a temporal PCA using SEM.
+This framework facilitated more accurate and refined measurement of ERP components.
+Further, we were able to investigate unique relations among self-report and psychophysiological data with SEM, as well as direct comparison of contrasting models.
+Our findings indicated that an early ERP component with a negative peak at 271 ms had a strong relation with PA, though in the opposite direction we had originally hypothesized.
+While this pattern of findings does not fit previous laboratory based studies of emotion reactivity, it does coincide with the brightening effect observed in EMA research.
+This suggests that studies aimed at repairing early processes associated with emotion reactivity may bolster PA and reduce depressive symptomatology.
+Mindfulness- and savoring-based interventions may particularly effective to this end.
+Future work should aim to replicate our findings in a more diverse sample and utilize other EEG methods, such as time-frequency and source analysis.
+Last, we encourage other researchers to test more complex and refined theories, perhaps within an SEM framework, to provide more information regarding mechanisms of change among neurobiological factors and self-report data.
+Overall, our findings may bring us a step closer to bridging the gap between self-report symptomatology their neural correlates, which will provide a more holistic perspective on developing treatments for those with depression and other forms of psychopathology. 
+
+<!-- Another limitation is the degree to which we are capturing trait-like characteristics with our measures. -->
+<!-- The MASQ asks about symptoms occurring over the past week, while the PSWQ asks participants to rate themselves based on what is "typical or characteristic." -->
+<!-- What constitutes a trait, or what constitutes the occurrence of a state, is a thorny issue [e.g., @sharpTransdiagnosticDimensionsAnxiety2015]. -->
