@@ -27,7 +27,7 @@ plot_arrow <-
            arrow = arrow(type = "closed",
                          length = unit (.1, "inches"))) +
   annotate(geom = "text",
-           x = 0.47,
+           x = 0.45,
            y = 0.51,
            label = "PCA",
            angle = 90,
@@ -62,7 +62,7 @@ neg_rc8_component_plots <-
 
 ggsave(here("images", "paper_3", "ERP Topo Images", "neg_rc8_plots.png"),
        plot = neg_rc8_component_plots,
-       height = 5,
+       height = 8,
        width = 8)
 
 rc2_component_plots <-
@@ -85,7 +85,7 @@ rc2_component_plots <-
 
 ggsave(here("images", "paper_3", "ERP Topo Images", "rc2_plots.png"),
        plot = rc2_component_plots,
-       height = 5,
+       height = 8,
        width = 8)
 
 rc3_component_plots <-
@@ -108,5 +108,5 @@ rc3_component_plots <-
 
 ggsave(here("images", "paper_3", "ERP Topo Images", "rc3_plots.png"),
        plot = rc3_component_plots,
-       height = 5,
+       height = 8,
        width = 8)
