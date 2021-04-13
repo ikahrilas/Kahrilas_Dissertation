@@ -7,7 +7,7 @@ There are an estimated 322 million people in the world living with Major Depress
 This is compounded by increases in mental illness due to the current global pandemic [@twengeCensusBureauassessedPrevalence2020]. 
 Depression is associated with decrements in interpersonal relationships, poor work performance and burnout, and reductions in physical wellbeing [@drussImpairmentRoleFunctioning2009a; @kesslerPrevalenceEffectsMood2006; @lewinsohnPsychosocialFunctioningYoung2003].
 Given its ubiquity, the economic impact of depression is profound.
-Depression is associated with higher levels of healthcare utilization and spending [@donohueReducingSocietalBurden2007].
+Depression is associated with higher levels of health care utilization and spending [@donohueReducingSocietalBurden2007].
 In the United States, loss in work productivity related to depression is estimated to surpass \$36 billion [@kesslerPrevalenceEffectsMood2006].
 The cost associated with “presenteeism” (i.e., being present at work with depression) is estimated to be \$5524 per person in the United States[@evans-lackoGlobalPatternsWorkplace2016].
 The impacts of MDD are far reaching, and more effective treatments will improve quality of life and ease economic burden. 
@@ -34,6 +34,11 @@ Positive attenuation holds that those with MDD will have reduced emotional react
 ECI maintains MDD is marked by a pattern of reduced reactivity to both positive and negative stimuli [@rottenbergMoodEmotionMajor2005].
 Research has largely supported the ECI theory, though there are discrepant accounts of negative potentiation in the literature [@bylsmaMetaanalysisEmotionalReactivity2008]. 
 In sum, while negative emotion reactivity patterns in depression tend to vary, positive attenuation appears to be a robust feature of depression. 
+However, this pattern of findings is not replicated in Ecological Momentary Assessment (EMA) research.
+Rather, this literature illustrates a "brightening" effect in those with depression, such that there is enhanced reactivity to positive events [@khazanovBrighteningEffectReactions2019a].
+This discrepancy between laboratory- and EMA-based research remains unresolved.
+It is possible that standardized stimuli utilized in laboratory research is less personally meaningful and emotionally salient that the real-world context of EMA studies, and these standardized stimuli attenuate brightening [@khazanovBrighteningEffectReactions2019a].
+For example, brightening may result from negative expectations for future positive events [@strunkDepressiveSymptomsAre2006], and these low expectations in turn result in heightened arousal [@mcnamaraAdaptiveResponseUncertainty2013].
 
 Impaired ability to regulate negative emotions is a well-established feature of depression [@grossEmergingFieldEmotion1998; @grossEmotionRegulationMental1995; @joormannEmotionRegulationDepression2010; @joormannEmotionRegulationDepression2014; @nolen-hoeksemaResponseStylesDuration1993].
 Research has begun to examine the influence of positive emotion regulation on depression symptoms [@feldmanResponsesPositiveAffect2008; @nelisResponseStylesPositive2015; @raesDampeningPositiveAffect2012; @werner-seidlerInvestigationRelationshipPositive2013].
