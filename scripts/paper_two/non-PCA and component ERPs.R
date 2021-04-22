@@ -99,13 +99,11 @@ elec_selections <- list(c("A29", "B26"),
                         c("A29", "B26"),
                         c("B21", "B28"),
                         c("A29", "B26"),
-                        c("A29", "B26"),
                         c("A29", "B26", "A26", "B23","B28", "A30", "B27", "A25", "B22"))
 
 # list of component sites for map function ordered chronologically
 component_list <- list("RC5",
                        "RC11",
-                       "RC12",
                        "RC12",
                        "RC2",
                        "RC3")
@@ -113,8 +111,7 @@ component_list <- list("RC5",
 # name
 comp_names <- list("124 ms",
                    "162 ms",
-                   "Negative 259 ms",
-                   "Positive 259 ms",
+                   "259 ms",
                    "381 ms",
                    "740 ms")
 
@@ -188,7 +185,7 @@ layout <- '
 #AA#
 BBBB
 CCDD
-EEFF
+#EE#
 '
 
 po7_po8_plot +
@@ -196,9 +193,8 @@ po7_po8_plot +
   comp_erps[[1]] +
   comp_erps[[2]] +
   comp_erps[[4]] +
-  comp_erps[[5]] +
   plot_layout(design = layout,
-              heights = c(1.5, 0.8, 1, 1))
+              heights = c(1.5, 0.8, 1))
 
 ggsave(here("images", "paper_2", "erp_raw_comp", "po7_po8_erps.png"),
        plot = last_plot(),
@@ -207,7 +203,7 @@ ggsave(here("images", "paper_2", "erp_raw_comp", "po7_po8_erps.png"),
 
 (pz_cpz_plot | lpp_plot) /
   (arrow_2 | arrow_2) /
-  (comp_erps[[3]] | comp_erps[[6]]) +
+  (comp_erps[[3]] | comp_erps[[5]]) +
   plot_layout(heights = c(1.5, 1, 1.5))
 
 ggsave(here("images", "paper_2", "erp_raw_comp", "pz_cpz_lpp_erps.png"),
