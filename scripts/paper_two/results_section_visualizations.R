@@ -15,22 +15,21 @@ glimpse(fac_score_dat)
 
 # change data to long form and reorder variables
 fac_score_dat_long <- fac_score_dat %>%
-  pivot_longer(cols = RC2:pos_RC12,
+  pivot_longer(cols = RC2:RC12,
                names_to = "component",
                values_to = "fac_score") %>%
   relocate(pid, block, component, fac_score, everything())
 
 # change component variable to a factor type
 fac_score_dat_long$component <- factor(fac_score_dat_long$component,
-                                       levels = c("RC5", "RC11", "RC12", "pos_RC12", "RC3", "RC2"))
+                                       levels = c("RC5", "RC11", "RC12", "RC3", "RC2"))
 
 # rename the factor levels
-levels(fac_score_dat_long$component) <- c("RC5", "RC11", "neg_RC12", "RC12", "RC3", "RC2")
+levels(fac_score_dat_long$component) <- c("RC5", "RC11", "neg_RC12", "RC3", "RC2")
 
 levels(fac_score_dat_long$component) <- c("124 ms Pos Peak",
                                           "162 ms Pos Peak",
                                           "259 ms Neg Peak",
-                                          "259 ms Pos Peak",
                                           "381 ms Pos Peak",
                                           "740 ms Pos Peak")
 
@@ -135,52 +134,36 @@ p_1 <-
            y = c(2.7, -4.9),
            label = "*",
            size = 5) +
-  annotate(geom = "segment", # 250 ms positive peak annotations
-           x = c(3.75),
-           xend = c(4),
-           y = 3.9,
-           yend = 3.9,
-           color = "black") +
-  annotate(geom = "segment",
-           x = c(3.75, 4),
-           xend = c(3.75, 4),
-           y = 3.9,
-           yend = c(3.6, 3.6),
-           color = "black") +
-  annotate(geom = "text",
-           x = c(3.875),
-           y = 4,
-           label = "*",
-           size = 5) +
-  annotate(geom = "segment", # 375 ms peak annotations
-           x = c(4.75, 5.025, 4.75),
-           xend = c(4.975, 5.25, 5.25),
+  annotate(geom = "segment", # 375 ms positive peak annotations
+           x = c(3.75, 4.025, 3.75),
+           xend = c(4, 4.275, 4.275),
            y = c(3.45, 3.45, -1.5),
            yend = c(3.45, 3.45, -1.5),
            color = "black") +
   annotate(geom = "segment",
-           x = c(4.75, 4.975, 5.025, 5.25, 4.75, 5.25),
-           xend = c(4.75, 4.975, 5.025, 5.25, 4.75, 5.25),
+           x = c(3.75, 4, 4.025, 4.275, 3.75, 4.275),
+           xend = c(3.75, 4, 4.025, 4.275, 3.75, 4.275),
            y = c(3.45, 3.45, 3.45, 3.45, -1.5, -1.5),
-           yend = c(3.25, 1.8, 1.8, 2, -0.4, -0.5)) +
+           yend = c(3.25, 1.8, 1.8, 2, -0.4, -0.5),
+           color = "black") +
   annotate(geom = "text",
-           x = c(4.8625, 5.1375, 5),
+           x = c(3.875, 4.15, 4.0125),
            y = c(3.55, 3.55, -2.5),
            label = "*",
            size = 5) +
   annotate(geom = "segment", # 800 ms peak annotations
-           x = c(5.75, 6.025, 5.75),
-           xend = c(5.975, 6.25, 6.25),
+           x = c(4.75, 5.025, 4.75),
+           xend = c(4.975, 5.25, 5.25),
            y = c(5, 5, -1.7),
            yend = c(5, 5, -1.7),
            color = "black") +
   annotate(geom = "segment",
-           x = c(5.75, 5.975, 6.025, 6.25, 5.75, 6.25),
-           xend = c(5.75, 5.975, 6.025, 6.25, 5.75, 6.25),
+           x = c(4.75, 4.975, 5.025, 5.25, 4.75, 5.25),
+           xend = c(4.75, 4.975, 5.025, 5.25, 4.75, 5.25),
            y = c(5, 5, 5, 5, -1.7, -1.7),
            yend = c(4.7, 2.85, 2.85, 3.6, -0.2, -0.7)) +
   annotate(geom = "text",
-           x = c(5.8625, 6.1375, 6),
+           x = c(4.8625, 5.1375, 5),
            y = c(5.1, 5.1, -2.7),
            label = "*",
            size = 5)
