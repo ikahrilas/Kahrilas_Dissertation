@@ -206,34 +206,34 @@ p_2 <-
            label = "*",
            size = 5) +
   annotate(geom = "segment", # 375 ms peak annotations
-           x = c(4.75, 5),
-           xend = c(5.25, 5.25),
+           x = c(3.75, 4.025),
+           xend = c(4.275, 4.275),
            y = c(-1.2, 2.65),
            yend = c(-1.2, 2.65),
            color = "black") +
   annotate(geom = "segment",
-           x = c(4.75, 5.25, 5, 5.25),
-           xend = c(4.75, 5.25, 5, 5.25),
+           x = c(3.75, 4.275, 4.025, 4.275),
+           xend = c(3.75, 4.275, 4.025, 4.275),
            y = c(-1.2, -1.2, 2.65, 2.65),
            yend = c(-.95, -.7, 2.05, 2.3)) +
   annotate(geom = "text",
-           x = c(5, 5.1275),
+           x = c(4.0125, 4.15),
            y = c(-2.2, 2.75),
            label = "*",
            size = 5) +
   annotate(geom = "segment", # 800 ms peak annotations
-           x = c(5.75),
-           xend = c(6.25),
+           x = c(4.75),
+           xend = c(5.25),
            y = c(-1),
            yend = c(-1),
            color = "black") +
   annotate(geom = "segment",
-           x = c(5.75, 6.25),
-           xend = c(5.75, 6.25),
+           x = c(4.75, 5.25),
+           xend = c(4.75, 5.25),
            y = c(-1, -1),
            yend = c(-0.3, -0.7)) +
   annotate(geom = "text",
-           x = c(6),
+           x = c(5),
            y = c(-2),
            label = "*",
            size = 5)
@@ -352,37 +352,20 @@ dec_cases <- fac_score_dat_long %>%
            y = 1.7,
            label = "*",
            size = 5) +
-  annotate(geom = "segment", # 250 ms positive peak annotations
-           x = 3.815,
-           xend = 4.185,
-           y = 4.1,
-           yend = 4.1,
-           color = "black") +
-  annotate(geom = "segment",
-             x = c(3.815, 4.185),
-             xend = c(3.815, 4.185),
-             y = c(4.1, 4.1),
-             yend = c(3.4, 3.8),
-             color = "black") +
-  annotate(geom = "text",
-             x = 4,
-             y = 4.2,
-             label = "*",
-             size = 5) +
     annotate(geom = "segment", # 800 ms positive peak annotations
-             x = 5.815,
-             xend = 6.185,
+             x = 4.815,
+             xend = 5.185,
              y = 4.3,
              yend = 4.3,
              color = "black") +
     annotate(geom = "segment",
-             x = c(5.815, 6.185),
-             xend = c(5.815, 6.185),
+             x = c(4.815, 5.185),
+             xend = c(4.815, 5.185),
              y = c(4.3, 4.3),
              yend = c(4.05, 3.8),
              color = "black") +
     annotate(geom = "text",
-             x = 6,
+             x = 5,
              y = 4.4,
              label = "*",
              size = 5)
@@ -424,36 +407,36 @@ p_5 <-
              label = "*",
              size = 5) +
     annotate(geom = "segment", # 375 ms negative peak annotations
-             x = 4.815,
-             xend = 5.185,
+             x = 3.815,
+             xend = 4.185,
              y = 3.2,
              yend = 3.2,
              color = "black") +
     annotate(geom = "segment",
-             x = c(4.815, 5.185),
-             xend = c(4.815, 5.185),
+             x = c(3.815, 4.185),
+             xend = c(3.815, 4.185),
              y = c(3.2, 3.2),
              yend = c(2.9, 2.9),
              color = "black") +
     annotate(geom = "text",
-             x = 5,
+             x = 4,
              y = 3.3,
              label = "*",
              size = 5) +
     annotate(geom = "segment", # 800 ms negative peak annotations
-             x = 5.815,
-             xend = 6.185,
+             x = 4.815,
+             xend = 5.185,
              y = 4.5,
              yend = 4.5,
              color = "black") +
     annotate(geom = "segment",
-             x = c(5.815, 6.185),
-             xend = c(5.815, 6.185),
+             x = c(4.815, 5.185),
+             xend = c(4.815, 5.185),
              y = c(4.5, 4.5),
              yend = c(4.2, 4),
              color = "black") +
     annotate(geom = "text",
-             x = 6,
+             x = 5,
              y = 4.6,
              label = "*",
              size = 5)
@@ -461,6 +444,8 @@ p_5 <-
 ############################################
 ##### Topographical plots ##################
 ############################################
+
+######################################
 
 ### Starting with raw voltage topoplots
 
@@ -513,6 +498,12 @@ topo_plot_lst <- map2(lower_time_windows,
   theme(legend.position = "none",
         plot.title = element_text(hjust = 0.5,
                                   size = 10))
+        # guides(fill = guide_colorbar(title = expression(paste("Amplitude (",
+        #                                                       mu, "V)")),
+        #                              title.position = "right",
+        #                              barwidth = 0.5,
+        #                              barheight = 2,
+        #                              title.theme = element_text(angle = 270)))
 })
 
 ###  Now the component  topoplots
@@ -523,13 +514,12 @@ temp_dat_fac_scores <- read_csv(here("data", "paper_two", "temp_fac_score_dat.cs
 
 # define vectorS for iteration
 ## component names
-comp_list_topo <- c("RC5", "RC11", "RC12", "RC12", "RC2", "RC3")
+comp_list_topo <- c("RC5", "RC11", "RC12", "RC2", "RC3")
 
 ## electrodes to highlight
 electrode_highlight_lst <- list(c("A29", "B26"),
                                 c("A29", "B26"),
                                 c("B21", "B28"),
-                                c("A29", "B26"),
                                 c("A29", "B26"),
                                 c("A29", "B26", "A26", "B23","B28", "A30", "B27", "A25", "B22")
                                 )
@@ -543,16 +533,13 @@ temp_dat_fac_scores %>%
     topoplot(interp_limit = "head",
              highlights = .y,
              scaling = 0.25) +
-    # coord_fixed(clip = 'off') +
-    theme(legend.position = "none")
-    # guides(fill = guide_colorbar(title = expression(paste("Average ",
-    #                                                       mu, "V")),
+             theme(legend.position = "none")
+    # guides(fill = guide_colorbar(title = expression(paste("Amplitude (",
+    #                                                       mu, "V)")),
     #                              title.position = "right",
-    #                              barwidth = rel(1),
-    #                              barheight = rel(6),
-    #                              title.theme = element_text(angle = 270)
-    #                              )
-    #        )
+    #                              barwidth = 0.5,
+    #                              barheight = 2,
+    #                              title.theme = element_text(angle = 270)))
 })
 
 arrow_1 <-
@@ -563,8 +550,8 @@ arrow_1 <-
         title = element_blank()) +
   lims(x = c(0, 1), y = c(0, 1)) +
   annotate(geom = "segment",
-           x = 1,
-           xend = 0.3,
+           x = 0.5,
+           xend = 0.5,
            y = 1,
            yend = 0,
            size = 0.5,
@@ -572,15 +559,15 @@ arrow_1 <-
                          length = unit (.1, "inches")))
 
 arrow_2 <-
-  ggplot() +
+ggplot() +
   theme_classic() +
   theme(line = element_blank(),
         text = element_blank(),
         title = element_blank()) +
   lims(x = c(0, 1), y = c(0, 1)) +
   annotate(geom = "segment",
-           x = 0,
-           xend = 0.7,
+           x = 0.5,
+           xend = 0.5,
            y = 1,
            yend = 0,
            size = 0.5,
@@ -588,7 +575,7 @@ arrow_2 <-
                          length = unit (.1, "inches")))
 
 arrow_3 <-
-ggplot() +
+  ggplot() +
   theme_classic() +
   theme(line = element_blank(),
         text = element_blank(),
@@ -635,49 +622,31 @@ arrow_5 <-
            arrow = arrow(type = "open",
                          length = unit (.1, "inches")))
 
-arrow_6 <-
-  ggplot() +
-  theme_classic() +
-  theme(line = element_blank(),
-        text = element_blank(),
-        title = element_blank()) +
-  lims(x = c(0, 1), y = c(0, 1)) +
-  annotate(geom = "segment",
-           x = 0.5,
-           xend = 0.5,
-           y = 1,
-           yend = 0,
-           size = 0.5,
-           arrow = arrow(type = "open",
-                         length = unit (.1, "inches")))
-
 layout <- "
-AAABBB##CC##DDDEEE
-FFFGGG##HI##JJJKKK
-LLLMMMNNNOOOPPPQQQ
-RRRRRRRRRRRRRRRRRR
-SSSSSSSSSSSSSSSSSS
-TTTTTTTTTTTTTTTTTT
-UUUUUUUUUUUUUUUUUU
-VVVVVVVVVVVVVVVVVV"
+ABCDE
+FGHIJ
+KLMNO
+PPPPP
+QQQQQ
+RRRRR
+SSSSS
+TTTTT"
 
 (topo_plot_lst[[1]] +
   topo_plot_lst[[2]] +
   topo_plot_lst[[3]] +
   topo_plot_lst[[4]] +
   topo_plot_lst[[5]] +
-  arrow_3 +
-  arrow_5 +
   arrow_1 +
   arrow_2 +
+  arrow_3 +
   arrow_4 +
-  arrow_6 +
+  arrow_5 +
   comp_topo_lst[[1]] +
   comp_topo_lst[[2]] +
   comp_topo_lst[[3]] +
   comp_topo_lst[[4]] +
   comp_topo_lst[[5]] +
-  comp_topo_lst[[6]] +
   p_1 +
   p_2 +
   p_3 +
