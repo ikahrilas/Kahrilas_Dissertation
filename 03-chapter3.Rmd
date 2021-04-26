@@ -2,7 +2,7 @@
 library(kableExtra)
 ```
 
-## DIFFERENCES IN NEURAL TIME COURSE OF POSITIVE AND NEGATIVE EMOTION REACTIVITY AND REGULATION
+## NEURAL CHRONOMETRY OF POSITIVE AND NEGATIVE EMOTION REACTIVITY AND REGULATION
 Healthy emotion regulation abilities are integral to wellbeing [@grossEmergingFieldEmotion1998; @grossEmotionRegulationMental1995; @koolePsychologyEmotionRegulation2009; @sapolskyStressStressrelatedDisease2007].
 Emotion regulation refers to psychological processes that influence an initial emotional response [@lewisAdvancesProblemsChallenges2010a], including modulation of positive and negative affective states [@koolePsychologyEmotionRegulation2009].
 This also includes attenuating upsetting, or enhancing positive aspects, of a situation [@grossEmergingFieldEmotion1998].
@@ -80,7 +80,7 @@ Thus, we expected LPP modulations congruent with the regulatory goals.
 
 #### Disentangling overlapping neural processes implicated in reactivity and regulation: A principal components approach
 Nearly all of the ERP research reviewed above involved submitting windowed averages, or area measures to statistical analyses, which is a common practice in ERP research. 
-However, this method may be inadequate in dealing with the thorny issue of components that overlap temporally [@donchinMultivariateAnalysisEventrelated1978; @fotiDifferentiatingNeuralResponses2009], which is of primary consideration in this present study since a primary aim of this study is to investigate the *temporal* courses associated with emotion reactivity and regulation
+However, this method may be inadequate in dealing with the thorny issue of components that overlap temporally [@donchinMultivariateAnalysisEventrelated1978; @fotiDifferentiatingNeuralResponses2009], which is of primary consideration in this present study since a primary aim of this study is to investigate the *temporal* courses associated with emotion reactivity and regulation.
 Indeed, there is speculation that N170 modulation due to emotional expressions may be due to superimposed EPN activity [@relleckeEmotionEffectsN1702013].
 Similarly, LPP may overlap with P3, a parietally maximal component peaking in the 300-400 ms window that is sensitive to task relevant and motivationally significant stimuli [@polichCognitiveBiologicalDeterminants1995], and even later portions of EPN [@schuppSelectiveProcessingBriefly2004].
 To address this issue, we utilized an exploratory temporal principal components analysis (PCA) to better isolate distinct ERP components across time.
