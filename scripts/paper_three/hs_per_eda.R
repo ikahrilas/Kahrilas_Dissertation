@@ -76,6 +76,20 @@ per_hs_ques_dat <- read_csv(here("data", "paper_three", "total_questionnaire_dat
 summary(per_hs_ques_dat)
 unique(temp_score_dat$pid[!(temp_score_dat$pid %in% per_hs_ques_dat$pid)])
 
+ggplot(per_hs_ques_dat, aes(pswq_total)) +
+  geom_histogram(color = "black", fill = "white") +
+  theme_classic() +
+  xlab("PSWQ Scores") +
+  ylab("Count") +
+  theme(text = element_text(size = 14))
+
+ggplot(filter(per_hs_ques_dat, group == "per"), aes(pswq_total)) +
+  geom_histogram(color = "black", fill = "white") +
+  theme_classic() +
+  xlab("PSWQ Scores") +
+  ylab("Count") +
+  theme(text = element_text(size = 14))
+
 # merge eeg and questionnaire data
 dat <- full_join(temp_score_dat, per_hs_ques_dat, by = c("pid", "group"))
 
@@ -86,7 +100,7 @@ dat$block <- factor(dat$block, levels = c("Neg_Watch",
 dat$block <- droplevels(dat$block)
 levels(dat$block)
 # observe histograms for each of the factors
-comps <- c("RC2", "RC3", "RC5", "RC7", "nRC8", "pRC8", "RC17")
+comps <- c("RC2", "RC3", "RC5", "RC7", "nRC8", "pRC8", "RC12", "RC17")
 
 # observe histograms of component data
 map(comps, ~ {
