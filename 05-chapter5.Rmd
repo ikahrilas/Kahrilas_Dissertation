@@ -1,0 +1,172 @@
+## CHAPTER FIVE: DISCUSSION
+
+Broadly, the present set of studies investigated individual differences and neural correlates associated with emotion reactivity and regulation.
+Study One, "Savoring the moment: A link between affectivity and depression" advanced our understanding of the relations among affectivity (negative and positive), savoring, and depression.
+More specifically, it investigated the mediating role of the temporal domains of savoring (anticipating, savoring the moment, reminiscing) in the relation between factors of Clark and Watson’s tripartite model (PA and NA) and depression.
+Findings from this study indicated that PA and NA were associated with depression as well as all three savoring temporal domains.
+This suggests that all temporal domains of savoring may bolster PA and mitigate NA.
+Notably, momentary savoring distinctly mediated the relationship between both PA and NA and depression, suggesting that  momentary savoring may reduce depression symptoms in individuals with low PA and high NA, more so that future- or past-oriented domains of savoring.
+This underscores the importance of momentary awareness and upregulation of positive emotions in managing depression. It also corroborates the notion that increased attention to positive stimuli is likely one mechanism through which savoring attenuates depression symptoms [@carlPositiveEmotionRegulation2013].
+
+Study One supports the importance of momentary awareness in treating depression in those with low PA, but its use of cross-sectional data precluded causal inference.
+Further, it did not disentangle the affective chronometry of emotion reactivity and regulation and how these concepts related to individual differences (i.e., PA and savoring capacity), which is crucial to devise neuroscience-informed interventions for those with anhedonic depression.
+Studies Two and Three were conducted to address these gaps.
+Study Two, “Neural chronometry of positive and negative emotion reactivity and regulation,” addressed fundamental questions regarding the neural time course associated with reacting to, and regulating, positively- and negatively-valenced images.
+We created and administered a novel experimental emotion reactivity/regulation paradigm utilizing a block design presentation and a new, open source set of standardized images [the Open Affective Standardized Image Set, or OASIS; @kurdiIntroducingOpenAffective2017].
+To extract ERP components throughout the time course of emotion reactivity/regulation, we utilized an exploratory temporal PCA.
+The temporal PCA retained five components with peaks ranging from 124 ms to 740 ms.
+With regards to emotion reactivity (i.e., changes among passively viewing different valence categories of images), differences were noted as early as 162 ms through the entire time course.
+Negative and positive images were largely associated with greater component amplitudes with the exception of positive vs. neutral images for a 259 ms negative peak component.
+Valence (i.e., differences between arousal-matched negative and positive images) were noted, such that negative images consistently elicited enhanced amplitudes of all retained components throughout.
+This ultimately suggests that time course is an important consideration in the study of emotion reactivity, as differences were noted in early visual and slow wave components, which may pose modifiable intervention targets in psychopathology.
+Differences in chronometry emerged in regulation conditions for positive and negative images.
+Negative regulatory processes unfolded in the 124 ms to 259 ms, while positive regulatory processes occurred later from 259 ms to 740 ms.
+Negative regulatory processes may implicate earlier neural activity compared to positive images.
+This may imply that those with impairment in positive emotion regulation and negative emotion regulation might benefit treatment that focuses on different processes and suggests heterogeneity of neural processes associated with emotion regulation that is predicated upon the valence of the emotion.
+In sum, Study Two underscored the importance of attending to the entire temporal course of emotion reactivity and regulation and provide a more holistic view on the temporal cascade of neural processing involved in emotion reactivity and regulation that may highlight modifiable mechanisms with relevance to depression.
+Further, it brought attention to the topic of measurement within ERPs with a temporal PCA approach that mitigates conflation of overlapping ERP components.
+
+The third study in the series, "Too much of a good thing? Early neural activity as an indicator of the brightening effect" built upon findings from Study Two and investigated associations among neural chronometry of emotion reactivity and positive affectivity.
+To obtain more dimensional measures of our variables, we harmonized the sample from Study Two with a sample recruited from the SMile study, an eight-week mindfulness-based meditation intervention study using the Headspace smart phone app. 
+The SMiLe study recruited participants endorsing significant depressive symptomatology (i.e., PHQ-9 > 10) from a college student population.
+We utilized that same experimental paradigm and temporal PCA method from Study Two to guide our selection of ERP components.
+We tested competing views of emotion reactivity in depression with SEM as informed by a previous study conducted by Hill and Foti [-@hillAbnormalEmotionalReactivity2019] in three separate ERP components extracted from PCA.
+We found that an early visual component with a negative peak at 257 ms at centroparietal electrode sites was  associated with positive affectivity, such that increases in positive affectivity were associated with attenuated 257 ms component amplitudes.
+Further, we found that this model offered superior fit to the data compared to competing models. 
+Later components were not associated with positive affectivity, and an orthogonal model that fixed associations between later components and internalizing symptoms fit the data better than other competing models.
+While we hypothesized that a pattern of results consistent with the emotion context insensitivity view would emerge, we found that lower levels of positive affectivity (i.e., greater depressive symptomatology) was associated with enhanced 257 ms component activity.
+While inconsistent with previous laboratory findings, this does fit with the brightening effect observed in ecological momentary assessment research that observes enhanced reactivity in response to positive events for those with depression [e.g., @khazanovBrighteningEffectReactions2019a].
+It may be that these early neural processes are capturing activity that is more representative of day-to-day lived experiences, which is corroborated by research suggesting that EPN reflects relatively automatic processes observed even when processing resources are limited due to rapid presentation rates [@junghoferFleetingImagesNew2001; @schuppAttentionEmotionERP2003; @schuppEmotionalFacilitationSensory2003].
+Targeting early reactive processes with specificity to positive events may be effective in treating those with low PA and depression.
+
+Collectively, this trio of studies highlighted the relation among self-report data pertaining to positive emotions, depression, and psychophysiological correlates. More specifically they highlighted the role of momentary awareness of positive events and its relation with early neural processes measured with EEG and temporal PCA methods.
+
+### Future directions
+
+Targeting early reactive processes with specificity to positive events may be effective in treating those with low PA and depression.
+One potentially fruitful venture would be to explore the role of mindfulness-based interventions in modifying positive affectivity and early neural activity.
+Mindfulness meditation is theorized to enhance the capacity for and experience of positive emotions
+[@garlandMindfulnessBroadensAwareness2015a; @wielgoszMindfulnessMeditationPsychopathology2019a] and ultimately promote wellbeing [@dahlReconstructingDeconstructingSelf2015a] and modify positive valence systems through enhanced emotion awareness, modulations in emotional reactivity, increased use of cognitive reappraisal, and alterations in reward processes [@wielgoszMindfulnessMeditationPsychopathology2019a]. 
+Other studies have illustrated negative associations between specific facets of mindfulness (non-reactivity and non-judgment) and both anhedonic depression (low PA) and general distress (high NA) in participants diagnosed with depression and anxiety [@desrosiersMappingMindfulnessFacets2013; @raphiphatthanaHowFacetsMindfulness2016].
+Acting with awareness [i.e., directing attention to the present activity; @mooreMeditationMindfulnessCognitive2009] predicted lower levels of anhedonia (i.e., higher PA) one month later, indicating that awareness to present activities may facilitate pleasant experience derived from said activities [@raphiphatthanaHowFacetsMindfulness2016]. 
+
+Future research should also leverage advanced statistical methods, such as PCA and SEM, to their advantage. 
+To improve upon the analytical strategy from Study Three, experimental paradigm blocks with similar regulatory goals (e.g., to maximize positive emotion/mitigate negative emotion and maximize negative emotion/mitigate positive emotion) can specified as indicators of a latent variables that are devoid of measurement error. 
+The positive emotion latent factor can then be regressed on the negative emotion latent factor to derive residual variance of the former.
+For self-report data, 
+
+
+Future work in our lab will seek to investigate changes in early neural processes and positive affectivity after an eight-week mindfulness-based meditation intervention app, Headspace.
+
+Future work in our lab will seek to investigate changes in EPN as a function of MBIs to further clarify this component as a modifiable biomarker of low PA in depression.
+Other work by our lab (Kahrilas et al., in prep) has illustrated the blurred lines between emotion reactivity and regulation. 
+Thus, developing emotion regulation strategies may also serve to repair early reactivity processes associated with low PA.
+This is corroborated by the fact that the brightening effect may stem from more negative expectations for future events in depression [@strunkDepressiveSymptomsAre2006].
+Research has illustrated that low expectation for positive events actually results in *amplified* reactions to positive stimuli [@mcnamaraAdaptiveResponseUncertainty2013].
+Savoring-based regulatory strategies are used to sustain and upregulate positive emotions [@heiyBackBasicsNaturalistic2014; @liuSelectionImplementationEmotion2017].
+While savoring, one may eagerly anticipate future positive experiences, focus on ongoing positive experiences as they occur in the present moment, or reminisce about past positive experiences.
+With specific relevance to depression, studies aimed at enhancing savoring capacity show that enriching any of the three temporal domains of savoring (reminiscing, savoring the moment, or anticipating) is associated with increased frequency and intensity of positive affect, and decreased negative affect [@bryantDimensionsSubjectiveMental1984; @bryantSavoringNewModel2007; @kahrilasSavoringMomentLink2020].
+Training on momentary positive emotion regulation (i.e., memory building, expressing positive emotions) resulted in decreased self-reported depression symptoms when compared to a control group after two weeks [@hurleyResultsStudyIncrease2012].
+Intervention studies with older adults have shown that savoring was positively related to decreased depression, increased activity engagement, and increased wellbeing [@smithEffectsSavoringIntervention2017; @smithImpactSavoringAbility2020].
+Savoring may improve the capacity to recognize and enjoy positive moments, even during difficult times [@smithEffectsSavoringIntervention2017].
+Thus, anticipatory-based interventions aimed at constructing more positive expectations for future events may mitigate brightening and repair EPN and PA.
+While other researchers have suggested that low PA emerges only in later attentional stages [@weinbergDistinctAssociationsLow2018], our work underscores the importance of considering the role that earlier processes play in depression as well.
+
+While others have not observed relations between EPN and PA [@weinbergDistinctAssociationsLow2018], it seems reasonable to attribute this to our use of PCA to isolate these components.
+Visual inspection of waveforms indicated that the 371 ms component (which was not found to be related to PA in the present study) starting at around 70 ms, overlapped considerably with the 271 ms peak EPN.
+Relying on windowed averages likely would not have successfully captured the EPN component, which may explain these previous null findings. 
+While there is no one best way to measure one's ERP data, we do encourage other ERP researchers to add multivariate techniques such as PCA to their toolbox. 
+
+There are several limitations to the present study.
+First, these data are cross sectional and causation cannot be inferred among neural activity and self-report measures.
+Future RCT based work should focus on modifying low PA and related neurobiological factors to further clarify their relation.
+As noted above, mindfulness- and savoring-based interventions may be a particularly fruitful endeavor in this regard.
+Further, while our sample contained dimensional variability on constructs of interest (e.g., depression, PA), it is still primarily a Caucasian undergraduate sample.
+Thus, generalizability of our findings is hindered.
+Future work should work with community samples and participants throughout the lifespan.
+Related, research has suggested that older individuals may have higher savoring (i.e., positive emotion regulation) capacity, which may have implications for EPN and PA [@smithSavoringResiliencePsychological2015] and inform intervention strategies for older and younger individuals with depression alike.
+Future work should also employ other EEG methods, such as source analysis, to investigate the time course of specific neural structures and their relation with self-report data.
+This research will elucidate brain-behavior relations within the context of psychopathology and inform clinical and pharmacological interventions.
+Last, despite the methodological rigor of our analytical plan, our results are still merely associations.
+Future researchers should strive to test more intricate theories of how psychophysiological constructs relate to questionnaire-based data (e.g., mediation and moderation).
+Such information regarding mechanisms of change among neurobiological factors and psychopathology will be crucial to developing more refined clinical interventions.
+While sample size can be a limitation, SEM is one such analytical framework that is catered to more testing such theories and models.
+For those researchers with smaller sample sizes that wish to test more complex models, partial least squares structural equation modeling allows for such analyses with reduced demands on sample size [@sarstedtTandemAnalysisSEM2020].
+
+### Conclusion
+The present study examined relations among three ERP components derived from a temporal PCA using SEM.
+This framework facilitated more accurate and refined measurement of ERP components.
+Further, we were able to investigate unique relations among self-report and psychophysiological data with SEM, as well as direct comparison of contrasting models.
+Our findings indicated that an early ERP component with a negative peak at 271 ms had a strong relation with PA, though in the opposite direction we had originally hypothesized.
+While this pattern of findings does not fit previous laboratory based studies of emotion reactivity, it does coincide with the brightening effect observed in EMA research.
+This suggests that studies aimed at repairing early processes associated with emotion reactivity may bolster PA and reduce depressive symptomatology.
+Mindfulness- and savoring-based interventions may particularly effective to this end.
+Future work should aim to replicate our findings in a more diverse sample and utilize other EEG methods, such as time-frequency and source analysis.
+Last, we encourage other researchers to test more complex and refined theories, perhaps within an SEM framework, to provide more information regarding mechanisms of change among neurobiological factors and self-report data.
+Overall, our findings may bring us a step closer to bridging the gap between self-report symptomatology their neural correlates, which will provide a more holistic perspective on developing treatments for those with depression and other forms of psychopathology. 
+
+
+
+
+
+
+
+To extend findings from Study One, Study Two will address fundamental questions regarding the neural time course of emotion reactivity and regulation. This study tests the hypothesis that specific patterns of enhancement and attenuation in ERP components (N170, EPN, and LPP) accompany passively reacting to, as well as down- and up-regulating emotional intensity in response to, positive and negative images in a sample that is not selected on the basis of psychopathology symptoms ($N$ = 54).
+While some of the aforementioned ERP components are well established in emotion regulation literature (i.e., LPP), other early visual components (i.e., N170 & EPN) are not.
+Examining these earlier components will provide a more holistic view on the temporal cascade of neural processing involved in emotion reactivity and regulation that may highlight modifiable mechanisms with relevance to depression.
+It was further hypothesized that the relation between viewing conditions and ERP components of interest would vary depending on one’s self-reported PA (i.e., individual difference pertaining positive emotion reactivity) and savoring capacity (i.e., individual difference pertaining to positive emotion regulation).
+The questions of how emotion reactivity relates to depression and how it may be modified remain unanswered.
+Interventions that target the ability to attend to and appreciate positive events as they occur in the moment may have the potential to bolster positive emotion reactivity and in turn ameliorate anhedonic symptoms of depression. 
+This was the focus of Study Three.
+
+
+
+
+
+
+
+Mindfulness meditation practices and mindfulness-based interventions (MBI) emphasize the importance of cultivating non-judgmental attention and awareness in the present moment [@guHowMindfulnessbasedCognitive2015a].
+Mindfulness meditation is theorized to enhance the capacity for and experience of positive emotions [@garlandAllostaticDysregulationNatural2015; @wielgoszMindfulnessMeditationPsychopathology2019a] and ultimately promote wellbeing [@dahlReconstructingDeconstructingSelf2015a].
+Research has supported efficacy of MBIs in treatment of current depression symptoms [e.g., @greenExpandingScopeMindfulnessBased2012] and reducing risk of relapse for depression [@kuykenMindfulnessbasedCognitiveTherapy2008].
+MBIs may modify positive valence systems through enhanced emotion awareness, modulations in emotional reactivity, increased use of cognitive reappraisal, and alterations in reward processes [@wielgoszMindfulnessMeditationPsychopathology2019a].
+A systematic review and meta-analysis conducted by Gu and colleagues (2015) indicated that self-reported mindfulness and emotional reactivity are mechanisms driving the efficacy of MBIs for mood disorders, such as depression. 
+
+### Mindfulness-based interventions may modify the experience of positive emotions in depression
+Research has indicated relations between facets of mindfulness and factors in Clark and Watson’s tripartite model [i.e., PA, NA, and anxious arousal; @clarkTripartiteModelAnxiety1991].
+There are negative associations between specific facets of mindfulness (non-reactivity and non-judgment) and both anhedonic depression (low PA) and general distress (high NA) in participants diagnosed with depression and anxiety [@desrosiersMappingMindfulnessFacets2013].
+Mixed methods (cross-sectional and longitudinal) research has found inverse relationships between the mindfulness facets of acting with awareness and non-judging with PA and NA, which suggests that adopting a non-evaluative disposition may serve to mitigate the experience of negative mood and bolster the experience of positive emotion [@raphiphatthanaHowFacetsMindfulness2016].
+The same study showed that acting with awareness [i.e., directing attention to the present activity; @mooreMeditationMindfulnessCognitive2009] predicted lower levels of anhedonia (i.e., higher PA) one month later, indicating that allocating more awareness to present activities may facilitate pleasant experience derived from said activities [@raphiphatthanaHowFacetsMindfulness2016]. 
+
+There may be some overlapping conceptual aspects between savoring and mindfulness [@bryantAppreciatingLifeMidst2015; @bryantSavoringNewModel2007; @hurleyResultsStudyIncrease2012].
+Increased attention to positive stimuli is a candidate psychological mechanism through which positive emotion regulation strategies are theorized to mitigate depression symptoms [@carlPositiveEmotionRegulation2013; @joormannExaminingEmotionRegulation2016a].
+Mindfulness meditation practices and mindfulness-based interventions emphasize the importance of cultivating non-judgmental attention and awareness in the present moment [@guHowMindfulnessbasedCognitive2015a], which may broaden one’s cognitive scope and help enhance savoring capacity [@garlandMindfulnessBroadensAwareness2015a].
+Thus, MBIs may prove effective in bolstering savoring capacity.
+
+#### MBIs and psychophysiological outcomes
+
+Literature has indicated that MBIs enhance emotional reactivity to naturally rewarding stimuli (i.e., positively-valenced images) in those with substance use dependence, a disorder that is characterized by reward deficits, dysphoric moods, and dysregulated reward processing [@garlandAllostaticDysregulationNatural2015], as indicated by increased self-report ratings of emotional arousal to rewarding stimuli [@garlandEffectsMindfulnessOrientedRecovery2014]. 
+Researchers have also demonstrated associations between self-report trait mindfulness and less negative self-report ratings of negative stimuli, along with increased early ERP component (frontal P200) amplitude for positive compared to neutral stimuli [@hoMindfulnessTraitPredicts2015].
+Another randomized control trial examined efficacy of an MBI for opioid-treated chronic pain patients [@garlandEnhancingNaturalReward2018].
+Findings indicated that those with chronic pain exhibited blunted LPP amplitude in response to rewarding complex affective images compared to healthy control participants.
+Participants with chronic pain exhibited increased LPP in response to rewarding images after eight weeks of an MBI [@garlandEnhancingNaturalReward2018] and increased LPP response to rewarding images was predictive of decreased pain interference three months later [@garlandEnhancingNaturalReward2018].
+Other research has found small increases in LPP in response to viewing positive images after a brief mindfulness induction [@eddyEffectBriefMindfulness2015].
+The same study found positive relations between LPP in response to positive images and trait mindfulness scales.
+Thus, it may be that MBIs can modify patterns of neural emotion reactivity to positive emotions for those with depression. 
+
+
+investigates the efficacy of Headspace (an online/mobile mindfulness meditation app) in ameliorating depression, enhancing individual differences regarding emotion reactivity and regulation, and modifying neural correlates of positive emotion reactivity using a randomized controlled trial design. 
+
+<!-- People initiate savoring responses in reaction to a positive event or affect as a way to maintain, intensify, or prolong the initial positive experience [@bryantSavoringNewModel2007]. -->
+<!-- While savoring, one may reminisce about past positive experiences, focus on ongoing positive experiences as they occur, or anticipate the enjoyments of future positive experiences [@bryantSavoringNewModel2007]. -->
+<!-- Regardless of the temporal focus, savoring processes regulate positive emotions in the present moment. -->
+
+<!-- Savoring is associated with a number of positive outcomes. -->
+<!-- Research has indicated that those with a greater capacity to savor possess increased life satisfaction, affective intensity, and self-esteem [@bryantUnderstandingProcessesThat2011]. -->
+<!-- Past research has also revealed that savoring is related to present happiness, total percent of time feeling happy versus sad, extraversion, optimism, and self-esteem. -->
+<!-- Furthermore, savoring is negatively associated with depression, neuroticism, and hopelessness [@bryantSavoringBeliefsInventory2003a; @eisnerPositiveAffectRegulation2009; @houSavoringModeratesAssociation2016; @kahrilasSavoringMomentLink2020; @ramseyAgeDifferencesSubjective2014; @smithSavoringResiliencePsychological2015]. -->
+<!-- A separate study found that savoring the moment is related to higher life satisfaction, subjective happiness, and overall higher levels of positive affect [@hurleyResultsStudyIncrease2012]. -->
+<!-- Other research has similarly revealed that savoring was strongly related to higher levels of present happiness, higher self-esteem, and lower reported levels of depression [@bryantSavoringBeliefsInventory2003a]. -->
+<!-- Further, increased savoring capacity is associated with pain resilience [@thongBufferingRolePositive2016]. -->
+
+<!-- The original conceptual formulation of savoring [@bryantSavoringNewModel2007] is predicated on the assumption that people typically initiate savoring responses in reaction to positive events or affect, which people regulate through cognitive or behavioral strategies. -->
+<!-- Thus, difficulties processing positive emotions and events preclude the ability to savor; --> 
