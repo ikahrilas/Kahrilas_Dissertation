@@ -9,6 +9,51 @@ library(here)
 library(semPlot)
 library(tidySEM)
 library(performance)
+library(lmerTest)
+library(emmeans)
+
+## ANOVAS for Greg
+dat_long <- read_csv(here("data", "paper_three", "dat_for_analyses_2021-04-02.csv")) %>%
+  select(!c(RC5, RC7, pRC8, RC17)) %>%
+  filter(!is.na(RC2), # only participants with EEG data for all conditions
+         pid != 22585512,       # dropped out of study
+         pid != 22585452) %>%
+  pivot_longer(cols = c(RC2, RC3, nRC8),
+               names_to = "comp",
+               values_to = "amp") %>%
+  relocate(comp, amp)
+
+dat_long$block <- factor(dat_long$block)
+dat_long$block <- relevel(dat_long$block, ref = "Neu_Watch")
+
+# define contrasts
+c1 <- c(0, -1, 1)
+c2 <- c(-1, 0.5, 0.5)
+
+# combined the above 2 lines into a matrix
+mat <- cbind(c1, c2)
+
+# matrix that gives the contrasts you want
+contrasts(dat_long$block) <- mat
+
+# anova for each of the components
+model_rc2 <- aov(amp ~ block + Error(pid/block), data = dat_long %>% filter(comp == "RC2"))
+model_rc3 <- aov(amp ~ block + Error(pid/block), data = dat_long %>% filter(comp == "RC3"))
+model_rc8 <- aov(amp ~ block + Error(pid/block), data = dat_long %>% filter(comp == "nRC8"))
+
+# get the contrasts for each
+summary(model_rc2, split = list(block = list("Linear" = 1, "Quadratic" = 2)))
+summary(model_rc3, split = list(block = list("Linear" = 1, "Quadratic" = 2)))
+summary(model_rc8, split = list(block = list("Linear" = 1, "Quadratic" = 2)))
+
+# mixed model with interaction term between block and component
+mod <- lmer(amp ~ block * comp + (1|pid), dat_long)
+
+# pairwise contrasts
+emmeans(mod, data = dat_long, specs = c("block", "comp"))  %>%
+  contrast("pairwise", by = "comp", adjust = "none")
+
+##-- SEM analyses
 
 ## read in data and pivot to wide format
 dat <- read_csv(here("data", "paper_three", "dat_for_analyses_2021-04-02.csv")) %>%
@@ -18,7 +63,7 @@ dat <- read_csv(here("data", "paper_three", "dat_for_analyses_2021-04-02.csv")) 
   select(-c(RC2_NA, RC3_NA, RC5_NA, RC7_NA, nRC8_NA, pRC8_NA, RC17_NA)) %>%
   filter(!is.na(RC2_Pos_Watch), # only participants with EEG data for all conditions
          pid != 22585512,       # dropped out of study
-         pid != 22585452)       # only participants with EEG data for all conditions
+         pid != 22585452)
 
 ################################
 ###INTERNALIZING FACTOR MODEL###
