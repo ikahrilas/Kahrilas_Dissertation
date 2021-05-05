@@ -484,7 +484,7 @@ reg_tab_wide <- bind_cols(reg_tab_pos, reg_tab_neg)
 names(reg_tab_wide) <- c(names(reg_tab_pos), names(reg_tab_pos)[3:5])
 
 reg_tab_wide[-1] %>%
-  kable(., escape = FALSE, booktabs = TRUE, align = c("l", rep("c", times = 6)), linesep = "", caption = "(ref:pairwise-reg-comparison-table)") %>%
+  kable("latex", escape = FALSE, booktabs = TRUE, align = c("l", rep("c", times = 6)), linesep = "", caption = "(ref:pairwise-reg-comparison-table)") %>%
   kable_styling(latex_options = "scale_down") %>%
   add_header_above(c(" ", "Positive Images" = 3, "Negative Images" = 3), bold = TRUE, italic = TRUE) %>%
   row_spec(0, align = "c") %>%
@@ -500,6 +500,7 @@ reg_tab_wide[-1] %>%
            general_title = "Note.",
            general = "Std. Beta = Absolute value of standardized beta coefficient as measure of effect size derived by fitting model to standardized dataset with effect size label as per Cohen's (1988) recommendations, Sig. = $p$ value. $P$ values and confidence intervals adjusted using the Tukey method for comparing a family of three estimates.",
            threeparttable = TRUE,
-           footnote_as_chunk = TRUE)
+           footnote_as_chunk = TRUE) %>%
+  save_kable("regulation_table.pdf")
 
 save.image(file = paste0("data/paper_two/analyses/", Sys.Date(), "factor_score_regulations_table-data", ".RData"))
