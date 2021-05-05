@@ -13,7 +13,8 @@ library(lmerTest)
 library(emmeans)
 
 ## ANOVAS for Greg
-dat_long <- read_csv(here("data", "paper_three", "dat_for_analyses_2021-04-02.csv")) %>%
+dat_long <-
+  read_csv(here("data", "paper_three", "dat_for_analyses_2021-04-02.csv")) %>%
   select(!c(RC5, RC7, pRC8, RC17)) %>%
   filter(!is.na(RC2), # only participants with EEG data for all conditions
          pid != 22585512,       # dropped out of study
