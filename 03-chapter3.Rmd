@@ -16,14 +16,14 @@ Further, many types of psychopathology such as depression [@bylsmaMetaanalysisEm
 Disentangling emotion reactivity and regulation is complex [@joormannExaminingEmotionRegulation2016a], and these two constructs share considerable temporal overlap in terms of affective chronometry [@davidsonReactivityRecoveryRegulation2018].
 Electroencephalography (EEG) is a psychophysiological method that can be used to evaluate the chronometry of reactivity and regulation processes. 
 In particular, event-related potentials (ERPs) facilitate assessment of neural responses to affective stimuli with millisecond temporal resolution [@olofssonAffectivePictureProcessing2008].
-Thus, the present study used EEG methods to investigate the temporal course of reactivity and regulation of visual affective stimuli in order to contribute to the development of more targeted psychological treatments and interventions designed to support positive health and wellbeing outcomes.
+The present study used EEG methods to investigate the temporal course of reactivity and regulation of visual affective stimuli, with the broader translational aim of informing innovative development of psychological treatments and interventions designed to support positive health and wellbeing outcomes.
 
-Previous psychophysiological research has typically focused on either the neural correlates of reactivity *or* regulation, within positive or negative valence task conditions or mood states, which has precluded researchers from identifying a comprehensive picture of the temporal course of reactivity and regulation in the context of both positive and negative valence.
-Incorporating negative and positive images in emotion reactivity and regulation paradigms facilitates direct comparison of reactivity and regulation conditions across valenced stimuli.
-Thus, in the present study, we implemented an experimental paradigm where participants were shown blocks of images of varying arousal (positive, negative, and neutral) with different regulation instructions (increasing/decreasing emotional intensity in response to images, or passively watching).
-As explained in more detail in the method section, we implemented a principal components analysis (PCA) approach to identifying ERP components, and previous research on the neural correlates of reactivity and regulation contributed to informing our selection of components.
-The present study is inherently exploratory given the utilization of PCA to identify ERP components.
-In the subsequent sections, we provide a brief overview of relevant ERP components, ranging from early to late components, that have been implicated in emotion reactivity and regulation. 
+Previous psychophysiological research has typically focused on either the neural correlates of reactivity *or* regulation, within positive *or* negative valence task conditions, which has precluded researchers from identifying a comprehensive picture of the temporal course of reactivity and regulation in the context of both positive and negative valence.
+Incorporating negative and positive stimuli in emotion reactivity and regulation paradigms facilitates comparison of reactivity and regulation conditions across valenced stimuli.
+Thus, in the present study, we implemented an experimental paradigm where participants were shown blocks of images of varying valence levels (positive, negative, and neutral) with different regulation instructions (increase/decrease emotional intensity in response to images, or passively watching).
+As explained in more detail in the method section, we implemented a principal components analysis (PCA) approach to identifying ERP components [@dienApplyingPrincipalComponents2012; @donchinMultivariateAnalysisEventrelated1978], and previous research on the neural correlates of reactivity and regulation contributed to informing our selection of components.
+The present study is inherently exploratory given the novel application of PCA of PCA to identify ERP components in the context of our study paradigm.
+Below, we provide a brief overview of relevant ERP components (ranging from early to late) that have been implicated in emotion reactivity and regulation. 
 We also outline expected patterns of results regarding these components based on extant literature.
 
 #### Early Visual ERP Components Associated with Affective Processing
@@ -37,7 +37,7 @@ The N170 has commonly been observed in response to facial stimuli and is thought
 Some research indicates comparable N170 amplitude for positive and negative facial expressions, while other studies show enhanced N170 amplitude for negative compared to positive facial expressions [for a review, see @hinojosaN170SensitivityFacial2015; @stockdaleInfluenceStimulusValence2020].
 Enhanced (i.e., more negative) N170 amplitude has also been observed in response to negatively-valenced complex affective images [i.e., IAPS; @bekhterevaAttentionalBiasAffective2015], albeit with a slightly later peak latency compared to face stimuli (160 - 200 ms for face stimuli and 200 - 240 ms for IAPS).
 Limited, if any research, has studied patterns of N170 activity evoked by positive affective images (beyond facial expressions), and identifying the temporal course of early neural response to both positive and negative affective stimuli is important for advancing treatment and intervention for psychological disorders hallmarked by transdiagnostic dimensions of dysregulated emotion reactivity and regulation. 
-We expected enhanced N170-like activity in response to both positive and negative stimuli.
+In the present study, we expected enhanced N170-like activity in response to both positive and negative stimuli.
 
 While studies have generally shown that N170 is sensitive to valence rather than arousal, the EPN has been observed in response to emotionally arousing compared to neutral stimuli in the 200 - 300 ms window over bilateral occipital-parietal sites [@olofssonAffectivePictureProcessing2008; @schuppAffectivePictureProcessing2000; @schuppAttentionEmotionERP2003]. 
 Potential neural generators of the EPN are located in the occipital cortex and may also include contributions from parietal regions [@wiensNonemotionalFeaturesSuppress2011].
@@ -49,7 +49,7 @@ Other research has observed augmented EPN amplitude in response to pleasant comp
 EPN has been observed across a variety of different tasks, inter-stimulus intervals (ISI), and stimulus presentation durations [@olofssonAffectivePictureProcessing2008], leading researchers to surmise that EPN reflects relatively automatic processes observed even when processing resources are limited due to rapid presentation rates [@junghoferFleetingImagesNew2001; @schuppAttentionEmotionERP2003; @schuppEmotionalFacilitationSensory2003].
 This sensitivity to affective stimuli may index rapid affective amygdala processing of emotionally salient information [@ledouxEmotionCluesBrain1995; @morrisConsciousUnconsciousEmotional1998] and is also theorized to index selective attention where evaluation of image features is contingent upon affectively arousing perceptual characteristics for additional processing [@dolcosEventrelatedPotentialsEmotional2002; @schuppSelectiveProcessingBriefly2004].
 Thus, highly arousing positive and negative images, may elicit augmented EPN amplitude.
-Given the limited research on explicit emotion regulation and EPN/N170, analyses regarding regulation blocks were conducted in an entirely exploratory manner.
+Given the limited research on explicit emotion regulation and EPN/N170, analyses regarding regulation blocks were conducted in an exploratory manner.
 
 #### Slow Wave Components Associated with Affective Processing and Individual Differences
 Research using EEG has implicated the LPP, a sustained positive slow wave observed starting as early as 300 ms following stimuli onset, as an established index of evaluative congruency and arousal [@olofssonAffectivePictureProcessing2008].
@@ -63,7 +63,7 @@ We accordingly expected augmented LPP in response to both positive and negative 
 Enhanced LPP has been observed when participants described affective images in more negative (compared to neutral) terms [@fotiDeconstructingReappraisalDescriptions2008] and when participants were instructed to evaluate images in affective (compared to non-affective) conditions [@hajcakAttendingAffectAppraisal2006].
 Other research has shown reduced LPP when participants suppressed emotional intensity in response to viewing highly arousing affective images [e.g., @moserIntentionalModulationEmotional2006].
 However, research has not reliably demonstrated that LPP is enhanced when participants are instructed to enhance their emotional intensity in response to negative [@moserIntentionalModulationEmotional2006] and positive [@krompingerModulationsElectrophysiologicalResponse2008] affective stimuli.
-However, a recent study conducted by Wilson and MacNamara [-@wilsonSavorMomentWillful2021], that found increases in centroparietal and frontal LPP when participants were asked to savor (i.e., upregulate) positive images compared to passively viewing images.
+However, increases in centroparietal and frontal LPP were observed when participants were asked to savor (i.e., upregulate) positive images compared to passively viewing images [@wilsonSavorMomentWillful2021].
 Thus, we expected LPP modulations congruent with the regulatory goals.
 <!-- Further, we surmised that higher self-report ratings of one’s capacity to savor would be expected to moderate the relationship between LPP and increased emotional intensity in response to positive stimuli. -->
 <!-- Methodological factors might be contributing to these findings, such as inconsistent stimulus presentation durations, utilization of non-blocked vs. blocked designs, and offline filter settings. -->
@@ -83,31 +83,29 @@ Nearly all of the ERP research reviewed above involved submitting windowed avera
 However, this method may be inadequate in dealing with the thorny issue of components that overlap temporally [@donchinMultivariateAnalysisEventrelated1978; @fotiDifferentiatingNeuralResponses2009], which is of primary consideration in this present study since a primary aim of this study is to investigate the *temporal* courses associated with emotion reactivity and regulation.
 Indeed, there is speculation that N170 modulation due to emotional expressions may be due to superimposed EPN activity [@relleckeEmotionEffectsN1702013].
 Similarly, LPP may overlap with P3, a parietally maximal component peaking in the 300-400 ms window that is sensitive to task relevant and motivationally significant stimuli [@polichCognitiveBiologicalDeterminants1995], and even later portions of EPN [@schuppSelectiveProcessingBriefly2004].
-To address this issue, we utilized an exploratory temporal principal components analysis (PCA) to better isolate distinct ERP components across time.
+To address this issue, we used a exploratory temporal principal components analysis (PCA) to isolate distinct ERP components across time.
 PCA is a dimension reduction technique that identifies a new set of variables that are linear combinations of the original variables.
 In the context of ERPs, these new variables represent latent components that may not be apparent by visually inspecting ERP averages.
 For example, if there were two temporally overlapping ERP components with equal magnitude but opposite directionality (positive and negative), the two components would negate each other and not be observable via inspection of grand average ERPs.
 Temporal PCA, on the other hand, would extract these components provided that the experimental paradigm reliably produces them.
 
 ### The Present Study
-The present study utilized an experimental paradigm using 120 different standardized complex affective stimuli. 
-Forty images were highly arousing positive images, 40 images were highly arousing negative images, and 40 were neutral. 
-Participants were given directions with increasing or decreasing emotional intensity in response to (i.e., upregulating or downregulating) positive and negative images, as well as passively watching them. 
-Participants also passively viewed the block of 40 neutral images for a total of seven blocks.
-Our objective was to examine how block type would influence ERP components using an exploratory PCA approach.
-We expected that highly arousing positive and negative compared to neutral Open Affective Standardized Image Set (OASIS) stimuli would be associated with enhanced ERP components retained from the PCA (e.g., N170, EPN, LPP).
-Related, we expected reduction of LPP in decrease conditions relative to passive watch conditions, and increased LPP in increase relative to passive watch conditions.
-Analyses of regulatory effects on ERP/N170 were conducted in an exploratory manner.
-<!-- The second objective was to examine the relation between personality traits and EEG components. -->
-<!-- We expected that a) PA would moderate the relationship between watching positive images and LPP and b) savoring capacity would moderate the relationship between increasing emotional intensity in response to positive images and LPP.  -->
-<!-- Moderation analyses of personality traits and N170/EPN were exploratory. -->
+The present study was designed to evaluate the temporal course of emotion reactivity and regulation to positive and negative stimuli, using EEG methods.
+Our experimental paradigm included 120 different standardized complex affective stimuli (40 positive, 40 neutral, and 40 positive) from the OASIS (Open Affective Standardized Image Set (OASIS) data set [@kurdiIntroducingOpenAffective2017].
+Participants were given directions to increase or decrease (i.e., upregulate or downregulate) emotional intensity in response to positive and negative images, as well as to passively view them.
+Participants also passively viewed the block of 40 neutral images for a total of seven regulatory blocks.
+Using an exploratory PCA approach, we examined the evoked neural response to each regulatory block.
+We expected that highly arousing positive and negative compared to neutral stimuli would be associated with enhanced ERP components retained from the PCA (e.g., approximating N170, EPN, LPP).
+Related, indicative of an arousal effect, we expected reduced LPP in decrease blocks relative to passive watch conditions, and increased LPP in increase blocks relative to passive watch conditions. 
+Analyses of regulatory effects on ERN/N170 were conducted in an exploratory manner.
 All data and R code are available on the Open Science Framework [https://osf.io/p5ba9/](https://osf.io/p5ba9/).
 
 ## Method 
 ### Participants
-54 participants were recruited for the study, two of which were excluded due to missing EEG or questionnaire data (*n* = 29 women, *n* = 2 non-binary).
-Participants ranged in age from 18-29 (*M* = 19.84 years, *SD* = 1.95).
-The sample was 70.6% Caucasian, 17.6% Asian, 2.0% Black or African American, and 7.8% multiracial (2.0% declined to answer); 9.8% reported that they were Hispanic/Latino and 90.2% were not Hispanic/Latino.
+54 participants were recruited from a college campus for the study (*n* = 29 women, *n* = 2 non-binary). 
+Participants ranged in age from 18-29 (*M* = 19.84 years, *SD* = 1.95). 
+The sample was 70.6% white, 17.6% Asian, 2.0% Black or African American, and 7.8% multiracial (2.0% declined to answer); 9.8% reported that they were Hispanic/Latinx and 90.2% were not Hispanic/Latinx. 
+Two participants were not included in subsequent analyses due to missing EEG or questionnaire data.
 The study was approved by the Institutional Review Board and informed consent was provided to all participants prior to beginning the experiment.
 
 ### Materials and Procedure
@@ -117,49 +115,44 @@ The study was approved by the Institutional Review Board and informed consent wa
 <!-- The SBI measures the perception of one’s ability to feel pleasure through anticipating positive outcomes ($\omega = .88$), savoring positive moments ($\omega = .85$), and reminiscing about past positive events ($\omega = .86$; Bryant, 2009). -->
 <!-- Only the momentary savoring subscale was used in the following moderation analyses, as this temporal domain was most relevant to the present hypotheses and experimental paradigm. -->
 #### Emotion Task Paradigm
-64-channel high-density electroencephalography (EEG) data were recorded while participants viewed seven blocks of 40 images (280 total trials).
 The study used 120 different Open Affective Standardized Image Set (OASIS) images [@kurdiIntroducingOpenAffective2017].
-The International Affective Picture System [IAPS; @langInternationalAffectivePicture2008] has been used in a majority of the aforementioned research.
+The OASIS is a collection of 900 high quality images collected from open-access online sources depicting a range of categories (people. animals, objects, & scenes).
+the OAISS  was normed on arousal ratings collected from a diverse sample recruited through Amazon's Mechanical Turk [@kurdiIntroducingOpenAffective2017].
+However, the International Affective Picture System [IAPS; @langInternationalAffectivePicture2008] was used in a majority of the aforementioned research.
 The IAPS was developed to provide a standardized stimulus set of complex affective images to facilitate the comparison of results across different studies and enhance replication across research groups [@bradleyInternationalAffectivePicture2007].
 IAPS images are rated with respect to arousal (negative-to-positive) and arousal (low-to-high) on a nine-point visual analogue scale.
 The copyright agreement that accompanies the IAPS mandates that users cannot place any of the images on computer-accessible websites.
 This poses considerable restraint on increasing reliance on online samples in behavioral research that make data collection from large and diverse samples faster, less costly, and more efficient [@berinskyEvaluatingOnlineLabor2012; @buhrmesterAmazonMechanicalTurk2011; @krautPsychologicalResearchOnline2004; @masonConductingBehavioralResearch2012; @paolacciRunningExperimentsAmazon2010].
-Thus, there is an increasing demand for images with standardized arousal and arousal ratings for behavioral researchers to use in online contexts, such as the OASIS.
-The OASIS is a collection of 900 high quality images collected from open-access online sources depicting a range of categories (people, animals, objects, & scenes).
-The OASIS was normed on arousal and arousal ratings collected from a diverse sample recruited through Amazon’s Mechanical Turk [@kurdiIntroducingOpenAffective2017].
-To facilitate experimental control in the selection of stimuli and facilitating comparison of results and replication across different studies using this new image set, the present study utilized OASIS stimuli in lieu of the IAPS.
+There are also concerns about lack of diversity and inclusion with regard to the initial normative development of the IAPS [@villanuevaChangeHorizonCall2021].
+We selected the OASIS for the present study given that the updated norming process included a more diverse sample of participants, and the use of the OASIS facilitates comparison of results with research that goes beyond the traditional walls of a research laboratory.
 
+During the emotion task, participants viewed seven blocks of 40 images (280 total trials).
 Forty of the images were positive, 40 were neutral, and 40 were negative.
-Previous research has shown that 40 trials is sufficient to evoke a reliable LPP component [@fotiDeconstructingReappraisalDescriptions2008; @hajcakAttendingAffectAppraisal2006; @hajcakPersistenceAttentionEmotion2008; @hajcakReappraisalModulatesElectrocortical2006].
-The mean normative arousal ratings (on a scale of one to seven) were 5.71, 4.09, and 2.18 for positive, neutral, and negative pictures, respectively.
+The mean normative arousal ratings (on a scale of one to seven) from the OASIS data set were 5.71, 4.09, and 2.18 for positive, neutral, and negative pictures, respectively.
 The mean normative arousal ratings (on a scale of one to seven) were 4.46, 1.99, and 4.52, for positive, neutral, and negative pictures, respectively.
-
 Each block represented an experimental regulation condition: increase (positive/negative), decrease (positive/negative), and watch (positive/negative/neutral).
-During the increase condition, participants were instructed to appraise the picture in a way that will intensify the emotion that is elicited by looking at it.
-During the decrease condition, participants were asked to reduce the intensity of the emotion that is elicited by looking at the picture.
-When prompted to watch, participants were asked to view the picture as they would naturally.
+During the increase condition, participants were instructed to appraise the stimulus image in a way that will intensify the emotion that they are experiencing.
+During the decrease condition, participants were asked to reduce the intensity of the emotion that they are experiencing.
+When prompted to watch the stimuli, participants were asked to simply view the picture as they would naturally without consciously attempting to modify their affective response to it.
 The passive “watch” blocks served as baseline conditions for LPP component analyses [@hajcakReappraisalModulatesElectrocortical2006].
-A block design was selected for the proposed study because arousing images outnumber the neutral images two-to-one.
-The relatively rare neutral stimuli may produce a P3 if intermixed with valenced stimuli in the same block [@schuppAffectivePictureProcessing2000]. Additionally, LPP signal is increased for stimuli that are perceived as incongruent within a given affective context.
-Thus, a neutral stimulus displayed in a series of emotional stimuli would likely evoke an enhanced LPP activity, thus decreasing effect size [@schuppAffectivePictureProcessing2000].
-Further, a block design paradigm may better emulate one's natural environment, as stimuli of congruent arousal are typically encountered in clusters rather than isolation [@schuppAffectivePictureProcessing2012].
-Research comparing intermixed and block designs for LPP and EPN have shown comparable findings between the two approaches [@pastorAffectivePicturePerception2008; @schuppAffectivePictureProcessing2012].
+A key reasons that a block design was selected for this study was because arousing positive and negative images outnumber the neutral images two-to-one, and the lower arousing neutral stimuli may produce a P3 if intermixed with higher arousing (e.g., positive/negative) stimuli in the same block [@schuppAffectivePictureProcessing2000]. 
+Further, a block design paradigm may better emulate the natural environment, as stimuli of congruent arousal are typically encountered in clusters rather than isolation [@schuppAffectivePictureProcessing2012]; however, research comparing intermixed and block designs for LPP and EPN have shown comparable findings between the two approaches [@pastorAffectivePicturePerception2008; @schuppAffectivePictureProcessing2012].
 
-First, participants completed three practice trials that consisted of 10 images not used during the actual task [@hajcakReappraisalModulatesElectrocortical2006].
+At the beginning of the task, participants completed three practice trials that consisted of 10 images that are not used elsewhere during the task [@hajcakReappraisalModulatesElectrocortical2006].
 Participants were instructed to increase or decrease emotional arousal in response to a mixture of positive and negative images, respectively.
 Participants were also asked to watch a third practice trial comprised of positive, negative, and neutral images.
 Stimuli were presented in random order within each block.
 Prior to each practice trial, participants were provided with instructions on how to regulate (increase/decrease) their affective response to the stimuli, or to simply view the stimuli [@moserIntentionalModulationEmotional2006].
-Participants were shown which regulation strategy to engage in (increase, decrease, or watch) at the start of each experimental block.
+Participants were instructed which regulation strategy to engage in (increase, decrease, or watch) at the start of each experimental block.
 Once the participant was ready, an OASIS stimulus appeared for 2000 ms [@fotiDifferentiatingNeuralResponses2009; @hajcakPersistenceAttentionEmotion2008].
 Following stimulus offset, a blank screen appeared for 500 ms followed by a fixation cross for 1500 ms (± 250 ms) for a total ISI of 1750 - 2250 ms (see Figure \@ref(fig:paradigm-image-1) for a visual depiction of the experimental paradigm used in the present study).
-This interval is identical to other studies utilizing the IAPS and investigating LPP [@dunningSeeNoEvil2009; @hajcakMotivatedControlledAttention2009].
+This interval is identical to other studies that used the IAPS and investigated LPP [@dunningSeeNoEvil2009; @hajcakMotivatedControlledAttention2009].
 Stimuli within each block were presented in random order.
-Each block was separated by a break and presented in pseudo-random order, such that no arousal (i.e., positive or negative) nor regulation (i.e., increase, decrease, or watch) condition were presented consecutively.
-After each experimental block, arousal and arousal ratings were collected using a seven-point likert scale and the same instructions used in Kurdi, Lozano, and Banaji’s [-@kurdiIntroducingOpenAffective2017] norming study of the OASIS stimuli set.
-Furthermore, difficulty ratings on a seven-point likert scale were also obtained.
+Each block was separated by a break and presented in pseudo-random order, such that no valence (i.e., positive or negative) nor regulation (i.e., increase, decrease, or watch) conditions were presented consecutively.
+After each experimental block, valence and arousal ratings were collected using a seven-point likert scale and the same instructions used in Kurdi, Lozano, and Banaji’s [-@kurdiIntroducingOpenAffective2017] norming study of the OASIS stimuli set.
+Furthermore, task difficulty ratings on a seven-point likert scale were also obtained.
 Affective visual stimuli elicit increased arousal and valence self-report ratings [@bradleyInternationalAffectivePicture2007; @kurdiIntroducingOpenAffective2017; @olofssonAffectivePictureProcessing2008] and are sensitive to reappraisal [e.g., @thiruchselvamTemporalDynamicsEmotion2011].
-Thus, we conducted exploratory analyses with self-report ratings as the dependent variable and block type as the independent variable
+Thus, we conducted exploratory analyses with self-report ratings as the dependent variable and block type as the independent variable.
 
 (ref:paradigm-image-1) Experimental paradigm utilized in the present study.
 
@@ -170,6 +163,9 @@ knitr::include_graphics("images/paper_2/PER_paradigm.png", auto_pdf = TRUE)
 ### Apparatus and Physiological Recording
 Scalp electroencephalography (EEG) was measured while participants completed an emotion regulation task (Figure \@ref(fig:paradigm-image-1)).
 Participants were seated in a comfortable chair, approximately 24 inches from a 24-inch LCD monitor in a quiet, dimly lit room.
+The viewing distance was approximately 24 in. and occupied 25° of the vertical visual angle and 30° horizontally (Cuthbert et al., 2000; Hajcak & Nieuwenhuis, 2006).
+The experiment was computer-administered using E-Prime 2.0 software [@schneiderEPrimeUserGuide2002] in order to manipulate the timing and presentation of stimuli.
+All stimuli were presented in color and occupied the entirety of the 21-inch monitor.
 Participants were monitored by a task administrator in a nearby room and received task instructions by intercom.
 EEG data were recorded using a Biosemi Active2 EEG system.
 A custom-designed Falk Minow 64-channel cap with equidistantly spaced BioSemi active Ag and AgCl electrodes was used for data collection.
@@ -178,29 +174,30 @@ After placement of the electrode cap, electrode positions were digitized.
 An additional electrode was placed on the inferior edge of the orbit of each eye to monitor vertical eye movements; nearby electrodes in the cap (lateral to each eye) monitored horizontal eye movements.
 Data were recorded with a band pass of 0 – 104 Hz at a sampling rate of 512 Hz.
 
+### EEG Data Reduction: PCA Approach
 The following EEG data processing steps were implemented in Brain Electrical Source Analysis software [BESA, Version 7; @schergBESABrainElectric1990].
 Following the adaptive artifact correction method [@illeArtifactCorrectionOngoing2002], ocular artifacts were corrected using a spatial PCA filter.
 EEG data were re-referenced to the [@hajcakAttendingAffectAppraisal2006; @hajcakReappraisalModulatesElectrocortical2006]  average reference of all electrodes for analyses and digitally filtered with 0.01 Hz high-pass and 30 Hz low-pass filters with a cutoff attenuation of 12 dB/octave.
 EEG data were re-referenced to the average activity of all electrodes.
-While it is convention to re-reference data to average activity of the mastoids for LPP, a covariance matrix was utilized in the PCA, which is inherently mean corrected [@dienApplyingPrincipalComponents2012].
-Thus, minimal effects would be expected as a function of referencing scheme for temporal PCA (though this is not the case for spatial PCAj; see @dienApplyingPrincipalComponents2012).
+While it is convention to re-reference data to average activity of the mastoids for LPP analysis, a covariance matrix was utilized in the PCA, which is inherently mean corrected [@dienApplyingPrincipalComponents2012].
+Thus, minimal effects would be expected as a function of referencing scheme for temporal PCA (though this is not the case for spatial PCA; see @dienApplyingPrincipalComponents2012).
 Muscle activity and other artifacts were corrected through implementing an algorithmic scan of continuous EEG data in BESA (fixed threshold criteria: amplitude > 120 uV; gradient > 75 uV, low signal <.01 uV).
 Data were baseline-adjusted by subtracting the average activity for 200 milliseconds [@moserIntentionalModulationEmotional2006] before stimulus onset.
 
-To discriminate among temporal sources of variance (i.e., ERP components) in the time course of ERPs, ERP averages were submitted to a temporal PCA to derive linear combinations of data that distinguish activity across time points. 
+To discriminate among temporal sources of variance across the time course of ERPs, ERP averages were submitted to a temporal PCA to derive linear combinations of data that distinguish activity across time points. 
 A temporal PCA was performed using the Psych package [@revellePsychProceduresPsychological2020] in R version 4.0.3 [@rcoreteamLanguageEnvironmentStatistical2020] with a covariance matrix.
 A covariance matrix was used to retain the original units of measurement (i.e., voltage) for the average ERPs for each time point [@donchinMultivariateAnalysisEventrelated1978].
-The temporal PCA used all time points (-200 ms - 2000 ms) as variables and all 55 participants, seven blocks, and 66 recording sites as observations, yielding linear combinations of time points and "temporal" factors [@dienApplyingPrincipalComponents2012].
+The temporal PCA used all time points (-200 ms - 2000 ms) as variables and all 55 participants, seven stimuli blocks, and 66 recording sites as observations, yielding linear combinations of time points and "temporal" factors [@dienApplyingPrincipalComponents2012].
 To determine the number of components to retain for rotation, a parallel analysis [@hornRationaleTestNumber1965] was performed on the resultant Scree plot.
 The parallel analysis creates Scree plots of the actual and simulated fully random data to determine the number of components that explain more variance than if only chance alone were acting. 
 Based on the parallel analysis, 22 components were retained for rotation. 
 An Promax rotation was then used on the 22 components because it does not impose orthogonality, and simulation studies suggest that Promax is most effective for temporal PCA [@dienERPPCAToolkit2010; @dienEvaluationPCAICA2007].
 The time course of each of the 22 components was inspected by plotting the covariance loadings along each time point. 
 Given the a priori nature of the ERP components of interest, those PCA components with covariance loadings in time windows that fit descriptions of LPP and early visual components (e.g., N170, EPN) were retained for further analyses.
+
 Spatial information is retained in PCA; the topography of each factor is encoded in the mean amplitude of factor scores at each recording site [@dienAddressingMisallocationVariance1998].
 Thus, scalp topographies of each component for each condition was inspected to determine correspondence of components and ERP components of interest.
-Of note, portions of waveforms represented by a given PCA component can be reproduced by multiplying covariance loadings by observations' factor scores [@dienAddressingMisallocationVariance1998]. 
-Five components were retained for statistical analyses based inspection of topographic plots and ERP waveforms.
+Five components were extracted for statistical analyses based on inspection of topographic plots and ERP waveforms.
 Two of the retained components represented LPP-like components that have positive peaks at 381 ms and 740 ms with the former demonstrating activity at PO7 and PO8 electrode sites and the latter at PO7, PO8, PO3, PO4, P1, P2, P5/P3, P6/P4 and Pz electrode sites. 
 Three components represented early visual components with positive peaks at 124 ms, 162 ms, and 259 ms with activity at PO7 and PO8 electrodes sites.
 While no a priori hypotheses were made regarding ERP components occurring as early as 124 ms, we decided to retain the component for exploratory analyses.
@@ -223,14 +220,8 @@ knitr::include_graphics("images/paper_2/erp_raw_comp/pz_cpz_lpp_erps.png", auto_
 <!-- LPP activity was calculated as the average activity in the 400 – 800 ms window at the Pz electrode site. -->
 <!-- Adaptive means for N170 and EPN were computed separately to account for peak latency variability among participants. N170 was defined as the minimum mean-peak amplitude (average amplitude across +/- 15 ms around the peak) between 130 - 200 ms post-stimulus at PO7 and PO8 electrode sites. The EPN was defined as the minimum mean-peak amplitude (average amplitude across +/- 25 ms around the peak) detected between 225 to 325 ms post-stimulus at PO7 and PO8 electrode sites. -->
 <!-- Scoring windows and electrode sites were similar to other studies investigating LPP, EPN, and N170 [e.g., @frankHemodynamicElectrocorticalReactivity2019; @hajcakReappraisalModulatesElectrocortical2006; @thomEmotionalScenesElicit2014]. -->
-The experiment was computer-administered using E-Prime 2.0 software [@schneiderEPrimeUserGuide2002] in order to manipulate the timing and presentation of stimuli.
-All stimuli were presented in color and occupied the entirety of the 21-inch monitor.
-The viewing distance was approximately 24 in. and occupied 25° of the vertical visual angle and 30° horizontally (Cuthbert et al., 2000; Hajcak & Nieuwenhuis, 2006).
 
 ## Results
-```{r rm-ANOVA, message = FALSE, include = FALSE, echo = FALSE}
-load("data/paper_two/analyses/2021-03-01_repeated_measures_ANOVA_analysis-data.RData")
-```
 Analyses were run in R version 4.0.3 [@R-base].
 Multilevel modeling (MLM) analyses were conducted using the lme4 package [@batesFittingLinearMixedeffects2015].
 All linear mixed models were estimated using REML with participants included as random intercepts.
@@ -240,43 +231,88 @@ Model assumptions were checked via visual inspection of diagnostic plots (i.e., 
 
 Repeated measures ANOVA was performed to probe for significant deviations from the average activity of each component and behavioral rating as a function of experimental block.
 Greenhouse-Geisser corrections were implemented to account for significant departures from sphericity as tested by Mauchly's test for sphericity.
-Significant variation among experimental image blocks were found for the 124 ms component (`r rc5_results`), 162 ms component (`r rc11_results`), negative 259 component (`r neg_rc12_results`), positive 259 component (`r pos_rc12_results`), 381 ms component (`r pos_rc2_results`), and 740 ms component (`r pos_rc3_results`). 
-Further, significant variation was examined with valence ratings (`r val_results`), arousal ratings (`r ar_results`), and difficulty ratings (`r diff_results`).
-
-Follow up pairwise *t* tests were conducted using the emmeans package [@lenthEmmeansEstimatedMarginal2020] among passive watch and regulation conditions for PCA EEG components and behavioral ratings.
-Findings for EEG components are summarized in Figure \@ref(fig:contrast-plot)
+Findings are summarized in Table \@ref(tab:rm-anova-tab).
+Each analysis resulted in a significant test statistic at $\alpha = .05$, signifying that block type accounted for a significant portion of the variance in each fo the retained ERP components and behavioral ratings. Follow up pairwise *t* tests were conducted using the emmeans package [@lenthEmmeansEstimatedMarginal2020] among passive watch and regulation conditions for PCA EEG components and behavioral ratings.
+Reactivity effects were observed starting at the 162 ms component and largely continued through the time course until the 740 ms component.
+Regulation effects for positive stimuli unfolded started at 259 ms with differences observed between passive viewing and increase conditions that were observed in the 381 ms component as well.
+Regulation effects for negative stimuli started earlier at 124 ms, with differences observed between passive viewing and increase conditions that were also observed in the 259 ms component, and more detailed statistical results for EEG components are summarized in Figure \@ref(fig:contrast-plot).
 More detailed statistical findings for each comparison are provided in Appendix A of the supplementary materials.
-As noted earlier, the top row of topographic plots represents the average activity collapsed across all blocks for the time window of maximal activity as suggested by inspection of PCA covariance loadings.
-The second row of topographic plots represent the average activity across the entire -200 to 2000 ms time window for each PCA component collapsed across all blocks.
-Differences among blocks are illustrated with box-and-whisker/violin plots below the topographic plots.
-The width of the violin plots corresponds to the number of cases, or density, with that level of the dependent variable.
-Thus, they can largely be interpreted as one would a histogram, excepted rotated 90 degrees and symmetrical.
-Regarding the box-and-whisker plots, the area between the lower and upper hinges correspond to the interquartile range (the 25th and 75th percentiles). 
-The upper whisker extends from the hinge to the largest value no further than 1.5 times the interquartile range from the hinge. 
-The lower whisker extends from the hinge to the smallest value at most 1.5 times the interquartile range of the hinge. 
-Data beyond the end of the whiskers are are plotted individually as dots.
+
+(ref:rm-anova-tab) Repeated measures ANOVA results with block as the independent variable for each extracted ERP component from the PCA and behavioral ratings at dependent variables ($n$ = 54).
+
+```{r rm-anova-tab, message = FALSE, include = FALSE, echo = FALSE, fig.pos="H", fig.cap = "(ref:rm-anova-tab)", out.height = "100%", out.width = "100%"}
+load("data/paper_two/analyses/2021-05-03_repeated_measures_ANOVA_analysis-data.RData")
+
+# create table for paper
+aov_tab <-
+  map_df(aov_lst, ~ {
+    apa_print(.x)$table
+  }) %>%
+    mutate(DV = c("124 ms Component",
+                  "162 ms Component",
+                  "259 ms Component",
+                  "381 ms Component",
+                  "740 ms Component",
+                  "Valence Ratings",
+                  "Arousal Ratings",
+                  "Difficulty Ratings")) %>%
+    select(-Effect) %>%
+    relocate(DV)
+
+names(aov_tab) <- c("DV",
+                    "$F$",
+                    "$df_1^{GG}$",
+                    "$df_2^{GG}$",
+                    "$MSE$",
+                    "$p$",
+                    "$\\hat{\\eta}^2_G$")
+
+aov_tab %>%
+  kable("latex", escape = FALSE, booktabs = TRUE, align = c("r", "r", "c", "c", "c", "r", "c"), linesep = "", caption = "(ref:anova-table)") %>%
+  row_spec(0, align = "c") %>%
+  footnote(escape = FALSE,
+           footnote_as_chunk = TRUE,
+           general_title = "Note.",
+           general = "DV = dependent variable, $F$ = F statistic with Greenhouse-Geisser corrected degrees of freedom, $df_1^{GG}$ = Greenhouse-Geisser corrected numerator degrees of freedom,
+           $df_2^{GG}$ = Greenhouse-Geisser corrected denominatr degrees of freedom,
+           $MSE$ = mean square error,
+           $p$ = p value,
+           $\\\\hat{\\\\eta}^2_G$ = partial eta squared as measure of effect size.",
+           threeparttable = TRUE)
+```
+
 <!-- which are summarized in Table \@ref(tab:pairwise-watch-comparison-table) and Table \@ref(tab:pairwise-reg-comparison-table), respectively. -->
 <!-- Effect sizes were interpreted using Funder's [-@funderEvaluatingEffectSize2019] recommendations. -->
 <!-- Topographical plots and average ERP waveforms for each component of interest were also created (see Figures \@ref(fig:LPP-watch-topos), \@ref(fig:LPP-reg-topos), \@ref(fig:EPN-N170-watch-topos), \@ref(fig:EPN-N170-pos-topos), \@ref(fig:EPN-N170-neg-topos), \@ref(fig:front-LPP-watch-topos), & \@ref(fig:front-LPP-reg-topos)). -->
 Effect sizes are interpreted in accordance with Cohen's guidelines [@cohenStatisticalPowerAnalysis1988a].
-Significant differences among all three passive watch conditions first emerged at the 162 ms component, with medium and small differences in negative versus neutral and positive versus neutral contrasts, respectively.  
+Starting at the earliest component extracted from the PCA with a peak at 124 ms, no reactivity or positive regulatory effects were observed.
+However, a small difference was noted for between the negative increase and negative watch conditions, with greater amplitudes for the increase relative to the watch condition.
+This illustrates a difference in time course among regulation and reactivity starting at early neural processes.
+Reactivity effects began unfolding at the 162 ms component, with medium and small differences in negative versus neutral and positive versus neutral contrasts, respectively.  
 There was also a small sized effect between negative and positive images, with negative images eliciting larger 162 ms component amplitude.
-A similar pattern was observed with the 381 ms and 740 ms components with larger effects; there were large differences between negative and neutral watch conditions and medium differences between positive and neutral watch conditions.
-Regarding negative watch and positive watch conditions, there was a small difference with the 381 ms component and a medium difference with the 740 ms component.
-In both cases, negative images had larger amplitudes.
+No regulation effects were observed for the 162 ms component, suggesting that this component may be unique to reactivity effects.
+Reactivity and regulation effects were noted at the 259 ms component.
 Medium sized significant differences were noted between negative and neutral watch conditions for the negative and positive 259 ms components.
-No significant differences were observed for positive versus neutral watch conditions with the 259 ms components.
-There was an additional small significant difference between the positive and negative passive watch conditions for the negative 259 ms component; the negative condition exhibited more negative amplitudes compared to the positive condition.
+In addition, there was a small difference between positive and negative images, with negative images eliciting more negative (i.e., enhanced) 259 ms amplitude relative to positive images.
+Small increase conditions were noted between increase and watch conditions for positive and negative regulatory conditions, with more negative amplitudes in increase relative to watch conditions.
+Results suggest that the 259 ms is flexible to task demands (e.g., reactivity or regulation) and also marks the point at which positive emotion regulation effects begin to unfold and negative emotion regulation ends.
+There were reactivity and positive regulatory effects observed at the 381 ms component.
+Large and medium sized effects were observed for negative and positive stimuli relative to neutral stimuli, respectively, and negative stimuli elicited greater amplitude than positive images (small sized effect).
+There was a small difference between the positive watch and increase conditions, with greater 381 ms component amplitude in increase conditions, as well as an additional small difference between increase and decrease conditions.
+Finally, reactivity conditions were observed among positive, neutral, and negative images at the 740 ms peak that ranged from large (negative vs. neutral) to medium (positive vs. neutral, negative vs. positive).
+An additional small effect was noted when comparing the positive increase and decrease conditions.
 
-Regarding comparisons among regulation conditions, there were small significant difference between the positive increase and positive watch conditions for the negative 259 ms (positive increase < positive watch) and 381 ms components (positive increase > positive watch). 
-There were also small differences between the positive increase and positive decrease conditions for the negative 259 ms, positive 381 ms, and positive 740 ms components; the positive increase conditions elicited more negative amplitude in the negative 259 ms component and more positive amplitude for the 381 ms and 740 ms components.
-Small significant differences were noted between the negative increase and negative watch conditions for the 124 ms component (negative increase < negative watch) and negative 259 ms component (negative increase > negative watch).
-Comparisons among increase conditions as well as decrease conditions were also performed.
-A small significant difference was found between the negative and positive increase conditions for the negative 259 ms component; the negative increase condition elicited more negative amplitude. 
-A difference in the same direction was found for negative and positive decrease conditions, except with a medium-sized effect.
-Another small difference was found between the negative and positive increase conditions for the positive 259 ms component, with the positive increase condition eliciting more positive amplitude compared to the negative increase condition.
-A small significant difference was observed between the negative and positive decrease conditions for the 381 ms component, with larger amplitude associated with the negative decrease condition.
-Finally, with the 740 ms component as the outcome, the negative increase and decrease elicited greater amplitude than their positive counterparts, with small- and medium-sized effects, respectively.
+Regarding arousal behavioral ratings, there were significant reactivity effects when comparing negative and neutral conditions, $t(318) = 5.93,\ SE = 0.21,\ p <.001$ (medium sized effect), positive and neutral conditions, $t(318)=3.01,/ SE = 0.21,/ p = .008$ (small sized effect), as well as negative and positive conditions, $t(318)=2.92,/ SE = 0.21,/ p = .011$ (small sized effect). 
+On average, participants rated negative images as more arousing than positive images and positive images as more arousing than neutral images.
+Reactivity differences in valence ratings were also observed between negative and neutral conditions, $t(318) = 6.04,\ SE = 0.15,\ p <.001$ (medium sized effect), positive and neutral conditions, $t(318) = 3.08,\ SE = 0.15,\ p =.006$ (small sized effect), as well as positive and negative conditions, $t(318) = 9.12,\ SE = 0.15,\ p <.001$ (large sized effect). 
+On average, participants rated negative images more valenced (i.e., farther away from the midpoint of the scale, which signified neutral valence) than positive images and neutral images and positive images more valenced than neutral images.
+These patterns coincide with patterns of ERP component amplitudes, suggesting that there is overlap between these behavioral ratings and ERP components with regards passively viewing emotional stimuli.
+In terms of positive regulation conditions, differences in arousal ratings were observed when comparing increase and watch conditions, $t(318) = 4.78,\ SE = 0.21,\ p <.001$ (medium sized effect), as well as increase and decrease conditions, $t(318) = 6.10,\ SE = 0.21,\ p <.001$ (large sized effect). 
+No significant difference was noted between the decrease and watch conditions.
+Differences in valence ratings were also noted when comparing increase and watch conditions $t(318) = 5.67,\ SE = 0.15,\ p <.001$ (medium sized effect), the decrease and watch conditions, $t(318) = 3.70,\ SE = 0.15,\ p <.001$ (small sized effect), as well as the decrease and increase conditions $t(318) = 9.37,\ SE = 0.15,\ p <.001$ (large sized effect).
+In terms of negative regulation conditions, differences in arousal ratings were observed when comparing increase and watch conditions, $t(318) = 4.42,\ SE = 0.21,\ p < .001$ (medium sized effect), as well as increase and decrease conditions, $t(318) = 4.07,\ SE = 0.15,\ p < .001$ (medium sized effect).
+There was no difference between the decrease and watch conditions
+Valence rating differences also emerged when comparing increase and watch conditions $t(318) = 3.58,\ SE = 0.15,\ p =.001$ (medium-sized effect), as well as decrease and increase conditions $t(318) = 2.71,\ SE = 0.15,\ p =.019$ (medium sized effect).
 
 <!-- (ref:descriptives-by-block) Means and standard deviations for all PCA components, as well as arousal, arousal, and difficulty ratings partitioned by regulation block. -->
 
@@ -315,7 +351,8 @@ Finally, with the 740 ms component as the outcome, the negative increase and dec
 <!--            footnote_as_chunk = TRUE) -->
 <!-- ``` -->
 
-(ref:contrast-plot) Pre- and post-PCA topographical plots collapsed across block and statistical findings for pairwise t tests among each block for each component. Electrode sites used to measure each component highlighted in the corresponding topographic plot.
+(ref:contrast-plot) Pre- (top row of topographic plots) and post-PCA (second row of topographic plots) topographical plots collapsed across all blocks and statistical findings for pairwise *t* tests among each block for each component. Pre-PCA topographic plots represent average activity across the time window above each plot. Electrode sites used to measure each component highlighted in the post-PCA topographic plots. Differences among blocks are illustrated with box-and-whisker/violin plots below the topographic plots. The width of the violin plots corresponds to the number of cases, or density, with that level of the dependent variable. Regarding the box-and-whisker plots, the area between the lower and upper hinges correspond to the interquartile range (the 25th and 75th percentiles). 
+The upper whisker extends from the hinge to the largest value no further than 1.5 times the interquartile range from the hinge. The lower whisker extends from the hinge to the smallest value at most 1.5 times the interquartile range of the hinge. Data beyond the end of the whiskers are are plotted individually as dots.
 
 ```{r contrast-plot, echo = FALSE, fig.pos="H", fig.cap = "(ref:contrast-plot)", out.extra="", out.height= "100%", out.width="100%"}
 knitr::include_graphics("images/paper_2/results_images/contrast_plot.png", auto_pdf = TRUE)
@@ -376,85 +413,83 @@ knitr::include_graphics("images/paper_2/results_images/contrast_plot.png", auto_
 <!-- ``` -->
 
 ## DISCUSSION
-We aimed to explore the neural time course of positive and negative emotion reactivity and regulation with an exploratory temporal PCA approach in the present study.
-This research will help introduce more up-to-date and open access materials in affective neuroscience research and devise neuroscience-informed clinical interventions to enhance wellbeing.
-Of note, no component resembling N170 was retained in our temporal PCA. 
-It may be that our block design paradigm or use of complex affective stimuli failed to capture these components.
+We explored the neural time course of positive and negative emotion reactivity and regulation with an exploratory temporal PCA approach in the present study.
+We found that emotion reactivity unfolded starting at 162 ms and generally continued through the first 1000 ms following stimulus presentation, with negative stimuli consistently eliciting enhanced amplitude relative to positive stimuli.
+Regarding emotion regulation, different patterns emerged that were contingent upon whether the stimuli were positive or negative, and negative regulatory effects unfolded early in the time course at 124 ms while positive regulatory effects were observed starting at 259 ms.
+Only increase effects were observed relative to passive watch conditions, and no decrease effects were found.
+Overall, this suggests that emotion reactivity unfolds more consistently throughout the neural time course, while regulatory effects are smaller and their time course contingent upon valence.
+In devising neuroscience-informed interventions, whether the target is reactivity, positive emotion regulation, or negative emotion regulation may have important implications in terms of modifiable neural correlates.
+This research will also help introduce more up-to-date and open access materials in affective neuroscience research and devise neuroscience-informed clinical interventions to enhance wellbeing.
 
-Passively viewing positive and negative OASIS stimuli elicited augmented amplitude compared to neutral images across both LPP components and a positive component with a 162 ms peak.
-Indeed, the earliest component retained from the PCA to demonstrate a valence effect for both negative and positive images occurred at 162 ms with negative images eliciting greater amplitude compared to positive images.
-Highly arousing positive and negative images eliciting enhanced LPP is a common finding in research investigating the neural time course of affective processing with the IAPS [@cuthbertBrainPotentialsAffective2000; @hajcakMotivatedControlledAttention2009; @hajcakNeuralResponseEmotional2007; @krompingerModulationsElectrophysiologicalResponse2008; @moserIntentionalModulationEmotional2006; @schuppAffectivePictureProcessing2000; @trittIdeologicalReactivityPolitical2016].
+<!-- 124 ms component -->
+The earliest component retained from our PCA, a positive 124 ms peak, did not display and reactivity or positive regulatory effects.
+However, it is the point at which we first observed an increase (relative to passive viewing) effect for negative images.
+This finding further challenges the notion of emotion regulation implying change from *initial* reactivity [@lewisAdvancesProblemsChallenges2010a] and begs the question: does emotion reactivity necessarily precede regulation?
+More research is needed to adequately address this question, though it appears that our findings support Joormann's and Stanton's assertion that disentangling the two processes is complex, and they may share overlap in terms of chronometry [@joormannExaminingEmotionRegulation2016a].
+This finding also indicates that negative emotion regulatory processes may be implicated earlier in the neural time course when compared to positive emotion regulation or emotion reactivity.
+Modifiable neural mechanisms of negative emotion regulatory processes, then, may occur earlier in the time course.
+
+<!-- 162 ms component -->
+For the next extracted component at 162 ms, passively viewing positive and negative OASIS stimuli elicited amplitude relative to neutral stimuli.
+Within the the present study, this marks the time point at which reactivity processes begin to unfold throughout the rest of the neural time course of extracted PCA components (i.e., the first 1000 ms following stimulus presentation).
+We also found that negative images elicited augmented amplitude relative to positive images, ultimately illustrating both an arousal and valence effect at this component (and, generally, all subsequent components).
+While no previous studies have investigated components this early in the context of emotion reactivity to complex affective images, this does fit with research illustrating larger amplitude for positive slow wave components [e.g., @fotiDifferentiatingNeuralResponses2009; @frankHemodynamicElectrocorticalReactivity2019].
+No regulatory effects were found for this component, implying that activity within this time window is specific to emotion reactivity.
+This also illustrates that negative emotion regulation is not necessarily a continuous process.
+Rather, it is implicated at certain points in the time course regardless of the topographical similarities of the component.
+In sum, interventions targeted at emotion reactivity may consider neural processes starting very early in the time course and through the time course.
+Emotion regulation, on the other hand, may require a more selective approach in identifying related neural activity.
+
+<!-- 259 ms component -->
+The next time point, 259 ms, is the sole time point in the present study where reactivity, positive emotion regulation, and negative emotion regulation effects were observed concurrently.
+This implies that the 259 ms component is flexible to task demands (e.g., reactivity or regulation) and also marks the point at which positive emotion regulation effects begin to unfold and negative emotion regulation ends.
+With regard to reactivity, no effect was found when comparing neutral and positive stimuli.
+Rather, negative images elicited augmented amplitude relative to neutral and positive stimuli.
+This contradicts a supposed "pleasure bias" observed in another negative peak component often observed in this time window, the EPN [@frankHemodynamicElectrocorticalReactivity2019].
+One possible explanation for this discrepancy is our use of PCA, which addresses the issue of overlapping waveforms - a problem that windowed averages are vulnerable to [@donchinMultivariateAnalysisEventrelated1978].
+Another study conducted in our lab (Kahrilas et al., in prep) suggests that positive reactivity in this component is related to positive affectivity (i.e., one's disposition to experience positive emotions).
+Therefore, a lack of a positive reactivity effect may be attributed to the fact that the present sample was not recruited on the basis of depressive symptoms.
+Concerning regulatory effects, significant differences were observed for both positive and negative stimuli.
+To the authors' knowledge, this is the first display of explicit regulatory effects in at this time point, ultimately suggesting that early visual ERP processes may play a larger role in emotion regulation than previously surmised.
+Of note, only increase effects were observed.
+It may be that this component is specific to increasing emotional intensity, or that our paradigm was unsuccessful in eliciting decrease effects, as indicated by null findings in other ERP components and behavioral arousal ratings.
+
+<!-- 381 ms component -->
+There was a continuation of reactivity effects in the two extracted positive slow wave components at 381 ms and 740 ms.
+Highly arousing positive and negative images eliciting enhanced slow wave ERPs (i.e., LPP) is a common finding in research investigating the neural time course of affective processing with the IAPS [@cuthbertBrainPotentialsAffective2000; @hajcakMotivatedControlledAttention2009; @hajcakNeuralResponseEmotional2007; @krompingerModulationsElectrophysiologicalResponse2008; @moserIntentionalModulationEmotional2006; @schuppAffectivePictureProcessing2000; @trittIdeologicalReactivityPolitical2016].
 It is also largely consistent with past research examining emotion reactivity with PCA [e.g., @fotiDifferentiatingNeuralResponses2009].
-Smaller effects were found for positive images compared to negative images for LPP, which is consistent with previous literature [@fotiDifferentiatingNeuralResponses2009; @frankHemodynamicElectrocorticalReactivity2019].
-Of note, these LPP findings are somewhat at odds with a 2012 study by Liu and colleagues [-@liuNeuralSubstrateLate2012] that found comparable effect sizes between positive and negative stimuli.
+Smaller effects were found for positive images compared to negative images in the 381 ms and 740 ms components, which is also consistent with previous literature [@fotiDifferentiatingNeuralResponses2009; @frankHemodynamicElectrocorticalReactivity2019].
+Of note, these findings are somewhat at odds with a 2012 study by Liu and colleagues [-@liuNeuralSubstrateLate2012] that found comparable effect sizes between positive and negative stimuli for centroparietal LPP.
 Differences between the present study and Liu et al. (2012) may be attributed to different high-pass filters (.01 Hz versus .1 Hz), experimental paradigms (block vs. randomized design), and use of PCA vs. averaging of time windows. 
 Future researchers should be mindful of these factors as to facilitate replicability of results.
 
-Enhanced EPN was observed for negative, but not positive, images relative to neutral images.
-Further, the EPN for negative images was enhanced compared to the positive condition, which contradict a supposed "pleasure bias" in EPN, which suggests that positive complex images elicit augmented amplitude compared to negative images [@frankHemodynamicElectrocorticalReactivity2019].
-One possible explanation for this discrepancy is our use of PCA, which addresses the issue of overlapping waveforms - a problem that windowed averages are vulnerable to [@donchinMultivariateAnalysisEventrelated1978].
-Further, we observed differences among all passive watch blocks with arousal and valence ratings.
-More specifically, passively viewing negative images was associated with arousal scores that were significantly lower than neutral images, and passively viewing positive images was associated with arousal scores that were significantly higher than neutral images.
-This suggests that the passive viewing conditions were successful in producing state mood manipulations.
-and negatively-arousing stimuli may have stronger manipulations of emotion than positively-arousing stimuli.
-These results also insinuate that the 162 ms component and both LPP components best map onto the valence and arousal constructs within passive watch conditions.
-While positive and negative image sets were matched on average arousal and arousal ratings, pornographic images were omitted, which are commonly rated as highly arousing positive images [@bradleyInternationalAffectivePicture2007:1; @kurdiIntroducingOpenAffective2017] and used in other studies investigating neural time course of affective processing with positive images [e.g., @hajcakTemporalDynamicsEmotion2007; @liuNeuralSubstrateLate2012].
-Thus, the omission of these images may be contributing to discrepant findings in the present study compared to others.
-<!-- Notably, behavioral ratings correlated with LPP activity, reflecting a relation among state manipulations of arousal and arousal in and parietal cortical activity. -->
-Overall, these findings lend support to the OASIS image set being used in subsequent psychophysiological studies investigating the neural time course of affective processing.
-The OASIS also has several advantages over the IAPS; it is up-to-date, spans a number of semantic categories, and is open access [@kurdiIntroducingOpenAffective2017].
-
-<!-- We found partial support for our hypotheses that there will be modulations in LPP and behavioral ratings in regulation blocks for LPP and behavioral ratings. -->
-Regulation effects were found in the 381 ms LPP-like component for the positive increase condition compared to the positive watch and decrease conditions.
-This contrasts with previous literature reporting null findings [@krompingerModulationsElectrophysiologicalResponse2008; @moserElectrophysiologicalCorrelatesDecreasing2009], which was attributed to a theorized ceiling effect that results from automatic capture of attentional resources by motivationally relevant stimuli.
-However, these results did align with Wilson and MacNamara (2021), who adopted a novel paradigm that instructed participants to savor positive IAPS stimuli, with language borrowed from Bryant's [@bryantFourfactorModelPerceived1989; @bryantSavoringNewModel2007] conceptualization of savoring.
-This condition is most similar to our positive increase condition (see supplementary materials for instructions used in the present experiment).
+Regulation effects were found in the 381 ms component for the positive increase condition relative to the neutral and decrease conditions.
+This contrasts with previous literature reporting null findings in positive increase conditions for positive slow wave components [@krompingerModulationsElectrophysiologicalResponse2008; @moserElectrophysiologicalCorrelatesDecreasing2009], which was attributed to a theorized ceiling effect that results from automatic capture of attentional resources by motivationally relevant stimuli.
+However, our results did align with Wilson and MacNamara (2021), who adopted a novel paradigm that instructed participants to savor positive IAPS stimuli, with language borrowed from Bryant's [@bryantFourfactorModelPerceived1989; @bryantSavoringNewModel2007] conceptualization of savoring.
 Notably, our instructions prompted participants to reappraise the images in a manner that elicited greater emotional intensity, while Wilson and MacNamara were careful not to adopt such language on the basis that the cognitive demands of reappraisal may actually contradict the goal of increasing emotional intensity.
-This may explain why our later LPP component with a 740 ms temporal peak loading was not modulated as a result of regulatory condition, while Wilson and MacNamara found such an effect at a parieto-occipital LPP site occurring in the 1,000 - 6,000 ms time window using windowed averages. 
-Future researchers would benefit from incorporating elements of Wilson and MacNamara's study as well as ours: inspection of earlier EEG components, examination of the relation among psychological questionnaire data (e.g.,, the SBI) and psychophysiological data, use of PCA rather than windowed averages, and employing paradigms instructions designed to more directly tap into the psychological constructs of interest.
-
-No positive increase effect was observed for the 740 ms LPP component, though the positive increase condition did elicit an augmented amplitude when compared with the positive decrease condition.
-The hypothesis the LPP would be modulated in negative regulation conditions was not supported.
-This diverges from previous findings showing a reduction in LPP for when decreasing emotional intensity in response to negative and positive images [@krompingerModulationsElectrophysiologicalResponse2008; @moserElectrophysiologicalCorrelatesDecreasing2009; @moserIntentionalModulationEmotional2006; @moserNeuralMarkersPositive2014].
+This may explain why our 740 ms component was not modulated by regulatory condition, while Wilson and MacNamara found such an effect at a parieto-occipital LPP site occurring in the 1,000 - 6,000 ms time window using windowed averages. 
+Future researchers would benefit from incorporating elements of Wilson and MacNamara's study as well as ours: inspection of earlier EEG components, use of PCA rather than windowed averages, and employing paradigms instructions designed to more directly tap into the psychological constructs of interest.
+The lack of negative regulatory effects in our slow wave components is surprising given findings showing a reduction in LPP for when decreasing emotional intensity in response to negative and positive images [@krompingerModulationsElectrophysiologicalResponse2008; @moserElectrophysiologicalCorrelatesDecreasing2009; @moserIntentionalModulationEmotional2006; @moserNeuralMarkersPositive2014].
 Indeed, it is possible that our block-design paradigm with seven different regulatory conditions failed to capture such an effect, as other researchers have utilized randomized designs.
 The presence of type II error also cannot be ruled out, and future replication is the only way to ascertain the presence of a true effect.
-Findings for behavioral arousal and arousal ratings in regulation conditions supported our hypotheses.
-Increasing emotional intensity in response to positive and negative stimuli resulted in enhanced arousal/arousal ratings compared to passively watching.
-However, decrease conditions only resulted in decreased valence ratings for positive images.
+
+<!-- Ratings -->
+Regarding behavioral ratings, we observed reactivity differences among all passive watch blocks with arousal and valence ratings.
+Negative arousal ratings that were significantly larger than positive ratings, while positive ratings were larger than neutral ratings.
+Further, valence ratings for all stimuli deviated from each other in the expected direction.
+While positive and negative image sets were matched on normative arousal and arousal ratings in the present study, pornographic images were omitted, which are commonly rated as highly arousing positive images [@bradleyInternationalAffectivePicture2007:1; @kurdiIntroducingOpenAffective2017] and used in other studies investigating neural time course of affective processing with positive images [e.g., @hajcakTemporalDynamicsEmotion2007; @liuNeuralSubstrateLate2012].
+Thus, the omission of these images may be contributing to discrepant findings in the present study compared to others.
+With regards to reactivity, it appears that the 162 ms, 381 ms, and 740 ms component mapped onto behavioral ratings of valence and arousal, or state mood manipulations
+
+Regarding regulatory conditions, positive and negative increase conditions resulted in enhanced arousal/arousal ratings compared to passive watch conditions.
+This pattern of positive regulation ratings matches differences noted in the 259 ms and 381 ms components, while the 124 ms and 259 ms component matches the behavioral ratings of negative images.
+It appears that the relation among ERP component and state mood manipulation is contingent upon the type of emotion.
+Decrease conditions only resulted in attenuated valence ratings for positive, and not negative, images.
 It could be that our block design paradigm produced an aggregated mood manipulation effect as a result of highly arousing valenced images being presented in sequence that made it difficult to decrease emotional intensity.
 This would also explain why there appears to be a successful regulation effect of increasing emotional intensity, which is underscored by the fact that only increase conditions modulated ERP components. 
 
-Regarding our exploratory analyses with earlier visual components, the earliest effect we observed observed was the 124 ms temporal peak component between the negative increase and negative watch condition.
-This effect precedes all reactivity effects found in the previous aim and challenges the notion of emotion regulation implying change from *initial* reactivity [@lewisAdvancesProblemsChallenges2010a].
-This begs the question: does emotion reactivity necessarily precede regulation?
-More research is needed to adequately address this question, though it appears that our findings support Joormann's and Stanton's assertion that disentangling the two processes is complex, and they may share overlap in terms of chronometry [@joormannExaminingEmotionRegulation2016a].
-Exploratory analyses investigating earlier ERP components revealed regulatory effects for the negative 259 ms temporal loading peak component for the negative and positive increase conditions.
-Effects on N170 and EPN have been observed as a result of implicit emotion regulation [e.g., @gyurakExplicitImplicitEmotion2011; @liuImplicitEmotionRegulation2018].
-Interestingly, some researchers have noted implicit emotion regulation effects only on N170 and not EPN [@wangTemporalCourseImplicit2017].
-This suggests there may be distinct neural time courses of implicit and explicit emotion regulation.
-Future research should seek to elucidate upon these differences in more depth.
-To our knowledge, this is the first study to demonstrate such an effect with explicit emotion regulation strategies.
-Overall, this pattern of findings suggests that emotion regulation and reactivity processes are not constrained to one time window or ERP component. 
-Further, it does not appear that there is a clear start and end point for either process.
-For example, while regulatory effects were observed at an early 259 ms component, they were not present in some later LPP-like component.
-Rather than asking *when* emotion regulation begins or ends, a better question may be  *what* processes are modified.
-These individual processes may begin and end at different time points and may be sensitive to experimental paradigm, valence of the emotion that is being regulated, and the type of regulation technique being employed.
-This is a question well-suited to PCA, which in the authors' opinion, should be more commonly utilized in ERP research and a staple in the ERP researcher's toolbox [@dienERPPCAToolkit2010; @donchinMultivariateAnalysisEventrelated1978].
-
-<!-- Regarding our third aim regarding individual differences, PA nor capacity to savor the moment influenced the relation between viewing conditions and EEG components. -->
-<!-- This is a departure from earlier fMRI research investigating correlations between neural activation in response to pleasant stimuli/happy faces and the personality trait of extraversion [@canliAmygdalaResponseHappy2002; @canliFMRIStudyPersonality2001]. -->
-<!-- This discrepancy could be due to different methods. -->
-<!-- Canli et al. (2001, 2002) utilized fMRI and presented five blocks of four pictures that were presented for 7.5 seconds each while the present study used EEG and utilized seven blocks of 40 image blocks that were presented for two seconds each. -->
-<!-- fMRI does not have the temporal resolution necessary to analyze timing in the 0 – 3000 ms time window as the present study did. -->
-<!-- Thus, it is possible that different components were being analyzed in Canli et al. (2001, 2002) and the present study. -->
-<!-- Furthermore, Canli et al. (2001) limited their sample to only women on the grounds that, “...they are more likely to report intense emotional experiences (Shields, 1991) and because they show more physiological reactivity in concordance with arousal judgments than men (Lang, Greenwald, Bradley, & Hamm, 1993).”  -->
-<!-- In contrast, the present study recruited participants regardless of gender to facilitate generalizability. -->
-<!-- Of note, a significant moderating effect of PA was found when analyzing difference in behavioral arousal scores between passively viewing positive vs. neutral images, such that those reporting higher levels of PA tended to endorse more positive state mood manipulations after passively viewing the positive image block. -->
-<!-- This suggests that PA may be a viable clinical intervention target for those with mood disorders, such as depression, which is marked by a negative emotional disposition [@beckCognitiveTherapyEmotional1979] and is further supported by research suggesting that positive emotions are as important an intervention target as negative emotions in treating depression [@demyttenaereWhatImportantBeing2015; @dunnChangesPositiveNegative2019]. -->
-<!-- Of note is a recent study published by Wilson and MacNamara [-@wilsonSavorMomentWillful2021] where the authors found an LPP effect in a savoring paradigm. -->
-
-<!-- This may be attributed to the present study's use of a block design paradigm where neural signals may partly reflect aggregated mood effects over the course of each experimental block, which is underscored by correlations among these early components and behavioral arousal ratings. -->
-<!-- Future research should consider time-frequency and source analysis analysis to disentangle constituent components and neural source generators. -->
+Overall, these findings lend support to the OASIS image set being used in subsequent psychophysiological studies investigating the neural time course of affective processing.
+The OASIS also has several advantages over the IAPS; it is up-to-date, spans a number of semantic categories, and is open access [@kurdiIntroducingOpenAffective2017].
 
 There several limitations to the present study.
 The psychophysiological data collected are cross-sectional and causation cannot be inferred.
@@ -474,22 +509,40 @@ Another method to consider is time-frequency analysis, which is able to simultan
 Frontal EEG alpha band frequency asymmetry has been observed at rest in those with depression [@gotlibEEGAlphaAsymmetry1998; @keuneApproachingDysphoricMood2013; @stewartFrontalEEGAsymmetry2011; @thibodeauDepressionAnxietyResting2006], and research has also shown correlations between reductions of frontal alpha band EEG frequency and decreased depression symptomatology [@zotevCorrelationAmygdalaBOLD2016].
 Considering that low positive affectivity is theorized to be a specific risk factor for depression [@clarkTripartiteModelAnxiety1991; @kendallProspectiveAssociationsLow2015; @lewinsohnPleasantActivitiesDepression1973; @raesDampeningPositiveAffect2012; @watsonTestingTripartiteModel1995; @watsonTestingTripartiteModel1995a] and related to exacerbated depressive symptomatology [@clarkTripartiteModelAnxiety1991; @davidsonAffectiveStyleAffective1998a; @watsonExtraversionPsychopathologyFacetlevel2015], it may be associated with less left frontal EEG alpha-band frequency.
 
+### Conclusions
+In conclusion, our study illustrated that a cascade of early and slow wave ERP components that were modified in reactivity conditions, with more selective modulations in regulation conditions that were contingent upon stimulus valence.
+These are important considerations in devising neuroscience-informed treatments for those with dysregulated emotion reactivity and/or regulation.
+Additionally, this is one of the first studies to examine the neural time course of affective processing using the OASIS.
+Results indicate that it is an appropriate replacement for the IAPS.
+Future researchers would be wise to utilize the OASIS in order to facilitate comparison of results across studies and capitalize on its high quality, open access, and up-to-date stimuli.
+Future aims have been identified based on these findings, such as examining relations among self-report data and ERP data, recruiting a more diverse sample, and utilizing different EEG methods (e.g., source analysis, time frequency analysis).
+The study is limited by its use of cross-sectional data, precluding causal inference, and a sample predominately comprised of Caucasian college students that limits generalizability.
+Regardless of these limitations, the present study brings attention to a more holistic perspective of the time course of positive and negative emotion reactivity/regulation.
+Uncovering the biological implementations of emotion reactivity and regulation will be crucial for developing therapeutic and pharmacological interventions for those suffering from psychological and physiological ailments.
+It may also bring us a step closer to harnessing the mechanisms of wellbeing.
+
+
+<!-- Regarding our third aim regarding individual differences, PA nor capacity to savor the moment influenced the relation between viewing conditions and EEG components. -->
+<!-- This is a departure from earlier fMRI research investigating correlations between neural activation in response to pleasant stimuli/happy faces and the personality trait of extraversion [@canliAmygdalaResponseHappy2002; @canliFMRIStudyPersonality2001]. -->
+<!-- This discrepancy could be due to different methods. -->
+<!-- Canli et al. (2001, 2002) utilized fMRI and presented five blocks of four pictures that were presented for 7.5 seconds each while the present study used EEG and utilized seven blocks of 40 image blocks that were presented for two seconds each. -->
+<!-- fMRI does not have the temporal resolution necessary to analyze timing in the 0 – 3000 ms time window as the present study did. -->
+<!-- Thus, it is possible that different components were being analyzed in Canli et al. (2001, 2002) and the present study. -->
+<!-- Furthermore, Canli et al. (2001) limited their sample to only women on the grounds that, “...they are more likely to report intense emotional experiences (Shields, 1991) and because they show more physiological reactivity in concordance with arousal judgments than men (Lang, Greenwald, Bradley, & Hamm, 1993).”  -->
+<!-- In contrast, the present study recruited participants regardless of gender to facilitate generalizability. -->
+<!-- Of note, a significant moderating effect of PA was found when analyzing difference in behavioral arousal scores between passively viewing positive vs. neutral images, such that those reporting higher levels of PA tended to endorse more positive state mood manipulations after passively viewing the positive image block. -->
+<!-- This suggests that PA may be a viable clinical intervention target for those with mood disorders, such as depression, which is marked by a negative emotional disposition [@beckCognitiveTherapyEmotional1979] and is further supported by research suggesting that positive emotions are as important an intervention target as negative emotions in treating depression [@demyttenaereWhatImportantBeing2015; @dunnChangesPositiveNegative2019]. -->
+<!-- Of note is a recent study published by Wilson and MacNamara [-@wilsonSavorMomentWillful2021] where the authors found an LPP effect in a savoring paradigm. -->
+
+<!-- This may be attributed to the present study's use of a block design paradigm where neural signals may partly reflect aggregated mood effects over the course of each experimental block, which is underscored by correlations among these early components and behavioral arousal ratings. -->
+<!-- Future research should consider time-frequency and source analysis analysis to disentangle constituent components and neural source generators. -->
+
 <!-- Research indicates that past adverse experiences may contribute to one’s capacity to savor present events [@croftTribulationsAppreciationExperiencing2014]. -->
 <!-- An interesting future line of inquiry may examine if past experiences predict certain patterns of neural activity in response to emotional stimuli. -->
 <!-- Additionally, research indicates that psychopathology influences emotion regulation and salience of emotional stimuli [@ehringEmotionRegulationVulnerability2010; @gotlibAttentionalBiasesNegative2004; @hamiltonNeuralSubstratesIncreased2008; @joormannEmotionRegulationDepression2010; @joormannEmotionRegulationDepression2014]. -->
 <!-- Future research should investigate how depression and anxiety influence neural activity in response to passively viewing and regulating one’s emotion in response to affective stimuli. -->
 
-This is one of the first studies to examine the neural time course of affective processing using the OASIS.
-Results indicate that it is an appropriate replacement for the IAPS.
-Future researchers would be wise to utilize the OASIS in order to facilitate comparison of results across studies and capitalize on its high quality, open access, and up-to-date stimuli.
-Findings illustrated that early and slow wave ERP components may be selectively enhanced in response to viewing and upregulating positive emotion and negative emotion. 
-Additionally, future aims have been identified based on these findings, such as examining relations among self-report data and ERP data, recruiting a more diverse sample, and utilizing different EEG methods (e.g., source analysis, time frequency analysis).
-The study is limited by its use of cross-sectional data, precluding causal inference, and a sample predominately comprised of Caucasian college students that limits generalizability.
-Regardless of these limitations, the present study brings attention to a more holistic perspective of the time course of positive and negative emotion reactivity/regulation.
-Past research on affective processing has overwhelmingly focused on negative emotion.
-This work is useful for mitigating the effects of unpleasant emotion and bolstering positive emotion.
-Uncovering the biological implementations of emotion reactivity and regulation will be crucial for developing therapeutic and pharmacological interventions for those suffering from psychological and physiological ailments.
-It may also bring us a step closer to harnessing the mechanisms of wellbeing.
+
 
 <!-- While savoring is a trait-like measure of one's ability to regulate positive emotions, positive affectivity (PA) pertains to one's reactivity to positive emotions, or a trait-like disposition to recognize, attend to, and ultimately experience positive emotions [e.g., happiness, interest, energy, and self-assurance; @watsonPositiveAffectivity2009]. -->
 <!-- Understanding how individual differences modify the neural correlates of positive emotion reactivity/regulation may facilitate development of neuroscience-informed interventions for those with psychological problems marked by low levels of positive emotion (e.g., depression).  -->
