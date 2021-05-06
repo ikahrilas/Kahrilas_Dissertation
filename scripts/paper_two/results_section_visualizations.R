@@ -675,7 +675,7 @@ levels(bx_rating_long$block) <- c("Negative Decrease",
                                   "Positive Decrease",
                                   "Positive Increase",
                                   "Positive Watch")
-
+levels(bx_rating_long$bx_rating) <- c("Arousal", "Valence")
 
 # make separate data frames for each facet, then create facet variable for actual facetting
 watch_cases <- bx_rating_long %>%
@@ -691,17 +691,19 @@ neg_cases <- bx_rating_long %>%
   mutate(facet = 3, # facet variable
          block = factor(block, levels = c("Negative Decrease", "Negative Watch", "Negative Increase")))
 
-# first plot the neutral conditions
-p_1 <-
+# first plot the watch conditions
+ p_1 <-
   ggplot(watch_cases, aes(x = bx_rating, y = rating)) +
-  geom_violin(aes(fill = block),
-              position = position_dodge(width = .75),
-              trim = TRUE) +
   scale_fill_manual(values = c(`Negative Watch` = "purple",
                                `Neutral Watch` = "grey",
                                `Positive Watch` ="blue")) +
-  geom_boxplot(aes(group = interaction(block, bx_rating)), fatten = 0.75, outlier.size = 1,
-               width = 0.2, fill = "white", position = position_dodge(width = .75)) +
+  geom_boxplot(aes(group = interaction(block, bx_rating),
+                   fill = block),
+               fatten = 1,
+               size = 1.10,
+               outlier.size = 1,
+               width = 0.5,
+               position = position_dodge(width = .75)) +
   facet_wrap(~ facet, ncol = 1) +
   theme_classic() +
   theme(
@@ -711,224 +713,226 @@ p_1 <-
   labs(x = NULL,
        y = expression(paste("Rating")),
        fill = "Block") +
-  coord_cartesian(
-    xlim = NULL,
-    ylim = c(-4.5, 6),
-    expand = TRUE,
-    default = FALSE,
-    clip = "on"
-  ) +
-  annotate(geom = "segment", # 170 ms peak annotations
+  annotate(geom = "segment",
            x = c(1.75, 2.025),
            xend = c(1.975, 2.25),
-           y = 5.6,
-           yend = 5.6,
+           y = 7,
+           yend = 7,
            color = "black") +
   annotate(geom = "segment",
            x = c(1.75, 1.975, 2.025, 2.25),
            xend = c(1.75, 1.975, 2.025, 2.25),
-           y = 5.6,
-           yend = c(5.2, 4.1, 4.1, 5.1),
+           y = 7,
+           yend = c(5.2, 6.2, 6.2, 6.2),
            color = "black") +
   annotate(geom = "segment",
            x = 1.75,
            xend = 2.25,
-           y = -1.85,
-           yend = -1.85,
+           y = 0.5,
+           yend = 0.5,
            color = "black") +
   annotate(geom = "segment",
            x = c(1.75, 2.25),
            xend = c(1.75, 2.25),
-           y = c(-1.85, -1.85),
-           yend = c(-0.25, -1.05)) +
+           y = c(0.5, 0.5),
+           yend = c(0.8, 2.7)) +
   annotate(geom = "text",
            x = c(1.8625, 2, 2.1375),
-           y = c(5.7, -2.9, 5.7),
+           y = c(7.1, 0, 7.1),
            label = "*",
            size = 5) +
-  annotate(geom = "segment", # 250 ms negative peak annotations
-           x = c(2.75, 2.75),
-           xend = c(3, 3.25),
-           y = c(2.7, -3.9),
-           yend = c(2.7, -3.9),
+  annotate(geom = "segment",
+           x = c(0.75, 1.025),
+           xend = c(0.975, 1.25),
+           y = 7.3,
+           yend = 7.3,
            color = "black") +
   annotate(geom = "segment",
-           x = c(2.75, 3, 2.75, 3.25),
-           xend = c(2.75, 3, 2.75, 3.25),
-           y = c(2.7, 2.7, -3.9, -3.9),
-           yend = c(2.4, 1.5, -3.65, -3.1),
-           color = "black") +
-  annotate(geom = "text",
-           x = c(2.875, 3),
-           y = c(2.7, -4.9),
-           label = "*",
-           size = 5) +
-  annotate(geom = "segment", # 375 ms positive peak annotations
-           x = c(3.75, 4.025, 3.75),
-           xend = c(4, 4.275, 4.275),
-           y = c(3.45, 3.45, -1.5),
-           yend = c(3.45, 3.45, -1.5),
+           x = c(0.75, 0.975, 1.025, 1.25),
+           xend = c(0.75, 0.975, 1.025, 1.25),
+           y = 7.3,
+           yend = c(7.1, 6.1, 6.1, 5.2),
            color = "black") +
   annotate(geom = "segment",
-           x = c(3.75, 4, 4.025, 4.275, 3.75, 4.275),
-           xend = c(3.75, 4, 4.025, 4.275, 3.75, 4.275),
-           y = c(3.45, 3.45, 3.45, 3.45, -1.5, -1.5),
-           yend = c(3.25, 1.8, 1.8, 2, -0.4, -0.5),
-           color = "black") +
-  annotate(geom = "text",
-           x = c(3.875, 4.15, 4.0125),
-           y = c(3.55, 3.55, -2.5),
-           label = "*",
-           size = 5) +
-  annotate(geom = "segment", # 800 ms peak annotations
-           x = c(4.75, 5.025, 4.75),
-           xend = c(4.975, 5.25, 5.25),
-           y = c(5, 5, -1.7),
-           yend = c(5, 5, -1.7),
+           x = 0.75,
+           xend = 1.25,
+           y = 0.75,
+           yend = 0.75,
            color = "black") +
   annotate(geom = "segment",
-           x = c(4.75, 4.975, 5.025, 5.25, 4.75, 5.25),
-           xend = c(4.75, 4.975, 5.025, 5.25, 4.75, 5.25),
-           y = c(5, 5, 5, 5, -1.7, -1.7),
-           yend = c(4.7, 2.85, 2.85, 3.6, -0.2, -0.7)) +
+           x = c(0.75, 1.25),
+           xend = c(0.75, 1.25),
+           y = c(0.75, 0.75),
+           yend = c(0.85, 0.95)) +
   annotate(geom = "text",
-           x = c(4.8625, 5.1375, 5),
-           y = c(5.1, 5.1, -2.7),
+           x = c(0.8625, 1, 1.1375),
+           y = c(7.4, 0.25, 7.4),
            label = "*",
            size = 5)
 
 p_2 <-
-  ggplot(pos_cases, aes(x = component, y = fac_score)) +
-  geom_violin(aes(fill = block),
-              position = position_dodge(width = .75),
-              trim = TRUE) +
-  scale_fill_manual(values = c(`Positive Decrease` = "cadetblue1",
-                               `Positive Watch` = "blue",
-                               `Positive Increase` = "springgreen")) +
-  geom_boxplot(aes(group = interaction(block, component)), fatten = 0.75, outlier.size = 1,
-               width = 0.2, fill = "white", position = position_dodge(width = .75)) +
-  facet_wrap(~ facet, ncol = 1) +
-  theme_classic() +
-  theme(
-    strip.background = element_blank(),
-    strip.text.x = element_blank(),
-  ) +
-  labs(x = NULL,
-       y = expression(paste("Amplitude (",mu,"V)")),
-       fill = "Block") +
-  ylim(-4.5, 6) +
-  annotate(geom = "segment", # 250 ms negative peak annotations
-           x = c(2.75, 3),
-           xend = c(3.25, 3.25),
-           y = c(-3.5, 1.75),
-           yend = c(-3.5, 1.75),
-           color = "black") +
-  annotate(geom = "segment",
-           x = c(2.75, 3.25, 3, 3.25),
-           xend = c(2.75, 3.25, 3, 3.25),
-           y = c(-3.5, -3.5, 1.75, 1.75),
-           yend = c(-2.5, -3.25, 1.5, 1.5),
-           color = "black") +
-  annotate(geom = "text",
-           x = c(3, 3.125),
-           y = c(-4.5, 1.85),
-           label = "*",
-           size = 5) +
-  annotate(geom = "segment", # 375 ms peak annotations
-           x = c(3.75, 4.025),
-           xend = c(4.275, 4.275),
-           y = c(-1.2, 2.65),
-           yend = c(-1.2, 2.65),
-           color = "black") +
-  annotate(geom = "segment",
-           x = c(3.75, 4.275, 4.025, 4.275),
-           xend = c(3.75, 4.275, 4.025, 4.275),
-           y = c(-1.2, -1.2, 2.65, 2.65),
-           yend = c(-.95, -.7, 2.05, 2.3)) +
-  annotate(geom = "text",
-           x = c(4.0125, 4.15),
-           y = c(-2.2, 2.75),
-           label = "*",
-           size = 5) +
-  annotate(geom = "segment", # 800 ms peak annotations
-           x = c(4.75),
-           xend = c(5.25),
-           y = c(-1),
-           yend = c(-1),
-           color = "black") +
-  annotate(geom = "segment",
-           x = c(4.75, 5.25),
-           xend = c(4.75, 5.25),
-           y = c(-1, -1),
-           yend = c(-0.3, -0.7)) +
-  annotate(geom = "text",
-           x = c(5),
-           y = c(-2),
-           label = "*",
-           size = 5)
+   ggplot(pos_cases, aes(x = bx_rating, y = rating)) +
+   scale_fill_manual(values = c(`Positive Decrease` = "cadetblue1",
+                                `Positive Watch` = "blue",
+                                `Positive Increase` = "springgreen")) +
+   geom_boxplot(aes(group = interaction(block, bx_rating),
+                    fill = block),
+                fatten = 1,
+                size = 1.10,
+                outlier.size = 1,
+                width = 0.5,
+                position = position_dodge(width = .75)) +
+   facet_wrap(~ facet, ncol = 1) +
+   theme_classic() +
+   theme(
+     strip.background = element_blank(),
+     strip.text.x = element_blank()
+   ) +
+   labs(x = NULL,
+        y = expression(paste("Rating")),
+        fill = "Block") +
+   annotate(geom = "segment",
+            x = c(1.75, 2.025),
+            xend = c(1.975, 2.25),
+            y = 7.3,
+            yend = 7.3,
+            color = "black") +
+   annotate(geom = "segment",
+            x = c(1.75, 1.975, 2.025, 2.25),
+            xend = c(1.75, 1.975, 2.025, 2.25),
+            y = 7.3,
+            yend = c(6.1, 6.1, 6.1, 7.1),
+            color = "black") +
+   annotate(geom = "segment",
+            x = 1.75,
+            xend = 2.25,
+            y = 1.7,
+            yend = 1.7,
+            color = "black") +
+   annotate(geom = "segment",
+            x = c(1.75, 2.25),
+            xend = c(1.75, 2.25),
+            y = c(1.7, 1.7),
+            yend = c(1.9, 3.9)) +
+   annotate(geom = "text",
+            x = c(1.8625, 2, 2.1375),
+            y = c(7.4, 1.2, 7.4),
+            label = "*",
+            size = 5) +
+   annotate(geom = "segment",
+            x = 1,
+            xend = 1.25,
+            y = 6.3,
+            yend = 6.3,
+            color = "black") +
+   annotate(geom = "segment",
+            x = c(1, 1.25),
+            xend = c(1, 1.25),
+            y = 6.3,
+            yend = c(5.1, 6.1),
+            color = "black") +
+   annotate(geom = "segment",
+            x = 0.75,
+            xend = 1.25,
+            y = 0.75,
+            yend = 0.75,
+            color = "black") +
+   annotate(geom = "segment",
+            x = c(0.75, 1.25),
+            xend = c(0.75, 1.25),
+            y = c(0.75, 0.75),
+            yend = c(0.85, 0.85)) +
+   annotate(geom = "text",
+            x = c(1, 1.1125),
+            y = c(0.25, 6.4),
+            label = "*",
+            size = 5)
 
 p_3 <-
-  ggplot(neg_cases, aes(x = component, y = fac_score)) +
-  geom_violin(aes(fill = block),
-              position = position_dodge(width = .75),
-              trim = TRUE) +
-  scale_fill_manual(values = c(`Negative Decrease` = "plum",
-                               `Negative Watch` = "purple",
-                               `Negative Increase` = "red")) +
-  geom_boxplot(aes(group = interaction(block, component)), fatten = 0.75, outlier.size = 1,
-               width = 0.2, fill = "white", position = position_dodge(width = .75)) +
-  facet_wrap(~ facet, ncol = 1) +
-  theme_classic() +
-  theme(
-    strip.background = element_blank(),
-    strip.text.x = element_blank(),
-    axis.title.x = element_text(size = 16)
-  ) +
-  labs(x = NULL,
-       y = expression(paste("Amplitude (",mu,"V)")),
-       fill = "Block") +
-  ylim(-4.5, 6) +
-  coord_cartesian(clip = "off") +
-  annotate(geom = "segment", # 125 ms peak annotations
-           x = c(1),
-           xend = c(1.25),
-           y = 5.85,
-           yend = 5.85,
-           color = "black") +
-  annotate(geom = "segment",
-           x = c(1, 1.25),
-           xend = c(1, 1.25),
-           y = 5.85,
-           yend = c(4.4, 5.5),
-           color = "black") +
-  annotate(geom = "text",
-           x = c(1.125),
-           y = 5.95,
-           label = "*",
-           size = 5) +
-  annotate(geom = "segment", # 250 ms negative peak annotations
-           x = c(3),
-           xend = c(3.25),
-           y = 2.8,
-           yend = 2.8,
-           color = "black") +
-  annotate(geom = "segment",
-           x = c(3, 3.25),
-           xend = c(3, 3.25),
-           y = 2.8,
-           yend = c(2.45, 1.0),
-           color = "black") +
-  annotate(geom = "text",
-           x = c(3.125),
-           y = 2.9,
-           label = "*",
-           size = 5)
+  ggplot(neg_cases, aes(x = bx_rating, y = rating)) +
+     scale_fill_manual(values = c(`Negative Decrease` = "plum",
+                                  `Negative Watch` = "purple",
+                                  `Negative Increase` = "red")) +
+     geom_boxplot(aes(group = interaction(block, bx_rating),
+                      fill = block),
+                  fatten = 1,
+                  size = 1.10,
+                  outlier.size = 1,
+                  width = 0.5,
+                  position = position_dodge(width = .75)) +
+     facet_wrap(~ facet, ncol = 1) +
+     theme_classic() +
+     theme(
+       strip.background = element_blank(),
+       strip.text.x = element_blank()
+     ) +
+     labs(x = NULL,
+          y = expression(paste("Rating")),
+          fill = "Block") +
+     annotate(geom = "segment",
+              x = 2,
+              xend = 2.25,
+              y = 5.3,
+              yend = 5.3,
+              color = "black") +
+     annotate(geom = "segment",
+              x = c(2, 2.25),
+              xend = c(2, 2.25),
+              y = 5.3,
+              yend = 5.1,
+              color = "black") +
+     annotate(geom = "segment",
+              x = 1.75,
+              xend = 2.25,
+              y = 0.7,
+              yend = 0.7,
+              color = "black") +
+     annotate(geom = "segment",
+              x = c(1.75, 2.25),
+              xend = c(1.75, 2.25),
+              y = c(0.7, 0.7),
+              yend = c(0.9, 0.9)) +
+     annotate(geom = "text",
+              x = c(2, 2.125),
+              y = c(0.2, 5.4),
+              label = "*",
+              size = 5) +
+     annotate(geom = "segment",
+              x = 1,
+              xend = 1.25,
+              y = 7.3,
+              yend = 7.3,
+              color = "black") +
+     annotate(geom = "segment",
+              x = c(1, 1.25),
+              xend = c(1, 1.25),
+              y = 7.3,
+              yend = c(7.1, 7.1),
+              color = "black") +
+     annotate(geom = "segment",
+              x = 0.75,
+              xend = 1.25,
+              y = 0.75,
+              yend = 0.75,
+              color = "black") +
+     annotate(geom = "segment",
+              x = c(0.75, 1.25),
+              xend = c(0.75, 1.25),
+              y = c(0.75, 0.75),
+              yend = c(0.85, 0.85)) +
+     annotate(geom = "text",
+              x = c(1, 1.1125),
+              y = c(0.25, 7.4),
+              label = "*",
+              size = 5)
 
+# final plot
+p_1/p_2/p_3
 
-
-
-
-
+ggsave(here("images", "paper_2", "results_images", "bx_contrast_plot.png"),
+       plot = last_plot(),
+       height = 6,
+       width = 6)
 
 
 
