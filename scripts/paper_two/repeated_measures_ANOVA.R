@@ -79,7 +79,7 @@ names(aov_tab) <- c("DV",
                     "$\\hat{\\eta}^2_G$")
 
 aov_tab %>%
-  kable("latex", escape = FALSE, booktabs = TRUE, align = c("r", "r", "c", "c", "c", "r", "c"), linesep = "", caption = "(ref:anova-table)") %>%
+  kable("latex", escape = FALSE, booktabs = TRUE, align = c("r", "r", "c", "c", "c", "r", "c"), linesep = "") %>%
   row_spec(0, align = "c") %>%
   footnote(escape = FALSE,
            footnote_as_chunk = TRUE,
@@ -92,6 +92,6 @@ aov_tab %>%
            The above table summarized findings from repeated measures ANOVA with block as the independent variable and each of the ERP components and behavioral ratings as
            dependent variables (as indiciated in the DV column).",
            threeparttable = TRUE) %>%
-  save_kable(file = "anova_table.pdf")
+  save_kable(file = "anova_table.pdf", )
 
 
