@@ -49,7 +49,6 @@ model_rc8 <- aov(amp ~ block + Error(pid/block), data = dat_long %>% filter(comp
 summary(model_rc2, split = list(block = list("Linear" = 1, "Quadratic" = 2)))
 summary(model_rc3, split = list(block = list("Linear" = 1, "Quadratic" = 2)))
 summary(model_rc8, split = list(block = list("Linear" = 1, "Quadratic" = 2)))
-anova_test(model_rc2)
 
 # anova results
 map(c("nRC8", "RC2", "RC3"), ~ {
@@ -103,9 +102,7 @@ poly_tab %>%
            $SE$ = standard error;
            $df$ = degrees of freedom;
            $t$ = $t$ ratio;
-           $p$ = p value,
-           The above table summarizes polynomial contrasts exploring linear (valence: comparing pleasant with negative) and
-           quadratic (arousal: comparing pleasant and negative with neutral) orthogonal univariate trends on the block factor.",
+           $p$ = p value.",
            threeparttable = TRUE) %>%
   save_kable(file = "poly_contrast_table.pdf")
 
@@ -1198,10 +1195,6 @@ chi_rc3_anxapp_meas <- lavTestLRT(fit_meas_rc3, fit_anxapp_rc3)
 
 # save all analyses to work space
 save.image("data/paper_three/sem_analyses_results.RData")
-
-
-
-
 
 ################
 ## -- RC5 -- ##
