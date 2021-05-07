@@ -1,11 +1,3 @@
-Major Depressive Disorder (MDD) is one of the most common psychological disorders (World Health Organization, 2017). 
-In the United States, 17% of adults experience at least one major depressive episode during their life [@kesslerLifetimePrevalenceAgeofonset2005], and it is continuing to increase significantly during the backdrop of a global pandemic [@twengeCensusBureauassessedPrevalence2020]. 
-Depression symptoms are associated with challenges in daily life functioning including interpersonal relationship strain, increased likelihood of poor work performance and burnout, and decreased physical wellbeing [@chauvet-gelinierStressAnxietyDepression2017; @drussImpairmentRoleFunctioning2009a; @kesslerPrevalenceEffectsMood2006; @lewinsohnPsychosocialFunctioningYoung2003]. 
-In the United States alone, depression-related loss in work productivity has been estimated to exceed $36 billion per year [@kesslerPrevalenceEffectsMood2006]. 
-Treatment outcomes for depression suggest that even after the completion of therapy, 54% of individuals relapse within two years following treatment [@vittenglReducingRelapseRecurrence2007]. 
-Depression is currently a highly intractable disorder with a high rate of recurrence and relapse that involves dysregulated emotion reactivity.
-Translational research that strives to develop a better understanding of factors that contribute to ongoing symptoms and relapse is urgently needed to develop effective treatments. 
-
 ## CHAPTER FOUR: EARLY NEURAL INDICATORS OF THE BRIGHTENING EFFECT.
 
 Impaired emotion reactivity has been observed in individuals with major depressive disorder [MDD; e.g., @joormannExaminingEmotionRegulation2016a; @rottenbergMoodEmotionMajor2005]. 
@@ -30,7 +22,7 @@ It is unclear why laboratory settings have failed to replicate a brightening eff
 
 While some previous research has used physiological methods to study emotion reactivity in individuals with depression [e.g, @fotiReducedElectrocorticalResponse2010], the present study used a laboratory-based electroencephalography (EEG) approach to evaluating the relation of emotion reactivity with dimensional depression symptoms.
 EEG offers excellent temporal resolution which contributes to further refining our understanding of the neural correlates implicated in emotion reactivity dysfunction in depression, which is important to informing innovative neuroscience-informed treatments for depression.
-Further, previous research investigating emotion reactivity in depression using EEG has largely focused on positive slow wave components that are measured with windowed averages [@hillAbnormalEmotionalReactivity2019:1; @weinbergDecreasedNeuralResponse2017; @weinbergDepressionReducedNeural2016].
+Further, previous research investigating emotion reactivity in depression using EEG has largely focused on positive slow wave components that are measured with windowed averages [@hillAbnormalEmotionalReactivity2019; @weinbergDecreasedNeuralResponse2017; @weinbergDepressionReducedNeural2016].
 This approach might be overlooking important neural processes occurring earlier in the time course of emotion reactivity, and might be susceptible to measuring of overlapping components [@donchinMultivariateAnalysisEventrelated1978].
 Given the laboratory context of the present study, our hypotheses were ultimately informed from other laboratory-based studies, which appear to provide the most support for the ECI view.
 Therefore, consistent with the ECI theory, we hypothesized that attenuated reactivity to positive and negative stimuli, as measured via EEG, would be associated with increased depression symptoms.
@@ -369,7 +361,8 @@ Results indicated significant valence (with greater effects for negative compare
 load("data/paper_three/sem_analyses_results.RData")
 
 poly_tab %>%
-  kable("latex", escape = FALSE, booktabs = TRUE, align = c("l", "c", "c", "c", "r", "c"), linesep = "") %>%
+  kable("latex", escape = FALSE, booktabs = TRUE, align = c("l", "c", "c", "c", "r", "c"), linesep = "",
+        caption = "(ref:poly-tab)") %>%
   row_spec(0, align = "c") %>%
   column_spec(1, width = "9em") %>%
   pack_rows(index = c("257 ms Component" = 2, "371 ms Component" = 2, "736 ms Component" = 2),
