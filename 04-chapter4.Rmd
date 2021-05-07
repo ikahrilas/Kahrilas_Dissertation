@@ -360,11 +360,32 @@ Thus, the Akaike information criterion (AIC) and Bayesian information criterion 
 ### Arousal and valence effects
 A repeated measures ANOVA was conducted with block type (negative, neutral, and positive emotional stimuli) as the independent variable with Greenhouse-Geisser corrections for deviations from sphericity for each of the three ERP components.
 Results illustrated that block type explained a significant portion of the variance for each of the three components, 257 ms component: $F(1.95, 218.06) = 50.57$, $\mathit{MSE} = 0.29$, $p < .001$, $\hat{\eta}^2_G = .111$, 371 ms component: $F(1.78, 199.37) = 148.96$, $\mathit{MSE} = 0.13$, $p < .001$, $\hat{\eta}^2_G = .125$, and the 736 ms component: $F(1.90, 212.57) = 78.06$, $\mathit{MSE} = 0.17$, $p < .001$, $\hat{\eta}^2_G = .174$.
-We also explored linear (valence: comparing pleasant with threat) and quadratic (arousal: comparing pleasant and threat with neutral) orthogonal univariate trends on the block factor in Table XX.
+We also explored linear (valence: comparing pleasant with threat) and quadratic (arousal: comparing pleasant and threat with neutral) orthogonal univariate trends on the block factor in Table \@ref(tab:poly-tab)
 Results indicated significant valence (with greater effects for negative compared to positive emotional stimuli) and arousal effects for each of the components.
 
+(ref:poly-tab) Summary of polynomial contrasts exploring linear (valence: comparing pleasant with negative) and quadratic (arousal: comparing pleasant and negative with neutral) orthogonal univariate trends on the block factor for each component.
 
+```{r poly-tab, echo = FALSE, fig.pos="H", out.extra="", fig.cap = "(ref:poly-tab)", , out.height = "100%", out.width = "100%", message=FALSE, warning=FALSE}
+load("data/paper_three/sem_analyses_results.RData")
 
+poly_tab %>%
+  kable("latex", escape = FALSE, booktabs = TRUE, align = c("l", "c", "c", "c", "r", "c"), linesep = "") %>%
+  row_spec(0, align = "c") %>%
+  column_spec(1, width = "9em") %>%
+  pack_rows(index = c("257 ms Component" = 2, "371 ms Component" = 2, "736 ms Component" = 2),
+            bold = T, italic = T) %>%
+  footnote(escape = FALSE,
+           footnote_as_chunk = TRUE,
+           general_title = "",
+           general = "$Note.$ Contrast = linear (valence) and quadratic (arousal) contrasts for each ERP component,
+           $SE$ = standard error;
+           $df$ = degrees of freedom;
+           $t$ = $t$ ratio;
+           $p$ = p value.",
+           threeparttable = TRUE)
+```
+
+### SEM Analyses
 All parameter estimates are tabulated in Table \@ref(tab:parameter-estimate-tab).
 Model fit indices and chi-square difference test results are contained in Table \@ref(tab:fit-measure-tab).
 The PA, anxious arousal, and anxious apprehension variables each loaded significantly onto the *Internalizing* factor, with correlations ranging from moderate to large [@cohenStatisticalPowerAnalysis1988a; .35, -.40, and .89, respectively).
