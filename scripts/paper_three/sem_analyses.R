@@ -11,6 +11,9 @@ library(tidySEM)
 library(performance)
 library(lmerTest)
 library(emmeans)
+library(kableExtra)
+library(car)
+library(rstatix)
 
 ## ANOVAS for Greg
 dat_long <-
@@ -24,8 +27,8 @@ dat_long <-
                values_to = "amp") %>%
   relocate(comp, amp)
 
-dat_long$block <- factor(dat_long$block)
-dat_long$block <- relevel(dat_long$block, ref = "Neu_Watch")
+dat_long$block <- factor(dat_long$block, levels = c("Neg_Watch", "Neu_Watch", "Pos_Watch"))
+dat_long$block <- relevel(dat_long$block, ref = "Neg_Watch")
 
 # define contrasts
 c1 <- c(0, -1, 1)
@@ -46,6 +49,65 @@ model_rc8 <- aov(amp ~ block + Error(pid/block), data = dat_long %>% filter(comp
 summary(model_rc2, split = list(block = list("Linear" = 1, "Quadratic" = 2)))
 summary(model_rc3, split = list(block = list("Linear" = 1, "Quadratic" = 2)))
 summary(model_rc8, split = list(block = list("Linear" = 1, "Quadratic" = 2)))
+anova_test(model_rc2)
+
+# anova results
+map(c("nRC8", "RC2", "RC3"), ~ {
+  afex::aov_ez(
+    data = dat_long %>% filter(comp == .x)
+    , dv = "amp"
+    , id = "pid"
+    , within = "block") %>%
+    papaja::apa_print()
+})
+
+# derive GG corrective factor epsilon
+poly_tab <-
+  map(c("nRC8", "RC2", "RC3"), ~ {
+  afex::aov_ez(
+    data = dat_long %>% filter(comp == .x)
+    , dv = "amp"
+    , id = "pid"
+    , within = "block"
+  )
+  }) %>%
+  map_df(~{
+  .x %>%
+    emmeans("block") %>%
+    contrast("poly") %>%
+    as_tibble()
+  }) %>%
+  mutate(contrast = str_to_title(contrast),
+         across(.cols = c(estimate, SE, t.ratio),
+                .fns = ~ sprintf("%.2f", .x)),
+         p.value = str_replace(scales::pvalue(p.value), "0", " "))
+
+# make fun little table
+names(poly_tab) <- c("Contrast",
+                     "Estimate",
+                     "$SE$",
+                     "$df$",
+                     "$t$",
+                     "$p$")
+
+poly_tab %>%
+  kable("latex", escape = FALSE, booktabs = TRUE, align = c("l", "c", "c", "c", "r", "c"), linesep = "") %>%
+  row_spec(0, align = "c") %>%
+  column_spec(1, width = "9em") %>%
+  pack_rows(index = c("257 ms Component" = 2, "371 ms Component" = 2, "736 ms Component" = 2),
+            bold = T, italic = T) %>%
+  footnote(escape = FALSE,
+           footnote_as_chunk = TRUE,
+           general_title = "",
+           general = "$Note.$ Contrast = linear (valence) and quadratic (arousal) contrasts for each ERP component,
+           $SE$ = standard error;
+           $df$ = degrees of freedom;
+           $t$ = $t$ ratio;
+           $p$ = p value,
+           The above table summarizes polynomial contrasts exploring linear (valence: comparing pleasant with negative) and
+           quadratic (arousal: comparing pleasant and negative with neutral) orthogonal univariate trends on the block factor.",
+           threeparttable = TRUE) %>%
+  save_kable(file = "poly_contrast_table.pdf")
 
 # mixed model with interaction term between block and component
 mod <- lmer(amp ~ block * comp + (1|pid), dat_long)
