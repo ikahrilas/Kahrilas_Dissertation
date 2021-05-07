@@ -92,6 +92,6 @@ aov_tab %>%
            The above table summarized findings from repeated measures ANOVA with block as the independent variable and each of the ERP components and behavioral ratings as
            dependent variables (as indiciated in the DV column).",
            threeparttable = TRUE) %>%
-  save_kable(file = "anova_table.pdf", )
+  save_kable(file = "anova_table.pdf")
 
 
