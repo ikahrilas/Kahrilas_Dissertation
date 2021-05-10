@@ -86,18 +86,18 @@ LPP has been theorized to reflect activation of a brain network engaged in proce
 Attenuated LPP in response to both unpleasant and pleasant affective stimuli as been observed in those with MDD [@fotiReducedElectrocorticalResponse2010; @kayserEventrelatedPotentialsERPs2000; @macnamaraDiagnosticSymptombasedPredictors2016], which is consistent with the ECI view of emotion reactivity in depression [@rottenbergEmotionContextInsensitivity2005].
 A study conducted by Weinberg and colleagues [-@weinbergDepressionReducedNeural2016] found that, in a sample with diagnoses of MDD and anxiety disorders, a diagnosis of MDD was uniquely associated with attenuated LPP in response to rewarding visual stimuli while a diagnosis of an anxiety disorder was not. 
 The aforementioned study did not demonstrate an association with MDD diagnosis and reduced LPP in response to threatening stimuli [@weinbergDepressionReducedNeural2016], thus ultimately showing support for the positive attenuation view of emotion reactivity.
-A follow up study found that those with MDD and previous suicide attempts (an index for illness severity) had blunted LPP in response to threatening stimuli compared to those with MDD and without a history of suicide attempts [@weinbergDecreasedNeuralResponse2017].
+A follow-up study found that those with MDD and previous suicide attempts (an index for illness severity) had blunted LPP in response to threatening stimuli compared to those with MDD and without a history of suicide attempts [@weinbergDecreasedNeuralResponse2017].
 This effect was unique to threatening (not rewarding) images, which is consistent with fMRI accounts of depression severity altering amygdala activity patterns in response to negative stimuli [@demenescuNeuralCorrelatesPerception2011].
 Overall, this illustrates differences in neural reactivity depending on illness severity and further underscores the need for dimensional measures of psychopathology rather than categorical nosology.
 Lending additional support to the ECI view are findings that illustrate negative associations among LPP elicited in response to positive and negative images and depression symptoms [@hillAbnormalEmotionalReactivity2019]. 
-Of note in the Hill et al. (2019) study was the use of structural equation modeling (SEM).
+Of note in the Hill and colleagues (2019) study was the use of structural equation modeling (SEM).
 In contrast to more ubiquitous OLS regression methods, SEM allows the researcher to explicitly model measurement error, assess overall model fit, and statistically compare competing models.
 Hill and colleagues (2019) constructed two separate factors: a neural reactivity and internalizing model.
 The former was created by estimating covariances among LPP in response to neutral, positive, and negative images and the latter among the depression, anxiety, and stress subscales of the DASS-21.
 This allowed the researchers to then estimate covariances among residual variances for each indicator (i.e., observed) variable while controlling for the shared variance among each of the other indicator variables.
 For example, this technique allows the user to estimate relations between the unique variances of each each viewing condition for a specified ERP component and specific facets of psychopathology.
 This method affords more flexibility, the ability to test more intricate theories, and is also more reliable than calculating mean difference scores (e.g., difference in LPP elicited between positive and neutral images) by allowing examination of variance that is unique to a given condition [@cronbachHowWeShould1970; @weinbergHeritabilityNeuralResponse2015].
-By comparing Akaike and Bayesian Information Criteria, Hill et al. (2019) found that the model corresponding to the ECI view provided the best fit to the data.
+By comparing Akaike and Bayesian Information Criteria, Hill and colleagues (2019) found that the model corresponding to the ECI view provided the best fit to the data.
 Additionally, parameter estimates that approached significance (*p* = .05) were found between LPP in response to positive/negative images and depression symptoms [@hillAbnormalEmotionalReactivity2019].
 A notable omission in the aforementioned study were likelihood ratio tests between the nested comparison and baseline models.
 This information would inform the reader as to whether the various statistical models actually fit the data better that the initial measurement model that treated the neural reactivity and internalizing factors as entirely orthogonal constructs.
@@ -127,7 +127,7 @@ In the context of ERPs, these new variables represent latent components that may
 For example, if there were two temporally overlapping ERP components with equal magnitude but opposite directionality (positive and negative), the two components would negate each other and not be observable via inspection of grand average ERPs.
 Temporal PCA, on the other hand, would theoretically be able to retain these components provided that the experimental paradigm reliably produces them.
 
-Thus, the present study aimed to build upon the SEM framework in Hill et al. (2019) in several ways.
+Thus, the present study aimed to build upon the SEM framework in Hill and colleagues' study (2019) in several ways.
 Rather than analyzing associations with solely later components, analyses will be expanded to incorporate other early visual components retained in a temporal PCA to determine their relations with internalizing symptoms.
 Further, the present study will examine unique relations among ERP components and PA while controlling for dimensions of anxiety.
 Last, in addition to comparing AIC and BIC among unnested models, we also conducted chi-square likelihood ratio tests to determine if competing models afforded superior data fit when compared to nested comparison (i.e., measurement) models.
@@ -135,7 +135,7 @@ Last, in addition to comparing AIC and BIC among unnested models, we also conduc
 ## The Present Study
 
 The present study utilized a sample from an earlier experiment (Kahrilas et al., in prep) where participants were not recruited on the basis of depression severity, and the Supported Mindful Learning (SMiLe) study, a three-month randomized controlled trial investigating the efficacy of Headspace in mitigating psychological symptoms in a sample of college students with depression.
-Participants that met inclusion criteria in the SMILE study were randomized to one of three experimental groups, two of which included self-guided Headspace use and another that served as an experimental control (i.e., wait list).
+Participants who met inclusion criteria in the SMILE study were randomized to one of three experimental groups, two of which included self-guided Headspace use and another that served as an experimental control (i.e., wait list).
 Participants also completed batteries of surveys at four separate time points. 
 
 Participants in both samples underwent an experimental paradigm consisting of seven blocks of images using 120 different Open Affective Standardized Image Set (OASIS) stimuli.
@@ -145,7 +145,7 @@ Participants also passively viewed the block of 40 neutral images.
 EEG was recorded during the experimental paradigm.
 Following each block of images, participants were asked to rate on a seven-point scale how positive or negative they feel (valence), the intensity of the emotion they feel (arousal), as well as how difficult the regulation task was (difficulty).
 Only the passive viewing conditions (positive, negative, and neutral) were analyzed for the present study.
-The data from time one of the SMiLe study was harmonized with the data from Kahrilas et al. to afford greater variability in variables of interest (e.g., PA), which will afford more dimensionality in our constructs.
+The data from time one of the SMiLe study was combined with the data from Kahrilas and colleagues previous study (in preparation) to afford greater variability in variables of interest (e.g., PA), which will afford more dimensionality in our constructs.
 
 Overall, the primary objective of the present study was to evaluate several statistical models characterizing patterns of emotion reactivity (as indexed by N170, EPN, and LPP, derived with PCA) with PA (while accounting for anxious arousal and anxious apprehension) within an SEM framework.
 We hypothesized that there would be negative associations between LPP reactivity in response to positive/negative images and PA, and that this model would afford superior fit compared to competing models.
@@ -161,14 +161,14 @@ Approximately 15 students per fall and spring semester were recruited over the c
 Only pre-trial baseline data was used fro the present study.
 Eighty undergraduate students were recruited from a mid-sized, Midwestern university for the SMiLe study.
 Participants were recruited using listserv emails, flyers, and Sona postings.
-Additionally, a sample ($N$ = 52) of undergraduate students used for a different study in our lab (Kahrilas et al., in preparation) that were not selected on the basis of depression symptoms were harmonized with the present sample at pre-trial baseline (total $N$ = 134) for the present study.
+Additionally, a sample ($N$ = 52) of undergraduate students used for a different study in our lab (Kahrilas et al., in preparation) that were not selected on the basis of depression symptoms were combined with the present sample at pre-trial baseline (total $N$ = 134) for the present study.
 
 ### Participants
 Of the 80 participants recruited for the SMiLe study, 72 underwent the EEG paradigm, and 10 participants were excluded from analyses due to large amounts of EEG artifact.
 One participant was dropped from the study following their EEG session, and thus was not included in final analyses.
 This resulted in a final total of 62 from the SMiLe study.
-These 62 participants were pooled with the sample of 52 from Kahrilas et al. (in preparation) for a total $n$ of 113.
-In this harmonized sample, participants were 18 to 29 years old ($M$ = 19.4, $SD$ = 1.64), 75% of which identified as female, 21% as male, 0.9% as transgender, 0.9% as non-binary, and 1.7% as other.
+These 62 participants were pooled with the sample of 52 from Kahrilas and colleagues' study (in preparation) for a total $n$ of 113.
+In this combined sample, participants were 18 to 29 years old ($M$ = 19.4, $SD$ = 1.64), 75% of which identified as female, 21% as male, 0.9% as transgender, 0.9% as non-binary, and 1.7% as other.
 Seventy-one percent identified as heterosexual, 21% as bisexual, 4% as gay, and 4% as a different sexual orientation.
 Sixty-nine percent of participants identified as Caucasian, 15% Asian, 8% Hispanic or Latinx, 5% Multi-Racial, 1% as Black, and 1% as Other.
 
@@ -202,8 +202,11 @@ Meyer and colleagues (1990) found a high degree of internal consistency in the P
 The study used 120 different Open Affective Standardized Image Set (OASIS) images [@kurdiIntroducingOpenAffective2017].
 40 of the images were positive, 40 were neutral, and 40 were negative.
 Previous research has shown that 40 trials is sufficient to evoke a reliable LPP component [@fotiDeconstructingReappraisalDescriptions2008; @hajcakAttendingAffectAppraisal2006; @hajcakPersistenceAttentionEmotion2008; @hajcakReappraisalModulatesElectrocortical2006].
-The mean normative valence ratings (on a scale of one to seven) were 5.71, 4.09, and 2.18 for positive, neutral, and negative pictures, respectively.
-The mean normative arousal ratings (on a scale of one to seven) were 4.46, 1.99, and 4.52, for positive, neutral, and negative pictures, respectively.
+All OASIS images were rated on seven point Likert scales in terms of their valence (negative to positive) and arousal (not arousing to very arousing) using a sample recruited from Amazon's Mechanical Turk [@kurdiIntroducingOpenAffective2017].
+The image categories (positive, neutral, and negative) from the OASIS selected for the present study each varied in terms of normative valence ratings.
+The negative and positive stimuli categories were matched on arousal ratings. 
+The mean normative valence ratings of the images used in the present study from Kurdi and colleague's (2017) norming study (on a scale of one to seven) were 5.71, 4.09, and 2.18 for positive, neutral, and negative pictures, respectively.
+The mean normative arousal ratings of the images used in the present study from Kurdi and colleague's (2017) norming study (on a scale of one to seven) were 4.46, 1.99, and 4.52, for positive, neutral, and negative pictures, respectively.
 
 Each block represented an experimental regulation condition: increase (positive/negative), decrease (positive/negative), and watch (positive/negative/neutral).
 During the increase condition, participants were instructed to appraise the picture in a way that will intensify the emotion that is elicited by looking at it.
@@ -228,7 +231,8 @@ This interval is identical to other studies utilizing the IAPS and investigating
 Stimuli within each block were presented in random order.
 Each block was separated by a break and presented in pseudo-random order, such that no valence (i.e., positive or negative) nor regulation (i.e., increase, decrease, or watch) condition were presented consecutively.
 After each experimental block, valence and arousal ratings were collected using a seven-point likert scale and the same instructions used in Kurdi, Lozano, and Banaji’s [-@kurdiIntroducingOpenAffective2017] norming study of the OASIS stimuli set.
-Furthermore, difficulty ratings on a seven-point likert scale were also obtained.
+These ratings were obtained to measure mood manipulation (in terms of valence and arousal) at the end of each experimental block.
+Furthermore, difficulty ratings on a seven-point likert scale were also obtained, as to measure the degree of difficulty that participants experienced with each experimental block's instructions.
 
 (ref:paradigm-image-2) Experimental paradigm utilized in the present study.
 
@@ -243,7 +247,7 @@ Participants were monitored by a task administrator in a nearby room and receive
 EEG data were recorded using a Biosemi Active2 EEG system.
 A custom-designed Falk Minow 64-channel cap with equidistantly spaced BioSemi active Ag and AgCl electrodes was used for data collection.
 CMS/DRL was placed near the vertex, and two electrodes were located on the mastoid bones.
-After placement of the electrode cap, electrode positions were digitized.
+After placement of the electrode cap, electrode positions were digitized and quantified in terms of their coordinates on each participant's scalp.
 An additional electrode was placed on the inferior edge of the orbit of each eye to monitor vertical eye movements; nearby electrodes in the cap (lateral to each eye) monitored horizontal eye movements.
 Data were recorded with a band pass of 0 – 104 Hz at a sampling rate of 512 Hz.
 
@@ -267,13 +271,13 @@ Based on the parallel analysis, 22 components were retained for rotation.
 A Promax rotation was then used on the 22 components because it does not impose orthogonality, and simulation studies suggest that Promax is most effective for temporal PCA [@dienERPPCAToolkit2010; @dienEvaluationPCAICA2007].
 The time course of each of the 22 components was inspected by plotting the covariance loadings along each time point. 
 To further guide our selection of components, we used a previous study conducted by our lab (Kahrilas et al., in prep) that analyzed the time course of emotion reactivity and regulation using PCA.
-PCA components with covariance loadings in time windows that fit descriptions of later and early visual components (e.g., EPN, P300, and LPP) that matched components sensitive to emotion reactivity in Kahrilas et al. (in prep) were retained for statistical analyses.
+PCA components with covariance loadings in time windows that fit descriptions of later and early visual components (e.g., EPN, P300, and LPP) that matched components sensitive to emotion reactivity in a previous study by Kahrilas and colleagues (in prep) were retained for statistical analyses.
 Spatial information is retained in PCA; the topography of each factor is encoded in the mean amplitude of factor scores at each recording site [@dienAddressingMisallocationVariance1998].
 Thus, scalp topographies of each component for each condition was inspected to determine correspondence of components and ERP components of interest.
 Of note, portions of waveforms represented by a given PCA component can be reproduced by multiplying covariance loadings by observations' factor scores [@dienAddressingMisallocationVariance1998]. 
 Three components were retained for statistical analyses based inspection of topographic plots and ERP waveforms.
 Two of the retained components represented later components that have positive peaks at 371 ms and 736 ms, with the former demonstrating activity at PO7 and PO8 electrode sites and the latter at PO7, PO8, PO3, PO4, P1, P2, P5/P3, P6/P4 and Pz electrode sites. 
-Similar to findings from Kahrilas et al. (in preparation), topography of a 257 ms component indicated a dipole of scalp activity, with positive going waveforms in the occipital region (PO7, PO8, O1, and O2) and negative waveforms in the centroparietal region (CPz and Pz).
+Similar to findings from Kahrilas and colleagues' study (in preparation), topography of a 257 ms component indicated a dipole of scalp activity, with positive going waveforms in the occipital region (PO7, PO8, O1, and O2) and negative waveforms in the centroparietal region (CPz and Pz).
 Based on our a apriori interest in the EPN and other research demonstrated EPN activity in response to emotional images, we submitted the negative centroparietal activity to statistical analyses.
 No component resembling an N170 was derived from the PCA.
 See Figures \@ref(fig:neg-257-component-plot), \@ref(fig:371-component-plot), and \@ref(fig:736-component-plot) for grand average ERP and topographic plots of the retained components before and after the PCA was performed.

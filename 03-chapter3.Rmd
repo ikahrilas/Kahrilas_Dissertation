@@ -42,7 +42,7 @@ In the present study, we expected enhanced N170-like activity in response to bot
 
 While studies have generally shown that N170 is sensitive to valence rather than arousal, the EPN has been observed in response to emotionally arousing compared to neutral stimuli in the 200 - 300 ms window over bilateral occipital-parietal sites [@olofssonAffectivePictureProcessing2008; @schuppAffectivePictureProcessing2000; @schuppAttentionEmotionERP2003]. 
 Potential neural generators of the EPN are located in the occipital cortex and may also include contributions from parietal regions [@wiensNonemotionalFeaturesSuppress2011].
-Yoon et al. [-@yoonEnhancedEarlyPosterior2016] found that EPN amplitude in response to happy and fearful faces was augmented (i.e., enhanced negativity) compared to neutral faces in healthy control participants.
+Yoon and colleagues [-@yoonEnhancedEarlyPosterior2016] found that EPN amplitude in response to happy and fearful faces was augmented (i.e., enhanced negativity) compared to neutral faces in healthy control participants.
 Individual differences, including psychopathology symptoms, also modulate the EPN. 
 For example, individuals with anxiety disorders exhibited greater EPN amplitude in response to fearful compared to happy and neutral faces, suggesting that anxiety may specifically enhance response to fearful faces [@yoonEnhancedEarlyPosterior2016].
 
@@ -113,7 +113,11 @@ We selected the OASIS for the present study given that the updated norming proce
 During the emotion task, participants viewed seven blocks of 40 images (280 total trials).
 Forty of the images were positive, 40 were neutral, and 40 were negative.
 The mean normative arousal ratings (on a scale of one to seven) from the OASIS data set were 5.71, 4.09, and 2.18 for positive, neutral, and negative pictures, respectively.
-The mean normative arousal ratings (on a scale of one to seven) were 4.46, 1.99, and 4.52, for positive, neutral, and negative pictures, respectively.
+All OASIS images were rated on seven point Likert scales in terms of their valence (negative to positive) and arousal (not arousing to very arousing) using a sample recruited from Amazon's Mechanical Turk [@kurdiIntroducingOpenAffective2017].
+The image categories (positive, neutral, and negative) from the OASIS selected for the present study each varied in terms of normative valence ratings.
+The negative and positive stimuli categories were matched on arousal ratings. 
+The mean normative valence ratings of the images used in the present study from Kurdi and colleague's (2017) norming study (on a scale of one to seven) were 5.71, 4.09, and 2.18 for positive, neutral, and negative pictures, respectively.
+The mean normative arousal ratings of the images used in the present study from Kurdi and colleague's (2017) norming study (on a scale of one to seven) were 4.46, 1.99, and 4.52, for positive, neutral, and negative pictures, respectively.
 Each block represented an experimental regulation condition: increase (positive/negative), decrease (positive/negative), and watch (positive/negative/neutral).
 During the increase condition, participants were instructed to appraise the stimulus image in a way that will intensify the emotion that they are experiencing.
 During the decrease condition, participants were asked to reduce the intensity of the emotion that they are experiencing.
@@ -135,6 +139,8 @@ Stimuli within each block were presented in random order.
 Each block was separated by a break and presented in pseudo-random order, such that no valence (i.e., positive or negative) nor regulation (i.e., increase, decrease, or watch) conditions were presented consecutively.
 After each experimental block, valence and arousal ratings were collected using a seven-point likert scale and the same instructions used in Kurdi, Lozano, and Banaji’s [-@kurdiIntroducingOpenAffective2017] norming study of the OASIS stimuli set.
 Furthermore, task difficulty ratings on a seven-point likert scale were also obtained.
+These ratings were obtained to measure mood manipulation (in terms of valence and arousal) at the end of each experimental block.
+Furthermore, difficulty ratings on a seven-point likert scale were also obtained, as to measure the degree of difficulty that participants experienced with each experimental block's instructions.
 Affective visual stimuli elicit increased arousal and valence self-report ratings [@bradleyInternationalAffectivePicture2007; @kurdiIntroducingOpenAffective2017; @olofssonAffectivePictureProcessing2008] and are sensitive to reappraisal [e.g., @thiruchselvamTemporalDynamicsEmotion2011].
 Thus, we conducted exploratory analyses with self-report ratings as the dependent variable and block type as the independent variable.
 

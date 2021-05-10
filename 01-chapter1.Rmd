@@ -14,7 +14,7 @@ The impacts of MDD are far reaching, and more effective treatments will improve 
 
 Current treatments for depression are lacking. 
 Approximately 45-65% of those with depression undergoing CBT do not achieve remission [@derubeisCognitiveTherapyVs2005; @dimidjianRandomizedTrialBehavioral2006].
-Treatment outcomes for depression suggest that even after completion of therapy, 29% of individuals relapse within one year following treatment and 54% within two years [@vittenglReducingRelapseRecurrence2007].
+Treatment outcomes for depression suggest that even after completion of therapy, 29% of individuals relapse within one year following treatment and 54% do so within two years [@vittenglReducingRelapseRecurrence2007].
 Depression is currently a highly intractable disorder with a high rate of recurrence and relapse.
 Mainstream treatments for depression largely focus on mitigating symptoms associated with negative emotions [@argyropoulosAnhedoniaRevisitedThere2013; @beckCognitiveTherapyEmotional1979].
 However, patients undergoing treatment typically equally emphasize the importance of bolstering positive emotions as they do reducing negative emotion [@demyttenaereWhatImportantBeing2015].
@@ -44,11 +44,11 @@ Impaired ability to regulate negative emotions is a well-established feature of 
 Research has begun to examine the influence of positive emotion regulation on depression symptoms [@feldmanResponsesPositiveAffect2008; @nelisResponseStylesPositive2015; @raesDampeningPositiveAffect2012; @werner-seidlerInvestigationRelationshipPositive2013].
 Beck [-@beckCognitiveTherapyEmotional1979] theorized that dampening positive emotions intensifies and perpetuates depression. Accordingly, greater dampening of positive affect is prospectively associated with increased depression symptoms three and five months later [@raesDampeningPositiveAffect2012]. 
 Other research has shown that those with depression tend to be apprehensive about experiencing positive affect and thus engage in maladaptive emotion regulation strategies, such as dampening positive affect [@werner-seidlerInvestigationRelationshipPositive2013].
-Further, Werner-Seidler et al. (2013) showed that depression symptoms are inversely related to strategies implemented to amplify positive affect and depression. 
+Further, Werner-Seidler and colleagues (2013) showed that depression symptoms are inversely related to strategies implemented to amplify positive affect and depression. 
 
 Findings regarding positive reactivity and regulation are largely consistent with a dominant symptom of depression, anhedonia [i.e., lack of pleasure; @americanpsychiatricassociationDiagnosticStatisticalManual2013b].
 Anhedonia negatively impacts daily function, predicts poor treatment response, indicates risk for future depressive episodes, and shows specificity with regard to depression diagnosis [@khazanovBrighteningEffectReactions2019; @watsonSpecificityPositiveEmotional2010b].
-It is theorized that anhedonia involves abnormal bi-directional reactivity and regulatory affective processes including 1) positive attenuation, or hyporeactivity to positive stimuli [@bylsmaMetaanalysisEmotionalReactivity2008; @forbesNeuralSystemsPositive2005] and 2) impaired capacity to enhance or upregulate affective responses evoked by positive stimuli [@forbesNeuralSystemsPositive2005].
+It is theorized that anhedonia involves abnormal bi-directional reactivity and regulatory affective processes including a) positive attenuation, or hyporeactivity to positive stimuli [@bylsmaMetaanalysisEmotionalReactivity2008; @forbesNeuralSystemsPositive2005] and b) impaired capacity to enhance or upregulate affective responses evoked by positive stimuli [@forbesNeuralSystemsPositive2005].
 This suggests that developing interventions that specifically target the experience of positive emotions may prove especially fruitful in ameliorating depression. 
 
 ### Individual differences in positive emotion reactivity and regulation
@@ -70,7 +70,7 @@ Studies aimed at enhancing savoring capacity show that enriching any of the thre
 Training on momentary positive emotion regulation (i.e., memory building, expressing positive emotions) resulted in decreased self-reported depression symptoms when compared to a control group after two weeks [@hurleyResultsStudyIncrease2012].
 A savoring intervention study that was conducted in older adults showed that diminished dampening of positive emotions was related to decreased depression symptoms [@smithEffectsSavoringIntervention2019].
 Positive self-attributions for recent positive events have been associated with attenuated depression symptoms and enhanced positive affect following positive events in a sample of college-aged women [@mcmakinPositiveAffectStimulation2011].
-Elucidation upon the relation between PA (i.e., disposition to react to positive emotions) and savoring capacity (i.e., disposition to upregulate positive emotions) may shed light on modifiable mechanisms between low PA (i.e., anhedonia) and depression that will improve treatment. Additionally, how these individual differences interact with neural correlates will facilitate neuroscience-informed interventions may improve treatment outcomes for depression and bring us a step closer to harnessing the mechanisms of wellbeing.
+Elucidation upon the relation between PA (i.e., disposition to react to positive emotions) and savoring capacity (i.e., disposition to upregulate positive emotions) may shed light on modifiable mechanisms between low PA (i.e., anhedonia) and depression that will improve treatment. Additionally, how these individual differences interact with neural correlates will facilitate neuroscience-informed interventions that may improve treatment outcomes for depression and bring us a step closer to harnessing the mechanisms of wellbeing.
 
 ### Neural Correlates of Emotion Reactivity and Regulation
 
@@ -92,9 +92,7 @@ With specificity to low PA, Weinberg and colleagues [-@weinbergDistinctAssociati
 Relations between certain ERP components and regulation or reactivity remain unclear, which is a critical gap in devising treatments for disordered positive emotion reactivity and regulation in depression.
 For example, early visual components such as the N170 (a negative peak occurring approximately 170 ms follow presentation of a stimulus at bilateral occipito-temporal sites) and EPN (a relative negative differences occurring 200 - 300 ms following stimulus presentation) have commonly been researched in the context of affective facial processing [e.g., @stockdaleInfluenceStimulusValence2020; @yoonEnhancedEarlyPosterior2016] rather than complex affective images paradigms. 
 The latter may afford more ecologically valid results that are more representative of daily lived experiences.
-Further, these components are largely studied in relation to passively viewing affective stimuli (i.e., reactivity).
-Emotion regulation research with  N170 and EPN components tends to focus on implicit emotion regulation, or regulatory efforts that are automatically evoked by stimuli that occur without awareness, which is in contrast to explicit emotion regulation, which occurs with awareness. 
-Results indicate that both N170 and EPN can be sensitive to these implicit regulatory efforts [e.g., @liuImplicitEmotionRegulation2018; @wangTemporalCourseImplicit2017], suggesting that these “bottom up” components can be modified via emotion regulation efforts.
+Further, these components have not been investigated within the context of explicit emotion regulation, which may have more relevance to interventions for psychopathology [@beckCognitiveTherapyEmotional1979; @joormannExaminingEmotionRegulation2016a].
 Further, these components may vary as a function of depression symptoms; EPN may be enhanced in response to negative images [@connellBingeDrinkingDepression2015] and N170 attenuated in response to positive images in depression [@chenDistinctFacialProcessing2014].
 In sum, early ERP components observed in emotion reactivity and regulation may constitute modifiable neural correlates in depression.
 
