@@ -37,8 +37,8 @@ int_fac_table_wide <- bind_cols(int_param_table, # repeat these three times so t
 
 # parameter estimates for erp measurement components
 meas_params_list <- list(rc8_meas_params,
-                         rc2_meas_params,
-                         rc3_meas_params)
+                         rc2_meas_params %>% filter(term != "NR ~~ INT"),
+                         rc3_meas_params %>% filter(term != "NR ~~ INT"))
 
 meas_params_list <-
   map(meas_params_list, ~{
@@ -61,9 +61,9 @@ meas_params_list <-
 meas_params_wide <- bind_cols(meas_params_list)
 
 # parameter estimates for erp eci components
-eci_params_list <- list(rc8_eci_params,
-                        rc2_eci_params,
-                        rc3_eci_params)
+eci_params_list <- list(rc8_eci_params %>% filter(term != "NR ~~ INT"),
+                        rc2_eci_params %>% filter(term != "NR ~~ INT"),
+                        rc3_eci_params %>% filter(term != "NR ~~ INT"))
 
 eci_params_list <-
   map(eci_params_list, ~{
@@ -85,28 +85,28 @@ eci_params_list <-
 
 eci_params_wide <- bind_cols(eci_params_list)
 
-# parameter estimates for NR components
-nr_params_list <- list(rc8_nr_params,
-                       rc2_nr_params,
-                       rc3_nr_params)
-
-nr_params_list <-
-  map(nr_params_list, ~{
-    .x %>%
-      select(term, estimate, std.all, std.error, p.value) %>%
-      filter(term == "NR ~~ masq_pa") %>%
-      mutate(across(.cols = c(estimate, std.all, std.error),
-                    .fns = ~ sprintf("%.2f", .x))) %>%
-      mutate(p.value = if_else(p.value < .001, "<.001",
-                               num_format(p.value))) %>%
-      unite("Est/Std", estimate, std.all, sep = "/") %>%
-      rename("Path" = "term",
-             "$SE$" = "std.error",
-             "$p$" = "p.value") %>%
-      mutate(Path = "NR $\\leftrightarrow$ PA")
-  })
-
-nr_params_wide <- bind_cols(nr_params_list)
+# # parameter estimates for NR components
+# nr_params_list <- list(rc8_nr_params,
+#                        rc2_nr_params,
+#                        rc3_nr_params)
+#
+# nr_params_list <-
+#   map(nr_params_list, ~{
+#     .x %>%
+#       select(term, estimate, std.all, std.error, p.value) %>%
+#       filter(term == "NR ~~ masq_pa") %>%
+#       mutate(across(.cols = c(estimate, std.all, std.error),
+#                     .fns = ~ sprintf("%.2f", .x))) %>%
+#       mutate(p.value = if_else(p.value < .001, "<.001",
+#                                num_format(p.value))) %>%
+#       unite("Est/Std", estimate, std.all, sep = "/") %>%
+#       rename("Path" = "term",
+#              "$SE$" = "std.error",
+#              "$p$" = "p.value") %>%
+#       mutate(Path = "NR $\\leftrightarrow$ PA")
+#   })
+#
+# nr_params_wide <- bind_cols(nr_params_list)
 
 # parameter estimates for internalizing components
 int_params_list <- list(nrc8_int_params,
@@ -185,7 +185,6 @@ anxapp_params_wide <- bind_cols(anxapp_params_list)
 tab <- bind_rows(int_fac_table_wide,
                  meas_params_wide,
                  eci_params_wide,
-                 nr_params_wide,
                  int_params_wide,
                  anx_params_wide,
                  anxapp_params_wide) %>%
@@ -202,10 +201,9 @@ kable(tab, "latex", escape = FALSE, booktabs = TRUE, align = c("l", rep("r", 9))
                    italic = TRUE) %>%
   pack_rows("Measurement Model", 1, 6) %>%
   pack_rows("ECI Model", 7, 8) %>%
-  pack_rows("Neural Responsivity Model", 9, 9) %>%
-  pack_rows("Internalizing Model", 10, 11) %>%
-  pack_rows("Anxious Arousal Model", 12, 13) %>%
-  pack_rows("Anxious Apprehension Model", 14, 15) %>%
+  pack_rows("Internalizing Model", 9, 10) %>%
+  pack_rows("Anxious Arousal Model", 11, 12) %>%
+  pack_rows("Anxious Apprehension Model", 13, 14) %>%
   row_spec(0, align = "c") %>%
   landscape() %>%
   footnote(general = "Path labels correspond to a parameter estimates in each model. Group headings
@@ -238,21 +236,18 @@ chisq_format_fn <- function(chi){
 rc8_fit_table <-
   bind_rows(rc8_meas_fit,
             rc8_eci_fit,
-            rc8_nr_fit,
             nrc8_int_fit,
             rc8_anx_fit,
             rc8_anxapp_fit) %>%
     mutate("Model" = c("Measurement",
                        "Emotion Context Insensitivity",
-                       "Neural Responsivity",
                        "Internalizing",
                        "Anxious Arousal",
                        "Anxious Apprehension")) %>%
     relocate(Model, everything()) %>%
     mutate("$\\Delta{\\chi}^2$" =
-             c("",
+             c("Nested Measurement Model",
                chisq_format_fn(chi_nrc8_eci_meas),
-               chisq_format_fn(chi_nrc8_nr_meas),
                chisq_format_fn(chi_nrc8_int_meas),
                chisq_format_fn(chi_nrc8_anx_meas),
                chisq_format_fn(chi_nrc8_anxapp_meas))
@@ -262,21 +257,18 @@ rc8_fit_table <-
 rc2_fit_table <-
   bind_rows(rc2_meas_fit,
             rc2_eci_fit,
-            rc2_nr_fit,
             rc2_int_fit,
             rc2_anx_fit,
             rc2_anxapp_fit) %>%
   mutate("Model" = c("Measurement",
                      "Emotion Context Insensitivity",
-                     "Neural Responsivity",
                      "Internalizing",
                      "Anxious Arousal",
                      "Anxious Apprehension")) %>%
   relocate(Model, everything()) %>%
   mutate("$\\Delta{\\chi}^2$" =
-           c("",
+           c("Nested Measurement Model",
              chisq_format_fn(chi_rc2_eci_meas),
-             chisq_format_fn(chisq_rc2_nr_meas),
              chisq_format_fn(chisq_rc2_int_meas),
              chisq_format_fn(chi_rc2_anx_meas),
              chisq_format_fn(chi_nrc8_anxapp_meas))
@@ -286,21 +278,18 @@ rc2_fit_table <-
 rc3_fit_table <-
   bind_rows(rc3_meas_fit,
             rc3_eci_fit,
-            rc3_nr_fit,
             rc3_int_fit,
             rc3_anx_fit,
             rc3_anxapp_fit) %>%
   mutate("Model" = c("Measurement",
                      "Emotion Context Insensitivity",
-                     "Neural Responsivity",
                      "Internalizing",
                      "Anxious Arousal",
                      "Anxious Apprehension")) %>%
   relocate(Model, everything()) %>%
   mutate("$\\Delta{\\chi}^2$" =
-           c("",
+           c("Nested Measurement Model",
              chisq_format_fn(chisq_rc3_eci_meas),
-             chisq_format_fn(chisq_rc3_nr_meas),
              chisq_format_fn(chisq_rc3_int_meas),
              chisq_format_fn(chisq_rc3_anx_meas),
              chisq_format_fn(chi_rc3_anxapp_meas))
@@ -334,9 +323,9 @@ fit_tab <-
 kable(fit_tab, "latex", escape = FALSE, booktabs = TRUE,
       align = c("l", rep("r", times = 8), "l"), linesep = "") %>%
   kable_styling(font_size = 12, latex_options = c("scale_down")) %>%
-  pack_rows("257 ms Component", 1, 6) %>%
-  pack_rows("371 ms Component", 7, 12) %>%
-  pack_rows("736 ms Component", 13, 18) %>%
+  pack_rows("257 ms Component", 1, 5) %>%
+  pack_rows("371 ms Component", 6, 10) %>%
+  pack_rows("736 ms Component", 11, 15) %>%
   row_spec(0, align = c("l", rep("c", times = 9))) %>%
   landscape() %>%
   footnote(general = "${\\\\chi}^2$ = chi-square, $df$ = degrees of freedom, RMSEA = root mean square error of

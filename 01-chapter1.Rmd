@@ -9,7 +9,7 @@ Depression is associated with decrements in interpersonal relationships, poor wo
 Given its ubiquity, the economic impact of depression is profound.
 Depression is associated with higher levels of health care utilization and spending [@donohueReducingSocietalBurden2007].
 In the United States, loss in work productivity related to depression is estimated to surpass \$36 billion [@kesslerPrevalenceEffectsMood2006].
-The cost associated with “presenteeism” (i.e., being present at work with depression) is estimated to be \$5524 per person in the United States[@evans-lackoGlobalPatternsWorkplace2016].
+The cost associated with “presenteeism” (i.e., being present at work with depression) is estimated to be \$5524 per person in the United States [@evans-lackoGlobalPatternsWorkplace2016].
 The impacts of MDD are far reaching, and more effective treatments will improve quality of life and ease economic burden. 
 
 Current treatments for depression are lacking. 
@@ -28,7 +28,7 @@ Emotion reactivity refers to an individual’s initial baseline affective respon
 Emotion regulation refers to psychological processes that influence an initial emotional response [@lewisAdvancesProblemsChallenges2010a] and suggests a change from baseline reactivity.
 There is difficulty disentangling the two processes: it is unclear when reactivity ends and regulation begins, and there is at least partial overlap between them [@davidsonReactivityRecoveryRegulation2018].
 
-Within the context of depression, there are three leading theories of emotion reactivity: positive attenuation, negative potentiation, and emotion context insensitivity [ECI; @rottenbergMoodEmotionMajor2005].
+Within the context of depression, there are three leading views of emotion reactivity: positive attenuation, negative potentiation, and emotion context insensitivity [ECI; @rottenbergMoodEmotionMajor2005].
 The negative potentiation theory states that negative mood in MDD is due to potentiated emotional reactivity in response to negative emotional stimuli.
 Positive attenuation holds that those with MDD will have reduced emotional reactivity in response to positive stimuli.
 ECI maintains MDD is marked by a pattern of reduced reactivity to both positive and negative stimuli [@rottenbergMoodEmotionMajor2005].
@@ -70,7 +70,8 @@ Studies aimed at enhancing savoring capacity show that enriching any of the thre
 Training on momentary positive emotion regulation (i.e., memory building, expressing positive emotions) resulted in decreased self-reported depression symptoms when compared to a control group after two weeks [@hurleyResultsStudyIncrease2012].
 A savoring intervention study that was conducted in older adults showed that diminished dampening of positive emotions was related to decreased depression symptoms [@smithEffectsSavoringIntervention2019].
 Positive self-attributions for recent positive events have been associated with attenuated depression symptoms and enhanced positive affect following positive events in a sample of college-aged women [@mcmakinPositiveAffectStimulation2011].
-Elucidation upon the relation between PA (i.e., disposition to react to positive emotions) and savoring capacity (i.e., disposition to upregulate positive emotions) may shed light on modifiable mechanisms between low PA (i.e., anhedonia) and depression that will improve treatment. Additionally, how these individual differences interact with neural correlates will facilitate neuroscience-informed interventions that may improve treatment outcomes for depression and bring us a step closer to harnessing the mechanisms of wellbeing.
+Elucidation upon the relation between PA (i.e., disposition to react to positive emotions) and savoring capacity (i.e., disposition to upregulate positive emotions) may shed light on modifiable mechanisms between low PA (i.e., anhedonia) and depression that will improve treatment.
+Additionally, how these individual differences interact with neural correlates will facilitate neuroscience-informed interventions that may improve treatment outcomes for depression and bring us a step closer to harnessing the mechanisms of wellbeing.
 
 ### Neural Correlates of Emotion Reactivity and Regulation
 
@@ -114,7 +115,7 @@ Study One supports the importance of momentary awareness in treating depression 
 Further, it did not disentangle the neural time course of positive emotion reactivity and regulation and how these concepts related to individual differences (i.e., PA and savoring capacity), which is crucial to devise neuroscience-informed interventions for those with anhedonic depression.
 Studies Two and Three were conducted to address these gaps.
 
-### Overview of Study Two, the neurobiological correlates of positive emotion reactivity and regulation
+### Overview of Study Two, Neural Chronometry of Positive and Negative Emotion Reactivity and Regulation
 
 In order to explore emotion reactivity and regulation, Study Two, “The neural correlates of  emotion reactivity and regulation,” will investigate the neural time course associated with reacting to, and regulating, positively- and negatively-valenced images. 
 The study also seeks to elucidate the relation among individual differences (i.e,. PA and savoring capacity from Study One) and neural correlates of positive emotion reactivity and regulation. 
@@ -129,7 +130,7 @@ The questions of how emotion reactivity relates to depression and how it may be 
 Interventions that target the ability to attend to and appreciate positive events as they occur in the moment may have the potential to bolster positive emotion reactivity and in turn ameliorate anhedonic symptoms of depression. 
 This was the focus of Study Three.
 
-### Overview of Study Three, Too much of a good thing?: The EPN as a potential biomarker of the brightening effect
+### Overview of Study Three, Neural Correlates of the Brightening Effect in Depression
 
 Building on findings from Study One and Study Two, Study Three aimed to investigate the relations relations among low PA in depression and the neural time course of emotion reactivity.
 To this end, participants ($n$ = 80) endorsing clinically significant levels of depression were recruited and completed batteries of questionnaires (including measures of depression and PA).

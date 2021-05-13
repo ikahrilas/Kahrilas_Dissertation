@@ -231,49 +231,49 @@ semPaths(fit_eci_rc8,
 ## model comparison test with measurement model
 chi_nrc8_eci_meas <- lavTestLRT(mod_meas_rc8, fit_eci_rc8)
 
-# define neural reactivity model with neg RC8
-rc8_nr_mod <- '
-# neural responsivity factor
-  NR =~ nRC8_Neu_Watch + nRC8_Pos_Watch + nRC8_Neg_Watch
-# internalizing measurement model with MASQ subscales
-  INT =~ masq_aa + masq_pa + pswq_total
-# no association between nr and int factory but parameter estimate between nr and pa
-  NR ~~ 0*INT + masq_pa
-'
-
-fit_nr_rc8 <- cfa(rc8_nr_mod,
-                  data = dat,
-                  estimator = "MLR",
-                  missing = "ML",
-                  std.lv = TRUE)
-
-summary(fit_nr_rc8, fit.measures = TRUE, standardized = TRUE)
-
-rc8_nr_params <- tidy(fit_nr_rc8)
-
-rc8_nr_fit <- fitMeasures(fit_nr_rc8, c("chisq.scaled",
-                                          "df",
-                                          "rmsea.scaled",
-                                          "srmr",
-                                          "cfi.scaled",
-                                          "nnfi.scaled",
-                                          "aic",
-                                          "bic"))
-
-semPaths(fit_nr_rc8,
-         what = "diagram",
-         whatLabels = "est",
-         style = "lisrel",
-         nCharNodes = 0,
-         intercepts = FALSE,
-         sizeMan = 8,
-         sizeLat = 10,
-         nodeLabels = c("NEU", "POS", "NEG",
-                        "PA", "AA", "WOR",
-                        "NR", "INT"))
-
-## model comparison test with measurement model
-chi_nrc8_nr_meas <- lavTestLRT(mod_meas_rc8, fit_nr_rc8)
+# # define neural reactivity model with neg RC8
+# rc8_nr_mod <- '
+# # neural responsivity factor
+#   NR =~ nRC8_Neu_Watch + nRC8_Pos_Watch + nRC8_Neg_Watch
+# # internalizing measurement model with MASQ subscales
+#   INT =~ masq_aa + masq_pa + pswq_total
+# # no association between nr and int factory but parameter estimate between nr and pa
+#   NR ~~ 0*INT + masq_pa
+# '
+#
+# fit_nr_rc8 <- cfa(rc8_nr_mod,
+#                   data = dat,
+#                   estimator = "MLR",
+#                   missing = "ML",
+#                   std.lv = TRUE)
+#
+# summary(fit_nr_rc8, fit.measures = TRUE, standardized = TRUE)
+#
+# rc8_nr_params <- tidy(fit_nr_rc8)
+#
+# rc8_nr_fit <- fitMeasures(fit_nr_rc8, c("chisq.scaled",
+#                                           "df",
+#                                           "rmsea.scaled",
+#                                           "srmr",
+#                                           "cfi.scaled",
+#                                           "nnfi.scaled",
+#                                           "aic",
+#                                           "bic"))
+#
+# semPaths(fit_nr_rc8,
+#          what = "diagram",
+#          whatLabels = "est",
+#          style = "lisrel",
+#          nCharNodes = 0,
+#          intercepts = FALSE,
+#          sizeMan = 8,
+#          sizeLat = 10,
+#          nodeLabels = c("NEU", "POS", "NEG",
+#                         "PA", "AA", "WOR",
+#                         "NR", "INT"))
+#
+# ## model comparison test with measurement model
+# chi_nrc8_nr_meas <- lavTestLRT(mod_meas_rc8, fit_nr_rc8)
 
 # define internalizing model with RC8
 rc8_int_mod <- '
@@ -788,38 +788,38 @@ semPaths(fit_eci_rc2,
 chi_rc2_eci_meas <- lavTestLRT(fit_meas_rc2, fit_eci_rc2)
 ### comparison model does NOT fit the data significantly better
 
-# define neural reactivity model with RC2
-rc2_nr_mod <- '
-# neural responsivity factor
-  NR =~ RC2_Neu_Watch + RC2_Pos_Watch + RC2_Neg_Watch
-# internalizing measurement model with MASQ subscales
-  INT =~ masq_aa + masq_pa + pswq_total
-# no correlation with internalizing factor but correlated with masq_pa
-  NR ~~ 0*INT + masq_pa
-'
-
-fit_nr_rc2 <- cfa(rc2_nr_mod,
-                  data = dat,
-                  estimator = "MLR",
-                  missing = "ML",
-                  std.lv = TRUE)
-
-summary(fit_nr_rc2, fit.measures = TRUE, standardized = TRUE)
-
-rc2_nr_params <- tidy(fit_nr_rc2)
-
-rc2_nr_fit <- fitMeasures(fit_nr_rc2, c("chisq.scaled",
-                                         "df",
-                                         "rmsea.scaled",
-                                         "srmr",
-                                         "cfi.scaled",
-                                         "nnfi.scaled",
-                                         "aic",
-                                         "bic"))
-
-## model comparison test with measurement model
-chisq_rc2_nr_meas <- lavTestLRT(fit_meas_rc2, fit_nr_rc2)
-### comparison model does NOT fit the data significantly better
+# # define neural reactivity model with RC2
+# rc2_nr_mod <- '
+# # neural responsivity factor
+#   NR =~ RC2_Neu_Watch + RC2_Pos_Watch + RC2_Neg_Watch
+# # internalizing measurement model with MASQ subscales
+#   INT =~ masq_aa + masq_pa + pswq_total
+# # no correlation with internalizing factor but correlated with masq_pa
+#   NR ~~ 0*INT + masq_pa
+# '
+#
+# fit_nr_rc2 <- cfa(rc2_nr_mod,
+#                   data = dat,
+#                   estimator = "MLR",
+#                   missing = "ML",
+#                   std.lv = TRUE)
+#
+# summary(fit_nr_rc2, fit.measures = TRUE, standardized = TRUE)
+#
+# rc2_nr_params <- tidy(fit_nr_rc2)
+#
+# rc2_nr_fit <- fitMeasures(fit_nr_rc2, c("chisq.scaled",
+#                                          "df",
+#                                          "rmsea.scaled",
+#                                          "srmr",
+#                                          "cfi.scaled",
+#                                          "nnfi.scaled",
+#                                          "aic",
+#                                          "bic"))
+#
+# ## model comparison test with measurement model
+# chisq_rc2_nr_meas <- lavTestLRT(fit_meas_rc2, fit_nr_rc2)
+# ### comparison model does NOT fit the data significantly better
 
 # define internalizing model with RC2
 rc2_int_mod <- '
@@ -1031,38 +1031,38 @@ rc3_eci_fit <- fitMeasures(fit_eci_rc3, c("chisq.scaled",
 chisq_rc3_eci_meas <- lavTestLRT(fit_meas_rc3, fit_eci_rc3)
 ### comparison model does NOT fit the data significantly better
 
-# define neural reactivity model with RC3
-rc3_nr_mod <- '
-# neural responsivity factor
-  NR =~ RC3_Neu_Watch + RC3_Pos_Watch + RC3_Neg_Watch
-# internalizing measurement model with MASQ subscales
-  INT =~ masq_aa + masq_pa + pswq_total
-# no association between nr and int factory but parameter estimate between nr and pa
-  NR ~~ 0*INT + masq_pa
-'
-
-fit_nr_rc3 <- cfa(rc3_nr_mod,
-                  data = dat,
-                  estimator = "MLR",
-                  missing = "ML",
-                  std.lv = TRUE)
-
-summary(fit_nr_rc3, fit.measures = TRUE, standardized = TRUE)
-
-rc3_nr_params <- tidy(fit_nr_rc3)
-
-rc3_nr_fit <- fitMeasures(fit_nr_rc3, c("chisq.scaled",
-                                         "df",
-                                         "rmsea.scaled",
-                                         "srmr",
-                                         "cfi.scaled",
-                                         "nnfi.scaled",
-                                         "aic",
-                                         "bic"))
-
-## model comparison test with measurement model
-chisq_rc3_nr_meas <- lavTestLRT(fit_meas_rc3, fit_nr_rc3)
-### comparison model does NOT fit the data significantly better
+# # define neural reactivity model with RC3
+# rc3_nr_mod <- '
+# # neural responsivity factor
+#   NR =~ RC3_Neu_Watch + RC3_Pos_Watch + RC3_Neg_Watch
+# # internalizing measurement model with MASQ subscales
+#   INT =~ masq_aa + masq_pa + pswq_total
+# # no association between nr and int factory but parameter estimate between nr and pa
+#   NR ~~ 0*INT + masq_pa
+# '
+#
+# fit_nr_rc3 <- cfa(rc3_nr_mod,
+#                   data = dat,
+#                   estimator = "MLR",
+#                   missing = "ML",
+#                   std.lv = TRUE)
+#
+# summary(fit_nr_rc3, fit.measures = TRUE, standardized = TRUE)
+#
+# rc3_nr_params <- tidy(fit_nr_rc3)
+#
+# rc3_nr_fit <- fitMeasures(fit_nr_rc3, c("chisq.scaled",
+#                                          "df",
+#                                          "rmsea.scaled",
+#                                          "srmr",
+#                                          "cfi.scaled",
+#                                          "nnfi.scaled",
+#                                          "aic",
+#                                          "bic"))
+#
+# ## model comparison test with measurement model
+# chisq_rc3_nr_meas <- lavTestLRT(fit_meas_rc3, fit_nr_rc3)
+# ### comparison model does NOT fit the data significantly better
 
 # define internalizing model with RC3
 rc3_int_mod <- '

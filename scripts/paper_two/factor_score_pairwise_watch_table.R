@@ -43,7 +43,7 @@ rc2_std_beta <- bind_rows(rc2_std_beta, tmp) %>%
 rc2_watch_tab <- full_join(rc2_watch_tab, rc2_std_beta, by = c("contrast" = "Parameter")) %>%
   select(contrast, estimate, lower.CL, upper.CL, Std_Coefficient, interpretation, t.ratio, p.value)
 rc2_watch_tab <- rc2_watch_tab %>%
-  mutate(comp = "First LPP Component") %>%
+  mutate(comp = "381 ms Component") %>%
   select(comp, everything())
 
 # RC3 watch comparisons
@@ -71,7 +71,7 @@ rc3_std_beta <- bind_rows(rc3_std_beta, tmp) %>%
 rc3_watch_tab <- full_join(rc3_watch_tab, rc3_std_beta, by = c("contrast" = "Parameter")) %>%
   select(contrast, estimate, lower.CL, upper.CL, Std_Coefficient, interpretation, t.ratio, p.value)
 rc3_watch_tab <- rc3_watch_tab %>%
-  mutate(comp = "Second LPP Component") %>%
+  mutate(comp = "740 ms Component") %>%
   select(comp, everything())
 
 # RC5 watch comparisons
@@ -99,7 +99,7 @@ RC5_std_beta <- bind_rows(RC5_std_beta, tmp) %>%
 RC5_watch_tab <- full_join(RC5_watch_tab, RC5_std_beta, by = c("contrast" = "Parameter")) %>%
   select(contrast, estimate, lower.CL, upper.CL, Std_Coefficient, interpretation, t.ratio, p.value)
 RC5_watch_tab <- RC5_watch_tab %>%
-  mutate(comp = "P100 Component") %>%
+  mutate(comp = "124 ms Component") %>%
   select(comp, everything())
 
 # RC11 watch comparisons
@@ -127,7 +127,7 @@ RC11_std_beta <- bind_rows(RC11_std_beta, tmp) %>%
 RC11_watch_tab <- full_join(RC11_watch_tab, RC11_std_beta, by = c("contrast" = "Parameter")) %>%
   select(contrast, estimate, lower.CL, upper.CL, Std_Coefficient, interpretation, t.ratio, p.value)
 RC11_watch_tab <- RC11_watch_tab %>%
-  mutate(comp = "N170 Component") %>%
+  mutate(comp = "162 ms Component") %>%
   select(comp, everything())
 
 # RC12 watch comparisons
@@ -155,7 +155,7 @@ RC12_std_beta <- bind_rows(RC12_std_beta, tmp) %>%
 RC12_watch_tab <- full_join(RC12_watch_tab, RC12_std_beta, by = c("contrast" = "Parameter")) %>%
   select(contrast, estimate, lower.CL, upper.CL, Std_Coefficient, interpretation, t.ratio, p.value)
 RC12_watch_tab <- RC12_watch_tab %>%
-  mutate(comp = "EPN Component") %>%
+  mutate(comp = "259 ms Component") %>%
   select(comp, everything())
 
 # pos_RC12 watch comparisons
@@ -242,7 +242,7 @@ val_watch_tab <- val_watch_tab %>%
   mutate(comp = "valence_rating") %>%
   select(comp, everything())
 
-watch_tab <- bind_rows(rc2_watch_tab, rc3_watch_tab, RC5_watch_tab, RC11_watch_tab, RC12_watch_tab, pos_RC12_watch_tab, ar_watch_tab, val_watch_tab) %>%
+watch_tab <- bind_rows(RC5_watch_tab, RC11_watch_tab, RC12_watch_tab, rc2_watch_tab, rc3_watch_tab, ar_watch_tab, val_watch_tab) %>%
   mutate(Std_Coefficient = abs(Std_Coefficient))
 names(watch_tab) <- c("comp", "Contrast", "Estimate", "lower.CL", "upper.CL", "Std. Beta", "interpretation", "$t$ ratio", "Sig.")
 watch_tab <- watch_tab %>%
@@ -256,6 +256,7 @@ watch_tab <- map_df(watch_tab, ~ {
     .x
   }
 })
+
 watch_tab <- watch_tab %>%
   mutate(Estimate = if_else(Estimate == "-0.00", "0.00", Estimate),
          lower.CL = if_else(lower.CL == "-0.00", "0.00", lower.CL),
@@ -270,16 +271,15 @@ watch_tab <- watch_tab %>%
 
 watch_tab %>%
   select(-comp) %>%
-  kable(., escape = FALSE, booktabs = TRUE, align = c("l", "c", "c", "c"), linesep = "", caption = "(ref:pairwise-watch-comparison-table)") %>%
+  kable("latex", escape = FALSE, booktabs = TRUE, align = c("l", "c", "c", "r"), linesep = "") %>%
   row_spec(0, align = "c") %>%
-  pack_rows("Early LPP Component", 1, 3) %>%
-  pack_rows("Late LPP Component", 4, 6) %>%
-  pack_rows("P125 Component", 7, 9) %>%
-  pack_rows("N170 Component", 10, 12) %>%
-  pack_rows("EPN Component", 13, 15) %>%
-  pack_rows("EPP Component", 16, 18) %>%
-  pack_rows("Arousal Ratings", 19, 21) %>%
-  pack_rows("Valence Ratings", 22, 24) %>%
+  pack_rows("124 ms Component", 1, 3) %>%
+  pack_rows("162 ms Component", 4, 6) %>%
+  pack_rows("259 ms Component", 7, 9) %>%
+  pack_rows("381 ms Component", 10, 12) %>%
+  pack_rows("740 ms Component", 13, 15) %>%
+  pack_rows("Arousal Ratings", 16, 18) %>%
+  pack_rows("Valence Ratings", 19, 21) %>%
   footnote(escape = FALSE,
            footnote_as_chunk = TRUE,
            general_title = "Note.",
@@ -288,6 +288,7 @@ beta coefficient as measure of effect size derived by fitting model to
 standardized dataset with effect size label as per Cohen's (1988) recommendations,
 Sig. = $p$ value. $P$ values and confidence intervals adjusted using the Tukey method
 for comparing a family of three estimates.",
-           threeparttable = TRUE)
+           threeparttable = TRUE) %>%
+  save_kable(file = "images/paper_2/watch_table_results.pdf")
 
 save.image(file = paste0("data/paper_two/analyses/", Sys.Date(), "factor_score_pairwise_watch_table-data", ".RData"))

@@ -444,7 +444,7 @@ val_reg_tab <- full_join(val_reg_tab, val_std_beta, by = c("contrast" = "Paramet
   select(comp, valence_condition, contrast, estimate, lower.CL, upper.CL, Std_Coefficient, interpretation, p.value)
 
 # collate components and behavioral ratings
-reg_tab <- bind_rows(RC2_reg_tab, RC3_reg_tab, RC5_reg_tab, RC11_reg_tab, RC12_reg_tab, pos_RC12_reg_tab, ar_reg_tab, val_reg_tab) %>%
+reg_tab <- bind_rows(RC5_reg_tab, RC11_reg_tab, RC12_reg_tab, RC2_reg_tab, RC3_reg_tab, ar_reg_tab, val_reg_tab) %>%
   mutate(Std_Coefficient = abs(Std_Coefficient))
 names(reg_tab) <- c("comp", "valence_condition", "Contrast", "Estimate", "lower.CL", "upper.CL", "Std. Beta", "interpretation", "Sig.")
 reg_tab <- reg_tab %>%
@@ -484,23 +484,22 @@ reg_tab_wide <- bind_cols(reg_tab_pos, reg_tab_neg)
 names(reg_tab_wide) <- c(names(reg_tab_pos), names(reg_tab_pos)[3:5])
 
 reg_tab_wide[-1] %>%
-  kable("latex", escape = FALSE, booktabs = TRUE, align = c("l", rep("c", times = 6)), linesep = "", caption = "(ref:pairwise-reg-comparison-table)") %>%
+  kable("latex", escape = FALSE, booktabs = TRUE, align = c("l", rep(c("c", "c", "r"), times = 2)), linesep = "") %>%
   kable_styling(latex_options = "scale_down") %>%
   add_header_above(c(" ", "Positive Images" = 3, "Negative Images" = 3), bold = TRUE, italic = TRUE) %>%
   row_spec(0, align = "c") %>%
-  pack_rows("Early LPP Component", 1, 3) %>%
-  pack_rows("Late LPP Component", 4, 6) %>%
-  pack_rows("P125 Component", 7, 9) %>%
-  pack_rows("N170 Component", 10, 12) %>%
-  pack_rows("EPN Component", 13, 15) %>%
-  pack_rows("EPP Component", 16, 18) %>%
-  pack_rows("Arousal Ratings", 19, 21) %>%
-  pack_rows("Valence Ratings", 22, 24) %>%
+  pack_rows("124 ms Component", 1, 3) %>%
+  pack_rows("162 ms Component", 4, 6) %>%
+  pack_rows("259 ms Component", 7, 9) %>%
+  pack_rows("381 ms Component", 10, 12) %>%
+  pack_rows("740 ms Component", 13, 15) %>%
+  pack_rows("Arousal Ratings", 16, 18) %>%
+  pack_rows("Valence Ratings", 19, 21) %>%
   footnote(escape = FALSE,
            general_title = "Note.",
            general = "Std. Beta = Absolute value of standardized beta coefficient as measure of effect size derived by fitting model to standardized dataset with effect size label as per Cohen's (1988) recommendations, Sig. = $p$ value. $P$ values and confidence intervals adjusted using the Tukey method for comparing a family of three estimates.",
            threeparttable = TRUE,
            footnote_as_chunk = TRUE) %>%
-  save_kable("regulation_table.pdf")
+  save_kable("images/paper_2/regulation_table_results.pdf")
 
 save.image(file = paste0("data/paper_two/analyses/", Sys.Date(), "factor_score_regulations_table-data", ".RData"))
