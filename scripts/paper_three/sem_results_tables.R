@@ -201,7 +201,7 @@ kable(tab, "latex", escape = FALSE, booktabs = TRUE, align = c("l", rep("r", 9))
                    italic = TRUE) %>%
   pack_rows("Measurement Model", 1, 6) %>%
   pack_rows("ECI Model", 7, 8) %>%
-  pack_rows("Internalizing Model", 9, 10) %>%
+  pack_rows("Psychopathology Symptoms Model", 9, 10) %>%
   pack_rows("Anxious Arousal Model", 11, 12) %>%
   pack_rows("Anxious Apprehension Model", 13, 14) %>%
   row_spec(0, align = "c") %>%
@@ -241,7 +241,7 @@ rc8_fit_table <-
             rc8_anxapp_fit) %>%
     mutate("Model" = c("Measurement",
                        "Emotion Context Insensitivity",
-                       "Internalizing",
+                       "Psychopathology Symptoms",
                        "Anxious Arousal",
                        "Anxious Apprehension")) %>%
     relocate(Model, everything()) %>%
@@ -262,7 +262,7 @@ rc2_fit_table <-
             rc2_anxapp_fit) %>%
   mutate("Model" = c("Measurement",
                      "Emotion Context Insensitivity",
-                     "Internalizing",
+                     "Psychopathology Symptoms",
                      "Anxious Arousal",
                      "Anxious Apprehension")) %>%
   relocate(Model, everything()) %>%
@@ -283,7 +283,7 @@ rc3_fit_table <-
             rc3_anxapp_fit) %>%
   mutate("Model" = c("Measurement",
                      "Emotion Context Insensitivity",
-                     "Internalizing",
+                     "Psychopathology Symptoms",
                      "Anxious Arousal",
                      "Anxious Apprehension")) %>%
   relocate(Model, everything()) %>%
