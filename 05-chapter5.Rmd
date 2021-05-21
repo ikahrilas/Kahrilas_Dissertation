@@ -13,14 +13,15 @@ Study One supports the importance of momentary savoring in managing depression f
 However, it did not disentangle the affective chronometry of emotion reactivity and regulation and how these concepts related to PA, which is crucial to devise neuroscience-informed interventions for those with depression.
 Studies Two and Three were conducted to address these gaps.
 Study Two, “Neural chronometry of positive and negative emotion reactivity and regulation,” addressed fundamental questions regarding the neural time course associated with reacting to, and regulating, positively- and negatively-valenced emotional stimuli.
-We created and administered a novel experimental emotion reactivity/regulation paradigm utilizing a block design presentation and a new, open source set of standardized images [the Open Affective Standardized Image Set, or OASIS; @kurdiIntroducingOpenAffective2017].
-To extract ERP components throughout the time course of emotion reactivity/regulation, we utilized an exploratory temporal PCA.
+I created and administered a novel experimental emotion reactivity/regulation paradigm utilizing a block design presentation and a new, open source set of standardized images [the Open Affective Standardized Image Set, or OASIS; @kurdiIntroducingOpenAffective2017].
+
+To extract ERP components throughout the time course of emotion reactivity/regulation, I used an exploratory temporal PCA.
 The temporal PCA retained five ERP components with peaks ranging from 124 ms to 740 ms.
 With regards to emotion reactivity (i.e., changes among passively viewing different valence categories of images), differences were noted as early as 162 ms through the entire time course.
 Negative and positive emotional stimuli elicited enhanced component amplitudes at 162 ms, 381 ms, and 740 ms.
 Negative emotional stimuli elicited augmented amplitude relative to neutral stimuli at 259 ms, though positive emotion stimuli did not.
 Valence (i.e., differences between arousal-matched negative and positive images) were noted, such that negative images consistently elicited enhanced amplitudes of all retained components throughout.
-Results illustrated a temporal cascade of ERP components sensitive to emotion reactivity in the first 1000 ms of neural activity, which may pose as modifiable intervention targets in psychopathology.
+Results illustrated a temporal cascade of ERP components sensitive to emotion reactivity in the first 1000 ms of neural activity, which may serve as modifiable intervention targets in psychopathology.
 Differences in chronometry emerged in emotion regulation contingent upon valence.
 Negative regulatory processes unfolded in the 124 ms to 259 ms, while positive regulatory processes occurred later from 259 ms to 740 ms.
 This may imply that those with impairment in positive emotion regulation and negative emotion regulation might benefit from interventions that focus on different processes occurring within the neural time course.
@@ -51,6 +52,11 @@ It is also theorized to promote wellbeing [@dahlReconstructingDeconstructingSelf
 Other studies have illustrated associations between specific facets of mindfulness (e.g., directing attention to present activity, non-reactivity and non-judgment) and PA in participants with depression and anxiety [@desrosiersMappingMindfulnessFacets2013; @mooreMeditationMindfulnessCognitive2009 @raphiphatthanaHowFacetsMindfulness2016].
 Therefore, mindfulness may bolster PA and modify associated early neural processes.
 
+The PCA approach in Study Three suggests the existence of separable temporal courses for neural generators; yet, EEG scalp analyses provide minimal information regarding the spatial resolution of these generators. 
+Therefore, future work should also employ other EEG analytic methods, such as source analysis, to investigate the time course of specific neural structures and their relation with variables pertaining to positive emotion in depression. 
+For example, potential neural generators of the EPN lie in lateral occipital cortex and the frontoparietal network [@frankHemodynamicElectrocorticalReactivity2019; @junghoferFleetingImagesNew2001]. 
+These specific brain regions may be modifiable intervention targets that serve to bolster wellbeing in depression. 
+
 Future research should also continue using advanced statistical methods such as PCA and SEM.
 To improve upon the analytic strategy from Study Three, which estimates covariances among residual variances of indicator variables that may contain measurement error, experimental paradigm blocks with similar regulatory goals (e.g., to maximize positive emotion/mitigate negative emotion and maximize negative emotion/mitigate positive emotion) can specified as indicators of a latent variables that are devoid of measurement error. 
 The positive emotion latent factor can then be regressed on the negative emotion latent factor to derive residual variance of the former.
@@ -59,14 +65,14 @@ Then, a second order internalizing factor could be specific that explains the sh
 The residual variance of the positive emotion factor, then, could be regressed on the positive neural reactivity factor.
 This association will be free of measurement error and more specific with regards to the constructs of interest.
 Building upon this approach, future work should investigate possible modifiable mechanisms that link positive emotion and early neural processes.
-For example, since the brightening effect may stem from negative expectations for future positive events for those with depression [@khazanovBrighteningEffectReactions2019a; @strunkDepressiveSymptomsAre2006], ability to anticipate future events may constitute a modifiable mechanism.
-Interventions targeted at bolstering anticipatory processes, then, may be a modifiable mechanism in the relation between early neural neural and positive affectivity.
+For example, since the brightening effect may stem from negative expectations for future positive events for those with depression [@khazanovBrighteningEffectReactions2019a; @strunkDepressiveSymptomsAre2006], the ability to anticipate future positive events may constitute a modifiable psychological mechanism.
+Interventions targeted at bolstering anticipatory processes, then, may influence the relation between early neural neural and positive affectivity.
 
-Future work should also employ other EEG methods, such as source analysis, to investigate the time course of specific neural structures and their relation with variables pertaining to positive emotion in depression.
-Potential neural generators of the EPN lie in lateral occipital cortex and the frontoparietal network [@frankHemodynamicElectrocorticalReactivity2019; @junghoferFleetingImagesNew2001].
-Therefore, the neural time course these regions may be associated with positive emotion and depressive symptoms and pose as intervention targets to help bolster wellbeing in depression.
-Another EEG method, time-frequency analysis, enables simultaneous measurement of signals in time and frequency domains.
-Frontal EEG alpha band frequency asymmetry has been observed at rest in those with depression [@gotlibEEGAlphaAsymmetry1998; @keuneApproachingDysphoricMood2013; @stewartFrontalEEGAsymmetry2011; @thibodeauDepressionAnxietyResting2006], and research has also shown correlations between reductions of frontal alpha band EEG frequency and decreased depression symptomatology [@zotevCorrelationAmygdalaBOLD2016].
-Considering that low positive affectivity is theorized to be a specific risk factor for depression [@clarkTripartiteModelAnxiety1991; @kendallProspectiveAssociationsLow2015; @lewinsohnPleasantActivitiesDepression1973; @raesDampeningPositiveAffect2012; @watsonTestingTripartiteModel1995; @watsonTestingTripartiteModel1995a] and related to exacerbated depressive symptomatology [@clarkTripartiteModelAnxiety1991; @davidsonAffectiveStyleAffective1998a; @watsonExtraversionPsychopathologyFacetlevel2015], it may be associated with less left frontal EEG alpha-band frequency.
-This research will further bridge the gap between self-report measures of psychopathology and their neural correlates to the end of advancing current interventions for those with mental health problems.
+<!-- Future work should also employ other EEG methods, such as source analysis, to investigate the time course of specific neural structures and their relation with variables pertaining to positive emotion in depression. -->
+<!-- Potential neural generators of the EPN lie in lateral occipital cortex and the frontoparietal network [@frankHemodynamicElectrocorticalReactivity2019; @junghoferFleetingImagesNew2001]. -->
+<!-- Therefore, the neural time course these regions may be associated with positive emotion and depressive symptoms and pose as intervention targets to help bolster wellbeing in depression. -->
+<!-- Another EEG method, time-frequency analysis, enables simultaneous measurement of signals in time and frequency domains. -->
+<!-- Frontal EEG alpha band frequency asymmetry has been observed at rest in those with depression [@gotlibEEGAlphaAsymmetry1998; @keuneApproachingDysphoricMood2013; @stewartFrontalEEGAsymmetry2011; @thibodeauDepressionAnxietyResting2006], and research has also shown correlations between reductions of frontal alpha band EEG frequency and decreased depression symptomatology [@zotevCorrelationAmygdalaBOLD2016]. -->
+<!-- Considering that low positive affectivity is theorized to be a specific risk factor for depression [@clarkTripartiteModelAnxiety1991; @kendallProspectiveAssociationsLow2015; @lewinsohnPleasantActivitiesDepression1973; @raesDampeningPositiveAffect2012; @watsonTestingTripartiteModel1995; @watsonTestingTripartiteModel1995a] and related to exacerbated depressive symptomatology [@clarkTripartiteModelAnxiety1991; @davidsonAffectiveStyleAffective1998a; @watsonExtraversionPsychopathologyFacetlevel2015], it may be associated with less left frontal EEG alpha-band frequency. -->
+<!-- This research will further bridge the gap between self-report measures of psychopathology and their neural correlates to the end of advancing current interventions for those with mental health problems. -->
 
