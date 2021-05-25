@@ -26,7 +26,8 @@ int_param_table <-
   rename("Path" = "term",
          "$SE$" = "std.error",
          "$p$" = "p.value") %>%
-  mutate(Path = str_replace(Path, "=~", "→"),
+  mutate(Path = str_replace(Path, "INT", "PsySx"),
+         Path = str_replace(Path, "=~", "→"),
          Path = str_replace(Path, "masq_aa", "Anx Aro"),
          Path = str_replace(Path, "masq_pa", "PA"),
          Path = str_replace(Path, "pswq_total", "Anx App"))
@@ -53,9 +54,9 @@ meas_params_list <-
       rename("Path" = "term",
              "$SE$" = "std.error",
              "$p$" = "p.value") %>%
-      mutate(Path = c("R $\\rightarrow$ Neutral",
-                      "R $\\rightarrow$ Positive",
-                      "R $\\rightarrow$ Negative"))
+      mutate(Path = c("Reactivity $\\rightarrow$ Neutral",
+                      "Reactivity $\\rightarrow$ Positive",
+                      "Reactivity $\\rightarrow$ Negative"))
   })
 
 meas_params_wide <- bind_cols(meas_params_list)
@@ -208,7 +209,7 @@ kable(tab, "latex", escape = FALSE, booktabs = TRUE, align = c("l", rep("r", 9))
   landscape() %>%
   footnote(general = "Path labels correspond to a parameter estimates in each model. Group headings
   in the 'path' column denote the specific model that the following parameter estimates are
-  unique to. R = Reactivity latent factor, PsySx = Psychological Symptoms latent factor, ECI = emotion context insensitivity, $\\SE$ = standard error,
+  unique to. PsySx = Psychological Symptoms latent factor, ECI = emotion context insensitivity, $\\SE$ = standard error,
   Est/Std = undstandardized and standardized parameter estimate, $\\\\rightarrow$ = latent factor loading,
            \n$\\\\leftrightarrow$ = covariance.",
            threeparttable = TRUE,
@@ -321,7 +322,7 @@ fit_tab <-
 
 # construct the table
 kable(fit_tab, "latex", escape = FALSE, booktabs = TRUE,
-      align = c("l", rep("r", times = 8), "l"), linesep = "") %>%
+      align = c("l", "r", "c", "c", "c", "c", "c", "c", "c", "l"), linesep = "") %>%
   kable_styling(font_size = 12, latex_options = c("scale_down")) %>%
   pack_rows("257 ms Component", 1, 5) %>%
   pack_rows("371 ms Component", 6, 10) %>%
