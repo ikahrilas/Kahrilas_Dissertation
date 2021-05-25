@@ -298,8 +298,7 @@ Positive, negative, and neutral viewing conditions served as indicator variables
 Measures of anxious apprehension (PSWQ), anxious arousal (MASQ-AA), and PA (MASQ-PA) served as indicator variables for the *Psychopathology Symptoms* factor.
 Three separate measurement models were constructed for each ERP component retained from the earlier PCA.
 Across these measurement models, indicators (positive, negative, and neutral viewing conditions) of the *Reactivity* factor changed to reflect each PCA component being tested, while the *Psychopathology Symptoms* factor remained identical.
-The variances of both latent variables were standardized set a metric for the factors.
-All  loadings were freely estimated, as were the variances of each factor and residual variances of each indicator variable.
+The variances of both latent variables were fixed to unity (i.e., a variance of one) to set the metric for factor loading and covariance estimates. All loadings were freely estimated, as were the residual variances of each indicator variable.
 Each of the subsequent competing models were compared to their respective measurement model with a chi-square likelihood ratio test to determine of each model offered superior fit to the data compared to the measurement model.
 
 We then tested the ECI model by estimating covariances among the positive/negative viewing conditions and PA. 
