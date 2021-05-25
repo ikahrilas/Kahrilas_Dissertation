@@ -19,9 +19,10 @@ library(rstatix)
 dat_long <-
   read_csv(here("data", "paper_three", "dat_for_analyses_2021-04-02.csv")) %>%
   select(!c(RC5, RC7, pRC8, RC17)) %>%
-  filter(!is.na(RC2), # only participants with EEG data for all conditions
+  filter(!is.na(RC2),           # only participants with EEG data for all conditions
          pid != 22585512,       # dropped out of study
-         pid != 22585452) %>%
+         pid != 22585452,
+         pid != 22585473) %>%
   pivot_longer(cols = c(RC2, RC3, nRC8),
                names_to = "comp",
                values_to = "amp") %>%
@@ -121,7 +122,9 @@ dat <- read_csv(here("data", "paper_three", "dat_for_analyses_2021-04-02.csv")) 
               values_from = RC2:RC17) %>%
   relocate(pid:race, RC2_Neg_Watch:RC17_NA) %>%
   select(-c(RC2_NA, RC3_NA, RC5_NA, RC7_NA, nRC8_NA, pRC8_NA, RC17_NA)) %>%
-  filter(!is.na(RC2_Pos_Watch), # only participants with EEG data for all conditions
+  filter(!is.na(RC2_Pos_Watch),
+         !is.na(RC2_Neg_Watch),
+         !is.na(RC2_Neu_Watch),# only participants with EEG data for all conditions
          pid != 22585512,       # dropped out of study
          pid != 22585452)
 
@@ -1459,3 +1462,11 @@ semPaths(fit_anxapp_RC5,
 ## model comparison test with measurement model
 chi_nrc8_anxapp_meas <- lavTestLRT(fit_meas_RC5, fit_anxapp_RC5)
 ### comparison model does NOT fit the data significantly better
+#### code for deriving bootstrapped AIC and BIC values
+myFUN <- function(x) {
+  # require(lavaan)
+  model_aic <- AIC(x)
+  model_aic
+}
+
+aic_vec <- bootstrapLavaan(fit_anxapp_RC5, R = 1000, type = "ordinary", FUN = function(x) AIC(x))

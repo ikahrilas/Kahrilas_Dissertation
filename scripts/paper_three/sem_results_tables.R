@@ -53,9 +53,9 @@ meas_params_list <-
       rename("Path" = "term",
              "$SE$" = "std.error",
              "$p$" = "p.value") %>%
-      mutate(Path = c("NR $\\rightarrow$ Neutral",
-                      "NR $\\rightarrow$ Positive",
-                      "NR $\\rightarrow$ Negative"))
+      mutate(Path = c("R $\\rightarrow$ Neutral",
+                      "R $\\rightarrow$ Positive",
+                      "R $\\rightarrow$ Negative"))
   })
 
 meas_params_wide <- bind_cols(meas_params_list)
@@ -127,8 +127,8 @@ int_params_list <-
       rename("Path" = "term",
              "$SE$" = "std.error",
              "$p$" = "p.value") %>%
-      mutate(Path = c("INT $\\leftrightarrow$ Positive",
-                      "INT $\\leftrightarrow$ Negative"))
+      mutate(Path = c("PsySx $\\leftrightarrow$ Positive",
+                      "PsySx $\\leftrightarrow$ Negative"))
   })
 
 int_params_wide <- bind_cols(int_params_list)
@@ -208,7 +208,7 @@ kable(tab, "latex", escape = FALSE, booktabs = TRUE, align = c("l", rep("r", 9))
   landscape() %>%
   footnote(general = "Path labels correspond to a parameter estimates in each model. Group headings
   in the 'path' column denote the specific model that the following parameter estimates are
-  unique to to. ECI = emotion context insensitivity, $\\SE$ = standard error,
+  unique to. R = Reactivity latent factor, PsySx = Psychological Symptoms latent factor, ECI = emotion context insensitivity, $\\SE$ = standard error,
   Est/Std = undstandardized and standardized parameter estimate, $\\\\rightarrow$ = latent factor loading,
            \n$\\\\leftrightarrow$ = covariance.",
            threeparttable = TRUE,
@@ -331,7 +331,7 @@ kable(fit_tab, "latex", escape = FALSE, booktabs = TRUE,
   footnote(general = "${\\\\chi}^2$ = chi-square, $df$ = degrees of freedom, RMSEA = root mean square error of
            approximation, SRMR = standardized root mean square residual, CFI = comparative fit index,
            NNFI = non-normed fit index, AIC = Akaike Information Criteria, BIC = Bayesian Information Criteria,
-           $\\\\Delta{\\\\chi}^2$ = Satorra-Bentler scaled difference chi-square test comparing each model with its respective
+           $\\\\Delta{\\\\chi}^2$ = Satorra-Bentler scaled difference chi-square test comparing each model with its \\\\newline respective
            nested measurement model.",
            threeparttable = TRUE,
            escape = FALSE,
