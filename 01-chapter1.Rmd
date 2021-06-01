@@ -26,7 +26,7 @@ In order to contribute to informing the development of neuroscience-based interv
 ### Overview of Study One, Savoring the moment: A link between affectivity and depression
 
 The first study, “Savoring the moment: A link between affectivity and depression,” which was published in the International Journal of Wellbeing [@kahrilasSavoringMomentLink2020], investigated the relations among affectivity (negative and positive), savoring, and depression.
-More specifically, it investigated the mediating role of the temporal domains of savoring (anticipating, savoring the moment, reminiscing) in the relation between factors of Clark and Watson’s tripartite model (Positive Affectivity, PA, and Negative Affectivity, NA) and depression.
+More specifically, it investigated the mediating role of the temporal domains of savoring (anticipating, savoring the moment, reminiscing) in the relation between factors of Clark and Watson’s [@clarkTripartiteModelAnxiety1991] tripartite model (Positive Affectivity, PA, and Negative Affectivity, NA) and depression.
 Participants ($N$ = 1,618) completed questionnaires measuring PA, NA, savoring capacity, and depression.
 A path analysis was conducted with PA and NA as exogenous variables, the three temporal domains of savoring as mediators, and depression the outcome. Worry, sex, and anxious arousal were included as covariates for all paths.
 
@@ -44,14 +44,14 @@ Studies Two and Three were conducted to address these gaps.
 
 In order to extend findings from Study One, Study Two addressed fundamental questions regarding the neural time course of emotion reactivity and regulation. This study implemented a temporal principal components approach (PCA) to investigate the temporal course of enhancement and attenuation of neural response to positive and negative valenced affective images in a non-selected sample (N = 54). Certain ERP components are well established in emotion regulation literature (i.e., LPP), while other earlier visual components (i.e., N170 & EPN) are not. I examined these earlier ERP components with a PCA approach in order to provide a more holistic view on potentially critical windows of neural processing involved in emotion reactivity and regulation, with the ultimate goal of eventually identifying modifiable neural mechanisms in order to ameloriate depression symptoms. The questions of how emotion reactivity relates to depression symptoms remains unanswered, however. This was the focus of Study Three.
 
-### Overview of Study Three, Neural Correlates of the Brightening Effect in Depression
+### Overview of Study Three, A Potential Neural Mechanism Supporting the Brightening Effect in Depression
 
 Building on findings from Study One and Study Two, Study Three aimed to investigate the relations among low PA in depression and the neural time course of emotion reactivity. 
 To this end, participants (*n* = 80) endorsing clinically significant levels of depression were recruited and completed batteries of questionnaires (including measures of depression and PA). 
-Additionally, EEG data was collected using the same experimental paradigm validated in Study Two. 
-Research suggests that the relation between neural correlates of emotion reactivity and depression vary as a function of depression severity [e.g., @demenescuNeuralCorrelatesPerception2011; @weinbergDecreasedNeuralResponse2017].
-Thus, the samples from Study Two (unselected sample) and Study Three (recruited on the basis of depression symptoms) will be harmonized, resulting in a sample with greater variability in depression symptoms.
-This study will seek to compare different models of emotion reactivity in depression by using structural equation modeling. 
+Additionally, EEG data were collected using the same experimental paradigm validated in Study Two. 
+Research suggests that the relation between neural correlates of emotion reactivity and depression varies as a function of depression severity [e.g., @demenescuNeuralCorrelatesPerception2011; @weinbergDecreasedNeuralResponse2017].
+Thus, the samples from Study Two (unselected sample) and Study Three (recruited on the basis of depression symptoms) were harmonized, resulting in a sample with greater variability in depression symptoms.
+This study sought to compare different models of emotion reactivity in depression by using structural equation modeling. 
 Relations among depression symptoms and emotion reactivity were analyzed to determine how neural correlates of emotion reactivity vary depending on depression severity. 
 I hypothesized that positive and negative emotion reactivity across ERP components derived from a temporal PCA would be associated with PA. 
 More specifically, reduced levels of PA would be associated with blunted ERP activity in a manner congruent with the ECI view. 
