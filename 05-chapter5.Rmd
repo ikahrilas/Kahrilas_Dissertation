@@ -4,23 +4,23 @@ Broadly, the present set of studies investigated individual differences and neur
 Study One, "Savoring the moment: A link between affectivity and depression" advanced our understanding of the relations among affectivity (negative and positive), savoring, and depression.
 More specifically, it investigated the mediating role of the temporal domains of savoring (anticipating, savoring the moment, reminiscing) in the relation between factors of positive affectivity (PA), negative affectivity (NA), and depression.
 Findings from this study illustrated that PA and NA were associated with depression as well as all three savoring temporal domains.
-In line with previous research, this suggests that Low PA and high NA are risk factors were depression and that each of the temporal domains of savoring may bolster PA and mitigate NA.
+In line with previous research, this suggests that Low PA and high NA are risk factors for depression and that each of the temporal domains of savoring may bolster PA and mitigate NA.
 Notably, momentary savoring was the only temporal domain of savoring that was associated with depression and distinctly mediated the relationship between both PA and NA and depression.
-Altogether, this indicates momentary savoring may reduce depression symptoms in individuals with low PA and high NA, more so that future- or past-oriented domains of savoring.
+Altogether, this indicates momentary savoring may reduce depression symptoms in individuals with low PA and high NA, more so than future- or past-oriented domains of savoring.
 This underscores the importance of momentary awareness and upregulation of positive emotions in managing depression as well as the notion that increased attention to positive stimuli is likely one mechanism through which savoring attenuates depression symptoms [@carlPositiveEmotionRegulation2013].
 
 Study One supports the importance of momentary savoring in managing depression for those with low PA and high NA.
 However, it did not disentangle the affective chronometry of emotion reactivity and regulation and how these concepts related to PA, which is crucial to devise neuroscience-informed interventions for those with depression.
 Studies Two and Three were conducted to address these gaps.
 Study Two, “Neural chronometry of positive and negative emotion reactivity and regulation,” addressed fundamental questions regarding the neural time course associated with reacting to, and regulating, positively- and negatively-valenced emotional stimuli.
-I created and administered a novel experimental emotion reactivity/regulation paradigm utilizing a block design presentation and a new, open source set of standardized images [the Open Affective Standardized Image Set, or OASIS; @kurdiIntroducingOpenAffective2017].
+I created and administered a novel experimental emotion reactivity/regulation paradigm utilizing a block design presentation and a new, open-source set of standardized images [the Open Affective Standardized Image Set, or OASIS; @kurdiIntroducingOpenAffective2017].
 
 To extract ERP components throughout the time course of emotion reactivity/regulation, I used an exploratory temporal PCA.
 The temporal PCA retained five ERP components with peaks ranging from 124 ms to 740 ms.
 With regards to emotion reactivity (i.e., changes among passively viewing different valence categories of images), differences were noted as early as 162 ms through the entire time course.
 Negative and positive emotional stimuli elicited enhanced component amplitudes at 162 ms, 381 ms, and 740 ms.
 Negative emotional stimuli elicited augmented amplitude relative to neutral stimuli at 259 ms, though positive emotion stimuli did not.
-Valence (i.e., differences between arousal-matched negative and positive images) were noted, such that negative images consistently elicited enhanced amplitudes of all retained components throughout.
+Valence effects (i.e., differences between arousal-matched negative and positive images) were noted, such that negative images consistently elicited enhanced amplitudes of all retained components throughout.
 Results illustrated a temporal cascade of ERP components sensitive to emotion reactivity in the first 1000 ms of neural activity, which may serve as modifiable intervention targets in psychopathology.
 Differences in chronometry emerged in emotion regulation contingent upon valence.
 Negative regulatory processes unfolded in the 124 ms to 259 ms, while positive regulatory processes occurred later from 259 ms to 740 ms.
