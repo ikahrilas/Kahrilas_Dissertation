@@ -207,11 +207,12 @@ kable(tab, "latex", escape = FALSE, booktabs = TRUE, align = c("l", rep("r", 9))
   pack_rows("Anxious Apprehension Model", 13, 14) %>%
   row_spec(0, align = "c") %>%
   landscape() %>%
-  footnote(general = "Path labels correspond to a parameter estimates in each model. Group headings
+  footnote(general = "Path labels correspond to parameter estimates in each model. Group headings
   in the 'path' column denote the specific model that the following parameter estimates are
   unique to. PsySx = Psychological Symptoms latent factor, ECI = emotion context insensitivity, $\\SE$ = standard error,
-  Est/Std = undstandardized and standardized parameter estimate, $\\\\rightarrow$ = latent factor loading,
-           \n$\\\\leftrightarrow$ = covariance.",
+  Est/Std =
+    \nundstandardized and standardized parameter estimate, $\\\\rightarrow$ = latent factor loading,
+  $\\\\leftrightarrow$ = covariance.",
            threeparttable = TRUE,
            escape = FALSE,
            general_title = "Note.",
